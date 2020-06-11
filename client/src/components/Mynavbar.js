@@ -56,6 +56,9 @@ function Mynavbar(props) {
           <Nav.Link as={NavLink} to="/contact">
             聯絡我們
           </Nav.Link>
+          <Nav.Link as={NavLink} to="/shoppingcar">
+            購物車
+          </Nav.Link>
 
 
 

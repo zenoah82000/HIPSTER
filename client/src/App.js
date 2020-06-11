@@ -11,6 +11,7 @@ import About from './pages/About'
 import Article from './pages/Article'
 import Contact from './pages/Contact'
 import Product from './pages/Product'
+import ShoppingCar from './pages/ShoppingCar'
 
 
 
@@ -20,7 +21,7 @@ function App() {
     <Router>
       <>
         <Mynavbar />
-        <MainContent>
+        
           <Switch>
 
             <Route exact path="/about">
@@ -35,12 +36,15 @@ function App() {
             <Route exact path="/product">
               <Product />
             </Route>
-            {/* <Route exact path="/">
+            <Route exact path="/">
               <Home />
-            </Route> */}
+            </Route>
+            <Route exact path="/shoppingcar">
+              <ShoppingCar />
+            </Route>
 
           </Switch>
-          </MainContent>
+          
         <Myfooter />
       </>
     </Router>
