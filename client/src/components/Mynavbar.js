@@ -36,12 +36,14 @@ function Mynavbar(props) {
 
   return (
     <>
+
       <Navbar bg="" variant="dark" class="navbar">
-        <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+      <div className="container">
+        <Navbar.Brand href="/">Navbar</Navbar.Brand>
         <Nav className="m-auto">
-          <Nav.Link as={NavLink} to="/" >
+          {/* <Nav.Link as={NavLink} to="/" >
             Home
-          </Nav.Link>
+          </Nav.Link> */}
           <Nav.Link as={NavLink} to="/about">
             品牌介紹
           </Nav.Link>
@@ -59,7 +61,9 @@ function Mynavbar(props) {
 
         </Nav>
         <Form inline></Form>
+        </div>
       </Navbar>
+
     </>
   )
 }
