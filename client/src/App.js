@@ -24,22 +24,22 @@ function App() {
         
           <Switch>
 
-            <Route exact path="/about">
+            <Route  path="/about">
               <About />
             </Route>
-            <Route exact path="/article">
+            <Route path="/article">
               <Article />
             </Route>
-            <Route exact path="/Contact">
+            <Route  path="/Contact">
               <Contact />
             </Route>
-            <Route exact path="/product">
+            <Route  path="/product">
               <Product />
             </Route>
             <Route exact path="/">
               <Home />
             </Route>
-            <Route exact path="/shoppingcar">
+            <Route  path="/shoppingcar">
               <ShoppingCar />
             </Route>
 
