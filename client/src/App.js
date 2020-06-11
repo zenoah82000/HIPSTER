@@ -11,7 +11,7 @@ import Contact from './pages/Contact'
 import Product from './pages/Product'
 
 
-import './App.css';
+
 
 function App() {
   return (
@@ -20,9 +20,7 @@ function App() {
         <Mynavbar />
 
           <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
+
             <Route exact path="/about">
               <About />
             </Route>
@@ -35,7 +33,9 @@ function App() {
             <Route exact path="/product">
               <Product />
             </Route>
-
+            {/* <Route exact path="/">
+              <Home />
+            </Route> */}
 
           </Switch>
         {/* <Myfooter /> */}

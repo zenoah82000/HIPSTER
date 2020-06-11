@@ -3,43 +3,43 @@ import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap'
 import { Link, NavLink, withRouter } from 'react-router-dom'
 
 function Mynavbar(props) {
-  const { auth, name, setauth } = props
+//   const { auth, name, setauth } = props
 
-  const loginButton = (
-    <Button
-      variant="outline-light"
-      onClick={() => {
-        props.history.push('/memberlogin')
-      }}
-    >
-      登入
-    </Button>
-  )
+//   const loginButton = (
+//     <Button
+//       variant="outline-light"
+//       onClick={() => {
+//         props.history.push('/memberlogin')
+//       }}
+//     >
+//       登入
+//     </Button>
+//   )
 
-  const logoutButton = (
-    <>
-      <span style={{ color: '#ffffff' }}>{name}, 你好</span>
-      <Button
-        variant="outline-light"
-        onClick={() => {
-          alert('登出成功,將跳回')
-          props.history.push('/memberlogin')
-          setauth(false)
-        }}
-      >
-        登出
-      </Button>
-    </>
-  )
+//   const logoutButton = (
+//     <>
+//       <span style={{ color: '#ffffff' }}>{name}, 你好</span>
+//       <Button
+//         variant="outline-light"
+//         onClick={() => {
+//           alert('登出成功,將跳回')
+//           props.history.push('/memberlogin')
+//           setauth(false)
+//         }}
+//       >
+//         登出
+//       </Button>
+//     </>
+//   )
 
-  const displayButton = auth ? logoutButton : loginButton
+//   const displayButton = auth ? logoutButton : loginButton
 
   return (
     <>
       <Navbar bg="" variant="dark" class="navbar">
         <Navbar.Brand href="#home">Navbar</Navbar.Brand>
         <Nav className="m-auto">
-          <Nav.Link as={NavLink} to="/" exact>
+          <Nav.Link as={NavLink} to="/" >
             Home
           </Nav.Link>
           <Nav.Link as={NavLink} to="/about">
@@ -58,7 +58,7 @@ function Mynavbar(props) {
 
 
         </Nav>
-        <Form inline>{displayButton}</Form>
+        <Form inline></Form>
       </Navbar>
     </>
   )
