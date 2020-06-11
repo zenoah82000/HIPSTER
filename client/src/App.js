@@ -11,6 +11,7 @@ import About from './pages/About'
 import Article from './pages/Article'
 import Contact from './pages/Contact'
 import Product from './pages/Product'
+import Map from './pages/Map'
 import ShoppingCar from './pages/ShoppingCar'
 
 
@@ -42,7 +43,9 @@ function App() {
             <Route  path="/shoppingcar">
               <ShoppingCar />
             </Route>
-
+            <Route  path="/map">
+              <Map />
+            </Route>
           </Switch>
           
         <Myfooter />
