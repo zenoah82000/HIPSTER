@@ -3,4 +3,14 @@
   background-image: url(../images/home-banner.jpg);
   background-size: cover;
   background-position: center center;
+  position: relative;
+}
+.searchbar {
+  width: 900px;
+  height: 130px;
+  position: absolute;
+  background-color: yellowgreen;
+  left: 50%;
+  bottom: 50px;
+  transform: translateX(-50%);
 }
