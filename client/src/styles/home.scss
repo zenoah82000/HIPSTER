@@ -9,8 +9,22 @@
   width: 900px;
   height: 130px;
   position: absolute;
-  background-color: yellowgreen;
+  //   background-color: yellowgreen;
   left: 50%;
   bottom: 50px;
   transform: translateX(-50%);
+}
+.btnList {
+  width: 360px;
+  display: flex;
+  justify-content: space-between;
+}
+.btnList .btn {
+  width: 110px;
+  height: 40px;
+  background-color: rgba(113, 113, 113, 0.8);
+  color: white;
+}
+.btnList .active {
+  background-color: rgba(104, 142, 103, 0.8);
 }
