@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
-import Mynavbar from './compoments/Mynavbar'
-// import Myfooter from './compoments/Myfooter'
+
+import Mynavbar from './components/Mynavbar'
+import Myfooter from './components/Myfooter'
+import MainContent from './components/MainContent'
 // import Nopage from './pages/Nopage'
 
 import Home from './pages/Home'
@@ -18,7 +20,7 @@ function App() {
     <Router>
       <>
         <Mynavbar />
-
+        <MainContent>
           <Switch>
 
             <Route exact path="/about">
@@ -38,7 +40,8 @@ function App() {
             </Route> */}
 
           </Switch>
-        {/* <Myfooter /> */}
+          </MainContent>
+        <Myfooter />
       </>
     </Router>
   )
