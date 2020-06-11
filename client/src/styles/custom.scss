@@ -2,9 +2,6 @@
 @import "~bootstrap/scss/bootstrap.scss";
 
 // 其它要導入覆蓋掉原本的預設bootstrap樣式要放在這下面
-h1 {
-  color: rgb(255, 8, 0);
-}
 
 main > .container {
 }
@@ -20,4 +17,8 @@ main > .container {
 
 .footer {
   background-color: #f5f5f5;
+}
+
+.container {
+  max-width: 1180px;
 }
