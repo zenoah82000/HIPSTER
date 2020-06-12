@@ -1,20 +1,42 @@
 import React, { useState, useEffect } from 'react'
 import SwitchButton from './MemberEventComponents/SwitchButton'
 
+import '../../styles/map.scss'
+
 //傳入方法 props.getEventData() = 向伺服器請求新的資料
 //傳入方法 props.setIsEnable() = 設定開關狀態
 //傳入參數 props.isEnable() = 開關狀態
 //2020-03-25
 function EventSearchBar(props) {
-  //每次點擊SwitchButton就改變state
+  //每次點擊SwitchButton就改變state 
+
   const toggleSwitchButton = () => {
     props.setIsEnable(!!props.isEnable)
   }
+
   return (
     <>
-      <div className="row d-flex searchBox">
-        <div className="col-xl-3 col-12">
-          <div className="d-flex switchbutton-jy align-items-center justify-content-end">
+      <div className="m-3">
+      <div className="row">
+          <div className=" col-10 ">
+          <div class="search">
+           <input
+              type="text"
+              className="searchTerm form-control form-control ml-3 w-75  searchInput"
+              placeholder="What are you looking for?"
+            ></input> 
+            <button
+              type="button"
+              className="btn-search btn btn-outline-secondary ml-2 searchButton"            
+            >          
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+          </div>
+        </div>
+
+        <div className="row d-flex m-3">
+          <div className="col-4  d-flex switchbutton-jy align-items-center justify-content-end">
             <p>包含已過期資料</p>
             <SwitchButton
               type="button"
@@ -22,34 +44,16 @@ function EventSearchBar(props) {
               clicked={toggleSwitchButton}
             />
           </div>
-        </div>
-        <div className="col-xl-2 col-12 d-flex">
-          <select
-            name="type"
-            className="form-control mx-2"
-            onChange={() => {
-              props.getEventData()
-            }}
+          <div className="col-4 "> 
+          <select          
+            className="form-control "           
           >
-            <option value="">選擇活動類別</option>
-            {props.eventTypeData.length > 0
-              ? props.eventTypeData.map((value, index) => {
-                  return (
-                    <option value={value.eventTypeName} key={index}>
-                      {value.eventTypeName}
-                    </option>
-                  )
-                })
-              : ''}
+            <option value="">選擇活動類別</option>          
           </select>
         </div>
-        <div className="col-xl-2 col-12 d-flex">
-          <select
-            name="sort"
-            className="form-control mx-2"
-            onChange={() => {
-              props.getEventData()
-            }}
+        <div className=" col-4 ">
+          <select            
+            className="form-control "           
           >
             <option value="">選擇排序方式</option>
             <option value="eventStartDate,asc">日期由近到遠</option>
@@ -58,27 +62,11 @@ function EventSearchBar(props) {
             <option value="eventNeedPeople,desc">名額由多至少</option>
           </select>
         </div>
-        <div className="col-xl col-12 d-flex">
-          <div className="mx-2">
-            <input
-              type="text"
-              className="form-control searchInput"
-              placeholder="搜索主題"
-            ></input>
-          </div>
-          <div>
-            <button
-              type="button"
-              className="btn-search btn btn-outline-secondary"
-              onClick={() => {
-                props.getEventData()
-              }}
-            >
-              搜索
-            </button>
-          </div>
         </div>
-      </div>
+        </div>
+
+
+      
     </>
   )
 }
