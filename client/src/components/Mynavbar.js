@@ -43,23 +43,29 @@ function Mynavbar(props) {
             {/* <Nav.Link as={NavLink} to="/" >
             Home
           </Nav.Link> */}
-            <Nav.Link as={NavLink} to="/about">
-              品牌介紹
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="/article">
-              文章專欄
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="/product">
-              活動列表
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="/contact">
-              聯絡我們
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="/shoppingcar">
-              購物車
-            </Nav.Link>
-          </Nav>
-          <Form inline></Form>
+          <Nav.Link as={NavLink} to="/about">
+            品牌介紹
+          </Nav.Link>
+          <Nav.Link as={NavLink} to="/map">
+            地圖
+          </Nav.Link>
+          <Nav.Link as={NavLink} to="/article">
+            文章專欄
+          </Nav.Link>
+          <Nav.Link as={NavLink} to="/product">
+            活動列表
+          </Nav.Link>
+          <Nav.Link as={NavLink} to="/contact">
+            聯絡我們
+          </Nav.Link>
+          <Nav.Link as={NavLink} to="/shoppingcar">
+            購物車
+          </Nav.Link>
+
+
+
+        </Nav>
+        <Form inline></Form>
         </div>
       </Navbar>
     </>
