@@ -10,22 +10,21 @@ import MyMapComponent from '../components/event/MyMapComponent'
 
 function Map(props) {
   return (
-    <>   
-             <div className="row ">
-               <div className="col-4">
-                 <EventSearchBar/>
-                 <EventMapDataList/>
-              </div>
-               <div className="col-8">
-                 <MyMapComponent/>
-               </div>
-             </div>          
+    <>
+      <div className="row ">
+        {/* <div className="col-4">
+          <EventSearchBar />
+          <EventMapDataList />
+        </div> */}
+        <div className="col-8">
+          <MyMapComponent />
+        </div>
+      </div>
     </>
   )
 }
 
-export default  Map
-
+export default Map
 
 // import React, { useEffect, useState } from 'react'
 
@@ -34,10 +33,8 @@ export default  Map
 // import Myfooter from '../components/Myfooter'
 
 // // 引入conmponent
-// import Map from '../../components/divelocation/map' 
+// import Map from '../../components/divelocation/map'
 //引入leaf組件
-
-
 
 // <<<<<<< HEAD
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import SwitchButton from './MemberEventComponents/SwitchButton'
 
-import '../../styles/map.scss'
+import { FaSearch} from 'react-icons/fa'
 
 //傳入方法 props.getEventData() = 向伺服器請求新的資料
 //傳入方法 props.setIsEnable() = 設定開關狀態
@@ -20,17 +20,14 @@ function EventSearchBar(props) {
       <div className="row">
           <div className=" col-10 ">
           <div class="search">
-           <input
-              type="text"
-              className="searchTerm form-control form-control ml-3 w-75  searchInput"
-              placeholder="What are you looking for?"
-            ></input> 
-            <button
-              type="button"
-              className="btn-search btn btn-outline-secondary ml-2 searchButton"            
-            >          
-              <i class="fa fa-search"></i>
-            </button>
+          <input
+                type="text"
+                id="location-bar"
+                placeholder="請輸入活動地址...."
+              /> 
+            <div id="local-btn" className="search-btn btn btn-warning ">
+                <FaSearch className="fonticon"/>              
+              </div>
           </div>
           </div>
         </div>
