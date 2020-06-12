@@ -14,44 +14,40 @@ import Product from './pages/Product'
 import Map from './pages/Map'
 import ShoppingCar from './pages/ShoppingCar'
 
-
-
-
 function App() {
   return (
     <Router>
       <>
         <Mynavbar />
-        
-          <Switch>
 
-            <Route  path="/about">
-              <About />
-            </Route>
-            <Route path="/article">
-              <Article />
-            </Route>
-            <Route  path="/Contact">
-              <Contact />
-            </Route>
-            <Route  path="/product">
-              <Product />
-            </Route>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route  path="/shoppingcar">
-              <ShoppingCar />
-            </Route>
-            <Route  path="/map">
-              <Map />
-            </Route>
-          </Switch>
-          
+        <Switch>
+          <Route path="/about">
+            <About />
+          </Route>
+          <Route path="/article">
+            <Article />
+          </Route>
+          <Route path="/Contact">
+            <Contact />
+          </Route>
+          <Route path="/product">
+            <Product />
+          </Route>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route path="/shoppingcar">
+            <ShoppingCar />
+          </Route>
+          <Route path="/map">
+            <Map />
+          </Route>
+        </Switch>
+
         <Myfooter />
       </>
     </Router>
   )
 }
 
-export default App;
+export default App
