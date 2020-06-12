@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import '../../styles/ShoppingCar.scss'
 
+import Mycart from '../../components/order/MyCart'
+
 function ShoppingCar() {
   const [mycart, setMycart] = useState([])
 
@@ -37,6 +39,9 @@ function ShoppingCar() {
           <div className="col">
             <h6>總價</h6>
           </div>
+        </div>
+        <div className="bg-white mt-2">
+          <Mycart mycart={mycart}/>
         </div>
       </div>
     </>
