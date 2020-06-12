@@ -1,3 +1,41 @@
+import React from 'react'
+import '../styles/home.scss'
+import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap'
+import { Link, NavLink, withRouter } from 'react-router-dom'
+
+function Map(props) {
+  return (
+    <>
+      <div className="banner">
+        <div className="container">
+          <div className="searchbar">
+            <div className="btnList">
+              <div className="btn active">地點搜尋</div>
+              <div className="btn">活動名稱</div>
+              <div className="btn">活動地點</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  )
+}
+
+export default  Map
+
+
+// import React, { useEffect, useState } from 'react'
+
+// //引入通用conmponent
+// import Mynavbar from '../components/Mynavbar'
+// import Myfooter from '../components/Myfooter'
+
+// // 引入conmponent
+// import Map from '../../components/divelocation/map' 
+//引入leaf組件
+
+
+
 // <<<<<<< HEAD
 
 // import React, { useEffect, useState } from 'react'
@@ -366,4 +404,4 @@
 // }
 
 // export default connect(mapStateToProps, mapDispatchToProps)(EventMapList)
->>>>>>> 8906a3665611f6be66f29e901b448eaf05d26189
+// >>>>>>> 8906a3665611f6be66f29e901b448eaf05d26189

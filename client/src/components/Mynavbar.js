@@ -47,6 +47,9 @@ function Mynavbar(props) {
           <Nav.Link as={NavLink} to="/about">
             品牌介紹
           </Nav.Link>
+          <Nav.Link as={NavLink} to="/map">
+            地圖
+          </Nav.Link>
           <Nav.Link as={NavLink} to="/article">
             文章專欄
           </Nav.Link>
