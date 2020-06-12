@@ -8,6 +8,7 @@ import {
   GoogleMap,
   Marker,
 } from 'react-google-maps'
+
 import { MarkerClusterer } from 'react-google-maps/lib/components/addons/MarkerClusterer'
 
 //引入redux元件
@@ -22,10 +23,11 @@ import {
 } from '../../actions/event/event_Actions'
 
 //引入自訂元件
-import Header from '../../components/Header'
-import Banner from '../../components/Banner'
-import Footer from '../../components/Footer'
-import Loading from '../../components/class/Loading'
+
+import Mynavbar from '../components/Mynavbar'
+import Myfooter from '../components/Myfooter'
+
+// import Loading from '../../components/class/Loading'
 import EventMapDataList from '../../components/event/EventMapDataList'
 import EventSearchBar from '../../components/event/EventSearchBar'
 
@@ -125,8 +127,7 @@ function EventMapList(props) {
 
   return (
     <>
-      <Header />
-
+      <Mynavbar />
       {/* <Banner BannerImgSrc="./images/eventImg/eventBanner1.png" /> */}
       <div className="container-fluid JY-event-container-maplist">
         {hasloading ? (
@@ -158,7 +159,7 @@ function EventMapList(props) {
           </>
         )}
       </div>
-      <Footer />
+      <Myfooter />
     </>
   )
 }
