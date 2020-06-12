@@ -8,7 +8,8 @@ import MainContent from './components/MainContent'
 
 import Home from './pages/Home'
 import About from './pages/About'
-import Article from './pages/Article'
+import Article from './pages/Article' 
+import Test from './pages/Test' 
 import Contact from './pages/Contact'
 import Product from './pages/Product'
 import Map from './pages/Map'
@@ -26,6 +27,9 @@ function App() {
           </Route>
           <Route path="/article">
             <Article />
+          </Route>
+          <Route path="/test">
+            <Test />
           </Route>
           <Route path="/Contact">
             <Contact />
