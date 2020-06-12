@@ -12,7 +12,7 @@ import Article from './pages/Article'
 import Contact from './pages/Contact'
 import Product from './pages/Product'
 import Map from './pages/Map'
-import ShoppingCar from './pages/ShoppingCar'
+import ShoppingCar from './pages/order/ShoppingCar'
 
 
 
