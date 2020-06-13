@@ -2,267 +2,34 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Fade from 'react-reveal/Fade'
 
-
-//icon
-import { FaCoffee } from 'react-icons/fa'
-import { FaMapMarkerAlt } from 'react-icons/fa'
-import { FaRegClock } from 'react-icons/fa'
-import { FaRegCalendarCheck } from 'react-icons/fa'
-
-
+//傳入參數 props.eventData = 存放活動資料的陣列
+//2020-03-21
 function EventDataList(props) {
   return (
     <>
-      <div className="dataBox overflow-auto" >
-        <Fade>
-          <div className="eventContentBox d-flex">
-            <div className="eventImgBox col-4">
-              <img
-                src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
-                alt=""
-              />
-            </div>
-            <div className="eventDetailBox col-8 pl-3">
-              <h2 className="eventTitle">商品名</h2>
-              <ul className=" list-unstyled">
-                <li >
-                  <div className="mapCategory">
-                    手作課程
-                 </div>
-                </li>
-                <li>
-                  星等
-                </li>
-                <li>
-                  <span className="mr-2">
-                    <FaRegClock />
-                  </span>
-              營業時間
-            </li>
-                <li>
-                  <span className="mr-2">
-                    <FaMapMarkerAlt />
-                  </span>
-              地點
-            </li>
-                <li>
-                  <span className="mr-2">
-                    <FaRegCalendarCheck />
-                  </span>
-              活動日期：
-            </li>
-              </ul>
-            </div>
-          </div>
-        </Fade>
-        <Fade>
-          <div className="eventContentBox d-flex">
-            <div className="eventImgBox col-4">
-              <img
-                src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
-                alt=""
-              />
-            </div>
-            <div className="eventDetailBox col-8 pl-3">
-              <h2 className="eventTitle">商品名</h2>
-              <ul className=" list-unstyled">
-                <li >
-                  <div className="mapCategory">
-                    手作課程
-                 </div>
-                </li>
-                <li>
-                  星等
-                </li>
-                <li>
-                  <span className="mr-2">
-                    <FaRegClock />
-                  </span>
-              營業時間
-            </li>
-                <li>
-                  <span className="mr-2">
-                    <FaMapMarkerAlt />
-                  </span>
-              地點
-            </li>
-                <li>
-                  <span className="mr-2">
-                    <FaRegCalendarCheck />
-                  </span>
-              活動日期：
-            </li>
-              </ul>
-            </div>
-          </div>
-        </Fade>
-
-        <Fade>
-          <div className="eventContentBox d-flex">
-            <div className="eventImgBox col-4">
-              <img
-                src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
-                alt=""
-              />
-            </div>
-            <div className="eventDetailBox col-8 pl-3">
-              <h2 className="eventTitle">商品名</h2>
-              <ul className=" list-unstyled">
-                <li >
-                  <div className="mapCategory">
-                    手作課程
-                 </div>
-                </li>
-                <li>
-                  星等
-                </li>
-                <li>
-                  <span className="mr-2">
-                    <FaRegClock />
-                  </span>
-              營業時間
-            </li>
-                <li>
-                  <span className="mr-2">
-                    <FaMapMarkerAlt />
-                  </span>
-              地點
-            </li>
-                <li>
-                  <span className="mr-2">
-                    <FaRegCalendarCheck />
-                  </span>
-              活動日期：
-            </li>
-              </ul>
-            </div>
-          </div>
-        </Fade>
-        <Fade>
-          <div className="eventContentBox d-flex">
-            <div className="eventImgBox col-4">
-              <img
-                src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
-                alt=""
-              />
-            </div>
-            <div className="eventDetailBox col-8 pl-3">
-              <h2 className="eventTitle">商品名</h2>
-              <ul className=" list-unstyled">
-                <li >
-                  <div className="mapCategory">
-                    手作課程
-                 </div>
-                </li>
-                <li>
-                  星等
-                </li>
-                <li>
-                  <span className="mr-2">
-                    <FaRegClock />
-                  </span>
-              營業時間
-            </li>
-                <li>
-                  <span className="mr-2">
-                    <FaMapMarkerAlt />
-                  </span>
-              地點
-            </li>
-                <li>
-                  <span className="mr-2">
-                    <FaRegCalendarCheck />
-                  </span>
-              活動日期：
-            </li>
-              </ul>
-            </div>
-          </div>
-        </Fade>
-        <Fade>
-          <div className="eventContentBox d-flex">
-            <div className="eventImgBox col-4">
-              <img
-                src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
-                alt=""
-              />
-            </div>
-            <div className="eventDetailBox col-8 pl-3">
-              <h2 className="eventTitle">商品名</h2>
-              <ul className=" list-unstyled">
-                <li >
-                  <div className="mapCategory">
-                    手作課程
-                 </div>
-                </li>
-                <li>
-                  星等
-                </li>
-                <li>
-                  <span className="mr-2">
-                    <FaRegClock />
-                  </span>
-              營業時間
-            </li>
-                <li>
-                  <span className="mr-2">
-                    <FaMapMarkerAlt />
-                  </span>
-              地點
-            </li>
-                <li>
-                  <span className="mr-2">
-                    <FaRegCalendarCheck />
-                  </span>
-              活動日期：
-            </li>
-              </ul>
-            </div>
-          </div>
-        </Fade>
-
-      </div>  
-    </>
-  )
-}
-
-{/* <div className="cardBox">
-        <div className="d-flex">
-          <div className="cardImgBox " >
-            <img src="https://i.pinimg.com/564x/70/5b/e8/705be8c9c1f92e815af943a0bb54814d.jpg" alt="  " />
-          </div>
-          <div className="">
-            <h5 className="card-title">商品名</h5>
-            <p className="card-text">星等</p>
-            <p className="card-text">地址</p>
-            <p className="card-text">營業時間</p>
-            <a href="#" className="btn btn-primary">Button</a>
-          </div>
-        </div> */}
-
-
-
-
-
-{/*       
       <div className="row">
-        {props.eventData && props.eventData.length > 0 ? (
-          props.eventData.map((value, index) => {
+        {props.eventData.result && props.eventData.result.length > 0 ? (
+          props.eventData.result.map((value, index) => {
+            // 變數 status = 判斷目前人數或時間決定顯示什麼
+            let status = '火熱揪團中'
+            let newEventName = value.eventName
             let progress = (value.eventNowPeople / value.eventNeedPeople) * 100
 
+            if (value.eventNeedPeople === value.eventNowPeople)
+              status = '已額滿'
+
+            if (new Date(value.eventEndDate).getTime() < new Date().getTime())
+              status = '已過期'
+
+            if (props.eventData.searchKeyword) {
+              console.log(newEventName.indexOf(props.eventData.searchKeyword))
+            }
+
             return (
-              <Fade right key={index}>
-                <div
-                  className={
-                    index === 0
-                      ? 'col-xl-12 col-10 eventInfoBox eventMapList-JY mt-0'
-                      : 'col-xl-12 col-10 eventInfoBox eventMapList-JY boxHide'
-                  }
-                  key={index}
-                  data-eventId={value.eventId}
-                >
-                  <div className="eventContentBox d-flex">
-                    <div className="eventImgBox col-7">
+              <Fade bottom key={index}>
+                <div className="col-xl-3 col-10 eventInfoBox" key={index}>
+                  <div className="eventContentBox">
+                    <div className="eventImgBox">
                       <img
                         src={
                           'http://127.0.0.1:5000/images/eventImg/' +
@@ -271,8 +38,8 @@ function EventDataList(props) {
                         alt=""
                       />
                     </div>
-                    <div className="eventDetailBox col-5">
-                      <h2 className="eventTitle">{value.eventName}</h2>
+                    <div className="eventDetailBox">
+                      <h2 className="eventTitle">{newEventName}</h2>
                       <ul className="d-flex">
                         <li>
                           <img src="/images/eventImg/icons/type.svg" alt="" />
@@ -297,6 +64,7 @@ function EventDataList(props) {
                           活動日期：{value.eventStartDate}
                         </li>
                       </ul>
+                      <p className="status">{status}</p>
                       <p className="quota">
                         徵求 <span>{value.eventNeedPeople}</span> 人 還剩{' '}
                         <span>
@@ -315,14 +83,14 @@ function EventDataList(props) {
                           ></div>
                         </div>
                       </div>
-                      <div className="d-flex justify-content-center">
-                        <Link
-                          className="btn-more btn btn-raised btn-warning mt-3"
-                          to={'/event/' + value.eventId}
-                        >
-                          了解詳情
-                        </Link>
-                      </div>
+                    </div>
+                    <div className="d-flex justify-content-center">
+                      <Link
+                        className="btn-more btn btn-raised btn-warning"
+                        to={'/event/' + value.eventId}
+                      >
+                        了解詳情
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -334,7 +102,9 @@ function EventDataList(props) {
             <h2 className="text-white text-center">查無相關資料</h2>
           </div>
         )}
-      </div> */}
-
+      </div>
+    </>
+  )
+}
 
 export default EventDataList

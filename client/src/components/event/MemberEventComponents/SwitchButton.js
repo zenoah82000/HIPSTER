@@ -8,7 +8,7 @@ const StyledSwitchButton = styled.div`
   align-items: center;
   button {
     width: 38px;
-    background-color: ${props => (props.active ? '#f15a24' : '#132948')};
+    background-color: ${props => (props.active ? '#f15a24' : 'rgba(104, 142, 103, 0.8)')};
     border-radius: 11px;
     border: 1px solid ${props => (props.active ? '#ECECEC' : '#ECECEC')};
     box-sizing: border-box;
