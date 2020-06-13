@@ -1,51 +1,70 @@
-import React from 'react'
-import { render } from 'react-dom'
-import { Map, Marker, Popup, TileLayer,Overlay,BaseLayer } from 'react-leaflet'
+import React from "react";
+import { Map, Marker, Popup, TileLayer } from "react-leaflet";
+// import Markers from '@somarmeteorologia/react-leaflet-markers'
 
-// import { withRouter } from 'react-router-dom'
 
-//引入redux元件
-// import { connect } from 'react-redux'
-// import { bindActionCreators } from 'redux'
+const MyMapComponent = () => {
+    const [activePark, setActivePark] = React.useState(null);
 
-//引入leaf元件
-// import 'leaflet/dist/leaflet.css'
-// import L from 'leaflet'
-
-//引入action
-// import { fetchMapmarks } from '../../actions/location/Location_Action'
-
-// 參考資料 : https://leafletjs.com/examples/quick-start/ & https://juejin.im/post/5cc192976fb9a032092e8e0a
-const { Map, TileLayer, Pane, GeoJSON } = ReactLeaflet;
-const { BaseLayer, Overlay } = LayersControl;
-
-class MyMapComponent extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      lat: 51.505,
-      lng: -0.09,
-      zoom: 13
+    const parkData = {
+        "features": [
+            {
+                "type": "Feature",
+                "properties": {
+                    "PARK_ID": 960,
+                    "NAME": "Bearbrook Skateboard Park",
+                    "DESCRIPTIO": "Flat asphalt surface, 5 components"
+                },
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [25.0135914, 121.2332019]
+                }
+            },
+            {
+                "type": "Feature",
+                "properties": {
+                    "PARK_ID": 1219,
+                    "NAME": "Bob MacQuarrie Skateboard Park (SK8 Extreme Park)",
+                    "DESCRIPTIO": "Flat asphalt surface, 10 components, City run learn to skateboard programs, City run skateboard camps in summer"
+                },
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [-75.546518086577947, 45.467134581917357]
+                }
+            }
+        ]
     }
-  }
-
-  render() {
-    const position = [this.state.lat, this.state.lng];
     return (
-      <Map center={position} zoom={this.state.zoom}>
-        <TileLayer
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
-        />
-        <Marker position={position}>
-          <Popup>
-            <span>A pretty CSS3 popup. <br/> Easily customizable.</span>
-          </Popup>
-        </Marker>
+        <Map center={[25.0338438, 121.543350]} zoom={20}>
+            <TileLayer
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            />
+            {parkData.features.map(park => (
+                <Marker
+                    // markers={
+                    //     markers.map(marker => (
+                    //         <Marker
+                    //             key={marker.key}
+                    //             icon={defaultIcon}
+                    //             position={[marker.latitude, marker.longitude]}
+                    //             properties={marker}   />
+                    //             ))
+                    //           }
+                        key={park.properties.PARK_ID}
+                        position={[
+                                    25.0338438
+                                    , 121.543321
+                                ]}
+                        onClick={() => {
+                                    setActivePark(park);
+                                }}
+                            />
+                        ))}
       </Map>
-    );
-  }
-}
 
+
+    );
+}
 
 export default MyMapComponent
