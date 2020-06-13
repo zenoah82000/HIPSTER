@@ -13,7 +13,6 @@ function ShoppingCar() {
     setMycart(localCart)
   }
 
-  //把
   useEffect(() => {
     getCartFromLocalStorage()
   }, [])
@@ -21,10 +20,10 @@ function ShoppingCar() {
   return (
     <>
       <div className="container">
-        <h1>購物車</h1>
-        <div className="bg-white d-flex">
+        <h1 className="py-4">購物車</h1>
+        <div className="bg-white d-flex p-2 align-items-center">
           <div className="col">
-            <input type="checkbox" name="checkall" id="checkall" />
+            <input type="checkbox" className="mr-4" name="checkall" id="checkall" />
             <label for="checkall">全選</label>
           </div>
           <div className="col">
@@ -36,13 +35,20 @@ function ShoppingCar() {
           <div className="col">
             <h6>數量</h6>
           </div>
-          <div className="col">
+          <div className="col text-right">
             <h6>總價</h6>
           </div>
         </div>
-        <div className="bg-white mt-2">
           <Mycart mycart={mycart}/>
-        </div>
+          <div className="bg-white p-2 mt-3 d-flex">
+            <div className="col-6">
+              使用優惠券
+            </div>
+            <div className="col-6 text-right">
+              <button>結算</button>
+            </div>
+            
+          </div>
       </div>
     </>
   )

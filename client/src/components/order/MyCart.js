@@ -1,5 +1,8 @@
 import React from 'react'
 
+import {FiEdit} from 'react-icons/fi'
+import {BsTrash} from 'react-icons/bs'
+
 function MyCart(props) {
   const { handleDelete, mycart } = props
   // console.log('carditem', { mycart })
@@ -10,46 +13,28 @@ function MyCart(props) {
         props.mycart.map((value, index) => {
           return (
             <>
-              <div className="d-flex cart-item border-bottom" key={index}>
-                <div className="col-1 d-flex align-items-center">
-                  <input type="checkbox" name="" id="" />
-                </div>
-                <div className="card-item-img col-4 col-md-2 d-flex align-items-center">
-                  <img
-                    src={`http://127.0.0.1:5000/images/itemImg/${value.img}`}
+              <div className="bg-white d-flex mt-3 p-2 align-items-center">
+                <div className="col d-flex">
+                  <input type="checkbox" className="mr-4"/>
+                  <img className="productImg"
+                    src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
                     alt=""
                   />
                 </div>
-                <div className="card-item-info col-6 col-md-8 d-flex flex-column flex-md-row align-items-md-center">
-                  <div className="item-name col col-md-6 order-0 order-md-0">
-                    <h6>{value.name}</h6>
-                    <h6>S size</h6>
-                  </div>
-                  <div className="item-qty w-25 order-2 order-md-1">
-                    <select className="custom-select">
-                      <option value="{value.amount}" selected>
-                        {value.amount}
-                      </option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                    </select>
-                  </div>
-                  <div className="item-price order-1 order-md-2">
-                    <h6>NT$ {value.price}</h6>
-                  </div>
+                <div className="col">{value.name}</div>
+                <div className="col">{value.date}</div>
+                <div className="col">
+                  <span>
+                    <input value={value.amount} readOnly />
+                  </span>
                 </div>
-                <div className="item-delete col-1 d-flex align-items-center">
-                  <i
-                    className="material-icons"
-                    onClick={() =>
-                      handleDelete({
-                        id: `${value.id}`,
-                      })
-                    }
-                  >
-                    close
-                  </i>
+                <div className="col"></div>
+              </div>
+              <div className="bg-white d-flex border-top p-1">
+                <div className="col-2"><FiEdit/>更改</div>
+                <div className="col-2"><BsTrash/>刪除</div>
+                <div className="col text-right">
+                  NT${value.price * value.amount}
                 </div>
               </div>
             </>
