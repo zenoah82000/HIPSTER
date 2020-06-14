@@ -7,7 +7,7 @@ import EventMapDataList from '../components/event/EventMapDataList'
 import EventSearchBar from '../components/event/EventSearchBar'
 import MyMapComponent from '../components/event/MyMapComponent'
 
-import Comments from '../components/comments/commentList'
+import CommentList from '../components/comments/commentList'
 
 function Map(props) {
   return (
@@ -20,7 +20,7 @@ function Map(props) {
         <div className="col-8">
           <MyMapComponent />
         </div>
-         <Comments/>
+         <CommentList/>
       </div>
     </>
   )

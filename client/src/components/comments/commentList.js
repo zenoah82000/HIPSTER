@@ -14,7 +14,7 @@ class commtentList extends Component {
     }
     render() {
         return (
-            <div class="container mt-5 ">
+            <div class="container m-5 ">
                 <Tabs selectedIndex={this.state.tabIndex} onSelect={tabIndex => this.setState({ tabIndex })}>
                     <TabList>
                         <Tab>評價</Tab>
@@ -49,7 +49,7 @@ class commtentList extends Component {
                                         </li>
                                     </ul>
                                 </div>
-                            </div>               
+                            </div>
                         </div>
 
                         <div>
@@ -80,7 +80,7 @@ class commtentList extends Component {
                                         </li>
                                     </ul>
                                 </div>
-                            </div>               
+                            </div>
                         </div>
 
                         <div>
@@ -111,9 +111,13 @@ class commtentList extends Component {
                                         </li>
                                     </ul>
                                 </div>
-                            </div>               
+                            </div>
                         </div>
-                        
+                        <div className="d-flex justify-content-center   " >
+                           <div className="pageButton">1</div>
+                           <div className="pageButton">2</div>
+                           <div className="pageButton">3</div>
+                        </div>
                     </TabPanel>
 
                     <TabPanel>
@@ -140,13 +144,16 @@ class commtentList extends Component {
                                 </div>
                             </div>
                         </div>
+                        <div className="d-flex justify-content-center   " >
+                           <div className="pageButton">1</div>
+                           <div className="pageButton">2</div>
+                           <div className="pageButton">3</div>
+                        </div>
                     </TabPanel>
                 </Tabs>
-
-                <div className="pageButton"></div>
             </div>
         );
-    }
+    }   
 }
 
 export default commtentList
