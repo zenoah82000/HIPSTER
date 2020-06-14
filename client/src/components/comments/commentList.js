@@ -34,14 +34,53 @@ class commtentList extends Component {
                                 <div className="commentBox col-11">
                                     <h2 className="eventTitle">評論1   </h2>
                                     <ul className=" list-unstyled">
-                                        <li >
+                                    <li >
                                             用戶名
                                         </li>
                                         <li >
-                                            <div className="">
-                                                這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價
-                                            </div>
+                                            星等
                                         </li>
+                                        <li >
+                                            <p className="">
+                                                這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價
+                                            </p>
+                                        </li>
+                                        
+                                        <li className="d-flex">
+                                            <CommentImg />
+                                            <CommentImg />
+                                            <CommentImg />
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div className="commentList d-flex">
+                                <div className="col-1">
+                                    <div className="iconBox">
+                                        <img
+                                            src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
+                                            alt=""
+                                        />
+                                    </div>
+                                </div>
+                                <div className="commentBox col-11">
+                                    <h2 className="eventTitle">評論1   </h2>
+                                    <ul className=" list-unstyled">
+                                    <li >
+                                            用戶名
+                                        </li>  
+                                        <li >
+                                            星等
+                                        </li>
+                                        <li >
+                                            <p className="">
+                                                這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價
+                                            </p>
+                                        </li>
+                                      
                                         <li className="d-flex">
                                             <CommentImg />
                                             <CommentImg />
@@ -67,43 +106,15 @@ class commtentList extends Component {
                                     <ul className=" list-unstyled">
                                         <li >
                                             用戶名
+                                        </li> 
+                                        <li >
+                                            星等
                                         </li>
                                         <li >
-                                            <div className="">
+                                            <p className="">
                                                 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價
-                                            </div>
-                                        </li>
-                                        <li className="d-flex">
-                                            <CommentImg />
-                                            <CommentImg />
-                                            <CommentImg />
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div className="commentList d-flex">
-                                <div className="col-1">
-                                    <div className="iconBox">
-                                        <img
-                                            src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
-                                            alt=""
-                                        />
-                                    </div>
-                                </div>
-                                <div className="commentBox col-11">
-                                    <h2 className="eventTitle">評論1   </h2>
-                                    <ul className=" list-unstyled">
-                                        <li >
-                                            用戶名
-                                        </li>
-                                        <li >
-                                            <div className="">
-                                                這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價
-                                            </div>
-                                        </li>
+                                            </p>
+                                        </li>                                      
                                         <li className="d-flex">
                                             <CommentImg />
                                             <CommentImg />

@@ -20,7 +20,6 @@ function Map(props) {
         <div className="col-8">
           <MyMapComponent />
         </div>
-         <CommentList/>
       </div>
     </>
   )
