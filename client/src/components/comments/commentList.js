@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.scss'
+import '../../styles/comment.scss'
 
 //引入自訂元件
-import CommentImg from '../comments/commentImg'
+import CommentImg from './commentImg'
 
 
-class commtents extends Component {
+class commtentList extends Component {
     constructor() {
         super();
         this.state = { tabIndex: 0 };
@@ -20,15 +21,17 @@ class commtents extends Component {
                         <Tab>問與答</Tab>
                     </TabList>
                     <TabPanel>
-                        <div style={{ padding: "20px" }}>
-                            <div className="eventContentBox d-flex">
-                                <div className="comment icon col-1">
-                                    <img
-                                        src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
-                                        alt=""
-                                    />
+                        <div>
+                            <div className="commentList d-flex">
+                                <div className="col-1">
+                                    <div className="iconBox">
+                                        <img
+                                            src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
+                                            alt=""
+                                        />
+                                    </div>
                                 </div>
-                                <div className="eventDetailBox col-11 pl-3">
+                                <div className="commentBox col-11">
                                     <h2 className="eventTitle">評論1   </h2>
                                     <ul className=" list-unstyled">
                                         <li >
@@ -46,53 +49,73 @@ class commtents extends Component {
                                         </li>
                                     </ul>
                                 </div>
-                            </div>
-
-                            <div className="eventContentBox d-flex">
-                                <div className="eventImgBox col-2">
-                                    <img
-                                        src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
-                                        alt=""
-                                    />
-                                </div>
-                                <div className="eventDetailBox col-10 pl-3">
-                                    <h2 className="eventTitle">評論2   </h2>
-                                    <ul className=" list-unstyled">
-                                        <li >
-                                            <div className="">
-                                                手作課程
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <CommentImg />
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div className="eventContentBox d-flex">
-                                <div className="eventImgBox col-2">
-                                    <img
-                                        src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
-                                        alt=""
-                                    />
-                                </div>
-                                <div className="eventDetailBox col-10 pl-3">
-                                    <h2 className="eventTitle">評論3   </h2>
-                                    <ul className=" list-unstyled">
-                                        <li >
-                                            <div className="">
-                                                手作課程
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <CommentImg />
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                            </div>               
                         </div>
+
+                        <div>
+                            <div className="commentList d-flex">
+                                <div className="col-1">
+                                    <div className="iconBox">
+                                        <img
+                                            src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
+                                            alt=""
+                                        />
+                                    </div>
+                                </div>
+                                <div className="commentBox col-11">
+                                    <h2 className="eventTitle">評論1   </h2>
+                                    <ul className=" list-unstyled">
+                                        <li >
+                                            用戶名
+                                        </li>
+                                        <li >
+                                            <div className="">
+                                                這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價
+                                            </div>
+                                        </li>
+                                        <li className="d-flex">
+                                            <CommentImg />
+                                            <CommentImg />
+                                            <CommentImg />
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>               
+                        </div>
+
+                        <div>
+                            <div className="commentList d-flex">
+                                <div className="col-1">
+                                    <div className="iconBox">
+                                        <img
+                                            src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
+                                            alt=""
+                                        />
+                                    </div>
+                                </div>
+                                <div className="commentBox col-11">
+                                    <h2 className="eventTitle">評論1   </h2>
+                                    <ul className=" list-unstyled">
+                                        <li >
+                                            用戶名
+                                        </li>
+                                        <li >
+                                            <div className="">
+                                                這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價 這是評價
+                                            </div>
+                                        </li>
+                                        <li className="d-flex">
+                                            <CommentImg />
+                                            <CommentImg />
+                                            <CommentImg />
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>               
+                        </div>
+                        
                     </TabPanel>
+
                     <TabPanel>
                         <div>
                             <div className="eventContentBox d-flex">
@@ -119,9 +142,11 @@ class commtents extends Component {
                         </div>
                     </TabPanel>
                 </Tabs>
+
+                <div className="pageButton"></div>
             </div>
         );
     }
 }
 
-export default commtents
+export default commtentList
