@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
+import { withRouter } from 'react-router-dom'
 import '../../styles/ShoppingCar.scss'
 
 import Mycart from '../../components/order/MyCart'
+import { checkPropTypes } from 'prop-types'
 
-function ShoppingCar() {
+function ShoppingCar(props) {
   const [mycart, setMycart] = useState([])
 
 
@@ -45,7 +47,9 @@ function ShoppingCar() {
               使用優惠券
             </div>
             <div className="col-6 text-right">
-              <button>結算</button>
+              <button onClick={()=>{
+                props.history.push('/')
+              }}>結算</button>
             </div>
             
           </div>
@@ -53,4 +57,4 @@ function ShoppingCar() {
     </>
   )
 }
-export default ShoppingCar
+export default withRouter(ShoppingCar)
