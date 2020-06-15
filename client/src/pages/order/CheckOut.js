@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
+import { Link,  withRouter } from 'react-router-dom'
 
-function CheckOut() {
+function CheckOut(props) {
   const [addressCity, setAddressCity] = useState('') //儲存使用者選擇的縣市
   const [addressDist, setAddressDist] = useState('') //儲存使用者選擇的地區
 
@@ -56,28 +57,8 @@ function CheckOut() {
                       <select
                         name=""
                         className="form-control"
-                        onChange={(event) => {
-                          const city = event.target.value
-                          props.getDistDataAsync(city) //取得相對應的地區資料
-                          setAddressCity(city) //設定課程地點(縣市)到本地state
-                          setAddressDist('')
-                          // setClassFullLocation('')
-                          // setClassLocation('')
-                          // document.querySelector(
-                          //   'input[name="classFullLocation"]'
-                          // ).value = ''
-                        }}
                       >
                         <option value="">請選擇縣市</option>
-                        {props.cityData.length > 0
-                          ? props.cityData.map((value, index) => {
-                              return (
-                                <option value={value.name} key={index}>
-                                  {value.name}
-                                </option>
-                              )
-                            })
-                          : ''}
                       </select>
                     </div>
                     <div className="col">
@@ -85,30 +66,11 @@ function CheckOut() {
                         name=""
                         id=""
                         className="form-control"
-                        onBlur={() => {
-                          setArea(addressCity + addressDist)
-                        }}
-                        onChange={(event) => {
-                          const dist = event.target.value
-                          setAddressDist(dist)
+                
 
-                          // setClassFullLocation('')
-                          // setClassLocation('')
-                          // document.querySelector(
-                          //   'input[name="classFullLocation"]'
-                          // ).value = ''
-                        }}
+                    
                       >
                         <option value="">請選擇地區</option>
-                        {props.distData.length > 0
-                          ? props.distData.map((value, index) => {
-                              return (
-                                <option value={value} key={index}>
-                                  {value}
-                                </option>
-                              )
-                            })
-                          : ''}
                       </select>
                     </div>
                   </div>
@@ -117,20 +79,12 @@ function CheckOut() {
                     type="text"
                     name="address"
                     id="address"
-                    onChange={(event) => {
-                      const address = event.target.value
-                      setAddress(address)
-                    }}
                   />
                   <input
                     className="form-control"
                     type="phone"
                     name="phone"
                     id="phone"
-                    onChange={(event) => {
-                      const phone = event.target.value
-                      setPhone(phone)
-                    }}
                   />
                   <textarea
                     className="form-control"
@@ -138,10 +92,7 @@ function CheckOut() {
                     id="note"
                     cols="30"
                     rows="5"
-                    onChange={(event) => {
-                      const note = event.target.value
-                      setNote(note)
-                    }}
+
                   ></textarea>
                 </div>
               </div>
@@ -175,7 +126,7 @@ function CheckOut() {
                   className="check-btn btn btn-lg w-100"
                   onClick={
                     () => {
-                      post()
+                      
                     }
                   }
                 >
