@@ -10,14 +10,50 @@ body {
   display: none !important;
 }
 //===================選單====================
-.navbar {
+nav {
   background-color: #688e67;
   color: #fff;
+  font-size: 16px;
 }
-.navbar-dark .navbar-nav .nav-link {
-  padding: 0 1rem;
+.navbar {
+  height: 100px;
   color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
+.logo {
+  width: 248px;
+  height: 70px;
+  background-image: url(../images/home/logo.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: block;
+}
+.menu {
+  list-style: none;
+  display: flex;
+  margin: 0;
+}
+.menu li {
+  padding: 0 8px;
+}
+.menu a {
+  color: white;
+  text-decoration: none;
+}
+.menu a:hover {
+  color: rgba($color: #fff, $alpha: 0.5);
+}
+
+// .navbar {
+//   background-color: #688e67;
+//   color: #fff;
+// }
+// .navbar-dark .navbar-nav .nav-link {
+//   padding: 0 1rem;
+//   color: #fff;
+// }
 
 .burger {
   font-size: 15px;
@@ -27,21 +63,21 @@ body {
   cursor: pointer;
 }
 
-.sign .nav-link {
-  padding: 0 0.5rem !important;
-}
-.memberbtn {
-  padding: 3px 10px !important;
-  border-radius: 3px;
-  border: 1.5px solid #fff;
-}
-.memberbtn:hover {
-  background-color: rgba($color: #ffffff, $alpha: 0.5);
-}
-.membername {
-  line-height: 30px;
-  margin: 0 30px;
-}
+// .sign .nav-link {
+//   padding: 0 0.5rem !important;
+// }
+// .memberbtn {
+//   padding: 3px 10px !important;
+//   border-radius: 3px;
+//   border: 1.5px solid #fff;
+// }
+// .memberbtn:hover {
+//   background-color: rgba($color: #ffffff, $alpha: 0.5);
+// }
+// .membername {
+//   line-height: 30px;
+//   margin: 0 30px;
+// }
 //===================選單====================
 
 .footer {
