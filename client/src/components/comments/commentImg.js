@@ -6,7 +6,7 @@ import React from 'react'
 function commentImg(props) {
     return (
         <>
-            <div style={{width:"80px",height:"80px",objectFit:"cover",overflow:"hidden",margin:"5px"}}>
+            <div className="commentImg"style={{width:"80px",height:"80px",objectFit:"cover",overflow:"hidden",margin:"5px"}}>
                 <img
                     src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
                     alt=""
