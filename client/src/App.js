@@ -17,6 +17,10 @@ import Map from './pages/Map'
 import ShoppingCar from './pages/order/ShoppingCar'
 import CheckOut from './pages/order/CheckOut'
 
+import PaymentDetail from './pages/payment/paymentDetail'
+import PaymentFinish from './pages/payment/paymentFinish'
+import PaymentType from './pages/payment/paymentType'
+
 function App() {
   return (
     <Router>
@@ -50,6 +54,15 @@ function App() {
           </Route>
           <Route path="/checkout">
             <CheckOut />
+          </Route>
+          <Route path="/paymentDetail">
+            <PaymentDetail />
+          </Route>
+          <Route path="/paymentFinish">
+            <PaymentFinish />
+          </Route>
+          <Route path="/paymentType">
+            <PaymentType />
           </Route>
         </Switch>
 

@@ -9,10 +9,11 @@ function paymentDetail(props) {
       <div className="container">
         <div className="row">
           <div className="col-9">
-            
+            <div className="mt-5 prograssBar1"></div>
+            <div className="mt-3 paymentBox"></div>
           </div>
           <div className="col-3">
-            <paymentTotal/>
+            <paymentTotal />
           </div>
         </div>
       </div>

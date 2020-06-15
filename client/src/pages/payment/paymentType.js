@@ -8,7 +8,13 @@ function paymentType(props) {
     <>
       <div className="container">
         <div className="row">
-          <div className=""></div>
+          <div className="col-9">
+            <div className="mt-5 prograssBar2"></div>
+            <div></div>
+          </div>
+          <div className="col-3">
+            <paymentTotal />
+          </div>
         </div>
       </div>
     </>

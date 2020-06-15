@@ -1,8 +1,32 @@
 .totalPriceBox {
 }
 
-.prograssBar {
-  background-image: url();  
+.prograssBar1 {
   width: 100%;
-  height: 200px;
+  height: 100px;
+  overflow: hidden;
+  background: url(..\images\progressbar1.png) no-repeat;
+  background-size: contain;
+}
+
+.prograssBar2 {
+  width: 100%;
+  height: 100px;
+  overflow: hidden;
+  background: url(..\images\progressbar2.png) no-repeat;
+  background-size: contain;
+}
+
+.prograssBar3 {
+  width: 100%;
+  height: 100px;
+  overflow: hidden;
+  background: url(..\images\progressbar3.png) no-repeat;
+  background-size: contain;
+}
+
+.paymentBox {
+  width: 100%;
+  height: 800px;
+  background: white;
 }
