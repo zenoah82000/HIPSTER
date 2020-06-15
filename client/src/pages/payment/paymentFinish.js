@@ -20,7 +20,7 @@ function paymentFinish(props) {
               <li className= "pt-2">預定日期: 2020年5月24日 9:20PM  </li>
             </ul>
           </div>
-          <button>查看訂單</button>
+          <button className="paymentButton">查看訂單</button>
           </div>      
         </div>
       </div>
