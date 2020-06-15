@@ -2,7 +2,7 @@ import React from 'react'
 import '../../styles/Payment.scss'
 
 //引入自訂元件
-import paymentTotal from '../../components/payment/paymentTotal'
+
 
 function paymentFinish(props) {
   return (

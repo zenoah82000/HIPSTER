@@ -1,28 +1,39 @@
 .totalPriceBox {
+width: 100%;
+height: 300px;
+background: white;
 }
 
+.buttonBox{
+  width: 100%;
+  height: 300px;
+  background: white;
+}
 .prograssBar1 {
   width: 100%;
   height: 100px;
   overflow: hidden;
-  background: url(..\images\progressbar1.png) no-repeat;
+  background: url(..\images\progressbar1.png) no-repeat center;
   background-size: contain;
+  background-color: white;
 }
 
 .prograssBar2 {
   width: 100%;
   height: 100px;
   overflow: hidden;
-  background: url(..\images\progressbar2.png) no-repeat;
+  background: url(..\images\progressbar2.png) no-repeat center;
   background-size: contain;
+  background-color: white;
 }
 
 .prograssBar3 {
   width: 100%;
   height: 100px;
   overflow: hidden;
-  background: url(..\images\progressbar3.png) no-repeat;
+  background: url(..\images\progressbar3.png) no-repeat center;
   background-size: contain;
+  background-color: white;
 }
 
 .paymentBox {
