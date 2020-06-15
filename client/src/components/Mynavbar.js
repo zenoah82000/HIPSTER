@@ -38,7 +38,32 @@ function Mynavbar(props) {
 
   return (
     <>
-      <Navbar bg="" variant="dark" class="navbar">
+      <nav>
+        <div className="navbar container ">
+          <a href="./" className="logo"></a>
+          <div className="burger none" id="burger">
+            ☰
+          </div>
+          <ul className="menu">
+            <li>
+              <a href="/about">品牌介紹</a>
+            </li>
+            <li>
+              <a href="/map">地圖探索</a>
+            </li>
+            <li>
+              <a href="/article">文章專欄</a>
+            </li>
+            <li>
+              <a href="/article">活動列表</a>
+            </li>
+            <li>
+              <a href="/contact">聯絡我們</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      {/* <Navbar bg="" variant="dark" class="navbar">
         <div className="container">
           <Navbar.Brand href="/">Navbar</Navbar.Brand>
           <div className="burger " id="burger">
@@ -62,7 +87,7 @@ function Mynavbar(props) {
             </Nav.Link>
           </Nav>
           {/* ========================================================= */}
-          <Nav className="shop">
+      {/* <Nav className="shop">
             <Nav.Link as={NavLink} to="/shoppingcar">
               <FaShoppingCart />
             </Nav.Link>
@@ -78,9 +103,9 @@ function Mynavbar(props) {
             <Nav.Link as={NavLink} to="">
               登入
             </Nav.Link>
-          </Nav>
-          {/* ========================================================= */}
-          <Nav className="member" id="member">
+          </Nav> */}
+      {/* ========================================================= */}
+      {/* <Nav className="member" id="member">
             <span className="membername" as={NavLink} to="">
               David , 您好!
             </span>
@@ -89,7 +114,7 @@ function Mynavbar(props) {
             </Nav.Link>
           </Nav>
         </div>
-      </Navbar>
+      </Navbar> */}{' '}
     </>
   )
 }
