@@ -37,6 +37,7 @@ function Home(props) {
                 type="text"
                 id="location-bar"
                 placeholder="請輸入活動地址...."
+                className="form-control"
               />
               <div id="local-btn" className="search-btn btn btn-warning ">
                 <FaSearch className="fonticon" />
@@ -50,6 +51,7 @@ function Home(props) {
                 定位搜尋
               </div>
             </div>
+            {/* --------------------------------------------------------------- */}
 
             <div id="activename-search" className="search-bar none">
               <select id="category1">
@@ -62,6 +64,7 @@ function Home(props) {
                 type="text"
                 id="activename-bar"
                 placeholder="請輸入活動名稱...."
+                className="form-control"
               />
               <div id="active-btn" className="search-btn btn btn-warning ">
                 <FaSearch className="fonticon" />
@@ -69,16 +72,18 @@ function Home(props) {
               </div>
             </div>
 
+            {/* --------------------------------------------------------------- */}
             <div id="time-search" className="search-bar none">
               <div className="time-title">搜尋時間內活動：</div>
-              <input type="date" id="time1" />
+              <input type="date" id="time1" className="form-control" />
               <FaLongArrowAltRight className="fonticon" />
-              <input type="date" id="time2" />
+              <input type="date" id="time2" className="form-control" />
               <div id="active-btn" className="search-btn btn btn-warning ">
                 <FaSearch className="fonticon" />
                 搜尋
               </div>
             </div>
+            {/* ------------------------------------------------------------------ */}
           </div>
         </div>
       </div>
