@@ -1,7 +1,30 @@
-.totalPriceBox {
+.priceBox {
 width: 100%;
-height: 300px;
+height: 200px;
 background: white;
+}
+
+.totalPrice{
+  margin: 0 10px  0 10px;
+  padding: 20px;
+  font-size: 18px;
+  border-bottom: 2px solid rgb(211,211,211);
+  }
+
+  .payPrice{
+    margin: 0 10px  0 10px;
+    padding: 20px;
+    font-size: 18px;
+    color:#688e67; 
+    font-weight: bold;
+    } 
+
+.subTitle{
+  border-left: 8px solid #688e67;
+  font-size: 20px;
+  font-weight: bold;
+  padding-left:8px;
+  color: #684b38;
 }
 
 .buttonBox{
@@ -47,6 +70,10 @@ background: white;
 
 .contentBox {
   width: 100%;
-  height: 800px;
+  // height: 800px;
   background: white;
+}
+
+.paymentType{
+  border: 2px solid rgb(211,211,211);
 }
