@@ -40,7 +40,7 @@ const EventSearchBar = (props) => {
               </select>
             </div>
             <div className="col-4  d-flex switchbutton-jy align-items-center justify-content-end">
-              <p>已過期資料</p>
+              <p>營業中</p>
               <SwitchButton
               // type="button"
               // active={props.isEnable}
