@@ -5,7 +5,7 @@ import '../../styles/comment.scss'
 
 //引入自訂元件
 import CommentImg from './commentImg'
-
+import RatingStar from './ratingStar'
 
 class commtentList extends Component {
     constructor() {
@@ -38,6 +38,7 @@ class commtentList extends Component {
                                             用戶名
                                         </li>
                                         <li >
+                                            <RatingStar/>                      
                                             星等
                                         </li>
                                         <li >

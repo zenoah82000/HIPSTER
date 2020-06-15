@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap'
+
+import { FaHeart, FaShoppingCart } from 'react-icons/fa'
 import { Link, NavLink, withRouter } from 'react-router-dom'
 
 function Mynavbar(props) {
@@ -39,33 +41,42 @@ function Mynavbar(props) {
       <Navbar bg="" variant="dark" class="navbar">
         <div className="container">
           <Navbar.Brand href="/">Navbar</Navbar.Brand>
+          <div className="burger" id="burger">
+            ☰
+          </div>
           <Nav className="m-auto">
-            {/* <Nav.Link as={NavLink} to="/" >
-            Home
-          </Nav.Link> */}
-          <Nav.Link as={NavLink} to="/about">
-            品牌介紹
-          </Nav.Link>
-          <Nav.Link as={NavLink} to="/map">
-            地圖
-          </Nav.Link>
-          <Nav.Link as={NavLink} to="/article">
-            文章專欄
-          </Nav.Link>
-          <Nav.Link as={NavLink} to="/product">
-            活動列表
-          </Nav.Link>
-          <Nav.Link as={NavLink} to="/contact">
-            聯絡我們
-          </Nav.Link>
-          <Nav.Link as={NavLink} to="/shoppingcar">
-            購物車
-          </Nav.Link>
-
-
-
-        </Nav>
-        <Form inline></Form>
+            <Nav.Link as={NavLink} to="/about">
+              品牌介紹
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/map">
+              地圖
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/article">
+              文章專欄
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/product">
+              活動列表
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/contact">
+              聯絡我們
+            </Nav.Link>
+          </Nav>
+          <Nav className="">
+            <Nav.Link as={NavLink} to="/shoppingcar">
+              <FaShoppingCart />
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/shoppingcar">
+              <FaHeart />
+            </Nav.Link>
+          </Nav>
+          <Nav className="" id="sign">
+            <Nav.Link as={NavLink} to="/shoppingcar">
+              註冊
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/shoppingcar">
+              登入
+            </Nav.Link>
+          </Nav>
         </div>
       </Navbar>
     </>
