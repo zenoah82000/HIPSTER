@@ -16,27 +16,32 @@ function paymentType(props) {
                   <p>填寫付款資訊</p>
                 </div>
 
-                <div className="">
-                  <div class="py-3">
-                    請選擇付款方式
+                <div className="paymentBox">
+                  <div class="p-3 borderBottom bgColor">
+                    請選擇付款方式  
                     </div>
-                  <div className="form-check p-3">
-                    <input className="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked />
-                    <label className="form-check-label" for="gridRadios1">  
+                  <div className=" p-3 borderBottom">
+                    <input className="" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked />
+                    <label className="p-1 form-check-label" for="gridRadios1">  
                       Pay Pal
-          </label>
+                  </label>
                   </div>
-                  <div className="form-check p-3">
-                    <input className="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2" />
-                    <label className="form-check-label" for="gridRadios2">
+                  <div className=" p-3 borderBottom">
+                    <input className="" type="radio" name="gridRadios" id="gridRadios2" value="option2" />
+                    <label className="p-1 form-check-label" for="gridRadios2">
                       信用卡/記帳卡
-          </label>
+                  </label>
                   </div>
-                  <div className="form-check p-3">
-                    <input className="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" />
-                    <label className="form-check-label" for="gridRadios3">
-                      已保存的卡片資訊
-          </label>
+                  <div className=" p-3">
+                    <p>已保存的卡片資訊</p>
+                    <div className="d-flex justify-content-between">
+                    <label className="p-1 form-check-label" for="gridRadios3">
+                    <input className="" type="radio" name="gridRadios" id="gridRadios3" value="option3" />                  
+                      **** **** **** 0000
+                     </label>
+                     <a href="#">刪除</a>
+                     </div>
+                    <a href="#">+添加新卡</a>
                   </div>
                 </div>
               </div>

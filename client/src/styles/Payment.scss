@@ -41,6 +41,14 @@ background: white;
  height:50px;
  background: #688e67;
 }
+
+button{
+  margin-top: 20px;
+  color: white;
+  min-width:235px;
+ height:50px;
+ background: #688e67;
+}
 .prograssBar1 {
   width: 100%;
   height: 100px;
@@ -74,6 +82,20 @@ background: white;
   background: white;
 }
 
-.paymentType{
-  border: 2px solid rgb(211,211,211);
+.contentBox h1,.contentBox span{
+  color: #688e67;
+  font-weight: bold;
 }
+.paymentBox{
+  border: 2px solid rgb(211,211,211);
+  border-radius: 2px;
+}
+
+.borderBottom{
+  border-bottom: 2px solid rgb(211,211,211);
+}
+.bgColor{
+  background: rgb(211,211,211);
+}
+
+
