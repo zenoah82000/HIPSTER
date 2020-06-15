@@ -15,8 +15,8 @@ function CheckOut(props) {
     <>
       <div className="container">
         <div className="row">
-          <div className="col-md-8 form-wrapper">
-            <div className="card mb-3">
+          <div className="col-md-8">
+            <div className="card">
               <div className="card-header bg-light">
                 <h6>購買人資訊</h6>
               </div>
@@ -121,19 +121,29 @@ function CheckOut(props) {
                 <input type="radio" name="shipping" id="home" />
                 <label htmlFor="home">宅配</label>
               </div>
-              <div className="card-footer">
+            </div>
+            <div className=" bg-white mt-2">
                 <button
-                  className="check-btn btn btn-lg w-100"
+                  className="btn"
                   onClick={
                     () => {
                       
                     }
                   }
                 >
-                  <Link to="/member/created">完成訂單</Link>
+                  <Link to="/member/created">下一步</Link>
+                </button>
+                <button
+                  className="btn"
+                  onClick={
+                    () => {
+                      
+                    }
+                  }
+                >
+                  <Link to="/member/created">返回上一步</Link>
                 </button>
               </div>
-            </div>
           </div>
         </div>
       </div>
