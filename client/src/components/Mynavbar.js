@@ -41,7 +41,7 @@ function Mynavbar(props) {
       <Navbar bg="" variant="dark" class="navbar">
         <div className="container">
           <Navbar.Brand href="/">Navbar</Navbar.Brand>
-          <div className="burger" id="burger">
+          <div className="burger " id="burger">
             ☰
           </div>
           <Nav className="m-auto">
@@ -61,7 +61,8 @@ function Mynavbar(props) {
               聯絡我們
             </Nav.Link>
           </Nav>
-          <Nav className="">
+          {/* ========================================================= */}
+          <Nav className="shop">
             <Nav.Link as={NavLink} to="/shoppingcar">
               <FaShoppingCart />
             </Nav.Link>
@@ -69,12 +70,22 @@ function Mynavbar(props) {
               <FaHeart />
             </Nav.Link>
           </Nav>
-          <Nav className="" id="sign">
-            <Nav.Link as={NavLink} to="/shoppingcar">
+
+          <Nav className="sign none" id="sign">
+            <Nav.Link as={NavLink} to="">
               註冊
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/shoppingcar">
+            <Nav.Link as={NavLink} to="">
               登入
+            </Nav.Link>
+          </Nav>
+          {/* ========================================================= */}
+          <Nav className="member" id="member">
+            <span className="membername" as={NavLink} to="">
+              David , 您好!
+            </span>
+            <Nav.Link as={NavLink} to="" className="memberbtn">
+              會員中心
             </Nav.Link>
           </Nav>
         </div>
