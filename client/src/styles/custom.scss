@@ -15,8 +15,7 @@ body {
   color: #fff;
 }
 .navbar-dark .navbar-nav .nav-link {
-  padding-right: 1rem;
-  padding-left: 1rem;
+  padding: 0 1rem;
   color: #fff;
 }
 
@@ -28,6 +27,21 @@ body {
   cursor: pointer;
 }
 
+.sign .nav-link {
+  padding: 0 0.5rem !important;
+}
+.memberbtn {
+  padding: 3px 10px !important;
+  border-radius: 3px;
+  border: 1.5px solid #fff;
+}
+.memberbtn:hover {
+  background-color: rgba($color: #ffffff, $alpha: 0.5);
+}
+.membername {
+  line-height: 30px;
+  margin: 0 30px;
+}
 //===================選單====================
 
 .footer {
