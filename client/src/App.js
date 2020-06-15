@@ -8,12 +8,14 @@ import MainContent from './components/MainContent'
 
 import Home from './pages/Home'
 import About from './pages/About'
-import Article from './pages/Article' 
-import Test from './pages/Test' 
+import Article from './pages/Article'
+import Test from './pages/Test'
 import Contact from './pages/Contact'
 import Product from './pages/Product'
 import Map from './pages/Map'
+
 import ShoppingCar from './pages/order/ShoppingCar'
+import CheckOut from './pages/order/CheckOut'
 
 function App() {
   return (
@@ -45,6 +47,9 @@ function App() {
           </Route>
           <Route path="/map">
             <Map />
+          </Route>
+          <Route path="/checkout">
+            <CheckOut />
           </Route>
         </Switch>
 
