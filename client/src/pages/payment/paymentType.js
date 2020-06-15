@@ -11,7 +11,7 @@ function paymentType(props) {
         <div className= "prograssBar2 mt-5"></div>
           <div className="col-9">
             <div className=" mr-3">
-            <div className="mt-3 paymentBox"></div>
+            <div className="mt-3 contentBox"></div>
             </div>
           </div>
           <div className="col-3">    
