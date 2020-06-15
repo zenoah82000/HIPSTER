@@ -9,7 +9,9 @@ function paymentFinish(props) {
       <div className="container">
         <div className="row">
           <div className="col-9">
-            
+            <div>
+              <img className="prograssBar"></img>
+            </div>
           </div>
           <div className="col-3">
             <paymentTotal/>
