@@ -1,7 +1,7 @@
 //主要背景色
 $aquabackground: #132948;
 // 強調色
-$aquacolordanger: #e3f124;
+$aquacolordanger: #ff3400;
 //以下輔色，按深淺排列
 $aquacolorone: #31445f;
 $aquacolortwo: #4e5f76;
@@ -13,6 +13,10 @@ $black: #000000;
 $white: #ffffff;
 
 // Others----------------------------------------
+#membername {
+  color: #b98f50;
+}
+
 .otherlogin {
   color: $black;
 }
@@ -33,12 +37,16 @@ $white: #ffffff;
 }
 
 //Sidebar----------------------------------------
+.nav.flex-column {
+  background: #fff;
+}
+
 .avatar {
   width: 130px;
   height: 130px;
 }
 .sidebarlink-hs {
-  color: $white;
+  color: #707070;
 }
 .sidebarlink-hs:hover {
   color: $aquacolordanger;
