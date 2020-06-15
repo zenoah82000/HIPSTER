@@ -3,7 +3,7 @@ import React from 'react'
 function paymentTotal(props) {
   return (
     <>
-      <div></div>
+      s<div className="totalPriceBox"></div>
     </>
   )
 }
