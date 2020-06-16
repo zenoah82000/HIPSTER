@@ -5,14 +5,14 @@
 }
 
 //EventSearchBar
-.container-1{
+.container-1 {
   width: 100%;
   vertical-align: middle;
   white-space: nowrap;
   position: relative;
 }
 
-.container-1 input#search{
+.container-1 input#search {
   width: 100%;
   height: 50px;
   background: #ffffff;
@@ -26,7 +26,7 @@
   border-radius: 5px;
 }
 
-.container-1 .fonticon{
+.container-1 .fonticon {
   position: absolute;
   margin-left: 17px;
   margin-top: 17px;
@@ -34,52 +34,63 @@
   color: rgba(104, 142, 103, 0.8);
 }
 
- .container-1 input#search:focus, .container-1 input#search:active{
-  outline:none;
+.container-1 input#search:focus,
+.container-1 input#search:active {
+  outline: none;
   background: #ffffff;
 }
 
-.select-1{
-  border-radius:20px;
+.select-1 {
+  border-radius: 20px;
+}
+
+.mapSearch {
+  // background:#ffffff;
+  border: 1px solid rgba(104, 142, 103, 0.8);
+  border-radius: 20px;
+  width: 100px;
+  text-align: center;
+  color: rgba(104, 142, 103, 0.8);
 }
 
 //EventMapDataList
-.dataBox{
+.dataBox {
   padding-top: 5px;
-  background: rgb(222,223,221);
-  height: 750px; 
+  background: rgb(222, 223, 221);
+  height: 750px;
 }
 
-.eventContentBox{
+.eventContentBox {
   background: #ffffff;
   margin-bottom: 5px;
   width: 100%;
-  height: 200px;  
+  height: 200px;
 }
-.eventImgBox{
- width: 100%;
+.eventImgBox {
+  width: 100%;
   object-fit: cover;
   overflow: hidden;
 }
-.mapCategory{
+.mapCategory {
   background: rgba(104, 142, 103, 0.8);
   border-radius: 20px;
   width: 100px;
   text-align: center;
   color: #ffffff;
 }
-.eventDetailBox li{
+.eventDetailBox li {
   margin-top: 5px;
 }
 
-.bgGreen{
-  background:rgba(104, 142, 103, 0.8) ;
+.bgGreen {
+  background: rgba(104, 142, 103, 0.8);
 }
-.bgRed{
+.bgRed {
   background: #c54424;
 }
 
-.input-group,.input-group input{
+.input-group,
+.input-group input {
   height: 50px;
 }
 
