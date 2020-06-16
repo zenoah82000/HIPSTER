@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import SwitchButton from './MemberEventComponents/SwitchButton'
 import { Dropdown } from 'react-bootstrap'
-import Calendar from './calendar'
+import Calendar from 'react-calendar'
 
 //引用icon
 import { FaSearch, FaStreetView } from 'react-icons/fa'
