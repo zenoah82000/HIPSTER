@@ -66,7 +66,7 @@ function Mynavbar(props) {
           {/* ========================================================= */}
           <ul className="shop-group">
             <li>
-              <a href="">
+              <a href="/checkout">
                 <FaShoppingCart />
               </a>
             </li>
@@ -89,7 +89,7 @@ function Mynavbar(props) {
           <ul className="member">
             <li>David,您好</li>
             <li>
-              <a href="" className="memberbtn">
+              <a href="./memberuser" className="memberbtn">
                 會員中心
               </a>
             </li>

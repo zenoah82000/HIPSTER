@@ -1,14 +1,25 @@
 import React from 'react'
 import '../styles/home.scss'
 import { FaSearch, FaStreetView, FaLongArrowAltRight } from 'react-icons/fa'
-import Logo from '../images/home/title.png'
+import Title from '../images/home/title.png'
 import { Link, NavLink, withRouter } from 'react-router-dom'
 
 function Home(props) {
   return (
     <>
       <div className="banner">
+        <div className="video">
+          <iframe
+            src="https://www.youtube.com/embed/9Pqy7a-HhtU?ecver=1&controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=1"
+            frameborder="0"
+            allowfullscreen
+            class="video"
+          ></iframe>
+        </div>
         <div className="container">
+          <div className="banner-title">
+            <img src={Title} />
+          </div>
           <div className="searchbar">
             <div className="btnList">
               <div id="location" className="btn active">
@@ -83,7 +94,31 @@ function Home(props) {
                 搜尋
               </div>
             </div>
-            {/* ------------------------------------------------------------------ */}
+            {/* --------------------------------------------------------------- */}
+          </div>
+        </div>
+      </div>
+
+      <div className="about">
+        <div className="container">
+          <div className="title">
+            <span class="line"></span>
+            <span class="txt">關於我們</span>
+            <span class="line"></span>
+          </div>
+          <p className="text-center">
+            文青地圖致力於提供最優質的手作課程與展覽活動，透過我們所提供的快速搜尋服務，讓繁忙的
+            <br />
+            您活動安排變得更簡單、更即時，讓每趟行程充滿難忘的回憶。
+          </p>
+
+          <div className="about-main">
+            <div className="about-main-cont">
+              <div className="about-icon"></div>
+            </div>
+            <div className="about-main-cont"></div>
+            <div className="about-main-cont"></div>
+            <div className="about-main-cont"></div>
           </div>
         </div>
       </div>
