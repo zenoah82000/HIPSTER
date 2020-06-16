@@ -11,6 +11,9 @@ body {
 .none {
   display: none !important;
 }
+img {
+  width: 100%;
+}
 //===================選單====================
 nav {
   background-color: #688e67;
@@ -24,38 +27,45 @@ nav {
   align-items: center;
   justify-content: space-between;
 }
+
 .logo {
-  width: 248px;
-  height: 70px;
-  background-image: url(../images/home/logo.png);
-  background-size: cover;
-  background-repeat: no-repeat;
-  display: block;
+  width: 245px;
+  // height: 70px;
+  // background-image: url(../images/home/logo.png);
+  // background-size: cover;
+  // background-repeat: no-repeat;
+  // display: block;
 }
-.menu {
+.menu,
+.shop-group,
+.sign,
+.member {
   list-style: none;
   display: flex;
   margin: 0;
 }
-.menu li {
-  padding: 0 8px;
+.menu li,
+.shop-group li,
+.sign li,
+.member li {
+  padding: 0 12px;
 }
-.menu a {
+.menu a,
+.shop-group a,
+.sign a,
+.member a {
   color: white;
   text-decoration: none;
 }
-.menu a:hover {
+.menu a:hover,
+.shop-group a:hover,
+.sign a:hover {
   color: rgba($color: #fff, $alpha: 0.5);
 }
-
-// .navbar {
-//   background-color: #688e67;
-//   color: #fff;
-// }
-// .navbar-dark .navbar-nav .nav-link {
-//   padding: 0 1rem;
-//   color: #fff;
-// }
+.shop-group {
+  display: flex;
+  margin: 0;
+}
 
 .burger {
   font-size: 15px;
@@ -65,21 +75,15 @@ nav {
   cursor: pointer;
 }
 
-// .sign .nav-link {
-//   padding: 0 0.5rem !important;
-// }
-// .memberbtn {
-//   padding: 3px 10px !important;
-//   border-radius: 3px;
-//   border: 1.5px solid #fff;
-// }
-// .memberbtn:hover {
-//   background-color: rgba($color: #ffffff, $alpha: 0.5);
-// }
-// .membername {
-//   line-height: 30px;
-//   margin: 0 30px;
-// }
+.memberbtn {
+  padding: 5px 10px !important;
+  border-radius: 3px;
+  border: 1.5px solid #fff;
+}
+.memberbtn:hover {
+  background-color: rgba($color: #ffffff, $alpha: 0.3);
+}
+
 //===================選單====================
 
 .footer {

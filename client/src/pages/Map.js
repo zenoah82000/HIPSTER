@@ -1,7 +1,6 @@
 import React from 'react'
 import '../styles/map.scss'
 
-
 //引入自訂元件
 import EventMapDataList from '../components/event/EventMapDataList'
 import EventSearchBar from '../components/event/EventSearchBar'
