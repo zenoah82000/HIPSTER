@@ -14,14 +14,14 @@ function Sidebar(props) {
       <main role="main" className="flex-shrink-0">
         <div className="container">
           <div className="row">
-            <div className="col-lg-3">
-              <ul className="nav flex-column px-lg-5">
+            <div className="col-md-3 mr-md-2">
+              <ul className="nav flex-column px-md-5">
                 <li className="nav-item">
                   <img
                     className="rounded-circle avatar mt-4 "
                     src="
-                    https://images.unsplash.com/photo-1519052537078-e6302a4968d4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
-                    alt=""
+                    https://cdn.pixabay.com/photo/2017/03/30/18/17/girl-2189247_960_720.jpg"
+                    alt="cat"
                   ></img>
                 </li>
                 <li className="nav-item">
@@ -110,7 +110,7 @@ function Sidebar(props) {
                 </li>
               </ul>
             </div>
-            <div className="col-lg-9">{props.children}</div>
+            <div className="col-md-8 bg-white ml-md-2">{props.children}</div>
           </div>
         </div>
       </main>
