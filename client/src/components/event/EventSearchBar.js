@@ -40,6 +40,7 @@ const EventSearchBar = (props) => {
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
+              <div class='p-3'>
               <div class="form-check">
                 <input
                   class="form-check-input position-static"
@@ -48,8 +49,9 @@ const EventSearchBar = (props) => {
                   value="option1"
                   aria-label="..."
                 />
-                <label>文藝展覽</label>
+                <label className="">文藝展覽</label>
               </div>
+              <div class="dropdown-divider"></div>
               <div class="form-check">
                 <input
                   class="form-check-input position-static"
@@ -58,17 +60,19 @@ const EventSearchBar = (props) => {
                   value="option1"
                   aria-label="..."
                 />
-                <label>手作課程</label>
+                <label className="">手作課程</label>
               </div>
+              <div class="dropdown-divider"></div>
               <div class="form-check">
                 <input
-                  class="form-check-input position-static"
+                  className="form-check-input position-static "
                   type="checkbox"
                   id="blankCheckbox"
                   value="option1"
                   aria-label="..."
                 />
-                <label>咖啡廳</label>
+                <label className="">咖啡廳</label>
+              </div>
               </div>
             </Dropdown.Menu>
           </Dropdown>
@@ -91,7 +95,7 @@ const EventSearchBar = (props) => {
               variant="success"
               id="dropdown-basic"
             >
-              時間
+              評價
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
@@ -129,9 +133,7 @@ const EventSearchBar = (props) => {
         </div>
         <div className=" d-flex m-3">
           <div className="col-4 ">
-            <select className="form-control select-1">
-              <option value="">活動類別</option>
-            </select>
+            
           </div>
           <div className="col-4 ">
             <select className="form-control select-1 ">

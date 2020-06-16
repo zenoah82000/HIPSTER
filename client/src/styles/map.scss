@@ -111,6 +111,20 @@
   height: 50px;
 }
 
+.dropdown .dropdown-menu{
+  padding: 0;
+  top: 10px !important;
+}
+
+.form-check-input{
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+
+}
+label {
+  margin-bottom: 0;
+}
 MyCalendar .dropdown-menu.show{
   width: 350px;
   padding:0 10px 10px 10px;
