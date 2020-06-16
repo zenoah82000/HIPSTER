@@ -48,11 +48,28 @@
   // background:#ffffff;
   border: 1px solid rgba(104, 142, 103, 0.8);
   border-radius: 20px;
-  width: 100px;
+  width: 80px;
+  padding: 0;
+  margin-right: 10px;
   text-align: center;
   color: rgba(104, 142, 103, 0.8);
 }
-
+.btn-success {
+  background-color: transparent;
+}
+.btn-success:hover,
+.btn-success:focus,
+.btn-success.focus,
+.btn-success:not(:disabled):not(.disabled):active,
+.btn-success:not(:disabled):not(.disabled).active,
+.show > .btn-success.dropdown-toggle {
+  color: #fff;
+  background-color: rgba(104, 142, 103, 0.8);
+  border-color: rgba(104, 142, 103, 0.8);
+}
+.dropdown-toggle::after {
+  display: none;
+}
 //EventMapDataList
 .dataBox {
   padding-top: 5px;

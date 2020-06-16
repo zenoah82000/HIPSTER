@@ -74,15 +74,9 @@ function ShoppingCar(props) {
       })
     }
   }
-
-  useEffect(() => {
-    getCartFromLocalStorage()
-  }, [])
-
-  return (
-    <>
-      <div className="container">
-        <h1 className="py-4">購物車</h1>
+  const display =
+    mycart != null && mycart.length >= 1 ? (
+      <>
         <div className="bg-white d-flex p-2 align-items-center">
           <div className="col">
             <input
@@ -111,6 +105,7 @@ function ShoppingCar(props) {
           <div className="col-6">使用優惠券</div>
           <div className="col-6 text-right">
             <button
+              className="button"
               onClick={() => {
                 checkOut()
               }}
@@ -119,6 +114,19 @@ function ShoppingCar(props) {
             </button>
           </div>
         </div>
+      </>
+    ) : (
+      <h2>購物車是空的</h2>
+    )
+  useEffect(() => {
+    getCartFromLocalStorage()
+  }, [])
+
+  return (
+    <>
+      <div className="container">
+        <h1 className="py-4">購物車</h1>
+        {display}
       </div>
     </>
   )
