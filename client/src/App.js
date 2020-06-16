@@ -21,6 +21,9 @@ import PaymentDetail from './pages/payment/paymentDetail'
 import PaymentFinish from './pages/payment/paymentFinish'
 import PaymentType from './pages/payment/paymentType'
 
+//member
+import MemberUser from './pages/members/MemberUser'
+
 function App() {
   return (
     <Router>
@@ -63,6 +66,9 @@ function App() {
           </Route>
           <Route path="/paymentType">
             <PaymentType />
+          </Route>
+          <Route path="/memberuser">
+            <MemberUser />
           </Route>
         </Switch>
 
