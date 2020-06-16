@@ -13,7 +13,8 @@ import { FaRegCalendarCheck } from 'react-icons/fa'
 function EventDataList() {
   return (
     <>
-      <div className="dataBox overflow-auto" >
+    <div className="px-4">
+      <div className="dataBox overflow-auto px-1" >
         <Fade>
           <div className="eventContentBox d-flex">
             <div className="eventImgBox col-4">
@@ -221,6 +222,7 @@ function EventDataList() {
           </div>
         </Fade>
 
+      </div>
       </div>  
     </>
   )

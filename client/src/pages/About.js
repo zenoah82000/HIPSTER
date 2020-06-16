@@ -3,7 +3,6 @@ import React from 'react'
 //引入自訂元件
 import CommentList from '../components/comments/commentList'
 
-
 function About(props) {
   return (
     <>
@@ -14,4 +13,4 @@ function About(props) {
   )
 }
 
-export default About  
+export default About

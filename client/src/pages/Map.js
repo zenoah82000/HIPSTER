@@ -12,7 +12,7 @@ import CommentList from '../components/comments/commentList'
 function Map(props) {
   return (
     <>
-      <div className="row ">
+      <div className="row">
         <div className="col-4">
           <EventSearchBar />
           <EventMapDataList />

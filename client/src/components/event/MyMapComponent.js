@@ -35,6 +35,7 @@ const MyMapComponent = () => {
         ]
     }
     return (
+        <div  className="">
         <Map center={[25.0338438, 121.543350]} zoom={20}>
             <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -62,7 +63,7 @@ const MyMapComponent = () => {
                             />
                         ))}
       </Map>
-
+</div>
 
     );
 }

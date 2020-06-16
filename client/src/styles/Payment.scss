@@ -1,8 +1,101 @@
-.totalPriceBox {
+.priceBox {
+width: 100%;
+height: 200px;
+background: white;
 }
 
-.prograssBar {
-  background-image: url();  
-  width: 100%;
-  height: 200px;
+.totalPrice{
+  margin: 0 10px  0 10px;
+  padding: 20px;
+  font-size: 18px;
+  border-bottom: 2px solid rgb(211,211,211);
+  }
+
+  .payPrice{
+    margin: 0 10px  0 10px;
+    padding: 20px;
+    font-size: 18px;
+    color:#688e67; 
+    font-weight: bold;
+    } 
+
+.subTitle{
+  border-left: 8px solid #688e67;
+  font-size: 20px;
+  font-weight: bold;
+  padding-left:8px;
+  color: #684b38;
 }
+
+.buttonBox{
+  width: 100%;
+  height: 160px;
+  background: white;
+  text-align: center;
+}
+
+.buttonBox button{
+  margin-top: 20px;
+  color: white;
+ width: 80%;
+ height:50px;
+ background: #688e67;
+}
+
+.paymentButton{
+  margin-top: 20px;
+  color: white;
+  min-width:235px;
+ height:50px;
+ background: #688e67;
+}
+.prograssBar1 {
+  width: 100%;
+  height: 100px;
+  overflow: hidden;
+  background: url(..\images\progressbar1.png) no-repeat center;
+  background-size: contain;
+  background-color: white;
+}
+
+.prograssBar2 {
+  width: 100%;
+  height: 100px;
+  overflow: hidden;
+  background: url(..\images\progressbar2.png) no-repeat center;
+  background-size: contain;
+  background-color: white;
+}
+
+.prograssBar3 {
+  width: 100%;
+  height: 100px;
+  overflow: hidden;
+  background: url(..\images\progressbar3.png) no-repeat center;
+  background-size: contain;
+  background-color: white;
+}
+
+.contentBox {
+  width: 100%;
+  // height: 800px;
+  background: white;
+}
+
+.contentBox h1,.contentBox span{
+  color: #688e67;
+  font-weight: bold;
+}
+.paymentBox{
+  border: 2px solid rgb(211,211,211);
+  border-radius: 2px;
+}
+
+.borderBottom{
+  border-bottom: 2px solid rgb(211,211,211);
+}
+.bgColor{
+  background: rgb(211,211,211);
+}
+
+

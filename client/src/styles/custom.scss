@@ -5,6 +5,8 @@
 
 body {
   // font-family: 'Noto Sans TC', sans-serif;
+  font-family:"微軟正黑體";
+  color: #684b38; 
 }
 .none {
   display: none !important;
@@ -174,54 +176,4 @@ nav {
 .col-xl-auto {
   padding-right: 0px;
   padding-left: 0px;
-}
-
-// 其它要導入覆蓋掉原本的預設tab樣式要放在這下面
-.react-tabs {
-  -webkit-tap-highlight-color: transparent;
-}
-.react-tabs__tab-list {
-  border-bottom: 1px solid #aaa;
-  margin: 0 0 10px;
-  padding: 0;
-}
-.react-tabs__tab {
-  display: inline-block;
-  border: 1px solid transparent;
-  border-bottom: none;
-  bottom: -1px;
-  position: relative;
-  list-style: none;
-  padding: 6px 12px;
-  cursor: pointer;
-}
-.react-tabs__tab--selected {
-  background: #688e67;
-  border-color: #aaa;
-  color: black;
-  border-radius: 5px 5px 0 0;
-}
-.react-tabs__tab--disabled {
-  color: GrayText;
-  cursor: default;
-}
-.react-tabs__tab:focus {
-  box-shadow: 0 0 5px #0188fe;
-  border-color: #0188fe;
-  outline: none;
-}
-.react-tabs__tab:focus:after {
-  content: '';
-  position: absolute;
-  height: 5px;
-  left: -4px;
-  right: -4px;
-  bottom: -5px;
-  background: #fff;
-}
-.react-tabs__tab-panel {
-  display: none;
-}
-.react-tabs__tab-panel--selected {
-  display: block;
 }
