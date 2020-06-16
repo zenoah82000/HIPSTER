@@ -6,7 +6,6 @@ import EventMapDataList from '../components/event/EventMapDataList'
 import EventSearchBar from '../components/event/EventSearchBar'
 import MyMapComponent from '../components/event/MyMapComponent'
 
-import CommentList from '../components/comments/commentList'
 
 function Map(props) {
   return (
