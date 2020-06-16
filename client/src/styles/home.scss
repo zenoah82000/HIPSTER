@@ -1,3 +1,13 @@
+p,
+a,
+ul,
+li,
+h1,
+h2 {
+  margin: 0;
+  padding: 0;
+}
+
 .banner {
   height: 800px;
   background-image: url(../images/home/home-banner.jpg);
@@ -17,7 +27,7 @@ input,
   height: 130px;
   position: absolute;
   left: 50%;
-  // bottom: 50px;
+  bottom: 50px;
   transform: translateX(-50%);
 }
 .btnList {
