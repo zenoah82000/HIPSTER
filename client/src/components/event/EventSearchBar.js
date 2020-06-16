@@ -3,6 +3,7 @@ import SwitchButton from './MemberEventComponents/SwitchButton'
 import { Dropdown } from 'react-bootstrap'
 import Calendar from 'react-calendar'
 
+
 //引用icon
 import { FaSearch, FaStreetView } from 'react-icons/fa'
 import { GiCoffeeCup } from 'react-icons/gi'
@@ -99,9 +100,40 @@ const EventSearchBar = (props) => {
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              <Dropdown.Item>Action</Dropdown.Item>
-              <Dropdown.Item>Another action</Dropdown.Item>
-              <Dropdown.Item>Something else</Dropdown.Item>
+              <div class='p-3'>
+              <div class="form-check">
+                <input
+                  class="form-check-input position-static"
+                  type="checkbox"
+                  id="blankCheckbox"
+                  value="option1"
+                  aria-label="..."
+                />
+                <label className="">4.5顆星以上</label>
+              </div>
+              <div class="dropdown-divider"></div>
+              <div class="form-check">
+                <input
+                  class="form-check-input position-static"
+                  type="checkbox"
+                  id="blankCheckbox"
+                  value="option1"
+                  aria-label="..."
+                />
+                <label className="">4顆星以上</label>
+              </div>
+              <div class="dropdown-divider"></div>
+              <div class="form-check">
+                <input
+                  className="form-check-input position-static "
+                  type="checkbox"
+                  id="blankCheckbox"
+                  value="option1"
+                  aria-label="..."
+                />
+                <label className="">3顆星以上</label>
+              </div>
+              </div>
             </Dropdown.Menu>
           </Dropdown>
           <Dropdown>
@@ -114,9 +146,7 @@ const EventSearchBar = (props) => {
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              <Dropdown.Item>Action</Dropdown.Item>
-              <Dropdown.Item>Another action</Dropdown.Item>
-              <Dropdown.Item>Something else</Dropdown.Item>
+
             </Dropdown.Menu>
           </Dropdown>
 
