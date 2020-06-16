@@ -8,14 +8,14 @@ function Home(props) {
   return (
     <>
       <div className="banner">
-        <div className="video">
+        {/* <div className="video">
           <iframe
-            src="https://www.youtube.com/embed/9Pqy7a-HhtU?ecver=1&controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=1"
+            src="https://www.youtube.com/embed/9Pqy7a-HhtU?ecver=1&controls=0&showinfo=0&rel=0&autoplay=1&fs=1&loop=1&mute=1&vq=hd1080"
             frameborder="0"
             allowfullscreen
             class="video"
           ></iframe>
-        </div>
+        </div> */}
         <div className="container">
           <div className="banner-title">
             <img src={Title} />

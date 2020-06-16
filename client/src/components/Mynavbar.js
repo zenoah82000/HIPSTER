@@ -66,7 +66,7 @@ function Mynavbar(props) {
           {/* ========================================================= */}
           <ul className="shop-group">
             <li>
-              <a href="/checkout">
+              <a href="/shoppingcar">
                 <FaShoppingCart />
               </a>
             </li>

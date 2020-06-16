@@ -6,7 +6,7 @@ import * as serviceWorker from './serviceWorker'
 
 //redux
 import { Provider } from 'react-redux'
-import { createStore, combineReducers,compose,applyMiddleware } from 'redux'
+import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
 
 //引入reducers
 import { orderReducer } from './reducers/order/order_Reducers'
@@ -16,7 +16,6 @@ import thunk from 'redux-thunk'
 
 const rootReducer = combineReducers({
   orderReducer,
-  
 })
 //使用中介軟體時，建立store的方法，需要額外建立一個composeEnhancers
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose

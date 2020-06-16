@@ -26,13 +26,20 @@
       }
 
       .checkbox-dropdown-list {
+        display: none;
         list-style: none;
         height: 0;
         overflow: hidden;
-        margin: 0;
 
         &.active {
+          display: block;
           height: unset;
+          margin-bottom: 15px;
+        }
+
+        .checkbox {
+          padding: 10px 20px;
+          margin: 5px 20px;
         }
       }
     }
@@ -54,6 +61,7 @@
     .product-result-sort {
       padding: 15px 20px;
       background-color: white;
+      border-top: 1px solid #dfdfdd;
       border-radius: 0 0 3px 3px;
       vertical-align: middle;
 
