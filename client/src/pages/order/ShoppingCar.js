@@ -22,7 +22,7 @@ function ShoppingCar(props) {
   }
 
   //購物車金額加總
-  const sum = (items)=>{
+  const sum = (items) => {
     let total = 0
     if (items != null) {
       for (let i = 0; i < items.length; i++) {
@@ -31,11 +31,11 @@ function ShoppingCar(props) {
     }
     return total
   }
-//訂單初始化
-const orderData = {
-  orderItems: [],
-}
-let itemData = {}
+  //訂單初始化
+  const orderData = {
+    orderItems: [],
+  }
+  let itemData = {}
   //前往結帳，送出訂單
   const checkOut = () => {
     if (localCart == null || localCart.length < 1) {
