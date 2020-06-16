@@ -19,7 +19,7 @@ const app = express();
 app.use(express.urlencoded({extended:false}))
 app.use(express.json());
 
-const whitelist=['http://localhost:8080',undefined,'http://localhost:3000'];
+const whitelist=['http://localhost:5000',undefined,'http://localhost:3000'];
 const corsOptions={
     credentials:true,
     origin:function(origin,cb){
