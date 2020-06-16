@@ -1,7 +1,7 @@
 import React from 'react'
 import '../styles/home.scss'
 import { FaSearch, FaStreetView, FaLongArrowAltRight } from 'react-icons/fa'
-import { Navbar } from 'react-bootstrap'
+import Logo from '../images/home/title.png'
 import { Link, NavLink, withRouter } from 'react-router-dom'
 
 function Home(props) {
