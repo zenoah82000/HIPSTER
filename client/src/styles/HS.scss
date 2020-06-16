@@ -37,13 +37,28 @@ $white: #ffffff;
 }
 
 //Sidebar----------------------------------------
+@media only screen and (min-width: 768px) {
+  .pl-md-5,
+  .px-md-5 {
+    padding-left: 30% !important;
+  }
+}
+
 .nav.flex-column {
   background: #fff;
+}
+
+@media only screen and (max-width: 768px) {
+  .nav.flex-column {
+    display: none;
+  }
 }
 
 .avatar {
   width: 130px;
   height: 130px;
+  object-fit: cover;
+  border: 1.5px solid rgb(216, 214, 214);
 }
 .sidebarlink-hs {
   color: #707070;
