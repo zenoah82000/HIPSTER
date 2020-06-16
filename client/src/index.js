@@ -4,9 +4,27 @@ import './index.scss'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
 
+//redux
+import { Provider } from 'react-redux'
+import { createStore, combineReducers } from 'redux'
+
+//引入reducers
+import { orderReducer } from './reducers/order/order_Reducers'
+
+const rootReducer = combineReducers({
+  orderReducer,
+  
+})
+
+const store = createStore(
+  rootReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION_ && window.__REDUX_DEVTOOLS_EXTENSION_()
+)
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 )
