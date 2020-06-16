@@ -1,24 +1,15 @@
 .aside-wrapper {
-  background-color: white;
-  width: 262.5px;
+  padding: 0 15px;
   box-sizing: border-box;
 
-  .checkbox-dropdown-list {
-    list-style: none;
-    height: 0;
-    overflow: hidden;
-  }
-
-  .checkbox-dropdown-list-active {
-    list-style: none;
-    height: unset;
-  }
-
   .aside-wrapper-filter-box {
+    background-color: white;
+    border-radius: 6px;
     padding: 5px 0;
+    margin-bottom: 15px;
     // width: 100%;
 
-    h2 {
+    h3 {
       padding: 0px 20px;
       margin: 10px 0;
       font-weight: bold;
@@ -30,6 +21,17 @@
       h4 {
         margin: 5px 0;
       }
+    }
+  }
+
+  .checkbox-dropdown-list {
+    list-style: none;
+    height: 0;
+    overflow: hidden;
+    margin: 0;
+
+    &.active {
+      height: unset;
     }
   }
 }
