@@ -28,8 +28,8 @@ function UserWishlist() {
                   </div>
 
                   <div className="card-body">
-                    <h6 className="card-title">嵐山嵯峨野觀光火車票</h6>
-                    <span>NT$330</span>
+                    <h6 className="card-title">{item.name}</h6>
+                    <span>NT${item.price}</span>
                   </div>
 
                   <div className="card-footer bg-white">
@@ -39,7 +39,7 @@ function UserWishlist() {
                     </span>
                     <span>
                       <FaHeart />
-                      加入願望清單
+                      移出願望清單
                     </span>
                   </div>
                 </div>
@@ -74,7 +74,7 @@ function UserWishlist() {
                 </span>
                 <span>
                   <FaHeart />
-                  加入願望清單
+                  移出願望清單
                 </span>
               </div>
             </div>
