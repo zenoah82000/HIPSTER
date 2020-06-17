@@ -5,11 +5,9 @@ import { BsTrash } from 'react-icons/bs'
 
 function MyCart(props) {
   const { handleDelete, mycart } = props
-  // console.log('carditem', { mycart })
-
   return (
     <>
-      {props.mycart.map((value, index) => {
+      {mycart.map((value, index) => {
         return (
           <>
             <div className="bg-white d-flex mt-3 p-2 align-items-center">
@@ -35,7 +33,9 @@ function MyCart(props) {
                 <FiEdit />
                 更改
               </div>
-              <div className="col-2">
+              <div className="col-2" onClick={()=>{
+                
+              }}>
                 <BsTrash />
                 刪除
               </div>

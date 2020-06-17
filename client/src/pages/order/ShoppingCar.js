@@ -3,6 +3,8 @@ import { withRouter } from 'react-router-dom'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+
+//新增訂單
 import { memberCheckOutAsync } from '../../actions/order/order_Actions'
 
 //確認框
@@ -54,7 +56,7 @@ function ShoppingCar(props) {
         showCancelButton: true,
         cancelButtonText: '取消',
       }).then((result) => {
-        if (result.value === true) {
+        if (result.value) {
           for (let i = 0; i < localCart.length; i++) {
             console.log(localCart[i])
             itemData.orderItemId = localCart[i].id
