@@ -7,6 +7,8 @@ import Masonry from 'react-masonry-css'
 
 import '../components/blog/Masonry.css'
 
+import MyBreadcrumb from '../components/blog/MyBreadcrumb'
+
 import author1 from '../components/blog/author1.jpg'
 import author2 from '../components/blog/author2.jpg'
 import author3 from '../components/blog/author3.jpg'
@@ -17,7 +19,7 @@ import author7 from '../components/blog/author7.jpg'
 import author8 from '../components/blog/author8.jpg'
 
 function Blog(props) {
-  // console.log(props)
+  console.log('Blog:', props)
 
   var items = [
     {
@@ -86,17 +88,26 @@ function Blog(props) {
     return (
       <div key={item.id} className="blog-list-card">
         <img src={authorImgArr[item.id - 1]} />
-        <p>{item.title}</p>
-        <p>{item.text}</p>
-        <p>{item.author}</p>
+        <h3>{item.title}</h3>
+        <p>
+          這是自由發揮的地方
+          <br />
+          你的文青足跡
+          <br />
+        </p>
+        <p className="author-date">
+          <span>{item.author}</span>
+          <span>2020年6月1日</span>
+        </p>
       </div>
     )
   })
 
   return (
     <>
-      <Link to="/">Home - Router Link</Link>
+      {/* <Link to="/">Home - Router Link</Link> */}
       <div className="container">
+        <MyBreadcrumb />
         <Masonry
           breakpointCols={{ default: 4, 800: 2 }}
           classtitle="my-masonry-grid"

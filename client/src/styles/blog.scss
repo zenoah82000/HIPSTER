@@ -1,3 +1,21 @@
 .blog-list-card {
   background: #ffffff;
+  border-radius: 5px;
+  img {
+    border-radius: 5px 5px 0 0;
+  }
+  h6 {
+    font-weight: bold;
+  }
+  p {
+    font-weight: bold;
+  }
+  .author-date {
+    display: flex;
+    justify-content: space-between;
+    span {
+      display: block;
+      // text-align: right;
+    }
+  }
 }
