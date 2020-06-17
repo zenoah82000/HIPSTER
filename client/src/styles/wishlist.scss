@@ -1,27 +1,43 @@
-.wishlistbox {
-  .card {
-    margin: 10px 0px;
-    width: 31%;
-    .card-header {
-      padding: 0px;
-      height: 200px;
-      img {
-        object-fit: cover;
-        width: 100%;
-        height: 100%;
+.usercontainer {
+  padding: 20px 30px 0px;
+  .wishlistbox {
+    .usertitle {
+      font-weight: bold;
+      font-size: 24px;
+      margin-top: 20px;
+    }
+    .card {
+      margin: 20px 0px;
+      width: 31%;
+      .card-header {
+        padding: 0px;
+        height: 200px;
+        img {
+          object-fit: cover;
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .card-body {
+        padding: 12px;
+      }
+      .card-footer {
+        padding: 12px;
+        text-align: center;
+        span {
+          cursor: pointer;
+          margin: 5px;
+          font-size: 14px;
+        }
       }
     }
-    .card-body {
-      padding: 12px;
-    }
-    .card-footer {
-      padding: 12px;
-      text-align: center;
-      span {
-        cursor: pointer;
-        margin: 5px;
-        font-size: 14px;
-      }
-    }
+  }
+}
+
+.empty {
+  margin: 100px;
+  .emptyImg {
+    width: 200px;
+    height: 150px;
   }
 }
