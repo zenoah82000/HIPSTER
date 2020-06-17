@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 
 import { FaHeart, FaShoppingCart } from 'react-icons/fa'
+import { BsTrash } from 'react-icons/bs'
 
-//星星
+import Swal from 'sweetalert2'
 
 import '../../styles/wishlist.scss'
 
@@ -14,24 +15,43 @@ function UserWishlist() {
   async function getCartFromLocalStorage() {
     setWishlist(localWishlist)
   }
+  //刪除願望清單
+  const deleteWishlist = (id) => {
+    Swal.fire({
+      text: '是否刪除該商品?',
+      icon: 'warning',
+      confirmButtonText: '確定',
+      showCancelButton: true,
+      cancelButtonText: '取消',
+    }).then((result) => {
+      if (result.value) {
+        const index = localWishlist.findIndex((item) => item.id === id)
+        if (index !== -1) {
+          localWishlist.splice(index, 1)
+          localStorage.setItem('wishlist', JSON.stringify(localWishlist))
+          getCartFromLocalStorage()
+        }
+      }
+    })
+  }
   useEffect(() => {
     getCartFromLocalStorage()
   }, [])
 
   const display =
     wishlist != null && wishlist.length >= 1 ? (
-      <div className="wishlistbox">
-        <div className="row d-flex flex-wrap ">
+      <div className="wishlistbox ">
+        <div className="row">
           {wishlist.map((item) => {
             return (
               <>
-                <div className="card">
+                <div className="card m-2`">
                   <div className="card-header">
                     <img src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg" />
                   </div>
 
                   <div className="card-body">
-                    <h6 className="card-title">{item.name}</h6>
+                    <p className="card-title">{item.name}</p>
                     <span>NT${item.price}</span>
                   </div>
 
@@ -40,9 +60,13 @@ function UserWishlist() {
                       <FaShoppingCart />
                       加入購物車
                     </span>
-                    <span>
-                      <FaHeart />
-                      移出願望清單
+                    <span
+                      onClick={() => {
+                        deleteWishlist(item.id)
+                      }}
+                    >
+                      <BsTrash />
+                      刪除
                     </span>
                   </div>
                 </div>
