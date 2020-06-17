@@ -1,30 +1,28 @@
-
 //comments
 
-.commentBox{
- border-bottom: 2px solid rgba(104, 142, 103, 0.8) ;
+.commentBox {
+  border-bottom: 2px solid rgba(104, 142, 103, 0.8);
   width: 100%;
-  // height: 
+  // height:
 }
 
-.iconBox{
- width: 80px;
- height: 80px;
- border-radius: 50%;
- object-fit: cover;
+.iconBox {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
   overflow: hidden;
-  margin:5px;
+  margin: 5px;
 }
 
-
-.commentBox li{
+.commentBox li {
   margin-top: 5px;
 }
 
-.commentImg{
-width:80px;
-height:80px;
-object-fit:cover;
-overflow:hidden;
-margin:5px
+.commentImg {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  overflow: hidden;
+  margin: 5px;
 }

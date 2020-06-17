@@ -19,6 +19,10 @@
         }
       }
       .card-body {
+        p {
+          font-size: 14px;
+          line-height: none;
+        }
         padding: 12px;
       }
       .card-footer {
