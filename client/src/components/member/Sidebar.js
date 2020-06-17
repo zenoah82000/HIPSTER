@@ -11,7 +11,7 @@ function Sidebar(props) {
   // console.log(props)
   return (
     <>
-      <main role="main" className="flex-shrink-0">
+      <main role="main" className="flex-shrink-0 mb-5">
         <div className="container mt-md-3">
           <div className="row">
             <div className="col-md-3 mr-md-2">
@@ -24,7 +24,7 @@ function Sidebar(props) {
                     alt="cat"
                   ></img>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item border-bottom membername mb-1">
                   <div
                     className="nav-link sidebarlink-hs font-weight-bold"
                     id="membername"
@@ -110,9 +110,7 @@ function Sidebar(props) {
                 </li>
               </ul>
             </div>
-            <div className="flex-grow-1 bg-white ml-md-2 mb-5">
-              {props.children}
-            </div>
+            <div className="flex-grow-1 bg-white ml-md-2">{props.children}</div>
           </div>
         </div>
       </main>
