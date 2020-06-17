@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 import Mynavbar from './components/Mynavbar'
 import Myfooter from './components/Myfooter'
 import MainContent from './components/MainContent'
-// import Nopage from './pages/Nopage'
+import NotFoundPage from './pages/NotFoundPage'
 
 import Home from './pages/Home'
 import About from './pages/About'
@@ -46,9 +46,6 @@ function App() {
           <Route path="/product">
             <Product />
           </Route>
-          <Route exact path="/">
-            <Home />
-          </Route>
           <Route path="/shoppingcar">
             <ShoppingCar />
           </Route>
@@ -69,6 +66,12 @@ function App() {
           </Route>
           <Route path="/memberuser">
             <MemberUser />
+          </Route>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route exact path="*">
+            <NotFoundPage />
           </Route>
         </Switch>
 

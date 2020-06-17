@@ -110,7 +110,9 @@ function Sidebar(props) {
                 </li>
               </ul>
             </div>
-            <div className="flex-grow-1 bg-white ml-md-2 col-8">{props.children}</div>
+            <div className="flex-grow-1 bg-white ml-md-2 sidebarright">
+              {props.children}
+            </div>
           </div>
         </div>
       </main>

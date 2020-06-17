@@ -81,6 +81,12 @@ $white: #ffffff;
   height: 45px;
 }
 
+@media only screen and (max-width: 768px) {
+  .sidebarright {
+    width: 100%;
+  }
+}
+
 // Login----------------------------------------
 .signincard-hs {
   padding-top: 250px;
