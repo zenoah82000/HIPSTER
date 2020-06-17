@@ -5,19 +5,19 @@ import '../styles/map.scss'
 import EventMapDataList from '../components/event/EventMapDataList'
 import EventSearchBar from '../components/event/EventSearchBar'
 import MyMapComponent from '../components/event/MyMapComponent'
-
+import Location from '../components/event/location'
 
 function Map(props) {
   return (
     <>
       <div className="row">
         <div className="col-4">
-          <button type="button" >測試用</button>
-          {/* <EventSearchBar />
-          <EventMapDataList /> */}
+          <EventSearchBar />
+          <EventMapDataList />
         </div>
         <div className="col-8">
-          <MyMapComponent />
+          {/* <MyMapComponent /> */}
+          <Location />
         </div>
       </div>
     </>
