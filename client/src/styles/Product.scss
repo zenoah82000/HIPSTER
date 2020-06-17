@@ -88,7 +88,12 @@
 
       .product-detail {
         .product-footer {
+          .product-star {
+            display: inline-block;
+          }
+
           .product-price {
+            display: inline-block;
             h4 {
               display: inline-block;
             }

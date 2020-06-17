@@ -35,6 +35,7 @@ function ShoppingCar(props) {
   }
   //訂單初始化
   const orderData = {
+      
     orderItems: [],
   }
   let itemData = {}
@@ -76,6 +77,24 @@ function ShoppingCar(props) {
       })
     }
   }
+  //刪除購物車
+  const deleteCart = (id)=>{
+    Swal.fire({
+      text:'是否刪除該商品?',
+      icon:'warning',
+      confirmButtonText:'確定',
+      showCancelButton:true,
+      cancelButtonText:'取消',
+    }).then((result)=>{if(result.value){
+      const index = localCart.findIndex(item=>item.id === id)
+      if(index !== -1 ){
+        localCart.splice(index,1)
+        localStorage.setItem('cart',JSON.stringify(localCart))
+        getCartFromLocalStorage()
+      }
+    }
+    })
+  }
   const display =
     mycart != null && mycart.length >= 1 ? (
       <>
@@ -102,7 +121,7 @@ function ShoppingCar(props) {
             <h6>總價</h6>
           </div>
         </div>
-        <Mycart mycart={mycart} />
+        <Mycart deleteCart={deleteCart} mycart={mycart} />
         <div className="bg-white p-2 mt-3 d-flex">
           <div className="col-6">使用優惠券</div>
           <div className="col-6 text-right">
