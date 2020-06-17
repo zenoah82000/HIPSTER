@@ -13,7 +13,9 @@ function AsideBar(props) {
               <h5>戶外活動</h5>
             </div>
             <ul className="checkbox-dropdown-list">
-              <li className="checkbox">1</li>
+              <li className="checkbox">
+                <i className="far fa-square"></i>1
+              </li>
               <li className="checkbox">1</li>
               <li className="checkbox">1</li>
               <li className="checkbox">1</li>
@@ -35,10 +37,18 @@ function AsideBar(props) {
               <h5>戶外活動</h5>
             </div>
             <ul className="checkbox-dropdown-list active">
-              <li className="checkbox">1</li>
-              <li className="checkbox">1</li>
-              <li className="checkbox">1</li>
-              <li className="checkbox">1</li>
+              <li className="checkbox">
+                <i className="far fa-square"></i>1
+              </li>
+              <li className="checkbox">
+                <i className="far fa-square"></i>1
+              </li>
+              <li className="checkbox">
+                <i className="far fa-square"></i>1
+              </li>
+              <li className="checkbox">
+                <i className="far fa-square"></i>1
+              </li>
             </ul>
           </div>
           <div>

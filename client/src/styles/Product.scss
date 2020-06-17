@@ -41,6 +41,7 @@
         overflow: hidden;
         font-size: 14px;
         line-height: 21px;
+        cursor: pointer;
 
         &.active {
           display: block;
@@ -51,6 +52,13 @@
         .checkbox {
           padding: 10px 20px;
           margin: 5px 20px;
+
+          & > .fa-square {
+            transform: scale(1.1);
+          }
+          i {
+            width: 20px;
+          }
         }
       }
     }
