@@ -3,7 +3,6 @@ import SwitchButton from './MemberEventComponents/SwitchButton'
 import { Dropdown } from 'react-bootstrap'
 import Calendar from 'react-calendar'
 
-
 //引用icon
 import { FaSearch, FaStreetView } from 'react-icons/fa'
 import { GiCoffeeCup } from 'react-icons/gi'
@@ -41,39 +40,39 @@ const EventSearchBar = (props) => {
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              <div class='p-3'>
-              <div class="form-check">
-                <input
-                  class="form-check-input position-static"
-                  type="checkbox"
-                  id="blankCheckbox"
-                  value="option1"
-                  aria-label="..."
-                />
-                <label className="">文藝展覽</label>
-              </div>
-              <div class="dropdown-divider"></div>
-              <div class="form-check">
-                <input
-                  class="form-check-input position-static"
-                  type="checkbox"
-                  id="blankCheckbox"
-                  value="option1"
-                  aria-label="..."
-                />
-                <label className="">手作課程</label>
-              </div>
-              <div class="dropdown-divider"></div>
-              <div class="form-check">
-                <input
-                  className="form-check-input position-static "
-                  type="checkbox"
-                  id="blankCheckbox"
-                  value="option1"
-                  aria-label="..."
-                />
-                <label className="">咖啡廳</label>
-              </div>
+              <div class="p-3">
+                <div class="form-check">
+                  <input
+                    class="form-check-input position-static"
+                    type="checkbox"
+                    id="blankCheckbox"
+                    value="option1"
+                    aria-label="..."
+                  />
+                  <label className="">文藝展覽</label>
+                </div>
+                <div class="dropdown-divider"></div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input position-static"
+                    type="checkbox"
+                    id="blankCheckbox"
+                    value="option1"
+                    aria-label="..."
+                  />
+                  <label className="">手作課程</label>
+                </div>
+                <div class="dropdown-divider"></div>
+                <div class="form-check">
+                  <input
+                    className="form-check-input position-static "
+                    type="checkbox"
+                    id="blankCheckbox"
+                    value="option1"
+                    aria-label="..."
+                  />
+                  <label className="">咖啡廳</label>
+                </div>
               </div>
             </Dropdown.Menu>
           </Dropdown>
@@ -100,39 +99,39 @@ const EventSearchBar = (props) => {
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              <div class='p-3'>
-              <div class="form-check">
-                <input
-                  class="form-check-input position-static"
-                  type="checkbox"
-                  id="blankCheckbox"
-                  value="option1"
-                  aria-label="..."
-                />
-                <label className="">4.5顆星以上</label>
-              </div>
-              <div class="dropdown-divider"></div>
-              <div class="form-check">
-                <input
-                  class="form-check-input position-static"
-                  type="checkbox"
-                  id="blankCheckbox"
-                  value="option1"
-                  aria-label="..."
-                />
-                <label className="">4顆星以上</label>
-              </div>
-              <div class="dropdown-divider"></div>
-              <div class="form-check">
-                <input
-                  className="form-check-input position-static "
-                  type="checkbox"
-                  id="blankCheckbox"
-                  value="option1"
-                  aria-label="..."
-                />
-                <label className="">3顆星以上</label>
-              </div>
+              <div class="p-3">
+                <div class="form-check">
+                  <input
+                    class="form-check-input position-static"
+                    type="checkbox"
+                    id="blankCheckbox"
+                    value="option1"
+                    aria-label="..."
+                  />
+                  <label className="">4.5顆星以上</label>
+                </div>
+                <div class="dropdown-divider"></div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input position-static"
+                    type="checkbox"
+                    id="blankCheckbox"
+                    value="option1"
+                    aria-label="..."
+                  />
+                  <label className="">4顆星以上</label>
+                </div>
+                <div class="dropdown-divider"></div>
+                <div class="form-check">
+                  <input
+                    className="form-check-input position-static "
+                    type="checkbox"
+                    id="blankCheckbox"
+                    value="option1"
+                    aria-label="..."
+                  />
+                  <label className="">3顆星以上</label>
+                </div>
               </div>
             </Dropdown.Menu>
           </Dropdown>
@@ -145,9 +144,7 @@ const EventSearchBar = (props) => {
               價格
             </Dropdown.Toggle>
 
-            <Dropdown.Menu>
-
-            </Dropdown.Menu>
+            <Dropdown.Menu></Dropdown.Menu>
           </Dropdown>
 
           <span>營業中</span>
@@ -161,26 +158,15 @@ const EventSearchBar = (props) => {
             />
           </div> */}
         </div>
-        <div className=" d-flex m-3">
-          <div className="col-4 ">
-            
-          </div>
-          <div className="col-4 ">
-            <select className="form-control select-1 ">
+        <div className="">
+          <div className="select-1 col- ">
+            <select className="form-control btn-success ">
               <option value="">排序方式</option>
               <option value="eventStartDate,asc">日期由近到遠</option>
               <option value="eventStartDate,desc">日期由遠到近</option>
               <option value="eventNeedPeople,asc">名額由少至多</option>
               <option value="eventNeedPeople,desc">名額由多至少</option>
             </select>
-          </div>
-          <div className="col-4  d-flex switchbutton-jy align-items-center justify-content-end">
-            {/* <p>營業中</p>
-            <SwitchButton
-            // type="button"
-            // active={props.isEnable}
-            // clicked={toggleSwitchButton}
-            /> */}
           </div>
         </div>
       </div>
