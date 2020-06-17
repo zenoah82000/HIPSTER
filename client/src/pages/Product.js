@@ -65,6 +65,7 @@ function Product(props) {
                       </div>
                       <div className="product-footer">
                         <div className="product-star"></div>
+                        <span className="divider">|</span>
                         <div className="product-price">
                           <span>TWD</span>
                           <h4>130</h4>
