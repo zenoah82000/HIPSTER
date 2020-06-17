@@ -8,7 +8,7 @@ import MainContent from './components/MainContent'
 
 import Home from './pages/Home'
 import About from './pages/About'
-import Article from './pages/Article'
+import Blog from './pages/Blog'
 import Test from './pages/Test'
 import Contact from './pages/Contact'
 import Product from './pages/Product'
@@ -34,8 +34,8 @@ function App() {
           <Route path="/about">
             <About />
           </Route>
-          <Route path="/article">
-            <Article />
+          <Route path="/blog">
+            <Blog />
           </Route>
           <Route path="/test">
             <Test />

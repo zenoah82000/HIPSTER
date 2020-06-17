@@ -54,7 +54,7 @@ function Mynavbar(props) {
               <a href="/map">地圖探索</a>
             </li>
             <li>
-              <a href="/article">文章專欄</a>
+              <a href="/blog">文章專欄</a>
             </li>
             <li>
               <a href="/product">活動列表</a>
