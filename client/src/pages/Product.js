@@ -80,6 +80,7 @@ function Product(props) {
             <div className="product-list-search-info"></div>
             <div className="product-list-search-info"></div>
             <div className="product-list-search-info"></div>
+            <div className="product-list-search-info"></div>
           </main>
         </div>
       </div>
