@@ -1,11 +1,18 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 
-import SimpleReactCalendar from 'simple-react-calendar'
+function MyCalendar() {
+  const [value, onChange] = useState(new Date());
 
-class Calendar extends Component {
-  render() {
-    return <SimpleReactCalendar activeMonth={new Date()} />
-  }
+  return (
+    <div>
+      <Calendar
+        onChange={onChange}
+        value={value}
+      />
+    </div>
+  );
 }
 
-export default Calendar
+export default MyCalendar

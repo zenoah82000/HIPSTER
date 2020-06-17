@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import SwitchButton from './MemberEventComponents/SwitchButton'
 import { Dropdown } from 'react-bootstrap'
-import Calendar from './calendar'
+import Calendar from 'react-calendar'
+
 
 //引用icon
 import { FaSearch, FaStreetView } from 'react-icons/fa'
@@ -40,6 +41,7 @@ const EventSearchBar = (props) => {
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
+              <div class='p-3'>
               <div class="form-check">
                 <input
                   class="form-check-input position-static"
@@ -48,8 +50,9 @@ const EventSearchBar = (props) => {
                   value="option1"
                   aria-label="..."
                 />
-                <label>文藝展覽</label>
+                <label className="">文藝展覽</label>
               </div>
+              <div class="dropdown-divider"></div>
               <div class="form-check">
                 <input
                   class="form-check-input position-static"
@@ -58,17 +61,19 @@ const EventSearchBar = (props) => {
                   value="option1"
                   aria-label="..."
                 />
-                <label>手作課程</label>
+                <label className="">手作課程</label>
               </div>
+              <div class="dropdown-divider"></div>
               <div class="form-check">
                 <input
-                  class="form-check-input position-static"
+                  className="form-check-input position-static "
                   type="checkbox"
                   id="blankCheckbox"
                   value="option1"
                   aria-label="..."
                 />
-                <label>咖啡廳</label>
+                <label className="">咖啡廳</label>
+              </div>
               </div>
             </Dropdown.Menu>
           </Dropdown>
@@ -91,13 +96,44 @@ const EventSearchBar = (props) => {
               variant="success"
               id="dropdown-basic"
             >
-              時間
+              評價
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              <Dropdown.Item>Action</Dropdown.Item>
-              <Dropdown.Item>Another action</Dropdown.Item>
-              <Dropdown.Item>Something else</Dropdown.Item>
+              <div class='p-3'>
+              <div class="form-check">
+                <input
+                  class="form-check-input position-static"
+                  type="checkbox"
+                  id="blankCheckbox"
+                  value="option1"
+                  aria-label="..."
+                />
+                <label className="">4.5顆星以上</label>
+              </div>
+              <div class="dropdown-divider"></div>
+              <div class="form-check">
+                <input
+                  class="form-check-input position-static"
+                  type="checkbox"
+                  id="blankCheckbox"
+                  value="option1"
+                  aria-label="..."
+                />
+                <label className="">4顆星以上</label>
+              </div>
+              <div class="dropdown-divider"></div>
+              <div class="form-check">
+                <input
+                  className="form-check-input position-static "
+                  type="checkbox"
+                  id="blankCheckbox"
+                  value="option1"
+                  aria-label="..."
+                />
+                <label className="">3顆星以上</label>
+              </div>
+              </div>
             </Dropdown.Menu>
           </Dropdown>
           <Dropdown>
@@ -110,9 +146,7 @@ const EventSearchBar = (props) => {
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              <Dropdown.Item>Action</Dropdown.Item>
-              <Dropdown.Item>Another action</Dropdown.Item>
-              <Dropdown.Item>Something else</Dropdown.Item>
+
             </Dropdown.Menu>
           </Dropdown>
 
@@ -129,9 +163,7 @@ const EventSearchBar = (props) => {
         </div>
         <div className=" d-flex m-3">
           <div className="col-4 ">
-            <select className="form-control select-1">
-              <option value="">活動類別</option>
-            </select>
+            
           </div>
           <div className="col-4 ">
             <select className="form-control select-1 ">
