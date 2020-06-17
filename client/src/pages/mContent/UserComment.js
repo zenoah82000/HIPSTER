@@ -3,7 +3,25 @@ import '../../styles/mContent/userComment.scss'
 import CommentImg from '../../components/comments/commentImg'
 import RatingStar from '../../components/comments/ratingStar'
 
+import myComment from '../../data/myComment.json'
+
 function UserComment() {
+  const data = {}
+
+  myComment.comment.forEach((item, i) => {
+    data[item.id] = {
+      name: item.name,
+      content: item.content,
+    }
+  })
+
+  let dataArry = []
+
+  for (const key in data) {
+    data[key].id = key
+    dataArry.push(data[key])
+  }
+
   return (
     <>
       <div className="usercontainer">
@@ -12,8 +30,43 @@ function UserComment() {
           <div className="tabcontainer couponactive">尚未評價</div>
           <div className="tabcontainer">已評價 </div>
         </div>
-
-        <div class="coupon-listview">
+        {dataArry.map((item) => (
+          <div class="coupon-listview">
+            <div class="row">
+              <div className="myReplyBox d-flex">
+                <div className="eventImgBox col-3">
+                  <img
+                    src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
+                    alt=""
+                  />
+                </div>
+                <div className="myReplyBox col-9 pl-3">
+                  <h4 className="eventTitle">商品名稱</h4>
+                  <ul className=" list-unstyled">
+                    <li className="d-flex">
+                      <p>星等</p>
+                      <RatingStar />
+                    </li>
+                    <li>
+                      <p>我的回覆:</p>
+                    </li>
+                    <li className="myReply pb-3">
+                      <p className="pt-2 ">
+                        我的回覆我的回覆我的回覆我的回覆我的回覆我的回覆我的回覆我的回覆我的回覆
+                      </p>
+                      <div className="d-flex mt-5 mb-2">
+                        <CommentImg />
+                        <CommentImg />
+                      </div>
+                      <span className="">回覆日期</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+        {/* <div class="coupon-listview">
           <div class="row">
             <div className="myReplyBox d-flex">
               <div className="eventImgBox col-3">
@@ -81,42 +134,7 @@ function UserComment() {
               </div>
             </div>
           </div>
-        </div>
-
-        <div class="coupon-listview">
-          <div class="row">
-            <div className="myReplyBox d-flex">
-              <div className="eventImgBox col-3">
-                <img
-                  src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
-                  alt=""
-                />
-              </div>
-              <div className="myReplyBox col-9 pl-3">
-                <h4 className="eventTitle">商品名稱</h4>
-                <ul className=" list-unstyled">
-                  <li className="d-flex">
-                    <p>星等</p>
-                    <RatingStar />
-                  </li>
-                  <li>
-                    <p>我的回覆:</p>
-                  </li>
-                  <li className="myReply pb-3">
-                    <p className="pt-2 ">
-                      我的回覆我的回覆我的回覆我的回覆我的回覆我的回覆我的回覆我的回覆我的回覆
-                    </p>
-                    <div className="d-flex mt-5 mb-2">
-                      <CommentImg />
-                      <CommentImg />
-                    </div>
-                    <span className="">回覆日期</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
+        </div> */}
       </div>
     </>
   )
