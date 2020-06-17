@@ -4,7 +4,7 @@ import { FiEdit } from 'react-icons/fi'
 import { BsTrash } from 'react-icons/bs'
 
 function MyCart(props) {
-  const { deleteCart, mycart } = props
+  const { handleDelete, mycart } = props
   return (
     <>
       {mycart.map((value, index) => {
@@ -34,7 +34,7 @@ function MyCart(props) {
                 更改
               </div>
               <div className="col-2" onClick={()=>{
-                deleteCart(value.id)
+                
               }}>
                 <BsTrash />
                 刪除

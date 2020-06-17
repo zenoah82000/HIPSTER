@@ -11,7 +11,7 @@ function Sidebar(props) {
   // console.log(props)
   return (
     <>
-      <main role="main" className="flex-shrink-0 mb-5">
+      <main role="main" className="flex-shrink-0">
         <div className="container mt-md-3">
           <div className="row">
             <div className="col-md-3 mr-md-2">
@@ -24,7 +24,7 @@ function Sidebar(props) {
                     alt="cat"
                   ></img>
                 </li>
-                <li className="nav-item border-bottom membername mb-1">
+                <li className="nav-item">
                   <div
                     className="nav-link sidebarlink-hs font-weight-bold"
                     id="membername"
@@ -45,7 +45,7 @@ function Sidebar(props) {
                     className="nav-link sidebarlink-hs"
                     to="/memberuser/comment"
                   >
-                    <i className="fas fa-comments"></i>我的評價
+                    <i className="far fa-comments"></i>我的評價
                   </Link>
                 </li>
                 <li className="nav-item">

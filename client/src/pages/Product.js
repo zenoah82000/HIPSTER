@@ -65,7 +65,6 @@ function Product(props) {
                       </div>
                       <div className="product-footer">
                         <div className="product-star"></div>
-                        <span className="divider">|</span>
                         <div className="product-price">
                           <span>TWD</span>
                           <h4>130</h4>
@@ -76,7 +75,6 @@ function Product(props) {
                 </div>
               </a>
             </div>
-            <div className="product-list-search-info"></div>
             <div className="product-list-search-info"></div>
             <div className="product-list-search-info"></div>
             <div className="product-list-search-info"></div>

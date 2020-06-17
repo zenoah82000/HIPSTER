@@ -21,10 +21,6 @@ import UserMymap from '../mContent/UserMymap'
 import UserWishlist from '../mContent/UserWishlist'
 
 
-
-
-
-
 function MemberUser() {
   return (
     <>

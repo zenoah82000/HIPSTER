@@ -1,25 +1,25 @@
 import React from 'react'
-import ReactStars from 'react-rating-stars-component'
+import ReactStars from "react-rating-stars-component";
 
-import { FaStar } from 'react-icons/fa'
+import {FaStar} from 'react-icons/fa'
 
 const ratingChanged = (newRating) => {
-  console.log(newRating)
-}
+    console.log(newRating);
+  };
 
 const ratingStar = () => {
-  return (
-    <ReactStars
-      count={5}
-      onChange={ratingChanged}
-      size={24}
-      half={true}
-      emptyIcon={<i className="far fa-star"></i>}
-      halfIcon={<i className="fa fa-star-half-alt"></i>}
-      fullIcon={<i className="fa fa-star"></i>}
-      color2={'#ffd700'}
-    />
-  )
+return(
+  <ReactStars
+    count={5}
+    onChange={ratingChanged}
+    size={24}
+    half={true}
+    emptyIcon={<i className="far fa-star"></i>}
+    halfIcon={<i className="fa fa-star-half-alt"></i>}
+    fullIcon={<i className="fa fa-star"></i>}
+    color2={"#ffd700"}
+  />
+)
 }
 
 //   const [rating, setRating] = React.useState(null);
@@ -29,7 +29,7 @@ const ratingStar = () => {
 //       <div>
 //           {[...Array(5)].map((star,i) =>{
 //               const ratingValue = i + 1;
-
+          
 //           return (
 // <label>
 // <input type="radio" name="rating" value={ratingValue} onClick={()=>setRating(ratingValue)} />
@@ -45,5 +45,5 @@ const ratingStar = () => {
 //           })}
 //     </div>
 //           )}
-
+     
 export default ratingStar

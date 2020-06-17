@@ -37,19 +37,17 @@ $white: #ffffff;
 }
 
 //Sidebar----------------------------------------
-.svg-inline--fa.fa-w-20,
 .svg-inline--fa.fa-w-18,
 .svg-inline--fa.fa-w-14,
 .svg-inline--fa.fa-w-16,
 .svg-inline--fa.fa-w-12 {
   width: 20px;
-  margin-right: 3px;
 }
 
 @media only screen and (min-width: 768px) {
   .pl-md-5,
   .px-md-5 {
-    padding-left: 28% !important;
+    padding-left: 30% !important;
   }
 }
 
@@ -75,10 +73,6 @@ $white: #ffffff;
 }
 .sidebarlink-hs:hover {
   color: $aquacolordanger;
-}
-
-.membername {
-  height: 45px;
 }
 
 // Login----------------------------------------

@@ -27,7 +27,7 @@
     "react-google-maps": "^9.4.5",
     "react-icons": "^3.10.0",
     "react-leaflet": "^2.7.0",
-    "react-masonry-css": "^1.0.14",
+    "react-native": "^0.55.4",
     "react-rating-stars-component": "^1.1.0",
     "react-redux": "^7.2.0",
     "react-reveal": "^1.2.2",

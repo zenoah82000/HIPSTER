@@ -1,15 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
 import { GiCoffeeCup } from 'react-icons/gi'
-import L from 'leaflet';
+import L from 'leaflet'
 
 import CafeData from '../../data/cafe.json'
 import { FaMapMarkerAlt } from 'react-icons/fa'
 import { FaRegClock } from 'react-icons/fa'
 import { FaRegCalendarCheck } from 'react-icons/fa'
 
-const MyMapComponent = () => {
-  const [activeData, setActiveData] = React.useState(null)
+const MyMapComponent = (props) => {
+  const { lat, log, position } = props
+
+  const [viewport, setViewport] = React.useState({})
 
   const data = {
     //name{
@@ -34,33 +36,45 @@ const MyMapComponent = () => {
     data[key].name = key
     dataArry.push(data[key])
   }
-
-  console.log(dataArry)
-  console.log(data)
-
   const cafeIcon = L.icon({
     iconUrl: require('../../images/food.svg'),
-    iconSize: [32,32],
+    iconSize: [32, 32],
     iconAnchor: [32, 64],
     popupAnchor: null,
     shadowUrl: null,
     shadowSize: null,
-    shadowAnchor: null
-  });
-  
+    shadowAnchor: null,
+  })
+
   const myIcon = L.icon({
-  iconUrl: require('../../images/pin.svg'),
-  iconSize: [64,64],
-  iconAnchor: [32, 64],
-  popupAnchor: null,
-  shadowUrl: null,
-  shadowSize: null,
-  shadowAnchor: null
-  });
+    iconUrl: require('../../images/pin.svg'),
+    iconSize: [64, 64],
+    iconAnchor: [32, 64],
+    popupAnchor: null,
+    shadowUrl: null,
+    shadowSize: null,
+    shadowAnchor: null,
+  })
+
+  const onViewportChanged = (viewport) => {
+    // setViewport(viewport)
+  }
+  useEffect(() => {
+    const view = {
+      center: [30.040741099999998, 121.54840689999999],
+      zoom: 20,
+    }
+    setViewport(view)
+  }, [])
 
   return (
+    // console.log('123')
     <div className="">
-      <Map center={[25.0338438, 121.54335]} zoom={20}>
+      <button
+        onClick={(viewport.center = [25.040741099999998, 121.54840689999999])}
+      ></button>
+      <Map viewport={viewport} onViewportChanged={onViewportChanged}>
+        {/* <Map center={[25.040741099999998, 121.54840689999999]} zoom={20} > */}
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -85,9 +99,9 @@ const MyMapComponent = () => {
             // key={data.id}
             // icon={cafeIcon}
             position={[item.lat, item.log]}
-            onClick={() => {
-              setActiveData(data)
-            }}
+            // onClick={() => {
+            //   setActiveData(data)
+            // }}
           >
             <Popup>
               <div style={{ width: '500px', height: '500px' }}>
