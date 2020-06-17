@@ -12,8 +12,9 @@ function Map(props) {
     <>
       <div className="row">
         <div className="col-4">
-          <EventSearchBar />
-          <EventMapDataList />
+          <button type="button" >測試用</button>
+          {/* <EventSearchBar />
+          <EventMapDataList /> */}
         </div>
         <div className="col-8">
           <MyMapComponent />

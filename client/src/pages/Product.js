@@ -40,7 +40,29 @@ function Product(props) {
                 </a>
               </span>
             </div>
-            <div className="product-list-search-info"></div>
+            <div className="product-list-search-info">
+              <a href="">
+                <div className="row">
+                  <div className="col-sm-5 col-lg-4">
+                    <img src="" />
+                  </div>
+                  <div className="col-sm-7 col-lg-8">
+                    <div className="product-detail">
+                      <div className="product-label"></div>
+                      <h3>
+                        台灣澎湖跳島一日遊 |
+                        探索浪漫七美＆絕美藍洞＆南方四島＆雙心石滬等 |
+                        自選遊覽車或機車環島
+                      </h3>
+                      <p className="product-description"></p>
+                      <div className="product-place"></div>
+                      <div className="product-time"></div>
+                      <div className="product-footer"></div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
             <div className="product-list-search-info"></div>
             <div className="product-list-search-info"></div>
             <div className="product-list-search-info"></div>
