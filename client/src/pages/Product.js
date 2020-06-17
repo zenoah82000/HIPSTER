@@ -55,7 +55,10 @@ function Product(props) {
                         自選遊覽車或機車環島
                       </h3>
                       <p className="product-description"></p>
-                      <div className="product-place"></div>
+                      <div className="product-place">
+                        <i class="fas fa-map-marker-alt"></i>
+                        台灣 澎湖
+                      </div>
                       <div className="product-time"></div>
                       <div className="product-footer"></div>
                     </div>

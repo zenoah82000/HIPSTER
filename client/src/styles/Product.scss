@@ -79,5 +79,20 @@
         font-weight: bolder;
       }
     }
+
+    .product-list-search-info {
+      a {
+        text-decoration: none;
+        color: #684b38;
+      }
+
+      .product-detail {
+        font-size: 12px;
+
+        i {
+          width: 20px;
+        }
+      }
+    }
   }
 }
