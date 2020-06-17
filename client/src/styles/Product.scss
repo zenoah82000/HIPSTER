@@ -87,10 +87,12 @@
       }
 
       .product-detail {
-        font-size: 12px;
-
-        i {
-          width: 20px;
+        .product-footer {
+          .product-price {
+            h4 {
+              display: inline-block;
+            }
+          }
         }
       }
     }

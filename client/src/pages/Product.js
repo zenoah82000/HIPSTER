@@ -24,19 +24,19 @@ function Product(props) {
               <span>
                 <span className="gap">|</span>
                 <a href="">
-                  <i class="fab fa-hotjar"></i> 熱門程度
+                  <i className="fab fa-hotjar"></i> 熱門程度
                 </a>
               </span>
               <span>
                 <span className="gap">|</span>
                 <a href="">
-                  <i class="fas fa-star"></i>用戶評價
+                  <i className="fas fa-star"></i>用戶評價
                 </a>
               </span>
               <span>
                 <span className="gap">|</span>
                 <a href="">
-                  <i class="fas fa-dollar-sign"></i>價格：低到高
+                  <i className="fas fa-dollar-sign"></i>價格：低到高
                 </a>
               </span>
             </div>
@@ -56,11 +56,20 @@ function Product(props) {
                       </h3>
                       <p className="product-description"></p>
                       <div className="product-place">
-                        <i class="fas fa-map-marker-alt"></i>
+                        <i className="fas fa-map-marker-alt"></i>
                         台灣 澎湖
                       </div>
-                      <div className="product-time"></div>
-                      <div className="product-footer"></div>
+                      <div className="product-time">
+                        <i className="far fa-calendar"></i>
+                        最早可使用日期：今日
+                      </div>
+                      <div className="product-footer">
+                        <div className="product-star"></div>
+                        <div className="product-price">
+                          <span>TWD</span>
+                          <h4>130</h4>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
