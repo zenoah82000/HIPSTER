@@ -37,6 +37,13 @@ $white: #ffffff;
 }
 
 //Sidebar----------------------------------------
+.svg-inline--fa.fa-w-18,
+.svg-inline--fa.fa-w-14,
+.svg-inline--fa.fa-w-16,
+.svg-inline--fa.fa-w-12 {
+  width: 20px;
+}
+
 @media only screen and (min-width: 768px) {
   .pl-md-5,
   .px-md-5 {

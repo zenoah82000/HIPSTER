@@ -45,7 +45,7 @@ function Sidebar(props) {
                     className="nav-link sidebarlink-hs"
                     to="/memberuser/comment"
                   >
-                    <i className="fas fa-comments"></i>我的評價
+                    <i className="far fa-comments"></i>我的評價
                   </Link>
                 </li>
                 <li className="nav-item">
@@ -110,7 +110,7 @@ function Sidebar(props) {
                 </li>
               </ul>
             </div>
-            <div className="col-md-8 bg-white ml-md-2">{props.children}</div>
+            <div className="flex-grow-1 bg-white ml-md-2">{props.children}</div>
           </div>
         </div>
       </main>
