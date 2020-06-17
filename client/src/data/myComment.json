@@ -2,18 +2,25 @@
   "comment": [
     {
       "id": "1",
-      "name": "評論1",
-      "content": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      "name": "商品1",
+      "content": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "date":"2020/5/15",
+      "img":"'../images/home/activity-test.jpg'"
     },
     {
       "id": "2",
-      "name": "評論2",
-      "content": "aaaabbbbbbaaaaaaaagfdfsaaafaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      "name": "商品2",
+      "content": "aaaabbbbbbaaaaaaaagfdfsaaafaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "date":"2020/5/10",
+      "img":"../../images/home/activity-test.jpg"
     },
     {
       "id": "3",
-      "name": "評論3",
-      "content": "dddddddddddaaaaafaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      "name": "商品3",
+      "content": "dddddddddddaaaaafaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "date":"2020/5/5",
+      "img":"../../images/home/activity-test.jpg"
     }
   ]
 }
+ 
