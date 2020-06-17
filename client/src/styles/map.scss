@@ -41,7 +41,7 @@
 }
 
 .select-1 {
-  border-radius: 20px;
+  background: rgba(104, 142, 103, 0.8);
 }
 
 .mapSearch {
@@ -111,23 +111,22 @@
   height: 50px;
 }
 
-.dropdown .dropdown-menu{
+.dropdown .dropdown-menu {
   padding: 0;
   top: 10px !important;
 }
 
-.form-check-input{
+.form-check-input {
   width: 18px;
   height: 18px;
   margin-right: 10px;
-
 }
 label {
   margin-bottom: 0;
 }
-MyCalendar .dropdown-menu.show{
+MyCalendar .dropdown-menu.show {
   width: 350px;
-  padding:0 10px 10px 10px;
+  padding: 0 10px 10px 10px;
 }
 
 .col-1,
@@ -204,15 +203,13 @@ MyCalendar .dropdown-menu.show{
   padding-left: 0px;
 }
 
-
-
 //calender
 .react-calendar {
   width: 350px;
   max-width: 100%;
   background: white;
   border: 1px solid #a0a096;
-  font-family: "微軟正黑體";
+  font-family: '微軟正黑體';
   font-weight: bold;
   line-height: 1.125em;
 }
