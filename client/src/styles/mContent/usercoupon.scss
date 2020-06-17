@@ -1,5 +1,7 @@
+// couponhead
 .usercontainer {
-  padding: 30px;
+  padding: 20px 30px 0px;
+  //   padding-right: 30px;
 }
 .usertitle {
   font-weight: bold;
@@ -30,7 +32,12 @@
   text-align: center;
   line-height: 50px;
 }
-.active {
+
+.tabcontainer:hover {
+  border-bottom: 3px solid #ff3706b2;
+}
+
+.couponactive {
   border-bottom: 3px solid #ff3400;
   color: #ff3400;
   font-weight: 800;
@@ -39,4 +46,22 @@
 .table thead th {
   padding-bottom: 4px;
   padding-top: 4px;
+}
+
+// couponbody
+.tab-pane {
+  padding: 0px 30px 0px;
+}
+
+.row {
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+.table-head {
+  background-color: #eee;
+  padding: 5px 10px;
+  margin: 20px 0px;
+  border-radius: 4px 4px 0 0;
+  color: #666;
 }

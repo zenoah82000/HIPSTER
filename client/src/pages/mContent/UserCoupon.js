@@ -22,35 +22,18 @@ function UserCoupon() {
           </div>
         </div>
         <div className="d-flex coupon-bar border-bottom">
-          <div className="tabcontainer active">可使用</div>
+          <div className="tabcontainer couponactive">可使用</div>
           <div className="tabcontainer">已過期</div>
         </div>
-        <table class="table">
-          <thead>
-            <tr className="table-active">
-              <th scope="col">折價券</th>
-              <th scope="col">使用日期</th>
-              <th scope="col">適用規則</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
-            </tr>
-          </tbody>
-        </table>
+      </div>
+      <div className="tab-pane">
+        <div className="table-head hidden-xs">
+          <div class="row">
+            <div class="col-sm-3">折扣券</div>
+            <div class="col-sm-4">使用效期</div>
+            <div class="col-sm-5">適用規則</div>
+          </div>
+        </div>
       </div>
     </>
   )
