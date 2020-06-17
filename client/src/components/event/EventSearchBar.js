@@ -8,6 +8,9 @@ import { FaSearch, FaStreetView } from 'react-icons/fa'
 import { GiCoffeeCup } from 'react-icons/gi'
 
 const EventSearchBar = (props) => {
+
+  const {search,changeState} = props
+
   return (
     <>
       <div className="px-4 pt-3">
@@ -18,7 +21,11 @@ const EventSearchBar = (props) => {
           </div> */}
 
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search..." />
+            <input type="text" 
+            class="form-control" 
+            placeholder="Search..."  
+            value={search}
+            onChange={changeState}/>
             <div class="input-group-append">
               <span class="input-group-text bgGreen">
                 <FaSearch className="fonticon" />

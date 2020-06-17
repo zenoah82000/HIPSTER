@@ -3,12 +3,15 @@ import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
 import { GiCoffeeCup } from 'react-icons/gi'
 import L from 'leaflet';
 
-import CafeData from '../../data/cafe.json'
+// import CafeData from '../../data/cafe.json'
 import { FaMapMarkerAlt } from 'react-icons/fa'
 import { FaRegClock } from 'react-icons/fa'
 import { FaRegCalendarCheck } from 'react-icons/fa'
 
-const MyMapComponent = () => {
+const MyMapComponent = (props) => {
+  const {itemId,CafeData} = props
+
+  console.log(CafeData)
   const [activeData, setActiveData] = React.useState(null)
 
   const data = {
