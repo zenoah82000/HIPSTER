@@ -30,7 +30,7 @@ function EventDataList(props) {
 
   const display =
     dataArry.map((item) => {
-      if (item.name.indexOf(search) != -1)
+      if (item.name.indexOf(search) !== -1)
         return(
       <div className="eventContentBox d-flex " >
         <div className="eventImgBox col-4" >
