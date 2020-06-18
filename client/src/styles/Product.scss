@@ -22,9 +22,12 @@
   .product-title {
     margin: 0 0 24px 0;
   }
+
   .product-star-bar {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 20px;
+
     .product-star-box {
       p {
         letter-spacing: unset;
@@ -70,6 +73,35 @@
       }
       span {
         font-size: 14px;
+      }
+    }
+  }
+
+  .product-time {
+    margin-bottom: 20px;
+    p {
+      font-size: 16px;
+      font-weight: 400;
+      letter-spacing: unset;
+    }
+  }
+
+  .product-info-icon {
+    padding: 8px 0 24px 0;
+    border-top: 1px solid #afaeae;
+    list-style: none;
+
+    li {
+      padding: 16px 0 0 0;
+      margin: 0 34px 0 0;
+      display: inline-flex;
+      font-size: 16px;
+
+      align-items: center;
+
+      .fa-circle {
+        font-size: 30px;
+        margin: 0 5px;
       }
     }
   }

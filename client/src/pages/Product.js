@@ -10,6 +10,7 @@ function Product(props) {
         <div className="container">
           <div className="product-banner"></div>
           <div className="product-main-left">
+            {/* product head */}
             <MyBreadcrumb />
             <h1 className="product-title">綠島進階深潛體驗</h1>
             <div className="product-star-bar">
@@ -29,6 +30,28 @@ function Product(props) {
                 <span>心願清單</span>
               </div>
             </div>
+            <div className="product-time">
+              <p>活動時間:2020-05-30</p>
+            </div>
+            {/* product head */}
+            <ul className="product-info-icon">
+              <li>
+                <i class="far fa-circle"></i>
+                <div>不予更改</div>
+              </li>
+              <li>
+                <i class="far fa-circle"></i>
+                <div>可出示手機電子憑證或列印的紙本憑證</div>
+              </li>
+              <li>
+                <i class="far fa-circle"></i>
+                <div>僅限指定日期使用</div>
+              </li>
+              <li>
+                <i class="far fa-circle"></i>
+                <div>必須兌換實體票券</div>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
