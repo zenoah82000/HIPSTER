@@ -59,7 +59,7 @@ function Sidebar(props) {
                 <li className="nav-item">
                   <Link
                     className="nav-link sidebarlink-hs"
-                    to="/memberuser/article"
+                    to="/memberuser/blog"
                   >
                     <i className="far fa-edit"></i>我的文章
                   </Link>

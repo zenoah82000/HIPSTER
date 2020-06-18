@@ -3,7 +3,7 @@ import { Link, withRouter } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
 import Masonry from 'react-masonry-css'
 
-import MyBreadcrumb from '../../components/blog/MyBreadcrumb'
+import MyBreadcrumb from '../../components/MyBreadcrumb'
 
 import '../../components/blog/Masonry.css'
 
@@ -86,14 +86,14 @@ function Blog(props) {
     return (
       <div key={item.id} className="blog-list-card">
         <img src={authorImgArr[item.id - 1]} />
-        <h3>{item.title}</h3>
-        <p>
+        <h3 className="ml-3">{item.title}</h3>
+        <p className="ml-3">
           這是自由發揮的地方
           <br />
           你的文青足跡
           <br />
         </p>
-        <p className="author-date">
+        <p className="author-date d-flex justify-content-between ml-3">
           <span>{item.author}</span>
           <span>2020年6月1日</span>
         </p>
@@ -104,8 +104,9 @@ function Blog(props) {
   return (
     <>
       <div>
-        開發用: <Link to="/blogEdit">編輯</Link> /
-        <Link to="/blogContent">詳細頁</Link>/<Link to="/blogAdd">新增</Link>
+        開發用:
+        <Link to="/blogContent">詳細頁</Link>/<Link to="/blogAdd">新增</Link>/
+        <Link to="/blogEdit">編輯</Link>
       </div>
       <Container>
         <MyBreadcrumb />

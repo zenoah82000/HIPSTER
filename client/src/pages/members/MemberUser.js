@@ -14,16 +14,11 @@ import Sidebar from '../../components/member/Sidebar'
 import UserContent from '../mContent/UserContent'
 import UserComment from '../mContent/UserComment'
 import UserOrder from '../mContent/UserOrder'
-import UserArticle from '../mContent/UserArticle'
+import UserBlog from '../mContent/UserBlog'
 import UserQanda from '../mContent/UserQanda'
 import UserCoupon from '../mContent/UserCoupon'
 import UserMymap from '../mContent/UserMymap'
 import UserWishlist from '../mContent/UserWishlist'
-
-
-
-
-
 
 function MemberUser() {
   return (
@@ -31,35 +26,35 @@ function MemberUser() {
       {/* <Header />
       <Banner BannerImgSrc={image} /> */}
       {/* <!-- Page Content --> */}
-   
-        <Sidebar>     
-            <Switch>
-              <Route path="/memberuser/user">
-                <UserContent />
-              </Route>
-              <Route path="/memberuser/comment">
-                <UserComment />
-              </Route>
-              <Route path="/memberuser/order">
-                <UserOrder />
-              </Route>
-              <Route path="/memberuser/article">
-                <UserArticle />
-              </Route>
-              <Route path="/memberuser/qanda">
-                <UserQanda />
-              </Route>
-              <Route path="/memberuser/coupon/:type">
-                <UserCoupon />
-              </Route>
-              <Route path="/memberuser/mymap">
-                <UserMymap />
-              </Route>
-              <Route path="/memberuser/wishlist">
-                <UserWishlist />
-              </Route>
-            </Switch>
-        </Sidebar>    
+
+      <Sidebar>
+        <Switch>
+          <Route path="/memberuser/user">
+            <UserContent />
+          </Route>
+          <Route path="/memberuser/comment">
+            <UserComment />
+          </Route>
+          <Route path="/memberuser/order">
+            <UserOrder />
+          </Route>
+          <Route path="/memberuser/blog">
+            <UserBlog />
+          </Route>
+          <Route path="/memberuser/qanda">
+            <UserQanda />
+          </Route>
+          <Route path="/memberuser/coupon/:type">
+            <UserCoupon />
+          </Route>
+          <Route path="/memberuser/mymap">
+            <UserMymap />
+          </Route>
+          <Route path="/memberuser/wishlist">
+            <UserWishlist />
+          </Route>
+        </Switch>
+      </Sidebar>
     </>
   )
 }
