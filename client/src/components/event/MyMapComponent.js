@@ -52,7 +52,7 @@ const MyMapComponent = (props) => {
   });
   
   const myIcon = L.icon({
-  iconUrl: require('../../images/pin.svg'),
+  iconUrl: require('../../images/cafeTag.svg'),
   iconSize: [64,64],
   iconAnchor: [32, 64],
   popupAnchor: null,
@@ -86,57 +86,60 @@ const MyMapComponent = (props) => {
             //             ))
             //           }
             // key={data.id}
-            // icon={cafeIcon}
+            // icon={myIcon}
             position={[item.lat, item.log]}
             onClick={() => {
               setActiveData(data)
             }}
           >
-            <Popup>
-              <div style={{ width: '500px', height: '500px' }}>
+            <Popup className="locationCard">
+              {/* <div className="locationCard" > */}
                 <h5>
-                  <GiCoffeeCup />
+                  <GiCoffeeCup className="h5 mr-1"/>
                   {item.name}
                 </h5>
-                <ul className=" list-unstyled">
+                <ul className="cardList list-unstyled">
                   <li>
-                    <div className="mapCategory">手作課程</div>
+                    <div className="mapCategory"><span>咖啡廳</span></div>
                   </li>
-                  <li>星等{item.star}</li>
+                  <li style={{
+                    width: '460px',
+                    height: '200px',
+                    objectFit: 'cover',
+                    overflow: 'hidden',
+                    marginTop: '10px',
+                  }}>                
+                  <img
+                    src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
+                    alt=""
+                  />
+                  </li>
+                  <li ><span>星等{item.star}</span></li>
                   <li>
                     <span className="mr-2">
                       <FaRegClock />
                     </span>
-                    營業時間
+                    <span>營業時間</span>
                   </li>
                   <li>
                     <span className="mr-2">
                       <FaMapMarkerAlt />
                     </span>
-                    地點
+                    <span>地點</span>
                   </li>
                   <li>
-                    <span className="mr-2">
+                    <span className="mr-2 ">
                       <FaRegCalendarCheck />
                     </span>
-                    活動日期：
+                    <span>活動日期：</span>
                   </li>
+                  
                 </ul>
-                <div
-                  style={{
-                    width: '300px',
-                    height: '300px',
-                    objectFit: 'cover',
-                    overflow: 'hidden',
-                    marginTop: '50px',
-                  }}
-                >
-                  <img
-                    src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
-                    alt=""
-                  />
-                </div>
-              </div>
+               <button className="cardButton" value>立即預定</button>
+          
+{/*                 
+                </div> */}
+         
             </Popup>
           </Marker>
         ))}

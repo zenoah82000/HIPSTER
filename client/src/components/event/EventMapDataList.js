@@ -18,6 +18,10 @@ class FilteredList extends React.Component {
       data: [],
       sortType: '',
       search: '',
+      searchBtn1: "類別",
+      searchBtn2: "日期",
+      searchBtn3: "星等",
+      date: new Date()
     }
   }
   componentDidMount() {
@@ -39,14 +43,6 @@ class FilteredList extends React.Component {
     }
     console.log(dataArry)
 
-    const namedataArry = []
-    for (const key in data) {
-      data[key].name = key
-      namedataArry.push(data[key].name)
-    }
-
-    console.log(namedataArry)
-
     this.setState({
       data: dataArry,
       search: '',
@@ -59,6 +55,40 @@ class FilteredList extends React.Component {
       search: event.target.value,
     })
   }
+
+
+  //搜尋btn
+  showCat = (event) => {
+    this.setState({
+      searchBtn1: event.target.name,
+    })
+
+    // console.log(event)
+  }
+  showStar = (event) => {
+    this.setState({
+      searchBtn3: event.target.name,
+    })
+    // console.log(event)
+  }
+
+  showDate = (event) => {
+    this.setState({
+      searchBtn2: event.target.value,
+    })
+    // console.log(this.state.searchBtn2)
+  }
+
+  pickDate = (date,event) => {
+    this.setState({ date})
+    console.log(date, "onchange")
+    console.log(this.state.date)
+    console.log(this.state.searchBtn2)
+
+  }
+
+
+
 
   filterList() {
     let updatedList = this.state.data.filter((item) => {
@@ -79,7 +109,7 @@ class FilteredList extends React.Component {
                 <h2 className="eventTitle">{item.name}</h2>
                 <ul className=" list-unstyled">
                   <li>
-                    <div className="mapCategory">手作課程</div>
+                    <div className="mapCategory">咖啡廳</div>
                   </li>
                   <li>星等:{item.star}</li>
                   <li>
@@ -138,45 +168,28 @@ class FilteredList extends React.Component {
                     className="mapSearch btn-small"
                     variant="success"
                     id="dropdown-basic"
+                  >{this.state.searchBtn1}
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    <Dropdown.Item href="" className="btn3" name="全部類別" onClick={(event) => this.showCat(event)}>全部類別</Dropdown.Item>
+                    <Dropdown.Item href="" className="btn3" name="文藝展覽" onClick={(event) => this.showCat(event)}>文藝展覽</Dropdown.Item>
+                    <Dropdown.Item href="" className="btn3" name="手作課程" onClick={(event) => this.showCat(event)}>手作課程</Dropdown.Item>
+                    <Dropdown.Item href="" className="btn3" name="咖啡廳" onClick={(event) => this.showCat(event)}>咖啡廳</Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+
+                <Dropdown>
+                  <Dropdown.Toggle
+                    className="mapSearch  btn-small"
+                    variant="success"
+                    id="dropdown-basic"
                   >
-                    類型
+                    {this.state.searchBtn2}
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>
-                    <div class="p-3">
-                      <div class="form-check">
-                        <input
-                          class="form-check-input position-static"
-                          type="checkbox"
-                          id="blankCheckbox"
-                          value="option1"
-                          aria-label="..."
-                        />
-                        <label className="">文藝展覽</label>
-                      </div>
-                      <div class="dropdown-divider"></div>
-                      <div class="form-check">
-                        <input
-                          class="form-check-input position-static"
-                          type="checkbox"
-                          id="blankCheckbox"
-                          value="option1"
-                          aria-label="..."
-                        />
-                        <label className="">手作課程</label>
-                      </div>
-                      <div class="dropdown-divider"></div>
-                      <div class="form-check">
-                        <input
-                          className="form-check-input position-static "
-                          type="checkbox"
-                          id="blankCheckbox"
-                          value="option1"
-                          aria-label="..."
-                        />
-                        <label className="">咖啡廳</label>
-                      </div>
-                    </div>
+                    <Calendar
+                      onChange={this.pickDate} value={this.state.date} onClick={(event) => this.showDate(event)}/>
                   </Dropdown.Menu>
                 </Dropdown>
                 <Dropdown>
@@ -185,71 +198,16 @@ class FilteredList extends React.Component {
                     variant="success"
                     id="dropdown-basic"
                   >
-                    日期
+                    {this.state.searchBtn3}
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>
-                    <Calendar />
+                    <Dropdown.Item href="" className="btn3" name="4.5分以上" onClick={(event) => this.showStar(event)}>4.5分以上</Dropdown.Item>
+                    <Dropdown.Item href="" className="btn3" name="4分以上" onClick={(event) => this.showStar(event)}>4分以上</Dropdown.Item>
+                    <Dropdown.Item href="" className="btn3" name="3.5分以上" onClick={(event) => this.showStar(event)}>3.5分以上</Dropdown.Item>
+                    <Dropdown.Item href="" className="btn3" name="全部星等" onClick={(event) => this.showStar(event)}>全部星等</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
-                <Dropdown>
-                  <Dropdown.Toggle
-                    className="mapSearch  btn-small"
-                    variant="success"
-                    id="dropdown-basic"
-                  >
-                    評價
-                  </Dropdown.Toggle>
-
-                  <Dropdown.Menu>
-                    <div class="p-3">
-                      <div class="form-check">
-                        <input
-                          class="form-check-input position-static"
-                          type="checkbox"
-                          id="blankCheckbox"
-                          value="option1"
-                          aria-label="..."
-                        />
-                        <label className="">4.5顆星以上</label>
-                      </div>
-                      <div class="dropdown-divider"></div>
-                      <div class="form-check">
-                        <input
-                          class="form-check-input position-static"
-                          type="checkbox"
-                          id="blankCheckbox"
-                          value="option1"
-                          aria-label="..."
-                        />
-                        <label className="">4顆星以上</label>
-                      </div>
-                      <div class="dropdown-divider"></div>
-                      <div class="form-check">
-                        <input
-                          className="form-check-input position-static "
-                          type="checkbox"
-                          id="blankCheckbox"
-                          value="option1"
-                          aria-label="..."
-                        />
-                        <label className="">3顆星以上</label>
-                      </div>
-                    </div>
-                  </Dropdown.Menu>
-                </Dropdown>
-                <Dropdown>
-                  <Dropdown.Toggle
-                    className="mapSearch  btn-small"
-                    variant="success"
-                    id="dropdown-basic"
-                  >
-                    價格
-                  </Dropdown.Toggle>
-
-                  <Dropdown.Menu></Dropdown.Menu>
-                </Dropdown>
-
                 <span>營業中</span>
                 <SwitchButton />
                 {/* <div className="d-flex switchbutton-jy align-items-center justify-content-end">
