@@ -45,7 +45,7 @@ function UserWishlist() {
           {wishlist.map((item) => {
             return (
               <>
-                <div className="card m-2`">
+                <div className="card m-2">
                   <div className="card-header">
                     <img src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg" />
                   </div>
@@ -81,7 +81,7 @@ function UserWishlist() {
           className="emptyImg mb-3"
           src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
         />
-        <h6>願望清單是空的！趕緊探索你下一次的旅程，並標記你心儀的活動體驗</h6>
+        <p>願望清單是空的！趕緊探索你下一次的旅程，並標記你心儀的活動體驗</p>
       </div>
     )
   return (

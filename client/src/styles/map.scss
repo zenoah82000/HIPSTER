@@ -54,8 +54,11 @@
   text-align: center;
   color: rgba(104, 142, 103, 0.8);
 }
-.btn-success {
+.btn-large {
   background-color: transparent;
+}
+.btn-small {
+  background-color: white;
 }
 .btn-success:hover,
 .btn-success:focus,
