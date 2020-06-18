@@ -19,7 +19,7 @@ function ShoppingCar(props) {
 
   //取得購物車
   const localCart = JSON.parse(localStorage.getItem('cart'))
-  async function getCartFromLocalStorage() {
+   function getCartFromLocalStorage() {
     setMycart(localCart)
   }
 
@@ -98,33 +98,34 @@ function ShoppingCar(props) {
   const display =
     mycart != null && mycart.length >= 1 ? (
       <>
-        <div className="bg-white d-flex p-2 align-items-center">
-          <div className="col">
+        <div className="mycartbox bg-white d-flex p-2 align-items-center">
+          <div className="col-2">
             <input
               type="checkbox"
               className="mr-4"
               name="checkall"
               id="checkall"
             />
-            <label for="checkall">全選</label>
+            <label for="checkall"><p>全選</p></label>
+          </div>
+          <div className="col-3">
+            <p>活動名稱</p>
+          </div>
+          <div className="col-3">
+            <p>活動日期</p>
           </div>
           <div className="col">
-            <h6>活動</h6>
-          </div>
-          <div className="col">
-            <h6>活動日期</h6>
-          </div>
-          <div className="col">
-            <h6>數量</h6>
+            <p>數量</p>
           </div>
           <div className="col text-right">
-            <h6>總價</h6>
+            <p>總價</p>
           </div>
         </div>
-        <Mycart deleteCart={deleteCart} mycart={mycart} />
-        <div className="bg-white p-2 mt-3 d-flex">
+        <Mycart deleteCart={deleteCart} setMycart={setMycart} mycart={mycart} />
+        <div className="totalbox bg-white p-2 mt-3 d-flex">
           <div className="col-6">使用優惠券</div>
-          <div className="col-6 text-right">
+          <div className="col-4 text-right total ">活動合計:<span className="total">NT${sum(mycart)}</span></div>
+          <div className="col-2 text-right">
             <button
               className="button"
               onClick={() => {
@@ -137,7 +138,13 @@ function ShoppingCar(props) {
         </div>
       </>
     ) : (
-      <h2>購物車是空的</h2>
+      <div className="empty text-center">
+        <img
+          className="emptyImg mb-3"
+          src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
+        />
+        <p>購物車是空的!</p>
+      </div>
     )
   useEffect(() => {
     getCartFromLocalStorage()

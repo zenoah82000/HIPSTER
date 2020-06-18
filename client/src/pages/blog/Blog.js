@@ -3,7 +3,7 @@ import { Link, withRouter } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
 import Masonry from 'react-masonry-css'
 
-import MyBreadcrumb from '../../components/blog/MyBreadcrumb'
+import MyBreadcrumb from '../../components/MyBreadcrumb'
 
 import '../../components/blog/Masonry.css'
 

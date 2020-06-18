@@ -2,16 +2,21 @@ import React from 'react'
 
 import { FiEdit } from 'react-icons/fi'
 import { BsTrash } from 'react-icons/bs'
+import {GrFormAdd} from 'react-icons/gr'
+import {GrFormSubtract} from 'react-icons/gr'
+
+import Amount from '../../components/order/amount'
 
 function MyCart(props) {
-  const { deleteCart, mycart } = props
+  console.log(props)
+  const { deleteCart,setMycart,mycart } = props
   return (
     <>
       {mycart.map((value, index) => {
         return (
           <>
-            <div className="bg-white d-flex mt-3 p-2 align-items-center">
-              <div className="col d-flex">
+            <div className="productbox bg-white d-flex mt-3 p-2 align-items-center">
+              <div className="col-2 d-flex">
                 <input type="checkbox" className="mr-4" />
                 <img
                   className="productImg"
@@ -19,17 +24,15 @@ function MyCart(props) {
                   alt=""
                 />
               </div>
-              <div className="col">{value.name}</div>
-              <div className="col">{value.date}</div>
+              <div className="col-3">{value.name}</div>
+              <div className="col-3">{value.date}</div>
               <div className="col">
-                <span>
-                  <input value={value.amount} readOnly />
-                </span>
+              <Amount setMycart={setMycart} mycart={mycart} index={index} value={value.amount}/>
               </div>
               <div className="col"></div>
             </div>
-            <div className="bg-white d-flex border-top p-1">
-              <div className="col-2">
+            <div className="bg-white d-flex border-top p-1 text-right">
+              <div className="col-1">
                 <FiEdit />
                 更改
               </div>
