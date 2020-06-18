@@ -577,7 +577,7 @@ function Home(props) {
             </div>
           </div>
 
-          <a href="#" className="more-activity-btn">
+          <a href="#" className="more-blog-btn">
             查看更多文章
           </a>
         </div>
