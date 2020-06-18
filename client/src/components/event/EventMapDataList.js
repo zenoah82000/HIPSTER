@@ -62,9 +62,9 @@ class FilteredList extends React.Component {
     this.setState({
       searchBtn1: event.target.name,
     })
-
     // console.log(event)
   }
+
   showStar = (event) => {
     this.setState({
       searchBtn3: event.target.name,
@@ -79,8 +79,8 @@ class FilteredList extends React.Component {
     // console.log(this.state.searchBtn2)
   }
 
-  pickDate = (date,event) => {
-    this.setState({ date})
+  pickDate = (date, event) => {
+    this.setState({ date })
     console.log(date, "onchange")
     console.log(this.state.date)
     console.log(this.state.searchBtn2)
@@ -88,11 +88,19 @@ class FilteredList extends React.Component {
   }
 
 
-
-
   filterList() {
     let updatedList = this.state.data.filter((item) => {
-      return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
+      switch (this.state.searchBtn1) {
+        case "咖啡廳": return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.star.indexOf("咖啡廳");
+          break
+        case "手作課程": return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.star.indexOf("手作課程");
+          break
+        case "文藝展覽": return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.star.indexOf("文藝展覽");
+          break
+        default:  return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
+        break
+      }
+
     })
     let data = updatedList.map((item, index, array) => {
       return (
@@ -189,7 +197,7 @@ class FilteredList extends React.Component {
 
                   <Dropdown.Menu>
                     <Calendar
-                      onChange={this.pickDate} value={this.state.date} onClick={(event) => this.showDate(event)}/>
+                      onChange={this.pickDate} value={this.state.date} onClick={(event) => this.showDate(event)} />
                   </Dropdown.Menu>
                 </Dropdown>
                 <Dropdown>
