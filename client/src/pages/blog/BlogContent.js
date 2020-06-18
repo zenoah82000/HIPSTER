@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
 
-import MyBreadcrumb from '../../components/blog/MyBreadcrumb'
+import MyBreadcrumb from '../../components/MyBreadcrumb'
 
 import author1 from '../../components/blog/author1.jpg'
 
