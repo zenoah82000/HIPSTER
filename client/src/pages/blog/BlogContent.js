@@ -29,7 +29,7 @@ function BlogContent(props) {
           </div>
         </div>
         <aside className="col-4 blog-content-aside">
-          <button className="btn btn-primary d-block">發表新文章</button>
+          <button className="btn d-block">發表新文章</button>
           <div className="card">
             <p>作者資訊</p>
             <div className="blog-author-avatar">
@@ -37,7 +37,7 @@ function BlogContent(props) {
             </div>
             <h3 className="text-center">感情專家</h3>
             <p className="text-center">發表文章數:999</p>
-            <button className="btn btn-primary d-block">看更多牠的文</button>
+            <button className="btn d-block">看更多牠的文</button>
           </div>
         </aside>
       </div>
