@@ -3,8 +3,8 @@ import { Link, withRouter } from 'react-router-dom'
 
 function MyBreadcrumb(props) {
   // console.log('MyBreadcrumb:', props)
-  const pathlist = ['/', '/blog']
-  const pathnames = ['首頁', '文章專欄']
+  const pathlist = ['/', '/blog', '/blogAdd', '/blogContent', '/blogEdit']
+  const pathnames = ['首頁', '文章專欄', '文章專欄', '文章專欄', '文章專欄']
 
   // 先找出對應的中文詞
   let locationPathname = props.location.pathname

@@ -57,7 +57,7 @@ function Mynavbar(props) {
               <a href="/blog">文章專欄</a>
             </li>
             <li>
-              <a href="/product">活動列表</a>
+              <a href="/productlist">活動列表</a>
             </li>
             <li>
               <a href="/contact">聯絡我們</a>
