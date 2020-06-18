@@ -32,12 +32,12 @@ class FilteredList extends React.Component {
       }
     })
 
-    // const dataArry = []
-    // for (const key in data) {
-    //   data[key].name = key
-    //   dataArry.push(data[key])
-    // }
-    // console.log(dataArry)
+    const dataArry = []
+    for (const key in data) {
+      data[key].name = key
+      dataArry.push(data[key])
+    }
+    console.log(dataArry)
 
     const namedataArry = []
     for (const key in data) {
@@ -48,7 +48,7 @@ class FilteredList extends React.Component {
     console.log(namedataArry)
 
     this.setState({
-      data: namedataArry,
+      data: dataArry,
       search: '',
     })
   }
@@ -62,12 +62,12 @@ class FilteredList extends React.Component {
 
   filterList() {
     let updatedList = this.state.data.filter((item) => {
-      return item.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
+      return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
     })
     let data = updatedList.map((item, index, array) => {
       return (
         <Fade>
-          <li className="list-group-item" data-category={item} key={index}>
+          <li className="list-group-item" data-category={item.name} key={index}>
             <div className="eventContentBox d-flex">
               <div className="eventImgBox col-4">
                 <img
@@ -76,7 +76,7 @@ class FilteredList extends React.Component {
                 />
               </div>
               <div className="eventDetailBox col-8 pl-3">
-                <h2 className="eventTitle">{item}</h2>
+                <h2 className="eventTitle">{item.name}</h2>
                 <ul className=" list-unstyled">
                   <li>
                     <div className="mapCategory">手作課程</div>
