@@ -1,10 +1,10 @@
 import React from 'react'
-import '../styles/Product.scss'
+import '../styles/ProductList.scss'
 
 import AsideBar from '../components/product/AsideBar'
 import ReactStars from 'react-rating-stars-component'
 
-function Product(props) {
+function ProductList(props) {
   return (
     <>
       <div className="container product-content">
@@ -433,4 +433,4 @@ function Product(props) {
   )
 }
 
-export default Product
+export default ProductList

@@ -11,7 +11,7 @@ import About from './pages/About'
 
 import Test from './pages/Test'
 import Contact from './pages/Contact'
-import Product from './pages/Product'
+import ProductList from './pages/ProductList'
 import Map from './pages/Map'
 
 import ShoppingCar from './pages/order/ShoppingCar'
@@ -59,8 +59,8 @@ function App() {
           <Route path="/Contact">
             <Contact />
           </Route>
-          <Route path="/product">
-            <Product />
+          <Route path="/productlist">
+            <ProductList />
           </Route>
           <Route path="/shoppingcar">
             <ShoppingCar />
