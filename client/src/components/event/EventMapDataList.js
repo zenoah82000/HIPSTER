@@ -16,6 +16,7 @@ class FilteredList extends React.Component {
     super(props)
     this.state = {
       data: [],
+      sortType: '',
       search: '',
     }
   }
@@ -31,11 +32,12 @@ class FilteredList extends React.Component {
       }
     })
 
-    const dataArry = []
-    for (const key in data) {
-      data[key].name = key
-      dataArry.push(data[key].name)
-    }
+    // const dataArry = []
+    // for (const key in data) {
+    //   data[key].name = key
+    //   dataArry.push(data[key])
+    // }
+    // console.log(dataArry)
 
     const namedataArry = []
     for (const key in data) {
@@ -50,12 +52,36 @@ class FilteredList extends React.Component {
       search: '',
     })
   }
+
+  handleItemSort = (sortType: string) => {
+    let oldItems = [...this.state.items]
+    if (sortType === 'asc') {
+      //按筆劃從少到多排序
+      newItems = newItems.sort((a, b) =>
+        a.title.localeCompare(b.title, 'zh-Hans-TW-u-co-stroke')
+      )
+    }
+
+    if (sortType === 'desc') {
+      //按筆劃從多到少排序
+      newItems = newItems.sort((a, b) =>
+        b.title.localeCompare(a.title, 'zh-Hans-TW-u-co-stroke')
+      )
+    }
+
+    this.setState({
+      items: newItems,
+      sortType,
+    })
+  }
+
   updateSearch(event) {
     this.setState({
       data: this.state.data,
       search: event.target.value,
     })
   }
+
   filterList() {
     let updatedList = this.state.data.filter((item) => {
       return item.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
@@ -265,10 +291,10 @@ class FilteredList extends React.Component {
             <div className="select-1 mb-1 ">
               <select className="form-control btn-success btn-large">
                 <option value="">排序方式</option>
-                <option value="eventStartDate,asc">日期由近到遠</option>
-                <option value="eventStartDate,desc">日期由遠到近</option>
-                <option value="eventNeedPeople,asc">名額由少至多</option>
-                <option value="eventNeedPeople,desc">名額由多至少</option>
+                <option value="eventStartDate,asc">評分由低到高</option>
+                <option value="eventStartDate,desc">評分由高到低</option>
+                <option value="eventNeedPeople,asc">價格由低到高</option>
+                <option value="eventNeedPeople,desc">價格由高到低</option>
               </select>
             </div>
           </div>
