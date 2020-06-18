@@ -77,7 +77,7 @@ function Mynavbar(props) {
             </li>
           </ul>
           {/* ========================================================= */}
-          <ul className="sign none">
+          <ul className="sign ">
             <li>
               <a href="">註冊</a>
             </li>
@@ -86,7 +86,7 @@ function Mynavbar(props) {
             </li>
           </ul>
           {/* ========================================================= */}
-          <ul className="member">
+          <ul className="member none">
             <li>David,您好</li>
             <li>
               <a href="./memberuser" className="memberbtn">
