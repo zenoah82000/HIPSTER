@@ -1,13 +1,17 @@
 import React from 'react'
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
 import { GiCoffeeCup } from 'react-icons/gi'
+import L from 'leaflet';
 
-import CafeData from '../../data/cafe.json'
+// import CafeData from '../../data/cafe.json'
 import { FaMapMarkerAlt } from 'react-icons/fa'
 import { FaRegClock } from 'react-icons/fa'
 import { FaRegCalendarCheck } from 'react-icons/fa'
 
-const MyMapComponent = () => {
+const MyMapComponent = (props) => {
+  const {itemId,CafeData} = props
+
+  console.log(CafeData)
   const [activeData, setActiveData] = React.useState(null)
 
   const data = {
@@ -37,6 +41,26 @@ const MyMapComponent = () => {
   console.log(dataArry)
   console.log(data)
 
+  const cafeIcon = L.icon({
+    iconUrl: require('../../images/food.svg'),
+    iconSize: [32,32],
+    iconAnchor: [32, 64],
+    popupAnchor: null,
+    shadowUrl: null,
+    shadowSize: null,
+    shadowAnchor: null
+  });
+  
+  const myIcon = L.icon({
+  iconUrl: require('../../images/pin.svg'),
+  iconSize: [64,64],
+  iconAnchor: [32, 64],
+  popupAnchor: null,
+  shadowUrl: null,
+  shadowSize: null,
+  shadowAnchor: null
+  });
+
   return (
     <div className="">
       <Map center={[25.0338438, 121.54335]} zoom={20}>
@@ -56,12 +80,13 @@ const MyMapComponent = () => {
             //     markers.map(marker => (
             //         <Marker
             //             key={marker.key}
-            //             icon={defaultIcon}
+            //             icon={cafeIcon}
             //             position={[marker.latitude, marker.longitude]}
             //             properties={marker}   />
             //             ))
             //           }
             // key={data.id}
+            // icon={cafeIcon}
             position={[item.lat, item.log]}
             onClick={() => {
               setActiveData(data)

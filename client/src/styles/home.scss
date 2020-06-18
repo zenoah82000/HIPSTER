@@ -9,63 +9,82 @@ h2 {
 }
 p {
   color: #707070;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 30px;
+  letter-spacing: 5px;
 }
-.banner {
-  height: 800px;
-  // background-image: url(../images/home/home-banner.jpg);
-  // background-size: cover;
-  // background-position: center center;
-  position: relative;
-}
-.video {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-.banner-title {
-  width: 375px;
-  position: absolute;
-  left: 50%;
-  top: 100px;
-  transform: translateX(-50%);
-}
-select,
-.btn,
-input,
-#location-search {
+.search-bar,
+.search-bar select,
+.search-bar .btn,
+.search-bar input {
   border-radius: 5px;
   border: 0;
 }
-.searchbar {
+.title {
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  .line {
+    display: inline-block;
+    width: 35%;
+    border-top: 1px solid #684b38;
+  }
+  .txt {
+    vertical-align: -14%;
+    display: inline-block;
+    width: 180px;
+    font-size: 24px;
+    font-weight: 600;
+    color: #684b38;
+  }
+}
+//////////////主圖//////////////
+.banner {
+  height: 800px;
+  background-image: url(../images/home/home-banner.jpg);
+  background-size: cover;
+  background-position: center center;
+  position: relative;
+
+  .banner-title {
+    width: 375px;
+    position: absolute;
+    left: 50%;
+    top: 100px;
+    transform: translateX(-50%);
+  }
+}
+
+///////////搜尋條-切換紐/////////////
+.searchbar-chang-btn {
   width: 900px;
   height: 130px;
   position: absolute;
   left: 50%;
   bottom: 50px;
   transform: translateX(-50%);
+
+  .btnList {
+    width: 360px;
+    display: flex;
+    justify-content: space-between;
+    .btn {
+      width: 110px;
+      height: 40px;
+      background-color: rgba(113, 113, 113, 0.8);
+      color: white;
+
+      &:hover {
+        background-color: rgb(85, 85, 85);
+      }
+      &.active {
+        background-color: rgba(104, 142, 103, 0.8);
+      }
+    }
+  }
 }
-.btnList {
-  width: 360px;
-  display: flex;
-  justify-content: space-between;
-}
-.btnList .btn {
-  width: 110px;
-  height: 40px;
-  background-color: rgba(113, 113, 113, 0.8);
-  color: white;
-}
-.btnList .btn:hover {
-  background-color: rgb(85, 85, 85);
-}
-.btnList .active {
-  background-color: rgba(104, 142, 103, 0.8);
-}
-.btnList .active:hover {
-  background-color: rgba(104, 142, 103, 0.8);
-}
+
+////////////搜尋條-地點&分類,下拉通用樣式//////////////
 .search-bar {
   background-color: rgba(113, 113, 113, 0.8);
   width: 890px;
@@ -74,42 +93,50 @@ input,
   justify-content: space-around;
   align-items: center;
   margin-top: 5px;
+
+  select {
+    border-radius: 5px;
+    height: 40px;
+    width: 120px;
+    padding: 0 0 0 25px;
+  }
+  .search-btn {
+    width: 90px;
+    height: 40px;
+    color: white;
+    &:hover {
+      background-color: #9c7843;
+      color: white;
+    }
+    &.btn-warning {
+      background-color: #b98f50;
+      border: 0;
+    }
+  }
 }
 
-select {
-  border-radius: 5px;
-  height: 40px;
-  width: 120px;
-  padding: 0 0 0 25px;
-}
+////////////搜尋條-地點搜尋//////////////
 #location-bar {
   height: 40px;
   width: 345px;
-}
-#activename-bar {
-  height: 40px;
-  width: 490px;
-}
-.search-btn {
-  width: 90px;
-  height: 40px;
-  color: white;
-}
-.search-btn:hover {
-  background-color: #9c7843;
-  color: white;
-}
-.location-search-btn {
-  width: 125px;
-  height: 40px;
-  color: white;
+  .location-search-btn {
+    width: 125px;
+    height: 40px;
+    color: white;
+  }
 }
 .btn-danger {
   background-color: #ff3400;
 }
-.btn-warning {
-  background-color: #b98f50;
-  border: 0;
+////////////搜尋條-分類搜尋//////////////
+#activename-bar {
+  height: 40px;
+  width: 490px;
+}
+
+////////////搜尋條-時間搜尋//////////////
+.time-title {
+  color: white;
 }
 .fonticon {
   font-size: 25px;
@@ -121,47 +148,90 @@ select {
   width: 275px;
   height: 40px;
 }
-.time-title {
-  color: white;
-}
 
-.about {
-  height: 600px;
+//////////////about//////////////////
+.home-about {
+  height: 650px;
   background-color: #e6ded8;
+  padding-top: 80px;
+  .about-main {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 100px;
+    .about-main-cont {
+      width: 20%;
+      text-align: center;
+      .about-icon {
+        width: 115px;
+        height: 115px;
+        margin: auto;
+      }
+      .about-title {
+        color: #707070;
+        font-weight: 900;
+        font-size: 18px;
+        letter-spacing: 5px;
+        margin: 20px 0;
+      }
+    }
+  }
 }
 
-.title {
-  margin-top: 90px;
-  height: 60px;
-  line-height: 60px;
-  text-align: center;
+//////////////////activity/////////////////////
+.slick-list {
+  overflow: visible;
 }
-.title .line {
-  display: inline-block;
-  width: 35%;
-  border-top: 1px solid #684b38;
-}
-.title .txt {
-  vertical-align: -14%;
-  display: inline-block;
-  width: 180px;
-  font-size: 24px;
-  font-weight: 600;
-  color: #684b38;
-}
-.about-main {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 100px;
-}
-.about-main-cont {
-  width: 20%;
-  background-color: cadetblue;
-  text-align: center;
-}
-.about-icon {
-  width: 115px;
-  height: 115px;
-  background-color: chartreuse;
-  margin: auto;
+.home-activity {
+  height: 950px;
+  background-color: white;
+  padding-top: 80px;
+  .activity-main {
+    margin-top: 50px;
+    a {
+      text-decoration: none;
+    }
+    .activity-main-cont {
+      width: 90%;
+      height: 360px;
+      margin: auto;
+      border-radius: 10px;
+      box-shadow: 3px 3px 5px rgba($color: #000000, $alpha: 0.3);
+      .activity-picture {
+        width: 100%;
+        height: 220px;
+        border-radius: 10px 10px 0 0;
+        overflow: hidden;
+        position: relative;
+        .activity-follow {
+          width: 35px;
+          height: 35px;
+          border-radius: 50%;
+          background-color: white;
+          position: absolute;
+          right: 10px;
+          top: 10px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 23px;
+          color: #545454;
+          &.active {
+            color: #fc77dd;
+          }
+        }
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+      .activity-title {
+        margin: 10px;
+      }
+      .activity-local p {
+        margin: 10px;
+        letter-spacing: 0px;
+      }
+    }
+  }
 }

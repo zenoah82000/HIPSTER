@@ -3,6 +3,8 @@ import { withRouter } from 'react-router-dom'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+
+//新增訂單
 import { memberCheckOutAsync } from '../../actions/order/order_Actions'
 
 //確認框
@@ -33,6 +35,7 @@ function ShoppingCar(props) {
   }
   //訂單初始化
   const orderData = {
+      
     orderItems: [],
   }
   let itemData = {}
@@ -54,7 +57,7 @@ function ShoppingCar(props) {
         showCancelButton: true,
         cancelButtonText: '取消',
       }).then((result) => {
-        if (result.value === true) {
+        if (result.value) {
           for (let i = 0; i < localCart.length; i++) {
             console.log(localCart[i])
             itemData.orderItemId = localCart[i].id
@@ -74,15 +77,27 @@ function ShoppingCar(props) {
       })
     }
   }
-
-  useEffect(() => {
-    getCartFromLocalStorage()
-  }, [])
-
-  return (
-    <>
-      <div className="container">
-        <h1 className="py-4">購物車</h1>
+  //刪除購物車
+  const deleteCart = (id)=>{
+    Swal.fire({
+      text:'是否刪除該商品?',
+      icon:'warning',
+      confirmButtonText:'確定',
+      showCancelButton:true,
+      cancelButtonText:'取消',
+    }).then((result)=>{if(result.value){
+      const index = localCart.findIndex(item=>item.id === id)
+      if(index !== -1 ){
+        localCart.splice(index,1)
+        localStorage.setItem('cart',JSON.stringify(localCart))
+        getCartFromLocalStorage()
+      }
+    }
+    })
+  }
+  const display =
+    mycart != null && mycart.length >= 1 ? (
+      <>
         <div className="bg-white d-flex p-2 align-items-center">
           <div className="col">
             <input
@@ -106,11 +121,12 @@ function ShoppingCar(props) {
             <h6>總價</h6>
           </div>
         </div>
-        <Mycart mycart={mycart} />
+        <Mycart deleteCart={deleteCart} mycart={mycart} />
         <div className="bg-white p-2 mt-3 d-flex">
           <div className="col-6">使用優惠券</div>
           <div className="col-6 text-right">
             <button
+              className="button"
               onClick={() => {
                 checkOut()
               }}
@@ -119,6 +135,19 @@ function ShoppingCar(props) {
             </button>
           </div>
         </div>
+      </>
+    ) : (
+      <h2>購物車是空的</h2>
+    )
+  useEffect(() => {
+    getCartFromLocalStorage()
+  }, [])
+
+  return (
+    <>
+      <div className="container">
+        <h1 className="py-4">購物車</h1>
+        {display}
       </div>
     </>
   )

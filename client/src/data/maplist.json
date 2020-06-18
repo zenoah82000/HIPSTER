@@ -1,0 +1,45 @@
+{
+  "maplist": [
+    {
+      "id": "1",
+      "name": "商品1",
+      "time":"10:00~17:00",
+      "star": "2",
+      "date":"2020/5/15",
+      "location":"taipei",
+      "latitude": 24.0040968,
+      "longitude": 121.5152865
+    },
+    {
+      "id": "2",
+      "name": "商品2",
+      "time":"13:00~17:00",
+      "star": "3.5",
+      "date":"2020/5/15",
+      "location":"taipei",
+      "latitude": 25.0040968,
+      "longitude": 121.5152865
+    },
+    {
+      "id": "3",
+      "name": "商品1",
+      "time":"10:00~17:00",
+      "star": "1",
+      "date":"2020/5/15",
+      "location":"new taipei",
+      "latitude": 26.0040968,
+      "longitude": 121.5152865
+    },
+    {
+      "id": "4",
+      "name": "商品4",
+      "time":"13:00~17:00",
+      "star": "3.5",
+      "date":"2020/5/15",
+      "location":"taipei",
+      "latitude": 27.0040968,
+      "longitude": 121.5152865
+    }
+  ]
+}
+ 

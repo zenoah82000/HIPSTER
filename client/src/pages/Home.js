@@ -1,26 +1,49 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import '../styles/home.scss'
-import { FaSearch, FaStreetView, FaLongArrowAltRight } from 'react-icons/fa'
+import {
+  FaSearch,
+  FaStreetView,
+  FaLongArrowAltRight,
+  FaHeart,
+  FaMapMarkerAlt,
+} from 'react-icons/fa'
+import Slider from 'react-slick'
 import Title from '../images/home/title.png'
+import abouticon1 from '../images/home/about-icon1.png'
+import abouticon2 from '../images/home/about-icon2.png'
+import abouticon3 from '../images/home/about-icon3.png'
+import abouticon4 from '../images/home/about-icon4.png'
+import activity from '../images/home/activity-test.jpg'
+
 import { Link, NavLink, withRouter } from 'react-router-dom'
 
 function Home(props) {
+  const settings = {
+    arrows: false,
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: false,
+  }
+
   return (
     <>
       <div className="banner">
-        {/* <div className="video">
-          <iframe
-            src="https://www.youtube.com/embed/9Pqy7a-HhtU?ecver=1&controls=0&showinfo=0&rel=0&autoplay=1&fs=1&loop=1&mute=1&vq=hd1080"
-            frameborder="0"
-            allowfullscreen
-            class="video"
-          ></iframe>
-        </div> */}
+        <div className="video">
+          <video
+            src="http://127.0.0.1:3000/test.mp4"
+            loop
+            autoPlay
+            muted
+          ></video>
+        </div>
         <div className="container">
           <div className="banner-title">
             <img src={Title} />
           </div>
-          <div className="searchbar">
+          <div className="searchbar-chang-btn">
             <div className="btnList">
               <div id="location" className="btn active">
                 地點搜尋
@@ -32,7 +55,7 @@ function Home(props) {
                 活動時間
               </div>
             </div>
-
+            {/* --------------------------------------------------------- */}
             <div id="location-search" className="search-bar">
               <select id="city">
                 <option>台北市</option>
@@ -62,7 +85,7 @@ function Home(props) {
                 定位搜尋
               </div>
             </div>
-            {/* --------------------------------------------------------------- */}
+            {/* ---------------------------------------------------------- */}
 
             <div id="activename-search" className="search-bar none">
               <select id="category1">
@@ -94,12 +117,12 @@ function Home(props) {
                 搜尋
               </div>
             </div>
-            {/* --------------------------------------------------------------- */}
+            {/* ----------------------------------------- */}
           </div>
         </div>
       </div>
 
-      <div className="about">
+      <div className="home-about">
         <div className="container">
           <div className="title">
             <span class="line"></span>
@@ -114,11 +137,78 @@ function Home(props) {
 
           <div className="about-main">
             <div className="about-main-cont">
-              <div className="about-icon"></div>
+              <div className="about-icon">
+                <img src={abouticon1}></img>
+              </div>
+              <div className="about-title">最優質的活動資訊</div>
+              <p>發掘最棒的展覽資訊、手作課程與最難忘的活動體驗！</p>
             </div>
-            <div className="about-main-cont"></div>
-            <div className="about-main-cont"></div>
-            <div className="about-main-cont"></div>
+            <div className="about-main-cont">
+              <div className="about-icon">
+                <img src={abouticon2}></img>
+              </div>
+              <div className="about-title">方便的地圖探索</div>
+              <p>提供分類、定位搜尋，輕鬆顯示所有附近的活動資訊！</p>
+            </div>
+            <div className="about-main-cont">
+              <div className="about-icon">
+                <img src={abouticon3}></img>
+              </div>
+              <div className="about-title">即時的評價訊息</div>
+              <p>我們鼓勵所有參與過活動的朋友們留下他們最誠實的評價！</p>
+            </div>
+            <div className="about-main-cont">
+              <div className="about-icon">
+                <img src={abouticon4}></img>
+              </div>
+              <div className="about-title">安全的購買系統</div>
+              <p>
+                安全加密付費、及電子憑證，以安心的方式，預訂最精彩的活動。！
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="home-activity">
+        <div className="container">
+          <div className="title">
+            <span class="line"></span>
+            <span class="txt">精選活動</span>
+            <span class="line"></span>
+          </div>
+          <div className="activity-main">
+            <Slider {...settings}>
+              <a href="">
+                <div className="activity-main-cont">
+                  <div className="activity-picture">
+                    <div className="activity-follow">
+                      <FaHeart />
+                    </div>
+                    <img src={activity} />
+                  </div>
+                  <div className="activity-title">
+                    <p>
+                      【花蓮七星潭 GLAMPING 】踏浪星辰 Camp｜露營帳篷／露營車
+                    </p>
+                  </div>
+                  <div className="activity-local">
+                    <p>
+                      <FaMapMarkerAlt />
+                      台灣 宜蘭
+                    </p>
+                  </div>
+                  <div className="star"></div>
+                </div>
+              </a>
+
+              <div>
+                <div className="activity-main-cont">1</div>
+              </div>
+              <div className="alink">
+                <div className="activity-main-cont">1</div>
+              </div>
+            </Slider>
           </div>
         </div>
       </div>

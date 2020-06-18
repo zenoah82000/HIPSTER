@@ -4,11 +4,11 @@ import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 import Mynavbar from './components/Mynavbar'
 import Myfooter from './components/Myfooter'
 import MainContent from './components/MainContent'
-// import Nopage from './pages/Nopage'
+import NotFoundPage from './pages/NotFoundPage'
 
 import Home from './pages/Home'
 import About from './pages/About'
-import Article from './pages/Article'
+import Blog from './pages/Blog'
 import Test from './pages/Test'
 import Contact from './pages/Contact'
 import Product from './pages/Product'
@@ -34,8 +34,8 @@ function App() {
           <Route path="/about">
             <About />
           </Route>
-          <Route path="/article">
-            <Article />
+          <Route path="/blog">
+            <Blog />
           </Route>
           <Route path="/test">
             <Test />
@@ -45,9 +45,6 @@ function App() {
           </Route>
           <Route path="/product">
             <Product />
-          </Route>
-          <Route exact path="/">
-            <Home />
           </Route>
           <Route path="/shoppingcar">
             <ShoppingCar />
@@ -69,6 +66,12 @@ function App() {
           </Route>
           <Route path="/memberuser">
             <MemberUser />
+          </Route>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route exact path="*">
+            <NotFoundPage />
           </Route>
         </Switch>
 

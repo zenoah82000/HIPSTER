@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import SwitchButton from './MemberEventComponents/SwitchButton'
+import { Dropdown } from 'react-bootstrap'
+import Calendar from 'react-calendar'
 
 //引用icon
 import { FaSearch, FaStreetView } from 'react-icons/fa'
 import { GiCoffeeCup } from 'react-icons/gi'
 
 const EventSearchBar = (props) => {
+
+  const {search,changeState} = props
+
   return (
     <>
       <div className="px-4 pt-3">
@@ -16,7 +21,11 @@ const EventSearchBar = (props) => {
           </div> */}
 
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search..." />
+            <input type="text" 
+            class="form-control" 
+            placeholder="Search..."  
+            value={search}
+            onChange={changeState}/>
             <div class="input-group-append">
               <span class="input-group-text bgGreen">
                 <FaSearch className="fonticon" />
@@ -28,10 +37,122 @@ const EventSearchBar = (props) => {
           </div>
         </div>
         <div className=" d-flex m-2 ">
-          <div className="mapSearch m-1">類型</div>
-          <div className="mapSearch m-1">日期</div>
-          <div className="mapSearch m-1">時間</div>
-          <div className="mapSearch m-1">價格</div>
+          <Dropdown>
+            <Dropdown.Toggle
+              className="mapSearch"
+              variant="success"
+              id="dropdown-basic"
+            >
+              類型
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              <div class="p-3">
+                <div class="form-check">
+                  <input
+                    class="form-check-input position-static"
+                    type="checkbox"
+                    id="blankCheckbox"
+                    value="option1"
+                    aria-label="..."
+                  />
+                  <label className="">文藝展覽</label>
+                </div>
+                <div class="dropdown-divider"></div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input position-static"
+                    type="checkbox"
+                    id="blankCheckbox"
+                    value="option1"
+                    aria-label="..."
+                  />
+                  <label className="">手作課程</label>
+                </div>
+                <div class="dropdown-divider"></div>
+                <div class="form-check">
+                  <input
+                    className="form-check-input position-static "
+                    type="checkbox"
+                    id="blankCheckbox"
+                    value="option1"
+                    aria-label="..."
+                  />
+                  <label className="">咖啡廳</label>
+                </div>
+              </div>
+            </Dropdown.Menu>
+          </Dropdown>
+          <Dropdown>
+            <Dropdown.Toggle
+              className="mapSearch"
+              variant="success"
+              id="dropdown-basic"
+            >
+              日期
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              <Calendar />
+            </Dropdown.Menu>
+          </Dropdown>
+          <Dropdown>
+            <Dropdown.Toggle
+              className="mapSearch"
+              variant="success"
+              id="dropdown-basic"
+            >
+              評價
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              <div class="p-3">
+                <div class="form-check">
+                  <input
+                    class="form-check-input position-static"
+                    type="checkbox"
+                    id="blankCheckbox"
+                    value="option1"
+                    aria-label="..."
+                  />
+                  <label className="">4.5顆星以上</label>
+                </div>
+                <div class="dropdown-divider"></div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input position-static"
+                    type="checkbox"
+                    id="blankCheckbox"
+                    value="option1"
+                    aria-label="..."
+                  />
+                  <label className="">4顆星以上</label>
+                </div>
+                <div class="dropdown-divider"></div>
+                <div class="form-check">
+                  <input
+                    className="form-check-input position-static "
+                    type="checkbox"
+                    id="blankCheckbox"
+                    value="option1"
+                    aria-label="..."
+                  />
+                  <label className="">3顆星以上</label>
+                </div>
+              </div>
+            </Dropdown.Menu>
+          </Dropdown>
+          <Dropdown>
+            <Dropdown.Toggle
+              className="mapSearch"
+              variant="success"
+              id="dropdown-basic"
+            >
+              價格
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu></Dropdown.Menu>
+          </Dropdown>
 
           <span>營業中</span>
           <SwitchButton />
@@ -44,28 +165,15 @@ const EventSearchBar = (props) => {
             />
           </div> */}
         </div>
-        <div className=" d-flex m-3">
-          <div className="col-4 ">
-            <select className="form-control select-1">
-              <option value="">活動類別</option>
-            </select>
-          </div>
-          <div className="col-4 ">
-            <select className="form-control select-1 ">
+        <div className="">
+          <div className="select-1 col- ">
+            <select className="form-control btn-success ">
               <option value="">排序方式</option>
               <option value="eventStartDate,asc">日期由近到遠</option>
               <option value="eventStartDate,desc">日期由遠到近</option>
               <option value="eventNeedPeople,asc">名額由少至多</option>
               <option value="eventNeedPeople,desc">名額由多至少</option>
             </select>
-          </div>
-          <div className="col-4  d-flex switchbutton-jy align-items-center justify-content-end">
-            {/* <p>營業中</p>
-            <SwitchButton
-            // type="button"
-            // active={props.isEnable}
-            // clicked={toggleSwitchButton}
-            /> */}
           </div>
         </div>
       </div>

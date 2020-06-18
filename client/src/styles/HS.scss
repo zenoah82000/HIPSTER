@@ -1,12 +1,12 @@
 //主要背景色
-$aquabackground: #132948;
+$hipsterbackground: #132948;
 // 強調色
-$aquacolordanger: #ff3400;
+$hipstercolordanger: #ff3400;
 //以下輔色，按深淺排列
-$aquacolorone: #31445f;
-$aquacolortwo: #4e5f76;
-$aquacolorthree: #c4cad1;
-$aquacolorfour: #e2e4e8;
+$hipstercolorone: #31445f;
+$hipstercolortwo: #4e5f76;
+$hipstercolorthree: #c4cad1;
+$hipstercolorfour: #e2e4e8;
 //我的顏色
 $fontawesome: #009688;
 $black: #000000;
@@ -21,7 +21,7 @@ $white: #ffffff;
   color: $black;
 }
 .servicelink {
-  color: $aquacolordanger;
+  color: $hipstercolordanger;
 }
 
 .entirepage-hs {
@@ -37,10 +37,19 @@ $white: #ffffff;
 }
 
 //Sidebar----------------------------------------
+.svg-inline--fa.fa-w-20,
+.svg-inline--fa.fa-w-18,
+.svg-inline--fa.fa-w-14,
+.svg-inline--fa.fa-w-16,
+.svg-inline--fa.fa-w-12 {
+  width: 20px;
+  margin-right: 3px;
+}
+
 @media only screen and (min-width: 768px) {
   .pl-md-5,
   .px-md-5 {
-    padding-left: 30% !important;
+    padding-left: 28% !important;
   }
 }
 
@@ -65,7 +74,20 @@ $white: #ffffff;
   color: #707070;
 }
 .sidebarlink-hs:hover {
-  color: $aquacolordanger;
+  color: $hipstercolordanger;
+}
+
+.membername {
+  height: 45px;
+}
+
+.sidebarright {
+  width: 73%;
+}
+@media only screen and (max-width: 768px) {
+  .sidebarright {
+    width: 100%;
+  }
 }
 
 // Login----------------------------------------
@@ -83,12 +105,12 @@ $white: #ffffff;
   }
   .btn.btn-info,
   .btn-info.custom-file-control::before {
-    color: $aquacolordanger;
+    color: $hipstercolordanger;
   }
   .sellerlogin {
     margin-top: 20px;
     a {
-      color: $aquacolordanger;
+      color: $hipstercolordanger;
     }
   }
 }
@@ -101,10 +123,10 @@ $white: #ffffff;
 .hsregister {
   .btn.btn-info,
   .btn-info.custom-file-control::before {
-    color: $aquacolordanger;
+    color: $hipstercolordanger;
   }
   .agreementlink {
-    color: $aquacolordanger;
+    color: $hipstercolordanger;
   }
 }
 .registercard-hs {
@@ -125,11 +147,11 @@ $white: #ffffff;
 }
 .btn.btn-primary,
 .btn-primary.custom-file-control::before {
-  color: $aquacolordanger;
+  color: $hipstercolordanger;
 }
 .btn.btn-primary:hover,
 .btn-primary.custom-file-control:hover::before {
-  color: $aquacolordanger;
+  color: $hipstercolordanger;
 }
 .infocard-hs {
   margin-bottom: 30px;
@@ -161,7 +183,7 @@ $white: #ffffff;
       color: $white;
     }
     a:hover {
-      color: $aquacolordanger;
+      color: $hipstercolordanger;
     }
   }
 }
@@ -183,7 +205,7 @@ $white: #ffffff;
       color: $white;
     }
     a:hover {
-      color: $aquacolordanger;
+      color: $hipstercolordanger;
     }
   }
 }
@@ -204,7 +226,7 @@ $white: #ffffff;
       color: $white;
     }
     a:hover {
-      color: $aquacolordanger;
+      color: $hipstercolordanger;
     }
   }
 }
@@ -230,6 +252,7 @@ $white: #ffffff;
     height: 100%;
   }
 }
+
 .itemId-JY {
   margin: 0;
 }
@@ -268,4 +291,10 @@ $white: #ffffff;
     margin: 0 5px 0 0;
   }
   color: rgba($color: #fff, $alpha: 0.6);
+}
+
+@media only screen and (max-width: 768px) {
+  .container.mt-md-3 {
+    padding: 0;
+  }
 }
