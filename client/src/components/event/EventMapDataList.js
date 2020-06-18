@@ -53,28 +53,6 @@ class FilteredList extends React.Component {
     })
   }
 
-  handleItemSort = (sortType: string) => {
-    let oldItems = [...this.state.items]
-    if (sortType === 'asc') {
-      //按筆劃從少到多排序
-      newItems = newItems.sort((a, b) =>
-        a.title.localeCompare(b.title, 'zh-Hans-TW-u-co-stroke')
-      )
-    }
-
-    if (sortType === 'desc') {
-      //按筆劃從多到少排序
-      newItems = newItems.sort((a, b) =>
-        b.title.localeCompare(a.title, 'zh-Hans-TW-u-co-stroke')
-      )
-    }
-
-    this.setState({
-      items: newItems,
-      sortType,
-    })
-  }
-
   updateSearch(event) {
     this.setState({
       data: this.state.data,
