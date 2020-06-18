@@ -2,6 +2,7 @@ import React from 'react'
 import '../styles/ProductList.scss'
 
 import AsideBar from '../components/product/AsideBar'
+import ProductListMainContent from '../components/product/ProductListMainContent'
 import ReactStars from 'react-rating-stars-component'
 
 function ProductList(props) {
@@ -10,7 +11,7 @@ function ProductList(props) {
       <div className="container product-content">
         <div className="row">
           <AsideBar />
-          <main className="col-md-9 product-list">
+          <ProductListMainContent>
             <div className="product-result">
               <h4>搜索結果</h4>
             </div>
@@ -426,7 +427,7 @@ function ProductList(props) {
                 </div>
               </a>
             </div>
-          </main>
+          </ProductListMainContent>
         </div>
       </div>
     </>
