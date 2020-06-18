@@ -1,6 +1,9 @@
 import React from 'react'
+import { Link,NavLink,withRouter } from 'react-router-dom'
 import '../../styles/mContent/usercoupon.scss'
-function UserCoupon() {
+function UserCoupon(props) {
+
+  console.log(props);
   return (
     <>
       <div className="usercontainer">
@@ -22,8 +25,10 @@ function UserCoupon() {
           </div>
         </div>
         <div className="d-flex coupon-bar border-bottom">
-          <div className="tabcontainer couponactive">可使用</div>
-          <div className="tabcontainer">已過期</div>
+          <div className="tabcontainer"><NavLink to={`./available`}  activeClassName="currentcoupon" className="coupontab-a">可使用</NavLink>
+          </div>
+          <div className="tabcontainer"><NavLink to={`./expired`}  activeClassName="currentcoupon" className="coupontab-a">已過期</NavLink>
+          </div>
         </div>
       </div>
       <div className="tab-pane">
@@ -109,4 +114,4 @@ function UserCoupon() {
   )
 }
 
-export default UserCoupon
+export default withRouter(UserCoupon)
