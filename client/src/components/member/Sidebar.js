@@ -75,7 +75,7 @@ function Sidebar(props) {
                 <li className="nav-item">
                   <Link
                     className="nav-link sidebarlink-hs"
-                    to="/memberuser/coupon"
+                    to="/memberuser/coupon/available"
                   >
                     <i className="fas fa-ticket-alt"></i>優惠券
                   </Link>

@@ -40,7 +40,7 @@ function Mynavbar(props) {
     <>
       <nav>
         <div className="navbar container ">
-          <a href="./" className="logo">
+          <a href="/" className="logo">
             <img src={Logo} />
           </a>
           <div className="burger none" id="burger">
