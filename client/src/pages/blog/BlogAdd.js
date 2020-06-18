@@ -11,22 +11,32 @@ function BlogAdd(props) {
     <>
       <Container>
         <MyBreadcrumb />
-        <select className="blog-select-category">
-          <option selected>請選擇類別</option>
-          <option value="1">類別1</option>
-          <option value="2">類別2</option>
-          <option value="3">類別3</option>
-        </select>
-        <div>
-          <input
-            className="blog-add-title"
-            type="text"
-            placeholder="請輸入文章標題"
-          />
-        </div>
-        <div>
-          <textarea></textarea>
-        </div>
+        <ul className="list-unstyled blog-add-ul">
+          <li className="d-flex justify-content-between">
+            <div>
+              <select className="blog-select-category">
+                <option selected>請選擇類別</option>
+                <option value="1">類別1</option>
+                <option value="2">類別2</option>
+                <option value="3">類別3</option>
+              </select>
+            </div>
+            <div className="blog-add-btn">
+              <button className="btn btn-primary">取消發文</button>
+              <button className="btn btn-primary">發佈文章</button>
+            </div>
+          </li>
+          <li>
+            <input
+              className="blog-add-title"
+              type="text"
+              placeholder="請輸入文章標題"
+            />
+          </li>
+          <li>
+            <textarea className="blog-add-content"></textarea>
+          </li>
+        </ul>
       </Container>
     </>
   )
