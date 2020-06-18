@@ -12,6 +12,7 @@ import About from './pages/About'
 import Test from './pages/Test'
 import Contact from './pages/Contact'
 import ProductList from './pages/ProductList'
+import Product from './pages/Product'
 import Map from './pages/Map'
 
 import ShoppingCar from './pages/order/ShoppingCar'
@@ -61,6 +62,9 @@ function App() {
           </Route>
           <Route path="/productlist">
             <ProductList />
+          </Route>
+          <Route path="/product">
+            <Product />
           </Route>
           <Route path="/shoppingcar">
             <ShoppingCar />
