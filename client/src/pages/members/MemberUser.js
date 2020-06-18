@@ -49,7 +49,7 @@ function MemberUser() {
               <Route path="/memberuser/qanda">
                 <UserQanda />
               </Route>
-              <Route path="/memberuser/coupon">
+              <Route path="/memberuser/coupon/:type">
                 <UserCoupon />
               </Route>
               <Route path="/memberuser/mymap">

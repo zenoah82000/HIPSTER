@@ -8,9 +8,10 @@ import NotFoundPage from './pages/NotFoundPage'
 
 import Home from './pages/Home'
 import About from './pages/About'
-import Blog from './pages/Blog'
+
 import Test from './pages/Test'
 import Contact from './pages/Contact'
+import ProductList from './pages/ProductList'
 import Product from './pages/Product'
 import Map from './pages/Map'
 
@@ -23,6 +24,12 @@ import PaymentType from './pages/payment/paymentType'
 //member
 import MemberUser from './pages/members/MemberUser'
 
+//blog
+import Blog from './pages/blog/Blog'
+import BlogEdit from './pages/blog/BlogEdit'
+import BlogContent from './pages/blog/BlogContent'
+import BlogAdd from './pages/blog/BlogAdd'
+
 function App() {
   return (
     <Router>
@@ -33,14 +40,27 @@ function App() {
           <Route path="/about">
             <About />
           </Route>
+          {/* Blog Routes */}
+          <Route path="/blogEdit">
+            <BlogEdit />
+          </Route>
+          <Route path="/blogContent">
+            <BlogContent />
+          </Route>
           <Route path="/blog">
             <Blog />
+          </Route>
+          <Route path="/blogAdd">
+            <BlogAdd />
           </Route>
           <Route path="/test">
             <Test />
           </Route>
           <Route path="/Contact">
             <Contact />
+          </Route>
+          <Route path="/productlist">
+            <ProductList />
           </Route>
           <Route path="/product">
             <Product />
