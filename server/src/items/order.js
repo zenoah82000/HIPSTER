@@ -14,4 +14,4 @@ router.post('/member/checkout',(req,res)=>{
     console.log('訂單新增',req.body)
 })
 
-
+module.exports = router

@@ -1,6 +1,5 @@
 const multer = require('multer');
 const {v4:uuidv4} = require('uuid');
-console.log(uuidv4());
 const extMap = {
     'image/jpeg':'.jpg',
     'image/png':'.png',
