@@ -5,6 +5,7 @@ import AsideBar from '../components/product/AsideBar'
 import ProductListMainContent from '../components/product/ProductListMainContent'
 import ProductSearchResult from '../components/product/ProductSearchResult'
 import ProductSearchResultSort from '../components/product/ProductSearchResultSort'
+import ProductListPageBar from '../components/product/ProductListPageBar'
 
 import ReactStars from 'react-rating-stars-component'
 
@@ -17,6 +18,7 @@ function ProductList(props) {
           <ProductListMainContent>
             <ProductSearchResult />
             <ProductSearchResultSort />
+            {/* -------商品列表區域------ */}
             <div className="product-list-search-info">
               <a href="">
                 <div className="row">
@@ -402,6 +404,8 @@ function ProductList(props) {
                 </div>
               </a>
             </div>
+            {/* -------商品列表區域------ */}
+            <ProductListPageBar />
           </ProductListMainContent>
         </div>
       </div>

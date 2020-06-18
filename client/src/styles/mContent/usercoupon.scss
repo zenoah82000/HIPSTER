@@ -1,4 +1,20 @@
 // couponhead
+.currentcoupon {
+  border-bottom: 3px solid #ff3400;
+  color: #ff3400;
+  font-weight: 800;
+}
+
+.coupontab-a {
+  color: #707070;
+  width: 190px;
+  display: inline-block;
+}
+.coupontab-a:hover {
+  text-decoration: none;
+  color: #ff3400;
+}
+
 .usercontainer {
   padding: 20px 30px 0px;
   //   padding-right: 30px;
@@ -40,16 +56,6 @@
   height: 50px;
   text-align: center;
   line-height: 50px;
-}
-
-.tabcontainer:hover {
-  border-bottom: 3px solid #ff3706b2;
-}
-
-.couponactive {
-  border-bottom: 3px solid #ff3400;
-  color: #ff3400;
-  font-weight: 800;
 }
 
 .table thead th {
