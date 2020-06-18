@@ -33,13 +33,13 @@ function BlogAdd(props) {
             <input
               className="blog-add-title"
               type="text"
-              placeholder="請輸入文章標題"
+              placeholder="請輸入文章標題..."
             />
           </li>
           <li>
             <CKEditor
               editor={ClassicEditor}
-              data="<p>Hello from CKEditor 5!</p>"
+              data="<p>請輸入文章內容...</p>"
               onInit={(editor) => {
                 // You can store the "editor" and use when it is needed.
                 console.log('Editor is ready to use!', editor)
