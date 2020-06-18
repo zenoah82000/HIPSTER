@@ -13,7 +13,7 @@ const EventSearchBar = (props) => {
 
   return (
     <>
-      <div className="px-4 pt-3">
+      <div className="px-4 p-3">
         <div class="box col-12">
           {/* <div class="container-1">
             <FaSearch className="fonticon" />
@@ -37,9 +37,9 @@ const EventSearchBar = (props) => {
           </div>
         </div>
         <div className=" d-flex m-2 ">
-          <Dropdown>
+          <Dropdown className="">
             <Dropdown.Toggle
-              className="mapSearch"
+              className="mapSearch btn-small"
               variant="success"
               id="dropdown-basic"
             >
@@ -85,7 +85,7 @@ const EventSearchBar = (props) => {
           </Dropdown>
           <Dropdown>
             <Dropdown.Toggle
-              className="mapSearch"
+              className="mapSearch  btn-small"
               variant="success"
               id="dropdown-basic"
             >
@@ -98,7 +98,7 @@ const EventSearchBar = (props) => {
           </Dropdown>
           <Dropdown>
             <Dropdown.Toggle
-              className="mapSearch"
+              className="mapSearch  btn-small"
               variant="success"
               id="dropdown-basic"
             >
@@ -144,7 +144,7 @@ const EventSearchBar = (props) => {
           </Dropdown>
           <Dropdown>
             <Dropdown.Toggle
-              className="mapSearch"
+              className="mapSearch  btn-small"
               variant="success"
               id="dropdown-basic"
             >
@@ -164,17 +164,6 @@ const EventSearchBar = (props) => {
             // clicked={toggleSwitchButton}
             />
           </div> */}
-        </div>
-        <div className="">
-          <div className="select-1 col- ">
-            <select className="form-control btn-success ">
-              <option value="">排序方式</option>
-              <option value="eventStartDate,asc">日期由近到遠</option>
-              <option value="eventStartDate,desc">日期由遠到近</option>
-              <option value="eventNeedPeople,asc">名額由少至多</option>
-              <option value="eventNeedPeople,desc">名額由多至少</option>
-            </select>
-          </div>
         </div>
       </div>
     </>
