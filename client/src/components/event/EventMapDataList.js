@@ -90,18 +90,42 @@ class FilteredList extends React.Component {
 
   filterList() {
     let updatedList = this.state.data.filter((item) => {
-      switch (this.state.searchBtn1) {
-        case "咖啡廳": return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.star.indexOf("咖啡廳");
+      switch (this.state.searchBtn1, this.state.searchBtn3) {
+        case ("全部類別" || "類別", "4.5分以上"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.star > 4.5
           break
-        case "手作課程": return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.star.indexOf("手作課程");
+        case ("全部類別" || "類別", "4分以上"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.star > 4
           break
-        case "文藝展覽": return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.star.indexOf("文藝展覽");
+        case ("全部類別" || "類別", "3.5分以上"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.star > 3.5
           break
-        default:  return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
-        break
+        case ("咖啡廳", "4.5分以上"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.star.indexOf("咖啡廳") && item.star > 4.5
+          break
+        case ("咖啡廳", "4分以上"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.star.indexOf("咖啡廳") && item.star > 4;
+          break
+        case ("咖啡廳", "3.5分以上"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.star.indexOf("咖啡廳") && item.star > 3.5;
+          break
+        case ("咖啡廳", "全部星等" || "星等"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.star.indexOf("咖啡廳") && item.star > 0;
+          break
+        case ("手作課程", "4.5分以上"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.star.indexOf("手作課程") && item.star > 4.5
+          break
+        case ("手作課程", "4分以上"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.star.indexOf("手作課程") && item.star > 4;
+          break
+        case ("手作課程", "3.5分以上"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.star.indexOf("手作課程") && item.star > 3.5;
+          break
+        case ("手作課程", "全部星等" || "星等"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.star.indexOf("手作課程") && item.star > 0;
+          break
+        case ("文藝展覽", "4.5分以上"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.star.indexOf("文藝展覽") && item.star > 4.5
+          break
+        case ("文藝展覽", "4分以上"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.star.indexOf("文藝展覽") && item.star > 4;
+          break
+        case ("文藝展覽", "3.5分以上"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.star.indexOf("文藝展覽") && item.star > 3.5;
+          break
+        case ("文藝展覽", "全部星等" || "星等"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.star.indexOf("文藝展覽") && item.star > 0;
+          break
+        default: return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
+          break
       }
-
     })
+    
     let data = updatedList.map((item, index, array) => {
       return (
         <Fade>
