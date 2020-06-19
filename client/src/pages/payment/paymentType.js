@@ -13,7 +13,7 @@ function paymentType(props) {
   }
   const checkOut= ()=>{
 
-
+    
     // 購物完清掉 localstorage 購物車
     localStorage.removeItem('cart')
     window.location.href = '/paymentFinish'
