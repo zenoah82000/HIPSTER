@@ -5,17 +5,12 @@ import { FaHeart, FaShoppingCart } from 'react-icons/fa'
 import { Link, NavLink, withRouter } from 'react-router-dom'
 
 function Mynavbar(props) {
+  const {mycart} = props
   const [showCart, setshowCart] = useState(false)
-  const [mycart, setMycart] = useState([])
+ 
 
-  //取得購物車
-  const localCart = JSON.parse(localStorage.getItem('cart')) || []
-  function getCartFromLocalStorage() {
-    setMycart(localCart)
-  }
-  useEffect(() => {
-    getCartFromLocalStorage()
-  }, [])
+  
+  
 
   //   const { auth, name, setauth } = props
 

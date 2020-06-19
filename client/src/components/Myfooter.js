@@ -1,5 +1,5 @@
 import React from 'react'
-import icon from '../images/home/footer-icon.svg'
+import icon from '../images/home/footer-icon.png'
 
 function MyFooter(props) {
   return (
@@ -48,7 +48,12 @@ function MyFooter(props) {
         </div>
         <div className="footer-bottom">
           <div className="container">
-            <div className="footer-icon"></div>
+            <div className="footer-icon">
+              <img src={icon}></img>
+            </div>
+            <p className="copyright">
+              COPYRIGHT © 2020 文青地圖 All rights reserved.
+            </p>
           </div>
         </div>
       </footer>

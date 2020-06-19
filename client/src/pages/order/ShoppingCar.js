@@ -15,24 +15,9 @@ import '../../styles/ShoppingCar.scss'
 import Mycart from '../../components/order/MyCart'
 
 function ShoppingCar(props) {
-  const [mycart, setMycart] = useState([])
+  const{mycart,setMycart,deleteCart,sum}=props
 
-  //取得購物車
-  const localCart = JSON.parse(localStorage.getItem('cart'))
-   function getCartFromLocalStorage() {
-    setMycart(localCart)
-  }
-
-  //購物車金額加總
-  const sum = (items) => {
-    let total = 0
-    if (items != null) {
-      for (let i = 0; i < items.length; i++) {
-        total += items[i].amount * items[i].price
-      }
-    }
-    return total
-  }
+  
   //訂單初始化
   const orderData = {
       
@@ -41,7 +26,7 @@ function ShoppingCar(props) {
   let itemData = {}
   //前往結帳，送出訂單
   const checkOut = () => {
-    if (localCart == null || localCart.length < 1) {
+    if (mycart == null || mycart.length < 1) {
       Swal.fire({
         // title: 'Error!',
         text: '購物車是空的喔！',
@@ -77,24 +62,7 @@ function ShoppingCar(props) {
       })
     }
   }
-  //刪除購物車
-  const deleteCart = (id)=>{
-    Swal.fire({
-      text:'是否刪除該商品?',
-      icon:'warning',
-      confirmButtonText:'確定',
-      showCancelButton:true,
-      cancelButtonText:'取消',
-    }).then((result)=>{if(result.value){
-      const index = localCart.findIndex(item=>item.id === id)
-      if(index !== -1 ){
-        localCart.splice(index,1)
-        localStorage.setItem('cart',JSON.stringify(localCart))
-        getCartFromLocalStorage()
-      }
-    }
-    })
-  }
+  
   const display =
     mycart != null && mycart.length >= 1 ? (
       <>
@@ -146,9 +114,6 @@ function ShoppingCar(props) {
         <p>購物車是空的!</p>
       </div>
     )
-  useEffect(() => {
-    getCartFromLocalStorage()
-  }, [])
 
   return (
     <>
