@@ -33,6 +33,7 @@ class FilteredList extends React.Component {
         lat: item.latitude,
         log: item.longitude,
         star: item.score,
+        category: item.type
       }
     })
 
@@ -62,7 +63,7 @@ class FilteredList extends React.Component {
     this.setState({
       searchBtn1: event.target.name,
     })
-    // console.log(event)
+    console.log(this.state.searchBtn1)
   }
 
   showStar = (event) => {
@@ -80,7 +81,7 @@ class FilteredList extends React.Component {
   }
 
   pickDate = (date, event) => {
-    this.setState({ date })
+    this.setState({ date }) 
     console.log(date, "onchange")
     console.log(this.state.date)
     console.log(this.state.searchBtn2)
@@ -91,37 +92,39 @@ class FilteredList extends React.Component {
   filterList() {
     let updatedList = this.state.data.filter((item) => {
       switch (this.state.searchBtn1, this.state.searchBtn3) {
-        case ("全部類別" || "類別", "4.5分以上"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.star > 4.5
-          console.log('test')  
+        case ("全部類別" || "類別", "4.5分以上"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.star > 4.5  
         break
         case ("全部類別" || "類別", "4分以上"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.star > 4
           break
         case ("全部類別" || "類別", "3.5分以上"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.star > 3.5
           break
-        case ("咖啡廳", "4.5分以上"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.star.indexOf("咖啡廳") && item.star > 4.5
+        case ("咖啡廳", "4.5分以上"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.category == "咖啡廳" && item.star > 4.5
           break
-        case ("咖啡廳", "4分以上"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.star.indexOf("咖啡廳") && item.star > 4;
+        case ("咖啡廳", "4分以上"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.category == "咖啡廳" && item.star > 4;
           break
-        case ("咖啡廳", "3.5分以上"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.star.indexOf("咖啡廳") && item.star > 3.5;
+        case ("咖啡廳", "3.5分以上"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.category == "咖啡廳" && item.star > 3.5;
           break
-        case ("咖啡廳", "全部星等" || "星等"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.star.indexOf("咖啡廳") && item.star > 0;
+        case ("咖啡廳", "全部星等" || "星等"): return  item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.category == "咖啡廳" && item.star >= 0;
+        // console.log("test")
           break
-        case ("手作課程", "4.5分以上"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.star.indexOf("手作課程") && item.star > 4.5
+        case ("手作課程", "4.5分以上"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.category == "手作課程" && item.star > 4.5
           break
-        case ("手作課程", "4分以上"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.star.indexOf("手作課程") && item.star > 4;
+        case ("手作課程", "4分以上"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.category == "手作課程" && item.star > 4;
           break
-        case ("手作課程", "3.5分以上"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.star.indexOf("手作課程") && item.star > 3.5;
+        case ("手作課程", "3.5分以上"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.category == "手作課程" && item.star > 3.5;
           break
-        case ("手作課程", "全部星等" || "星等"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.star.indexOf("手作課程") && item.star > 0;
+        case ("手作課程", "全部星等" || "星等"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.category == "手作課程" && item.star >= 0;
           break
-        case ("文藝展覽", "4.5分以上"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.star.indexOf("文藝展覽") && item.star > 4.5
+        case ("文藝展覽", "4.5分以上"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.category == "文藝展覽" && item.star > 4.5
           break
-        case ("文藝展覽", "4分以上"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.star.indexOf("文藝展覽") && item.star > 4;
+        case ("文藝展覽", "4分以上"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.category == "文藝展覽" && item.star > 4;
           break
-        case ("文藝展覽", "3.5分以上"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.star.indexOf("文藝展覽") && item.star > 3.5;
+        case ("文藝展覽", "3.5分以上"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.category == "文藝展覽" && item.star > 3.5;
           break
-        case ("文藝展覽", "全部星等" || "星等"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.star.indexOf("文藝展覽") && item.star > 0;
+        case ("文藝展覽", "全部星等" || "星等"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.category == "文藝展覽" && item.star >= 0;
           break
+          case ("全部類別" || "類別", "全部星等" || "星等"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
+          break  
         default: return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
           break
       }
@@ -142,7 +145,7 @@ class FilteredList extends React.Component {
                 <h2 className="eventTitle">{item.name}</h2>
                 <ul className=" list-unstyled">
                   <li>
-                    <div className="mapCategory">咖啡廳</div>
+                    <div className={this.state.category = "咖啡廳" ? "mapCategoryCafe" : "mapCategoryCafe"}>{item.category}</div>
                   </li>
                   <li>星等:{item.star}</li>
                   <li>

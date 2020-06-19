@@ -83,7 +83,7 @@
 .dataBox {
   padding-top: 5px;
   background: rgb(222, 223, 221);
-  height: 750px;
+  height: 720px;
 }
 
 .eventContentBox {
@@ -101,8 +101,17 @@
   object-fit: cover;
   overflow: hidden;
 }
-.mapCategory {
+.mapCategoryCafe {
   background: rgba(129, 111, 71, 0.918);
+  border-radius: 20px;
+  height: 25px;
+  width: 100px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.mapCategoryItem {
+  background: rgba(89, 129, 71, 0.918);
   border-radius: 20px;
   height: 25px;
   width: 100px;
