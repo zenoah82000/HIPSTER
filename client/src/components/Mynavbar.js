@@ -108,8 +108,12 @@ function Mynavbar(props) {
                                     <img src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg" />
                                   </div>
                                   <div className="item-text">
-                                    <div className="item-name"><p>{value.name}</p></div>
-                                    <div className="item-price"><span>NT${value.price}</span></div>
+                                    <div className="item-name">
+                                      <p>{value.name}</p>
+                                    </div>
+                                    <div className="item-price">
+                                      <span>NT${value.price}</span>
+                                    </div>
                                   </div>
                                 </div>
                               )
