@@ -8,9 +8,23 @@ import Swal from 'sweetalert2'
 import '../../styles/order.scss'
 
 function UserOrder() {
-  const [orderlist, setOrderlist] = useState([123, 123])
+  const [orderlist, setOrderlist] = useState([])
 
-  useEffect(() => {}, [])
+  const getOrderlist = async ()=>{
+    const request = new Request('http://localhost:5000/oreder/2', {
+      method: 'get',
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }),
+    })
+    const response = await fetch(request)
+    const data = await response.json()
+    setOrderlist(data)
+  }
+  useEffect(() => {
+    getOrderlist()
+  }, [])
   const display =
     orderlist.length != 0 ? (
       <div className="orderlistbox ">
