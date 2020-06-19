@@ -6,6 +6,7 @@ import '../../styles/comment.scss'
 //引入自訂元件
 import CommentImg from './commentImg'
 import RatingStar from './ratingStar'
+import ProductListPageBar from '../product/ProductListPageBar'
 
 class commtentList extends Component {
   constructor() {
@@ -61,12 +62,7 @@ class commtentList extends Component {
               </div>
             </div>
           </div>
-
-          <div className="d-flex justify-content-center   ">
-            <div className="pageButton">1</div>
-            <div className="pageButton">2</div>
-            <div className="pageButton">3</div>
-          </div>
+          <ProductListPageBar />
         </TabPanel>
 
         <TabPanel>
@@ -89,11 +85,8 @@ class commtentList extends Component {
               </div>
             </div>
           </div>
-          <div className="d-flex justify-content-center">
-            <div className="pageButton">1</div>
-            <div className="pageButton">2</div>
-            <div className="pageButton">3</div>
-          </div>
+
+          <ProductListPageBar />
         </TabPanel>
       </Tabs>
     )
