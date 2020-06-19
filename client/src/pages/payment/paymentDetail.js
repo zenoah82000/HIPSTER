@@ -8,7 +8,7 @@ import { GrNext } from 'react-icons/gr'
 
 
 function paymentDetail(props) {
-
+  const {mycart,sum}=props
   const nextPage=()=>{
     props.history.push('/paymentType')
   }
@@ -63,7 +63,7 @@ function paymentDetail(props) {
                 <div className="totalPrice">
                   <div className="d-flex justify-content-between">
                     <p>總價</p>
-                    <p>NT 1000</p>
+                    <p>NT${sum(mycart)}</p>
                   </div>
                   <div className="d-flex justify-content-between">
                     <p>折價金額</p>
@@ -73,7 +73,7 @@ function paymentDetail(props) {
                 <div className="payPrice">
                   <div className="d-flex justify-content-between">
                     <p>結帳金額</p>
-                    <p>NT 900</p>
+                    <p>NT${sum(mycart)}</p>
                   </div>
                 </div>
               </div>

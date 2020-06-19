@@ -62,6 +62,16 @@ function App() {
     }
     })
   }
+  //購物車金額加總
+  const sum = (items) => {
+    let total = 0
+    if (items != null) {
+      for (let i = 0; i < items.length; i++) {
+        total += items[i].amount * items[i].price
+      }
+    }
+    return total
+  }
   return (
     <Router>
       <>
@@ -97,19 +107,19 @@ function App() {
             <Product />
           </Route>
           <Route path="/shoppingcar">
-            <ShoppingCar mycart={mycart} setMycart={setMycart} deleteCart={deleteCart}/>
+            <ShoppingCar mycart={mycart} setMycart={setMycart} deleteCart={deleteCart} sum={sum}/>
           </Route>
           <Route path="/map">
             <Map />
           </Route>
           <Route path="/paymentDetail">
-            <PaymentDetail />
+            <PaymentDetail mycart={mycart} setMycart={setMycart} sum={sum}/>
           </Route>
           <Route path="/paymentFinish">
             <PaymentFinish />
           </Route>
           <Route path="/paymentType">
-            <PaymentType />
+            <PaymentType mycart={mycart} sum={sum}/>
           </Route>
           <Route path="/memberuser">
             <MemberUser />

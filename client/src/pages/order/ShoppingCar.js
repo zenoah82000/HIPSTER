@@ -15,18 +15,9 @@ import '../../styles/ShoppingCar.scss'
 import Mycart from '../../components/order/MyCart'
 
 function ShoppingCar(props) {
-  const{mycart,setMycart,deleteCart}=props
+  const{mycart,setMycart,deleteCart,sum}=props
 
-  //購物車金額加總
-  const sum = (items) => {
-    let total = 0
-    if (items != null) {
-      for (let i = 0; i < items.length; i++) {
-        total += items[i].amount * items[i].price
-      }
-    }
-    return total
-  }
+  
   //訂單初始化
   const orderData = {
       
