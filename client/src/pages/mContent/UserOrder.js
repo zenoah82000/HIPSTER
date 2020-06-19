@@ -24,16 +24,16 @@ function UserOrder() {
                     <div className="col">購買時間</div>
                   </div>
                   <div className="card-body order-body d-flex">
-                    <div className="productimg">
+                    <div className="productimg mr-3">
                       <img src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg" />
                     </div>
                     <div>
                     <div className="productname"><p>日本火車票</p></div>
-                    <div>數量:</div>
-                    <div>活動時間:</div>
+                    <div><p>數量:</p></div>
+                    <div><p>活動時間:</p></div>
                     </div>
                   </div>
-                  <div className="card-footer order-footer d-flex">
+                  <div className="card-footer order-footer d-flex justify-content-end">
                   <div>購買金額:<span>NT$300</span></div>
                   <button className="order-button">取消整筆訂單</button>
                     

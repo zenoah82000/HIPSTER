@@ -4,7 +4,7 @@ import { Container } from 'react-bootstrap'
 
 import MyBreadcrumb from '../../components/MyBreadcrumb'
 
-import author1 from '../../components/blog/author1.jpg'
+import author1 from '../../images/blog/author1.jpg'
 
 // import MyBreadcrumb from '../../components/blog/MyBreadcrumb'
 
