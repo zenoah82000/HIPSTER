@@ -219,7 +219,7 @@ nav {
     justify-content: flex-start;
     padding-bottom: 15px;
     margin-bottom: 15px;
-    .changsignbtn {
+    .changbtn {
       width: 140px;
       height: 40px;
       line-height: 30px;
@@ -232,9 +232,6 @@ nav {
       &.active {
         background-color: rgba(104, 142, 103, 0.8);
       }
-    }
-    .changloginbtn {
-      @extend .changsignbtn;
     }
   }
 
