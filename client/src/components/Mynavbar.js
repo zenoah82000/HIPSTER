@@ -63,7 +63,7 @@ function Mynavbar(props) {
             </div>
 
             <div
-              className="btn changloginbtn"
+              className="btn changloginbtn "
               id="changloginbtn"
               onClick={() => {
                 setSignLogin(false)
