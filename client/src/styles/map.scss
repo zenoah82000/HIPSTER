@@ -78,6 +78,10 @@
   background-color: rgba(104, 142, 103, 0.8);
   border-color: rgba(104, 142, 103, 0.8);
 }
+
+
+
+
 .dropdown-toggle::after {
   display: none;
 }
@@ -94,10 +98,10 @@
   width: 100%;
   height: 200px;
 }
-
-.eventContentBox:hover {
+.eventContentBox :hover {
   background: #f1f1f1a9;
 }
+
 .eventImgBox {
   width: 100%;
   object-fit: cover;
@@ -111,7 +115,11 @@
   text-align: center;
   color: #ffffff;
 }
-
+.bg1{
+  background: rgba(129, 111, 71, 0.918);
+  border: 1px solid rgba(129, 111, 71, 0.918);
+  color: white;
+}
 .mapCategoryItem {
   background: rgba(107, 136, 93, 0.918);
   border-radius: 20px;
@@ -120,6 +128,11 @@
   text-align: center;
   color: #ffffff;
 }
+.bg2{
+  background: rgba(107, 136, 93, 0.918);
+  border: 1px solid rgba(107, 136, 93, 0.918);
+  color: white;
+}
 .mapCategoryItem2 {
   background: rgba(156, 150, 138, 0.918);
   border-radius: 20px;
@@ -127,6 +140,11 @@
   width: 100px;
   text-align: center;
   color: #ffffff;
+}
+.bg3{
+  background: rgba(156, 150, 138, 0.918);
+  border: 1px solid rgba(156, 150, 138, 0.918);
+  color: white;
 }
 .eventDetailBox li {
   margin-top: 5px;

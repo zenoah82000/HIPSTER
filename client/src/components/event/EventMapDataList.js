@@ -105,7 +105,7 @@ class FilteredList extends React.Component {
     console.log(this.state.searchBtn2)
   }
 
-  //定位
+  //地圖定位
   handleClick() {
     this.props.onClickReset()
   }
@@ -119,6 +119,12 @@ class FilteredList extends React.Component {
       }
     })
   }
+  onItemClick = (event) => {
+    event.openPopup();
+  }
+
+
+
 
   filterList() {
     let updatedList = this.state.data.filter((item) => {
@@ -131,17 +137,17 @@ class FilteredList extends React.Component {
         if (this.state.searchBtn3 == '4.5分以上') {
           return (
             item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-              -1 && item.star > 25
+            -1 && item.star > 25
           )
         } else if (this.state.searchBtn3 == '4分以上') {
           return (
             item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-              -1 && item.star > 20
+            -1 && item.star > 20
           )
         } else if (this.state.searchBtn3 == '3.5分以上') {
           return (
             item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-              -1 && item.star > 3.5
+            -1 && item.star > 3.5
           )
         } else {
           return (
@@ -153,28 +159,28 @@ class FilteredList extends React.Component {
         if (this.state.searchBtn3 == '4.5分以上') {
           return (
             item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-              -1 &&
+            -1 &&
             item.category == '咖啡廳' &&
             item.star > 4.5
           )
         } else if (this.state.searchBtn3 == '4分以上') {
           return (
             item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-              -1 &&
+            -1 &&
             item.category == '咖啡廳' &&
             item.star > 4.5
           )
         } else if (this.state.searchBtn3 == '3.5分以上') {
           return (
             item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-              -1 &&
+            -1 &&
             item.category == '咖啡廳' &&
             item.star > 3.5
           )
         } else {
           return (
             item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-              -1 && item.category == '咖啡廳'
+            -1 && item.category == '咖啡廳'
           )
         }
       } else if (this.state.searchBtn1 == '手作課程') {
@@ -187,49 +193,49 @@ class FilteredList extends React.Component {
         } else if (this.state.searchBtn3 == '4分以上') {
           return (
             item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-              -1 &&
+            -1 &&
             item.category == '手作課程' &&
             item.star > 4.5
           )
         } else if (this.state.searchBtn3 == '3.5分以上') {
           return (
             item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-              -1 &&
+            -1 &&
             item.category == '手作課程' &&
             item.star > 3.5
           )
         } else {
           return (
             item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-              -1 && item.category == '手作課程'
+            -1 && item.category == '手作課程'
           )
         }
       } else if (this.state.searchBtn1 == '文藝展覽') {
         if (this.state.searchBtn3 == '4.5分以上') {
           return (
             item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-              -1 &&
+            -1 &&
             item.category == '文藝展覽' &&
             item.star > 4.5
           )
         } else if (this.state.searchBtn3 == '4分以上') {
           return (
             item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-              -1 &&
+            -1 &&
             item.category == '文藝展覽' &&
             item.star > 4.5
           )
         } else if (this.state.searchBtn3 == '3.5分以上') {
           return (
             item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-              -1 &&
+            -1 &&
             item.category == '文藝展覽' &&
             item.star > 3.5
           )
         } else {
           return (
             item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-              -1 && item.category == '文藝展覽'
+            -1 && item.category == '文藝展覽'
           )
         }
       }
@@ -239,7 +245,7 @@ class FilteredList extends React.Component {
       return (
         <Fade>
           <li
-            className="list-group-item"
+            className="eventContentLi list-group-item"
             data-category={item.name}
             key={index}
             id={item.id}
@@ -263,8 +269,8 @@ class FilteredList extends React.Component {
                         item.category == '咖啡廳'
                           ? 'mapCategoryCafe'
                           : item.category == '手作課程'
-                          ? 'mapCategoryItem'
-                          : 'mapCategoryItem2'
+                            ? 'mapCategoryItem'
+                            : 'mapCategoryItem2'
                       }
                     >
                       {item.category}
@@ -313,9 +319,6 @@ class FilteredList extends React.Component {
                   type="text"
                 />
                 <div class="input-group-append">
-                  {/* <span class="input-group-text bgGreen">
-                    <FaSearch className="fonticon" />
-                  </span> */}
                   <button
                     class="input-group-text bgRed mylocationBtn"
                     onClick={() => this.handleClick()}
@@ -336,7 +339,7 @@ class FilteredList extends React.Component {
                   <Dropdown.Menu>
                     <Dropdown.Item
                       href=""
-                      className="btn3"
+                      className="btn3 "
                       name="全部類別"
                       onClick={(event) => this.showCat(event)}
                     >
@@ -399,6 +402,14 @@ class FilteredList extends React.Component {
                     <Dropdown.Item
                       href=""
                       className="btn3"
+                      name="全部星等"
+                      onClick={(event) => this.showStar(event)}
+                    >
+                      全部星等
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      href=""
+                      className="btn3"
                       name="4.5分以上"
                       onClick={(event) => this.showStar(event)}
                     >
@@ -419,14 +430,6 @@ class FilteredList extends React.Component {
                       onClick={(event) => this.showStar(event)}
                     >
                       3.5分以上
-                    </Dropdown.Item>
-                    <Dropdown.Item
-                      href=""
-                      className="btn3"
-                      name="全部星等"
-                      onClick={(event) => this.showStar(event)}
-                    >
-                      全部星等
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
