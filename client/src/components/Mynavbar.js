@@ -1,52 +1,166 @@
 import React, { useState, useEffect } from 'react'
-import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap'
+import { Modal, Button, Form } from 'react-bootstrap'
 import Logo from '../images/home/logo.png'
+import loginiconf from '../images/home/login-f.png'
+import loginiconw from '../images/home/login-w.png'
+import loginicong from '../images/home/login-g.png'
+import loginicont from '../images/home/login-t.png'
 import { FaHeart, FaShoppingCart } from 'react-icons/fa'
-import { Link, NavLink, withRouter } from 'react-router-dom'
+import { IoMdClose } from 'react-icons/io'
+
+import { Link, withRouter } from 'react-router-dom'
+import { BsLock } from 'react-icons/bs'
+import Test from '../pages/Test'
 
 function Mynavbar(props) {
-  const {mycart} = props
+  const { mycart } = props
   const [showCart, setshowCart] = useState(false)
- 
-
-  
-  
-
-  //   const { auth, name, setauth } = props
-
-  //   const loginButton = (
-  //     <Button
-  //       variant="outline-light"
-  //       onClick={() => {
-  //         props.history.push('/memberlogin')
-  //       }}
-  //     >
-  //       登入
-  //     </Button>
-  //   )
-
-  //   const logoutButton = (
-  //     <>
-  //       <span style={{ color: '#ffffff' }}>{name}, 你好</span>
-  //       <Button
-  //         variant="outline-light"
-  //         onClick={() => {
-  //           alert('登出成功,將跳回')
-  //           props.history.push('/memberlogin')
-  //           setauth(false)
-  //         }}
-  //       >
-  //         登出
-  //       </Button>
-  //     </>
-  //   )
-
-  //   const displayButton = auth ? logoutButton : loginButton
   const showMenu = () => {
     setshowCart(!showCart)
   }
+
+  //跳出視窗狀態
+  const [showlogin, setShowlogin] = useState(false)
+
+  //登入登出狀態,true=註冊  false=登入
+  const [SignLogin, setSignLogin] = useState(true)
+
+  //
+  const SignDisplay = SignLogin ? 'block' : 'none'
+  const LoginDisplay = SignLogin ? 'none' : 'block'
+
+  useEffect(() => {
+    const changsignbtn = document.getElementById('changsignbtn')
+    const changloginbtn = document.getElementById('changloginbtn')
+    console.log(changsignbtn)
+    console.log(changloginbtn)
+  }, [SignLogin])
+
+  //跳出視窗
+  function LoginMassage(props) {
+    return (
+      <Modal
+        className="login"
+        {...props}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Body className="login-bg">
+          <div className="closeMassage" onClick={props.onHide}>
+            <IoMdClose />
+          </div>
+
+          <div className="functionChang">
+            <div
+              className="btn changsignbtn active"
+              id="changsignbtn"
+              onClick={() => {
+                setSignLogin(true)
+              }}
+            >
+              會員註冊
+            </div>
+
+            <div
+              className="btn changloginbtn "
+              id="changloginbtn"
+              onClick={() => {
+                setSignLogin(false)
+              }}
+            >
+              會員登入
+            </div>
+          </div>
+
+          {/* ---------註冊--------- */}
+          <div className="membersign " style={{ display: SignDisplay }}>
+            <p className="membersign-title">註冊會員帳號</p>
+            <Form.Group>
+              <Form.Label>帳號(聯絡信箱)：</Form.Label>
+              <Form.Control type="email" placeholder="請輸入註冊信箱..." />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>密碼：</Form.Label>
+              <Form.Control type="text" placeholder="請輸入註冊密碼..." />
+            </Form.Group>
+          </div>
+
+          {/* ---------登入--------- */}
+          <div className="membersign" style={{ display: LoginDisplay }}>
+            <p className="membersign-title">會員登入</p>
+            <Form.Group>
+              <Form.Label>帳號：</Form.Label>
+              <Form.Control type="email" placeholder="請輸入登入信箱..." />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>密碼：</Form.Label>
+              <Form.Control type="text" placeholder="請輸入登入密碼..." />
+            </Form.Group>
+          </div>
+
+          <div className="communitylogin">
+            <p className="communitylogin-title">使用社交平台帳號登入</p>
+            <div className="communityicon">
+              <div className="c-icon">
+                <img src={loginiconf}></img>
+                <div className="icon-name">Facebook</div>
+              </div>
+              <div className="c-icon">
+                <img src={loginicong}></img>
+                <div className="icon-name">Google</div>
+              </div>
+              <div className="c-icon">
+                <img src={loginiconw}></img>
+                <div className="icon-name">微信</div>
+              </div>
+              <div className="c-icon">
+                <img src={loginicont}></img>
+                <div className="icon-name">Twitter</div>
+              </div>
+            </div>
+          </div>
+
+          <Form.Group
+            controlId="formBasicCheckbox"
+            className="logincheck"
+            style={{ display: SignDisplay }}
+          >
+            <Form.Check type="checkbox">
+              <Form.Check.Input type="checkbox" />
+              <Form.Check.Label>
+                我已詳細閱讀，並同意接受<span>會員權益</span>與
+                <span>個資同意條款</span>
+              </Form.Check.Label>
+            </Form.Check>
+          </Form.Group>
+
+          <div className="forgetpwd" style={{ display: LoginDisplay }}>
+            忘記密碼
+          </div>
+
+          <div
+            className="signbtn "
+            onClick={() => {}}
+            style={{ display: SignDisplay }}
+          >
+            註冊
+          </div>
+          <div
+            className="loginbtn"
+            onClick={() => {}}
+            style={{ display: LoginDisplay }}
+          >
+            登入
+          </div>
+        </Modal.Body>
+      </Modal>
+    )
+  }
+
   return (
     <>
+      <LoginMassage show={showlogin} onHide={() => setShowlogin(false)} />
       <nav>
         <div className="navbar container ">
           <a href="/" className="logo">
@@ -145,10 +259,14 @@ function Mynavbar(props) {
           {/* ========================================================= */}
           <ul className="sign ">
             <li>
-              <a href="">註冊</a>
-            </li>
-            <li>
-              <a href="">登入</a>
+              <Link
+                href=""
+                onClick={() => {
+                  setShowlogin(true)
+                }}
+              >
+                註冊 / 登入
+              </Link>
             </li>
           </ul>
           {/* ========================================================= */}

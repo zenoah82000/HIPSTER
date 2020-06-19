@@ -9,7 +9,7 @@ import '../../styles/order.scss'
 
 function UserOrder() {
   const [orderlist, setOrderlist] = useState([])
-
+  let data =[]
   const getOrderlist = async ()=>{
     const request = new Request('http://localhost:5000/oreder/2', {
       method: 'get',
@@ -19,17 +19,17 @@ function UserOrder() {
       }),
     })
     const response = await fetch(request)
-    const data = await response.json()
+    data = await response.json()
     setOrderlist(data)
   }
   useEffect(() => {
     getOrderlist()
   }, [])
   const display =
-    orderlist.length != 0 ? (
+    data.length !== 0 ? (
       <div className="orderlistbox ">
         <div className="row">
-          {orderlist.map((item) => {
+          {orderlist.orderlist.map((item) => {
             return (
               <>
                 <div className="card order-box">
