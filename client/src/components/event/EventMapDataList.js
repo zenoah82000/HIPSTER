@@ -149,7 +149,7 @@ class FilteredList extends React.Component {
             -1
           )
         }
-      } else if (this.state.searchBtn1 == this.state.searchBtn1) {
+      } else if (this.state.searchBtn1 == '咖啡廳') {
         if (this.state.searchBtn3 == '4.5分以上') {
           return (
             item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
