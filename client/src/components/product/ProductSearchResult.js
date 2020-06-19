@@ -1,4 +1,5 @@
 import React from 'react'
+import '../../styles/product/ProductSearchResult.scss'
 
 function ProductSearchResult(props) {
   return (
