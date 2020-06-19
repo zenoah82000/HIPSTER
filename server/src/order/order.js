@@ -5,7 +5,7 @@ const router = express.Router()
 
 
 //訂單列表
-router.get('/member/oreder',(req,res)=>{
+router.get('/member/oreder/:memberId',(req,res)=>{
     console.log('買家訂單請求')
 
 })
