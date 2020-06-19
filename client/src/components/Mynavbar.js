@@ -9,7 +9,7 @@ function Mynavbar(props) {
   const [mycart, setMycart] = useState([])
 
   //取得購物車
-  const localCart = JSON.parse(localStorage.getItem('cart'))
+  const localCart = JSON.parse(localStorage.getItem('cart')) || []
   function getCartFromLocalStorage() {
     setMycart(localCart)
   }
