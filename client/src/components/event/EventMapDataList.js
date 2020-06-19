@@ -58,7 +58,6 @@ class FilteredList extends React.Component {
   }
 
   //排序
-
   sortByStarAsc = () => {
     let sortedProductsAsc
     sortedProductsAsc = this.state.data.sort((a, b) => {
@@ -297,12 +296,12 @@ class FilteredList extends React.Component {
                   type="text"
                 />
                 <div class="input-group-append">
-                  <span class="input-group-text bgGreen">
+                  {/* <span class="input-group-text bgGreen">
                     <FaSearch className="fonticon" />
-                  </span>
-                  <span class="input-group-text bgRed">
+                  </span> */}
+                  <button class="input-group-text bgRed mylocationBtn">
                     <FaStreetView className="fonticon" />
-                  </span>
+                  </button>
                 </div>
               </div>
               <div className=" d-flex m-2 ">
