@@ -2,21 +2,25 @@ import React from 'react'
 import {withRouter} from 'react-router-dom'
 import '../../styles/Payment.scss'
 import { GrNext } from 'react-icons/gr'
+import { BsExclamationCircle } from 'react-icons/bs'
 
 //引入自訂元件
 
 
 
 function paymentDetail(props) {
-
+  const {mycart,sum}=props
   const nextPage=()=>{
-    props.history.push('/paymentType')
+    
+    // props.history.push('/paymentType')
+    return false
   }
   const backPage=()=>{
     props.history.push('/shoppingcar')
   }
   return (
     <>
+    <form action="" method="">
       <div className="container mb-5">
         <div className="row">
           <div className="prograssBar1 mt-5"></div>
@@ -28,7 +32,7 @@ function paymentDetail(props) {
                 </div>
                 <div className="col-6 form-group">
                   <label for="inputEmail  ">電子郵件*</label>
-                  <input type="email" class="form-control" id="inputEmail" placeholder="name@example.com" />
+                  <input ref={input=>{const email=input}} type="email" class="form-control" id="inputEmail" placeholder="name@example.com" required/>
                 </div>
                 <div className="subTitle mt-5">
                   <p>聯絡資訊</p>
@@ -43,27 +47,28 @@ function paymentDetail(props) {
                   </div>
                   <div className="col-4 form-group mx-1">
                     <label for="inputFirstname  ">名字(需與護照一致)</label>
-                    <input type="email" className="form-control" id="inputFirstname" placeholder="First name" />
+                    <input type="text" className="form-control" id="inputFirstname" placeholder="First name" required/>
                   </div>
                   <div className="col-4 form-group mx-1">
                     <label for="inputLastname  ">姓氏(需與護照一致)</label>
-                    <input type="email" className="form-control" id="inputLastname" placeholder="Last name" />
+                    <input type="text" className="form-control" id="inputLastname" placeholder="Last name" required/>
                   </div>
                 </div>
                 <div className="col-6 form-group">
                   <label for="inputNumber  ">聯絡電話*</label>
-                  <input type="email" className="form-control" id="inputNumber" placeholder="" />
+                  <input type="text" className="form-control" id="inputNumber" placeholder="" required/>
                 </div>
               </div>
             </div>
           </div>
+         
           <div className="col-3">
             <div className="mt-3">
               <div className="priceBox ">
                 <div className="totalPrice">
                   <div className="d-flex justify-content-between">
                     <p>總價</p>
-                    <p>NT 1000</p>
+                    <p>NT${sum(mycart)}</p>
                   </div>
                   <div className="d-flex justify-content-between">
                     <p>折價金額</p>
@@ -73,7 +78,7 @@ function paymentDetail(props) {
                 <div className="payPrice">
                   <div className="d-flex justify-content-between">
                     <p>結帳金額</p>
-                    <p>NT 900</p>
+                    <p>NT${sum(mycart)}</p>
                   </div>
                 </div>
               </div>
@@ -81,7 +86,7 @@ function paymentDetail(props) {
                 <button onClick={()=>{
                   backPage()
                 }}>返回上一步</button>
-                <button onClick={()=>{
+                <button type="submit" onClick={()=>{
                   nextPage()
                 }}>下一步</button>
               </div>
@@ -89,6 +94,7 @@ function paymentDetail(props) {
           </div>
         </div>
       </div>
+      </form>
     </>
   )
 }

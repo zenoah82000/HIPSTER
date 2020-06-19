@@ -1,19 +1,23 @@
 import React from 'react'
-import {withRouter} from 'react-router-dom'
+import {withRouter,Link} from 'react-router-dom'
 import '../../styles/Payment.scss'
 
 //引入自訂元件
 
 function paymentType(props) {
+  const {mycart,setMycart,sum}=props
 
   const backPage=()=>{
     props.history.push('/paymentDetail')
     
   }
   const checkOut= ()=>{
+
+    
     // 購物完清掉 localstorage 購物車
     localStorage.removeItem('cart')
-    props.history.push('paymentFinish')
+    window.location.href = '/paymentFinish'
+    // props.history.push('')
   }
   return (
     <>
@@ -65,7 +69,7 @@ function paymentType(props) {
                 <div className="totalPrice">
                   <div className="d-flex justify-content-between ">
                     <p>總價</p>
-                    <p>NT 1000</p>
+                    <p>NT${sum(mycart)}</p>
                   </div>
                   <div className="d-flex justify-content-between">
                     <p>折價金額</p>
@@ -75,7 +79,7 @@ function paymentType(props) {
                 <div className="payPrice">
                   <div className="d-flex justify-content-between">
                     <p>結帳金額</p>
-                    <p>NT 900</p>
+                    <p>NT${sum(mycart)}</p>
                   </div>
                 </div>
               </div>

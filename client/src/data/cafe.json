@@ -4,10 +4,10 @@
     {
       "id": "000703fe-cf8a-43c8-bd83-c90cfd61915f",
       "name": "\u8702\u5de2\u5496\u5561",
-      "score": "咖啡廳",
+      "score": "4.6",
       "latitude": 25.0040968,
       "longitude": 121.5152865,
-      "type": "normal",
+      "type": "文藝展覽",
       "attr": {
         "is_starred": false,
         "is_donated": false,
@@ -19,10 +19,10 @@
     {
       "id": "0022fc3b-598f-4bb5-bb69-1b7d1b9b5202",
       "name": "The Kaffa Lovers",
-      "score": "咖啡廳",
+      "score": "3",
       "latitude": 25.044354,
       "longitude": 121.5304559,
-      "type": "normal",
+      "type": "手作課程",
       "attr": {
         "is_starred": false,
         "is_donated": false,
@@ -34,7 +34,7 @@
     {
       "id": "005a5ee9-7460-4f8a-b965-8b9565ee1e4e",
       "name": "\u4e00\u676f\u5496\u5561\u58eb\u6797\u5e97",
-      "score": "手作課程",
+      "score": "3.8",
       "latitude": 25.0930205,
       "longitude": 121.5266778,
       "type": "normal",
@@ -52,7 +52,7 @@
       "score": 0,
       "latitude": 25.047838,
       "longitude": 121.5411381,
-      "type": "藝文展覽",
+      "type": "咖啡廳",
       "attr": {
         "is_starred": false,
         "is_donated": false,
