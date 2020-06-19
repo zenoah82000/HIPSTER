@@ -30,11 +30,42 @@ import BlogEdit from './pages/blog/BlogEdit'
 import BlogContent from './pages/blog/BlogContent'
 import BlogAdd from './pages/blog/BlogAdd'
 
+import Swal from 'sweetalert2'
+
 function App() {
+  const [mycart, setMycart] = useState([])
+
+  //取得購物車
+  const localCart = JSON.parse(localStorage.getItem('cart')) || []
+  function getCartFromLocalStorage() {
+    setMycart(localCart)
+  }
+  useEffect(() => {
+    getCartFromLocalStorage()
+  }, [])
+
+  //刪除購物車
+  const deleteCart = (id)=>{
+    Swal.fire({
+      text:'是否刪除該商品?',
+      icon:'warning',
+      confirmButtonText:'確定',
+      showCancelButton:true,
+      cancelButtonText:'取消',
+    }).then((result)=>{if(result.value){
+      const index = localCart.findIndex(item=>item.id === id)
+      if(index !== -1 ){
+        localCart.splice(index,1)
+        localStorage.setItem('cart',JSON.stringify(localCart))
+        getCartFromLocalStorage()
+      }
+    }
+    })
+  }
   return (
     <Router>
       <>
-        <Mynavbar />
+        <Mynavbar mycart={mycart} setMycart={setMycart} deleteCart={deleteCart}/>
 
         <Switch>
           <Route path="/about">
@@ -66,7 +97,7 @@ function App() {
             <Product />
           </Route>
           <Route path="/shoppingcar">
-            <ShoppingCar />
+            <ShoppingCar mycart={mycart} setMycart={setMycart} deleteCart={deleteCart}/>
           </Route>
           <Route path="/map">
             <Map />
