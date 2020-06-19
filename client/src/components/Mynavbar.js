@@ -26,15 +26,39 @@ function Mynavbar(props) {
   const [SignLogin, setSignLogin] = useState(true)
 
   //
-  const SignDisplay = SignLogin ? 'block' : 'none'
-  const LoginDisplay = SignLogin ? 'none' : 'block'
+  const signchangbtn = SignLogin ? 'btn changbtn active' : 'btn changbtn'
+  const loginchangbtn = SignLogin ? 'btn changbtn' : 'btn changbtn active'
 
-  useEffect(() => {
-    const changsignbtn = document.getElementById('changsignbtn')
-    const changloginbtn = document.getElementById('changloginbtn')
-    console.log(changsignbtn)
-    console.log(changloginbtn)
-  }, [SignLogin])
+  const membersign = (
+    <>
+      <div className="membersign ">
+        <p className="membersign-title">註冊會員帳號</p>
+        <Form.Group>
+          <Form.Label>帳號(聯絡信箱)：</Form.Label>
+          <Form.Control type="email" placeholder="請輸入註冊信箱..." />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>密碼：</Form.Label>
+          <Form.Control type="text" placeholder="請輸入註冊密碼..." />
+        </Form.Group>
+      </div>
+    </>
+  )
+  const memberlogin = (
+    <>
+      <div className="membersign">
+        <p className="membersign-title">會員登入</p>
+        <Form.Group>
+          <Form.Label>帳號：</Form.Label>
+          <Form.Control type="email" placeholder="請輸入登入信箱..." />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>密碼：</Form.Label>
+          <Form.Control type="text" placeholder="請輸入登入密碼..." />
+        </Form.Group>
+      </div>
+    </>
+  )
 
   //跳出視窗
   function LoginMassage(props) {
@@ -53,7 +77,7 @@ function Mynavbar(props) {
 
           <div className="functionChang">
             <div
-              className="btn changsignbtn active"
+              className={signchangbtn}
               id="changsignbtn"
               onClick={() => {
                 setSignLogin(true)
@@ -63,7 +87,7 @@ function Mynavbar(props) {
             </div>
 
             <div
-              className="btn changloginbtn "
+              className={loginchangbtn}
               id="changloginbtn"
               onClick={() => {
                 setSignLogin(false)
@@ -73,31 +97,9 @@ function Mynavbar(props) {
             </div>
           </div>
 
-          {/* ---------註冊--------- */}
-          <div className="membersign " style={{ display: SignDisplay }}>
-            <p className="membersign-title">註冊會員帳號</p>
-            <Form.Group>
-              <Form.Label>帳號(聯絡信箱)：</Form.Label>
-              <Form.Control type="email" placeholder="請輸入註冊信箱..." />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>密碼：</Form.Label>
-              <Form.Control type="text" placeholder="請輸入註冊密碼..." />
-            </Form.Group>
-          </div>
-
-          {/* ---------登入--------- */}
-          <div className="membersign" style={{ display: LoginDisplay }}>
-            <p className="membersign-title">會員登入</p>
-            <Form.Group>
-              <Form.Label>帳號：</Form.Label>
-              <Form.Control type="email" placeholder="請輸入登入信箱..." />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>密碼：</Form.Label>
-              <Form.Control type="text" placeholder="請輸入登入密碼..." />
-            </Form.Group>
-          </div>
+          {/* ---------註冊登入--------- */}
+          {SignLogin ? membersign : memberlogin}
+          {/* ----------註冊登入--------- */}
 
           <div className="communitylogin">
             <p className="communitylogin-title">使用社交平台帳號登入</p>
@@ -121,38 +123,29 @@ function Mynavbar(props) {
             </div>
           </div>
 
-          <Form.Group
-            controlId="formBasicCheckbox"
-            className="logincheck"
-            style={{ display: SignDisplay }}
-          >
-            <Form.Check type="checkbox">
-              <Form.Check.Input type="checkbox" />
-              <Form.Check.Label>
-                我已詳細閱讀，並同意接受<span>會員權益</span>與
-                <span>個資同意條款</span>
-              </Form.Check.Label>
-            </Form.Check>
-          </Form.Group>
+          {SignLogin ? (
+            <Form.Group controlId="formBasicCheckbox" className="logincheck">
+              <Form.Check type="checkbox">
+                <Form.Check.Input type="checkbox" />
+                <Form.Check.Label>
+                  我已詳細閱讀，並同意接受<span>會員權益</span>與
+                  <span>個資同意條款</span>
+                </Form.Check.Label>
+              </Form.Check>
+            </Form.Group>
+          ) : (
+            <div className="forgetpwd">忘記密碼</div>
+          )}
 
-          <div className="forgetpwd" style={{ display: LoginDisplay }}>
-            忘記密碼
-          </div>
-
-          <div
-            className="signbtn "
-            onClick={() => {}}
-            style={{ display: SignDisplay }}
-          >
-            註冊
-          </div>
-          <div
-            className="loginbtn"
-            onClick={() => {}}
-            style={{ display: LoginDisplay }}
-          >
-            登入
-          </div>
+          {SignLogin ? (
+            <div className="signbtn " onClick={() => {}}>
+              註冊
+            </div>
+          ) : (
+            <div className="loginbtn" onClick={() => {}}>
+              登入
+            </div>
+          )}
         </Modal.Body>
       </Modal>
     )
