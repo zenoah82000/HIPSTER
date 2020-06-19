@@ -1,10 +1,22 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap'
 import Logo from '../images/home/logo.png'
 import { FaHeart, FaShoppingCart } from 'react-icons/fa'
 import { Link, NavLink, withRouter } from 'react-router-dom'
 
 function Mynavbar(props) {
+  const [showCart, setshowCart] = useState(false)
+  const [mycart, setMycart] = useState([])
+
+  //取得購物車
+  const localCart = JSON.parse(localStorage.getItem('cart'))
+  function getCartFromLocalStorage() {
+    setMycart(localCart)
+  }
+  useEffect(() => {
+    getCartFromLocalStorage()
+  }, [])
+
   //   const { auth, name, setauth } = props
 
   //   const loginButton = (
@@ -35,7 +47,9 @@ function Mynavbar(props) {
   //   )
 
   //   const displayButton = auth ? logoutButton : loginButton
-
+  const showMenu = () => {
+    setshowCart(!showCart)
+  }
   return (
     <>
       <nav>
@@ -66,9 +80,62 @@ function Mynavbar(props) {
           {/* ========================================================= */}
           <ul className="shop-group">
             <li>
-              <a href="/shoppingcar">
-                <FaShoppingCart />
-              </a>
+              <div className="navbar-cart">
+                <FaShoppingCart
+                  className="car-img"
+                  onClick={() => {
+                    showMenu()
+                  }}
+                />
+                {mycart.length >= 1 ? (
+                  <div className="cart-dot">
+                    <span>{mycart.length}</span>
+                  </div>
+                ) : (
+                  ''
+                )}
+
+                {showCart ? (
+                  <>
+                    <div className="card mt-3">
+                      <div className="card-body">
+                        {mycart != null && mycart.length >= 1 ? (
+                          <>
+                            {mycart.map((value, index) => {
+                              return (
+                                <div className="card-item d-flex align-items-center">
+                                  <div className="productimgbox mr-2">
+                                    <img src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg" />
+                                  </div>
+                                  <div className="item-text">
+                                    <div className="item-name"><p>{value.name}</p></div>
+                                    <div className="item-price"><span>NT${value.price}</span></div>
+                                  </div>
+                                </div>
+                              )
+                            })}
+                          </>
+                        ) : (
+                          <p className="text-center">購物車是空的喔!</p>
+                        )}
+                      </div>
+                      <div className="card-footer">
+                        <Link
+                          className="link text-center"
+                          to="/shoppingcar"
+                          onClick={() => {
+                            showMenu()
+                          }}
+                        >
+                          <p>查看我的購物車</p>
+                        </Link>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  ''
+                )}
+              </div>
             </li>
             <li>
               <a href="">
