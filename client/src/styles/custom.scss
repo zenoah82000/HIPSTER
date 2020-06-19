@@ -73,7 +73,7 @@ nav {
           position: absolute;
           width: 300px;
           right: -50%;
-          z-index: 99;
+          z-index: 2;
           &::before {
             content: '';
             position: absolute;
@@ -88,11 +88,14 @@ nav {
           .card-body {
             max-height: 300px;
             overflow: auto;
+            z-index: 3;
+            padding: 10px 20px;
             .card-item {
               align-items: center;
               padding: 10px 0;
               border-bottom: 1px solid gray;
               .item-text {
+                width: 300px;
                 .item-name {
                   p {
                     font-size: 12px;
