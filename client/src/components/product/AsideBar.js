@@ -1,6 +1,7 @@
 import React from 'react'
 import { Dropdown } from 'react-bootstrap'
 import Calendar from 'react-calendar'
+import '../../styles/product/AsideBar.scss'
 
 function AsideBar(props) {
   return (
