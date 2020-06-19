@@ -162,16 +162,14 @@ function Home(props) {
                 <img src={abouticon3}></img>
               </div>
               <div className="about-title">即時的評價訊息</div>
-              <p>我們鼓勵所有參與過活動的朋友們留下他們最誠實的評價！</p>
+              <p>我們鼓勵所有參與過活動的朋友們留下最誠實的評價！</p>
             </div>
             <div className="about-main-cont">
               <div className="about-icon">
                 <img src={abouticon4}></img>
               </div>
               <div className="about-title">安全的購買系統</div>
-              <p>
-                安全加密付費、及電子憑證，以安心的方式，預訂最精彩的活動。！
-              </p>
+              <p>加密付費及憑證，以安心的方式，預訂精彩的活動！</p>
             </div>
           </div>
         </div>
