@@ -92,7 +92,8 @@ class FilteredList extends React.Component {
     let updatedList = this.state.data.filter((item) => {
       switch (this.state.searchBtn1, this.state.searchBtn3) {
         case ("全部類別" || "類別", "4.5分以上"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.star > 4.5
-          break
+          console.log('test')  
+        break
         case ("全部類別" || "類別", "4分以上"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.star > 4
           break
         case ("全部類別" || "類別", "3.5分以上"): return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 && item.star > 3.5
@@ -125,7 +126,7 @@ class FilteredList extends React.Component {
           break
       }
     })
-    
+
     let data = updatedList.map((item, index, array) => {
       return (
         <Fade>
