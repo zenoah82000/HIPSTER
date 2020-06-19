@@ -8,11 +8,30 @@ function Product(props) {
   return (
     <>
       <div className="bg-white text-brown">
-        <div className="container">
+        <div className="container position-relative">
           <div className="product-banner"></div>
+          <MyBreadcrumb />
+          <div className="book-area">
+            <div className="price-info">
+              <h2>NT $ 1,500</h2>
+            </div>
+            <div className="book-info">
+              <ul>
+                <li>
+                  <i class="far fa-circle"></i>
+                  <div>今日可訂</div>
+                </li>
+                <li>
+                  <i class="far fa-circle"></i>
+                  <div>立即確認並獲得憑證</div>
+                </li>
+              </ul>
+            </div>
+            <input type="submit" className="book-btn" value="訂購" />
+          </div>
           <div className="product-main-left">
             {/* product head */}
-            <MyBreadcrumb />
+
             <h1 className="product-title">綠島進階深潛體驗</h1>
             <div className="product-star-bar">
               <div className="product-star-box">
