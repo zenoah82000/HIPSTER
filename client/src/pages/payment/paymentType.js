@@ -1,9 +1,20 @@
 import React from 'react'
+import {withRouter} from 'react-router-dom'
 import '../../styles/Payment.scss'
 
 //引入自訂元件
 
 function paymentType(props) {
+
+  const backPage=()=>{
+    props.history.push('/paymentDetail')
+    
+  }
+  const checkOut= ()=>{
+    // 購物完清掉 localstorage 購物車
+    localStorage.removeItem('cart')
+    props.history.push('paymentFinish')
+  }
   return (
     <>
       <div className="container mb-5">
@@ -69,8 +80,10 @@ function paymentType(props) {
                 </div>
               </div>
               <div className="mt-3 buttonBox">
-                <button>返回上一步</button>
-                <button>確認付款</button>
+                <button onClick={()=>{
+                  backPage()
+                }}>返回上一步</button>
+                <button onClick={()=>{checkOut()}}>確認付款</button>
               </div>
             </div>
           </div>
@@ -80,4 +93,4 @@ function paymentType(props) {
   )
 }
 
-export default paymentType
+export default withRouter(paymentType)
