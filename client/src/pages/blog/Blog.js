@@ -5,7 +5,7 @@ import Masonry from 'react-masonry-css'
 
 import MyBreadcrumb from '../../components/MyBreadcrumb'
 
-import '../../components/blog/Masonry.css'
+// import '../../components/blog/Masonry.css'
 
 import author1 from '../../images/blog/author1.jpg'
 import author2 from '../../images/blog/author2.jpg'
