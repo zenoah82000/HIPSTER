@@ -7,14 +7,14 @@ import MyBreadcrumb from '../../components/MyBreadcrumb'
 
 import '../../components/blog/Masonry.css'
 
-import author1 from '../../components/blog/author1.jpg'
-import author2 from '../../components/blog/author2.jpg'
-import author3 from '../../components/blog/author3.jpg'
-import author4 from '../../components/blog/author4.jpg'
-import author5 from '../../components/blog/author5.jpg'
-import author6 from '../../components/blog/author6.jpg'
-import author7 from '../../components/blog/author7.jpg'
-import author8 from '../../components/blog/author8.jpg'
+import author1 from '../../images/blog/author1.jpg'
+import author2 from '../../images/blog/author2.jpg'
+import author3 from '../../images/blog/author3.jpg'
+import author4 from '../../images/blog/author4.jpg'
+import author5 from '../../images/blog/author5.jpg'
+import author6 from '../../images/blog/author6.jpg'
+import author7 from '../../images/blog/author7.jpg'
+import author8 from '../../images/blog/author8.jpg'
 
 function Blog(props) {
   console.log('Blog:', props)
