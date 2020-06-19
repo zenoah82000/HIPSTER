@@ -211,6 +211,17 @@ nav {
     }
   }
   .footer-bottom {
+    padding-top: 20px;
+    .footer-icon {
+      width: 320px;
+      margin: auto;
+    }
+    .copyright {
+      font-weight: 600;
+      text-align: center;
+      color: rgba($color: #fff, $alpha: 0.4);
+      margin-top: 10px;
+    }
   }
 }
 
