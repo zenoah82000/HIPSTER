@@ -51,23 +51,24 @@ export default class ViewportExample extends Component {
     })
   }
 
-  onClickReset = () => {
-    // const data = this.state.viewport
-    this.setState({
-      viewport: {
-        center: [25.0338438 + 0.0000000000001, 121.54335 + 0.0000000000001],
-        zoom: 15,
-      },
-    })
-    console.log('test')
-    console.log(this.state.viewport, this.state.move)
-  }
+  // onClickReset = () => {
+  //   // const data = this.state.viewport
+  //   this.setState({
+  //     viewport: {
+  //       center: [25.0338438 + 0.0000000000001, 121.54335 + 0.0000000000001],
+  //       zoom: 15,
+  //     },
+  //   })
+  //   console.log('test')
+  //   console.log(this.state.viewport, this.state.move)
+  // }
 
   render() {
+    let { viewport } = this.props
     return (
       <div>
-        <button onClick={this.onClickReset}>TESTTTTTT</button>
-        <Map viewport={this.state.viewport} onClick={this.onViewportChanged}>
+        {/* <button onClick={this.onClickReset}>TESTTTTTT</button> */}
+        <Map viewport={viewport}>
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

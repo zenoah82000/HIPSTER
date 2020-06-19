@@ -36,12 +36,8 @@ class FilteredList extends React.Component {
         category: item.type,
       }
     })
-
-    const dataArry = []
-    for (const key in data) {
-      data[key].name = key
-      dataArry.push(data[key])
-    }
+    console.log(data)
+    const dataArry = Object.values(data)
     console.log(dataArry)
 
     this.setState({
@@ -107,6 +103,21 @@ class FilteredList extends React.Component {
     console.log(date, 'onchange')
     console.log(this.state.date)
     console.log(this.state.searchBtn2)
+  }
+
+  //定位
+  handleClick() {
+    this.props.onClickReset()
+  }
+  cardClick = (cid) => {
+    // console.log(cid)
+    this.state.data.forEach((item) => {
+      // console.log(item)
+      if (item.id === cid) {
+        // console.log(item.lat, item.log)
+        this.props.cardClickReset(item.lat, item.log)
+      }
+    })
   }
 
   filterList() {
@@ -227,7 +238,13 @@ class FilteredList extends React.Component {
     let data = updatedList.map((item, index, array) => {
       return (
         <Fade>
-          <li className="list-group-item" data-category={item.name} key={index}>
+          <li
+            className="list-group-item"
+            data-category={item.name}
+            key={index}
+            id={item.id}
+            onClick={() => this.cardClick(item.id)}
+          >
             <div className="eventContentBox d-flex">
               <div className="eventImgBox col-4">
                 <img
@@ -299,7 +316,10 @@ class FilteredList extends React.Component {
                   {/* <span class="input-group-text bgGreen">
                     <FaSearch className="fonticon" />
                   </span> */}
-                  <button class="input-group-text bgRed mylocationBtn">
+                  <button
+                    class="input-group-text bgRed mylocationBtn"
+                    onClick={() => this.handleClick()}
+                  >
                     <FaStreetView className="fonticon" />
                   </button>
                 </div>
