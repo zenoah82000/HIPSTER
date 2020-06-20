@@ -453,6 +453,16 @@ MyCalendar .dropdown-menu.show {
   font-size: 15px;
   border: 5px;
   border-radius: 10px;
+  text-align: center; 
+}
+.cardButton:hover{
+  background:  rgba(161, 161, 161, 0.911);
+}
+.cardButton a{
+  color: white;
+  display: block;
+  line-height: 30px;
+  text-decoration:none;
 }
 
 .mylocationBtn:hover {

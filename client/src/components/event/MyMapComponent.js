@@ -128,9 +128,11 @@ export default class ViewportExample extends Component {
                     <span>活動日期：</span>
                   </li>
                 </ul>
-                <button className="cardButton" value>
+                <div className="cardButton" >
+                <a value="" href="/#">
                   立即預定
-                </button>
+                </a>
+                </div>
               </Popup>
             </Marker>
             //     )
