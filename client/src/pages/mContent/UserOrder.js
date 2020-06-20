@@ -6,11 +6,13 @@ import { BsTrash } from 'react-icons/bs'
 import Swal from 'sweetalert2'
 
 import '../../styles/order.scss'
+import { GrOrderedList } from 'react-icons/gr'
 
 function UserOrder() {
   const [orderlist, setOrderlist] = useState([])
-  let data =[]
-  const getOrderlist = async ()=>{
+  const [loading, setLoading] = useState(false)
+
+  const getOrderlistAsync = async () => {
     const request = new Request('http://localhost:5000/oreder/2', {
       method: 'get',
       headers: new Headers({
@@ -19,38 +21,70 @@ function UserOrder() {
       }),
     })
     const response = await fetch(request)
-    data = await response.json()
+    const data = await response.json()
     setOrderlist(data)
   }
   useEffect(() => {
-    getOrderlist()
+    getOrderlistAsync()
   }, [])
+
+  // 渲染後載入商品
+  useEffect(() => {
+    setLoading(true)
+
+    setTimeout(() => {
+      if (orderlist.status) {
+        setLoading(false)
+      }
+    }, 500)
+  }, [orderlist])
+
   const display =
-    data.length !== 0 ? (
+    orderlist.length != 0 ? (
       <div className="orderlistbox ">
         <div className="row">
-          {orderlist.orderlist.map((item) => {
+          {orderlist.order.map((item) => {
             return (
               <>
                 <div className="card order-box">
                   <div className="card-header order-title d-flex">
-                    <div className="col">訂單編號</div>
-                    <div className="col">購買時間</div>
+                    <div className="col">訂單編號:{item.orderId}</div>
+                    <div className="col">購買時間:{item.created_at}</div>
                   </div>
-                  <div className="card-body order-body d-flex">
-                    <div className="productimg mr-3">
-                      <img src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg" />
-                    </div>
-                    <div>
-                    <div className="productname"><p>日本火車票</p></div>
-                    <div><p>數量:</p></div>
-                    <div><p>活動時間:</p></div>
-                    </div>
+                  <div className="card-body order-body">
+                    {orderlist.orderdetails
+                      .filter((value) => value.orderId == item.orderId)
+                      .map((value) => {
+                        return (
+                          <>
+                          <div className="d-flex product-box">
+                            <div className="productimg mr-3">
+                              <img src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg" />
+                            </div>
+                            <div>
+                              <div className="productname">
+                                <p>{value.productName}</p>
+                              </div>
+                              <div>
+                                <p>數量:{value.checkQty}</p>
+                              </div>
+                              <div>
+                                <p>價格:{value.checkPrice}</p>
+                              </div>
+                              <div>
+                                <p>活動時間:</p>
+                              </div>
+                            </div>
+                            </div>
+                          </>
+                        )
+                      })}
                   </div>
                   <div className="card-footer order-footer d-flex justify-content-end">
-                  <div>購買金額:<span>NT$300</span></div>
-                  <button className="order-button">取消整筆訂單</button>
-                    
+                    <div>
+                      購買金額:<span>NT$</span>
+                    </div>
+                    <button className="order-button">取消整筆訂單</button>
                   </div>
                 </div>
               </>
@@ -72,7 +106,7 @@ function UserOrder() {
     <>
       <div className="usercontainer">
         <h2 className="usertitle">我的訂單</h2>
-        {display}
+        {loading ? <h2>載入中</h2> : display}
       </div>
     </>
   )

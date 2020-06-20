@@ -17,18 +17,22 @@
         background-color: #879e87;
       }
       .order-body {
-        .productimg {
-          width: 160px;
-          height: 123px;
-          img {
-            object-fit: cover;
-            width: 100%;
-            height: 100%;
+        padding: 0;
+        .product-box {
+          margin: 20px;
+          .productimg {
+            width: 160px;
+            height: 123px;
+            img {
+              object-fit: cover;
+              width: 100%;
+              height: 100%;
+            }
           }
-        }
-        .productname {
-          p {
-            font-size: 20px;
+          .productname {
+            p {
+              font-size: 16px;
+            }
           }
         }
       }
