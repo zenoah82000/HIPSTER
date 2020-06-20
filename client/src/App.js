@@ -40,7 +40,7 @@ import Swal from 'sweetalert2'
 function App(props) {
   console.log(props)
   const{mycart} = props
-  // const [mycart, setMycart] = useState([])
+  
   const localCart = JSON.parse(localStorage.getItem('cart')) || []
 
   //取得購物車資料
