@@ -1,0 +1,22 @@
+.product-result-sort {
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  background-color: white;
+  border-top: 1px solid #dfdfdd;
+  border-radius: 0 0 3px 3px;
+  vertical-align: middle;
+
+  h4 {
+    margin: 0;
+    display: inline-block;
+    font-weight: bolder;
+  }
+  .gap {
+    margin: 0 5px;
+  }
+  a {
+    text-decoration: none;
+    color: #684b38;
+    font-weight: bolder;
+  }
+}

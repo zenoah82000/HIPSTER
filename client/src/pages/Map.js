@@ -10,27 +10,57 @@ import MyMapComponent from '../components/event/MyMapComponent'
 class Map extends React.Component {
   constructor(props) {
     super(props)
-    //增加了state.name用來放篩選留言者的值
-    this.state = { itemId: '', search: '' }
-    //照慣例也新增個changeState用來在使用者輸入值的時候觸發事件，改變state
-    this.changeState = this.changeState.bind(this)
-    // console.log(CafeData)
+    this.state = {
+      viewport: {
+        center: [25.0338438, 121.54335],
+        zoom: 15,
+      },
+      selected:"",
+      clicked:false
+    }
+    console.log(props)
   }
 
-  changeState(event) {
-    this.setState({ itemId: event.target.id, search: event.target.value })
+  onClickReset = () => {
+    this.setState({
+      viewport: {
+        center: [25.0338438 + 0.0000000000001, 121.54335 + 0.0000000000001],
+        zoom: 15,
+      },
+      clicked:false
+    })
   }
+
+  cardClickReset = (lat, log) => {
+    console.log(lat, log)
+    this.setState({
+      viewport: {
+        center: [lat, log ],
+        zoom: 15, 
+      },
+      clicked:true
+    })
+  }
+  
 
   render() {
-    //  console.log(CafeData)
     return (
       <>
         <div className="row">
           <div className="col-4">
-            <EventMapDataList search={this.state.search} CafeData={CafeData} />
+            <EventMapDataList
+              onClickReset={this.onClickReset}
+              cardClickReset={this.cardClickReset}
+              CafeData={CafeData}
+            />
           </div>
           <div className="col-8">
-            <MyMapComponent clickItem={this.state.itemId} CafeData={CafeData} />
+            <MyMapComponent
+            clicked={this.state.clicked}
+              viewport={this.state.viewport}
+              clickItem={this.state.itemId}
+              CafeData={CafeData}
+            />
           </div>
         </div>
       </>

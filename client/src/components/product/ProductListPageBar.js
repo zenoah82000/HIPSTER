@@ -1,11 +1,14 @@
 import React from 'react'
+import '../../styles/product/ProductListPageBar.scss'
 
 function ProductListPageBar(props) {
   return (
     <>
       <ul className="page-bar">
         <li>
-          <a href="">1</a>
+          <a className="active" href="">
+            1
+          </a>
         </li>
         <li>
           <a href="">2</a>
