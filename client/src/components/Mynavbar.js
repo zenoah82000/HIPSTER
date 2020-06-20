@@ -9,11 +9,16 @@ import { FaHeart, FaShoppingCart } from 'react-icons/fa'
 import { IoMdClose } from 'react-icons/io'
 
 import { Link, withRouter } from 'react-router-dom'
+import { BsTrash } from 'react-icons/bs'
 import { BsLock } from 'react-icons/bs'
 import Test from '../pages/Test'
 
 function Mynavbar(props) {
-  const { mycart } = props
+
+  //購物車資料
+  const { mycart,deleteCart } = props
+
+  //購物車視窗狀態
   const [showCart, setshowCart] = useState(false)
   const showMenu = () => {
     setshowCart(!showCart)
@@ -215,6 +220,7 @@ function Mynavbar(props) {
                                     </div>
                                     <div className="item-price">
                                       <span>NT${value.price}</span>
+                                      <button onClick ={()=>{deleteCart(value.id)}}><BsTrash/>移除</button>
                                     </div>
                                   </div>
                                 </div>
