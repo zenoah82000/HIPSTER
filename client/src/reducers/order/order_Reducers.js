@@ -11,10 +11,17 @@ const memberCheckOutResponse = (state = {}, action) => {
         return state
     }
   }
-
+  const cartData = (state = [], action) => {
+    switch (action.type) {
+      case 'GET_CART':
+        return action.value
+      default:
+        return state
+    }
+  }
 
 
   const orderReducer = combineReducers({
-    memberCheckOutResponse,
+    memberCheckOutResponse,cartData,
   })
   export { orderReducer }

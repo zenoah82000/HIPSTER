@@ -405,12 +405,21 @@ MyCalendar .dropdown-menu.show {
 
 .leaflet-popup-content-wrapper,
 .leaflet-popup-tip {
-  width: 500px;
+  width:500px;
   height: 500px;
   background: white;
   color: #333;
   box-shadow: 0 3px 14px rgba(0, 0, 0, 0.4);
 }
+
+// .mylocation .leaflet-popup-content-wrapper,
+// .mylocation .leaflet-popup-tip{
+//   width:100px;
+//   height: 100px;
+//   background: white;
+//   color: #333;
+//   box-shadow: 0 3px 14px rgba(0, 0, 0, 0.4);
+// }
 
 .locationCard {
   width: 100%;

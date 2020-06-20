@@ -8,19 +8,25 @@ const router = express.Router()
 router.get('/oreder/:memberId',async (req,res)=>{
     console.log('買家訂單請求')
     const data ={
-        status:false,
-        order:[],
-        orderdetails:[]
+        status:true,
+        orderdetails:[],
+        order:[]
     }
-    const sqlorderlist = "SELECT `product`.`productName`,`item_lists`.`orderId`,`item_lists`.`checkPrice`,`item_lists`.`checkQty`,`item_lists`.`checkSubtotal`,`item_lists`.`created_at`FROM `member` INNER JOIN `orderlist` ON `member`.`memberId` = `orderlist`.`memberId` INNER JOIN `item_lists` ON `orderlist`.`orderId`=`item_lists`.`orderId` INNER JOIN `product` ON `item_lists`.`productId` = `product`.`productId` WHERE `member`.`memberId`=?";
+    const sqlorderlist = "SELECT `product`.`productName`,`item_lists`.`orderId`,`item_lists`.`date`,`item_lists`.`checkPrice`,`item_lists`.`checkQty`,`item_lists`.`checkSubtotal`,`item_lists`.`created_at`FROM `member` INNER JOIN `orderlist` ON `member`.`memberId` = `orderlist`.`memberId` INNER JOIN `item_lists` ON `orderlist`.`orderId`=`item_lists`.`orderId` INNER JOIN `product` ON `item_lists`.`productId` = `product`.`productId` WHERE `member`.`memberId`=?";
 
     const sqlorder = "SELECT * FROM `orderlist` WHERE `memberId` = ?"
     const [r1] = await db.query(sqlorder,[req.params.memberId])
     const [r2] =  await db.query(sqlorderlist,[req.params.memberId])
-    console.log(r1)
-    data.orderdetails= r2
-    data.order=r1
-    data.status=true
+    if(r1.length >0 && r2.length>0){
+        r1.forEach(item=>{
+            item.created_at = item.created_at.toLocaleString()
+        })
+       r2.forEach(item=> {
+           item.date = item.date.toLocaleDateString() 
+       });
+        data.orderdetails= r2
+        data.order=r1
+    }
 
     res.json(data)
     

@@ -7,6 +7,8 @@ body {
     font-size: 20px;
   }
 }
+
+//購物車商品
 .productbox {
   .productImg {
     width: 90px;
@@ -32,6 +34,16 @@ body {
     outline: none;
   }
 }
+//購物車更改刪除
+.card-change {
+  .edit {
+    cursor: pointer;
+  }
+  .delete {
+    cursor: pointer;
+  }
+}
+//購物車總額
 .totalbox {
   .button {
     color: white;

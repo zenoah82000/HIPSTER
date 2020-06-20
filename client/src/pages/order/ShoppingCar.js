@@ -125,7 +125,10 @@ function ShoppingCar(props) {
   )
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ memberCheckOutAsync }, dispatch)
+const mapStateToProps = store=>{
+  return{
+    mycart:store.orderReducer.cartData
+  }
 }
-export default withRouter(connect(mapDispatchToProps)(ShoppingCar))
+
+export default withRouter(connect(mapStateToProps)(ShoppingCar))

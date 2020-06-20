@@ -1,9 +1,8 @@
+//購物車結帳
 export const memberCheckOut = (data) => ({
   type: 'NEW_ORDER',
   value: data,
 })
-
-//新增訂單
 export const memberCheckOutAsync = (orderData) => {
   orderData = JSON.stringify(orderData)
   return async (dispatch) => {
@@ -22,3 +21,18 @@ export const memberCheckOutAsync = (orderData) => {
     // window.location.href = '/member/checkout'
   }
 }
+
+//購物車資料
+export const getCartData = (data) => ({
+  type: 'GET_CART',
+  value: 4567,
+})
+
+export const getCartDataAsync =()=>{
+  return (dispatch)=>{
+    const localCart = JSON.parse(localStorage.getItem('cart')) || []
+
+    dispatch(getCartData(['123',123]))
+  }
+}
+

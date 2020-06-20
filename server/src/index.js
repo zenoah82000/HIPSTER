@@ -9,7 +9,6 @@ const Mysqlstore =require('express-mysql-session')(session);
 const cors = require('cors');
 
 
-
 const upload = require(__dirname+"/upload-module");
 
 const app = express();
@@ -52,9 +51,9 @@ app.use((req,res,next)=>{
 
 app.use(require(__dirname+'/coupon'))
 
-
 app.use(require(__dirname+'/order/order'));
 
+app.use(require(__dirname+'/blog'));
 
 
 

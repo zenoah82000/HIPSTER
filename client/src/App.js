@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+
+//取得購物車資料
+import {getCartDataAsync,getCartData} from './actions/order/order_Actions'
 
 import Mynavbar from './components/Mynavbar'
 import Myfooter from './components/Myfooter'
@@ -32,17 +37,24 @@ import BlogAdd from './pages/blog/BlogAdd'
 
 import Swal from 'sweetalert2'
 
-function App() {
-  const [mycart, setMycart] = useState([])
-
-  //取得購物車
+function App(props) {
+  console.log(props)
+  const{mycart} = props
+  // const [mycart, setMycart] = useState([])
   const localCart = JSON.parse(localStorage.getItem('cart')) || []
-  function getCartFromLocalStorage() {
-    setMycart(localCart)
-  }
-  useEffect(() => {
-    getCartFromLocalStorage()
-  }, [])
+
+  //取得購物車資料
+  useEffect(()=>{
+    props.dispatch({ type: 'GET_CART', value: localCart })
+   
+  },[])
+  // const localCart = JSON.parse(localStorage.getItem('cart')) || []
+  // function getCartFromLocalStorage() {
+  //   setMycart(localCart)
+  // }
+  // useEffect(() => {
+  //   getCartFromLocalStorage()
+  // }, [])
 
   //刪除購物車
   const deleteCart = (id)=>{
@@ -56,8 +68,9 @@ function App() {
       const index = localCart.findIndex(item=>item.id === id)
       if(index !== -1 ){
         localCart.splice(index,1)
+        props.dispatch({ type: 'GET_CART', value: localCart })
         localStorage.setItem('cart',JSON.stringify(localCart))
-        getCartFromLocalStorage()
+        // getCartFromLocalStorage()
       }
     }
     })
@@ -75,7 +88,7 @@ function App() {
   return (
     <Router>
       <>
-        <Mynavbar mycart={mycart} setMycart={setMycart} deleteCart={deleteCart}/>
+        <Mynavbar deleteCart={deleteCart}/>
 
         <Switch>
           <Route path="/about">
@@ -107,19 +120,19 @@ function App() {
             <Product />
           </Route>
           <Route path="/shoppingcar">
-            <ShoppingCar mycart={mycart} setMycart={setMycart} deleteCart={deleteCart} sum={sum}/>
+            <ShoppingCar deleteCart={deleteCart} sum={sum}/>
           </Route>
           <Route path="/map">
             <Map />
           </Route>
           <Route path="/paymentDetail">
-            <PaymentDetail mycart={mycart} setMycart={setMycart} sum={sum}/>
+            <PaymentDetail sum={sum}/>
           </Route>
           <Route path="/paymentFinish">
             <PaymentFinish />
           </Route>
           <Route path="/paymentType">
-            <PaymentType mycart={mycart} sum={sum}/>
+            <PaymentType sum={sum}/>
           </Route>
           <Route path="/memberuser">
             <MemberUser />
@@ -137,5 +150,12 @@ function App() {
     </Router>
   )
 }
+const mapStateToProps = store=>{
+  return{
+    mycart:store.orderReducer.cartData
+  }
+}
+const mapDispatchToProps = null
 
-export default App
+
+export default connect(mapStateToProps,mapDispatchToProps)(App)

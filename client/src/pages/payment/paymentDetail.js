@@ -1,5 +1,6 @@
 import React from 'react'
 import {withRouter} from 'react-router-dom'
+import { connect } from 'react-redux'
 import '../../styles/Payment.scss'
 import { GrNext } from 'react-icons/gr'
 import { BsExclamationCircle } from 'react-icons/bs'
@@ -9,15 +10,25 @@ import { BsExclamationCircle } from 'react-icons/bs'
 
 
 function paymentDetail(props) {
+  console.log(props)
   const {mycart,sum}=props
+
+  //需要輸入的欄位
+  let email,phone,lastName,firstName
+
+  //下一頁(填寫付款資訊)
   const nextPage=()=>{
-    
-    // props.history.push('/paymentType')
+    if(email.value == ''|| phone.value =='' || lastName.value == '' || firstName.value == ''){
+      return
+    }
+    props.history.push('/paymentType')
     return false
   }
+  //上一頁(返回購物車)
   const backPage=()=>{
     props.history.push('/shoppingcar')
   }
+ 
   return (
     <>
     <form action="" method="">
@@ -32,7 +43,7 @@ function paymentDetail(props) {
                 </div>
                 <div className="col-6 form-group">
                   <label for="inputEmail  ">電子郵件*</label>
-                  <input ref={input=>{const email=input}} type="email" class="form-control" id="inputEmail" placeholder="name@example.com" required/>
+                  <input ref={input=>{const email=input}} type="email" class="form-control" id="inputEmail" placeholder="name@example.com" required ref={input=>email = input} />
                 </div>
                 <div className="subTitle mt-5">
                   <p>聯絡資訊</p>
@@ -47,16 +58,16 @@ function paymentDetail(props) {
                   </div>
                   <div className="col-4 form-group mx-1">
                     <label for="inputFirstname  ">名字(需與護照一致)</label>
-                    <input type="text" className="form-control" id="inputFirstname" placeholder="First name" required/>
+                    <input type="text" className="form-control" id="inputFirstname" placeholder="First name" ref={input=>firstName = input} required/>
                   </div>
                   <div className="col-4 form-group mx-1">
                     <label for="inputLastname  ">姓氏(需與護照一致)</label>
-                    <input type="text" className="form-control" id="inputLastname" placeholder="Last name" required/>
+                    <input type="text" className="form-control" id="inputLastname" placeholder="Last name" ref={input=>lastName = input} required/>
                   </div>
                 </div>
                 <div className="col-6 form-group">
                   <label for="inputNumber  ">聯絡電話*</label>
-                  <input type="text" className="form-control" id="inputNumber" placeholder="" required/>
+                  <input type="text" className="form-control" id="inputNumber" placeholder="" ref={input=>phone = input} required/>
                 </div>
               </div>
             </div>
@@ -98,5 +109,11 @@ function paymentDetail(props) {
     </>
   )
 }
+const mapStateToProps = store=>{
+  return{
+    mycart:store.orderReducer.cartData
+  }
+}
 
-export default withRouter(paymentDetail)
+
+export default withRouter(connect(mapStateToProps)(paymentDetail))
