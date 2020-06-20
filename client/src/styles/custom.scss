@@ -181,7 +181,7 @@ nav {
 .form-group {
   margin: 1.5rem 0;
 }
-//註冊視窗
+//===================註冊登入視窗===================
 .login {
   .modal-lg {
     width: 650px;
@@ -193,6 +193,9 @@ nav {
       padding: 1.5rem;
     }
   }
+}
+.form-control::placeholder {
+  font-size: 15px !important;
 }
 .login-bg {
   background-color: #e6ded8;
@@ -321,7 +324,33 @@ nav {
   }
 }
 
-//===================選單====================
+//===================註冊ok視窗===================
+
+.SignOk {
+  @extend .login;
+}
+.SignOk-bg {
+  @extend .login-bg;
+  width: 290px;
+  text-align: center;
+  .SignOk-title {
+    width: 100%;
+    color: #707070;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .SignOk-text {
+    font-size: 16px;
+    width: 100%;
+  }
+  .SignOkbtn {
+    @extend .signbtn;
+    margin-bottom: 0;
+  }
+}
+
+//===================footer====================
 
 .footer {
   background-color: #684b38;
