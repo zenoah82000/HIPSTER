@@ -33,9 +33,14 @@ class Map extends React.Component {
 
   cardClickReset = (lat, log) => {
     console.log(lat, log)
+
+    let newLat = lat +0.01
+    let newLog = log +0.01
+
+    console.log(newLat, newLog)
     this.setState({
       viewport: {
-        center: [lat, log ],
+        center: [newLat, newLog],
         zoom: 15, 
       },
       clicked:true

@@ -8,6 +8,30 @@ import { FaMapMarkerAlt } from 'react-icons/fa'
 import { FaRegClock } from 'react-icons/fa'
 import { FaRegCalendarCheck } from 'react-icons/fa'
 
+
+export const pointerIcon = new L.Icon({
+  iconUrl: require("../../images/marker.svg"),
+  iconRetinaUrl: require("../../images/marker.svg"),
+  iconAnchor: [5, 55],
+  popupAnchor: [10, -44],
+  iconSize: [50, 55],
+  // shadowUrl: "../assets/marker-shadow.png",
+  // shadowSize: [68, 95],
+  // shadowAnchor: [20, 92]
+});
+
+export const cafeTagIcon = new L.Icon({
+  iconUrl: require("../../images/location-pin.svg"),
+  iconRetinaUrl: require("../../images/location-pin.svg"),
+  iconAnchor: [5, 55],
+  popupAnchor: [10, -44],
+  iconSize: [50, 55],
+  // shadowUrl: "../assets/marker-shadow.png",
+  // shadowSize: [68, 95],
+  // shadowAnchor: [20, 92]
+});
+
+
 export default class ViewportExample extends Component {
   constructor(props) {
     super(props)
@@ -46,7 +70,7 @@ export default class ViewportExample extends Component {
     })
   }
 
-  openPopup (marker) {
+  openPopup(marker) {
     if (marker && marker.leafletElement) {
       window.setTimeout(() => {
         marker.leafletElement.openPopup()
@@ -54,20 +78,28 @@ export default class ViewportExample extends Component {
     }
   }
 
+
+
+  
   render() {
-    let { viewport,clicked } = this.props
-    console.log(viewport.center[0]-0.001,viewport.center[0],clicked)
+    let { viewport, clicked } = this.props
+    // console.log(viewport.center[0] - 0.001, viewport.center[0], clicked)
     return (
       <div>
-        <Map  viewport={viewport}    >
+        <Map viewport={viewport}    >
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           />
 
-   {clicked? <Marker
+          {clicked ?
+            // this.state.data.forEach((item) => {
+            //   if (item.lat === viewport.center[0] && item.log === viewport.center[1]) {
+            //     return(
+            <Marker
               position={viewport.center}
               ref={this.openPopup}
+              icon={cafeTagIcon}
             >
               <Popup className="locationCard">
                 <h5>
@@ -76,17 +108,17 @@ export default class ViewportExample extends Component {
                 </h5>
                 <ul className="cardList list-unstyled">
                   <li>
-                    <div className=""
-                    // {
-                    //     item.category == '咖啡廳'
-                    //       ? 'mapCategoryCafe'
-                    //       : item.category == '手作課程'
-                    //       ? 'mapCategoryItem'
-                    //       : 'mapCategoryItem2'
-                    //   }
-                      >
-                      {/* <span>{item.category}</span> */}
-                    </div>
+                    {/* <div className=
+                      {
+                        item.category == '咖啡廳'
+                          ? 'mapCategoryCafe'
+                          : item.category == '手作課程'
+                            ? 'mapCategoryItem'
+                            : 'mapCategoryItem2'
+                      }
+                    >
+                      <span>{item.category}</span>
+                    </div> */}
                   </li>
                   <li
                     style={{
@@ -124,80 +156,103 @@ export default class ViewportExample extends Component {
                     <span>活動日期：</span>
                   </li>
                 </ul>
-                <button className="cardButton" value>
-                  立即預定
-                </button>
+                <div className="cardButton" >
+                  <a value="" href="/#">
+                    立即預定
+                </a>
+                </div>
               </Popup>
-            </Marker>:        
-          this.state.data.map((item) => (           
-            <Marker
-              position={[item.lat, item.log]}
+            </Marker>
+            //     )
+            //   }
+            // })
+            :
+
+            this.state.data.map((item) => (
+              <Marker
+                position={[item.lat, item.log]}
+                icon={cafeTagIcon}
               // onMouseOver={e => {
               //   e.target.openPopup();
               // }} 
-                // onMouseOut={e => {
-                //   e.target.closePopup();
-                // }}
-            >
-              <Popup className="locationCard">
-                <h5>
-                  <GiCoffeeCup className="h5 mr-1" />
-                  {item.name}
-                </h5>
-                <ul className="cardList list-unstyled">
-                  <li>
-                    <div className={
+              // onMouseOut={e => {
+              //   e.target.closePopup();
+              // }}
+              >
+                <Popup className="locationCard">
+                  <h5>
+                    <GiCoffeeCup className="h5 mr-1" />
+                    {item.name}
+                  </h5>
+                  <ul className="cardList list-unstyled">
+                    <li>
+                      <div className={
                         item.category == '咖啡廳'
                           ? 'mapCategoryCafe'
                           : item.category == '手作課程'
-                          ? 'mapCategoryItem'
-                          : 'mapCategoryItem2'
+                            ? 'mapCategoryItem'
+                            : 'mapCategoryItem2'
                       }>
-                      <span>{item.category}</span>
-                    </div>
-                  </li>
-                  <li
-                    style={{
-                      width: '460px',
-                      height: '200px',
-                      objectFit: 'cover',
-                      overflow: 'hidden',
-                      marginTop: '10px',
-                    }}
-                  >
-                    <img
-                      src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
-                      alt=""
-                    />
-                  </li>
-                  <li>
-                    <span>星等{item.star}</span>
-                  </li>
-                  <li>
-                    <span className="mr-2">
-                      <FaRegClock />
-                    </span>
-                    <span>營業時間</span>
-                  </li>
-                  <li>
-                    <span className="mr-2">
-                      <FaMapMarkerAlt />
-                    </span>
-                    <span>地點</span>
-                  </li>
-                  <li>
-                    <span className="mr-2 ">
-                      <FaRegCalendarCheck />
-                    </span>
-                    <span>活動日期：</span>
-                  </li>
-                </ul>
-                <button className="cardButton" value>
-                  立即預定
+                        <span>{item.category}</span>
+                      </div>
+                    </li>
+                    <li
+                      style={{
+                        width: '460px',
+                        height: '200px',
+                        objectFit: 'cover',
+                        overflow: 'hidden',
+                        marginTop: '10px',
+                      }}
+                    >
+                      <img
+                        src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
+                        alt=""
+                      />
+                    </li>
+                    <li>
+                      <span>星等{item.star}</span>
+                    </li>
+                    <li>
+                      <span className="mr-2">
+                        <FaRegClock />
+                      </span>
+                      <span>營業時間</span>
+                    </li>
+                    <li>
+                      <span className="mr-2">
+                        <FaMapMarkerAlt />
+                      </span>
+                      <span>地點</span>
+                    </li>
+                    <li>
+                      <span className="mr-2 ">
+                        <FaRegCalendarCheck />
+                      </span>
+                      <span>活動日期：</span>
+                    </li>
+                  </ul>
+                  <button className="cardButton" value>
+                    立即預定
                 </button>
-              </Popup>
-            </Marker>
-          ))}
+                </Popup>
+              </Marker>
+            ))}
+
+{/* My location */}
+          <Marker
+          icon={pointerIcon}
+           className="mylocation" 
+          //  ref={this.openPopup}
+            position={[25.0338438, 121.54335]}
+             >
+            {/* <Popup  >
+                     我的位置
+            </Popup> */}
+          </Marker>
+
+
+
         </Map>
       </div>
     )

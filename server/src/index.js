@@ -7,7 +7,8 @@ const db = require(__dirname + '/db_connect2');
 const session =require('express-session');
 const Mysqlstore =require('express-mysql-session')(session);
 const cors = require('cors');
-
+const nodemailer = require("nodemailer");
+require("dotenv").config();
 
 
 const upload = require(__dirname+"/upload-module");
@@ -52,9 +53,9 @@ app.use((req,res,next)=>{
 
 app.use(require(__dirname+'/coupon'))
 
-
 app.use(require(__dirname+'/order/order'));
 
+app.use(require(__dirname+'/blog'));
 
 
 

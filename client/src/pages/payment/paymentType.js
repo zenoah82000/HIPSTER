@@ -1,11 +1,12 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import {withRouter,Link} from 'react-router-dom'
 import '../../styles/Payment.scss'
 
 //引入自訂元件
 
 function paymentType(props) {
-  const {mycart,setMycart,sum}=props
+  const {mycart,sum}=props
 
   const backPage=()=>{
     props.history.push('/paymentDetail')
@@ -13,11 +14,13 @@ function paymentType(props) {
   }
   const checkOut= ()=>{
 
-    
+    const newMycart = [...mycart]
+    console.log(newMycart)
     // 購物完清掉 localstorage 購物車
+    props.dispatch({type:'GET_CART',value:[]})
     localStorage.removeItem('cart')
-    window.location.href = '/paymentFinish'
-    // props.history.push('')
+    // window.location.href = '/paymentFinish'
+    props.history.push('/paymentFinish')
   }
   return (
     <>
@@ -96,5 +99,10 @@ function paymentType(props) {
     </>
   )
 }
-
-export default withRouter(paymentType)
+const mapStateToProps = store=>{
+  return{
+    mycart:store.orderReducer.cartData
+  }
+}
+const mapDispatchToProps = null
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(paymentType))

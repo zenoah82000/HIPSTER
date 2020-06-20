@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
+
 import { Modal, Button, Form } from 'react-bootstrap'
 import Logo from '../images/home/logo.png'
 import loginiconf from '../images/home/login-f.png'
@@ -9,26 +11,28 @@ import { FaHeart, FaShoppingCart } from 'react-icons/fa'
 import { IoMdClose } from 'react-icons/io'
 
 import { Link, withRouter } from 'react-router-dom'
+import { BsTrash } from 'react-icons/bs'
 import { BsLock } from 'react-icons/bs'
 import Test from '../pages/Test'
 
 function Mynavbar(props) {
-  const { mycart } = props
+  //購物車資料
+  const { mycart, deleteCart } = props
+
+  //購物車視窗狀態
   const [showCart, setshowCart] = useState(false)
   const showMenu = () => {
     setshowCart(!showCart)
   }
 
-  //跳出視窗狀態
+  //是否跳出註冊&登入視窗
   const [showlogin, setShowlogin] = useState(false)
-
-  //登入登出狀態,true=註冊  false=登入
+  //登入登出視窗狀態,true=註冊  false=登入
   const [SignLogin, setSignLogin] = useState(true)
-
-  //
+  //視窗狀態按鈕切換
   const signchangbtn = SignLogin ? 'btn changbtn active' : 'btn changbtn'
   const loginchangbtn = SignLogin ? 'btn changbtn' : 'btn changbtn active'
-
+  //註冊會員表格
   const membersign = (
     <>
       <div className="membersign ">
@@ -44,6 +48,7 @@ function Mynavbar(props) {
       </div>
     </>
   )
+  //登入會員表格
   const memberlogin = (
     <>
       <div className="membersign">
@@ -60,8 +65,8 @@ function Mynavbar(props) {
     </>
   )
 
-  //跳出視窗
-  function LoginMassage(props) {
+  //註冊&登入浮動視窗
+  function SignLoginMassage(props) {
     return (
       <Modal
         className="login"
@@ -138,7 +143,15 @@ function Mynavbar(props) {
           )}
 
           {SignLogin ? (
-            <div className="signbtn " onClick={() => {}}>
+            <div
+              className="signbtn "
+              onClick={() => {
+                setShowlogin(false)
+                setTimeout(() => {
+                  setShowSignOk(true)
+                }, 300)
+              }}
+            >
               註冊
             </div>
           ) : (
@@ -151,9 +164,40 @@ function Mynavbar(props) {
     )
   }
 
+  ////註冊完成視窗
+  //是否跳出註冊完成視窗
+  const [showSignOk, setShowSignOk] = useState(false)
+  function SignOkMassage(props) {
+    return (
+      <Modal
+        className="SignOk"
+        {...props}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Body className="SignOk-bg">
+          <p className="SignOk-title">註冊完成</p>
+          <p className="SignOk-text">請重新登入</p>
+          <div
+            className="SignOkbtn"
+            onClick={() => {
+              setShowSignOk(false)
+              setSignLogin(false)
+              setShowlogin(true)
+            }}
+          >
+            確認
+          </div>
+        </Modal.Body>
+      </Modal>
+    )
+  }
+
   return (
     <>
-      <LoginMassage show={showlogin} onHide={() => setShowlogin(false)} />
+      <SignLoginMassage show={showlogin} onHide={() => setShowlogin(false)} />
+      <SignOkMassage show={showSignOk} onHide={() => setShowSignOk(false)} />
       <nav>
         <div className="navbar container ">
           <a href="/" className="logo">
@@ -215,6 +259,14 @@ function Mynavbar(props) {
                                     </div>
                                     <div className="item-price">
                                       <span>NT${value.price}</span>
+                                      <button
+                                        onClick={() => {
+                                          deleteCart(value.id)
+                                        }}
+                                      >
+                                        <BsTrash />
+                                        移除
+                                      </button>
                                     </div>
                                   </div>
                                 </div>
@@ -276,5 +328,10 @@ function Mynavbar(props) {
     </>
   )
 }
+const mapStateToProps = store=>{
+  return{
+    mycart:store.orderReducer.cartData
+  }
+}
 
-export default withRouter(Mynavbar)
+export default withRouter(connect(mapStateToProps)(Mynavbar))
