@@ -13,7 +13,7 @@ class Map extends React.Component {
     this.state = {
       viewport: {
         center: [25.0338438, 121.54335],
-        zoom: 15,
+        zoom: 20,
       },
       selected:"",
       clicked:false
@@ -25,7 +25,7 @@ class Map extends React.Component {
     this.setState({
       viewport: {
         center: [25.0338438 + 0.0000000000001, 121.54335 + 0.0000000000001],
-        zoom: 15,
+        zoom: 20,
       },
       clicked:false
     })

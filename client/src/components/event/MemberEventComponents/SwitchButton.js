@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 
 // Styled Components
@@ -25,7 +25,7 @@ const StyledSwitchButton = styled.div`
       box-shadow: 0px 1px 3px rgba(30, 30, 30, 0.3);
       transition: all 300ms ease-in-out;
       transform: ${props =>
-        props.active ? 'translate(16px)' : 'translate(0)'};
+    props.active ? 'translate(16px)' : 'translate(0)'};
       display: block;
     }
   }
@@ -36,15 +36,32 @@ const StyledSwitchButton = styled.div`
   }
 `
 
-// Switch Button Component
-// 透過 props 接收外部傳進來三個屬性的值
-// 1. type: 設置 Switch Button 按鈕類型。
-// 2. active: Switch Button 狀態。
-// 3. clicked: toggleSwitchButton (Method) 切換 Switch Button。
-const SwitchButton = props => (
-  <StyledSwitchButton active={props.active}>
-    <button type={props.type} onClick={props.clicked}></button>
-  </StyledSwitchButton>
-)
+class SwitchButton extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      active: true
+    }
+  }
+
+  toggleSwitchButton = () => {
+    this.setState({
+      active: !this.state.active
+    })
+    // console.log(this.state.active)
+  }
+
+  render() {
+    return (
+      <>
+        <StyledSwitchButton active  ={this.state.active}>
+          <button onClick={()=>this.toggleSwitchButton()}></button>
+        </StyledSwitchButton>
+      </>
+    )
+  }
+
+}
+
 
 export default SwitchButton

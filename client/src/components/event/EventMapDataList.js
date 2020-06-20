@@ -3,6 +3,7 @@ import Fade from 'react-reveal/Fade'
 import SwitchButton from './MemberEventComponents/SwitchButton'
 import { Dropdown } from 'react-bootstrap'
 import Calendar from 'react-calendar'
+// import '../../styles/product/map.scss'
 
 //icon
 import { FaMapMarkerAlt } from 'react-icons/fa'
@@ -10,6 +11,41 @@ import { FaRegClock } from 'react-icons/fa'
 import { FaRegCalendarCheck } from 'react-icons/fa'
 import { FaSearch, FaStreetView } from 'react-icons/fa'
 import { GiCoffeeCup } from 'react-icons/gi'
+
+
+Date.prototype.pattern = function (fmt) {
+  var o = {
+    "M+": this.getMonth() + 1, //月份         
+    "d+": this.getDate(), //日         
+    "h+": this.getHours() % 12 == 0 ? 12 : this.getHours() % 12, //小时         
+    "H+": this.getHours(), //小时         
+    "m+": this.getMinutes(), //分         
+    "s+": this.getSeconds(), //秒         
+    "q+": Math.floor((this.getMonth() + 3) / 3), //季度         
+    "S": this.getMilliseconds() //毫秒         
+  };
+  var week = {
+    "0": "/u65e5",
+    "1": "/u4e00",
+    "2": "/u4e8c",
+    "3": "/u4e09",
+    "4": "/u56db",
+    "5": "/u4e94",
+    "6": "/u516d"
+  };
+  if (/(y+)/.test(fmt)) {
+    fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+  }
+  if (/(E+)/.test(fmt)) {
+    fmt = fmt.replace(RegExp.$1, ((RegExp.$1.length > 1) ? (RegExp.$1.length > 2 ? "/u661f/u671f" : "/u5468") : "") + week[this.getDay() + ""]);
+  }
+  for (var k in o) {
+    if (new RegExp("(" + k + ")").test(fmt)) {
+      fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+    }
+  }
+  return fmt;
+}
 
 class FilteredList extends React.Component {
   constructor(props) {
@@ -22,6 +58,9 @@ class FilteredList extends React.Component {
       searchBtn2: '日期',
       searchBtn3: '星等',
       date: new Date(),
+      dateClicked:false,
+      active: true
+
     }
   }
   componentDidMount() {
@@ -91,19 +130,28 @@ class FilteredList extends React.Component {
     // console.log(event)
   }
 
-  showDate = (event) => {
+  showDate = () => {
     this.setState({
-      searchBtn2: event.target.value,
+      searchBtn2: this.state.date.pattern("yyyy-MM-dd"),
     })
-    // console.log(this.state.searchBtn2)
+    // console.log(this.state.dateClicked)
+  }
+
+ changeClickState= () => {
+    this.setState({
+      dateClicked: !this.state.dateClicked
+    })
+    console.log(this.state.dateClicked)
   }
 
   pickDate = (date, event) => {
     this.setState({ date })
-    console.log(date, 'onchange')
-    console.log(this.state.date)
-    console.log(this.state.searchBtn2)
+    // console.log(date, event,'onchange')
+    // console.log(this.state.date)
+    // console.log(this.state.searchBtn2)
+    this.showDate()
   }
+ 
 
   //地圖定位
   handleClick() {
@@ -119,21 +167,19 @@ class FilteredList extends React.Component {
       }
     })
   }
+ 
   onItemClick = (event) => {
     event.openPopup();
   }
 
-
-
-
   filterList() {
     let updatedList = this.state.data.filter((item) => {
-      console.log(this.state.searchBtn1, this.state.searchBtn3)
+      // console.log(this.state.searchBtn1, this.state.searchBtn3)
       if (
         this.state.searchBtn1 === '全部類別' ||
         this.state.searchBtn1 === '類別'
       ) {
-        console.log('texs')
+        // console.log('texs')
         if (this.state.searchBtn3 == '4.5分以上') {
           return (
             item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
@@ -372,23 +418,28 @@ class FilteredList extends React.Component {
                   </Dropdown.Menu>
                 </Dropdown>
 
-                <Dropdown>
+                <Dropdown >
                   <Dropdown.Toggle
                     className="mapSearch  btn-small"
                     variant="success"
                     id="dropdown-basic"
+                    // onClick={this.changeClickState}
                   >
                     {this.state.searchBtn2}
                   </Dropdown.Toggle>
-
-                  <Dropdown.Menu>
+                  <Dropdown.Menu >
+                  {/* className={this.state.dateClicked? "displayNone":""}  */}
+                  <div >
                     <Calendar
                       onChange={this.pickDate}
                       value={this.state.date}
-                      onClick={(event) => this.showDate(event)}
-                    />
+                      onClick={this.showDate}
+                    />          
+                      <button className="confirmBtn" onClick={this.changeClickState}>確認日期 </button>
+                    </div>
                   </Dropdown.Menu>
                 </Dropdown>
+
                 <Dropdown>
                   <Dropdown.Toggle
                     className="mapSearch  btn-small"
@@ -433,16 +484,10 @@ class FilteredList extends React.Component {
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
-                <span>營業中</span>
-                <SwitchButton />
-                {/* <div className="d-flex switchbutton-jy align-items-center justify-content-end">
-            <p>營業中</p>
-            <SwitchButton
-            // type="button"
-            // active={props.isEnable}
-            // clicked={toggleSwitchButton}
-            />
-          </div> */}
+                <p>顯示咖啡廳</p>
+                <SwitchButton
+                  type="button"
+                />
               </div>
             </div>
           </div>

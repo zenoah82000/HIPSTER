@@ -116,7 +116,7 @@
   color: #ffffff;
 }
 .bg1{
-  background: rgba(129, 111, 71, 0.918);
+  background: #816f47ea;
   border: 1px solid rgba(129, 111, 71, 0.918);
   color: white;
 }
@@ -476,4 +476,13 @@ MyCalendar .dropdown-menu.show {
 
 .mylocationBtn:hover {
   background: rgba(206, 205, 205, 0.911);
+}
+
+.displayNone{
+  display: none;
+}
+
+.confirmBtn{
+  background: rgba(104, 142, 103, 0.8);
+
 }
