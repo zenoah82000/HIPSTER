@@ -27,20 +27,21 @@ function MyCart(props) {
               <div className="col-3">{value.name}</div>
               <div className="col-3">{value.date}</div>
               <div className="col">
-              <Amount setMycart={setMycart} mycart={mycart} index={index} value={value.amount}/>
+              <Amount index={index} value={value.amount}/>
               </div>
               <div className="col"></div>
             </div>
-            <div className="bg-white d-flex border-top p-1 text-right">
-              <div className="col-1">
+            <div className="bg-white d-flex border-top p-1 text-right card-change">
+              <div className="col-1 d-flex align-items-center edit">
                 <FiEdit />
-                更改
+                <p>更改</p>
               </div>
-              <div className="col-2" onClick={()=>{
+              <div className="col-2 d-flex align-items-center delete" onClick={()=>{
                 deleteCart(value.id)
               }}>
                 <BsTrash />
-                刪除
+                <p>刪除</p>
+                
               </div>
               <div className="col text-right">
                 NT${value.price * value.amount}

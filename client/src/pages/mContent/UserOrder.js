@@ -57,7 +57,7 @@ function UserOrder() {
                       .map((value) => {
                         return (
                           <>
-                          <div className="d-flex product-box">
+                          <div className="d-flex product-box border-bottom">
                             <div className="productimg mr-3">
                               <img src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg" />
                             </div>
@@ -72,7 +72,7 @@ function UserOrder() {
                                 <p>價格:{value.checkPrice}</p>
                               </div>
                               <div>
-                                <p>活動時間:</p>
+                                <p>活動時間:{value.date}</p>
                               </div>
                             </div>
                             </div>
@@ -82,7 +82,7 @@ function UserOrder() {
                   </div>
                   <div className="card-footer order-footer d-flex justify-content-end">
                     <div>
-                      購買金額:<span>NT$</span>
+                      購買金額:<span>NT${item.orderTotal}</span>
                     </div>
                     <button className="order-button">取消整筆訂單</button>
                   </div>

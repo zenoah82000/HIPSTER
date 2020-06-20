@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import '../../styles/Payment.scss'
 import {BsCheckCircle  } from "react-icons/bs";
 
@@ -20,7 +21,7 @@ function paymentFinish(props) {
               <li className= "pt-2">預定日期: 2020年5月24日 9:20PM  </li>
             </ul>
           </div>
-          <button className="paymentButton">查看訂單</button>
+          <button className="paymentButton"><Link to="/memberuser/order">查看訂單</Link></button>
           </div>      
         </div>
       </div>

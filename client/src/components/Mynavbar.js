@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
+
 import { Modal, Button, Form } from 'react-bootstrap'
 import Logo from '../images/home/logo.png'
 import loginiconf from '../images/home/login-f.png'
@@ -282,5 +284,10 @@ function Mynavbar(props) {
     </>
   )
 }
+const mapStateToProps = store=>{
+  return{
+    mycart:store.orderReducer.cartData
+  }
+}
 
-export default withRouter(Mynavbar)
+export default withRouter(connect(mapStateToProps)(Mynavbar))

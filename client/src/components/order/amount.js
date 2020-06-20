@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
+import { connect } from 'react-redux'
 
 import { GrFormAdd } from 'react-icons/gr'
 import { GrFormSubtract } from 'react-icons/gr'
 
 function Amount(props) {
-  const { index, value, setMycart, mycart } = props
+  const { index, value, mycart } = props
   const [amount, setAmount] = useState(value)
 
   const changeAmount = (type) => {
@@ -15,7 +16,7 @@ function Amount(props) {
         newAmount = amount + 1
         setAmount(newAmount)
         newCart[index].amount = newAmount
-        setMycart(newCart)
+        props.dispatch({type:'GET_CART',value:newCart})
         localStorage.setItem('cart', JSON.stringify(newCart))
         break
       case 'dec':
@@ -28,7 +29,7 @@ function Amount(props) {
         }
         setAmount(newAmount)
         newCart[index].amount = newAmount
-        setMycart(newCart)
+        props.dispatch({type:'GET_CART',value:newCart})
         localStorage.setItem('cart', JSON.stringify(newCart))
         break
     }
@@ -52,4 +53,11 @@ function Amount(props) {
     </>
   )
 }
-export default Amount
+
+const mapStateToProps = store=>{
+  return{
+    mycart:store.orderReducer.cartData
+  }
+}
+const mapDispatchToProps = null
+export default connect(mapStateToProps, mapDispatchToProps)(Amount)
