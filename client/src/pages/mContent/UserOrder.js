@@ -13,7 +13,7 @@ function UserOrder() {
   const [loading, setLoading] = useState(false)
 
   const getOrderlistAsync = async () => {
-    const request = new Request('http://localhost:5000/member/oreder/2', {
+    const request = new Request('http://localhost:5000/member/order/2', {
       method: 'get',
       headers: new Headers({
         Accept: 'application/json',
