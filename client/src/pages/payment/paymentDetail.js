@@ -38,7 +38,7 @@ function paymentDetail(props) {
   const backPage = () => {
     props.history.push('/shoppingcar')
   }
-
+  window.history.forward(1);
   return (
     <>
       <form

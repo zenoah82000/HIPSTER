@@ -58,7 +58,7 @@ class FilteredList extends React.Component {
       searchBtn2: '日期',
       searchBtn3: '星等',
       date: new Date(),
-      dateClicked:false,
+      dateClicked: false,
       active: true
 
     }
@@ -137,7 +137,7 @@ class FilteredList extends React.Component {
     // console.log(this.state.dateClicked)
   }
 
- changeClickState= () => {
+  changeClickState = () => {
     this.setState({
       dateClicked: !this.state.dateClicked
     })
@@ -151,7 +151,7 @@ class FilteredList extends React.Component {
     // console.log(this.state.searchBtn2)
     this.showDate()
   }
- 
+
 
   //地圖定位
   handleClick() {
@@ -168,7 +168,7 @@ class FilteredList extends React.Component {
       }
     })
   }
- 
+
   onItemClick = (event) => {
     event.openPopup();
   }
@@ -288,7 +288,7 @@ class FilteredList extends React.Component {
       }
     })
 
-   
+
     let data = updatedList.map((item, index, array) => {
 
       return (
@@ -355,7 +355,7 @@ class FilteredList extends React.Component {
   }
 
   render() {
-    let {cafeActive } = this.props 
+    let { cafeActive } = this.props
 
     return (
       <div>
@@ -429,20 +429,17 @@ class FilteredList extends React.Component {
                     className="mapSearch  btn-small"
                     variant="success"
                     id="dropdown-basic"
-                    // onClick={this.changeClickState}
+                  // onClick={this.changeClickState}
                   >
                     {this.state.searchBtn2}
                   </Dropdown.Toggle>
                   <Dropdown.Menu >
-                  {/* className={this.state.dateClicked? "displayNone":""}  */}
-                  <div >
+                    {/* className={this.state.dateClicked? "displayNone":""}  */}
                     <Calendar
                       onChange={this.pickDate}
                       value={this.state.date}
-                      onClick={this.showDate}
-                    />          
-                      <button className="confirmBtn" onClick={this.changeClickState}>確認日期 </button>
-                    </div>
+
+                    />
                   </Dropdown.Menu>
                 </Dropdown>
 
@@ -490,7 +487,7 @@ class FilteredList extends React.Component {
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
-                
+
                 <p>顯示咖啡廳 </p>
                 <SwitchButton
                   type="button"
@@ -529,11 +526,11 @@ class FilteredList extends React.Component {
             </div>
           </div>
           <div className="dataBox overflow-auto px-1">
-            {cafeActive? 
-            <ul className="list-group ">{this.filterList()}</ul>:console.log()}
-            
-            
-           
+            {cafeActive ?
+              <ul className="list-group ">{this.filterList()}</ul> : console.log()}
+
+
+
           </div>
         </div>
       </div>
