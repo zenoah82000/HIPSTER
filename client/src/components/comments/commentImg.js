@@ -11,6 +11,7 @@ function commentImg(props) {
                     src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
                     alt=""
                 />
+            
             </div>
         </>
     )

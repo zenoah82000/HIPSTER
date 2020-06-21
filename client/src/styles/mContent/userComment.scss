@@ -14,3 +14,23 @@
   height: 200px;
   object-fit: cover;
 }
+
+.commentImg{
+  width:80px;
+   height: 80px;
+    object-fit: cover;
+     overflow: hidden;
+      margin: 5px; 
+}
+
+.commentImgPlus{
+  width:80px;
+   height: 80px;
+     margin: 5px; 
+    text-align: center;
+    line-height: 80px;
+    border: 1px solid gray;
+}
+.commentImgPlus:hover{
+  background: rgba(241, 241, 241, 0.726);
+}
