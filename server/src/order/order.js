@@ -69,7 +69,7 @@ router.post("/member/checkout", async (req, res) => {
 });
 
 //完成訂單寄發EMAIL
-router.post("/member/email", (req, res) => {
+router.get("/member/email", (req, res) => {
   console.log("發送電子郵件");
   const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -89,8 +89,8 @@ router.post("/member/email", (req, res) => {
     from: '"hisper" <e24971234@gmail.com>',
     to: "kengp6@gmail.com",
     cc: "e24971234@gmail.com",
-    subject: "(測試寄信)訂閱好康秘密報報報...馬仔",
-    text: "2223",
+    subject: "感謝你在本站消費",
+    text: "GGGGGGGGGGGGGG",
   };
   // 準備發送信件
   transporter.sendMail(mailOptions, function (err, info) {
