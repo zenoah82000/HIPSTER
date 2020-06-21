@@ -74,46 +74,7 @@ async function executeSQL(
   }
 }
 
-// instance 物件實體，預設為空物件
-async function userLogin(sql, req, res, instance) {
-  try {
-    const [rows, fields] = await db.promisePool.query(sql)
 
-    // 仿照json-server的回傳，有找到會回傳單一值，沒找到會回到空的物件字串
-    let result = {}
-    if (rows.length) {
-      result = rows[0]
-
-      req.session.regenerate(function(err) {
-        if (err) {
-          res.status(200).json({ status: 2, message: '登入失敗' })
-        }
-
-        req.session.loginId = result.id
-        req.session.loginName = result.name
-        req.session.loginEmail = result.email
-        req.session.loginUsername = result.username
-        req.session.loginCreatedDate = result.createDate
-
-        // 如果要用全訊息可以用以下的回傳
-        // res.json({ status: 0, message: '登入成功' })
-        res.status(200).json(result)
-      })
-    } else {
-      res.status(200).json({ status: 1, message: '帳號或密碼錯誤' })
-
-      //res.status(200).json(result)
-    }
-  } catch (error) {
-    // 錯誤處理
-    console.log(error)
-
-    // 顯示錯誤於json字串
-    res.status(200).json({
-      message: error,
-    })
-  }
-}
 
 // 以下為路由
 
@@ -123,11 +84,14 @@ router.post('/loginmember', async (req, res, next) =>{
   // console.log(req.body)
   const memberMail = req.body.memberMail
   const memberPwd = req.body.memberPwd
-    console.log('acc:'+memberMail)
-    console.log('pwd:'+memberPwd)
+    // console.log('acc:'+memberMail)
+    // console.log('pwd:'+memberPwd)
   const loginMemberSql = `SELECT * FROM member WHERE  memberMail=? AND memberPwd=? `
   const [r1] = await db.query(loginMemberSql, [memberMail,memberPwd]);
-  res.json([r1])
+  res.json([r1][0]['memberName'])
+
+
+
 })
 
 
