@@ -16,6 +16,7 @@ class Map extends React.Component {
         zoom: 20,
       },
       selected:"",
+      cafeActive:true,
       clicked:false
     }
     console.log(props)
@@ -47,6 +48,11 @@ class Map extends React.Component {
     })
   }
   
+  cafeActiveReset = () => {
+    this.setState({
+      cafeActive:!this.state.cafeActive
+    })
+  }
 
   render() {
     return (
@@ -56,7 +62,10 @@ class Map extends React.Component {
             <EventMapDataList
               onClickReset={this.onClickReset}
               cardClickReset={this.cardClickReset}
+              cafeActiveReset={this.cafeActiveReset}
+              cafeActive={this.state.cafeActive}
               CafeData={CafeData}
+
             />
           </div>
           <div className="col-8">
@@ -64,6 +73,7 @@ class Map extends React.Component {
             clicked={this.state.clicked}
               viewport={this.state.viewport}
               clickItem={this.state.itemId}
+              cafeActiveReset={this.cafeActiveReset}
               CafeData={CafeData}
             />
           </div>

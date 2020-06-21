@@ -156,6 +156,7 @@ class FilteredList extends React.Component {
   //地圖定位
   handleClick() {
     this.props.onClickReset()
+    // console.log(this.props.cafeActive)
   }
   cardClick = (cid) => {
     // console.log(cid)
@@ -287,7 +288,9 @@ class FilteredList extends React.Component {
       }
     })
 
+   
     let data = updatedList.map((item, index, array) => {
+
       return (
         <Fade>
           <li
@@ -350,7 +353,10 @@ class FilteredList extends React.Component {
     })
     return data
   }
+
   render() {
+    let {cafeActive } = this.props 
+
     return (
       <div>
         <fieldset className="">
@@ -484,9 +490,12 @@ class FilteredList extends React.Component {
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
-                <p>顯示咖啡廳</p>
+                
+                <p>顯示咖啡廳 </p>
                 <SwitchButton
                   type="button"
+                  cafeActiveReset={this.props.cafeActiveReset}
+                  cafeActive={this.props.cafeActive}
                 />
               </div>
             </div>
@@ -520,7 +529,11 @@ class FilteredList extends React.Component {
             </div>
           </div>
           <div className="dataBox overflow-auto px-1">
-            <ul className="list-group ">{this.filterList()}</ul>
+            {cafeActive? 
+            <ul className="list-group ">{this.filterList()}</ul>:console.log()}
+            
+            
+           
           </div>
         </div>
       </div>

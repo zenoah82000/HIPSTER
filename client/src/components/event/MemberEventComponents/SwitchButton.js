@@ -51,11 +51,19 @@ class SwitchButton extends React.Component {
     // console.log(this.state.active)
   }
 
+
+  cafeClick() {
+    this.props.cafeActiveReset()
+    console.log(this.props)
+  }
+
+
+
   render() {
     return (
       <>
-        <StyledSwitchButton active  ={this.state.active}>
-          <button onClick={()=>this.toggleSwitchButton()}></button>
+        <StyledSwitchButton active={this.props.cafeActive}>
+          <button onClick={()=>this.cafeClick()}></button>
         </StyledSwitchButton>
       </>
     )
