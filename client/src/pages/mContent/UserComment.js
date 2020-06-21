@@ -8,26 +8,32 @@ import myComment from '../../data/myComment.json'
 import { BsPlusCircle } from "react-icons/bs";
 import { IconContext } from "react-icons";
 
+// https://medium.com/@hugh_Program_learning_diary_Js/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6-react-react-form-%E5%A0%B1%E5%90%8D%E8%A1%A8%E5%96%AE-ebd5e3a7201a
 
 function UserComment(props) {
-
-  const [image, setImage] = useState({ file:[],preview: "", raw: "" });
-
-  const data = {}
+ const data = {}
   myComment.comment.forEach((item, i) => {
     data[item.id] = {
       name: item.name,
       content: item.content,
       date: item.date,
-      img: item.img
+      img: item.img,
     }
   })
+
   let dataArry = []
   for (const key in data) {
     data[key].id = key
     dataArry.push(data[key])
   }
 
+  const [image, setImage] = useState({ file:[],preview: "", raw: "" });
+  const [text, setText] = useState('');
+  const [list, setList] = useState(dataArry);
+  // const [nocommentlist, setNocommentlist] = useState([]);
+  // const divRef = React.createRef()
+
+ 
 
   // 上傳圖片
   let fileObj = []
@@ -41,15 +47,14 @@ function UserComment(props) {
       console.log(fileArray)
   }
 
-  setImage({ file: fileArray })
+  // setImage({ file: fileArray })
 
-    // if (e.target.files.length) {
-    //   setImage({
-
-    //     preview: URL.createObjectURL(e.target.files[0]),
-    //     raw: e.target.files[0]
-    //   });
-    // }
+    if (e.target.files.length) {
+      setImage({
+        preview: URL.createObjectURL(e.target.files[0]),
+        raw: e.target.files[0]
+      });
+    }
   };
 
   const handleUpload = async e => {
@@ -66,14 +71,36 @@ function UserComment(props) {
     });
   };
 
+const handleTextChange =(e) =>{
+  setText(e.target.value)
+  console.log("test")
+  console.log(text)
+}
+
+  const handleSubmit = (e) => {
+    // alert('submit')
+    text !==""?alert('提交成功') : alert('請輸入評論');
+    e.preventDefault();
+  }
+
+  const handleDelete = (index) => {
+    // console.log(index)
+    // console.log(dataArry)
+    dataArry.splice(index,1)
+    console.log(dataArry)
+    setList({
+      list:dataArry
+  })
+    // setLoadingState('刪除中........')
+  }
 
   //顯示評論
   const displayMyComment =
-    dataArry.length >= 1 ? (
-      dataArry.map((item) => {
+    list.length >= 1 ? (
+      list.map((item,index) => {
         return (
           <>
-            <div className="coupon-listview" >
+            <div className="coupon-listview" key={index} >
               <div class="row">
                 <div className="myReplyBox d-flex">
                   <div className="eventImgBox col-3">
@@ -96,7 +123,7 @@ function UserComment(props) {
                       <li className="d-flex">
                         <p>上傳相片:</p>
                         <div className="d-flex">
-                          {image.file!==[] ? (
+                          {image.preview!="" ? (
                             <div className="commentImg" >
                               <img
                               className="commentImgPhoto"
@@ -116,19 +143,27 @@ function UserComment(props) {
                                   type="file"
                                   id="upload-button"
                                   style={{ display: "none" }}
-                                  onChange={handleChange}  multiple/>
+                                  onChange={handleChange}  
+                                  // ref={divRef} 
+                                  multiple
+                                  // value={text}
+                                  />
                         </div>
                       </li>
                       <li>
                         <p>輸入回覆:</p>
-                        <textarea className="form-control" id="" rows="6 "></textarea>
+                        <textarea className="form-control" id="" rows="6" value={text} onChange={(index) => handleTextChange(index)} 
+                         ></textarea>
                       </li>
                     </ul>
                     <button
                       className="btn buttonstyle float-right mt-3"
                       type="submit"
                       id="button-addon2"
-                      onClick={handleUpload}
+                      value="Submit"
+                      onClick={()=>handleDelete(index)}
+                      // onClick={handleUpload}
+                      // onClick={()=>{setAccount("")}}
                     >
                       提交評論
                 </button>
@@ -261,7 +296,7 @@ function UserComment(props) {
             </NavLink></div>
             </div>
           </div>
-          <form className="tab-pane">
+          <form className="tab-pane" onSubmit={handleSubmit}>
             {displayMyComment}
           </form>
         </>
