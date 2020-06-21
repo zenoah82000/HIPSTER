@@ -27,10 +27,10 @@ function Blog(props) {
 
   // componentDidMount時執行一次
   // 從伺服要資料
-  // useEffect(() => {
-  //   initValueAsync()
-  //   console.log('Blog-props2:', props)
-  // }, [])
+  useEffect(() => {
+    initValueAsync()
+    console.log('Blog-props2:', props)
+  }, [])
   
 
   var items = [
@@ -138,8 +138,8 @@ function Blog(props) {
 
 // 將redux中的store的state(狀態)
 // 對應到這個元件中的props中，名稱為total
-const mapStateToProps = (state) => {
-  return { bloglist: state }
+const mapStateToProps = (store) => {
+  return { blogList: store.blogReducer.blogList}
 }
 
 // 綁定store的dispatch方法到這個元件的props
@@ -148,6 +148,6 @@ const mapStateToProps = (state) => {
 // }
 
 // 高階元件的樣式，必要的
-export default connect((state) => ({ bloglist: state }), {
+export default connect(mapStateToProps, {
   initValueAsync,
 })(Blog)

@@ -65,8 +65,8 @@ export const initValueAsync = (payload) => {
     const data = await response.json()
     // console.log(data)
     // 設定資料
-    console.log('延後 - initValueAsync',data)
+    console.log('initValueAsync中的data',data)
 
-    dispatch(initValue({ payload: data.rows }))
+    dispatch(initValue({ value: data.rows }))
   }
 }
