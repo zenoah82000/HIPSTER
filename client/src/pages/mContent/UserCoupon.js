@@ -5,7 +5,7 @@ function UserCoupon(props) {
   console.log(props)
   return (
     <>
-      {props.match.params.type == 'available' ? (
+      {props.match.params.type === 'available' ? (
         <>
           <div className="usercontainer">
             <h2 className="usertitle">我的優惠券</h2>

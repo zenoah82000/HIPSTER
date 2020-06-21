@@ -43,7 +43,7 @@ router.post("/member/email", (req, res) => {
   console.log("發送電子郵件");
   const transporter = nodemailer.createTransport({
     service: "gmail",
-    secure: true,
+    secure: true,   
     auth: {
       type: "OAuth2",
       user: process.env.ACCOUNT,
