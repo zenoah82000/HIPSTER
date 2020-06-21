@@ -8,14 +8,44 @@ import '../../styles/Payment.scss'
 function paymentType(props) {
   const {mycart,sum}=props
 
+  //訂單初始化
+  const orderData = {
+    orderMemberId: '2',
+    orderItems: [],
+    // checkSubtotal: handleOrderSum,
+  }
+  let itemData = {}
+  //訂單送出
+  const checkoutAsync= async(order)=>{
+    const request = new Request('http://localhost:5000/member/checkout', {
+      method: 'post',
+      body:JSON.stringify(order),
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }),
+    })
+    const response = await fetch(request)
+    const data = await response.json()
+  }
   const backPage=()=>{
     props.history.push('/paymentDetail')
+
     
   }
   const checkOut= ()=>{
-
-    const newMycart = [...mycart]
-    console.log(newMycart)
+    
+    let total =sum(mycart)
+    mycart.forEach((item,i)=>{
+      itemData.productId=mycart[i].id
+      itemData.date = mycart[i].date
+      itemData.checkPrice= mycart[i].price
+      itemData.checkQty = mycart[i].amount
+      itemData.checkSubtotal = +mycart[i].price * +mycart[i].amount
+      orderData.orderItems.push(itemData)
+      itemData={}
+    })
+    checkoutAsync(orderData)
     // 購物完清掉 localstorage 購物車
     props.dispatch({type:'GET_CART',value:[]})
     localStorage.removeItem('cart')

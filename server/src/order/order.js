@@ -6,7 +6,7 @@ const nodemailer = require("nodemailer");
 require("dotenv").config();
 
 //訂單列表
-router.get("/oreder/:memberId", async (req, res) => {
+router.get("/member/oreder/:memberId", async (req, res) => {
   console.log("買家訂單請求");
   const data = {
     status: true,
@@ -34,8 +34,38 @@ router.get("/oreder/:memberId", async (req, res) => {
 });
 
 //訂單新增
-router.post("/member/checkout", (req, res) => {
-  console.log("訂單新增", req.body);
+router.post("/member/checkout", async (req, res) => {
+  let year = new Date().getFullYear().toString();
+  let month = new Date().getMonth().toString();
+  let date = new Date().getDate().toString();
+  const memberId = 2;
+  const orderItems = req.body.orderItems;
+  //取得總筆數
+  let orderId;
+  const total = "show table status like 'item_lists'";
+  const [r1] = await db.query(total);
+  orderId =
+    "O" + year + month + date + (r1[0].Auto_increment + 1) + (r1[0].Rows + 1);
+
+
+
+  const addorderlist =
+    "INSERT INTO `item_lists` (`orderId`,`memberId`,`productId`,`date`,`checkPrice`,`checkQty`,`checkSubtotal`) VALUES (?,?,?,?,?,?,?)";
+  const addorder =""
+  for (let i = 0; i < orderItems.length; i++) {
+    db.query(addorderlist, [
+      orderId,
+      memberId,
+      orderItems[i].productId,
+      orderItems[i].date,
+      orderItems[i].checkPrice,
+      orderItems[i].checkQty,
+      orderItems[i].checkSubtotal,
+    ]);
+  }
+  console.log('訂單新增成功'+orderId)
+  res.json(orderId)
+  
 });
 
 //完成訂單寄發EMAIL
@@ -43,7 +73,7 @@ router.post("/member/email", (req, res) => {
   console.log("發送電子郵件");
   const transporter = nodemailer.createTransport({
     service: "gmail",
-    secure: true,   
+    secure: true,
     auth: {
       type: "OAuth2",
       user: process.env.ACCOUNT,

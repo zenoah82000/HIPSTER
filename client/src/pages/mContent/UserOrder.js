@@ -13,7 +13,7 @@ function UserOrder() {
   const [loading, setLoading] = useState(false)
 
   const getOrderlistAsync = async () => {
-    const request = new Request('http://localhost:5000/oreder/2', {
+    const request = new Request('http://localhost:5000/member/oreder/2', {
       method: 'get',
       headers: new Headers({
         Accept: 'application/json',
@@ -40,7 +40,7 @@ function UserOrder() {
   }, [orderlist])
 
   const display =
-    orderlist.length != 0 ? (
+    orderlist.length !=0? (
       <div className="orderlistbox ">
         <div className="row">
           {orderlist.order.map((item) => {
