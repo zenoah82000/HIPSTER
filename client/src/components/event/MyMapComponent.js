@@ -82,17 +82,19 @@ export default class ViewportExample extends Component {
 
   
   render() {
-    let { viewport, clicked } = this.props
+    let { viewport, clicked,cafeActive } = this.props
     // console.log(viewport.center[0] - 0.001, viewport.center[0], clicked)
     return (
       <div>
-        <Map viewport={viewport}    >
+        <Map viewport={viewport}>
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           />
 
-          {clicked ?
+{/* 顯示咖啡廳 */}
+{cafeActive? 
+          clicked ?
             // this.state.data.forEach((item) => {
             //   if (item.lat === viewport.center[0] && item.log === viewport.center[1]) {
             //     return(
@@ -237,7 +239,7 @@ export default class ViewportExample extends Component {
                 </button>
                 </Popup>
               </Marker>
-            ))}
+            )):""}
 
 {/* My location */}
           <Marker

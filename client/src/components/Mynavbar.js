@@ -328,9 +328,9 @@ function Mynavbar(props) {
     </>
   )
 }
-const mapStateToProps = store=>{
-  return{
-    mycart:store.orderReducer.cartData
+const mapStateToProps = (store) => {
+  return {
+    mycart: store.orderReducer.cartData,
   }
 }
 
