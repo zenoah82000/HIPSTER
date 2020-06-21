@@ -6,7 +6,6 @@ const router = express.Router()
 const db = require(__dirname + './../db_connect2')
 
 const getBlogList = async (req) => {
-
   const output = {          
     rows: [],
   }
@@ -23,6 +22,7 @@ const getBlogList = async (req) => {
 
 router.get('/blog', async (req, res) => {
   const output = await getBlogList(req)
+  
   res.json(output)
 })
 

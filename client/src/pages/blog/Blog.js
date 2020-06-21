@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
 import Masonry from 'react-masonry-css'
 
+import { initValueAsync } from '../../actions/blog'
+
 import MyBreadcrumb from '../../components/MyBreadcrumb'
 
-// import '../../components/blog/Masonry.css'
 
 import author1 from '../../images/blog/author1.jpg'
 import author2 from '../../images/blog/author2.jpg'
@@ -17,7 +20,18 @@ import author7 from '../../images/blog/author7.jpg'
 import author8 from '../../images/blog/author8.jpg'
 
 function Blog(props) {
-  console.log('Blog:', props)
+  console.log('Blog-props:', props)
+  // console.log('Blog-store:', store)
+
+  const { initValueAsync } = props
+
+  // componentDidMount時執行一次
+  // 從伺服要資料
+  // useEffect(() => {
+  //   initValueAsync()
+  //   console.log('Blog-props2:', props)
+  // }, [])
+  
 
   var items = [
     {
@@ -122,4 +136,18 @@ function Blog(props) {
   )
 }
 
-export default withRouter(Blog)
+// 將redux中的store的state(狀態)
+// 對應到這個元件中的props中，名稱為total
+const mapStateToProps = (state) => {
+  return { bloglist: state }
+}
+
+// 綁定store的dispatch方法到這個元件的props
+// const mapDispatchToProps = (dispatch) => {
+//   return bindActionCreators({ addValue, minusValue }, dispatch)
+// }
+
+// 高階元件的樣式，必要的
+export default connect((state) => ({ bloglist: state }), {
+  initValueAsync,
+})(Blog)
