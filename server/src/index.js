@@ -46,7 +46,7 @@ app.use(session({
 
 }))
 app.use((req,res,next)=>{
-    res.locals.sess= req.session || {}
+    res.locals.sess= req.session || {}//預設網頁session
 
    next()
 })

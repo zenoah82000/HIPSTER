@@ -88,7 +88,25 @@ router.post('/loginmember', async (req, res, next) =>{
     // console.log('pwd:'+memberPwd)
   const loginMemberSql = `SELECT * FROM member WHERE  memberMail=? AND memberPwd=? `
   const [r1] = await db.query(loginMemberSql, [memberMail,memberPwd]);
-  res.json([r1][0]['memberName'])
+
+  const output = {  //建立判斷登入
+    success:([r1][0].length)?true:false,
+    body:req.body  //表格回傳的fd
+  }
+  if([r1][0].length){
+    req.session.member = {
+      memberId:123,
+      memberName:456,
+  }
+  }
+
+
+//   app.get('/logout',(req,res)=>{
+//     delete req.session.user
+//     res.redirect('/login')
+// })
+
+  res.json(output)
 
 
 

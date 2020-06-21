@@ -67,7 +67,7 @@ function Mynavbar(props) {
     const response = await fetch(request)
     const data = await response.json()
 
-    console.log('伺服器登入回傳的json資料', data)
+    console.log('伺服器登入回傳的json資料', data.success)
     // 要等驗証過，再設定資料(簡單的直接設定)
   }
 
