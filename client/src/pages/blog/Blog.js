@@ -18,22 +18,22 @@ import author5 from '../../images/blog/author5.jpg'
 import author6 from '../../images/blog/author6.jpg'
 import author7 from '../../images/blog/author7.jpg'
 import author8 from '../../images/blog/author8.jpg'
+import blogList from '../../reducers/blog/blog'
 
 function Blog(props) {
   console.log('Blog-props:', props)
-  // console.log('Blog-store:', store)
 
-  const { initValueAsync } = props
-
+  const { blogList,initValueAsync } = props
+  console.log('blogList', blogList)
   // componentDidMount時執行一次
   // 從伺服要資料
-  // useEffect(() => {
-  //   initValueAsync()
-  //   console.log('Blog-props2:', props)
-  // }, [])
+  useEffect(() => {
+    initValueAsync()
+    
+  }, [])
   
 
-  var items = [
+  let items = [
     {
       id: 1,
       title: '文章標題: 狗頭',
@@ -96,20 +96,17 @@ function Blog(props) {
   ]
 
   // Convert array to JSX items
-  items = items.map(function (item) {
+  let blogList1 = blogList.map(function (item) {
     return (
-      <div key={item.id} className="blog-list-card">
-        <img src={authorImgArr[item.id - 1]} />
-        <h3 className="ml-3">{item.title}</h3>
+      <div key={item.articleId} className="blog-list-card">
+        <img src={authorImgArr[item.articleId - 1]} />
+        <h3 className="ml-3">{item.articleTitle}</h3>
         <p className="ml-3">
-          這是自由發揮的地方
-          <br />
-          你的文青足跡
-          <br />
+        {item.articleContent}
         </p>
         <p className="author-date d-flex justify-content-between ml-3">
           <span>{item.author}</span>
-          <span>2020年6月1日</span>
+          <span>{item.created_at}</span>
         </p>
       </div>
     )
@@ -129,7 +126,7 @@ function Blog(props) {
           classtitle="my-masonry-grid"
           columnClasstitle="my-masonry-grid_column"
         >
-          {items}
+          {blogList1}
         </Masonry>
       </Container>
     </>
@@ -138,8 +135,8 @@ function Blog(props) {
 
 // 將redux中的store的state(狀態)
 // 對應到這個元件中的props中，名稱為total
-const mapStateToProps = (state) => {
-  return { bloglist: state }
+const mapStateToProps = (store) => {
+  return { blogList: store.blogReducer.blogList}
 }
 
 // 綁定store的dispatch方法到這個元件的props
@@ -148,6 +145,6 @@ const mapStateToProps = (state) => {
 // }
 
 // 高階元件的樣式，必要的
-export default connect((state) => ({ bloglist: state }), {
+export default connect(mapStateToProps, {
   initValueAsync,
 })(Blog)

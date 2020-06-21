@@ -4,7 +4,7 @@ import { ADD_VALUE, MINUS_VALUE, INIT_VALUE } from '../../actions/blog/actionTyp
 // action = { type: 'ADD_VALUE', payload: { value: 2} }
 // 通常會預設導出，因為這個檔案裡有可能還有其它的程式碼
 // 然後一個reducer分不同的檔案寫
-export default function blog(state = 0, action) {
+export default function blogList(state = [], action) {
   switch (action.type) {
     // case 'ADD_VALUE':
     //   return state + action.payload.value

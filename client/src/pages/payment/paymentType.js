@@ -12,7 +12,6 @@ function paymentType(props) {
   const orderData = {
     orderMemberId: '2',
     orderItems: [],
-    // checkSubtotal: handleOrderSum,
   }
   let itemData = {}
   //訂單送出
@@ -45,6 +44,7 @@ function paymentType(props) {
       orderData.orderItems.push(itemData)
       itemData={}
     })
+    orderData.total=total
     checkoutAsync(orderData)
     // 購物完清掉 localstorage 購物車
     props.dispatch({type:'GET_CART',value:[]})
