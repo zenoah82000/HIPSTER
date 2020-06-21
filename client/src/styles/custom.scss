@@ -296,7 +296,9 @@ nav {
     @extend .logincheck;
     text-decoration: underline;
     color: #688e67;
-    cursor: pointer;
+    a {
+      cursor: pointer;
+    }
   }
   .signbtn,
   .loginbtn {

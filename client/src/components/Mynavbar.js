@@ -32,6 +32,51 @@ function Mynavbar(props) {
   //視窗狀態按鈕切換
   const signchangbtn = SignLogin ? 'btn changbtn active' : 'btn changbtn'
   const loginchangbtn = SignLogin ? 'btn changbtn' : 'btn changbtn active'
+
+  //註冊會員
+  async function addNewMember(item) {
+    // 注意資料格式要設定，伺服器才知道是json格式
+    const request = new Request('http://localhost:5000/addmember/', {
+      method: 'POST',
+      body: JSON.stringify(item),
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }),
+    })
+
+    const response = await fetch(request)
+    const data = await response.json()
+
+    console.log('伺服器回傳的json資料', data)
+    // 要等驗証過，再設定資料(簡單的直接設定)
+  }
+
+  //登入會員
+  async function LoginMember(item) {
+    // 注意資料格式要設定，伺服器才知道是json格式
+    const request = new Request('http://localhost:5000/loginmember/', {
+      method: 'POST',
+      body: JSON.stringify(item),
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }),
+    })
+
+    const response = await fetch(request)
+    const data = await response.json()
+
+    console.log('伺服器登入回傳的json資料', data)
+    // 要等驗証過，再設定資料(簡單的直接設定)
+  }
+
+  //抓取註冊表格資料
+  let signAccount, signPassword, signData
+
+  //抓取登入表格資料
+  let loginAccount, loginPassword, loginData
+
   //註冊會員表格
   const membersign = (
     <>
@@ -39,11 +84,23 @@ function Mynavbar(props) {
         <p className="membersign-title">註冊會員帳號</p>
         <Form.Group>
           <Form.Label>帳號(聯絡信箱)：</Form.Label>
-          <Form.Control type="email" placeholder="請輸入註冊信箱..." />
+          <Form.Control
+            ref={(input) => (signAccount = input)}
+            type="email"
+            id="signAccount"
+            required="required"
+            placeholder="請輸入註冊信箱..."
+          />
         </Form.Group>
         <Form.Group>
           <Form.Label>密碼：</Form.Label>
-          <Form.Control type="text" placeholder="請輸入註冊密碼..." />
+          <Form.Control
+            ref={(input) => (signPassword = input)}
+            type="text"
+            id="signPassword"
+            required="required"
+            placeholder="請輸入註冊密碼..."
+          />
         </Form.Group>
       </div>
     </>
@@ -55,11 +112,23 @@ function Mynavbar(props) {
         <p className="membersign-title">會員登入</p>
         <Form.Group>
           <Form.Label>帳號：</Form.Label>
-          <Form.Control type="email" placeholder="請輸入登入信箱..." />
+          <Form.Control
+            ref={(input) => (loginAccount = input)}
+            type="email"
+            id="loginAccount"
+            required="required"
+            placeholder="請輸入登入信箱..."
+          />
         </Form.Group>
         <Form.Group>
           <Form.Label>密碼：</Form.Label>
-          <Form.Control type="text" placeholder="請輸入登入密碼..." />
+          <Form.Control
+            ref={(input) => (loginPassword = input)}
+            type="text"
+            id="loginPassword"
+            required="required"
+            placeholder="請輸入登入密碼..."
+          />
         </Form.Group>
       </div>
     </>
@@ -139,23 +208,48 @@ function Mynavbar(props) {
               </Form.Check>
             </Form.Group>
           ) : (
-            <div className="forgetpwd">忘記密碼</div>
+            <div className="forgetpwd">
+              <a>忘記密碼</a>
+            </div>
           )}
 
           {SignLogin ? (
             <div
               className="signbtn "
+              type="submit"
               onClick={() => {
-                setShowlogin(false)
+                if (signAccount.value == '' || signPassword.value == '') {
+                }
+                //撈取資料
+                signData = {
+                  memberMail: signAccount.value,
+                  memberPwd: signPassword.value,
+                }
+                // console.log(signData)
+                addNewMember(signData) //寫入資料庫
+                setShowlogin(false) //關閉註冊登入視窗
                 setTimeout(() => {
-                  setShowSignOk(true)
+                  setShowSignOk(true) //跳出註冊完成視窗
                 }, 300)
               }}
             >
               註冊
             </div>
           ) : (
-            <div className="loginbtn" onClick={() => {}}>
+            <div
+              className="loginbtn"
+              onClick={() => {
+                loginData = {
+                  memberMail: loginAccount.value,
+                  memberPwd: loginPassword.value,
+                }
+                LoginMember(loginData) //寫入資料庫
+                setShowlogin(false) //關閉註冊登入視窗
+                setTimeout(() => {
+                  setShowLoginOk(true) //跳出註冊完成視窗
+                }, 300)
+              }}
+            >
               登入
             </div>
           )}
@@ -194,10 +288,38 @@ function Mynavbar(props) {
     )
   }
 
+  ////登入完成視窗
+  //是否跳出登入完成視窗
+  const [showLoginOk, setShowLoginOk] = useState(false)
+  function LoginOkMassage(props) {
+    return (
+      <Modal
+        className="SignOk"
+        {...props}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Body className="SignOk-bg">
+          <p className="SignOk-title">登入完成</p>
+          <div
+            className="SignOkbtn"
+            onClick={() => {
+              setShowLoginOk(false)
+            }}
+          >
+            確認
+          </div>
+        </Modal.Body>
+      </Modal>
+    )
+  }
+
   return (
     <>
       <SignLoginMassage show={showlogin} onHide={() => setShowlogin(false)} />
       <SignOkMassage show={showSignOk} onHide={() => setShowSignOk(false)} />
+      <LoginOkMassage show={showLoginOk} onHide={() => setShowLoginOk(false)} />
       <nav>
         <div className="navbar container ">
           <a href="/" className="logo">
