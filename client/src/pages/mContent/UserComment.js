@@ -8,6 +8,9 @@ import myComment from '../../data/myComment.json'
 import { BsPlusCircle } from "react-icons/bs";
 import { IconContext } from "react-icons";
 
+//確認框
+import Swal from 'sweetalert2'
+
 // https://medium.com/@hugh_Program_learning_diary_Js/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6-react-react-form-%E5%A0%B1%E5%90%8D%E8%A1%A8%E5%96%AE-ebd5e3a7201a
 
 function UserComment(props) {
@@ -28,7 +31,7 @@ function UserComment(props) {
   }
 
   const [image, setImage] = useState({ file:[],preview: "", raw: "" });
-  const [text, setText] = useState('');
+  // const [text, setText] = useState('');
   const [list, setList] = useState(dataArry);
   // const [nocommentlist, setNocommentlist] = useState([]);
   // const divRef = React.createRef()
@@ -71,32 +74,33 @@ function UserComment(props) {
     });
   };
 
-const handleTextChange =(e) =>{
-  setText(e.target.value)
-  console.log("test")
-  console.log(text)
-}
+// const handleTextChange =(e) =>{
+//   // setText(e.target.value)
+//   console.log("test")
+//   console.log(text)
+// }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e,index) => {
     // alert('submit')
-    text !==""?alert('提交成功') : alert('請輸入評論');
+    // text !==""?alert('提交成功') : alert('請輸入評論');
+    Swal.fire({
+      text: '成功送出評論',
+      icon: 'success',
+      confirmButtonText: '確定',
+      confirmButtonColor: "rgba(104, 142, 103, 0.8)",
+    }) 
     e.preventDefault();
   }
 
   const handleDelete = (index) => {
-    // console.log(index)
-    // console.log(dataArry)
-    dataArry.splice(index,1)
-    console.log(dataArry)
-    setList({
-      list:dataArry
-  })
-    // setLoadingState('刪除中........')
+    const newList = [...list]
+    newList.splice(index,1)
+    setList(newList)
   }
 
   //顯示評論
   const displayMyComment =
-    list.length >= 1 ? (
+  list.length >= 1 ? (
       list.map((item,index) => {
         return (
           <>
@@ -152,7 +156,9 @@ const handleTextChange =(e) =>{
                       </li>
                       <li>
                         <p>輸入回覆:</p>
-                        <textarea className="form-control" id="" rows="6" value={text} onChange={(index) => handleTextChange(index)} 
+                        <textarea className="form-control" id="" rows="6"
+                        //  onChange={(index) => handleTextChange(index)}
+                        //  key={index}
                          ></textarea>
                       </li>
                     </ul>
@@ -162,6 +168,7 @@ const handleTextChange =(e) =>{
                       id="button-addon2"
                       value="Submit"
                       onClick={()=>handleDelete(index)}
+                      key={index}
                       // onClick={handleUpload}
                       // onClick={()=>{setAccount("")}}
                     >
@@ -179,7 +186,7 @@ const handleTextChange =(e) =>{
             className="emptyImg mb-3"
             src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
           />
-          <h6>尚未有評價，趕緊探索你下一次的旅程，並標記你心儀的活動體驗</h6>
+          <h6>目前尚未有未評論的評價，趕緊探索你下一次的旅程，並標記你心儀的活動體驗</h6>
         </div>
       )
 

@@ -32,6 +32,7 @@ function ShoppingCar(props) {
         text: '購物車是空的喔！',
         icon: 'warning',
         confirmButtonText: '確定',
+        confirmButtonColor: "rgba(104, 142, 103, 0.8)",
       })
     } else {
       Swal.fire({
@@ -41,6 +42,7 @@ function ShoppingCar(props) {
         confirmButtonText: '確定',
         showCancelButton: true,
         cancelButtonText: '取消',
+        confirmButtonColor: "rgba(104, 142, 103, 0.8)",
       }).then((result) => {
         if (result.value) {
           // for (let i = 0; i < localCart.length; i++) {
