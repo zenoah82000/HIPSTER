@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../../styles/mContent/userComment.scss'
 import { Link, NavLink, withRouter } from 'react-router-dom'
 import RatingStar from '../../components/comments/ratingStar'
@@ -8,9 +8,12 @@ import myComment from '../../data/myComment.json'
 import { BsPlusCircle } from "react-icons/bs";
 import { IconContext } from "react-icons";
 
-function UserComment(props) {
-  const data = {}
 
+function UserComment(props) {
+
+  const [image, setImage] = useState({ preview: "", raw: "" });
+
+  const data = {}
   myComment.comment.forEach((item, i) => {
     data[item.id] = {
       name: item.name,
@@ -19,15 +22,39 @@ function UserComment(props) {
       img: item.img
     }
   })
-
-  // console.log(data)
   let dataArry = []
   for (const key in data) {
     data[key].id = key
     dataArry.push(data[key])
   }
-  // console.log(dataArry)
 
+
+  // 上傳圖片
+  const handleChange = e => {
+    if (e.target.files.length) {
+      setImage({
+        preview: URL.createObjectURL(e.target.files[0]),
+        raw: e.target.files[0]
+      });
+    }
+  };
+
+  const handleUpload = async e => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("image", image.raw);
+
+    await fetch("YOUR_URL", {
+      method: "POST",
+      headers: {
+        "Content-Type": "multipart/form-data"
+      },
+      body: formData
+    });
+  };
+
+
+  //顯示評論
   const displayMyComment =
     dataArry.length >= 1 ? (
       dataArry.map((item) => {
@@ -56,28 +83,39 @@ function UserComment(props) {
                       <li className="d-flex">
                         <p>上傳相片:</p>
                         <div className="d-flex">
-                          <div className="commentImg" >
-                            <img
-                              src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
-                              alt=""
-                            />
-                          </div>
-                          <div className="commentImgPlus" >
-                          <IconContext.Provider value={{ color: 'rgba(104, 142, 103, 0.8)', size: '40px' }}>
-                          <BsPlusCircle />
-                          </IconContext.Provider>
-                          </div>
+                          {image.preview ? (
+                            <div className="commentImg" >
+                              <img
+                              className="commentImgPhoto"
+                                src={image.preview}
+                                alt=""
+                              />
+                            </div>
+                          ) : ("")}
+                              <label htmlFor="upload-button">
+                                  <div className="commentImgPlus">
+                                    <IconContext.Provider value={{ color: 'rgba(104, 142, 103, 0.8)', size: '40px' }}>
+                                      <BsPlusCircle />
+                                    </IconContext.Provider>
+                                  </div>
+                                </label>
+                                <input
+                                  type="file"
+                                  id="upload-button"
+                                  style={{ display: "none" }}
+                                  onChange={handleChange} />
                         </div>
                       </li>
                       <li>
                         <p>輸入回覆:</p>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="6 "></textarea>
+                        <textarea className="form-control" id="" rows="6 "></textarea>
                       </li>
                     </ul>
                     <button
                       className="btn buttonstyle float-right mt-3"
                       type="submit"
                       id="button-addon2"
+                      onClick={handleUpload}
                     >
                       提交評論
                 </button>
@@ -96,7 +134,6 @@ function UserComment(props) {
           <h6>尚未有評價，趕緊探索你下一次的旅程，並標記你心儀的活動體驗</h6>
         </div>
       )
-
 
   const displayNotComment =
     dataArry.length >= 1 ? (
@@ -156,10 +193,6 @@ function UserComment(props) {
 
 
 
-
-
-  console.log(props.match.params.type)
-
   return (
     <>
       {props.match.params.type == 'mycomment' ?
@@ -215,9 +248,9 @@ function UserComment(props) {
             </NavLink></div>
             </div>
           </div>
-          <div className="tab-pane">
+          <form className="tab-pane">
             {displayMyComment}
-          </div>
+          </form>
         </>
       }
     </>
