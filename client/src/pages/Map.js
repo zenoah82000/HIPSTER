@@ -74,6 +74,7 @@ class Map extends React.Component {
               viewport={this.state.viewport}
               clickItem={this.state.itemId}
               cafeActiveReset={this.cafeActiveReset}
+              cafeActive={this.state.cafeActive}
               CafeData={CafeData}
             />
           </div>
