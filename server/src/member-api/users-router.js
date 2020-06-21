@@ -95,22 +95,21 @@ router.post('/loginmember', async (req, res, next) =>{
   }
   if([r1][0].length){
     req.session.member = {
-      memberId:123,
-      memberName:456,
+      memberId:'123',
+      memberName:'456',
   }
   }
-
-
-//   app.get('/logout',(req,res)=>{
-//     delete req.session.user
-//     res.redirect('/login')
-// })
 
   res.json(output)
 
-
-
 })
+
+
+
+// app.get('/logout',(req,res)=>{
+//   delete req.session.user
+//   res.redirect('/login')
+// })
 
 
 
