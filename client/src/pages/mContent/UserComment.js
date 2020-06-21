@@ -11,7 +11,7 @@ import { IconContext } from "react-icons";
 
 function UserComment(props) {
 
-  const [image, setImage] = useState({ preview: "", raw: "" });
+  const [image, setImage] = useState({ file:[],preview: "", raw: "" });
 
   const data = {}
   myComment.comment.forEach((item, i) => {
@@ -30,13 +30,26 @@ function UserComment(props) {
 
 
   // 上傳圖片
-  const handleChange = e => {
-    if (e.target.files.length) {
-      setImage({
-        preview: URL.createObjectURL(e.target.files[0]),
-        raw: e.target.files[0]
-      });
-    }
+  let fileObj = []
+  let fileArray = []
+
+  const handleChange = e => {   
+    fileObj.push(e.target.files)
+    for (let i = 0; i < fileObj[0].length; i++) {
+      fileArray.push(URL.createObjectURL(fileObj[0][i]))
+      console.log(fileObj)
+      console.log(fileArray)
+  }
+
+  setImage({ file: fileArray })
+
+    // if (e.target.files.length) {
+    //   setImage({
+
+    //     preview: URL.createObjectURL(e.target.files[0]),
+    //     raw: e.target.files[0]
+    //   });
+    // }
   };
 
   const handleUpload = async e => {
@@ -83,7 +96,7 @@ function UserComment(props) {
                       <li className="d-flex">
                         <p>上傳相片:</p>
                         <div className="d-flex">
-                          {image.preview ? (
+                          {image.file!==[] ? (
                             <div className="commentImg" >
                               <img
                               className="commentImgPhoto"
@@ -103,7 +116,7 @@ function UserComment(props) {
                                   type="file"
                                   id="upload-button"
                                   style={{ display: "none" }}
-                                  onChange={handleChange} />
+                                  onChange={handleChange}  multiple/>
                         </div>
                       </li>
                       <li>
