@@ -1,0 +1,53 @@
+.product-star-bar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+
+  .product-star-box {
+    p {
+      letter-spacing: unset;
+      display: inline;
+      font-size: 16px;
+    }
+
+    .fa-star {
+      color: #ffbc00;
+      font-size: 14px;
+    }
+
+    .product-star-scores {
+      color: #ffbc00;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 16px;
+    }
+    .separator {
+      display: inline-block;
+      width: 1px;
+      height: 12px;
+      background-color: #afaeae;
+      margin-left: 8px;
+    }
+
+    .product-comment-num {
+      text-decoration: none;
+      margin-left: 8px;
+    }
+
+    .product-bought-num {
+      font-size: 14px;
+      margin-left: 8px;
+    }
+  }
+  .product-wish-list {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    .fa-heart {
+      font-size: 18px;
+    }
+    span {
+      font-size: 14px;
+    }
+  }
+}

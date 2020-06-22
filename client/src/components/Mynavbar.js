@@ -418,9 +418,9 @@ function Mynavbar(props) {
               </div>
             </li>
             <li>
-              <a href="">
+              <Link to="/memberuser/wishlist">
                 <FaHeart />
-              </a>
+              </Link>
             </li>
           </ul>
           {/* ========================================================= */}

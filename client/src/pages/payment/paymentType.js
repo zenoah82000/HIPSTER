@@ -6,7 +6,7 @@ import '../../styles/Payment.scss'
 //引入自訂元件
 
 function paymentType(props) {
-  const {mycart,sum}=props
+  const {mycart,sum,buyerinfo}=props
 
   //訂單初始化
   const orderData = {
@@ -38,13 +38,17 @@ function paymentType(props) {
     mycart.forEach((item,i)=>{
       itemData.productId=mycart[i].id
       itemData.date = mycart[i].date
+      itemData.name = mycart[i].name
       itemData.checkPrice= mycart[i].price
       itemData.checkQty = mycart[i].amount
       itemData.checkSubtotal = +mycart[i].price * +mycart[i].amount
       orderData.orderItems.push(itemData)
       itemData={}
     })
+    //取得總額跟信箱
     orderData.total=total
+    orderData.email=buyerinfo.email
+    //訂單資料傳資料庫
     checkoutAsync(orderData)
     // 購物完清掉 localstorage 購物車
     props.dispatch({type:'GET_CART',value:[]})
@@ -131,7 +135,8 @@ function paymentType(props) {
 }
 const mapStateToProps = store=>{
   return{
-    mycart:store.orderReducer.cartData
+    mycart:store.orderReducer.cartData,
+    buyerinfo: store.orderReducer.buyerData,
   }
 }
 const mapDispatchToProps = null
