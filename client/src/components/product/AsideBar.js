@@ -28,6 +28,23 @@ function AsideBar(props) {
   useEffect(() => {
     getProductCategoryAsync()
   }, [])
+
+  // console.log('props', props)
+  // console.log('productData', productData)
+  const display = productData.map((item, index) => {
+    if (item.categoryParentId === 0) {
+    } else {
+      return (
+        <>
+          <li className="checkbox">
+            <i className="far fa-square"></i>
+            {item.categoryName}
+          </li>
+        </>
+      )
+    }
+  })
+
   return (
     <>
       <aside className="aside-wrapper col-md-3">
@@ -61,20 +78,7 @@ function AsideBar(props) {
             <div className="drop-title">
               <h5>戶外活動</h5>
             </div>
-            <ul className="checkbox-dropdown-list active">
-              <li className="checkbox">
-                <i className="far fa-square"></i>1
-              </li>
-              <li className="checkbox">
-                <i className="far fa-square"></i>1
-              </li>
-              <li className="checkbox">
-                <i className="far fa-square"></i>1
-              </li>
-              <li className="checkbox">
-                <i className="far fa-square"></i>1
-              </li>
-            </ul>
+            <ul className="checkbox-dropdown-list active">{display}</ul>
           </div>
           <div>
             <div className="drop-title">
@@ -120,9 +124,9 @@ function AsideBar(props) {
 // export default AsideBar
 
 // 將redux中的store的state(狀態)
-// 對應到這個元件中的props中，名稱為total
+// 對應到這個元件中的props中
 const mapStateToProps = (store) => {
-  return { productData: store.productReducer }
+  return { productData: store.productReducer.productData }
 }
 
 // 綁定store的dispatch方法到這個元件的props
