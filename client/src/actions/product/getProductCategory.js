@@ -1,12 +1,12 @@
-//從賣家那裏得到優惠券的使用資料
-export const getUserCouponDetail = (data) => ({
-  type: 'GET_USERCOUPON',
+//從資料庫獲得商品類別
+export const getProductCategory = (data) => ({
+  type: 'GET_ProductCategory',
   value: data,
 })
 
-export const getUserCouponDetaiAsync = (usercoupondata) => {
+export const getProductCategoryAsync = (productCategory) => {
   return async (dispatch) => {
-    const request = new Request(`http://localhost:5000/member/coupon/2`, {
+    const request = new Request('http://127.0.0.1:5000/productCategory', {
       method: 'GET',
       headers: new Headers({
         Accept: 'application/json',
@@ -17,6 +17,6 @@ export const getUserCouponDetaiAsync = (usercoupondata) => {
     const response = await fetch(request)
     const data = await response.json()
     console.log(data)
-    dispatch(getUserCouponDetail(data))
+    dispatch(getProductCategory(data))
   }
 }

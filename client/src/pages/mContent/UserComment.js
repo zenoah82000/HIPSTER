@@ -14,7 +14,6 @@ import Swal from 'sweetalert2'
 // https://medium.com/@hugh_Program_learning_diary_Js/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6-react-react-form-%E5%A0%B1%E5%90%8D%E8%A1%A8%E5%96%AE-ebd5e3a7201a
 
 function UserComment(props) {
-  
   const data = {}
   myComment.comment.forEach((item, i) => {
     data[item.id] = {
