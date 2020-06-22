@@ -105,11 +105,11 @@ function UserComment(props) {
   }
 
   //顯示評論
-  const displayMyComment =
+  const displayNotComment =
     list.length >= 1 ? (
       list.map((item, index) => {
         console.log(image)
-        // if (!image.prview) return 
+        // if (!image.prview) return
         return (
           <>
             <div className="coupon-listview" key={index}>
@@ -134,7 +134,7 @@ function UserComment(props) {
                       <li className="d-flex">
                         <p>上傳相片:</p>
                         <div className="d-flex">
-                          {image.preview.length>0
+                          {image.preview.length > 0
                             ? image.preview.map((item) => {
                                 return (
                                   <>
@@ -154,7 +154,7 @@ function UserComment(props) {
                             ''
                           ) : (
                             <>
-                              <label htmlFor="upload-button">   
+                              <label htmlFor="upload-button">
                                 <div className="commentImgPlus">
                                   <IconContext.Provider
                                     value={{
@@ -222,7 +222,7 @@ function UserComment(props) {
       </div>
     )
 
-  const displayNotComment =
+  const displayMyComment =
     dataArry.length >= 1 ? (
       dataArry.map((item) => {
         return (
@@ -278,7 +278,7 @@ function UserComment(props) {
 
   return (
     <>
-      {props.match.params.type == 'mycomment' ? (
+      {props.match.params.type === 'mycomment' ? (
         <>
           <div className="usercontainer">
             <h2 className="usertitle mb-3   ">我的評價</h2>
@@ -295,7 +295,7 @@ function UserComment(props) {
 
               <div className="tabcontainer">
                 <NavLink
-                  to={`./myComment`}
+                  to={`./mycomment`}
                   activeClassName="currentcoupon"
                   className="coupontab-a"
                 >
@@ -304,7 +304,7 @@ function UserComment(props) {
               </div>
             </div>
           </div>
-          <div className="tab-pane"></div>
+          <div className="tab-pane">{displayMyComment}</div>
         </>
       ) : (
         <>
@@ -322,7 +322,7 @@ function UserComment(props) {
               </div>
               <div className="tabcontainer">
                 <NavLink
-                  to={`./myComment`}
+                  to={`./mycomment`}
                   activeClassName="currentcoupon"
                   className="coupontab-a"
                 >
@@ -332,7 +332,7 @@ function UserComment(props) {
             </div>
           </div>
           <form className="tab-pane" onSubmit={handleSubmit}>
-            {displayMyComment}
+            {displayNotComment}
           </form>
         </>
       )}
