@@ -14,7 +14,7 @@ import Swal from 'sweetalert2'
 // https://medium.com/@hugh_Program_learning_diary_Js/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6-react-react-form-%E5%A0%B1%E5%90%8D%E8%A1%A8%E5%96%AE-ebd5e3a7201a
 
 function UserComment(props) {
- const data = {}
+  const data = {}
   myComment.comment.forEach((item, i) => {
     data[item.id] = {
       name: item.name,
@@ -30,28 +30,27 @@ function UserComment(props) {
     dataArry.push(data[key])
   }
 
-  const [image, setImage] = useState({ file:[],preview: "", raw: "" });
+  const [image, setImage] = useState({ file: [], preview: "", raw: "" });
   const [text, setText] = useState('');
   const [list, setList] = useState(dataArry);
+  const [ratingValue, setratingValue] = useState("");
   // const [nocommentlist, setNocommentlist] = useState([]);
   // const divRef = React.createRef()
 
- 
+
 
   // 上傳圖片
   let fileObj = []
   let fileArray = []
 
-  const handleChange = e => {   
+  const handleChange = e => {
     fileObj.push(e.target.files)
     for (let i = 0; i < fileObj[0].length; i++) {
       fileArray.push(URL.createObjectURL(fileObj[0][i]))
       console.log(fileObj)
       console.log(fileArray)
-  }
-
-  // setImage({ file: fileArray })
-
+    }
+    // setImage({ file: fileArray })
     if (e.target.files.length) {
       setImage({
         preview: URL.createObjectURL(e.target.files[0]),
@@ -74,39 +73,46 @@ function UserComment(props) {
     });
   };
 
-const handleTextChange =(e) =>{
-  setText(e.target.value)
-  console.log("test")
-  console.log(text)
-}
+  const handleTextChange = (e) => {
+    setText(e.target.value)
+    // console.log("test")
+    // console.log(text)
+  }
 
-  const handleSubmit = (e,index) => {
+  const handleSubmit = (e, index) => {
     // alert('submit')
-    text !==""? Swal.fire({
+    text !== "" ? Swal.fire({
       text: '成功送出評論',
       icon: 'success',
       confirmButtonText: '確定',
       confirmButtonColor: "rgba(104, 142, 103, 0.8)",
-    }) && handleDelete(index) :Swal.fire({
+    }) && handleDelete(index) : Swal.fire({
       text: '評論不能為空白',
       icon: 'warning',
       confirmButtonText: '確定',
       confirmButtonColor: "rgba(104, 142, 103, 0.8)",
     })
-   
+
     e.preventDefault();
   }
 
   const handleDelete = (index) => {
     const newList = [...list]
-    newList.splice(index,1)
+    newList.splice(index, 1)
     setList(newList)
   }
 
+  //獲取星等值
+  const onClickReset = (getrating) => {
+    console.log(getrating+1)
+    setratingValue(getrating + 1)
+  }
+
+
   //顯示評論
   const displayMyComment =
-  list.length >= 1 ? (
-      list.map((item,index) => {
+    list.length >= 1 ? (
+      list.map((item, index) => {
         return (
           <>
             <div className="coupon-listview" key={index} >
@@ -127,44 +133,50 @@ const handleTextChange =(e) =>{
                       </li>
                       <li className="d-flex">
                         <p>輸入星等:</p>
-                        <RatingStar />
+                        <RatingStar onClickReset={onClickReset} />
+                        <input
+                          type="text"
+                          style={{ display: "none" }}
+                          multiple
+                          value={ratingValue}
+                        />
                       </li>
                       <li className="d-flex">
                         <p>上傳相片:</p>
                         <div className="d-flex">
-                          {image.preview!="" ? (
+                          {image.preview != "" ? (
                             <div className="commentImg" >
                               <img
-                              className="commentImgPhoto"
+                                className="commentImgPhoto"
                                 src={image.preview}
                                 alt=""
                               />
                             </div>
                           ) : ("")}
-                              <label htmlFor="upload-button">
-                                  <div className="commentImgPlus">
-                                    <IconContext.Provider value={{ color: 'rgba(104, 142, 103, 0.8)', size: '40px' }}>
-                                      <BsPlusCircle />
-                                    </IconContext.Provider>
-                                  </div>
-                                </label>
-                                <input
-                                  type="file"
-                                  id="upload-button"
-                                  style={{ display: "none" }}
-                                  onChange={handleChange}  
-                                  // ref={divRef} 
-                                  multiple
-                                  // value={text}
-                                  />
+                          <label htmlFor="upload-button">
+                            <div className="commentImgPlus">
+                              <IconContext.Provider value={{ color: 'rgba(104, 142, 103, 0.8)', size: '40px' }}>
+                                <BsPlusCircle />
+                              </IconContext.Provider>
+                            </div>
+                          </label>
+                          <input
+                            type="file"
+                            id="upload-button"
+                            style={{ display: "none" }}
+                            onChange={handleChange}
+                            // ref={divRef} 
+                            multiple
+                          // value={text}
+                          />
                         </div>
                       </li>
                       <li>
                         <p>輸入回覆:</p>
                         <textarea className="form-control" id="" rows="6"
-                         onChange={(index) => handleTextChange(index)}
+                          onChange={(index) => handleTextChange(index)}
                         //  key={index}
-                         ></textarea>
+                        ></textarea>
                       </li>
                     </ul>
                     <button
@@ -174,8 +186,8 @@ const handleTextChange =(e) =>{
                       value="Submit"
                       // onClick={()=>handleDelete(index)}
                       key={index}
-                      // onClick={handleUpload}
-                      // onClick={()=>{setAccount("")}}
+                    // onClick={handleUpload}
+                    // onClick={()=>{setAccount("")}}
                     >
                       提交評論
                 </button>
