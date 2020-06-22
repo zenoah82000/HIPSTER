@@ -43,11 +43,9 @@ app.use(session({
     cookie:{
         maxAge:1200000,
     }
-
 }))
 app.use((req,res,next)=>{
-    res.locals.sess= req.session || {}//預設網頁session
-
+    res.locals.session= req.session || {}//預設網頁session
    next()
 })
 
