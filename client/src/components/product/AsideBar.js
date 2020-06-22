@@ -1,17 +1,50 @@
 import React, { useState, useEffect } from 'react'
 import { Dropdown } from 'react-bootstrap'
 import Calendar from 'react-calendar'
+import { connect } from 'react-redux'
+import { Link, withRouter } from 'react-router-dom'
 
 import '../../styles/product/AsideBar.scss'
 
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import { getProductCategoryAsync } from '../../actions/product/getProductCategory'
 
 function AsideBar(props) {
+  // const getProductCategoryAsync = async (productCategory) => {
+  //   const request = new Request('http://127.0.0.1:5000/productCategory', {
+  //     method: 'GET',
+  //     headers: new Headers({
+  //       Accept: 'application/json',
+  //       'Content-Type': 'application/json',
+  //     }),
+  //   })
+
+  //   const response = await fetch(request)
+  //   const data = await response.json()
+  //   console.log(data)
+  // }
+
+  const { productData, getProductCategoryAsync } = props
+
   useEffect(() => {
     getProductCategoryAsync()
   }, [])
+
+  // console.log('props', props)
+  // console.log('productData', productData)
+  const display = productData.map((item, index) => {
+    if (item.categoryParentId === 0) {
+    } else {
+      return (
+        <>
+          <li className="checkbox">
+            <i className="far fa-square"></i>
+            {item.categoryName}
+          </li>
+        </>
+      )
+    }
+  })
+
   return (
     <>
       <aside className="aside-wrapper col-md-3">
@@ -45,20 +78,7 @@ function AsideBar(props) {
             <div className="drop-title">
               <h5>戶外活動</h5>
             </div>
-            <ul className="checkbox-dropdown-list active">
-              <li className="checkbox">
-                <i className="far fa-square"></i>1
-              </li>
-              <li className="checkbox">
-                <i className="far fa-square"></i>1
-              </li>
-              <li className="checkbox">
-                <i className="far fa-square"></i>1
-              </li>
-              <li className="checkbox">
-                <i className="far fa-square"></i>1
-              </li>
-            </ul>
+            <ul className="checkbox-dropdown-list active">{display}</ul>
           </div>
           <div>
             <div className="drop-title">
@@ -101,4 +121,20 @@ function AsideBar(props) {
   )
 }
 
-export default AsideBar
+// export default AsideBar
+
+// 將redux中的store的state(狀態)
+// 對應到這個元件中的props中
+const mapStateToProps = (store) => {
+  return { productData: store.productReducer.productData }
+}
+
+// 綁定store的dispatch方法到這個元件的props
+// const mapDispatchToProps = (dispatch) => {
+//   return bindActionCreators({ addValue, minusValue }, dispatch)
+// }
+
+// 高階元件的樣式，必要的
+export default connect(mapStateToProps, {
+  getProductCategoryAsync,
+})(AsideBar)

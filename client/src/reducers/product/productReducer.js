@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux'
 
-const productData = (state = {}, action) => {
+const productData = (state = [], action) => {
   switch (action.type) {
     case 'GET_ProductCategory':
-      return action.value
+      return action.payload
     default:
       return state
   }

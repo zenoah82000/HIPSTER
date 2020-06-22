@@ -10,8 +10,6 @@ router.get("/member/order/:memberId", async (req, res) => {
   console.log("買家訂單請求");
   const data = {
     status: true,
-    orderdetails: [],
-    order: [],
   };
   const sqlorderlist =
     "SELECT `product`.`productName`,`item_lists`.`orderId`,`item_lists`.`date`,`item_lists`.`checkPrice`,`item_lists`.`checkQty`,`item_lists`.`checkSubtotal`,`item_lists`.`created_at`FROM `member` INNER JOIN `orderlist` ON `member`.`memberId` = `orderlist`.`memberId` INNER JOIN `item_lists` ON `orderlist`.`orderId`=`item_lists`.`orderId` INNER JOIN `product` ON `item_lists`.`productId` = `product`.`productId` WHERE `member`.`memberId`=?";
@@ -25,9 +23,9 @@ router.get("/member/order/:memberId", async (req, res) => {
     });
     r2.forEach((item) => {
       item.date = item.date.toLocaleDateString();
+      data.orderdetails = r2;
+      data.order = r1;
     });
-    data.orderdetails = r2;
-    data.order = r1;
   }
 
   res.json(data);
@@ -40,6 +38,7 @@ router.post("/member/checkout", async (req, res) => {
   let date = new Date().getDate().toString();
   const memberId = 2;
   const orderItems = req.body.orderItems;
+  const email = req.body.email
   //取得總筆數
   let orderId;
   const total = "show table status like 'item_lists'";
@@ -48,7 +47,6 @@ router.post("/member/checkout", async (req, res) => {
   rows = rows.padStart(5, 0);
   //訂單編號
   orderId = "O" + year + month + date + rows;
-
 
   const addorderlist =
     "INSERT INTO `item_lists` (`orderId`,`memberId`,`productId`,`date`,`checkPrice`,`checkQty`,`checkSubtotal`) VALUES (?,?,?,?,?,?,?)";
@@ -75,7 +73,7 @@ router.post("/member/checkout", async (req, res) => {
   }
   console.log("訂單新增成功" + orderId);
   //訂單成功送出email
-  console.log('送出電子郵件')
+  console.log("送出電子郵件");
   const transporter = nodemailer.createTransport({
     service: "gmail",
     secure: true,
@@ -90,13 +88,15 @@ router.post("/member/checkout", async (req, res) => {
       rejectUnauthorized: false,
     },
   });
-  let text = orderItems.map(item=>{return '<li>'+item.name+'<li>'})
-  console.log(text)
+  let text = orderItems.map((item) => {
+    return "<li>" + item.name + "<li>";
+  });
+  console.log(text);
   var mailOptions = {
     from: '"Hipster文青地圖" <e24971234@gmail.com>',
-    to: "kengp6@gmail.com",
+    to: email,
     subject: "感謝您在本站消費",
-    html:"<p>訂單編號:"+orderId+"</p>"+text,
+    html: "<p>訂單編號:" + orderId + "</p>" + text,
   };
   // 準備發送信件
   transporter.sendMail(mailOptions, function (err, info) {

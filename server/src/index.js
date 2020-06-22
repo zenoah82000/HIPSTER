@@ -52,6 +52,11 @@ app.use((req, res, next) => {
 
 app.use(require(__dirname + "/coupon"));
 
+app.use((req, res, next) => {
+  res.locals.session = req.session || {}; //預設網頁session
+  next();
+});
+
 app.use(require(__dirname + "/order/order"));
 
 app.use(require(__dirname + "/blog"));

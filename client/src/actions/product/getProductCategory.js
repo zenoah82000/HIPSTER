@@ -1,7 +1,7 @@
 //從資料庫獲得商品類別
-export const getProductCategory = (data) => ({
+export const getProductCategory = (payload) => ({
   type: 'GET_ProductCategory',
-  value: data,
+  payload,
 })
 
 export const getProductCategoryAsync = (productCategory) => {
