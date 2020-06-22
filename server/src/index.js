@@ -43,11 +43,9 @@ app.use(session({
     cookie:{
         maxAge:1200000,
     }
-
 }))
 app.use((req,res,next)=>{
-    res.locals.sess= req.session || {}//預設網頁session
-
+    res.locals.session= req.session || {}//預設網頁session
    next()
 })
 
@@ -56,6 +54,10 @@ app.use(require(__dirname+'/coupon'))
 app.use(require(__dirname+'/order/order'));
 
 app.use(require(__dirname+'/blog'));
+
+app.use(require(__dirname+'/productCategory'));
+
+app.use(require(__dirname+'/productlist'));
 
 app.use(require(__dirname+'/member-api/users-router'));
 

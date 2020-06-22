@@ -18,6 +18,10 @@ import abouticon4 from '../images/home/about-icon4.png'
 import activity from '../images/home/activity-test.jpg'
 
 function Home(props) {
+  //搜尋bar切換狀態
+  const [searchbar, setsearchbar] = useState('0')
+
+  //輪播-精選
   var activitys = {
     arrows: true,
     dots: false,
@@ -26,6 +30,7 @@ function Home(props) {
     slidesToShow: 3,
     slidesToScroll: 1,
   }
+  //輪播-時限
   var countdowns = {
     arrows: true,
     dots: false,
@@ -52,16 +57,35 @@ function Home(props) {
           </div>
           <div className="searchbar-chang-btn">
             <div className="btnList">
-              <div id="location" className="btn active">
+              <div
+                id="location"
+                className="btn "
+                onClick={() => {
+                  setsearchbar(0)
+                }}
+              >
                 地點搜尋
               </div>
-              <div id="activename" className="btn">
+              <div
+                id="activename"
+                className="btn"
+                onClick={() => {
+                  setsearchbar(1)
+                }}
+              >
                 活動名稱
               </div>
-              <div id="time" className="btn">
+              <div
+                id="time"
+                className="btn"
+                onClick={() => {
+                  setsearchbar(2)
+                }}
+              >
                 活動時間
               </div>
             </div>
+
             {/* --------------------------------------------------------- */}
             <div id="location-search" className="search-bar">
               <select id="city">
