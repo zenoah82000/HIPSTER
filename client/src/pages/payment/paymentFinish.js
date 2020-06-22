@@ -29,7 +29,7 @@ function paymentFinish(props) {
             </p>
             <div className="bgColor p-4">
               <ul className="list-unstyled ">
-                <li className="py-2">訂單編號:0000000000</li>
+                <li className="py-2">訂單編號:{buyerinfo.orderId? (buyerinfo.orderId):('')}</li>
                 {buyerinfo.product ? (buyerinfo.product.map((item) => {
                   return (
                     <>
