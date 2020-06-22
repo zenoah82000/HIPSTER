@@ -17,7 +17,8 @@ import Test from '../pages/Test'
 
 function Mynavbar(props) {
   //購物車資料
-  const { mycart, deleteCart } = props
+  const { mycart, deleteCart, userSuccess, setuserSuccess } = props
+  // console.log(userSuccess)
 
   //購物車視窗狀態
   const [showCart, setshowCart] = useState(false)
@@ -27,13 +28,23 @@ function Mynavbar(props) {
 
   //是否跳出註冊&登入視窗
   const [showlogin, setShowlogin] = useState(false)
-  //登入登出視窗狀態,true=註冊  false=登入
+  //視窗顯示註冊&登入狀態,true=註冊  false=登入
   const [SignLogin, setSignLogin] = useState(true)
-  //視窗狀態按鈕切換
+  //視窗送出按鈕狀態切換
   const signchangbtn = SignLogin ? 'btn changbtn active' : 'btn changbtn'
   const loginchangbtn = SignLogin ? 'btn changbtn' : 'btn changbtn active'
+  //是否跳出註冊完成視窗
+  const [showSignOk, setShowSignOk] = useState(false)
+  //是否跳出登入完成視窗
+  const [showLoginOk, setShowLoginOk] = useState(false)
+  //是否跳出登出完成視窗
+  const [showLogoutOk, setShowLogoutOk] = useState(false)
+  //註冊完成視窗文字顯示:失敗?成功?
+  const [signOk, setsignOk] = useState(false)
+  //登入完成視窗文字顯示:失敗?成功?
+  const [loginOk, setloginOk] = useState(false)
 
-  //註冊會員
+  //註冊會員傳後端
   async function addNewMember(item) {
     // 注意資料格式要設定，伺服器才知道是json格式
     const request = new Request('http://localhost:5000/addmember/', {
@@ -52,7 +63,7 @@ function Mynavbar(props) {
     // 要等驗証過，再設定資料(簡單的直接設定)
   }
 
-  //登入會員
+  //登入會員傳後端
   async function LoginMember(item) {
     // 注意資料格式要設定，伺服器才知道是json格式
     const request = new Request('http://localhost:5000/loginmember/', {
@@ -63,19 +74,32 @@ function Mynavbar(props) {
         'Content-Type': 'application/json',
       }),
     })
-
     const response = await fetch(request)
     const data = await response.json()
+    if (data.success) {
+      localStorage.setItem('member', JSON.stringify(data))
+      setloginOk(true)
+      setuserSuccess(true)
+    } else {
+      setloginOk(false)
+      setuserSuccess(false)
+    }
 
-    console.log('伺服器登入回傳的json資料', data.success)
-    // 要等驗証過，再設定資料(簡單的直接設定)
+    console.log('伺服器登入回傳的json資料', data)
+    console.log('loginOk', loginOk)
+  }
+
+  //登出處理
+  async function LogoutMember(item) {
+    localStorage.removeItem('member')
   }
 
   //抓取註冊表格資料
   let signAccount, signPassword, signData
-
   //抓取登入表格資料
   let loginAccount, loginPassword, loginData
+
+  //判定註冊是否成功>提示視窗顯示文字
 
   //註冊會員表格
   const membersign = (
@@ -259,8 +283,6 @@ function Mynavbar(props) {
   }
 
   ////註冊完成視窗
-  //是否跳出註冊完成視窗
-  const [showSignOk, setShowSignOk] = useState(false)
   function SignOkMassage(props) {
     return (
       <Modal
@@ -289,8 +311,6 @@ function Mynavbar(props) {
   }
 
   ////登入完成視窗
-  //是否跳出登入完成視窗
-  const [showLoginOk, setShowLoginOk] = useState(false)
   function LoginOkMassage(props) {
     return (
       <Modal
@@ -301,11 +321,44 @@ function Mynavbar(props) {
         centered
       >
         <Modal.Body className="SignOk-bg">
-          <p className="SignOk-title">登入完成</p>
+          {loginOk ? (
+            <p className="SignOk-title">登入完成</p>
+          ) : (
+            <p className="SignOk-title">
+              登入失敗
+              <br />
+              請檢查帳號＆密碼是否正確
+            </p>
+          )}
+
           <div
             className="SignOkbtn"
             onClick={() => {
               setShowLoginOk(false)
+            }}
+          >
+            確認
+          </div>
+        </Modal.Body>
+      </Modal>
+    )
+  }
+  ////登出完成視窗
+  function LogoutOkMassage(props) {
+    return (
+      <Modal
+        className="SignOk"
+        {...props}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Body className="SignOk-bg">
+          <p className="SignOk-title">登出成功</p>
+          <div
+            className="SignOkbtn"
+            onClick={() => {
+              setShowLogoutOk(false)
             }}
           >
             確認
@@ -320,6 +373,7 @@ function Mynavbar(props) {
       <SignLoginMassage show={showlogin} onHide={() => setShowlogin(false)} />
       <SignOkMassage show={showSignOk} onHide={() => setShowSignOk(false)} />
       <LoginOkMassage show={showLoginOk} onHide={() => setShowLoginOk(false)} />
+      <LogoutOkMassage show={showLogoutOk} />
       <nav>
         <div className="navbar container ">
           <a href="/" className="logo">
@@ -424,27 +478,48 @@ function Mynavbar(props) {
             </li>
           </ul>
           {/* ========================================================= */}
-          <ul className="sign ">
-            <li>
-              <Link
-                href=""
-                onClick={() => {
-                  setShowlogin(true)
-                }}
-              >
-                註冊 / 登入
-              </Link>
-            </li>
-          </ul>
+          {userSuccess ? (
+            <>
+              <ul className="member">
+                <li>David,您好</li>
+                <li>
+                  <a href="./memberuser" className="memberbtn">
+                    會員中心
+                  </a>
+                </li>
+                <li>
+                  <Link
+                    href="#"
+                    className="memberbtn"
+                    onClick={() => {
+                      LogoutMember()
+                      setuserSuccess(false)
+                      setShowLogoutOk(true)
+                    }}
+                  >
+                    登出
+                  </Link>
+                </li>
+              </ul>
+            </>
+          ) : (
+            <>
+              <ul className="sign ">
+                <li>
+                  <Link
+                    href=""
+                    onClick={() => {
+                      setShowlogin(true)
+                    }}
+                  >
+                    註冊 / 登入
+                  </Link>
+                </li>
+              </ul>
+            </>
+          )}
+
           {/* ========================================================= */}
-          <ul className="member none">
-            <li>David,您好</li>
-            <li>
-              <a href="./memberuser" className="memberbtn">
-                會員中心
-              </a>
-            </li>
-          </ul>
         </div>
       </nav>
     </>
