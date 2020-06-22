@@ -38,15 +38,25 @@ import BlogAdd from './pages/blog/BlogAdd'
 import Swal from 'sweetalert2'
 
 function App(props) {
-  console.log(props)
+  // console.log(props)
+
+  //判斷使用者是否已登入
+  const [userSuccess, setuserSuccess] = useState(false)
+  const userlocalStorage = JSON.parse(localStorage.getItem('member')) || []
+  const username = userlocalStorage.name
+
+  // console.log(userSuccess)
+
   const { mycart } = props
   //取得購物車資料
   const localCart = JSON.parse(localStorage.getItem('cart')) || []
 
   //寫入購物車資料
   useEffect(() => {
+    userlocalStorage.success ? setuserSuccess(true) : setuserSuccess(false)
     props.dispatch({ type: 'GET_CART', value: localCart })
   }, [])
+
   //刪除購物車
   const deleteCart = (id) => {
     Swal.fire({
@@ -73,10 +83,16 @@ function App(props) {
     }
     return total
   }
+
   return (
     <Router>
       <>
-        <Mynavbar deleteCart={deleteCart} />
+        <Mynavbar
+          deleteCart={deleteCart}
+          userSuccess={userSuccess}
+          setuserSuccess={setuserSuccess}
+          username={username}
+        />
 
         <Switch>
           <Route path="/about">

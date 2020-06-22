@@ -75,11 +75,13 @@ p {
       height: 40px;
       background-color: rgba(113, 113, 113, 0.8);
       color: white;
-
-      &:hover {
-        background-color: rgb(85, 85, 85);
-      }
       &.active {
+        background-color: rgba(104, 142, 103, 0.8);
+      }
+      // &:hover {
+      //   background-color: rgb(85, 85, 85);
+      // }
+      &:active {
         background-color: rgba(104, 142, 103, 0.8);
       }
     }

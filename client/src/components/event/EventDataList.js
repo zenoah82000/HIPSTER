@@ -1,110 +1,197 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import Fade from 'react-reveal/Fade'
+productfilterList() {
+  let updatedList = this.state.productdata.filter((item) => {
+    if (
+      this.state.searchBtn1 === '全部類別' ||
+      this.state.searchBtn1 === '類別'
+    ) {
+      if (this.state.searchBtn3 == '4.5分以上') {
+        return (
+          item.productName
+            .toLowerCase()
+            .indexOf(this.state.search.toLowerCase()) !== -1 && item.star > 25
+        )
+      } else if (this.state.searchBtn3 == '4分以上') {
+        return (
+          item.productName
+            .toLowerCase()
+            .indexOf(this.state.search.toLowerCase()) !== -1 && item.star > 20
+        )
+      } else if (this.state.searchBtn3 == '3.5分以上') {
+        return (
+          item.productName
+            .toLowerCase()
+            .indexOf(this.state.search.toLowerCase()) !== -1 &&
+          item.star > 3.5
+        )
+      } else {
+        return (
+          item.productName
+            .toLowerCase()
+            .indexOf(this.state.search.toLowerCase()) !== -1
+        )
+      }
+    } else if (this.state.searchBtn1 == '咖啡廳') {
+      if (this.state.searchBtn3 == '4.5分以上') {
+        return (
+          item.productName
+            .toLowerCase()
+            .indexOf(this.state.search.toLowerCase()) !== -1 &&
+          item.category == '咖啡廳' &&
+          item.star > 4.5
+        )
+      } else if (this.state.searchBtn3 == '4分以上') {
+        return (
+          item.productName
+            .toLowerCase()
+            .indexOf(this.state.search.toLowerCase()) !== -1 &&
+          item.category == '咖啡廳' &&
+          item.star > 4.5
+        )
+      } else if (this.state.searchBtn3 == '3.5分以上') {
+        return (
+          item.productName
+            .toLowerCase()
+            .indexOf(this.state.search.toLowerCase()) !== -1 &&
+          item.category == '咖啡廳' &&
+          item.star > 3.5
+        )
+      } else {
+        return (
+          item.productName
+            .toLowerCase()
+            .indexOf(this.state.search.toLowerCase()) !== -1 &&
+          item.category == '咖啡廳'
+        )
+      }
+    } else if (this.state.searchBtn1 == '手作課程') {
+      if (this.state.searchBtn3 == '4.5分以上') {
+        return (
+          item.productName
+            .toLowerCase()
+            .indexOf(this.state.search.toLowerCase()) &&
+          item.category == '手作課程' &&
+          item.star > 4.5
+        )
+      } else if (this.state.searchBtn3 == '4分以上') {
+        return (
+          item.productName
+            .toLowerCase()
+            .indexOf(this.state.search.toLowerCase()) !== -1 &&
+          item.category == '手作課程' &&
+          item.star > 4.5
+        )
+      } else if (this.state.searchBtn3 == '3.5分以上') {
+        return (
+          item.productName
+            .toLowerCase()
+            .indexOf(this.state.search.toLowerCase()) !== -1 &&
+          item.category == '手作課程' &&
+          item.star > 3.5
+        )
+      } else {
+        return (
+          item.productName
+            .toLowerCase()
+            .indexOf(this.state.search.toLowerCase()) !== -1 &&
+          item.category == '手作課程'
+        )
+      }
+    } else if (this.state.searchBtn1 == '文藝展覽') {
+      if (this.state.searchBtn3 == '4.5分以上') {
+        return (
+          item.productName
+            .toLowerCase()
+            .indexOf(this.state.search.toLowerCase()) !== -1 &&
+          item.category == '文藝展覽' &&
+          item.star > 4.5
+        )
+      } else if (this.state.searchBtn3 == '4分以上') {
+        return (
+          item.productName
+            .toLowerCase()
+            .indexOf(this.state.search.toLowerCase()) !== -1 &&
+          item.category == '文藝展覽' &&
+          item.star > 4.5
+        )
+      } else if (this.state.searchBtn3 == '3.5分以上') {
+        return (
+          item.productName
+            .toLowerCase()
+            .indexOf(this.state.search.toLowerCase()) !== -1 &&
+          item.category == '文藝展覽' &&
+          item.star > 3.5
+        )
+      } else {
+        return (
+          item.productName
+            .toLowerCase()
+            .indexOf(this.state.search.toLowerCase()) !== -1 &&
+          item.category == '文藝展覽'
+        )
+      }
+    }
+  })
 
-//傳入參數 props.eventData = 存放活動資料的陣列
-//2020-03-21
-function EventDataList(props) {
-  return (
-    <>
-      <div className="row">
-        {props.eventData.result && props.eventData.result.length > 0 ? (
-          props.eventData.result.map((value, index) => {
-            // 變數 status = 判斷目前人數或時間決定顯示什麼
-            let status = '火熱揪團中'
-            let newEventName = value.eventName
-            let progress = (value.eventNowPeople / value.eventNeedPeople) * 100
-
-            if (value.eventNeedPeople === value.eventNowPeople)
-              status = '已額滿'
-
-            if (new Date(value.eventEndDate).getTime() < new Date().getTime())
-              status = '已過期'
-
-            if (props.eventData.searchKeyword) {
-              console.log(newEventName.indexOf(props.eventData.searchKeyword))
-            }
-
-            return (
-              <Fade bottom key={index}>
-                <div className="col-xl-3 col-10 eventInfoBox" key={index}>
-                  <div className="eventContentBox">
-                    <div className="eventImgBox">
-                      <img
-                        src={
-                          'http://127.0.0.1:5000/images/eventImg/' +
-                          value.eventImg
-                        }
-                        alt=""
-                      />
-                    </div>
-                    <div className="eventDetailBox">
-                      <h2 className="eventTitle">{newEventName}</h2>
-                      <ul className="d-flex">
-                        <li>
-                          <img src="/images/eventImg/icons/type.svg" alt="" />
-                          {value.eventType}
-                        </li>
-                        <li>
-                          <img src="/images/eventImg/icons/local.svg" alt="" />
-                          {value.eventLocation}
-                        </li>
-                      </ul>
-                      <ul>
-                        <li>
-                          <img src="/images/eventImg/icons/member.svg" alt="" />
-                          {value.loginId}
-                        </li>
-                        <li>
-                          <img src="/images/eventImg/icons/date.svg" alt="" />
-                          報名期限：{value.eventEndDate} 止
-                        </li>
-                        <li>
-                          <img src="/images/eventImg/icons/date.svg" alt="" />
-                          活動日期：{value.eventStartDate}
-                        </li>
-                      </ul>
-                      <p className="status">{status}</p>
-                      <p className="quota">
-                        徵求 <span>{value.eventNeedPeople}</span> 人 還剩{' '}
-                        <span>
-                          {value.eventNeedPeople - value.eventNowPeople}
-                        </span>{' '}
-                        名額
-                      </p>
-                      <div
-                        className="progress_container"
-                        data-progress={parseInt(progress) + '%'}
-                      >
-                        <div className="progress progress-danger progress-striped active">
-                          <div
-                            className="bar"
-                            style={{ width: progress + '%' }}
-                          ></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="d-flex justify-content-center">
-                      <Link
-                        className="btn-more btn btn-raised btn-warning"
-                        to={'/event/' + value.eventId}
-                      >
-                        了解詳情
-                      </Link>
-                    </div>
+  let data = updatedList.map((item, index, array) => {
+    return (
+      <Fade>
+        <li
+          className="eventContentLi list-group-item"
+          data-category={item.productName}
+          key={index}
+          id={item.id}
+          onClick={() => this.cardClick(item.id)}
+        >
+          <div className="eventContentBox d-flex">
+            <div className="eventImgBox col-4">
+              <img
+                src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
+                alt=""
+              />
+            </div>
+            <div className="eventDetailBox col-8 pl-3">
+              <h4 className="eventTitle" style={{ fontWeight: 'bold' }}>
+                {item.productName}
+              </h4>
+              <ul className=" list-unstyled">
+                <li>
+                  <div
+                    className={
+                      item.category == '咖啡廳'
+                        ? 'mapCategoryCafe'
+                        : item.category == '手作課程'
+                        ? 'mapCategoryItem'
+                        : 'mapCategoryItem2'
+                    }
+                  >
+                    {item.category}
                   </div>
-                </div>
-              </Fade>
-            )
-          })
-        ) : (
-          <div className="col-12">
-            <h2 className="text-white text-center">查無相關資料</h2>
+                </li>
+                <li>星等:{item.star}</li>
+                <li>
+                  <span className="mr-2">
+                    <FaRegClock />
+                  </span>
+                  營業時間
+                </li>
+                <li>
+                  <span className="mr-2">
+                    <FaMapMarkerAlt />
+                  </span>
+                  地點
+                </li>
+                <li>
+                  <span className="mr-2">
+                    <FaRegCalendarCheck />
+                  </span>
+                  活動日期：
+                </li>
+              </ul>
+            </div>
           </div>
-        )}
-      </div>
-    </>
-  )
+        </li>
+      </Fade>
+    )
+  })
+  return data
 }
-
-export default EventDataList
