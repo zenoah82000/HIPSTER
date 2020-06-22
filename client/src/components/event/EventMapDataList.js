@@ -65,7 +65,8 @@ class mapList extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      data: [],
+      cafedata: [],
+      productdata: [],
       sortType: '',
       search: '',
       searchBtn1: '類別',
@@ -77,6 +78,7 @@ class mapList extends React.Component {
     }
   }
 
+  //資料庫傳資料
   getOrderlistAsync = async () => {
     const request = new Request('http://localhost:5000/map', {
       method: 'get',
@@ -87,32 +89,21 @@ class mapList extends React.Component {
     })
     const response = await fetch(request)
     const data = await response.json()
-    this.setState({ data: data })
+    // console.log(data)
+    // console.log(data.productlist)
+    // console.log(data.cafelist)
+    this.setState({ cafedata: data.cafelist, productdata: data.productlist })
   }
 
+  //初始化
   componentDidMount() {
-    const data = {}
-    this.props.CafeData.cafes.forEach((item, i) => {
-      data[item.name] = {
-        name: item.name,
-        id: item.id,
-        lat: item.latitude,
-        log: item.longitude,
-        star: item.score,
-        category: item.type,
-      }
-    })
-    console.log(data)
-    const dataArry = Object.values(data)
-    console.log(dataArry)
-
     this.setState({
-      data: dataArry,
       search: '',
     })
     this.getOrderlistAsync()
   }
 
+  //搜尋
   updateSearch(event) {
     this.setState({
       data: this.state.data,
@@ -150,28 +141,25 @@ class mapList extends React.Component {
     })
     console.log(this.state.searchBtn1)
   }
-
   showStar = (event) => {
     this.setState({
       searchBtn3: event.target.name,
     })
     // console.log(event)
   }
-
+  //選日期
   showDate = () => {
     this.setState({
       searchBtn2: this.state.date.pattern('yyyy-MM-dd'),
     })
     // console.log(this.state.dateClicked)
   }
-
   changeClickState = () => {
     this.setState({
       dateClicked: !this.state.dateClicked,
     })
     console.log(this.state.dateClicked)
   }
-
   pickDate = (date, event) => {
     this.setState({ date })
     // console.log(date, event,'onchange')
@@ -185,23 +173,35 @@ class mapList extends React.Component {
     this.props.onClickReset()
     // console.log(this.props.cafeActive)
   }
+
+  //點擊咖啡廳卡片
   cardClick = (cid) => {
-    // console.log(cid)
-    this.state.data.forEach((item) => {
-      // console.log(item)
-      if (item.id === cid) {
-        // console.log(item.lat, item.log)
+    this.state.cafedata.forEach((item) => {
+      if (item.mapCafe_Id === cid) {
+        console.log(item.lat, item.log)
         this.props.cardClickReset(item.lat, item.log)
       }
     })
   }
+
+  //點擊商品卡片
+  //  cardClick = (cid) => {
+  //   // console.log(cid)
+  //   this.state.productdata.forEach((item) => {
+  //     // console.log(item)
+  //     if (item.mapId === cid) {
+  //       console.log(item.lat, item.log)
+  //       this.props.cardClickReset(item.lat, item.log)
+  //     }
+  //   })
+  // }
 
   onItemClick = (event) => {
     event.openPopup()
   }
 
   filterList() {
-    let updatedList = this.state.data.filter((item) => {
+    let updatedList = this.state.cafedata.filter((item) => {
       // console.log(this.state.searchBtn1, this.state.searchBtn3)
       if (
         this.state.searchBtn1 === '全部類別' ||
@@ -210,106 +210,127 @@ class mapList extends React.Component {
         // console.log('texs')
         if (this.state.searchBtn3 == '4.5分以上') {
           return (
-            item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-              -1 && item.star > 25
+            item.mapCafe_Name
+              .toLowerCase()
+              .indexOf(this.state.search.toLowerCase()) !== -1 && item.star > 25
           )
         } else if (this.state.searchBtn3 == '4分以上') {
           return (
-            item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-              -1 && item.star > 20
+            item.mapCafe_Name
+              .toLowerCase()
+              .indexOf(this.state.search.toLowerCase()) !== -1 && item.star > 20
           )
         } else if (this.state.searchBtn3 == '3.5分以上') {
           return (
-            item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-              -1 && item.star > 3.5
+            item.mapCafe_Name
+              .toLowerCase()
+              .indexOf(this.state.search.toLowerCase()) !== -1 &&
+            item.star > 3.5
           )
         } else {
           return (
-            item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-            -1
+            item.mapCafe_Name
+              .toLowerCase()
+              .indexOf(this.state.search.toLowerCase()) !== -1
           )
         }
       } else if (this.state.searchBtn1 == '咖啡廳') {
         if (this.state.searchBtn3 == '4.5分以上') {
           return (
-            item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-              -1 &&
+            item.mapCafe_Name
+              .toLowerCase()
+              .indexOf(this.state.search.toLowerCase()) !== -1 &&
             item.category == '咖啡廳' &&
             item.star > 4.5
           )
         } else if (this.state.searchBtn3 == '4分以上') {
           return (
-            item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-              -1 &&
+            item.mapCafe_Name
+              .toLowerCase()
+              .indexOf(this.state.search.toLowerCase()) !== -1 &&
             item.category == '咖啡廳' &&
             item.star > 4.5
           )
         } else if (this.state.searchBtn3 == '3.5分以上') {
           return (
-            item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-              -1 &&
+            item.mapCafe_Name
+              .toLowerCase()
+              .indexOf(this.state.search.toLowerCase()) !== -1 &&
             item.category == '咖啡廳' &&
             item.star > 3.5
           )
         } else {
           return (
-            item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-              -1 && item.category == '咖啡廳'
+            item.mapCafe_Name
+              .toLowerCase()
+              .indexOf(this.state.search.toLowerCase()) !== -1 &&
+            item.category == '咖啡廳'
           )
         }
       } else if (this.state.searchBtn1 == '手作課程') {
         if (this.state.searchBtn3 == '4.5分以上') {
           return (
-            item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) &&
+            item.mapCafe_Name
+              .toLowerCase()
+              .indexOf(this.state.search.toLowerCase()) &&
             item.category == '手作課程' &&
             item.star > 4.5
           )
         } else if (this.state.searchBtn3 == '4分以上') {
           return (
-            item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-              -1 &&
+            item.mapCafe_Name
+              .toLowerCase()
+              .indexOf(this.state.search.toLowerCase()) !== -1 &&
             item.category == '手作課程' &&
             item.star > 4.5
           )
         } else if (this.state.searchBtn3 == '3.5分以上') {
           return (
-            item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-              -1 &&
+            item.mapCafe_Name
+              .toLowerCase()
+              .indexOf(this.state.search.toLowerCase()) !== -1 &&
             item.category == '手作課程' &&
             item.star > 3.5
           )
         } else {
           return (
-            item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-              -1 && item.category == '手作課程'
+            item.mapCafe_Name
+              .toLowerCase()
+              .indexOf(this.state.search.toLowerCase()) !== -1 &&
+            item.category == '手作課程'
           )
         }
       } else if (this.state.searchBtn1 == '文藝展覽') {
         if (this.state.searchBtn3 == '4.5分以上') {
           return (
-            item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-              -1 &&
+            item.mapCafe_Name
+              .toLowerCase()
+              .indexOf(this.state.search.toLowerCase()) !== -1 &&
             item.category == '文藝展覽' &&
             item.star > 4.5
           )
         } else if (this.state.searchBtn3 == '4分以上') {
           return (
-            item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-              -1 &&
+            item.mapCafe_Name
+              .toLowerCase()
+              .indexOf(this.state.search.toLowerCase()) !== -1 &&
             item.category == '文藝展覽' &&
             item.star > 4.5
           )
         } else if (this.state.searchBtn3 == '3.5分以上') {
           return (
-            item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-              -1 &&
+            item.mapCafe_Name
+              .toLowerCase()
+              .indexOf(this.state.search.toLowerCase()) !== -1 &&
             item.category == '文藝展覽' &&
             item.star > 3.5
           )
         } else {
           return (
-            item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-              -1 && item.category == '文藝展覽'
+            item.mapCafe_Name
+              .toLowerCase()
+              .indexOf(this.state.search.toLowerCase()) !== -1 &&
+            item.category == '文藝展覽'
           )
         }
       }
@@ -320,10 +341,10 @@ class mapList extends React.Component {
         <Fade>
           <li
             className="eventContentLi list-group-item"
-            data-category={item.name}
+            data-category={item.mapCafe_Name}
             key={index}
             id={item.id}
-            onClick={() => this.cardClick(item.id)}
+            onClick={() => this.cardClick(item.mapCafe_Id)}
           >
             <div className="eventContentBox d-flex">
               <div className="eventImgBox col-4">
@@ -334,7 +355,7 @@ class mapList extends React.Component {
               </div>
               <div className="eventDetailBox col-8 pl-3">
                 <h4 className="eventTitle" style={{ fontWeight: 'bold' }}>
-                  {item.name}
+                  {item.mapCafe_Name}
                 </h4>
                 <ul className=" list-unstyled">
                   <li>
@@ -386,7 +407,7 @@ class mapList extends React.Component {
       <div>
         <fieldset className="">
           <div className="px-4 p-3">
-            <div class="box col-12">
+            <div class="box col-12">  
               <div class="input-group">
                 <input
                   className="form-control form-control-lg"
@@ -550,11 +571,10 @@ class mapList extends React.Component {
             </div>
           </div>
           <div className="dataBox overflow-auto px-1">
-            {cafeActive ? (
-              <ul className="list-group ">{this.filterList()}</ul>
-            ) : (
-              console.log()
-            )}
+            <ul className="list-group ">
+              {/* {this.productfilterList()} */}
+              {cafeActive ? <>{this.filterList()}</> : console.log()}
+            </ul>
           </div>
         </div>
       </div>
