@@ -1,14 +1,30 @@
 import React, { useState, useEffect } from 'react'
 import { Dropdown } from 'react-bootstrap'
 import Calendar from 'react-calendar'
+import { connect } from 'react-redux'
+import { Link, withRouter } from 'react-router-dom'
 
 import '../../styles/product/AsideBar.scss'
 
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import { getProductCategoryAsync } from '../../actions/product/getProductCategory'
 
 function AsideBar(props) {
+  // const getProductCategoryAsync = async (productCategory) => {
+  //   const request = new Request('http://127.0.0.1:5000/productCategory', {
+  //     method: 'GET',
+  //     headers: new Headers({
+  //       Accept: 'application/json',
+  //       'Content-Type': 'application/json',
+  //     }),
+  //   })
+
+  //   const response = await fetch(request)
+  //   const data = await response.json()
+  //   console.log(data)
+  // }
+
+  const { productData, getProductCategoryAsync } = props
+
   useEffect(() => {
     getProductCategoryAsync()
   }, [])
@@ -101,4 +117,20 @@ function AsideBar(props) {
   )
 }
 
-export default AsideBar
+// export default AsideBar
+
+// 將redux中的store的state(狀態)
+// 對應到這個元件中的props中，名稱為total
+const mapStateToProps = (store) => {
+  return { productData: store.productReducer }
+}
+
+// 綁定store的dispatch方法到這個元件的props
+// const mapDispatchToProps = (dispatch) => {
+//   return bindActionCreators({ addValue, minusValue }, dispatch)
+// }
+
+// 高階元件的樣式，必要的
+export default connect(mapStateToProps, {
+  getProductCategoryAsync,
+})(AsideBar)
