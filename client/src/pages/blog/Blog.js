@@ -5,7 +5,7 @@ import { Link, withRouter } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
 import Masonry from 'react-masonry-css'
 
-import { initValueAsync } from '../../actions/blog'
+import { getBlogDataAsync } from '../../actions/blog'
 
 import MyBreadcrumb from '../../components/MyBreadcrumb'
 
@@ -18,17 +18,16 @@ import author5 from '../../images/blog/author5.jpg'
 import author6 from '../../images/blog/author6.jpg'
 import author7 from '../../images/blog/author7.jpg'
 import author8 from '../../images/blog/author8.jpg'
-import blogList from '../../reducers/blog/blog'
 
 function Blog(props) {
   console.log('Blog-props:', props)
 
-  const { blogList,initValueAsync } = props
+  const { blogList,getBlogDataAsync } = props
   console.log('blogList', blogList)
   // componentDidMount時執行一次
   // 從伺服要資料
   useEffect(() => {
-    initValueAsync()
+    getBlogDataAsync()
     
   }, [])
   
@@ -146,5 +145,5 @@ const mapStateToProps = (store) => {
 
 // 高階元件的樣式，必要的
 export default connect(mapStateToProps, {
-  initValueAsync,
+  getBlogDataAsync,
 })(Blog)
