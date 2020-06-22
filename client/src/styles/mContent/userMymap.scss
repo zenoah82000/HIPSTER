@@ -1,0 +1,152 @@
+// couponhead
+.currentcoupon {
+  border-bottom: 3px solid #ff3400;
+  color: #ff3400;
+  font-weight: 800;
+}
+
+.coupontab-a {
+  color: #707070;
+  width: 190px;
+  display: inline-block;
+}
+.coupontab-a:hover {
+  text-decoration: none;
+  color: #ff3400;
+}
+
+.usercontainer {
+  padding: 20px 30px 0px;
+  //   padding-right: 30px;
+}
+.usertitle {
+  font-weight: bold;
+  font-size: 24px;
+  margin-top: 20px;
+}
+
+.buttonstyle {
+  background: #ff3400;
+  width: 135px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+  letter-spacing: 2px;
+}
+
+.input-container {
+  width: 500px;
+}
+
+@media only screen and (max-width: 768px) {
+  .input-container {
+    width: 100%;
+  }
+  .buttonstyle {
+    width: 80px;
+  }
+}
+
+.form-control::placeholder {
+  font-size: 18px;
+}
+
+.tabcontainer {
+  width: 190px;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+}
+
+.table thead th {
+  padding-bottom: 4px;
+  padding-top: 4px;
+}
+
+// couponbody
+.tab-pane {
+  padding: 0px 30px 0px;
+}
+
+.row {
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+.table-head {
+  background-color: #eee;
+  padding: 5px 10px;
+  margin: 20px 0px 0px;
+  border-radius: 4px 4px 0 0;
+  color: #666;
+}
+
+//coupon
+.coupon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #688e67;
+  text-align: center;
+  color: #fff;
+  font-family: Arial Rounded MT Bold, Arial Rounded MT, sans-serif;
+  line-height: 1;
+  min-width: 90px;
+  min-height: 45px;
+  padding: 5px;
+  margin: 0 5px 5px;
+  position: relative;
+  word-break: break-word;
+  word-wrap: break-word;
+  font-size: 16px;
+}
+.coupon span {
+  display: inline-block;
+  border: 1px solid hsla(0, 0%, 100%, 0.6);
+  border-radius: 2px;
+  height: 100%;
+  width: 100%;
+  padding: 8px 10px;
+}
+
+.coupon:after,
+.coupon:before {
+  content: '';
+  background-image: url(https://i.imgur.com/ljmNnpJ.png);
+  background-size: auto 105%;
+  width: 5px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+}
+.coupon-listview {
+  border-bottom: 1px solid #eaeaea;
+  padding: 20px 10px;
+}
+
+.coupon-listview ul li {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.coupon:after {
+  right: -5px;
+  background-position: 100%;
+}
+.coupon:before {
+  left: -5px;
+  background-position: 0;
+}
+
+.coupon-code {
+  font-weight: 700;
+  margin-bottom: 5px;
+  font-size: 14px;
+  word-break: break-word;
+  word-wrap: break-word;
+}
+
+
+.leaflet-container{
+  height: 350px;
+}
