@@ -1,9 +1,17 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Dropdown } from 'react-bootstrap'
 import Calendar from 'react-calendar'
+
 import '../../styles/product/AsideBar.scss'
 
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { getProductCategoryAsync } from '../../actions/product/getProductCategory'
+
 function AsideBar(props) {
+  useEffect(() => {
+    getProductCategoryAsync()
+  }, [])
   return (
     <>
       <aside className="aside-wrapper col-md-3">

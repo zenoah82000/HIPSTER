@@ -1,0 +1,32 @@
+%h2Title {
+  margin: 40px 0 24px 0;
+  font-weight: 800;
+}
+.product-howto-area {
+  & > ul > li {
+    margin-bottom: 6px;
+    font-size: 18px;
+    font-weight: 800;
+    list-style-position: inside;
+  }
+  .li-16px {
+    font-size: 16px;
+    list-style-position: inside;
+  }
+
+  h3 {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 18px;
+  }
+
+  .product-howto-title {
+    @extend %h2Title;
+  }
+
+  .product-business-time,
+  .product-location,
+  .product-transport {
+    margin: 24px 0;
+  }
+}

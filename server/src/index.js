@@ -55,15 +55,26 @@ app.use(require(__dirname+'/order/order'));
 
 app.use(require(__dirname+'/blog'));
 
+app.use(require(__dirname+'/productCategory'));
+
+app.use(require(__dirname+'/productlist'));
+
 app.use(require(__dirname+'/member-api/users-router'));
 
 //設定公開資料夾
 app.use(express.static('public'));
 
+//首頁
+app.get('/', (req, res) => {
+    console.log('Request Hipster Api')
+    res.send(`<h1>Hipster Api Start</h1><img src="https://www.akamai.com/cn/zh/multimedia/images/intro/2018/big-data-connector-intro.jpg?imwidth=1366">`)
+  })
+  
+
 //找不到頁面
 app.use((req,res)=>{
     res.status(404);
-    res.send(`<h2>找不到你要的頁面</h2> <img src="https://cdn.pixabay.com/photo/2020/04/17/14/16/mountains-5055387_1280.jpg">`);
+    res.send(`<img src="https://i.ytimg.com/vi/kvKSi5_pnjk/maxresdefault.jpg">`);
 })
 app.listen(5000,()=>{
     console.log('開始監聽');

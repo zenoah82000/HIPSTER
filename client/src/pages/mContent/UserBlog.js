@@ -1,16 +1,20 @@
 import React from 'react'
 
 import author1 from '../../images/blog/author1.jpg'
+import userBlogTop from '../../images/blog/userBlogTop.png'
 
 function UserBlog() {
   return (
     <>
       <h3 className="ml-3 mt-3">我的文章</h3>
-      <div className="row">Slider</div>
-      <button className="btn">發表新文章</button>
+      <div className="row userBlogTop">
+        <img src={userBlogTop} />
+      </div>
+      <div className="row userblog-btn-row">
+        <button className="btn userblog-btn d-block">發表新文章</button>
+      </div>
       <hr />
-
-      <div className="row myblog-list-item">
+      <div className="row userblog-list-item">
         <div className="col-2">
           <img src={author1} alt="author1" />
         </div>
@@ -25,7 +29,8 @@ function UserBlog() {
           </button>
         </div>
       </div>
-      <div className="row myblog-list-item">
+      <hr />
+      <div className="row userblog-list-item">
         <div className="col-2">
           <img src={author1} alt="author1" />
         </div>

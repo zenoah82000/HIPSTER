@@ -10,7 +10,7 @@ const getBlogList = async (req) => {
     rows: [],
   }
   
-  const sql = `SELECT * FROM blog ORDER BY articleId ASC`
+  const sql = `SELECT * FROM article ORDER BY articleId ASC`
   const [r] = await db.query(sql)
   if (r) output.rows = r
   for (let i of r) {
