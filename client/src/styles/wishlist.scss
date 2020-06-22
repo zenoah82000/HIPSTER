@@ -43,9 +43,18 @@
 }
 
 .empty {
-  margin-top: 100px;
-  .emptyImg {
+  display: flex;
+  margin: 100px auto;
+  width: 350px;
+  flex-direction: column;
+  align-items: center;
+  .emptyimgbox {
     width: 200px;
     height: 150px;
+    .emptyImg {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
   }
 }

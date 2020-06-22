@@ -11,7 +11,7 @@ function UserWishlist() {
   const [wishlist, setWishlist] = useState([])
 
   //取得願望清單
-  const localWishlist = JSON.parse(localStorage.getItem('wishlist')) ||[]
+  const localWishlist = JSON.parse(localStorage.getItem('wishlist')) || []
   async function getCartFromLocalStorage() {
     setWishlist(localWishlist)
   }
@@ -76,12 +76,16 @@ function UserWishlist() {
         </div>
       </div>
     ) : (
-      <div className="empty text-center">
-        <img
-          className="emptyImg mb-3"
-          src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
-        />
-        <p>願望清單是空的！趕緊探索你下一次的旅程，並標記你心儀的活動體驗</p>
+      <div className="empty ">
+        <div className="emptyimgbox">
+          <img
+            className="emptyImg mb-3"
+            src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
+          />
+        </div>
+        <div className="emptytext text-center">
+          <p>願望清單是空的！趕緊探索你下一次的旅程，並標記你心儀的活動體驗</p>
+        </div>
       </div>
     )
   return (

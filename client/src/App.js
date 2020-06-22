@@ -56,7 +56,21 @@ function App(props) {
     userlocalStorage.success ? setuserSuccess(true) : setuserSuccess(false)
     props.dispatch({ type: 'GET_CART', value: localCart })
   }, [])
-
+  //加入購物車
+  const addCart =(value)=>{
+    const index =localCart.findIndex((item)=>
+      item.id == value.id
+    )
+    if(index == -1){
+      localCart.push(value)
+      props.dispatch({type:'GET_CART',value:localCart})
+      localStorage.setItem('cart', JSON.stringify(localCart))
+    }else{
+      localCart[index].amount +=1
+      props.dispatch({type:'GET_CART',value:localCart})
+      localStorage.setItem('cart', JSON.stringify(localCart))
+    }
+  }
   //刪除購物車
   const deleteCart = (id) => {
     Swal.fire({
