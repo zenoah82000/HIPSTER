@@ -30,13 +30,13 @@ function paymentFinish(props) {
             <div className="bgColor p-4">
               <ul className="list-unstyled ">
                 <li className="py-2">訂單編號:0000000000</li>
-                {buyerinfo.product.map((item) => {
+                {buyerinfo.product ? (buyerinfo.product.map((item) => {
                   return (
                     <>
                       <li className="pt-2">活動日期: 2020年5月24日 9:20PM </li>
                     </>
                   )
-                })}
+                })):('')}
               </ul>
             </div>
             <button

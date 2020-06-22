@@ -44,9 +44,11 @@ router.post("/member/checkout", async (req, res) => {
   let orderId;
   const total = "show table status like 'item_lists'";
   const [r1] = await db.query(total);
+  let rows = (r1[0].Rows + 1).toString();
+  rows = rows.padStart(5, 0);
   //訂單編號
-  orderId =
-    "O" + year + month + date + (r1[0].Auto_increment + 1) + (r1[0].Rows + 1);
+  orderId = "O" + year + month + date + rows;
+
 
   const addorderlist =
     "INSERT INTO `item_lists` (`orderId`,`memberId`,`productId`,`date`,`checkPrice`,`checkQty`,`checkSubtotal`) VALUES (?,?,?,?,?,?,?)";
@@ -54,7 +56,12 @@ router.post("/member/checkout", async (req, res) => {
     "INSERT INTO `orderlist` (`orderId`,`memberId`,`orderTotal`,`paymentTypeId`) VALUES(?,?,?,?)";
 
   //新增商品到訂單
-  const [r2] = await db.query(addorder, [orderId, memberId, req.body.total, "2"]);
+  const [r2] = await db.query(addorder, [
+    orderId,
+    memberId,
+    req.body.total,
+    "2",
+  ]);
   for (let i = 0; i < orderItems.length; i++) {
     db.query(addorderlist, [
       orderId,
@@ -67,12 +74,8 @@ router.post("/member/checkout", async (req, res) => {
     ]);
   }
   console.log("訂單新增成功" + orderId);
-  res.json(orderId);
-});
-
-//完成訂單寄發EMAIL
-router.get("/member/email", (req, res) => {
-  console.log("發送電子郵件");
+  //訂單成功送出email
+  console.log('送出電子郵件')
   const transporter = nodemailer.createTransport({
     service: "gmail",
     secure: true,
@@ -87,20 +90,23 @@ router.get("/member/email", (req, res) => {
       rejectUnauthorized: false,
     },
   });
+  let text = orderItems.map(item=>{return '<li>'+item.name+'<li>'})
+  console.log(text)
   var mailOptions = {
-    from: '"hisper" <e24971234@gmail.com>',
+    from: '"Hipster文青地圖" <e24971234@gmail.com>',
     to: "kengp6@gmail.com",
-    cc: "e24971234@gmail.com",
-    subject: "感謝你在本站消費",
-    text: "GGGGGGGGGGGGGG",
+    subject: "感謝您在本站消費",
+    html:"<p>訂單編號:"+orderId+"</p>"+text,
   };
   // 準備發送信件
   transporter.sendMail(mailOptions, function (err, info) {
     if (err) {
       return console.log(err);
     }
-    res.send("發送成功");
   });
+  res.json(orderId);
 });
+
+//完成訂單寄發EMAIL
 
 module.exports = router;
