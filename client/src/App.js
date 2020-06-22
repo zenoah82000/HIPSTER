@@ -43,6 +43,7 @@ function App(props) {
   //判斷使用者是否已登入
   const [userSuccess, setuserSuccess] = useState(false)
   const userlocalStorage = JSON.parse(localStorage.getItem('member')) || []
+  const username = userlocalStorage.name
 
   // console.log(userSuccess)
 
@@ -90,6 +91,7 @@ function App(props) {
           deleteCart={deleteCart}
           userSuccess={userSuccess}
           setuserSuccess={setuserSuccess}
+          username={username}
         />
 
         <Switch>
