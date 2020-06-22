@@ -102,7 +102,7 @@
 }
 .coupon span {
   display: inline-block;
-  border: 1px solid hsla(0, 0%, 100%, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.6);
   border-radius: 2px;
   height: 100%;
   width: 100%;
@@ -127,11 +127,12 @@
 .coupon-listview ul li {
   font-size: 13px;
   font-weight: 500;
+  overflow: hidden;
 }
 
 .coupon:after {
   right: -5px;
-  background-position: 100%;
+  // background-position: 100%;
 }
 .coupon:before {
   left: -5px;
@@ -149,4 +150,14 @@
 
 .leaflet-container{
   height: 350px;
+}
+
+
+.bg{
+  background:red ;
+}
+
+.vertical-timeline-element-date{
+  color:#688e67 ;
+  font-weight: bold;
 }

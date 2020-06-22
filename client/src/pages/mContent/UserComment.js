@@ -13,6 +13,7 @@ import Swal from 'sweetalert2'
 
 // https://medium.com/@hugh_Program_learning_diary_Js/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6-react-react-form-%E5%A0%B1%E5%90%8D%E8%A1%A8%E5%96%AE-ebd5e3a7201a
 
+//假資料
 function UserComment(props) {
   const data = {}
   myComment.comment.forEach((item, i) => {
@@ -23,18 +24,62 @@ function UserComment(props) {
       img: item.img,
     }
   })
-
-  let dataArry = []
+ let dataArry = []
   for (const key in data) {
     data[key].id = key
     dataArry.push(data[key])
   }
 
+  //state
   const [image, setImage] = useState({ file: [], preview: [], raw: '' })
   const [text, setText] = useState('')
   const [list, setList] = useState(dataArry)
   // const [nocommentlist, setNocommentlist] = useState([]);
   // const divRef = React.createRef()
+
+// 後端傳資料
+const checkoutAsync = async (order) => {
+  const request = new Request('http://localhost:5000/memberuser/comment/notcomment', {
+    method: 'post',
+    body: JSON.stringify(order),
+    headers: new Headers({
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    }),
+  })
+  const response = await fetch(request)
+  const data = await response.json()
+  this.setList(data)
+}
+
+// const checkOut = () => {
+//   let total = sum(mycart)
+//   mycart.forEach((item, i) => {
+//     itemData.productId = mycart[i].id
+//     itemData.date = mycart[i].date
+//     itemData.name = mycart[i].name
+//     itemData.checkPrice = mycart[i].price
+//     itemData.checkQty = mycart[i].amount
+//     itemData.checkSubtotal = +mycart[i].price * +mycart[i].amount
+//     orderData.orderItems.push(itemData)
+//     itemData = {}
+//   })
+
+//   //取得總額跟信箱
+//   orderData.total = total
+//   orderData.email = buyerinfo.email
+
+//   //訂單資料傳資料庫
+//   checkoutAsync(orderData)
+
+//   // 購物完清掉 localstorage 購物車
+//   props.dispatch({ type: 'GET_CART', value: [] })
+//   localStorage.removeItem('cart')
+//   // window.location.href = '/paymentFinish'
+//   props.history.push('/paymentFinish')
+// }
+
+
 
   // 上傳圖片
   let fileObj = []
@@ -48,9 +93,7 @@ function UserComment(props) {
       console.log(fileObj)
       console.log(fileArray)
     }
-
     // setImage({ file: fileArray })
-
     if (e.target.files.length) {
       setImage({
         preview: fileArray,
@@ -109,7 +152,6 @@ function UserComment(props) {
     list.length >= 1 ? (
       list.map((item, index) => {
         console.log(image)
-        // if (!image.prview) return
         return (
           <>
             <div className="coupon-listview" key={index}>
@@ -139,7 +181,7 @@ function UserComment(props) {
                                 return (
                                   <>
                                     <div className="commentImg">
-                                      <img
+                                      <img                                     
                                         className="commentImgPhoto"
                                         src={item}
                                         alt=""
@@ -247,8 +289,8 @@ function UserComment(props) {
                         <p>我的回覆:</p>
                       </li>
                       <li className="myReply pb-3">
-                        <p className="pt-2 ">{item.content}</p>
-                        <div className="d-flex mt-5 mb-2">
+                        <p className="pt-2 text">{item.content}</p>
+                        <div className="d-flex mt-2 mb-2">
                           <div className="commentImg">
                             <img
                               src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
@@ -331,7 +373,7 @@ function UserComment(props) {
               </div>
             </div>
           </div>
-          <form className="tab-pane" onSubmit={handleSubmit}>
+          <form className="tab-pane" onSubmit={handleSubmit} method="POST" action="">
             {displayNotComment}
           </form>
         </>
