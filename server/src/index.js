@@ -57,6 +57,10 @@ app.use(require(__dirname+'/order/order'));
 
 app.use(require(__dirname+'/blog'));
 
+app.use(require(__dirname+'/productCategory'));
+
+app.use(require(__dirname+'/productlist'));
+
 app.use(require(__dirname+'/member-api/users-router'));
 
 //設定公開資料夾
