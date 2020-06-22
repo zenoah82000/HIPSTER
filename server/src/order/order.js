@@ -38,6 +38,7 @@ router.post("/member/checkout", async (req, res) => {
   let date = new Date().getDate().toString();
   const memberId = 2;
   const orderItems = req.body.orderItems;
+  const email = req.body.email
   //取得總筆數
   let orderId;
   const total = "show table status like 'item_lists'";
@@ -93,7 +94,7 @@ router.post("/member/checkout", async (req, res) => {
   console.log(text);
   var mailOptions = {
     from: '"Hipster文青地圖" <e24971234@gmail.com>',
-    to: "kengp6@gmail.com",
+    to: email,
     subject: "感謝您在本站消費",
     html: "<p>訂單編號:" + orderId + "</p>" + text,
   };

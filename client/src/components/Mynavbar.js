@@ -17,7 +17,7 @@ import Test from '../pages/Test'
 
 function Mynavbar(props) {
   //購物車資料
-  const { mycart, deleteCart, userSuccess, setuserSuccess } = props
+  const { mycart, deleteCart, userSuccess, setuserSuccess, username } = props
   // console.log(userSuccess)
 
   //購物車視窗狀態
@@ -481,7 +481,7 @@ function Mynavbar(props) {
           {userSuccess ? (
             <>
               <ul className="member">
-                <li>David,您好</li>
+                <li>{username},您好</li>
                 <li>
                   <a href="./memberuser" className="memberbtn">
                     會員中心

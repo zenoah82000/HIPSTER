@@ -28,16 +28,29 @@ function paymentFinish(props) {
               {buyerinfo.email}
             </p>
             <div className="bgColor p-4">
-              <ul className="list-unstyled ">
-                <li className="py-2">訂單編號:{buyerinfo.orderId? (buyerinfo.orderId):('')}</li>
-                {buyerinfo.product ? (buyerinfo.product.map((item) => {
-                  return (
-                    <>
-                      <li className="pt-2">活動日期: 2020年5月24日 9:20PM </li>
-                    </>
-                  )
-                })):('')}
-              </ul>
+              <h4 className="py-2">
+                訂單編號:{buyerinfo.orderId ? buyerinfo.orderId : ''}
+              </h4>
+              {buyerinfo.product
+                ? buyerinfo.product.map((item) => {
+                    return (
+                      <>
+                        <div className="d-flex productbox">
+                          <div className="productimgbox mr-2">
+                            <img
+                              className="productimg"
+                              src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
+                            />
+                          </div>
+                          <div className="productinfo">
+                            <p className="title">{item.name}</p>
+                            <p className="date">預定日期: {item.date}</p>
+                          </div>
+                        </div>
+                      </>
+                    )
+                  })
+                : ''}
             </div>
             <button
               className="paymentButton"
