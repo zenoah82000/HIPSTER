@@ -31,7 +31,7 @@ function UserComment(props) {
   }
 
   const [image, setImage] = useState({ file:[],preview: "", raw: "" });
-  // const [text, setText] = useState('');
+  const [text, setText] = useState('');
   const [list, setList] = useState(dataArry);
   // const [nocommentlist, setNocommentlist] = useState([]);
   // const divRef = React.createRef()
@@ -74,21 +74,26 @@ function UserComment(props) {
     });
   };
 
-// const handleTextChange =(e) =>{
-//   // setText(e.target.value)
-//   console.log("test")
-//   console.log(text)
-// }
+const handleTextChange =(e) =>{
+  setText(e.target.value)
+  console.log("test")
+  console.log(text)
+}
 
   const handleSubmit = (e,index) => {
     // alert('submit')
-    // text !==""?alert('提交成功') : alert('請輸入評論');
-    Swal.fire({
+    text !==""? Swal.fire({
       text: '成功送出評論',
       icon: 'success',
       confirmButtonText: '確定',
       confirmButtonColor: "rgba(104, 142, 103, 0.8)",
-    }) 
+    }) && handleDelete(index) :Swal.fire({
+      text: '評論不能為空白',
+      icon: 'warning',
+      confirmButtonText: '確定',
+      confirmButtonColor: "rgba(104, 142, 103, 0.8)",
+    })
+   
     e.preventDefault();
   }
 
@@ -157,7 +162,7 @@ function UserComment(props) {
                       <li>
                         <p>輸入回覆:</p>
                         <textarea className="form-control" id="" rows="6"
-                        //  onChange={(index) => handleTextChange(index)}
+                         onChange={(index) => handleTextChange(index)}
                         //  key={index}
                          ></textarea>
                       </li>
@@ -167,7 +172,7 @@ function UserComment(props) {
                       type="submit"
                       id="button-addon2"
                       value="Submit"
-                      onClick={()=>handleDelete(index)}
+                      // onClick={()=>handleDelete(index)}
                       key={index}
                       // onClick={handleUpload}
                       // onClick={()=>{setAccount("")}}
