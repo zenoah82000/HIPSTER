@@ -113,7 +113,7 @@ function paymentDetail(props) {
                       id="inputNumber"
                       placeholder=""
                       ref={(input) => (phone = input)}
-                    
+                      required
                     />
                   </div>
                 </div>

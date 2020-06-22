@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-
 import '../styles/home.scss'
 import {
   FaSearch,
@@ -19,90 +18,6 @@ import abouticon4 from '../images/home/about-icon4.png'
 import activity from '../images/home/activity-test.jpg'
 
 function Home(props) {
-  //搜尋bar切換狀態 0=地點 1=分類 2=時間
-  const [searchbar, setsearchbar] = useState(0)
-  console.log(searchbar)
-
-  //地點搜尋bar
-  const location = (
-    <div id="location-search" className="search-bar">
-      <select id="city">
-        <option>台北市</option>
-        <option>台中市</option>
-        <option>高雄市</option>
-      </select>
-      <select id="area">
-        <option>內湖區</option>
-        <option>中正區</option>
-        <option>大同區</option>
-      </select>
-      <input
-        type="text"
-        id="location-bar"
-        placeholder="請輸入活動地址...."
-        className="form-control"
-      />
-      <div id="local-btn" className="search-btn btn btn-warning ">
-        <FaSearch className="fonticon" />
-        搜尋
-      </div>
-      <div id="location-btn" className="location-search-btn btn btn-danger">
-        <FaStreetView className="fonticon" />
-        定位搜尋
-      </div>
-    </div>
-  )
-
-  //分類搜尋bar
-  const activename = (
-    <div id="activename-search" className="search-bar">
-      <select id="category1">
-        <option>主分類</option>
-      </select>
-      <select id="category2">
-        <option>次分類</option>
-      </select>
-      <input
-        type="text"
-        id="activename-bar"
-        placeholder="請輸入活動名稱...."
-        className="form-control"
-      />
-      <div id="active-btn" className="search-btn btn btn-warning ">
-        <FaSearch className="fonticon" />
-        搜尋
-      </div>
-    </div>
-  )
-  //時間搜尋bar
-  const time = (
-    <div id="time-search" className="search-bar">
-      <div className="time-title">搜尋時間內活動：</div>
-      <input type="date" id="time1" className="form-control" />
-      <FaLongArrowAltRight className="fonticon" />
-      <input type="date" id="time2" className="form-control" />
-      <div id="active-btn" className="search-btn btn btn-warning ">
-        <FaSearch className="fonticon" />
-        搜尋
-      </div>
-    </div>
-  )
-  //搜尋bar顯示控制
-  const searchbarDisplay = () => {
-    if (searchbar == 0) {
-      return location
-    } else if (searchbar == 1) {
-      return activename
-    } else if (searchbar == 2) {
-      return time
-    }
-  }
-  //搜尋bar上方切換鈕控制
-  const localbtnChangeClass = searchbar == 0 ? 'btn active' : 'btn'
-  const activenamebtnChangeClass = searchbar == 1 ? 'btn active' : 'btn'
-  const timebtnChangeClass = searchbar == 2 ? 'btn active' : 'btn'
-
-  //輪播-精選
   var activitys = {
     arrows: true,
     dots: false,
@@ -111,8 +26,6 @@ function Home(props) {
     slidesToShow: 3,
     slidesToScroll: 1,
   }
-
-  //輪播-時限
   var countdowns = {
     arrows: true,
     dots: false,
@@ -139,35 +52,79 @@ function Home(props) {
           </div>
           <div className="searchbar-chang-btn">
             <div className="btnList">
-              <div
-                id="location"
-                className={localbtnChangeClass}
-                onClick={() => {
-                  setsearchbar(0)
-                }}
-              >
+              <div id="location" className="btn active">
                 地點搜尋
               </div>
-              <div
-                id="activename"
-                className={activenamebtnChangeClass}
-                onClick={() => {
-                  setsearchbar(1)
-                }}
-              >
+              <div id="activename" className="btn">
                 活動名稱
               </div>
-              <div
-                id="time"
-                className={timebtnChangeClass}
-                onClick={() => {
-                  setsearchbar(2)
-                }}
-              >
+              <div id="time" className="btn">
                 活動時間
               </div>
             </div>
-            {searchbarDisplay()}
+            {/* --------------------------------------------------------- */}
+            <div id="location-search" className="search-bar">
+              <select id="city">
+                <option>台北市</option>
+                <option>台中市</option>
+                <option>高雄市</option>
+              </select>
+              <select id="area">
+                <option>內湖區</option>
+                <option>中正區</option>
+                <option>大同區</option>
+              </select>
+              <input
+                type="text"
+                id="location-bar"
+                placeholder="請輸入活動地址...."
+                className="form-control"
+              />
+              <div id="local-btn" className="search-btn btn btn-warning ">
+                <FaSearch className="fonticon" />
+                搜尋
+              </div>
+              <div
+                id="location-btn"
+                className="location-search-btn btn btn-danger"
+              >
+                <FaStreetView className="fonticon" />
+                定位搜尋
+              </div>
+            </div>
+            {/* ---------------------------------------------------------- */}
+
+            <div id="activename-search" className="search-bar none">
+              <select id="category1">
+                <option>主分類</option>
+              </select>
+              <select id="category2">
+                <option>次分類</option>
+              </select>
+              <input
+                type="text"
+                id="activename-bar"
+                placeholder="請輸入活動名稱...."
+                className="form-control"
+              />
+              <div id="active-btn" className="search-btn btn btn-warning ">
+                <FaSearch className="fonticon" />
+                搜尋
+              </div>
+            </div>
+
+            {/* --------------------------------------------------------------- */}
+            <div id="time-search" className="search-bar none">
+              <div className="time-title">搜尋時間內活動：</div>
+              <input type="date" id="time1" className="form-control" />
+              <FaLongArrowAltRight className="fonticon" />
+              <input type="date" id="time2" className="form-control" />
+              <div id="active-btn" className="search-btn btn btn-warning ">
+                <FaSearch className="fonticon" />
+                搜尋
+              </div>
+            </div>
+            {/* ----------------------------------------- */}
           </div>
         </div>
       </div>

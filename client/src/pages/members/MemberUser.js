@@ -32,7 +32,7 @@ function MemberUser() {
           <Route path="/memberuser/user">
             <UserContent />
           </Route>
-          <Route path="/memberuser/comment/:type">
+          <Route path="/memberuser/comment">
             <UserComment />
           </Route>
           <Route path="/memberuser/order">

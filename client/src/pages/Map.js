@@ -15,9 +15,9 @@ class Map extends React.Component {
         center: [25.0338438, 121.54335],
         zoom: 20,
       },
-      selected: '',
-      cafeActive: true,
-      clicked: false,
+      selected:"",
+      cafeActive:true,
+      clicked:false
     }
     console.log(props)
   }
@@ -28,29 +28,29 @@ class Map extends React.Component {
         center: [25.0338438 + 0.0000000000001, 121.54335 + 0.0000000000001],
         zoom: 20,
       },
-      clicked: false,
+      clicked:false
     })
   }
 
   cardClickReset = (lat, log) => {
     console.log(lat, log)
 
-    let newLat = lat
-    let newLog = log
+    let newLat = lat +0.01
+    let newLog = log +0.01
 
     console.log(newLat, newLog)
     this.setState({
       viewport: {
         center: [newLat, newLog],
-        zoom: 15,
+        zoom: 15, 
       },
-      clicked: true,
+      clicked:true
     })
   }
-
+  
   cafeActiveReset = () => {
     this.setState({
-      cafeActive: !this.state.cafeActive,
+      cafeActive:!this.state.cafeActive
     })
   }
 
@@ -65,11 +65,12 @@ class Map extends React.Component {
               cafeActiveReset={this.cafeActiveReset}
               cafeActive={this.state.cafeActive}
               CafeData={CafeData}
+
             />
           </div>
           <div className="col-8">
             <MyMapComponent
-              clicked={this.state.clicked}
+            clicked={this.state.clicked}
               viewport={this.state.viewport}
               clickItem={this.state.itemId}
               cafeActiveReset={this.cafeActiveReset}

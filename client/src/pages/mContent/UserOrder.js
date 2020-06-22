@@ -34,14 +34,13 @@ function UserOrder() {
 
     setTimeout(() => {
       if (orderlist.status) {
-        console.log(orderlist)
         setLoading(false)
       }
     }, 500)
   }, [orderlist])
 
   const display =
-    orderlist.order ? (
+    orderlist.length !=0? (
       <div className="orderlistbox ">
         <div className="row">
           {orderlist.order.map((item) => {

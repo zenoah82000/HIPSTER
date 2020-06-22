@@ -39,7 +39,7 @@ function BlogAdd(props) {
           <li>
             <CKEditor
               editor={ClassicEditor}
-              // data="<p>請輸入文章內容...</p>"
+              data="<p>請輸入文章內容...</p>"
               onInit={(editor) => {
                 // You can store the "editor" and use when it is needed.
                 console.log('Editor is ready to use!', editor)

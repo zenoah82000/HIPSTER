@@ -11,7 +11,7 @@ function UserWishlist() {
   const [wishlist, setWishlist] = useState([])
 
   //取得願望清單
-  const localWishlist = JSON.parse(localStorage.getItem('wishlist')) ||[]
+  const localWishlist = JSON.parse(localStorage.getItem('wishlist'))
   async function getCartFromLocalStorage() {
     setWishlist(localWishlist)
   }

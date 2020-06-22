@@ -326,14 +326,14 @@ nav {
   }
 }
 
-//================註冊&登入&登出ok視窗===============
+//===================註冊ok視窗===================
 
 .SignOk {
   @extend .login;
 }
 .SignOk-bg {
   @extend .login-bg;
-  width: 355px;
+  width: 290px;
   text-align: center;
   .SignOk-title {
     width: 100%;

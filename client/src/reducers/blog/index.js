@@ -1,14 +1,9 @@
+import blogList from './blog'
+// 記得要匯入combineReducers
 import { combineReducers } from 'redux'
 
-const blogList = (state = [], action) => {
-  switch (action.type) {    
-    case 'GET_BLOGDATA':
-      return action.payload.value
-    default:
-      return state
-  }
-}
-
+// 合併所有的reducers成一個大的reducer
+// 傳入值為物件，用物件的es6的簡寫法
 export const blogReducer = combineReducers({
   blogList,
 })

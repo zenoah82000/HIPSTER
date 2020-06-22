@@ -5,7 +5,7 @@ import { Link, withRouter } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
 import Masonry from 'react-masonry-css'
 
-import { getBlogDataAsync } from '../../actions/blog'
+import { initValueAsync } from '../../actions/blog'
 
 import MyBreadcrumb from '../../components/MyBreadcrumb'
 
@@ -18,67 +18,71 @@ import author5 from '../../images/blog/author5.jpg'
 import author6 from '../../images/blog/author6.jpg'
 import author7 from '../../images/blog/author7.jpg'
 import author8 from '../../images/blog/author8.jpg'
+import blogList from '../../reducers/blog/blog'
 
 function Blog(props) {
   console.log('Blog-props:', props)
 
-  const { blogList,getBlogDataAsync } = props
+  const { blogList,initValueAsync } = props
   console.log('blogList', blogList)
-  
+  // componentDidMount時執行一次
+  // 從伺服要資料
   useEffect(() => {
-    getBlogDataAsync()    
+    initValueAsync()
+    
   }, [])
   
-  // let items = [
-  //   {
-  //     id: 1,
-  //     title: '文章標題: 狗頭',
-  //     text: '文章內文: 汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪',
-  //     author: '作者: dog',
-  //   },
-  //   {
-  //     id: 2,
-  //     title: '文章標題: 狗頭',
-  //     text: '文章內文: 汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪',
-  //     author: '作者: dog',
-  //   },
-  //   {
-  //     id: 3,
-  //     title: '文章標題: 狗頭',
-  //     text: '文章內文: 汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪',
-  //     author: '作者: dog',
-  //   },
-  //   {
-  //     id: 4,
-  //     title: '文章標題: 狗頭',
-  //     text: '文章內文: 汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪',
-  //     author: '作者: dog',
-  //   },
-  //   {
-  //     id: 5,
-  //     title: '文章標題: 狗頭',
-  //     text: '文章內文: 汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪',
-  //     author: '作者: dog',
-  //   },
-  //   {
-  //     id: 6,
-  //     title: '文章標題: 狗頭',
-  //     text: '文章內文: 汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪',
-  //     author: '作者: dog',
-  //   },
-  //   {
-  //     id: 7,
-  //     title: '文章標題: 狗頭',
-  //     text: '文章內文: 汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪',
-  //     author: '作者: dog',
-  //   },
-  //   {
-  //     id: 8,
-  //     title: '文章標題: 狗頭',
-  //     text: '文章內文: 汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪',
-  //     author: '作者: dog',
-  //   },
-  // ]
+
+  let items = [
+    {
+      id: 1,
+      title: '文章標題: 狗頭',
+      text: '文章內文: 汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪',
+      author: '作者: dog',
+    },
+    {
+      id: 2,
+      title: '文章標題: 狗頭',
+      text: '文章內文: 汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪',
+      author: '作者: dog',
+    },
+    {
+      id: 3,
+      title: '文章標題: 狗頭',
+      text: '文章內文: 汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪',
+      author: '作者: dog',
+    },
+    {
+      id: 4,
+      title: '文章標題: 狗頭',
+      text: '文章內文: 汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪',
+      author: '作者: dog',
+    },
+    {
+      id: 5,
+      title: '文章標題: 狗頭',
+      text: '文章內文: 汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪',
+      author: '作者: dog',
+    },
+    {
+      id: 6,
+      title: '文章標題: 狗頭',
+      text: '文章內文: 汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪',
+      author: '作者: dog',
+    },
+    {
+      id: 7,
+      title: '文章標題: 狗頭',
+      text: '文章內文: 汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪',
+      author: '作者: dog',
+    },
+    {
+      id: 8,
+      title: '文章標題: 狗頭',
+      text: '文章內文: 汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪',
+      author: '作者: dog',
+    },
+  ]
 
   const authorImgArr = [
     author1,
@@ -129,13 +133,18 @@ function Blog(props) {
   )
 }
 
-const mapStateToProps = (store) =>({ blogList: store.blogReducer.blogList})
+// 將redux中的store的state(狀態)
+// 對應到這個元件中的props中，名稱為total
+const mapStateToProps = (store) => {
+  return { blogList: store.blogReducer.blogList}
+}
 
 // 綁定store的dispatch方法到這個元件的props
 // const mapDispatchToProps = (dispatch) => {
 //   return bindActionCreators({ addValue, minusValue }, dispatch)
 // }
 
+// 高階元件的樣式，必要的
 export default connect(mapStateToProps, {
-  getBlogDataAsync,
+  initValueAsync,
 })(Blog)
