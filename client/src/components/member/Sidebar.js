@@ -43,7 +43,7 @@ function Sidebar(props) {
                 <li className="nav-item">
                   <Link
                     className="nav-link sidebarlink-hs"
-                    to="/memberuser/comment/mycomment"
+                    to="/memberuser/comment/notcomment"
                   >
                     <i className="fas fa-comments"></i>我的評價
                   </Link>
