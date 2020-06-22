@@ -12,42 +12,56 @@ import { FaRegCalendarCheck } from 'react-icons/fa'
 import { FaSearch, FaStreetView } from 'react-icons/fa'
 import { GiCoffeeCup } from 'react-icons/gi'
 
-
+//轉換日期格式
 Date.prototype.pattern = function (fmt) {
   var o = {
-    "M+": this.getMonth() + 1, //月份         
-    "d+": this.getDate(), //日         
-    "h+": this.getHours() % 12 == 0 ? 12 : this.getHours() % 12, //小时         
-    "H+": this.getHours(), //小时         
-    "m+": this.getMinutes(), //分         
-    "s+": this.getSeconds(), //秒         
-    "q+": Math.floor((this.getMonth() + 3) / 3), //季度         
-    "S": this.getMilliseconds() //毫秒         
-  };
+    'M+': this.getMonth() + 1, //月份
+    'd+': this.getDate(), //日
+    'h+': this.getHours() % 12 == 0 ? 12 : this.getHours() % 12, //小时
+    'H+': this.getHours(), //小时
+    'm+': this.getMinutes(), //分
+    's+': this.getSeconds(), //秒
+    'q+': Math.floor((this.getMonth() + 3) / 3), //季度
+    S: this.getMilliseconds(), //毫秒
+  }
   var week = {
-    "0": "/u65e5",
-    "1": "/u4e00",
-    "2": "/u4e8c",
-    "3": "/u4e09",
-    "4": "/u56db",
-    "5": "/u4e94",
-    "6": "/u516d"
-  };
+    '0': '/u65e5',
+    '1': '/u4e00',
+    '2': '/u4e8c',
+    '3': '/u4e09',
+    '4': '/u56db',
+    '5': '/u4e94',
+    '6': '/u516d',
+  }
   if (/(y+)/.test(fmt)) {
-    fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+    fmt = fmt.replace(
+      RegExp.$1,
+      (this.getFullYear() + '').substr(4 - RegExp.$1.length)
+    )
   }
   if (/(E+)/.test(fmt)) {
-    fmt = fmt.replace(RegExp.$1, ((RegExp.$1.length > 1) ? (RegExp.$1.length > 2 ? "/u661f/u671f" : "/u5468") : "") + week[this.getDay() + ""]);
+    fmt = fmt.replace(
+      RegExp.$1,
+      (RegExp.$1.length > 1
+        ? RegExp.$1.length > 2
+          ? '/u661f/u671f'
+          : '/u5468'
+        : '') + week[this.getDay() + '']
+    )
   }
   for (var k in o) {
-    if (new RegExp("(" + k + ")").test(fmt)) {
-      fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+    if (new RegExp('(' + k + ')').test(fmt)) {
+      fmt = fmt.replace(
+        RegExp.$1,
+        RegExp.$1.length == 1 ? o[k] : ('00' + o[k]).substr(('' + o[k]).length)
+      )
     }
   }
-  return fmt;
+  return fmt
 }
 
-class FilteredList extends React.Component {
+//地圖列表
+class mapList extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -59,10 +73,23 @@ class FilteredList extends React.Component {
       searchBtn3: '星等',
       date: new Date(),
       dateClicked: false,
-      active: true
-
+      active: true,
     }
   }
+
+  getOrderlistAsync = async () => {
+    const request = new Request('http://localhost:5000/map', {
+      method: 'get',
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }),
+    })
+    const response = await fetch(request)
+    const data = await response.json()
+    this.setState({ data: data })
+  }
+
   componentDidMount() {
     const data = {}
     this.props.CafeData.cafes.forEach((item, i) => {
@@ -83,6 +110,7 @@ class FilteredList extends React.Component {
       data: dataArry,
       search: '',
     })
+    this.getOrderlistAsync()
   }
 
   updateSearch(event) {
@@ -132,14 +160,14 @@ class FilteredList extends React.Component {
 
   showDate = () => {
     this.setState({
-      searchBtn2: this.state.date.pattern("yyyy-MM-dd"),
+      searchBtn2: this.state.date.pattern('yyyy-MM-dd'),
     })
     // console.log(this.state.dateClicked)
   }
 
   changeClickState = () => {
     this.setState({
-      dateClicked: !this.state.dateClicked
+      dateClicked: !this.state.dateClicked,
     })
     console.log(this.state.dateClicked)
   }
@@ -151,7 +179,6 @@ class FilteredList extends React.Component {
     // console.log(this.state.searchBtn2)
     this.showDate()
   }
-
 
   //地圖定位
   handleClick() {
@@ -170,7 +197,7 @@ class FilteredList extends React.Component {
   }
 
   onItemClick = (event) => {
-    event.openPopup();
+    event.openPopup()
   }
 
   filterList() {
@@ -184,17 +211,17 @@ class FilteredList extends React.Component {
         if (this.state.searchBtn3 == '4.5分以上') {
           return (
             item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-            -1 && item.star > 25
+              -1 && item.star > 25
           )
         } else if (this.state.searchBtn3 == '4分以上') {
           return (
             item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-            -1 && item.star > 20
+              -1 && item.star > 20
           )
         } else if (this.state.searchBtn3 == '3.5分以上') {
           return (
             item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-            -1 && item.star > 3.5
+              -1 && item.star > 3.5
           )
         } else {
           return (
@@ -206,28 +233,28 @@ class FilteredList extends React.Component {
         if (this.state.searchBtn3 == '4.5分以上') {
           return (
             item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-            -1 &&
+              -1 &&
             item.category == '咖啡廳' &&
             item.star > 4.5
           )
         } else if (this.state.searchBtn3 == '4分以上') {
           return (
             item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-            -1 &&
+              -1 &&
             item.category == '咖啡廳' &&
             item.star > 4.5
           )
         } else if (this.state.searchBtn3 == '3.5分以上') {
           return (
             item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-            -1 &&
+              -1 &&
             item.category == '咖啡廳' &&
             item.star > 3.5
           )
         } else {
           return (
             item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-            -1 && item.category == '咖啡廳'
+              -1 && item.category == '咖啡廳'
           )
         }
       } else if (this.state.searchBtn1 == '手作課程') {
@@ -240,57 +267,55 @@ class FilteredList extends React.Component {
         } else if (this.state.searchBtn3 == '4分以上') {
           return (
             item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-            -1 &&
+              -1 &&
             item.category == '手作課程' &&
             item.star > 4.5
           )
         } else if (this.state.searchBtn3 == '3.5分以上') {
           return (
             item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-            -1 &&
+              -1 &&
             item.category == '手作課程' &&
             item.star > 3.5
           )
         } else {
           return (
             item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-            -1 && item.category == '手作課程'
+              -1 && item.category == '手作課程'
           )
         }
       } else if (this.state.searchBtn1 == '文藝展覽') {
         if (this.state.searchBtn3 == '4.5分以上') {
           return (
             item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-            -1 &&
+              -1 &&
             item.category == '文藝展覽' &&
             item.star > 4.5
           )
         } else if (this.state.searchBtn3 == '4分以上') {
           return (
             item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-            -1 &&
+              -1 &&
             item.category == '文藝展覽' &&
             item.star > 4.5
           )
         } else if (this.state.searchBtn3 == '3.5分以上') {
           return (
             item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-            -1 &&
+              -1 &&
             item.category == '文藝展覽' &&
             item.star > 3.5
           )
         } else {
           return (
             item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-            -1 && item.category == '文藝展覽'
+              -1 && item.category == '文藝展覽'
           )
         }
       }
     })
 
-
     let data = updatedList.map((item, index, array) => {
-
       return (
         <Fade>
           <li
@@ -318,8 +343,8 @@ class FilteredList extends React.Component {
                         item.category == '咖啡廳'
                           ? 'mapCategoryCafe'
                           : item.category == '手作課程'
-                            ? 'mapCategoryItem'
-                            : 'mapCategoryItem2'
+                          ? 'mapCategoryItem'
+                          : 'mapCategoryItem2'
                       }
                     >
                       {item.category}
@@ -424,21 +449,20 @@ class FilteredList extends React.Component {
                   </Dropdown.Menu>
                 </Dropdown>
 
-                <Dropdown >
+                <Dropdown>
                   <Dropdown.Toggle
                     className="mapSearch  btn-small"
                     variant="success"
                     id="dropdown-basic"
-                  // onClick={this.changeClickState}
+                    // onClick={this.changeClickState}
                   >
                     {this.state.searchBtn2}
                   </Dropdown.Toggle>
-                  <Dropdown.Menu >
+                  <Dropdown.Menu>
                     {/* className={this.state.dateClicked? "displayNone":""}  */}
                     <Calendar
                       onChange={this.pickDate}
                       value={this.state.date}
-
                     />
                   </Dropdown.Menu>
                 </Dropdown>
@@ -526,11 +550,11 @@ class FilteredList extends React.Component {
             </div>
           </div>
           <div className="dataBox overflow-auto px-1">
-            {cafeActive ?
-              <ul className="list-group ">{this.filterList()}</ul> : console.log()}
-
-
-
+            {cafeActive ? (
+              <ul className="list-group ">{this.filterList()}</ul>
+            ) : (
+              console.log()
+            )}
           </div>
         </div>
       </div>
@@ -538,4 +562,4 @@ class FilteredList extends React.Component {
   }
 }
 
-export default FilteredList
+export default mapList
