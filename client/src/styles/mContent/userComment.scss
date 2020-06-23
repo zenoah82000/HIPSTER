@@ -43,7 +43,10 @@
 }
 
 
-
+.text{
+  word-wrap:break-word; 
+  word-break:normal;
+}
 //starRating
 
 %visually-hidden {

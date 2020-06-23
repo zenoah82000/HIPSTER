@@ -91,9 +91,9 @@ export default class ViewportExample extends Component {
           {/* 顯示咖啡廳 */}
           {cafeActive ? (
             clicked ? (
-              // this.state.data.forEach((item) => {
+              // this.state.cafedata.filter((item) => {
               //   if (item.lat === viewport.center[0] && item.log === viewport.center[1]) {
-              //     return(
+              //     return()}else{ return}
               <Marker
                 position={viewport.center}
                 ref={this.openPopup}
@@ -151,10 +151,16 @@ export default class ViewportExample extends Component {
                       </span>
                       <span>活動日期：</span>
                     </li>
+                    <li>
+                      <span className="mr-2 ">
+                        <FaRegCalendarCheck />
+                      </span>
+                      <span>電話：</span>
+                    </li>
                   </ul>
                   <div className="cardButton">
                     <a value="" href="/#">
-                      立即預定
+                      進入咖啡廳網址
                     </a>
                   </div>
                 </Popup>
@@ -214,28 +220,28 @@ export default class ViewportExample extends Component {
                         <span className="mr-2">
                           <FaRegClock />
                         </span>
-                        <span>營業時間</span>
+                        <span>
+                          營業時間: {item.openTime}-{item.closeTime}
+                        </span>
                       </li>
                       <li>
                         <span className="mr-2">
                           <FaMapMarkerAlt />
                         </span>
-                        <span>地點</span>
+                        <span>地點: {item.mapCafe_Address}</span>
                       </li>
                       <li>
                         <span className="mr-2 ">
                           <FaRegCalendarCheck />
                         </span>
-                        <span>電話：</span>
+                        <span>電話：{item.mapCafe_Phone}</span>
                       </li>
-                       <li>
-                        <span className="mr-2 ">
-                          <FaRegCalendarCheck />
-                        </span>
-                        <span>電話：</span>
-                      </li>
-
                     </ul>
+                    <div className="cardButton">
+                      <a value="" href={item.weblink} target="_blank">
+                        進入咖啡廳網址
+                      </a>
+                    </div>
                   </Popup>
                 </Marker>
               ))
@@ -260,3 +266,154 @@ export default class ViewportExample extends Component {
     )
   }
 }
+
+
+{clicked ? ( <Marker
+  position={viewport.center}
+  ref={this.openPopup}
+  icon={cafeTagIcon}
+>
+  <Popup className="locationCard">
+    <h5>
+      <GiCoffeeCup className="h5 mr-1" />
+      {/* {item.name} */}
+    </h5>
+    <ul className="cardList list-unstyled">
+      <li>
+        {/* <div className=
+        {
+          item.category == '咖啡廳'
+            ? 'mapCategoryCafe'
+            : item.category == '手作課程'
+              ? 'mapCategoryItem'
+              : 'mapCategoryItem2'
+        }
+      >
+        <span>{item.category}</span>
+      </div> */}
+      </li>
+      <li
+        style={{
+          width: '460px',
+          height: '200px',
+          objectFit: 'cover',
+          overflow: 'hidden',
+          marginTop: '10px',
+        }}
+      >
+        <img
+          src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
+          alt=""
+        />
+      </li>
+      <li>{/* <span>星等{item.star}</span> */}</li>
+      <li>
+        <span className="mr-2">
+          <FaRegClock />
+        </span>
+        <span>營業時間</span>
+      </li>
+      <li>
+        <span className="mr-2">
+          <FaMapMarkerAlt />
+        </span>
+        <span>地點</span>
+      </li>
+      <li>
+        <span className="mr-2 ">
+          <FaRegCalendarCheck />
+        </span>
+        <span>活動日期：</span>
+      </li>
+      <li>
+        <span className="mr-2 ">
+          <FaRegCalendarCheck />
+        </span>
+        <span>電話：</span>
+      </li>
+    </ul>
+    <div className="cardButton">
+      <a value="" href="/#">
+        進入咖啡廳網址
+      </a>
+    </div>
+  </Popup>
+</Marker>):(this.state.productdata.map((item) => ( <Marker
+        position={[item.lat, item.log]}
+        icon={cafeTagIcon}
+        // onMouseOver={e => {
+        //   e.target.openPopup();
+        // }}
+        // onMouseOut={e => {
+        //   e.target.closePopup();
+        // }}
+      >
+        <Popup className="locationCard">
+          <h5>
+            <GiCoffeeCup className="h5 mr-1" />
+            {item.productName}
+          </h5>
+          <ul className="cardList list-unstyled">
+            <li>
+              <div
+                className={
+                  item.category == '咖啡廳'
+                    ? 'mapCategoryCafe'
+                    : item.category == '手作課程'
+                    ? 'mapCategoryItem'
+                    : 'mapCategoryItem2'
+                }
+              >
+                <span>{item.category}</span>
+              </div>
+            </li>
+            <li
+              style={{
+                width: '460px',
+                height: '200px',
+                objectFit: 'cover',
+                overflow: 'hidden',
+                marginTop: '10px',
+              }}
+            >
+              <img
+                src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
+                alt=""
+              />
+            </li>
+            <li>
+              <span>星等{item.star}</span>
+            </li>
+            <li>
+              <span className="mr-2">
+                <FaRegClock />
+              </span>
+              <span>
+                營業時間: {item.openTime}-{item.closeTime}
+              </span>
+            </li>
+            <li>
+              <span className="mr-2">
+                <FaMapMarkerAlt />
+              </span>
+              <span>地點: {item.productAddress}</span>
+            </li>
+            <li>
+              <span className="mr-2 ">
+                <FaRegCalendarCheck />
+              </span>
+              <span>電話：{item.productPhone}</span>
+            </li>
+          </ul>
+          <div className="cardButton">
+            <a value="" href="
+            /product/{item.productId}" target="_blank">
+              進入咖啡廳網址
+            </a>
+          </div>
+        </Popup>
+      </Marker>)))
+     }
+
+
+

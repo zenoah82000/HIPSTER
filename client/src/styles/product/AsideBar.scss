@@ -1,6 +1,7 @@
 .aside-wrapper {
   padding: 0 15px !important;
   box-sizing: border-box;
+  color: #684b38;
 
   .aside-wrapper-filter-box {
     background-color: white;
@@ -9,6 +10,8 @@
     margin-bottom: 15px;
     width: 100%;
     text-align: unset;
+    cursor: pointer;
+    
 
     h3 {
       font-size: 16px;
@@ -22,24 +25,30 @@
 
     .drop-title {
       padding: 10px 20px;
-      cursor: pointer;
+      transition: .15s ease-in-out 0s;
+      
+      &:hover{
+        background-color: rgba(104, 142, 103, 0.15);
+      }
+
       h5 {
         font-size: 14px;
         letter-spacing: 0.5px;
         line-height: 23.8px;
-        font-weight: 400;
+        font-weight: 600;
         margin: 5px 0;
       }
     }
 
     .checkbox-dropdown-list {
+
       display: none;
       list-style: none;
       height: 0;
       overflow: hidden;
       font-size: 14px;
       line-height: 21px;
-      cursor: pointer;
+      
 
       &.active {
         display: block;
