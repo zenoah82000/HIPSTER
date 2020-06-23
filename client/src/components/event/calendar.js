@@ -7,9 +7,12 @@ function MyCalendar( props) {
 
   onChange = date => {
     console.log("test")
-    setDate({ date })
+    setDate(date)
     handleClick()
+
   } 
+
+  // https://demo.mobiscroll.com/react/calendar/datepicker#
 
 
   //回傳日期值給母元素
@@ -19,10 +22,12 @@ function MyCalendar( props) {
   }
 
   return (
-    <div>
+    <div onClick={handleClick}>
       <Calendar 
-        onChange={onChange}
-        value={date}
+      date={new Date()}
+        onChange={()=>onChange()}
+        onViewChange={console.log('test')}
+        value={date}  
       />
     </div>
   );

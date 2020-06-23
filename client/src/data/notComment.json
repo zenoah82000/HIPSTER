@@ -5,21 +5,24 @@
       "name": "item1",
       "content": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
       "date":"2020/5/15",
-      "img":"'../images/home/activity-test.jpg'"
+      "img":"'../images/home/activity-test.jpg'",
+      "star":"3"
     },
     {
       "id": "2",
       "name": "item2",
       "content": "aaaabbbbbbaaaaaaaagfdfsaaafaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
       "date":"2020/5/10",
-      "img":"../../images/home/activity-test.jpg"
+      "img":"../../images/home/activity-test.jpg",
+      "star":"2"
     },
     {
       "id": "3",
       "name": "item3",
       "content": "dddddddddddaaaaafaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
       "date":"2020/5/5",
-      "img":"../../images/home/activity-test.jpg"
+      "img":"../../images/home/activity-test.jpg",
+      "star":"5"
     }
   ]
 }
