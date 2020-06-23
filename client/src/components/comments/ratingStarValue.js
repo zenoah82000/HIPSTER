@@ -12,20 +12,25 @@ class RatingValue extends React.Component {
     }
   }
 
-  render() {
-    var stars = []
+  stars=() => {
+      // console.log(this.state.searchBtn1, this.state.searchBtn3)
+      if ( this.state.rating == 5){
+        return <><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></>
+      }else if( this.state.rating == 4){
+        return <><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></>
+      }else if( this.state.rating == 3){
+        return <><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></>
+      }else if( this.state.rating == 2){
+        return <><i class="fas fa-star"></i><i class="fas fa-star"></i></>
+      }else if( this.state.rating == 1){
+        return <><i class="fas fa-star"></i></>
+      }else{
+        return ""
+      }   
+   }
 
-    for (var i = 0; i < 5; i++) {
-      var klass = 'star-rating__star'
-
-      if (this.state.rating >= i && this.state.rating != null) {
-        klass += ' is-selected'
-      }
-
-      stars.push(<label>★</label>)
-    }
-    console.log(stars)
-    return <div className="star-rating">{stars}</div>
+  render() {   
+    return <div className="star-rating">{this.stars()}</div>
   }
 }
 

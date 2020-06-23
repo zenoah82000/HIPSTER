@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Fade from 'react-reveal/Fade'
 import SwitchButton from './MemberEventComponents/SwitchButton'
+import RatingStarValue from '../comments/ratingStarValue'
 import { Dropdown } from 'react-bootstrap'
 import Calendar from 'react-calendar'
 // import '../../styles/product/map.scss'
@@ -377,7 +378,7 @@ class mapList extends React.Component {
                       {item.category}
                     </div>
                   </li>
-                  {/* <li>星等:{item.star}</li> */}
+                  <li>星等: <RatingStarValue ratingValue={item.star}/></li>
                   <li>
                     <span className="mr-2">
                       <FaRegClock />
@@ -578,7 +579,7 @@ class mapList extends React.Component {
                       {item.category}
                     </div>
                   </li>
-                  <li>星等:{item.star}</li>
+                  <li>星等:<RatingStarValue ratingValue={item.star}/></li>
                   <li>
                     <span className="mr-2">
                       <FaRegClock />
