@@ -67,7 +67,7 @@ app.use(require(__dirname + "/productlist"));
 
 app.use(require(__dirname + "/map/map"));
 
-app.use(require(__dirname + "/member-api/users-router"));
+app.use(require(__dirname + "/member/users-router"));
 
 //設定公開資料夾
 app.use(express.static("public"));

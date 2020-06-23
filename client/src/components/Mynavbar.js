@@ -359,6 +359,7 @@ function Mynavbar(props) {
             className="SignOkbtn"
             onClick={() => {
               setShowLogoutOk(false)
+              window.location.href = '/'
             }}
           >
             確認
