@@ -22,8 +22,8 @@ import author8 from '../../images/blog/author8.jpg'
 function Blog(props) {
   console.log('Blog-props:', props)
 
-  const { blogList,getBlogDataAsync } = props
-  console.log('blogList', blogList)
+  const { blogData,getBlogDataAsync } = props
+  console.log('blogData', blogData)
   
   useEffect(() => {
     getBlogDataAsync()    
@@ -92,7 +92,7 @@ function Blog(props) {
   ]
 
   // Convert array to JSX items
-  let blogList1 = blogList.map(function (item) {
+  let blogData1 = blogData.map(function (item) {
     return (
       <div key={item.articleId} className="blog-list-card">
         <img src={authorImgArr[item.articleId - 1]} />
@@ -122,20 +122,20 @@ function Blog(props) {
           classtitle="my-masonry-grid"
           columnClasstitle="my-masonry-grid_column"
         >
-          {blogList1}
+          {blogData1}
         </Masonry>
       </Container>
     </>
   )
 }
 
-const mapStateToProps = (store) =>({ blogList: store.blogReducer.blogList})
+const mapStateToProps = (store) =>({ blogData: store.blogReducer.blogData})
 
 // 綁定store的dispatch方法到這個元件的props
 // const mapDispatchToProps = (dispatch) => {
 //   return bindActionCreators({ addValue, minusValue }, dispatch)
 // }
 
-export default connect(mapStateToProps, {
+export default withRouter(connect(mapStateToProps, {
   getBlogDataAsync,
-})(Blog)
+})(Blog))
