@@ -19,13 +19,6 @@ function UserCoupon(props) {
   let couponList = userCouponData.map((item) => {
     return (
       <div className="tab-pane">
-        <div className="table-head hidden-xs">
-          <div class="row">
-            <div class="col-3">折扣券</div>
-            <div class="col-4">使用效期</div>
-            <div class="col-5">適用規則</div>
-          </div>
-        </div>
         <div class="coupon-listview">
           <div class="row">
             <div class="col-sm-3">
@@ -92,6 +85,15 @@ function UserCoupon(props) {
                 >
                   已過期
                 </NavLink>
+              </div>
+            </div>
+          </div>
+          <div className="tab-pane">
+            <div className="table-head hidden-xs">
+              <div class="row">
+                <div class="col-3">折扣券</div>
+                <div class="col-4">使用效期</div>
+                <div class="col-5">適用規則</div>
               </div>
             </div>
           </div>
