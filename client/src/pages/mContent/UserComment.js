@@ -37,6 +37,7 @@ function UserComment(props) {
   const [image, setImage] = useState({ file: [], preview: [], raw: '' })
   const [text, setText] = useState('')
   const [list, setList] = useState(dataArry)
+  const [ratingValue, setRatingValue] = useState('')
   // const [nocommentlist, setNocommentlist] = useState([]);
   // const divRef = React.createRef()
 
@@ -150,6 +151,11 @@ function UserComment(props) {
     setList(newList)
   }
 
+  //子元素回傳星等
+  const getRatingValue = (value) => {
+    setRatingValue(value)
+    console.log(ratingValue+1)
+  }
   //顯示評論
   const displayNotComment =
     list.length >= 1 ? (
@@ -174,7 +180,7 @@ function UserComment(props) {
                       </li>
                       <li className="d-flex">
                         <p>輸入星等:</p>
-                        <RatingStar />
+                        <RatingStar getRatingValue={getRatingValue} />
                       </li>
                       <li className="d-flex">
                         <p>上傳相片:</p>
