@@ -114,23 +114,23 @@ class mapList extends React.Component {
   //排序
   sortByStarAsc = () => {
     let sortedProductsAsc
-    sortedProductsAsc = this.state.data.sort((a, b) => {
+    sortedProductsAsc = this.state.productdata.sort((a, b) => {
       return parseInt(a.star) - parseInt(b.star)
     })
 
     this.setState({
-      data: sortedProductsAsc,
+      productdata: sortedProductsAsc,
     })
   }
 
   sortByStarDsc = () => {
     let sortedProductsDsc
-    sortedProductsDsc = this.state.data.sort((a, b) => {
+    sortedProductsDsc = this.state.productdata.sort((a, b) => {
       return parseInt(b.star) - parseInt(a.star)
     })
 
     this.setState({
-      data: sortedProductsDsc,
+      productdata: sortedProductsDsc,
     })
   }
 
@@ -176,25 +176,28 @@ class mapList extends React.Component {
   }
 
   //點擊咖啡廳卡片
-  cardClick = (cid) => {
-    this.state.cafedata.forEach((item) => {
-      if (item.mapCafe_Id === cid) {
-        console.log(item.lat, item.log)
-        this.props.cardClickReset(item.lat, item.log)
-      }
-    })
+  cardClick = (item) => {
+    this.props.cardClickReset(item)
+    // this.state.cafedata.forEach((item) => {
+    //   if (item.mapCafe_Id === cid) {
+    //     console.log(item.lat, item.log)
+    //     this.props.cardClickReset(item.lat, item.log)
+    //   }
+    // })
   }
 
   //點擊商品卡片
-  productCardClick = (cid) => {
+  productCardClick = (item) => {
     // console.log(cid)
-    this.state.productdata.forEach((item) => {
-      console.log(item)
-      if (item.productId === cid) {
-        console.log(item.lat, item.log)
-        this.props.cardClickReset(item.lat, item.log)
-      }
-    })
+
+    this.props.cardClickReset(item)
+    // this.state.productdata.forEach((item) => {
+    //   console.log(item)
+    //   if (item.productId === cid) {
+    //     console.log(item.lat, item.log)
+    //     this.props.cardClickReset(item.lat, item.log)
+    //   }
+    // })
   }
 
   //popup資訊小卡
@@ -347,7 +350,7 @@ class mapList extends React.Component {
             data-category={item.mapCafe_Name}
             key={index}
             id={item.id}
-            onClick={() => this.cardClick(item.mapCafe_Id)}
+            onClick={() => this.cardClick(item)}
           >
             <div className="eventContentBox d-flex">
               <div className="eventImgBox col-4">
@@ -374,7 +377,7 @@ class mapList extends React.Component {
                       {item.category}
                     </div>
                   </li>
-                  <li>星等:{item.star}</li>
+                  {/* <li>星等:{item.star}</li> */}
                   <li>
                     <span className="mr-2">
                       <FaRegClock />
@@ -548,7 +551,7 @@ class mapList extends React.Component {
             data-category={item.productName}
             key={index}
             id={item.mapId}
-            onClick={() => this.productCardClick(item.productId)}
+            onClick={() => this.productCardClick(item)}
           >
             <div className="eventContentBox d-flex">
               <div className="eventImgBox col-4">

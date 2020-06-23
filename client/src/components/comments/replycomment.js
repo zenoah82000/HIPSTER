@@ -7,8 +7,7 @@ import { IconContext } from 'react-icons'
 //確認框
 import Swal from 'sweetalert2'
 
-function ReplyComment({commentData}) {
-  
+function ReplyComment({ commentData }) {
   //state
   const [image, setImage] = useState({ file: [], preview: [], raw: '' })
   const [text, setText] = useState('')
@@ -88,7 +87,12 @@ function ReplyComment({commentData}) {
 
   return (
     <>
-      <form onSubmit={handleSubmit} method="POST" action="">
+      <form
+        onSubmit={handleSubmit}
+        method="POST"
+        action=""
+        key={commentData.orderId}
+      >
         <div className="coupon-listview">
           <div class="row">
             <div className="myReplyBox d-flex">

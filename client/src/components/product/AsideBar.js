@@ -24,7 +24,7 @@ function AsideBar(props) {
   //   console.log(data)
   // }
 
-  const { productData, getProductCategoryAsync } = props
+  const { productCatogryData, getProductCategoryAsync } = props
 
   useEffect(() => {
     getProductCategoryAsync()
@@ -33,7 +33,7 @@ function AsideBar(props) {
   // console.log('props', props)
   // console.log('productData', productData)
   let arr1 = []
-  productData.forEach((item, index) => {
+  productCatogryData.forEach((item, index) => {
     if (item.categoryParentId === 0) {
       arr1[index] = item
     } else {
@@ -149,7 +149,7 @@ function AsideBar(props) {
 // 將redux中的store的state(狀態)
 // 對應到這個元件中的props中
 const mapStateToProps = (store) => {
-  return { productData: store.productReducer.productData }
+  return { productCatogryData: store.productReducer.productCatogryData }
 }
 
 // 綁定store的dispatch方法到這個元件的props

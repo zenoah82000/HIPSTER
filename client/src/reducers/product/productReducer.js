@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 
-const productData = (state = [], action) => {
+const productCatogryData = (state = [], action) => {
   switch (action.type) {
     case 'GET_ProductCategory':
       return action.payload
@@ -9,7 +9,17 @@ const productData = (state = [], action) => {
   }
 }
 
+const productListData = (state = [], action) => {
+  switch (action.type) {
+    case 'GET_ProductList':
+      return action.payload
+    default:
+      return state
+  }
+}
+
 const productReducer = combineReducers({
-  productData,
+  productCatogryData,
+  productListData,
 })
 export { productReducer }
