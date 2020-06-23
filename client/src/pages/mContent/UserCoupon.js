@@ -1,11 +1,22 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, NavLink, withRouter } from 'react-router-dom'
 import '../../styles/mContent/usercoupon.scss'
+import Swal from 'sweetalert2'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { getUserCouponDetaiAsync } from '../../actions/coupon/getCoupon'
+
 function UserCoupon(props) {
+  console.log('10行', props)
+  const { userCouponData, getUserCouponDetaiAsync } = props
+  useEffect(() => {
+    getUserCouponDetaiAsync()
+  }, [])
   console.log(props)
+  console.log(props.userCouponData.coupon)
   return (
     <>
-      {props.match.params.type === 'available' ? (
+      {/* {props.match.params.type === 'available' ? (
         <>
           <div className="usercontainer">
             <h2 className="usertitle">我的優惠券</h2>
@@ -166,9 +177,14 @@ function UserCoupon(props) {
             </div>
           </div>
         </div>
-      )}
+      )} */}
     </>
   )
 }
+const couponStateToProps = (store) => {
+  return { userCouponData: store.couponReducer.userCouponData }
+}
 
-export default withRouter(UserCoupon)
+export default connect(couponStateToProps, { getUserCouponDetaiAsync })(
+  UserCoupon
+)
