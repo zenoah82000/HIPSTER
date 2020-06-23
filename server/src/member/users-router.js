@@ -92,7 +92,7 @@ router.post('/loginmember', async (req, res, next) =>{
   const memberId = [r1][0][0].memberId
   const memberName = [r1][0][0].memberName
   const memberSuccess = ([r1][0].length)?true:false;
-  console.log(memberId,memberName,memberSuccess)
+  // console.log(memberId,memberName,memberSuccess)
 
   const output = {  //建立判斷登入
     success:memberSuccess,
@@ -105,24 +105,11 @@ router.post('/loginmember', async (req, res, next) =>{
 
 })
 
-
-
-// app.get('/logout',(req,res)=>{
-//   delete req.session.user
-//   res.redirect('/login')
-// })
-
-
-
-
-
-
-
-// post 新增一筆會員資料
-router.post('/addmember', async (req, res, next) => {
+// 處理會員註冊
+  router.post('/addmember', async (req, res, next) => {
   // 測試response，會自動解析為物件
-  console.log(typeof req.body)
-  console.log(req.body)
+  // console.log(typeof req.body)
+  // console.log(req.body)
   const memberMail = req.body.memberMail
   const memberPwd = req.body.memberPwd
   const addMemberSql = `INSERT INTO member(memberName, memberGender, memberBirth, memberPhone, 	memberAddress	,	memberMail,	memberPwd,	memberImg, memberStatus) VALUES('訪客','男','2020-01-01','0900000000','請輸入地址',?,?,'tmp','true')`
@@ -130,6 +117,19 @@ router.post('/addmember', async (req, res, next) => {
   const [r1] = await db.query(addMemberSql, [memberMail,memberPwd]);
   res.json(req.body)
 })
+
+
+// 取得會員基本資料
+  router.post('/getmemberdata', async (req, res, next) => {
+  // console.log(req.body.memberId)
+  const userId = req.body.memberId
+  const getMemberSql = `SELECT * FROM member WHERE  memberId=? `
+
+  const [r1] = await db.query(getMemberSql, userId);
+  res.json(r1[0])
+})
+
+
 
 
 module.exports = router;

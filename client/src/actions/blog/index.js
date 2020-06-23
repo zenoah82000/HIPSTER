@@ -1,3 +1,4 @@
+//取得文章列表資料
 export const getBlogData = (payload) => {
   return { type: 'GET_BLOGDATA', payload }
 }
@@ -19,26 +20,20 @@ export const getBlogDataAsync = (payload) => {
     // 設定資料
     console.log('getBlogDataAsync中的data',data)
 
-    dispatch(getBlogData({ value: data.rows }))
+    dispatch(getBlogData(data.rows))
   }
 }
 
-/////////////////////////////////////////////////
-
-
-//取得文章列表資料
-// export const getBlogData = data => ({
-//   type: 'GET_BLOGDATA',
+// //取得文章評論
+// export const getBlogCommentsData = data => ({
+//   type: 'GET_BLOGCOMMENTSDATA',
 //   value: data,
 // })
-// export const getBlogDataAsync = (blogInfoData, callback) => {
-//   // console.log(blogInfoData)
-//   return async dispatch => {
-//     let query = []
-//     if (blogInfoData) query.push(`blogInfoData=${blogInfoData.trim()}`)
-//     // console.log(blogInfoData)
 
-//     const request = new Request(`http://localhost:5000/blog?${query}`, {
+// export const getBlogCommentsDataAsync = (blogCommentsData, callback) => {
+//   console.log(blogCommentsData)
+//   return async dispatch => {
+//     const request = new Request('http://localhost:5000/blog/comments', {
 //       method: 'GET',
 //       headers: new Headers({
 //         Accept: 'application/json',
@@ -46,77 +41,50 @@ export const getBlogDataAsync = (payload) => {
 //       }),
 //     })
 
-//     // console.log(JSON.stringify(blogInfoData))
+//     // console.log(JSON.stringify(blogCommentsData))
 
 //     const response = await fetch(request)
 //     const data = await response.json()
-//     // console.log('res data', data)
 
-//     dispatch(getBlogData(data))
+//     dispatch(getBlogCommentsData(data))
 //   }
 // }
 
-//取得文章評論
-export const getBlogCommentsData = data => ({
-  type: 'GET_BLOGCOMMENTSDATA',
-  value: data,
-})
+// //新增評論
 
-export const getBlogCommentsDataAsync = (blogCommentsData, callback) => {
-  console.log(blogCommentsData)
-  return async dispatch => {
-    const request = new Request('http://localhost:5000/blog/comments', {
-      method: 'GET',
-      headers: new Headers({
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      }),
-    })
+// export const addContentCommentsData = data => ({
+//   type: 'ADD_CONTENTCOMMENTSDATA',
+//   value: data,
+// })
 
-    // console.log(JSON.stringify(blogCommentsData))
+// export const addContentCommentsDataAsync = (commentsData, callback) => {
+//   console.log(commentsData)
+//   return async dispatch => {
+//     const request = new Request('http://localhost:5000/blog/addComments', {
+//       method: 'POST',
+//       body: commentsData,
+//     })
 
-    const response = await fetch(request)
-    const data = await response.json()
+//     const response = await fetch(request)
+//     const data = await response.json()
+//     console.log('res data', data)
 
-    dispatch(getBlogCommentsData(data))
-  }
-}
+//     dispatch(addContentCommentsData(data))
 
-//新增評論
-
-export const addContentCommentsData = data => ({
-  type: 'ADD_CONTENTCOMMENTSDATA',
-  value: data,
-})
-
-export const addContentCommentsDataAsync = (commentsData, callback) => {
-  console.log(commentsData)
-  return async dispatch => {
-    const request = new Request('http://localhost:5000/blog/addComments', {
-      method: 'POST',
-      body: commentsData,
-    })
-
-    const response = await fetch(request)
-    const data = await response.json()
-    console.log('res data', data)
-
-    dispatch(addContentCommentsData(data))
-
-    // callback()
-  }
-}
+//     // callback()
+//   }
+// }
 
 //新增文章
-export const addContentData = data => ({
-  type: 'ADD_CONTENTDATA',
-  value: data,
+export const addBlogContentData = payload => ({
+  type: 'ADD_BLOGCONTENTDATA',
+  payload,
 })
 
-export const addContentDataAsync = (contentData, callback) => {
+export const addBlogContentDataAsync = (contentData, callback) => {
   console.log(contentData)
   return async dispatch => {
-    const request = new Request('http://localhost:5000/add', {
+    const request = new Request('http://localhost:5000/blogadd', {
       method: 'POST',
       body: contentData,
     })
@@ -125,31 +93,31 @@ export const addContentDataAsync = (contentData, callback) => {
     const data = await response.json()
     console.log('res data', data)
 
-    dispatch(addContentData(data))
+    dispatch(addBlogContentData(data))
 
     // callback()
   }
 }
 
-//更新文章
-export const editContentData = data => ({
-  type: 'EDIT_CONTENTDATA',
-  value: data,
-})
-export const editContentDataAsync = (contentData, callback) => {
-  console.log(contentData)
-  return async dispatch => {
-    const request = new Request('http://localhost:5000/edit', {
-      method: 'POST',
-      body: contentData,
-    })
+// //更新文章
+// export const editContentData = data => ({
+//   type: 'EDIT_CONTENTDATA',
+//   value: data,
+// })
+// export const editContentDataAsync = (contentData, callback) => {
+//   console.log(contentData)
+//   return async dispatch => {
+//     const request = new Request('http://localhost:5000/edit', {
+//       method: 'POST',
+//       body: contentData,
+//     })
 
-    const response = await fetch(request)
-    const data = await response.json()
-    console.log('res data', data)
+//     const response = await fetch(request)
+//     const data = await response.json()
+//     console.log('res data', data)
 
-    dispatch(editContentData(data))
+//     dispatch(editContentData(data))
 
-    // callback()
-  }
-}
+//     // callback()
+//   }
+// }

@@ -7,6 +7,7 @@ import { Link, withRouter } from 'react-router-dom'
 import '../../styles/product/AsideBar.scss'
 
 import { getProductCategoryAsync } from '../../actions/product/getProductCategory'
+import { element } from 'prop-types'
 
 function AsideBar(props) {
   // const getProductCategoryAsync = async (productCategory) => {
@@ -23,7 +24,7 @@ function AsideBar(props) {
   //   console.log(data)
   // }
 
-  const { productData, getProductCategoryAsync } = props
+  const { productCatogryData, getProductCategoryAsync } = props
 
   useEffect(() => {
     getProductCategoryAsync()
@@ -31,12 +32,35 @@ function AsideBar(props) {
 
   // console.log('props', props)
   // console.log('productData', productData)
-  const display = productData.map((item, index) => {
+  let arr1 = []
+  productCatogryData.forEach((item, index) => {
     if (item.categoryParentId === 0) {
+      arr1[index] = item
+    } else {
+      arr1.splice(
+        arr1.findIndex(
+          (element) => element.categoryId === item.categoryParentId
+        ) + 1,
+        0,
+        item
+      )
+    }
+  })
+  console.log(arr1)
+
+  const display = arr1.map((item, index) => {
+    if (item.categoryParentId === 0) {
+      return (
+        <>
+          <div className="drop-title" key={index}>
+            <h5>{item.categoryName}</h5>
+          </div>
+        </>
+      )
     } else {
       return (
         <>
-          <li className="checkbox">
+          <li className="checkbox" key={index}>
             <i className="far fa-square"></i>
             {item.categoryName}
           </li>
@@ -44,6 +68,7 @@ function AsideBar(props) {
       )
     }
   })
+  console.log(display)
 
   return (
     <>
@@ -121,12 +146,10 @@ function AsideBar(props) {
   )
 }
 
-// export default AsideBar
-
 // 將redux中的store的state(狀態)
 // 對應到這個元件中的props中
 const mapStateToProps = (store) => {
-  return { productData: store.productReducer.productData }
+  return { productCatogryData: store.productReducer.productCatogryData }
 }
 
 // 綁定store的dispatch方法到這個元件的props
