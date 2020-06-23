@@ -5,9 +5,9 @@ import { Link, withRouter } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
 import Masonry from 'react-masonry-css'
 
-import { getBlogDataAsync } from '../../actions/blog'
-
 import MyBreadcrumb from '../../components/MyBreadcrumb'
+
+import { getBlogDataAsync } from '../../actions/blog'
 
 
 import author1 from '../../images/blog/author1.jpg'
