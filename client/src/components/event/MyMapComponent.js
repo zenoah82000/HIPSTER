@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import { Map, TileLayer, type Viewport, Popup, Marker } from 'react-leaflet'
-import { GiCoffeeCup } from 'react-icons/gi'
+import { Map, TileLayer, Viewport, Popup, Marker } from 'react-leaflet'
 import L from 'leaflet'
-
-// import CafeData from '../../data/cafe.json'
+import RatingStarValue from '../comments/ratingStarValue'
+//icon
 import { FaMapMarkerAlt } from 'react-icons/fa'
 import { FaRegClock } from 'react-icons/fa'
 import { FaRegCalendarCheck } from 'react-icons/fa'
+import { GiCoffeeCup } from 'react-icons/gi'
 
 export const pointerIcon = new L.Icon({
   iconUrl: require('../../images/marker.svg'),
@@ -75,6 +75,7 @@ export default class ViewportExample extends Component {
 
   openPopup(marker) {
     if (marker && marker.leafletElement) {
+      console.log('test')
       window.setTimeout(() => {
         marker.leafletElement.openPopup()
       })
@@ -82,7 +83,8 @@ export default class ViewportExample extends Component {
   }
 
   render() {
-    let { viewport, clicked, cafeActive } = this.props
+    let { viewport, clicked, cafeActive, clickData } = this.props
+    console.log(viewport.center)
     // console.log(viewport.center[0] - 0.001, viewport.center[0], clicked)
     return (
       <div>
@@ -95,32 +97,29 @@ export default class ViewportExample extends Component {
           {/* 顯示咖啡廳 */}
           {cafeActive ? (
             clicked ? (
-              // this.state.cafedata.filter((item) => {
-              //   if (item.lat === viewport.center[0] && item.log === viewport.center[1]) {
-              //     return()}else{ return}
               <Marker
-                position={viewport.center}
+                position={(clickData.lat, clickData.log)}
                 ref={this.openPopup}
                 icon={cafeTagIcon}
               >
                 <Popup className="locationCard">
                   <h5>
                     <GiCoffeeCup className="h5 mr-1" />
-                    {/* {item.name} */}
+                    {clickData.mapCafe_Name}
                   </h5>
                   <ul className="cardList list-unstyled">
                     <li>
-                      {/* <div className=
-                      {
-                        item.category == '咖啡廳'
-                          ? 'mapCategoryCafe'
-                          : item.category == '手作課程'
+                      <div
+                        className={
+                          clickData.category == '咖啡廳'
+                            ? 'mapCategoryCafe'
+                            : clickData.category == '手作課程'
                             ? 'mapCategoryItem'
                             : 'mapCategoryItem2'
-                      }
-                    >
-                      <span>{item.category}</span>
-                    </div> */}
+                        }
+                      >
+                        <span>{clickData.category}</span>
+                      </div>
                     </li>
                     <li
                       style={{
@@ -136,30 +135,26 @@ export default class ViewportExample extends Component {
                         alt=""
                       />
                     </li>
-                    <li>{/* <span>星等{item.star}</span> */}</li>
+                    <li>{/* <span>星等{clickData.star}</span> */}</li>
                     <li>
                       <span className="mr-2">
                         <FaRegClock />
                       </span>
-                      <span>營業時間</span>
+                      <span>
+                        營業時間{clickData.openTime}-{clickData.closeTime}
+                      </span>
                     </li>
                     <li>
                       <span className="mr-2">
                         <FaMapMarkerAlt />
                       </span>
-                      <span>地點</span>
+                      <span>地點{clickData.mapCafe_Address}</span>
                     </li>
                     <li>
                       <span className="mr-2 ">
                         <FaRegCalendarCheck />
                       </span>
-                      <span>活動日期：</span>
-                    </li>
-                    <li>
-                      <span className="mr-2 ">
-                        <FaRegCalendarCheck />
-                      </span>
-                      <span>電話：</span>
+                      <span>電話：{clickData.mapCafe_Phone}</span>
                     </li>
                   </ul>
                   <div className="cardButton">
@@ -187,7 +182,7 @@ export default class ViewportExample extends Component {
                   <Popup className="locationCard">
                     <h5>
                       <GiCoffeeCup className="h5 mr-1" />
-                      {item.name}
+                      {item.mapCafe_Name}
                     </h5>
                     <ul className="cardList list-unstyled">
                       <li>
@@ -217,9 +212,7 @@ export default class ViewportExample extends Component {
                           alt=""
                         />
                       </li>
-                      <li>
-                        <span>星等{item.star}</span>
-                      </li>
+                      <li>{/* <span>星等{item.star}</span> */}</li>
                       <li>
                         <span className="mr-2">
                           <FaRegClock />
@@ -276,21 +269,21 @@ export default class ViewportExample extends Component {
               <Popup className="locationCard">
                 <h5>
                   <GiCoffeeCup className="h5 mr-1" />
-                  {/* {item.name} */}
+                  {clickData.productName}
                 </h5>
                 <ul className="cardList list-unstyled">
                   <li>
-                    {/* <div className=
-        {
-          item.category == '咖啡廳'
-            ? 'mapCategoryCafe'
-            : item.category == '手作課程'
-              ? 'mapCategoryItem'
-              : 'mapCategoryItem2'
-        }
-      >
-        <span>{item.category}</span>
-      </div> */}
+                    <div
+                      className={
+                        clickData.category == '咖啡廳'
+                          ? 'mapCategoryCafe'
+                          : clickData.category == '手作課程'
+                          ? 'mapCategoryItem'
+                          : 'mapCategoryItem2'
+                      }
+                    >
+                      <span>{clickData.category}</span>
+                    </div>
                   </li>
                   <li
                     style={{
@@ -307,7 +300,10 @@ export default class ViewportExample extends Component {
                     />
                   </li>
                   <li>
-                    <span>星等 </span>
+                    <span>
+                      星等
+                      <RatingStarValue ratingValue={clickData.star} />
+                    </span>
                   </li>
                   <li>
                     <span className="mr-2">
@@ -319,19 +315,21 @@ export default class ViewportExample extends Component {
                     <span className="mr-2">
                       <FaMapMarkerAlt />
                     </span>
-                    <span>地點</span>
+                    <span>地點: {clickData.productAddress}</span>
                   </li>
                   <li>
                     <span className="mr-2 ">
                       <FaRegCalendarCheck />
                     </span>
-                    <span>活動日期：</span>
+                    <span>
+                      活動日期：{clickData.openTime}-{clickData.closeTime}
+                    </span>
                   </li>
                   <li>
                     <span className="mr-2 ">
                       <FaRegCalendarCheck />
                     </span>
-                    <span>電話：</span>
+                    <span>電話：{clickData.productPhone}</span>
                   </li>
                 </ul>
                 <div className="cardButton">
