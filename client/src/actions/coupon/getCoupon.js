@@ -16,7 +16,7 @@ export const getUserCouponDetaiAsync = (usercoupondata) => {
 
     const response = await fetch(request)
     const data = await response.json()
-    console.log(data)
-    dispatch(getUserCouponDetail(data))
+    console.log('getUserCouponDetail-data', data.coupon)
+    dispatch(getUserCouponDetail(data.coupon))
   }
 }

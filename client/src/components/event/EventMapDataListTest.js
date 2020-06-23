@@ -154,18 +154,25 @@ class mapList extends React.Component {
     })
     // console.log(this.state.dateClicked)
   }
-  changeClickState = () => {
-    this.setState({
-      dateClicked: !this.state.dateClicked,
-    })
-    console.log(this.state.dateClicked)
-  }
-  pickDate = (date, event) => {
-    this.setState({ date })
-    // console.log(date, event,'onchange')
-    // console.log(this.state.date)
-    // console.log(this.state.searchBtn2)
+  // changeClickState = () => {
+  //   this.setState({
+  //     dateClicked: !this.state.dateClicked,
+  //   })
+  //   console.log(this.state.dateClicked)
+  // }
+
+  // pickDate = (date, event) => {
+  //   this.setState({ date })
+  //   // console.log(date, event,'onchange')
+  //   // console.log(this.state.date)
+  //   // console.log(this.state.searchBtn2)
+  //   this.showDate()
+  // }
+
+  getDateValue = (dateValue) => {
+    this.setState({ date: dateValue })
     this.showDate()
+    console.log('test')
   }
 
   //地圖定位
@@ -185,7 +192,7 @@ class mapList extends React.Component {
   }
 
   //點擊商品卡片
-  //  pdcardClick = (cid) => {
+  //  cardClick = (cid) => {
   //   // console.log(cid)
   //   this.state.productdata.forEach((item) => {
   //     // console.log(item)
@@ -400,7 +407,6 @@ class mapList extends React.Component {
     return data
   }
 
-
   render() {
     let { cafeActive } = this.props
 
@@ -408,7 +414,7 @@ class mapList extends React.Component {
       <div>
         <fieldset className="">
           <div className="px-4 p-3">
-            <div class="box col-12">  
+            <div class="box col-12">
               <div class="input-group">
                 <input
                   className="form-control form-control-lg"
@@ -483,9 +489,11 @@ class mapList extends React.Component {
                   <Dropdown.Menu>
                     {/* className={this.state.dateClicked? "displayNone":""}  */}
                     <Calendar
-                      onChange={this.pickDate}
+                      // onChange={this.pickDate}
                       value={this.state.date}
+                      getDateValue={this.getDateValue}
                     />
+                    {/* <input type="date"/> */}
                   </Dropdown.Menu>
                 </Dropdown>
 
@@ -573,8 +581,8 @@ class mapList extends React.Component {
           </div>
           <div className="dataBox overflow-auto px-1">
             <ul className="list-group ">
-              {this.productfilterList()}
-              {cafeActive ? <>{this.filterList()}</> : console.log("不顯示咖啡廳資訊")}
+              {/* {this.productfilterList()} */}
+              {cafeActive ? <>{this.filterList()}</> : console.log()}
             </ul>
           </div>
         </div>

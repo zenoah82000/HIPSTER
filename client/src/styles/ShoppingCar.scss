@@ -2,17 +2,60 @@ body {
   background-color: #dedfdd;
 }
 
-.mycartbox {
-  p {
-    font-size: 20px;
+//購物車標題
+.cart-title {
+  background-color: white;
+  display: flex;
+  padding: 12px;
+  justify-content: space-between;
+  .productname {
+    width: 40%;
+    display: flex;
+    margin-right: 20px;
+    align-items: center;
+  }
+  .productright {
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
   }
 }
 
 //購物車商品
-.productbox {
-  .productImg {
-    width: 90px;
-    height: 90px;
+.cartproductbox {
+  background-color: white;
+  display: flex;
+  margin-top: 20px;
+  padding: 12px;
+  align-items: center;
+  justify-content: space-between;
+  .productname {
+    width: 40%;
+    display: flex;
+    margin-right: 20px;
+    align-items: center;
+    .delete {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+    .productImg {
+      width: 90px;
+      height: 90px;
+      margin-right: 10px;
+      &:hover {
+        opacity: 0.5;
+      }
+    }
+  }
+  .productright {
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+    .productsubtotal {
+      width: 100px;
+      text-align: right;
+    }
   }
   .add {
     font-size: 25px;
@@ -34,15 +77,7 @@ body {
     outline: none;
   }
 }
-//購物車更改刪除
-.card-change {
-  .edit {
-    cursor: pointer;
-  }
-  .delete {
-    cursor: pointer;
-  }
-}
+
 //購物車總額
 .totalbox {
   .button {

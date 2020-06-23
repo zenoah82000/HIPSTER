@@ -14,14 +14,18 @@ export const pointerIcon = new L.Icon({
   iconAnchor: [5, 55],
   popupAnchor: [10, -44],
   iconSize: [50, 55],
-  // shadowUrl: "../assets/marker-shadow.png",
-  // shadowSize: [68, 95],
-  // shadowAnchor: [20, 92]
 })
 
 export const cafeTagIcon = new L.Icon({
   iconUrl: require('../../images/location-pin.svg'),
   iconRetinaUrl: require('../../images/location-pin.svg'),
+  iconAnchor: [5, 55],
+  popupAnchor: [10, -44],
+  iconSize: [50, 55],
+})
+export const productTagIcon = new L.Icon({
+  iconUrl: require('../../images/pin.svg'),
+  iconRetinaUrl: require('../../images/pin.svg'),
   iconAnchor: [5, 55],
   popupAnchor: [10, -44],
   iconSize: [50, 55],
@@ -261,6 +265,165 @@ export default class ViewportExample extends Component {
                      我的位置
             </Popup> */}
           </Marker>
+
+          {/* 商品地標 */}
+          {clicked ? (
+            <Marker
+              position={viewport.center}
+              ref={this.openPopup}
+              icon={productTagIcon}
+            >
+              <Popup className="locationCard">
+                <h5>
+                  <GiCoffeeCup className="h5 mr-1" />
+                  {/* {item.name} */}
+                </h5>
+                <ul className="cardList list-unstyled">
+                  <li>
+                    {/* <div className=
+        {
+          item.category == '咖啡廳'
+            ? 'mapCategoryCafe'
+            : item.category == '手作課程'
+              ? 'mapCategoryItem'
+              : 'mapCategoryItem2'
+        }
+      >
+        <span>{item.category}</span>
+      </div> */}
+                  </li>
+                  <li
+                    style={{
+                      width: '460px',
+                      height: '200px',
+                      objectFit: 'cover',
+                      overflow: 'hidden',
+                      marginTop: '10px',
+                    }}
+                  >
+                    <img
+                      src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
+                      alt=""
+                    />
+                  </li>
+                  <li>
+                    <span>星等 </span>
+                  </li>
+                  <li>
+                    <span className="mr-2">
+                      <FaRegClock />
+                    </span>
+                    <span>營業時間</span>
+                  </li>
+                  <li>
+                    <span className="mr-2">
+                      <FaMapMarkerAlt />
+                    </span>
+                    <span>地點</span>
+                  </li>
+                  <li>
+                    <span className="mr-2 ">
+                      <FaRegCalendarCheck />
+                    </span>
+                    <span>活動日期：</span>
+                  </li>
+                  <li>
+                    <span className="mr-2 ">
+                      <FaRegCalendarCheck />
+                    </span>
+                    <span>電話：</span>
+                  </li>
+                </ul>
+                <div className="cardButton">
+                  <a value="" href="/#">
+                    立即預定商品
+                  </a>
+                </div>
+              </Popup>
+            </Marker>
+          ) : (
+            this.state.productdata.map((item) => (
+              <Marker
+                position={[item.lat, item.log]}
+                icon={productTagIcon}
+                // onMouseOver={e => {
+                //   e.target.openPopup();
+                // }}
+                // onMouseOut={e => {
+                //   e.target.closePopup();
+                // }}
+              >
+                <Popup className="locationCard">
+                  <h5>
+                    <GiCoffeeCup className="h5 mr-1" />
+                    {item.productName}
+                  </h5>
+                  <ul className="cardList list-unstyled">
+                    <li>
+                      <div
+                        className={
+                          item.category == '咖啡廳'
+                            ? 'mapCategoryCafe'
+                            : item.category == '手作課程'
+                            ? 'mapCategoryItem'
+                            : 'mapCategoryItem2'
+                        }
+                      >
+                        <span>{item.category}</span>
+                      </div>
+                    </li>
+                    <li
+                      style={{
+                        width: '460px',
+                        height: '200px',
+                        objectFit: 'cover',
+                        overflow: 'hidden',
+                        marginTop: '10px',
+                      }}
+                    >
+                      <img
+                        src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
+                        alt=""
+                      />
+                    </li>
+                    <li>
+                      <span>星等:{item.star}</span>
+                    </li>
+                    <li>
+                      <span className="mr-2">
+                        <FaRegClock />
+                      </span>
+                      <span>
+                        營業時間: {item.openTime}-{item.closeTime}
+                      </span>
+                    </li>
+                    <li>
+                      <span className="mr-2">
+                        <FaMapMarkerAlt />
+                      </span>
+                      <span>地點: {item.productAddress}</span>
+                    </li>
+                    <li>
+                      <span className="mr-2 ">
+                        <FaRegCalendarCheck />
+                      </span>
+                      <span>電話：{item.productPhone}</span>
+                    </li>
+                  </ul>
+                  <div className="cardButton">
+                    <a
+                      value=""
+                      href="
+            /product/{item.productId}"
+                      target="_blank"
+                    >
+                      立即預定商品
+                    </a>
+                  </div>
+                </Popup>
+              </Marker>
+            ))
+          )}
         </Map>
       </div>
     )

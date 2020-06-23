@@ -7,16 +7,47 @@ import { bindActionCreators } from 'redux'
 import { getUserCouponDetaiAsync } from '../../actions/coupon/getCoupon'
 
 function UserCoupon(props) {
-  console.log('10行', props)
+  // console.log('10行', window.location.pathname.indexOf('available'))
   const { userCouponData, getUserCouponDetaiAsync } = props
   useEffect(() => {
     getUserCouponDetaiAsync()
   }, [])
-  console.log(props)
-  console.log(props.userCouponData.coupon)
+  console.log('uCoupon-props', props)
+
+  console.log('userCouponData', userCouponData)
+  console.log('userCouponData.coupon123', userCouponData[0])
+  let couponList = userCouponData.map((item) => {
+    return (
+      <div className="tab-pane">
+        <div class="coupon-listview">
+          <div class="row">
+            <div class="col-sm-3">
+              <div class="coupon">
+                <span>{item.discountCode}</span>
+              </div>
+              <div class="coupon-code">{item.discountName}</div>
+            </div>
+            <div class="col-sm-4">
+              <ul class="list-unstyled">
+                <li>開始日期：{item.startTime}</li>
+                <li>截止日期：{item.endTime}</li>
+              </ul>
+            </div>
+            <div class="col-sm-5">
+              <ul class="list-unstyled">
+                <li>可用數量：{item.memberCouponNum}</li>
+                <li>優惠代碼：{item.discountCode}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  })
+
   return (
     <>
-      {/* {props.match.params.type === 'available' ? (
+      {props.match.params.type === 'available' ? (
         <>
           <div className="usercontainer">
             <h2 className="usertitle">我的優惠券</h2>
@@ -65,77 +96,8 @@ function UserCoupon(props) {
                 <div class="col-5">適用規則</div>
               </div>
             </div>
-            <div class="coupon-listview">
-              <div class="row">
-                <div class="col-sm-3">
-                  <div class="coupon">
-                    <span>FUN 618</span>
-                  </div>
-                  <div class="coupon-code">CATHAY300</div>
-                </div>
-                <div class="col-sm-4">
-                  <ul class="list-unstyled">
-                    <li>訂購日期：2019/07/01~2020/06/30</li>
-                    <li>使用日期：2019/07/01~2020/08/31</li>
-                  </ul>
-                </div>
-                <div class="col-sm-5">
-                  <ul class="list-unstyled">
-                    <li>訂單金額：2,937 TWD</li>
-                    <li>適用平台：WEB,MWEB,ANDROID,IOS</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="coupon-listview">
-              <div class="row">
-                <div class="col-sm-3">
-                  <div class="coupon">
-                    <span>5% off</span>
-                  </div>
-                  <div class="coupon-code">CTBC952020</div>
-                </div>
-                <div class="col-sm-4">
-                  <ul class="list-unstyled">
-                    <li>訂購日期：2019/07/01~2020/06/30</li>
-                    <li>使用日期：2019/07/01~2020/08/31</li>
-                  </ul>
-                </div>
-                <div class="col-sm-5">
-                  <ul class="list-unstyled">
-                    <li>訂單金額：500 TWD</li>
-                    <li>適用平台：WEB,MWEB,ANDROID,IOS</li>
-                    <li>行程類別：文青咖啡廳</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="coupon-listview">
-              <div class="row">
-                <div class="col-sm-3">
-                  <div class="coupon">
-                    <span>TWD 312</span>
-                  </div>
-                  <div class="coupon-code">CATHAY300</div>
-                </div>
-                <div class="col-sm-4">
-                  <ul class="list-unstyled">
-                    <li>訂購日期：2019/07/01~2020/06/30</li>
-                    <li>使用日期：2019/07/01~2020/08/31</li>
-                  </ul>
-                </div>
-                <div class="col-sm-5">
-                  <ul class="list-unstyled">
-                    <li>訂單金額：2,937 TWD</li>
-                    <li>適用平台：WEB,MWEB,ANDROID,IOS</li>
-                    <li>
-                      行程類別：一日遊,多日旅遊,司機／交通,半日遊,私人導遊,點對點接送
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
           </div>
+          {couponList}
         </>
       ) : (
         <div className="usercontainer">
@@ -177,7 +139,7 @@ function UserCoupon(props) {
             </div>
           </div>
         </div>
-      )} */}
+      )}
     </>
   )
 }
@@ -185,6 +147,6 @@ const couponStateToProps = (store) => {
   return { userCouponData: store.couponReducer.userCouponData }
 }
 
-export default connect(couponStateToProps, { getUserCouponDetaiAsync })(
-  UserCoupon
+export default withRouter(
+  connect(couponStateToProps, { getUserCouponDetaiAsync })(UserCoupon)
 )
