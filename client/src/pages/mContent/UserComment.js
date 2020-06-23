@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import '../../styles/mContent/userComment.scss'
 import { Link, NavLink, withRouter } from 'react-router-dom'
 import RatingStar from '../../components/comments/ratingStar'
@@ -16,35 +16,30 @@ function UserComment(props) {
   //state
   const [image, setImage] = useState({ file: [], preview: [], raw: '' })
   const [text, setText] = useState('')
-  const [myCommentlist, setMyCommentList] = useState([])
-  const [noCommentlist, setNoCommentList] = useState([])
+  const [list, setList] = useState([])
 
   // 後端傳資料
   const checkoutAsync = async (order) => {
-    const request = new Request('http://localhost:5000/comments/2', {
-      method: 'get',
-      // body: JSON.stringify(order),
-      headers: new Headers({
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      }),
-    })
+    const request = new Request(
+      'http://localhost:5000/memberuser/comment/notcomment',
+      {
+        method: 'post',
+        body: JSON.stringify(order),
+        headers: new Headers({
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        }),
+      }
+    )
     const response = await fetch(request)
     const data = await response.json()
-    console.log(data)
-    console.log(data.comment)
-    setMyCommentList(data.comment)
-    setNoCommentList(data.notcomment)
+    this.setList(data)
   }
-
-  useEffect(() => {
-    checkoutAsync()
-  }, [])
 
   //顯示已評論
   const displayMyComment =
-    myCommentlist.length >= 1 ? (
-      myCommentlist.map((item) => {
+    list.length >= 1 ? (
+      list.map((item) => {
         return (
           <>
             <div className="coupon-listview">
@@ -152,8 +147,8 @@ function UserComment(props) {
             </div>
           </div>
           <div className="tab-pane">
-            {noCommentlist.length >= 1 ? (
-              noCommentlist.map((item,index) => <ReplyComment commentData={item} />)
+            {list.length >= 1 ? (
+              list.map((item) => <ReplyComment commentData={item} />)
             ) : (
               <div className="empty text-center">
                 <img

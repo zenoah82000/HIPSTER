@@ -1,7 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import { connect } from 'react-redux'
-import { Link, withRouter } from 'react-router-dom'
-
+import React from 'react'
 import '../styles/ProductList.scss'
 
 import AsideBar from '../components/product/AsideBar'
@@ -10,17 +7,9 @@ import ProductSearchResult from '../components/product/ProductSearchResult'
 import ProductSearchResultSort from '../components/product/ProductSearchResultSort'
 import ProductListPageBar from '../components/product/ProductListPageBar'
 
-import { getProductListAsync } from '../actions/product/grtProductList'
-
 import ReactStars from 'react-rating-stars-component'
 
 function ProductList(props) {
-  const { productListData, getProductListAsync } = props
-
-  useEffect(() => {
-    getProductListAsync()
-  }, [])
-
   return (
     <>
       <div className="container product-content">
@@ -424,18 +413,4 @@ function ProductList(props) {
   )
 }
 
-// 將redux中的store的state(狀態)
-// 對應到這個元件中的props中
-const mapStateToProps = (store) => {
-  return { productListData: store.productReducer.productListData }
-}
-
-// 綁定store的dispatch方法到這個元件的props
-// const mapDispatchToProps = (dispatch) => {
-//   return bindActionCreators({ addValue, minusValue }, dispatch)
-// }
-
-// 高階元件的樣式，必要的
-export default connect(mapStateToProps, {
-  getProductListAsync,
-})(ProductList)
+export default ProductList

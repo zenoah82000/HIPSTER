@@ -21,7 +21,7 @@ import activity from '../images/home/activity-test.jpg'
 function Home(props) {
   //搜尋bar切換狀態 0=地點 1=分類 2=時間
   const [searchbar, setsearchbar] = useState(0)
-  // console.log(searchbar)
+  console.log(searchbar)
 
   //地點搜尋bar
   const location = (

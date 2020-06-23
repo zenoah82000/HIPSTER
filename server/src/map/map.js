@@ -11,7 +11,7 @@ router.get("/map", async (req, res) => {
     cafelist: [],
   };
   const sqlproductlist =
-    "SELECT `map_product`.`mapId`, `map_product`.`productId`,`product`.`companyId`, `map_product`.`star`, `map_product`.`created_at`, `map_product`.`updated_at`,`product`.`productId`,`product`.`productAddress`,`product`.`productName`,`product`.`categoryId`,`product`.`lat`,`product`.`log`,`product`.`category`,`company`.`companyId`,`category`.`categoryName` FROM `map_product` LEFT JOIN `product` ON  `map_product`.`productId` =`product`.`productId`LEFT JOIN `company` ON  `product`.`companyId` =`company`.`companyId` LEFT JOIN `category` ON  `product`.`categoryId` =`category`.`categoryId`";
+    "SELECT `map_product`.`mapId`, `map_product`.`productId`,`product`.`companyId`, `map_product`.`star`, `map_product`.`created_at`, `map_product`.`updated_at`,`product`.`productId`,`product`.`productAddress`,`product`.`productName`,`product`.`categoryId`,`product`.`lat`,`product`.`log`,`company`.`companyId`,`category`.`categoryName` FROM `map_product` LEFT JOIN `product` ON  `map_product`.`productId` =`product`.`productId`LEFT JOIN `company` ON  `product`.`companyId` =`company`.`companyId` LEFT JOIN `category` ON  `product`.`categoryId` =`category`.`categoryId`";
 
   const sqlcafelist = "SELECT * FROM `map_cafe`";
 
@@ -20,6 +20,17 @@ router.get("/map", async (req, res) => {
 
   data.productlist = r1;
   data.cafelist = r2;
+  //   if (r1.length > 0 && r2.length > 0) {
+
+  //     r1.forEach((item) => {
+  //       item.created_at = item.created_at.toLocaleString();
+  //     });
+  //     r2.forEach((item) => {
+  //       item.date = item.date.toLocaleDateString();
+  //     });
+  //     data.orderdetails = r2;
+  //     data.order = r1;
+  //   }
 
   res.json(data);
 });

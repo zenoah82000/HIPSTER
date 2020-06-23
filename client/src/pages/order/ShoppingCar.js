@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { withRouter } from 'react-router-dom'
 
-import $ from 'jquery'
-
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
@@ -17,9 +15,7 @@ import '../../styles/ShoppingCar.scss'
 import Mycart from '../../components/order/MyCart'
 
 function ShoppingCar(props) {
-  const { mycart, deleteCart, sum ,userSuccess } = props
-   let  checkdiv
-
+  const { mycart, deleteCart, sum, userSuccess } = props
   //訂單初始化
   const orderData = {
     orderItems: [],
@@ -28,9 +24,9 @@ function ShoppingCar(props) {
   //前往結帳，送出訂單
   const checkOut = () => {
     //判斷是否登入
-    if(!userSuccess){
+    if (!userSuccess) {
       alert('請登入')
-    }else if (mycart == null || mycart.length < 1 ) {
+    } else if (mycart == null || mycart.length < 1) {
       Swal.fire({
         // title: 'Error!',
         text: '購物車是空的喔！',
@@ -53,43 +49,11 @@ function ShoppingCar(props) {
         }
       })
     }
-  
   }
-  useEffect(()=>{
-    if(checkdiv){
-      let pageHeight=$(window).innerHeight()
-      let navTop=$("#checkdiv").offset().top;
-      if(navTop>pageHeight) $("#checkdiv").addClass("checkfix");
-      $(window).scroll(function(){
-        let scrollTop=$(this).scrollTop();
-        pageHeight=$(this).innerHeight()
-        if(pageHeight+scrollTop<=navTop){
-          $("#checkdiv").addClass("checkfix");
-        }else{
-          $("#checkdiv").removeClass("checkfix");
-        }
-      });
-
-    }
-    
-    // window.addEventListener('scroll',()=>{
-    //   let pageheight = window.innerHeight
-    //   console.log(pageheight)
-    //   if(checkdiv){
-    //     if(pageheight < checkdiv.getBoundingClientRect().top){
-    //         checkdiv.classList.add("checkfix")
-          
-    //     }else{
-    //       checkdiv.classList.remove("checkfix");
-    //     }
-        
-    //   }
-      
-    // })
-  },[mycart])
 
   const display =
-       <>
+    mycart != null && mycart.length >= 1 ? (
+      <>
         <div className="cart-title">
           <div className="productname">
             <p>活動名稱</p>
@@ -107,7 +71,7 @@ function ShoppingCar(props) {
           </div>
         </div>
         <Mycart deleteCart={deleteCart} mycart={mycart} />
-        <div id="checkdiv" ref={div=>checkdiv = div} className="totalbox bg-white p-2 mt-3 d-flex">
+        <div className="totalbox bg-white p-2 mt-3 d-flex">
           <div className="col-6">使用優惠券</div>
           <div className="col-4 text-right total ">
             活動合計:<span className="total">NT${sum(mycart)}</span>
