@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 
-const userCouponData = (state = {}, action) => {
+const userCouponData = (state = [], action) => {
   switch (action.type) {
     case 'GET_USERCOUPON':
       return action.value
