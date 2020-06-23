@@ -16,7 +16,7 @@ function MyCart(props) {
       {mycart.map((value, index) => {
         return (
           <>
-            <div className="productbox">
+            <div className="cartproductbox">
               <div className="productname">
                 <GoX
                   className="mr-3 delete"

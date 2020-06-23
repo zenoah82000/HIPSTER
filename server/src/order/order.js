@@ -41,9 +41,10 @@ router.post("/member/checkout", async (req, res) => {
   const email = req.body.email
   //取得總筆數
   let orderId;
-  const total = "show table status like 'item_lists'";
+  const total = "show table status like 'orderlist'";
   const [r1] = await db.query(total);
-  let rows = (r1[0].Rows + 1).toString();
+  console.log(r1)
+  let rows = (r1[0].Auto_increment + 1).toString();
   rows = rows.padStart(5, 0);
   //訂單編號
   orderId = "O" + year + month + date + rows;
@@ -91,7 +92,6 @@ router.post("/member/checkout", async (req, res) => {
   let text = orderItems.map((item) => {
     return "<li>" + item.name + "<li>";
   });
-  console.log(text);
   var mailOptions = {
     from: '"Hipster文青地圖" <e24971234@gmail.com>',
     to: email,

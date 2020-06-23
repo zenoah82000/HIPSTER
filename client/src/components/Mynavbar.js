@@ -427,13 +427,18 @@ function Mynavbar(props) {
                               return (
                                 <div className="card-item d-flex align-items-center">
                                   <div className="productimgbox mr-4">
-                                    <img src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg" />
+                                    <Link to="/">
+                                      <img src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg" />
+                                    </Link>
                                   </div>
                                   <div className="item-text">
                                     <div className="item-name">
+                                      <Link to="/">
                                       <p>{value.name}</p>
+                                      </Link>
+                                      
                                     </div>
-                                    <div className="item-date"> 
+                                    <div className="item-date">
                                       <span>{value.date}</span>
                                     </div>
                                     <div className="item-price">

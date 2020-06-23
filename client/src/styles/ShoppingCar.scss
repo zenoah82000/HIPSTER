@@ -22,7 +22,7 @@ body {
 }
 
 //購物車商品
-.productbox {
+.cartproductbox {
   background-color: white;
   display: flex;
   margin-top: 20px;
@@ -43,14 +43,19 @@ body {
       width: 90px;
       height: 90px;
       margin-right: 10px;
-    }
-    p {
+      &:hover {
+        opacity: 0.5;
+      }
     }
   }
   .productright {
     width: 40%;
     display: flex;
     justify-content: space-between;
+    .productsubtotal {
+      width: 100px;
+      text-align: right;
+    }
   }
   .add {
     font-size: 25px;

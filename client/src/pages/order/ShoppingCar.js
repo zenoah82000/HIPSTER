@@ -15,7 +15,7 @@ import '../../styles/ShoppingCar.scss'
 import Mycart from '../../components/order/MyCart'
 
 function ShoppingCar(props) {
-  const { mycart, setMycart, deleteCart, sum } = props
+  const { mycart, deleteCart, sum ,userSuccess } = props
 
   //訂單初始化
   const orderData = {
@@ -24,7 +24,10 @@ function ShoppingCar(props) {
   let itemData = {}
   //前往結帳，送出訂單
   const checkOut = () => {
-    if (mycart == null || mycart.length < 1) {
+    //判斷是否登入
+    if(!userSuccess){
+      alert('請登入')
+    }else if (mycart == null || mycart.length < 1 ) {
       Swal.fire({
         // title: 'Error!',
         text: '購物車是空的喔！',
@@ -47,6 +50,7 @@ function ShoppingCar(props) {
         }
       })
     }
+    
   }
 
   const display =
@@ -68,7 +72,7 @@ function ShoppingCar(props) {
             </div>
           </div>
         </div>
-        <Mycart deleteCart={deleteCart} setMycart={setMycart} mycart={mycart} />
+        <Mycart deleteCart={deleteCart} mycart={mycart} />
         <div className="totalbox bg-white p-2 mt-3 d-flex">
           <div className="col-6">使用優惠券</div>
           <div className="col-4 text-right total ">
