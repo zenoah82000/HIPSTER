@@ -6,49 +6,59 @@ import { FaStar } from 'react-icons/fa'
 
 
 class Rating extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        rating:null,
-        temp_rating: null
+  constructor(props) {
+    super(props);
+    this.state = {
+      rating: null,
+      temp_rating: null
     }
-    }
-    
+  }
 
-//  getInitialState = () => {
-//     return {
-//       rating: this.props.rating || null,
-//       temp_rating: null
-//     };
-//   }
 
-  rate = (rating)=> {
+
+
+  //  getInitialState = () => {
+  //     return {
+  //       rating: this.props.rating || null,
+  //       temp_rating: null
+  //     };
+  //   }
+
+  rate = (rating) => {  
     this.setState({
       rating: rating,
       temp_rating: rating
     });
+    this.handleClick()
+
   }
-  star_over=(rating)=> {
+  //回傳星等值給母元素
+  handleClick = () => {
+    this.props.getRatingValue(this.state.rating)
+    // console.log(this.props.cafeActive)
+  }
+
+  star_over = (rating) => {
     this.state.temp_rating = this.state.rating;
     this.state.rating = rating;
-    
+
     this.setState({
       rating: this.state.rating,
       temp_rating: this.state.temp_rating
     });
   }
-  star_out=()=> {
+  star_out = () => {
     this.state.rating = this.state.temp_rating;
-    
+
     this.setState({ rating: this.state.rating });
   }
 
   render() {
     var stars = [];
-    
-    for(var i = 0; i < 5; i++) {
+
+    for (var i = 0; i < 5; i++) {
       var klass = 'star-rating__star';
-      
+
       if (this.state.rating >= i && this.state.rating != null) {
         klass += ' is-selected';
       }
@@ -63,7 +73,7 @@ class Rating extends React.Component {
         </label>
       );
     }
-    
+
     return (
       <div className="star-rating">
         {stars}
