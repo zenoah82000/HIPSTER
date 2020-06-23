@@ -18,6 +18,7 @@ class Map extends React.Component {
       selected: '',
       cafeActive: true,
       clicked: false,
+      clickData: [],
     }
     console.log(props)
   }
@@ -32,19 +33,15 @@ class Map extends React.Component {
     })
   }
 
-  cardClickReset = (lat, log) => {
-    console.log(lat, log)
+  cardClickReset = (clickData) => {
+    console.log(clickData)
 
-    let newLat = lat
-    let newLog = log
-
-    console.log(newLat, newLog)
     this.setState({
       viewport: {
-        center: [newLat, newLog],
+        center: [clickData.lat, clickData.log],
         zoom: 15,
       },
-      clicked: true,
+      clickData: clickData,
     })
   }
 
@@ -75,6 +72,7 @@ class Map extends React.Component {
               cafeActiveReset={this.cafeActiveReset}
               cafeActive={this.state.cafeActive}
               CafeData={CafeData}
+              clickData={this.state.clickData}
             />
           </div>
         </div>
