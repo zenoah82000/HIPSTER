@@ -15,12 +15,10 @@ import '../../styles/ShoppingCar.scss'
 import Mycart from '../../components/order/MyCart'
 
 function ShoppingCar(props) {
-  const{mycart,setMycart,deleteCart,sum}=props
+  const { mycart, setMycart, deleteCart, sum } = props
 
-  
   //訂單初始化
   const orderData = {
-      
     orderItems: [],
   }
   let itemData = {}
@@ -32,7 +30,7 @@ function ShoppingCar(props) {
         text: '購物車是空的喔！',
         icon: 'warning',
         confirmButtonText: '確定',
-        confirmButtonColor: "rgba(104, 142, 103, 0.8)",
+        confirmButtonColor: 'rgba(104, 142, 103, 0.8)',
       })
     } else {
       Swal.fire({
@@ -42,7 +40,7 @@ function ShoppingCar(props) {
         confirmButtonText: '確定',
         showCancelButton: true,
         cancelButtonText: '取消',
-        confirmButtonColor: "rgba(104, 142, 103, 0.8)",
+        confirmButtonColor: 'rgba(104, 142, 103, 0.8)',
       }).then((result) => {
         if (result.value) {
           // for (let i = 0; i < localCart.length; i++) {
@@ -64,37 +62,32 @@ function ShoppingCar(props) {
       })
     }
   }
-  
+
   const display =
     mycart != null && mycart.length >= 1 ? (
       <>
-        <div className="mycartbox bg-white d-flex p-2 align-items-center">
-          <div className="col-2">
-            <input
-              type="checkbox"
-              className="mr-4"
-              name="checkall"
-              id="checkall"
-            />
-            <label for="checkall"><p>全選</p></label>
-          </div>
-          <div className="col-3">
+        <div className="cart-title">
+          <div className="productname">
             <p>活動名稱</p>
           </div>
-          <div className="col-3">
-            <p>活動日期</p>
-          </div>
-          <div className="col">
-            <p>數量</p>
-          </div>
-          <div className="col text-right">
-            <p>總價</p>
+          <div className="productright">
+            <div className="productdate">
+              <p>活動日期</p>
+            </div>
+            <div className="productamount">
+              <p>數量</p>
+            </div>
+            <div className="producttoal">
+              <p>總價</p>
+            </div>
           </div>
         </div>
         <Mycart deleteCart={deleteCart} setMycart={setMycart} mycart={mycart} />
         <div className="totalbox bg-white p-2 mt-3 d-flex">
           <div className="col-6">使用優惠券</div>
-          <div className="col-4 text-right total ">活動合計:<span className="total">NT${sum(mycart)}</span></div>
+          <div className="col-4 text-right total ">
+            活動合計:<span className="total">NT${sum(mycart)}</span>
+          </div>
           <div className="col-2 text-right">
             <button
               className="button"
@@ -127,9 +120,9 @@ function ShoppingCar(props) {
   )
 }
 
-const mapStateToProps = store=>{
-  return{
-    mycart:store.orderReducer.cartData
+const mapStateToProps = (store) => {
+  return {
+    mycart: store.orderReducer.cartData,
   }
 }
 
