@@ -154,19 +154,27 @@ class mapList extends React.Component {
     })
     // console.log(this.state.dateClicked)
   }
-  changeClickState = () => {
-    this.setState({
-      dateClicked: !this.state.dateClicked,
-    })
-    console.log(this.state.dateClicked)
-  }
-  pickDate = (date, event) => {
-    this.setState({ date })
-    // console.log(date, event,'onchange')
-    // console.log(this.state.date)
-    // console.log(this.state.searchBtn2)
+  // changeClickState = () => {
+  //   this.setState({
+  //     dateClicked: !this.state.dateClicked,
+  //   })
+  //   console.log(this.state.dateClicked)
+  // }
+
+  // pickDate = (date, event) => {
+  //   this.setState({ date })
+  //   // console.log(date, event,'onchange')
+  //   // console.log(this.state.date)
+  //   // console.log(this.state.searchBtn2)
+  //   this.showDate()
+  // }
+
+  getDateValue= (dateValue) => {
+    this.setState({ date:dateValue })
     this.showDate()
+    console.log("test")
   }
+
 
   //地圖定位
   handleClick() {
@@ -482,9 +490,11 @@ class mapList extends React.Component {
                   <Dropdown.Menu>
                     {/* className={this.state.dateClicked? "displayNone":""}  */}
                     <Calendar
-                      onChange={this.pickDate}
+                      // onChange={this.pickDate}
                       value={this.state.date}
+                      getDateValue ={this.getDateValue}
                     />
+                    {/* <input type="date"/> */}
                   </Dropdown.Menu>
                 </Dropdown>
 
