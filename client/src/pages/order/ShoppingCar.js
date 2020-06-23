@@ -43,20 +43,6 @@ function ShoppingCar(props) {
         confirmButtonColor: 'rgba(104, 142, 103, 0.8)',
       }).then((result) => {
         if (result.value) {
-          // for (let i = 0; i < localCart.length; i++) {
-          //   console.log(localCart[i])
-          //   itemData.orderItemId = localCart[i].id
-          //   itemData.checkPrice = localCart[i].price
-          //   itemData.checkQty = localCart[i].amount
-          //   orderData.orderItems.push(itemData)
-          //   itemData = {}
-          // }
-          // console.log(orderData)
-          // props.memberCheckOutAsync(orderData)
-          // orderData.orderItems = []
-          // // 購物完清掉 localstorage 購物車
-          // localStorage.removeItem('cart')
-          // // window.location.href = '/member/checkout'
           props.history.push('/paymentDetail')
         }
       })
@@ -95,7 +81,7 @@ function ShoppingCar(props) {
                 checkOut()
               }}
             >
-              結算
+              結帳
             </button>
           </div>
         </div>

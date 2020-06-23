@@ -8,28 +8,17 @@ body {
   display: flex;
   padding: 12px;
   justify-content: space-between;
-}
-//購物車對齊
-.productname {
-  width: 40%;
-  display: flex;
-  margin-right: 20px;
-  align-items: center;
-  .delete {
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
+  .productname {
+    width: 40%;
+    display: flex;
+    margin-right: 20px;
+    align-items: center;
   }
-  .productImg {
-    width: 90px;
-    height: 90px;
-    margin-right: 10px;
+  .productright {
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
   }
-}
-.productright {
-  width: 40%;
-  display: flex;
-  justify-content: space-between;
 }
 
 //購物車商品
@@ -40,6 +29,29 @@ body {
   padding: 12px;
   align-items: center;
   justify-content: space-between;
+  .productname {
+    width: 40%;
+    display: flex;
+    margin-right: 20px;
+    align-items: center;
+    .delete {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+    .productImg {
+      width: 90px;
+      height: 90px;
+      margin-right: 10px;
+    }
+    p {
+    }
+  }
+  .productright {
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+  }
   .add {
     font-size: 25px;
     border: 1px solid gray;
