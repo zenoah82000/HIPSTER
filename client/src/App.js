@@ -137,7 +137,11 @@ function App(props) {
             <Product />
           </Route>
           <Route path="/shoppingcar">
-            <ShoppingCar deleteCart={deleteCart} sum={sum} userSuccess={userSuccess}/>
+            <ShoppingCar
+              deleteCart={deleteCart}
+              sum={sum}
+              userSuccess={userSuccess}
+            />
           </Route>
           <Route path="/map">
             <Map />
