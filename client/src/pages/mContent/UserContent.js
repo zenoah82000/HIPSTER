@@ -1,11 +1,7 @@
 import React from 'react'
 
 function UserContent() {
-    return (
-        <>
-        </>
-        
-    )
+  return <></>
 }
 
 export default UserContent

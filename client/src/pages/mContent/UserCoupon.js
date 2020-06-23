@@ -12,10 +12,9 @@ function UserCoupon(props) {
   useEffect(() => {
     getUserCouponDetaiAsync()
   }, [])
-  console.log('uCoupon-props', props)
-
-  console.log('userCouponData', userCouponData)
-  console.log('userCouponData.coupon123', userCouponData[0])
+  // console.log('uCoupon-props', props)
+  // console.log('userCouponData', userCouponData)
+  // console.log('userCouponData.coupon123', userCouponData[0])
   let couponList = userCouponData.map((item) => {
     return (
       <div className="tab-pane">
