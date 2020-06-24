@@ -9,7 +9,7 @@ import { BsExclamationCircle } from 'react-icons/bs'
 
 function paymentDetail(props) {
   //取得購物車的資料,個人資料
-  const { mycart, sum, buyerinfo } = props
+  const { sum, buyerinfo } = props
 
   //需要輸入的欄位
   let email, phone, lastName, firstName
@@ -29,16 +29,16 @@ function paymentDetail(props) {
       phone: phone.value,
       lastName: lastName.value,
       firstName: firstName.value,
-      product: [...mycart],
+      product:[...buyerinfo.product]
     }
     props.dispatch({ type: 'BUYER_DATA', value: data })
     props.history.push('/paymentType')
   }
   //上一頁(返回購物車)
   const backPage = () => {
+    console.log(buyerinfo)
     props.history.push('/shoppingcar')
   }
-  window.history.forward(1);
   return (
     <>
       <form
@@ -126,7 +126,7 @@ function paymentDetail(props) {
                   <div className="totalPrice">
                     <div className="d-flex justify-content-between">
                       <p>總價</p>
-                      <p>NT${sum(mycart)}</p>
+                      <p>NT${sum(buyerinfo.product)}</p>
                     </div>
                     <div className="d-flex justify-content-between">
                       <p>折價金額</p>
@@ -136,7 +136,7 @@ function paymentDetail(props) {
                   <div className="payPrice">
                     <div className="d-flex justify-content-between">
                       <p>結帳金額</p>
-                      <p>NT${sum(mycart)}</p>
+                      <p>NT${sum(buyerinfo.product)}</p>
                     </div>
                   </div>
                 </div>

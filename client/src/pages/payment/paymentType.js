@@ -6,7 +6,7 @@ import '../../styles/Payment.scss'
 //引入自訂元件
 
 function paymentType(props) {
-  const { mycart, sum, buyerinfo } = props
+  const { sum, buyerinfo } = props
 
   //訂單初始化
   const orderData = {
@@ -34,14 +34,14 @@ function paymentType(props) {
     props.history.push('/paymentDetail')
   }
   const checkOut = () => {
-    let total = sum(mycart)
-    mycart.forEach((item, i) => {
-      itemData.productId = mycart[i].id
-      itemData.date = mycart[i].date
-      itemData.name = mycart[i].name
-      itemData.checkPrice = mycart[i].price
-      itemData.checkQty = mycart[i].amount
-      itemData.checkSubtotal = +mycart[i].price * +mycart[i].amount
+    let total = sum(buyerinfo.product)
+    buyerinfo.product.forEach((item, i) => {
+      itemData.productId = item.id
+      itemData.date = item.date
+      itemData.name = item.name
+      itemData.checkPrice = item.price
+      itemData.checkQty = item.amount
+      itemData.checkSubtotal = +item.price * +item.amount
       orderData.orderItems.push(itemData)
       itemData = {}
     })
@@ -50,10 +50,6 @@ function paymentType(props) {
     orderData.email = buyerinfo.email
     //訂單資料傳資料庫
     checkoutAsync(orderData)
-    // 購物完清掉 localstorage 購物車
-    props.dispatch({ type: 'GET_CART', value: [] })
-    localStorage.removeItem('cart')
-    // window.location.href = '/paymentFinish'
     props.history.push('/paymentFinish')
   }
   return (
@@ -123,7 +119,7 @@ function paymentType(props) {
                 <div className="totalPrice">
                   <div className="d-flex justify-content-between ">
                     <p>總價</p>
-                    <p>NT${sum(mycart)}</p>
+                    <p>NT${sum(buyerinfo.product)}</p>
                   </div>
                   <div className="d-flex justify-content-between">
                     <p>折價金額</p>
@@ -133,7 +129,7 @@ function paymentType(props) {
                 <div className="payPrice">
                   <div className="d-flex justify-content-between">
                     <p>結帳金額</p>
-                    <p>NT${sum(mycart)}</p>
+                    <p>NT${sum(buyerinfo.product)}</p>
                   </div>
                 </div>
               </div>

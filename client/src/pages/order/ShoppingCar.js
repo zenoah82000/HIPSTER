@@ -18,13 +18,8 @@ import Mycart from '../../components/order/MyCart'
 import CouponAllData from '../../components/coupon/CouponAllData'
 
 function ShoppingCar(props) {
-  const { mycart, deleteCart, sum, userSuccess } = props
+  const { mycart, buyerinfo,deleteCart, sum, userSuccess } = props
   let checkdiv
-  //訂單初始化
-  const orderData = {
-    orderItems: [],
-  }
-  let itemData = {}
   //前往結帳，送出訂單
   const checkOut = () => {
     //判斷是否登入
@@ -40,7 +35,6 @@ function ShoppingCar(props) {
       })
     } else {
       Swal.fire({
-        // title: 'Error!',
         text: `確定商品總金額 NT$！${sum(mycart)}`,
         icon: 'info',
         confirmButtonText: '確定',
@@ -49,20 +43,32 @@ function ShoppingCar(props) {
         confirmButtonColor: 'rgba(104, 142, 103, 0.8)',
       }).then((result) => {
         if (result.value) {
+          let buydata ={
+            product:[...mycart],
+          }
+          props.dispatch({type:'BUYER_DATA',value:buydata})
+          props.dispatch({type:'GET_CART',value:[]})
+          localStorage.removeItem('cart')
           props.history.push('/paymentDetail')
         }
       })
     }
   }
   useEffect(() => {
+    //捲動事件
     if (checkdiv) {
+      $('#checkdiv').removeClass('checkfix')
+      let scrollTop = $(window).scrollTop()
       let pageHeight = $(window).innerHeight()
-      let navTop = $('#checkdiv').offset().top
-      if (navTop > pageHeight) $('#checkdiv').addClass('checkfix')
+      let checktop = $('#checkdiv').offset().top
+      if(pageHeight+scrollTop >checktop){
+        $('#checkdiv').removeClass('checkfix')
+      }else{
+        $('#checkdiv').addClass('checkfix')
+      }
       $(window).scroll(function () {
-        let scrollTop = $(this).scrollTop()
-        pageHeight = $(this).innerHeight()
-        if (pageHeight + scrollTop <= navTop) {
+         scrollTop = $(this).scrollTop()
+        if (pageHeight + scrollTop <= checktop) {
           $('#checkdiv').addClass('checkfix')
         } else {
           $('#checkdiv').removeClass('checkfix')
@@ -94,7 +100,7 @@ function ShoppingCar(props) {
         <div
           id="checkdiv"
           ref={(div) => (checkdiv = div)}
-          className="totalbox bg-white p-2 mt-3 d-flex"
+          className="totalbox bg-white mt-3 d-flex"
         >
           <div className="col-6">
             <CouponAllData />
@@ -137,6 +143,7 @@ function ShoppingCar(props) {
 const mapStateToProps = (store) => {
   return {
     mycart: store.orderReducer.cartData,
+    buyerinfo: store.orderReducer.buyerData,
   }
 }
 
