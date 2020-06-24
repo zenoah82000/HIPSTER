@@ -1,6 +1,13 @@
 .myReplyBox {
+  background: #ebebeb;
+  width: 100%;
+  padding: 20px 10px 10px 10px;
+}
+
+.mynotReplyBox {
   background: #ffffff;
   width: 100%;
+  padding: 20px 10px 10px 10px;
 }
 
 .comment-bar{
@@ -14,7 +21,7 @@
 }
 
 .myReply {
-  background: rgb(238, 237, 237);
+  background: rgb(216, 213, 213);
   width: 100%;
   padding-left: 30px;
   margin-bottom: 18px;
@@ -107,5 +114,4 @@
     padding: 5px;
     border-radius: 4px 4px 0 0;
     color: white;
-    margin-bottom: 15px;
 }

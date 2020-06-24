@@ -115,7 +115,7 @@ function UserComment(props) {
                       alt=""
                     />
                   </div>
-                  <div className="myReplyBox col-9 pl-3">
+                  <div className="col-9 pl-3">
 
                     <ul className=" list-unstyled">
                       <li className="d-flex">
@@ -134,12 +134,12 @@ function UserComment(props) {
                         </div>
                       </li>
                       <li>
-                        <p >我的回覆:</p>
+                        <p >我的評論:</p>
                       </li>
                       <li className="myReply pb-3">
                         <p className="pt-2 text">{item.content}</p>
                       </li>
-                      <p><small className="">回覆日期: {item.updated_at.substring(0,10)}</small></p>
+                      <small className="float-right">回覆日期: {item.updated_at.substring(0,10)}</small>
                     </ul>
                   </div>
                 </div>
