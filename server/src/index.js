@@ -59,6 +59,8 @@ app.use((req, res, next) => {
 
 app.use(require(__dirname + "/user-comment"));
 
+app.use(require(__dirname + "/user-map"));
+
 app.use(require(__dirname + "/order/order"));
 
 app.use(require(__dirname + "/blog"));
