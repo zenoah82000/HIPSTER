@@ -55,7 +55,7 @@ class Rating extends React.Component {
       var klass = 'star-rating__star'
 
       if (this.state.rating >= i && this.state.rating != null) {
-        klass += ' is-selected'
+        klass += '  '
       }
 
       stars.push(
