@@ -3,6 +3,8 @@ import { VerticalTimeline } from 'react-vertical-timeline-component';
 import { Map, TileLayer, Viewport, Popup, Marker } from 'react-leaflet'
 import L from 'leaflet'
 import TimelineElement from '../../components/user/TimelineElement';
+import SimpleReactLightbox from 'simple-react-lightbox'
+import { SRLWrapper } from 'simple-react-lightbox'
 
 import '../../styles/mContent/userMymap.scss'
 import 'react-vertical-timeline-component/style.min.css';
@@ -13,7 +15,7 @@ export const pointerIcon = new L.Icon({
     iconAnchor: [5, 55],
     popupAnchor: [10, -44],
     iconSize: [50, 55],
-  })
+})
 
 function UserMymap(props) {
     // console.log(props)
@@ -49,7 +51,7 @@ function UserMymap(props) {
             </div>
             <div className="tab-pane">
                 <div >
-                    <Map center={[25.0338438, 121.54335]} zoom={12}  style={{ height: "350px"}     }>
+                    <Map center={[25.0338438, 121.54335]} zoom={12} style={{ height: "350px" }}>
                         <TileLayer
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

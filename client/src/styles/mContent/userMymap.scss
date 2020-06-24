@@ -160,3 +160,27 @@
   color: #688e67;
   font-weight: bold;
 }
+
+
+.mymapBgImg{
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.mymapSmImg{
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+  margin-right: 10px;
+}
+
+.mymapBgImg:hover,.mymapSmImg:hover{
+  opacity: .5;
+}
+
+.object-fit{
+  // width: 100%;
+  object-fit: contain;
+}
