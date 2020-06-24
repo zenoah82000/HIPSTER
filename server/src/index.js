@@ -85,7 +85,7 @@ app.get("/", (req, res) => {
 //找不到頁面
 app.use((req, res) => {
   res.status(404);
-  res.send(`<img src="https://i.ytimg.com/vi/kvKSi5_pnjk/maxresdefault.jpg">`);
+  res.send(`<img src="https://i.imgur.com/AVAbDse.png">`);
 });
 app.listen(5000, () => {
   console.log("開始監聽");

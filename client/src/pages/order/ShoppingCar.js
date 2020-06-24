@@ -15,6 +15,7 @@ import Swal from 'sweetalert2'
 import '../../styles/ShoppingCar.scss'
 
 import Mycart from '../../components/order/MyCart'
+import CouponAllData from '../../components/coupon/CouponAllData'
 
 function ShoppingCar(props) {
   const { mycart, deleteCart, sum, userSuccess } = props
@@ -90,8 +91,14 @@ function ShoppingCar(props) {
           </div>
         </div>
         <Mycart deleteCart={deleteCart} mycart={mycart} />
-        <div id="checkdiv" ref={div=>checkdiv=div} className="totalbox bg-white p-2 mt-3 d-flex">
-          <div className="col-6">使用優惠券</div>
+        <div
+          id="checkdiv"
+          ref={(div) => (checkdiv = div)}
+          className="totalbox bg-white p-2 mt-3 d-flex"
+        >
+          <div className="col-6">
+            <CouponAllData />
+          </div>
           <div className="col-4 text-right total ">
             活動合計:<span className="total">NT${sum(mycart)}</span>
           </div>
