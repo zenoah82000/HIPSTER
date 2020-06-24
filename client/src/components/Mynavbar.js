@@ -243,18 +243,20 @@ function Mynavbar(props) {
               type="submit"
               onClick={() => {
                 if (signAccount.value == '' || signPassword.value == '') {
+                  alert('帳號或密碼不可為空')
+                } else {
+                  //撈取資料
+                  signData = {
+                    memberMail: signAccount.value,
+                    memberPwd: signPassword.value,
+                  }
+                  // console.log(signData)
+                  addNewMember(signData) //寫入資料庫
+                  setShowlogin(false) //關閉註冊登入視窗
+                  setTimeout(() => {
+                    setShowSignOk(true) //跳出註冊完成視窗
+                  }, 300)
                 }
-                //撈取資料
-                signData = {
-                  memberMail: signAccount.value,
-                  memberPwd: signPassword.value,
-                }
-                // console.log(signData)
-                addNewMember(signData) //寫入資料庫
-                setShowlogin(false) //關閉註冊登入視窗
-                setTimeout(() => {
-                  setShowSignOk(true) //跳出註冊完成視窗
-                }, 300)
               }}
             >
               註冊
@@ -359,6 +361,7 @@ function Mynavbar(props) {
             className="SignOkbtn"
             onClick={() => {
               setShowLogoutOk(false)
+              LogoutMember()
               window.location.href = '/'
             }}
           >
@@ -435,9 +438,8 @@ function Mynavbar(props) {
                                   <div className="item-text">
                                     <div className="item-name">
                                       <Link to="/">
-                                      <p>{value.name}</p>
+                                        <p>{value.name}</p>
                                       </Link>
-                                      
                                     </div>
                                     <div className="item-date">
                                       <span>{value.date}</span>
@@ -501,7 +503,6 @@ function Mynavbar(props) {
                     href="#"
                     className="memberbtn"
                     onClick={() => {
-                      LogoutMember()
                       setuserSuccess(false)
                       setShowLogoutOk(true)
                     }}

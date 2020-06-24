@@ -6,8 +6,9 @@
     font-weight: bold;
     font-size: 24px;
     margin-top: 20px;
+    margin-bottom: 20px;
   }
-  .userEditBtn {
+  .EditBtn {
     background-color: #6e845c;
     color: white;
     border: 0;
@@ -23,5 +24,20 @@
     &:focus {
       box-shadow: 0 0 0 0;
     }
+  }
+  .cancelBtn,
+  .submitBtn {
+    @extend .EditBtn;
+    margin-right: 10px;
+  }
+  .form-row {
+    border-top: 0.5px solid rgba($color: #000000, $alpha: 0.2);
+    .text-muted {
+      font-size: 16px;
+      margin-top: 8px;
+    }
+  }
+  .form-control-plaintext {
+    color: #586b49 !important;
   }
 }
