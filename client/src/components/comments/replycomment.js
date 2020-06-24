@@ -17,16 +17,14 @@ function ReplyComment({ commentData }) {
   // 上傳圖片
   let fileObj = []
   let fileArray = []
+  let uploadbutton
 
   const handleChange = (e) => {
-    console.log("test")
     fileObj.push(e.target.files)
-    console.log(fileObj)
-    console.log("test")
+   
     for (let i = 0; i < fileObj[0].length; i++) {
       fileArray.push(URL.createObjectURL(fileObj[0][i]))
-      console.log(fileObj)
-      console.log(fileArray)
+   
     }
     // setImage({ file: fileArray })
     if (e.target.files.length) {
@@ -148,7 +146,7 @@ function ReplyComment({ commentData }) {
                         ''
                       ) : (
                           <>
-                            <label htmlFor="upload-button">
+                            <label onClick={()=>{uploadbutton.click()}}>
                               <div className="commentImgPlus">
                                 <IconContext.Provider
                                   value={{
@@ -162,6 +160,7 @@ function ReplyComment({ commentData }) {
                             </label>
 
                             <input
+                              ref={input=>uploadbutton = input}
                               type="file"
                               id="upload-button"
                               style={{ display: 'none' }}
