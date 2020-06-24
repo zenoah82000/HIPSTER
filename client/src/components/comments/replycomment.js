@@ -19,8 +19,10 @@ function ReplyComment({ commentData }) {
   let fileArray = []
 
   const handleChange = (e) => {
+    console.log("test")
     fileObj.push(e.target.files)
     console.log(fileObj)
+    console.log("test")
     for (let i = 0; i < fileObj[0].length; i++) {
       fileArray.push(URL.createObjectURL(fileObj[0][i]))
       console.log(fileObj)
@@ -161,7 +163,7 @@ function ReplyComment({ commentData }) {
 
                             <input
                               type="file"
-                              id="commentData.orderId"
+                              id="upload-button"
                               style={{ display: 'none' }}
                               onChange={handleChange}
                               // ref={divRef}
@@ -176,7 +178,7 @@ function ReplyComment({ commentData }) {
                     <p>輸入評論:</p>
                     <textarea
                       className="form-control"
-                      id="commentData.orderId"
+                      // id={commentData.orderId}
                       rows="6"
                       onChange={(index) => handleTextChange(index)}
                     //  key={index}
@@ -186,7 +188,7 @@ function ReplyComment({ commentData }) {
                 <button
                   className="btn buttonstyle float-right mt-3"
                   type="submit"
-                  id={commentData.orderId}
+                  // id={commentData.orderId}
                   value="Submit"
                 // onClick={()=>handleDelete(index)}
                 // onClick={handleUpload}
