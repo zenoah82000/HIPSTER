@@ -92,20 +92,36 @@ function AsideBar(props) {
         </Dropdown>
         <div className="aside-wrapper-filter-box">
           <h3>導覽語言</h3>
-          <ul className="checkbox-dropdown-list">
-            <li className="type-li active">全部</li>
-            <li className="type-li active">中文</li>
-            <li className="type-li active">English</li>
-            <li className="type-li active">日本語</li>
+          <ul className="checkbox-dropdown-list active">
+            <li className="checkbox px-0">
+              <i className="far fa-square"></i>全部
+            </li>
+            <li className="checkbox px-0">
+              <i className="far fa-square"></i>中文
+            </li>
+            <li className="checkbox px-0">
+              <i className="far fa-square"></i>English
+            </li>
+            <li className="checkbox px-0">
+              <i className="far fa-square"></i>日本語
+            </li>
           </ul>
         </div>
         <div className="aside-wrapper-filter-box">
           <h3>行程時間</h3>
-          <ul className="checkbox-dropdown-list">
-            <li className="type-li active">0~1小時</li>
-            <li className="type-li active">1~3小時</li>
-            <li className="type-li active">3~5小時</li>
-            <li className="type-li active">5小時以上</li>
+          <ul className="checkbox-dropdown-list active">
+            <li className="checkbox px-0">
+              <i className="far fa-square"></i> 0 - 1 小時
+            </li>
+            <li className="checkbox px-0">
+              <i className="far fa-square"></i> 1 - 3 小時
+            </li>
+            <li className="checkbox px-0">
+              <i className="far fa-square"></i> 3 - 5 小時
+            </li>
+            <li className="checkbox px-0">
+              <i className="far fa-square"></i> 5 小時以上
+            </li>
           </ul>
         </div>
       </aside>
