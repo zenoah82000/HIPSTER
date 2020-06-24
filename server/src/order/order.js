@@ -14,7 +14,7 @@ router.get("/member/order/:memberId", async (req, res) => {
   const sqlorderlist =
     "SELECT `product`.`productName`,`item_lists`.`orderId`,`item_lists`.`date`,`item_lists`.`checkPrice`,`item_lists`.`checkQty`,`item_lists`.`checkSubtotal`,`item_lists`.`created_at`FROM `member` INNER JOIN `orderlist` ON `member`.`memberId` = `orderlist`.`memberId` INNER JOIN `item_lists` ON `orderlist`.`orderId`=`item_lists`.`orderId` INNER JOIN `product` ON `item_lists`.`productId` = `product`.`productId` WHERE `member`.`memberId`=?";
 
-  const sqlorder = "SELECT * FROM `orderlist` WHERE `memberId` = ?";
+  const sqlorder = "SELECT * FROM `orderlist` WHERE `memberId` = ? ORDER BY `created_at` DESC";
   const [r1] = await db.query(sqlorder, [req.params.memberId]);
   const [r2] = await db.query(sqlorderlist, [req.params.memberId]);
   if (r1.length > 0 && r2.length > 0) {
