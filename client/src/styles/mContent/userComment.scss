@@ -1,5 +1,5 @@
 .myReplyBox {
-  background: #E6DED7;
+  background: #ebebeb;
   width: 100%;
   padding: 20px 10px 10px 10px;
 }
@@ -21,22 +21,16 @@
 }
 
 .myReply {
-  background: rgb(209, 207, 207);
+  background: rgb(216, 213, 213);
   width: 100%;
-  min-height: 155px;
-  padding-right: 10px;
-  padding-left: 20px;
+  padding-left: 30px;
   margin-bottom: 18px;
-  border-radius: 3px;
-  // color: white;
 }
 
 .eventImgBox img {
   height: 200px;
   object-fit: cover;
   // padding-top: 8px;;
- border-radius: 3px;  
-
 }
 
 .commentImg{
@@ -46,7 +40,6 @@
     // object-fit: full;
      overflow: hidden;
       margin: 5px; 
-     
 }
 .commentImgPhoto{
   width:100%;

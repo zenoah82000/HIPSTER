@@ -3,8 +3,7 @@ import { VerticalTimeline } from 'react-vertical-timeline-component';
 import { Map, TileLayer, Viewport, Popup, Marker } from 'react-leaflet'
 import L from 'leaflet'
 import TimelineElement from '../../components/user/TimelineElement';
-import SimpleReactLightbox from 'simple-react-lightbox'
-import { SRLWrapper } from 'simple-react-lightbox'
+
 
 import '../../styles/mContent/userMymap.scss'
 import 'react-vertical-timeline-component/style.min.css';

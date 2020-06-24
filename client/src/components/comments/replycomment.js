@@ -14,43 +14,17 @@ function ReplyComment({ commentData }) {
   const [list, setList] = useState([])
   const [ratingValue, setRatingValue] = useState('')
 
-
-//評論送出
-// const commentData ={
-//   commentMemberId:"",
-//   comment:[]
-// }
-
-// const sendCommentAsync = async (comment) => {
-//   const request = new Request('http://localhost:5000/sendComments/2', {
-//     method: 'post',
-//     body: JSON.stringify(comment),
-//     headers: new Headers({
-//       Accept: 'application/json',
-//       'Content-Type': 'application/json',
-//     }),
-//   })
-//   const response = await fetch(request)
-//   const data = await response.json()
-//   const orderId = {...buyerinfo}
-//   orderId.orderId = data
-//   props.dispatch({ type: 'BUYER_DATA', value: orderId })
-// }
-
-
   // 上傳圖片
   let fileObj = []
   let fileArray = []
+  let uploadbutton
 
   const handleChange = (e) => {
-    console.log("test")
     fileObj.push(e.target.files)
-    console.log(fileObj)
-    console.log("test")
+   
     for (let i = 0; i < fileObj[0].length; i++) {
       fileArray.push(URL.createObjectURL(fileObj[0][i]))
-      console.log(fileObj)
-      console.log(fileArray)
+   
     }
     // setImage({ file: fileArray })
     if (e.target.files.length) {
@@ -89,8 +63,7 @@ function ReplyComment({ commentData }) {
         icon: 'success',
         confirmButtonText: '確定',
         confirmButtonColor: 'rgba(104, 142, 103, 0.8)',
-      }) && handleDelete(index) 
-      // && sendCommentAsync(commentData)
+      }) && handleDelete(index)
       : Swal.fire({
         text: '評論不能為空白',
         icon: 'warning',
@@ -119,7 +92,6 @@ function ReplyComment({ commentData }) {
         onSubmit={handleSubmit}
         method="POST"
         action="/{commentData.memberId}"
-        enctype="multipart/form-data"
         key={commentData.orderId}
       >
         <div className="reply-listview">
@@ -148,11 +120,11 @@ function ReplyComment({ commentData }) {
                     <p>活動日期:{commentData.date}</p>
                   </li> */}
                   <li className="d-flex">
-                    <p style={{fontWeight:"bold"}}>輸入星等:</p>
+                    <p>輸入星等:</p>
                     <RatingStar getRatingValue={getRatingValue} />
                   </li>
                   <li className="d-flex">
-                    <p style={{fontWeight:"bold"}}>上傳相片:</p>
+                    <p>上傳相片:</p>
                     <div className="d-flex">
                       {image.preview.length > 0
                         ? image.preview.map((item) => {
@@ -174,7 +146,7 @@ function ReplyComment({ commentData }) {
                         ''
                       ) : (
                           <>
-                            <label htmlFor={commentData.orderId}>
+                            <label onClick={()=>{uploadbutton.click()}}>
                               <div className="commentImgPlus">
                                 <IconContext.Provider
                                   value={{
@@ -188,8 +160,9 @@ function ReplyComment({ commentData }) {
                             </label>
 
                             <input
+                              ref={input=>uploadbutton = input}
                               type="file"
-                              id={commentData.orderId}
+                              id="upload-button"
                               style={{ display: 'none' }}
                               onChange={handleChange}
                               // ref={divRef}
@@ -201,7 +174,7 @@ function ReplyComment({ commentData }) {
                     </div>
                   </li>
                   <li>
-                    <p style={{fontWeight:"bold"}}  >輸入評論:</p>
+                    <p>輸入評論:</p>
                     <textarea
                       className="form-control"
                       // id={commentData.orderId}
