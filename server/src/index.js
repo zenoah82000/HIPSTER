@@ -73,6 +73,8 @@ app.use(require(__dirname + "/map/map"));
 
 app.use(require(__dirname + "/member/users-router"));
 
+app.use(require(__dirname + "/user-map"));
+
 //設定公開資料夾
 app.use(express.static("public"));
 
