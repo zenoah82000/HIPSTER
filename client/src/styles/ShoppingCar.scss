@@ -80,6 +80,7 @@ body {
 
 //購物車總額
 .totalbox {
+  padding: 12px;
   .button {
     color: white;
     width: 100px;
@@ -95,12 +96,18 @@ body {
     }
   }
 }
+
+//捲動事件固定
 .checkfix {
   width: 100%;
   left: 0;
   position: fixed;
   bottom: 0;
+  box-shadow: 0 0 2px black;
+  padding: 12px 190px;
 }
+
+//購物車為空
 .empty {
   margin: 100px;
   .emptyImg {
