@@ -89,7 +89,7 @@ function UserCoupon(props) {
             </div>
           </div>
           <div className="tab-pane">
-            <div className="table-head hidden-xs">
+            <div className="table-head ">
               <div class="row">
                 <div class="col-3">折扣券</div>
                 <div class="col-4">使用效期</div>
