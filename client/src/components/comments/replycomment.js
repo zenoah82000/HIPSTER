@@ -83,6 +83,7 @@ function ReplyComment({ commentData }) {
   //子元素回傳星等
   const getRatingValue = (value) => {
     setRatingValue(value)
+    console.log(ratingValue+1)
   }
 
   return (
@@ -150,7 +151,7 @@ function ReplyComment({ commentData }) {
 
                           <input
                             type="file"
-                            id="upload-button"
+                            id="commentData.orderId"
                             style={{ display: 'none' }}
                             onChange={handleChange}
                             // ref={divRef}
@@ -165,7 +166,7 @@ function ReplyComment({ commentData }) {
                     <p>輸入回覆:</p>
                     <textarea
                       className="form-control"
-                      id=""
+                      id="commentData.orderId"
                       rows="6"
                       onChange={(index) => handleTextChange(index)}
                       //  key={index}
@@ -175,7 +176,7 @@ function ReplyComment({ commentData }) {
                 <button
                   className="btn buttonstyle float-right mt-3"
                   type="submit"
-                  id="button-addon2"
+                  id={commentData.orderId }
                   value="Submit"
                   // onClick={()=>handleDelete(index)}
                   // onClick={handleUpload}

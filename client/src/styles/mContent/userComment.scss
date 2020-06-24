@@ -3,11 +3,16 @@
   width: 100%;
 }
 
+.reply-listview {
+  border-bottom: 1px solid #eaeaea;
+  padding: 20px 10px 2px 10px ;
+}
+
 .myReply {
   background: rgb(238, 237, 237);
   width: 100%;
   padding-left: 30px;
-  margin-top: 10px;
+  margin-bottom: 18px;
 }
 
 .eventImgBox img {
