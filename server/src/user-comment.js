@@ -26,4 +26,22 @@ router.get("/comments/:memberId", async (req, res) => {
   res.json(data);
 });
 
+//訂單新增
+router.post("/sendComments/:memberId", async (req, res) => {
+
+  const addCommentList =
+    "INSERT INTO `comments` (`itemListId`,`content`, `star`) VALUES (?,?,?)";
+
+
+  //新增評論到資料庫
+  const [r2] = await db.query(addCommentList, [
+    req.body.itemListId,
+    req.body.content,
+    req.body.star,
+  ]);
+  
+  console.log("訂單新增成功" + orderId);
+
+})
+
 module.exports = router;

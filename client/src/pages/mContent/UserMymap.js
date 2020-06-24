@@ -7,6 +7,14 @@ import TimelineElement from '../../components/user/TimelineElement';
 import '../../styles/mContent/userMymap.scss'
 import 'react-vertical-timeline-component/style.min.css';
 
+export const pointerIcon = new L.Icon({
+    iconUrl: require('../../images/marker.svg'),
+    iconRetinaUrl: require('../../images/marker.svg'),
+    iconAnchor: [5, 55],
+    popupAnchor: [10, -44],
+    iconSize: [50, 55],
+  })
+
 function UserMymap(props) {
     // console.log(props)
     const [myItemlist, setMyItemlist] = useState([])

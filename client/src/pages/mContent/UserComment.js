@@ -68,7 +68,7 @@ function UserComment(props) {
   const [noCommentlist, setNoCommentList] = useState([])
 
   // 後端傳資料
-  const checkoutAsync = async (order) => {
+  const commentAsync = async (order) => {
     const request = new Request('http://localhost:5000/comments/2', {
       method: 'get',
       // body: JSON.stringify(order),
@@ -86,7 +86,7 @@ function UserComment(props) {
   }
 
   useEffect(() => {
-    checkoutAsync()
+    commentAsync()
   }, [])
 
   //顯示已評論
