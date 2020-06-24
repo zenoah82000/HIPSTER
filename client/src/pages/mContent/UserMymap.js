@@ -49,8 +49,8 @@ function UserMymap(props) {
                 <h2 className="usertitle">我的文青地圖</h2>
             </div>
             <div className="tab-pane">
-                <div >
-                    <Map center={[25.0338438, 121.54335]} zoom={12} style={{ height: "350px" }}>
+                <div style={{ background: "#E6DED8",padding:"20px 20px 0 20px" }} >
+                    <Map center={[25.0338438, 121.54335]} zoom={12} style={{ width:"100%", height: "350px"}}>
                         <TileLayer
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
