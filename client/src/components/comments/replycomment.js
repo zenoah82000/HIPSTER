@@ -122,11 +122,11 @@ function ReplyComment({ commentData }) {
                     <p>活動日期:{commentData.date}</p>
                   </li> */}
                   <li className="d-flex">
-                    <p>輸入星等:</p>
+                    <p style={{fontWeight:"bold"}}>輸入星等:</p>
                     <RatingStar getRatingValue={getRatingValue} />
                   </li>
                   <li className="d-flex">
-                    <p>上傳相片:</p>
+                    <p style={{fontWeight:"bold"}}>上傳相片:</p>
                     <div className="d-flex">
                       {image.preview.length > 0
                         ? image.preview.map((item) => {
@@ -148,7 +148,7 @@ function ReplyComment({ commentData }) {
                         ''
                       ) : (
                           <>
-                            <label htmlFor="upload-button">
+                            <label htmlFor={commentData.orderId}>
                               <div className="commentImgPlus">
                                 <IconContext.Provider
                                   value={{
@@ -163,7 +163,7 @@ function ReplyComment({ commentData }) {
 
                             <input
                               type="file"
-                              id="upload-button"
+                              id={commentData.orderId}
                               style={{ display: 'none' }}
                               onChange={handleChange}
                               // ref={divRef}
@@ -175,7 +175,7 @@ function ReplyComment({ commentData }) {
                     </div>
                   </li>
                   <li>
-                    <p>輸入評論:</p>
+                    <p style={{fontWeight:"bold"}}>輸入評論:</p>
                     <textarea
                       className="form-control"
                       // id={commentData.orderId}

@@ -41,7 +41,7 @@ function UserMymap(props) {
             </div>
             <div className="tab-pane">
                 <div >
-                    <Map center={[20, 125]} zoom={20}>
+                    <Map center={[25.0338438, 121.54335]} zoom={12}  style={{ height: "350px"}     }>
                         <TileLayer
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -59,7 +59,7 @@ function UserMymap(props) {
                     </Map>
                 </div>
 
-                <div class="coupon-listview" style={{ background: "#b3b3b3" }}>
+                <div class="coupon-listview" style={{ background: "#E6DED8" }}>
                     {myItemlist.length >= 1 ? (
                         <VerticalTimeline >
                             {myItemlist.map((item, index) => <TimelineElement myMapData={item} />)}

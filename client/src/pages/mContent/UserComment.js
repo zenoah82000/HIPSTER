@@ -119,11 +119,26 @@ function UserComment(props) {
 
                     <ul className=" list-unstyled">
                       <li className="d-flex">
-                        <p >評價星等:</p><p><RatingStarValue ratingValue={item.star} /></p>
+                        <p style={{fontWeight:"bold"}}>評價星等:</p><p><RatingStarValue ratingValue={item.star} /></p>
                       </li>
                       <li className="d-flex">
-                        <p>活動相片:</p>
-                        <div className="d-flex">
+                        <p style={{fontWeight:"bold"}}>活動相片:</p>
+                        {image.preview.length > 0
+                        ? image.preview.map((item) => {
+                          return (
+                            <>
+                              <div className="commentImg">
+                                <img
+                                  className="commentImgPhoto"
+                                  src={item}
+                                  alt=""
+                                />
+                              </div>
+                            </>
+                          )
+                        })
+                        : (<p>未上傳相片</p>)}
+                        {/* <div className="d-flex">
                           <div className="commentImg">
                             <img
                               className="commentImgPhoto"
@@ -131,10 +146,10 @@ function UserComment(props) {
                               alt=""
                             />
                           </div>
-                        </div>
+                        </div> */}
                       </li>
                       <li>
-                        <p >我的評論:</p>
+                        <p style={{fontWeight:"bold"}}>我的評論:</p>
                       </li>
                       <li className="myReply pb-3">
                         <p className="pt-2 text">{item.content}</p>
