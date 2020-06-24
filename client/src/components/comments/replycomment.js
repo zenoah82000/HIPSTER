@@ -91,10 +91,21 @@ function ReplyComment({ commentData }) {
       <form
         onSubmit={handleSubmit}
         method="POST"
-        action=""
+        action="/{commentData.memberId}"
         key={commentData.orderId}
       >
-        <div className="coupon-listview">
+        <div className="reply-listview">
+        <div className="comment-tbhead">
+              <div class="row">
+                <div class="col-9 pl-1"><h5 className="eventTitle " style={{fontWeight:"bold"}}>{commentData.productName}</h5></div>
+                <div class="col-3 pr-1"> 
+                <ul className="float-right list-unstyled" >
+                  <li><small>訂單編號:{commentData.orderId}</small></li>
+                  <li><small>活動日期:{commentData.date.substring(0,10)}</small></li>
+                </ul>
+                </div>
+              </div>
+            </div>
           <div class="row">
             <div className="myReplyBox d-flex">
               <div className="eventImgBox col-3">
@@ -104,11 +115,10 @@ function ReplyComment({ commentData }) {
                 />
               </div>
               <div className="myReplyBox col-9 pl-3">
-                <h4 className="eventTitle">{commentData.ProductName}</h4>
                 <ul className=" list-unstyled">
-                  <li className="d-flex">
-                    <p>活動日期:</p>
-                  </li>
+                  {/* <li className="d-flex">
+                    <p>活動日期:{commentData.date}</p>
+                  </li> */}
                   <li className="d-flex">
                     <p>輸入星等:</p>
                     <RatingStar getRatingValue={getRatingValue} />
