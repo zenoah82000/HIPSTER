@@ -32,38 +32,45 @@ function AsideBar(props) {
 
   // console.log('props', props)
   // console.log('productData', productData)
-  let arr1 = []
-  productCatogryData.forEach((item, index) => {
-    if (item.categoryParentId === 0) {
-      arr1[index] = item
-    } else {
-      arr1.splice(
-        arr1.findIndex(
-          (element) => element.categoryId === item.categoryParentId
-        ) + 1,
-        0,
-        item
-      )
-    }
-  })
-  console.log(arr1)
+  // let arr1 = []
+  // productCatogryData.forEach((item, index) => {
+  //   if (item.categoryParentId === 0) {
+  //     arr1.push(item)
+  //   } else {
+  //     arr1.splice(
+  //       arr1.findIndex(
+  //         (element) => element.categoryId === item.categoryParentId
+  //       ) + 1,
+  //       0,
+  //       item
+  //     )
+  //   }
+  // })
+  // console.log(arr1)
 
-  const display = arr1.map((item, index) => {
+  const display = productCatogryData.map((item, index) => {
     if (item.categoryParentId === 0) {
       return (
         <>
-          <div className="drop-title" key={index}>
-            <h5>{item.categoryName}</h5>
+          <div>
+            <div className="drop-title" key={index} dataValue={index}>
+              <h5>{item.categoryName}</h5>
+            </div>
+            <ul className="checkbox-dropdown-list active">
+              {productCatogryData.map((category, i) => {
+                if (category.categoryParentId === item.categoryId) {
+                  return (
+                    <>
+                      <li className="checkbox" key={i} dataValue={i}>
+                        <i className="far fa-square"></i>
+                        {category.categoryName}
+                      </li>
+                    </>
+                  )
+                }
+              })}
+            </ul>
           </div>
-        </>
-      )
-    } else {
-      return (
-        <>
-          <li className="checkbox" key={index}>
-            <i className="far fa-square"></i>
-            {item.categoryName}
-          </li>
         </>
       )
     }
@@ -75,47 +82,7 @@ function AsideBar(props) {
       <aside className="aside-wrapper col-md-3">
         <div className="aside-wrapper-filter-box">
           <h3>所有商品類別</h3>
-          <div>
-            <div className="drop-title">
-              <h5>戶外活動</h5>
-            </div>
-            <ul className="checkbox-dropdown-list">
-              <li className="checkbox">
-                <i className="far fa-square"></i>1
-              </li>
-              <li className="checkbox">1</li>
-              <li className="checkbox">1</li>
-              <li className="checkbox">1</li>
-            </ul>
-          </div>
-          <div>
-            <div className="drop-title">
-              <h5>戶外活動</h5>
-            </div>
-            <ul className="checkbox-dropdown-list">
-              <li className="checkbox">1</li>
-              <li className="checkbox">1</li>
-              <li className="checkbox">1</li>
-              <li className="checkbox">1</li>
-            </ul>
-          </div>
-          <div>
-            <div className="drop-title">
-              <h5>戶外活動</h5>
-            </div>
-            <ul className="checkbox-dropdown-list active">{display}</ul>
-          </div>
-          <div>
-            <div className="drop-title">
-              <h5>戶外活動</h5>
-            </div>
-            <ul className="checkbox-dropdown-list">
-              <li className="checkbox">1</li>
-              <li className="checkbox">1</li>
-              <li className="checkbox">1</li>
-              <li className="checkbox">1</li>
-            </ul>
-          </div>
+          {display}
         </div>
         <Dropdown>
           <Dropdown.Toggle className="aside-wrapper-filter-box" drop={'down'}>
@@ -125,20 +92,36 @@ function AsideBar(props) {
         </Dropdown>
         <div className="aside-wrapper-filter-box">
           <h3>導覽語言</h3>
-          <ul className="checkbox-dropdown-list">
-            <li className="type-li active">全部</li>
-            <li className="type-li active">中文</li>
-            <li className="type-li active">English</li>
-            <li className="type-li active">日本語</li>
+          <ul className="checkbox-dropdown-list active">
+            <li className="checkbox px-0">
+              <i className="far fa-square"></i>全部
+            </li>
+            <li className="checkbox px-0">
+              <i className="far fa-square"></i>中文
+            </li>
+            <li className="checkbox px-0">
+              <i className="far fa-square"></i>English
+            </li>
+            <li className="checkbox px-0">
+              <i className="far fa-square"></i>日本語
+            </li>
           </ul>
         </div>
         <div className="aside-wrapper-filter-box">
           <h3>行程時間</h3>
-          <ul className="checkbox-dropdown-list">
-            <li className="type-li active">0~1小時</li>
-            <li className="type-li active">1~3小時</li>
-            <li className="type-li active">3~5小時</li>
-            <li className="type-li active">5小時以上</li>
+          <ul className="checkbox-dropdown-list active">
+            <li className="checkbox px-0">
+              <i className="far fa-square"></i> 0 - 1 小時
+            </li>
+            <li className="checkbox px-0">
+              <i className="far fa-square"></i> 1 - 3 小時
+            </li>
+            <li className="checkbox px-0">
+              <i className="far fa-square"></i> 3 - 5 小時
+            </li>
+            <li className="checkbox px-0">
+              <i className="far fa-square"></i> 5 小時以上
+            </li>
           </ul>
         </div>
       </aside>

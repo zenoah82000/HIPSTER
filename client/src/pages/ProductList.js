@@ -10,7 +10,7 @@ import ProductSearchResult from '../components/product/ProductSearchResult'
 import ProductSearchResultSort from '../components/product/ProductSearchResultSort'
 import ProductListPageBar from '../components/product/ProductListPageBar'
 
-import { getProductListAsync } from '../actions/product/grtProductList'
+import { getProductListAsync } from '../actions/product/getProductList'
 
 import ReactStars from 'react-rating-stars-component'
 
@@ -27,7 +27,7 @@ function ProductList(props) {
         <div className="row">
           <AsideBar />
           <ProductListMainContent>
-            <ProductSearchResult />
+            <ProductSearchResult productnumbers={productListData.length} />
             <ProductSearchResultSort />
             {/* -------商品列表區域------ */}
             <div className="product-list-search-info">

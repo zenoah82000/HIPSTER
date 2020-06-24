@@ -11,9 +11,11 @@ router.get("/comments/:memberId", async (req, res) => {
   };
 
   const sqlcommentlist =
-    "SELECT `comments`.`commentId`, `comments`.`memberId`,`comments`.`content`, `comments`.`rating`, `comments`.`itemId`, `comments`.`created_at`, `comments`.`updated_at`,`item_lists`.`productId`,`orderlist`.`memberId`,`item_lists`.`orderId`,`product`.`productName`,`item_lists`.`itemListId`FROM `comments`LEFT JOIN `item_lists` ON `comments`.`itemId` =`item_lists`.`productId` LEFT JOIN `product`ON `comments`.`itemId` =`product`.`productId` LEFT JOIN `orderlist` ON `item_lists`.`orderId` =`orderlist`.`orderId` WHERE `comments`.`memberId` = ?";
+    "SELECT `comments`.`commentId`, `comments`.`itemListId`,`comments`.`content`, `comments`.`star`, `comments`.`created_at`, `comments`.`updated_at`,`item_lists`.`productId`,`item_lists`.`orderId`,`item_lists`.`date`,`product`.`productName`, `item_lists`.`memberId` FROM `comments`LEFT JOIN `item_lists` ON `comments`.`itemListId` =`item_lists`.`itemListId` LEFT JOIN `product`ON `item_lists`.`productId` =`product`.`productId` LEFT JOIN `orderlist` ON `item_lists`.`orderId` =`orderlist`.`orderId` WHERE `item_lists`.`memberId` = ?";
 
-  const sqlnotcommentlist = "SELECT * FROM `item_lists`";
+  const sqlnotcommentlist = "SELECT `item_lists`.`itemListId`, `item_lists`.`orderId`, `item_lists`.`memberId`, `item_lists`.`productId`, `item_lists`.`date`, `item_lists`.`checkPrice`, `item_lists`.`checkQty`, `item_lists`.`checkSubtotal`, `item_lists`.`created_at`, `item_lists`.`updated_at`,`product`.`productName` FROM `item_lists` LEFT JOIN `product`ON `item_lists`.`productId` =`product`.`productId`  WHERE `item_lists`.`memberId` = ?";
+
+ 
 
   const [r1] = await db.query(sqlcommentlist, [req.params.memberId]);
   const [r2] = await db.query(sqlnotcommentlist, [req.params.memberId]);

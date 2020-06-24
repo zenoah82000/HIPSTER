@@ -19,8 +19,10 @@ function ReplyComment({ commentData }) {
   let fileArray = []
 
   const handleChange = (e) => {
+    console.log("test")
     fileObj.push(e.target.files)
     console.log(fileObj)
+    console.log("test")
     for (let i = 0; i < fileObj[0].length; i++) {
       fileArray.push(URL.createObjectURL(fileObj[0][i]))
       console.log(fileObj)
@@ -59,17 +61,17 @@ function ReplyComment({ commentData }) {
     // alert('submit')
     text !== ''
       ? Swal.fire({
-          text: '成功送出評論',
-          icon: 'success',
-          confirmButtonText: '確定',
-          confirmButtonColor: 'rgba(104, 142, 103, 0.8)',
-        }) && handleDelete(index)
+        text: '成功送出評論',
+        icon: 'success',
+        confirmButtonText: '確定',
+        confirmButtonColor: 'rgba(104, 142, 103, 0.8)',
+      }) && handleDelete(index)
       : Swal.fire({
-          text: '評論不能為空白',
-          icon: 'warning',
-          confirmButtonText: '確定',
-          confirmButtonColor: 'rgba(104, 142, 103, 0.8)',
-        })
+        text: '評論不能為空白',
+        icon: 'warning',
+        confirmButtonText: '確定',
+        confirmButtonColor: 'rgba(104, 142, 103, 0.8)',
+      })
 
     e.preventDefault()
   }
@@ -83,6 +85,7 @@ function ReplyComment({ commentData }) {
   //子元素回傳星等
   const getRatingValue = (value) => {
     setRatingValue(value)
+    console.log(ratingValue + 1)
   }
 
   return (
@@ -90,24 +93,34 @@ function ReplyComment({ commentData }) {
       <form
         onSubmit={handleSubmit}
         method="POST"
-        action=""
+        action="/{commentData.memberId}"
         key={commentData.orderId}
       >
-        <div className="coupon-listview">
+        <div className="reply-listview">
+          <div className="comment-tbhead">
+            <div class="row">
+              <div class="col-9 pl-1"><h5 className="eventTitle " style={{ fontWeight: "bold" }}>{commentData.productName}</h5></div>
+              <div class="col-3 pr-1">
+                <ul className="float-right list-unstyled" >
+                  <li><small>訂單編號:{commentData.orderId}</small></li>
+                  <li><small>活動日期:{commentData.date.substring(0, 10)}</small></li>
+                </ul>
+              </div>
+            </div>
+          </div>
           <div class="row">
-            <div className="myReplyBox d-flex">
+            <div className="mynotReplyBox d-flex">
               <div className="eventImgBox col-3">
                 <img
                   src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
                   alt=""
                 />
               </div>
-              <div className="myReplyBox col-9 pl-3">
-                <h4 className="eventTitle">{commentData.ProductName}</h4>
+              <div className=" col-9 pl-3">
                 <ul className=" list-unstyled">
-                  <li className="d-flex">
-                    <p>活動日期:</p>
-                  </li>
+                  {/* <li className="d-flex">
+                    <p>活動日期:{commentData.date}</p>
+                  </li> */}
                   <li className="d-flex">
                     <p>輸入星等:</p>
                     <RatingStar getRatingValue={getRatingValue} />
@@ -117,69 +130,69 @@ function ReplyComment({ commentData }) {
                     <div className="d-flex">
                       {image.preview.length > 0
                         ? image.preview.map((item) => {
-                            return (
-                              <>
-                                <div className="commentImg">
-                                  <img
-                                    className="commentImgPhoto"
-                                    src={item}
-                                    alt=""
-                                  />
-                                </div>
-                              </>
-                            )
-                          })
+                          return (
+                            <>
+                              <div className="commentImg">
+                                <img
+                                  className="commentImgPhoto"
+                                  src={item}
+                                  alt=""
+                                />
+                              </div>
+                            </>
+                          )
+                        })
                         : ''}
 
                       {image.preview.length >= 3 ? (
                         ''
                       ) : (
-                        <>
-                          <label htmlFor="upload-button">
-                            <div className="commentImgPlus">
-                              <IconContext.Provider
-                                value={{
-                                  color: 'rgba(104, 142, 103, 0.8)',
-                                  size: '40px',
-                                }}
-                              >
-                                <BsPlusCircle />
-                              </IconContext.Provider>
-                            </div>
-                          </label>
+                          <>
+                            <label htmlFor="upload-button">
+                              <div className="commentImgPlus">
+                                <IconContext.Provider
+                                  value={{
+                                    color: 'rgba(104, 142, 103, 0.8)',
+                                    size: '40px',
+                                  }}
+                                >
+                                  <BsPlusCircle />
+                                </IconContext.Provider>
+                              </div>
+                            </label>
 
-                          <input
-                            type="file"
-                            id="upload-button"
-                            style={{ display: 'none' }}
-                            onChange={handleChange}
-                            // ref={divRef}
-                            multiple
+                            <input
+                              type="file"
+                              id="upload-button"
+                              style={{ display: 'none' }}
+                              onChange={handleChange}
+                              // ref={divRef}
+                              multiple
                             // value={text}
-                          />
-                        </>
-                      )}
+                            />
+                          </>
+                        )}
                     </div>
                   </li>
                   <li>
-                    <p>輸入回覆:</p>
+                    <p>輸入評論:</p>
                     <textarea
                       className="form-control"
-                      id=""
+                      // id={commentData.orderId}
                       rows="6"
                       onChange={(index) => handleTextChange(index)}
-                      //  key={index}
+                    //  key={index}
                     ></textarea>
                   </li>
                 </ul>
                 <button
                   className="btn buttonstyle float-right mt-3"
                   type="submit"
-                  id="button-addon2"
+                  // id={commentData.orderId}
                   value="Submit"
-                  // onClick={()=>handleDelete(index)}
-                  // onClick={handleUpload}
-                  // onClick={()=>{setAccount("")}}
+                // onClick={()=>handleDelete(index)}
+                // onClick={handleUpload}
+                // onClick={()=>{setAccount("")}}
                 >
                   提交評論
                 </button>
