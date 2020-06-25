@@ -4,18 +4,37 @@ import '../../styles/mContent/usercoupon.scss'
 import Swal from 'sweetalert2'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { getUserCouponDetaiAsync } from '../../actions/coupon/getCoupon'
+import {
+  getUserCouponDetaiAsync,
+  addUserCouponDataAsync,
+} from '../../actions/coupon/getCoupon'
 
 function UserCoupon(props) {
-  // console.log('10行', window.location.pathname.indexOf('available'))
   const { userCouponData, getUserCouponDetaiAsync } = props
+  const { adduserCouponData, addUserCouponDataAsync } = props
+  const memberId = 2
+  const [discountCode, setdiscountCode] = useState([])
   useEffect(() => {
     getUserCouponDetaiAsync()
+    addUserCouponDataAsync()
   }, [])
+
   console.log('uCoupon-props', props)
 
   console.log('userCouponData', userCouponData)
   console.log('userCouponData.coupon123', userCouponData[0])
+
+  const addGiviData = async () => {
+    const GiviFormData = {
+      memberId,
+      discountCode,
+    }
+    console.log('GiviFormData', GiviFormData)
+    props.addUserCouponDataAsync(GiviFormData)
+  }
+  console.log('discountCode', discountCode)
+  console.log('adduserCouponData', adduserCouponData)
+
   let couponList = userCouponData.map((item) => {
     return (
       <div className="tab-pane">
@@ -53,15 +72,21 @@ function UserCoupon(props) {
             <h2 className="usertitle">我的優惠券</h2>
             <div className="input-group mb-3 mt-4 input-container mx-auto">
               <input
+                name="addCode"
                 type="text"
                 className="form-control"
                 placeholder="請輸入優惠碼"
+                onChange={(event) => setdiscountCode(event.target.value)}
               />
+              <input name="memberId" type="hidden" value="2"></input>
               <div className="input-group-append">
                 <button
                   className="btn buttonstyle"
                   type="submit"
                   id="button-addon2"
+                  onClick={() => {
+                    addGiviData()
+                  }}
                 >
                   兌換
                 </button>
@@ -113,6 +138,9 @@ function UserCoupon(props) {
                 className="btn buttonstyle"
                 type="submit"
                 id="button-addon2"
+                onClick={() => {
+                  addGiviData()
+                }}
               >
                 兌換
               </button>
@@ -144,9 +172,15 @@ function UserCoupon(props) {
   )
 }
 const couponStateToProps = (store) => {
-  return { userCouponData: store.couponReducer.userCouponData }
+  return {
+    userCouponData: store.couponReducer.userCouponData,
+    adduserCouponData: store.couponReducer.adduserCouponData,
+  }
 }
 
 export default withRouter(
-  connect(couponStateToProps, { getUserCouponDetaiAsync })(UserCoupon)
+  connect(couponStateToProps, {
+    getUserCouponDetaiAsync,
+    addUserCouponDataAsync,
+  })(UserCoupon)
 )
