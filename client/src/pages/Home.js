@@ -16,7 +16,7 @@ import activity from '../images/home/activity-test.jpg'
 function Home(props) {
   //搜尋bar切換狀態 0=地點 1=分類 2=時間
   const [searchbar, setsearchbar] = useState(0)
-  const [heart,setHeart]=useState(false)
+  const [heart, setHeart] = useState(false)
   // console.log(searchbar)
 
   //地點搜尋bar
@@ -119,7 +119,7 @@ function Home(props) {
   const localbtnChangeClass = searchbar == 0 ? 'btn active' : 'btn'
   const activenamebtnChangeClass = searchbar == 1 ? 'btn active' : 'btn'
   const timebtnChangeClass = searchbar == 2 ? 'btn active' : 'btn'
-  const wishChangeClass = heart  == true?  'heart':''
+  const wishChangeClass = heart == true ? 'heart' : ''
   //輪播-精選
   var activitys = {
     arrows: true,
@@ -249,9 +249,12 @@ function Home(props) {
                 <div className="activity-main-cont">
                   <div className="activity-picture">
                     <div className="activity-follow">
-                      <FaHeart onClick={()=>{
-                        setHeart(!heart)
-                      }} className={wishChangeClass}/>
+                      <FaHeart
+                        onClick={() => {
+                          setHeart(!heart)
+                        }}
+                        className={wishChangeClass}
+                      />
                     </div>
                     <img src={activity} />
                   </div>
