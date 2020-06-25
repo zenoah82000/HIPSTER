@@ -25,6 +25,11 @@ function AsideBar(props) {
   // }
 
   const { productCatogryData, getProductCategoryAsync } = props
+  const [activeClass, setActiveClass] = useState(false)
+
+  const activeClassName = activeClass
+    ? 'checkbox-dropdown-list active'
+    : 'checkbox-dropdown-list'
 
   useEffect(() => {
     getProductCategoryAsync()
@@ -53,15 +58,21 @@ function AsideBar(props) {
       return (
         <>
           <div>
-            <div className="drop-title" key={index} dataValue={index}>
+            <div
+              key={item.categoryName}
+              className="drop-title"
+              onClick={() => {
+                setActiveClass(!activeClass)
+              }}
+            >
               <h5>{item.categoryName}</h5>
             </div>
-            <ul className="checkbox-dropdown-list active">
+            <ul className={activeClassName} key={item.categoryId}>
               {productCatogryData.map((category, i) => {
                 if (category.categoryParentId === item.categoryId) {
                   return (
                     <>
-                      <li className="checkbox" key={i} dataValue={i}>
+                      <li className="checkbox" key={category.categoryName}>
                         <i className="far fa-square"></i>
                         {category.categoryName}
                       </li>
@@ -75,7 +86,7 @@ function AsideBar(props) {
       )
     }
   })
-  console.log(display)
+  // console.log(display)
 
   return (
     <>
@@ -93,16 +104,16 @@ function AsideBar(props) {
         <div className="aside-wrapper-filter-box">
           <h3>導覽語言</h3>
           <ul className="checkbox-dropdown-list active">
-            <li className="checkbox px-0">
+            <li className="checkbox px-0" key="all">
               <i className="far fa-square"></i>全部
             </li>
-            <li className="checkbox px-0">
+            <li className="checkbox px-0" key="Chinese">
               <i className="far fa-square"></i>中文
             </li>
-            <li className="checkbox px-0">
+            <li className="checkbox px-0" key="English">
               <i className="far fa-square"></i>English
             </li>
-            <li className="checkbox px-0">
+            <li className="checkbox px-0" key="Japanese">
               <i className="far fa-square"></i>日本語
             </li>
           </ul>
@@ -110,16 +121,16 @@ function AsideBar(props) {
         <div className="aside-wrapper-filter-box">
           <h3>行程時間</h3>
           <ul className="checkbox-dropdown-list active">
-            <li className="checkbox px-0">
+            <li className="checkbox px-0" key="0-1">
               <i className="far fa-square"></i> 0 - 1 小時
             </li>
-            <li className="checkbox px-0">
+            <li className="checkbox px-0" key="1-3">
               <i className="far fa-square"></i> 1 - 3 小時
             </li>
-            <li className="checkbox px-0">
+            <li className="checkbox px-0" key="3-5">
               <i className="far fa-square"></i> 3 - 5 小時
             </li>
-            <li className="checkbox px-0">
+            <li className="checkbox px-0" key="5++">
               <i className="far fa-square"></i> 5 小時以上
             </li>
           </ul>
@@ -134,11 +145,6 @@ function AsideBar(props) {
 const mapStateToProps = (store) => {
   return { productCatogryData: store.productReducer.productCatogryData }
 }
-
-// 綁定store的dispatch方法到這個元件的props
-// const mapDispatchToProps = (dispatch) => {
-//   return bindActionCreators({ addValue, minusValue }, dispatch)
-// }
 
 // 高階元件的樣式，必要的
 export default connect(mapStateToProps, {
