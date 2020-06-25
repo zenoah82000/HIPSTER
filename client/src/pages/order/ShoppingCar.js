@@ -11,6 +11,7 @@ import { memberCheckOutAsync } from '../../actions/order/order_Actions'
 
 //確認框
 import Swal from 'sweetalert2'
+import { Modal, Button, Form } from 'react-bootstrap'
 
 import '../../styles/ShoppingCar.scss'
 
@@ -20,11 +21,45 @@ import CouponAllData from '../../components/coupon/CouponAllData'
 function ShoppingCar(props) {
   const { mycart, buyerinfo,deleteCart, sum, userSuccess } = props
   let checkdiv
+  console.log(mycart)
+
+  //請先登入視窗
+  const [login, setLogin] = useState(false)
+  //結帳視窗
+  const [checkoutok, setCheckoutok] = useState(false)
+  
+
+   //請登入視窗
+   function Checklogin(props) {
+    return (
+      <Modal
+        className="SignOk"
+        {...props}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Body className="SignOk-bg">
+          <p className="SignOk-title">請先登入</p>
+          <div
+            className="SignOkbtn"
+            onClick={() => {
+              setLogin(false)
+            }}
+          >
+            確認
+          </div>
+        </Modal.Body>
+      </Modal>
+    )
+  }
+  //結帳視窗
+  
   //前往結帳，送出訂單
   const checkOut = () => {
     //判斷是否登入
     if (!userSuccess) {
-      alert('請登入')
+      setLogin(true)
     } else if (mycart == null || mycart.length < 1) {
       Swal.fire({
         // title: 'Error!',
@@ -132,6 +167,7 @@ function ShoppingCar(props) {
 
   return (
     <>
+    <Checklogin show={login} onHide={() => setLogin(false)} />
       <div className="container">
         <h1 className="py-4">購物車</h1>
         {display}

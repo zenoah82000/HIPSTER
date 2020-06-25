@@ -9,7 +9,8 @@ import { BsExclamationCircle } from 'react-icons/bs'
 
 function paymentDetail(props) {
   //取得購物車的資料,個人資料
-  const { sum, buyerinfo } = props
+  const { sum, buyerinfo ,userSuccess} = props
+  console.log(userSuccess)
 
   //需要輸入的欄位
   let email, phone, lastName, firstName
@@ -36,7 +37,8 @@ function paymentDetail(props) {
   }
   //上一頁(返回購物車)
   const backPage = () => {
-    console.log(buyerinfo)
+    props.dispatch({type:'GET_CART',value:buyerinfo.product})
+    localStorage.setItem('cart',JSON.stringify(buyerinfo.product))
     props.history.push('/shoppingcar')
   }
   return (

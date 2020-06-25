@@ -37,6 +37,9 @@ import BlogAdd from './pages/blog/BlogAdd'
 
 import Swal from 'sweetalert2'
 
+//保護路由
+import ProtectedRoute from './utils/ProtectedRoute'
+
 function App(props) {
   // console.log(props)
 
@@ -48,14 +51,17 @@ function App(props) {
 
   // console.log(userid)
 
-  const { mycart } = props
+  const { mycart,wishlist } = props
   //取得購物車資料
   const localCart = JSON.parse(localStorage.getItem('cart')) || []
+  //取得願望清單資料
+  const localWishlist = JSON.parse(localStorage.getItem('wishlist')) || []
 
   //寫入購物車資料
   useEffect(() => {
     userlocalStorage.success ? setuserSuccess(true) : setuserSuccess(false)
     props.dispatch({ type: 'GET_CART', value: localCart })
+    props.dispatch({ type: 'GET_WISH', value: localWishlist })
   }, [])
   //加入購物車
   const addCart = (value) => {
@@ -96,7 +102,19 @@ function App(props) {
     }
     return total
   }
-
+  //加入願望清單
+  const addwish = (value) => {
+    const index = localWishlist.findIndex((item) => item.id == value.id)
+    if (index == -1) {
+      localWishlist.push(value)
+      props.dispatch({ type: 'GET_WISH', value: localWishlist })
+      localStorage.setItem('wishlist', JSON.stringify(localWishlist))
+    } else {
+      localWishlist[index].amount += 1
+      props.dispatch({ type: 'GET_WISH', value: localWishlist })
+      localStorage.setItem('wishlist', JSON.stringify(localWishlist))
+    }
+  }
   return (
     <Router>
       <>
@@ -146,24 +164,29 @@ function App(props) {
           <Route path="/map">
             <Map />
           </Route>
-          <Route path="/paymentDetail">
-            <PaymentDetail sum={sum} />
-          </Route>
-          <Route path="/paymentFinish">
-            <PaymentFinish />
-          </Route>
-          <Route path="/paymentType">
-            <PaymentType sum={sum} />
-          </Route>
+          
           <Route path="/memberuser">
             <MemberUser />
           </Route>
+          {/* 保護路由 */}
+          <Route path="/paymentDetail">
+            <PaymentDetail sum={sum} userSuccess={userSuccess}/>
+          </Route>
+          <Route path="/paymentFinish">
+            <PaymentFinish userSuccess={userSuccess}/>
+          </Route>
+          <Route path="/paymentType">
+            <PaymentType sum={sum} userSuccess={userSuccess}/>
+          </Route>
+
           <Route exact path="/">
             <Home />
           </Route>
           <Route exact path="*">
             <NotFoundPage />
           </Route>
+
+          
         </Switch>
 
         <Myfooter />
@@ -174,6 +197,7 @@ function App(props) {
 const mapStateToProps = (store) => {
   return {
     mycart: store.orderReducer.cartData,
+    wishlist:store.orderReducer.wishData,
   }
 }
 const mapDispatchToProps = null
