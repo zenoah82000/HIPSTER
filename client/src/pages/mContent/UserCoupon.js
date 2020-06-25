@@ -16,6 +16,8 @@ function UserCoupon(props) {
   const [discountCode, setdiscountCode] = useState([])
   useEffect(() => {
     getUserCouponDetaiAsync()
+  }, [userCouponData])
+  useEffect(() => {
     addUserCouponDataAsync()
   }, [])
 
