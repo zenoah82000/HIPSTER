@@ -48,14 +48,17 @@ function App(props) {
 
   // console.log(userid)
 
-  const { mycart } = props
+  const { mycart,wishlist } = props
   //取得購物車資料
   const localCart = JSON.parse(localStorage.getItem('cart')) || []
+  //取得願望清單資料
+  const localWishlist = JSON.parse(localStorage.getItem('wishlist')) || []
 
   //寫入購物車資料
   useEffect(() => {
     userlocalStorage.success ? setuserSuccess(true) : setuserSuccess(false)
     props.dispatch({ type: 'GET_CART', value: localCart })
+    props.dispatch({ type: 'GET_WISH', value: localWishlist })
   }, [])
   //加入購物車
   const addCart = (value) => {
@@ -97,6 +100,25 @@ function App(props) {
     return total
   }
 
+  //刪除願望清單
+  const deleteWishlist = (id) => {
+    Swal.fire({
+      text: '是否刪除該商品?',
+      icon: 'warning',
+      confirmButtonText: '確定',
+      showCancelButton: true,
+      cancelButtonText: '取消',
+    }).then((result) => {
+      if (result.value) {
+        const index = wishlist.findIndex((item) => item.id === id)
+        if (index !== -1) {
+          localWishlist.splice(index, 1)
+          props.dispatch({type:'GET_WISH',value:localWishlist})
+          localStorage.setItem('wishlist', JSON.stringify(localWishlist))
+        }
+      }
+    })
+  }
   return (
     <Router>
       <>
@@ -174,6 +196,7 @@ function App(props) {
 const mapStateToProps = (store) => {
   return {
     mycart: store.orderReducer.cartData,
+    wishlist:store.orderReducer.wishData,
   }
 }
 const mapDispatchToProps = null
