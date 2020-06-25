@@ -37,6 +37,9 @@ import BlogAdd from './pages/blog/BlogAdd'
 
 import Swal from 'sweetalert2'
 
+//保護路由
+import ProtectedRoute from './utils/ProtectedRoute'
+
 function App(props) {
   // console.log(props)
 
@@ -100,25 +103,7 @@ function App(props) {
     return total
   }
 
-  //刪除願望清單
-  const deleteWishlist = (id) => {
-    Swal.fire({
-      text: '是否刪除該商品?',
-      icon: 'warning',
-      confirmButtonText: '確定',
-      showCancelButton: true,
-      cancelButtonText: '取消',
-    }).then((result) => {
-      if (result.value) {
-        const index = wishlist.findIndex((item) => item.id === id)
-        if (index !== -1) {
-          localWishlist.splice(index, 1)
-          props.dispatch({type:'GET_WISH',value:localWishlist})
-          localStorage.setItem('wishlist', JSON.stringify(localWishlist))
-        }
-      }
-    })
-  }
+  
   return (
     <Router>
       <>
@@ -168,24 +153,29 @@ function App(props) {
           <Route path="/map">
             <Map />
           </Route>
-          <Route path="/paymentDetail">
-            <PaymentDetail sum={sum} />
-          </Route>
-          <Route path="/paymentFinish">
-            <PaymentFinish />
-          </Route>
-          <Route path="/paymentType">
-            <PaymentType sum={sum} />
-          </Route>
+          
           <Route path="/memberuser">
             <MemberUser />
           </Route>
+          {/* 保護路由 */}
+          <Route path="/paymentDetail">
+            <PaymentDetail sum={sum} userSuccess={userSuccess}/>
+          </Route>
+          <Route path="/paymentFinish">
+            <PaymentFinish userSuccess={userSuccess}/>
+          </Route>
+          <Route path="/paymentType">
+            <PaymentType sum={sum} userSuccess={userSuccess}/>
+          </Route>
+
           <Route exact path="/">
             <Home />
           </Route>
           <Route exact path="*">
             <NotFoundPage />
           </Route>
+
+          
         </Switch>
 
         <Myfooter />
