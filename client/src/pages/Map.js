@@ -23,14 +23,38 @@ class Map extends React.Component {
     console.log(props)
   }
 
+  // 取得目前位置
+  getLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(this.updateLocation);
+    }
+  }
+
+  // 取得目前位置後插上marker並且將現在位置設定為中心點
+  updateLocation = (position) => {
+    this.setState(
+      {
+        viewport: {
+          center: [position.coords.latitude, position.coords.longitude],
+          zoom: 15,
+        }
+      }
+    )
+  }
+
+
+
   onClickReset = () => {
-    this.setState({
-      viewport: {
-        center: [25.0338438 + 0.0000000000001, 121.54335 + 0.0000000000001],
-        zoom: 20,
-      },
-      clicked: false,
-    })
+    
+    // this.setState({
+    //   viewport: {
+    //     center: [25.0338438 + 0.0000000000001, 121.54335 + 0.0000000000001],
+    //     zoom: 20,
+    //   },
+    //   clicked: false,
+    // })
+    this.getLocation()
+    console.log(this.state.viewport)
   }
 
   cardClickReset = (clickData) => {

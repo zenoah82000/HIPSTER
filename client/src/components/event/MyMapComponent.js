@@ -9,8 +9,8 @@ import { FaRegCalendarCheck } from 'react-icons/fa'
 import { GiCoffeeCup } from 'react-icons/gi'
 
 export const pointerIcon = new L.Icon({
-  iconUrl: require('../../images/marker.svg'),
-  iconRetinaUrl: require('../../images/marker.svg'),
+  iconUrl: require('../../images/myplace.svg'),
+  iconRetinaUrl: require('../../images/myplace.svg'),
   iconAnchor: [5, 55],
   popupAnchor: [10, -44],
   iconSize: [50, 55],
@@ -252,7 +252,7 @@ export default class ViewportExample extends Component {
             icon={pointerIcon}
             className="mylocation"
             //  ref={this.openPopup}
-            position={[25.0338438, 121.54335]}
+            position={viewport.center}
           >
             {/* <Popup  >
                      我的位置

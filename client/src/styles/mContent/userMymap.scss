@@ -181,6 +181,11 @@
 }
 
 .object-fit{
-  // width: 100%;
+  width: 100%;
   object-fit: contain;
+}
+
+.cardBorder{
+  border-top:1px solid #cfcccc;
+  margin-top: 15px;
 }
