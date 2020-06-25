@@ -102,8 +102,19 @@ function App(props) {
     }
     return total
   }
-
-  
+  //加入願望清單
+  const addwish = (value) => {
+    const index = localWishlist.findIndex((item) => item.id == value.id)
+    if (index == -1) {
+      localWishlist.push(value)
+      props.dispatch({ type: 'GET_WISH', value: localWishlist })
+      localStorage.setItem('wishlist', JSON.stringify(localWishlist))
+    } else {
+      localWishlist[index].amount += 1
+      props.dispatch({ type: 'GET_WISH', value: localWishlist })
+      localStorage.setItem('wishlist', JSON.stringify(localWishlist))
+    }
+  }
   return (
     <Router>
       <>

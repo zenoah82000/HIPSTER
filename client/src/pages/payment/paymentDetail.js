@@ -37,7 +37,8 @@ function paymentDetail(props) {
   }
   //上一頁(返回購物車)
   const backPage = () => {
-    console.log(buyerinfo)
+    props.dispatch({type:'GET_CART',value:buyerinfo.product})
+    localStorage.setItem('cart',JSON.stringify(buyerinfo.product))
     props.history.push('/shoppingcar')
   }
   return (
