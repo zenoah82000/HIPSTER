@@ -10,11 +10,6 @@ import {
 } from 'react-icons/fa'
 import Slider from 'react-slick'
 
-import Title from '../images/home/title.png'
-import abouticon1 from '../images/home/about-icon1.png'
-import abouticon2 from '../images/home/about-icon2.png'
-import abouticon3 from '../images/home/about-icon3.png'
-import abouticon4 from '../images/home/about-icon4.png'
 import activity from '../images/home/activity-test.jpg'
 
 function Home(props) {
