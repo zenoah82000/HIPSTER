@@ -23,8 +23,7 @@ function Home(props) {
   useEffect(() => {
     homeProductEndlist()
   }, [])
-  // console.log(ProductEndlist[0].productId)
-
+  console.log({ ...ProductEndlist[0] }.productId)
   //找出倒數結束5筆商品
   async function homeProductEndlist(item) {
     // 注意資料格式要設定，伺服器才知道是json格式
