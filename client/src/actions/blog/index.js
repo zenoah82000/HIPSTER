@@ -82,7 +82,7 @@ export const addBlogContentData = payload => ({
 })
 
 export const addBlogContentDataAsync = (contentData, callback) => {
-  console.log('contentData',contentData)
+  console.log(contentData)
   return async dispatch => {
     const request = new Request('http://localhost:5000/blogadd', {
       method: 'POST',

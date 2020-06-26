@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-
 import '../styles/home.scss'
 import {
   FaSearch,
@@ -11,31 +10,71 @@ import {
 } from 'react-icons/fa'
 import Slider from 'react-slick'
 
-import Title from '../images/home/title.png'
-import abouticon1 from '../images/home/about-icon1.png'
-import abouticon2 from '../images/home/about-icon2.png'
-import abouticon3 from '../images/home/about-icon3.png'
-import abouticon4 from '../images/home/about-icon4.png'
 import activity from '../images/home/activity-test.jpg'
 
 function Home(props) {
   //搜尋bar切換狀態 0=地點 1=分類 2=時間
   const [searchbar, setsearchbar] = useState(0)
-  const [heart,setHeart]=useState(false)
-  // console.log(searchbar)
+  //商品區塊>關注
+  const [heart, setHeart] = useState(false)
+
+  const [ProductEndlist, setProductEndlist] = useState('')
+
+  useEffect(() => {
+    homeProductEndlist()
+  }, [])
+  console.log({ ...ProductEndlist[0] }.productId)
+  //找出倒數結束5筆商品
+  async function homeProductEndlist(item) {
+    // 注意資料格式要設定，伺服器才知道是json格式
+    const request = new Request('http://localhost:5000/homeproductendlist/', {
+      method: 'POST',
+      body: JSON.stringify(item),
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }),
+    })
+    const response = await fetch(request)
+    const data = await response.json()
+    // console.log('5筆商品', data.length)
+    setProductEndlist(data)
+  }
 
   //地點搜尋bar
   const location = (
     <div id="location-search" className="search-bar">
       <select id="city">
-        <option>台北市</option>
-        <option>台中市</option>
-        <option>高雄市</option>
+        <option>新北市</option>
+        <option>臺北市</option>
+        <option>基隆市</option>
+        <option>連江縣</option>
+        <option>宜蘭縣</option>
+        <option>新竹市</option>
+        <option>新竹縣</option>
+        <option>桃園市</option>
+        <option>苗栗縣</option>
+        <option>臺中市</option>
+        <option>彰化縣</option>
+        <option>南投縣</option>
+        <option>嘉義市</option>
+        <option>嘉義縣</option>
+        <option>雲林縣</option>
+        <option>臺南市</option>
       </select>
       <select id="area">
-        <option>內湖區</option>
+        <option>請選擇</option>
         <option>中正區</option>
         <option>大同區</option>
+        <option>中山區</option>
+        <option>松山區</option>
+        <option>大安區</option>
+        <option>信義區</option>
+        <option>士林區</option>
+        <option>北投區</option>
+        <option>內湖區</option>
+        <option>南港區</option>
+        <option>文山區</option>
       </select>
       <input
         type="text"
@@ -102,7 +141,9 @@ function Home(props) {
   const localbtnChangeClass = searchbar == 0 ? 'btn active' : 'btn'
   const activenamebtnChangeClass = searchbar == 1 ? 'btn active' : 'btn'
   const timebtnChangeClass = searchbar == 2 ? 'btn active' : 'btn'
-  const wishChangeClass = heart  == true?  'heart':''
+
+  //商品區塊>關注
+  const wishChangeClass = heart == true ? 'heart' : ''
   //輪播-精選
   var activitys = {
     arrows: true,
@@ -123,12 +164,21 @@ function Home(props) {
     slidesToScroll: 1,
   }
 
+  // const display = ProductEndlist.map((item, index) => {
+  //   return (
+  //     <>
+  //       <h1>{item.productName}</h1>
+  //     </>
+  //   )
+  // })
+  // console.log(display)
+
   return (
     <>
       <div className="banner">
         <div className="video">
           <video
-            src="http://127.0.0.1:3000/test.mp4"
+            // src="http://localhost:5000/images/home/test.mp4"
             loop
             autoPlay
             muted
@@ -136,7 +186,7 @@ function Home(props) {
         </div>
         <div className="container">
           <div className="banner-title">
-            <img src={Title} />
+            <img src="http://localhost:5000/images/home/title.png" />
           </div>
           <div className="searchbar-chang-btn">
             <div className="btnList">
@@ -180,6 +230,7 @@ function Home(props) {
             <span className="txt">關於我們</span>
             <span className="line"></span>
           </div>
+
           <p className="text-center">
             文青地圖致力於提供最優質的手作課程與展覽活動，透過我們所提供的快速搜尋服務，讓繁忙的
             <br />
@@ -189,28 +240,28 @@ function Home(props) {
           <div className="about-main">
             <div className="about-main-cont">
               <div className="about-icon">
-                <img src={abouticon1}></img>
+                <img src="http://localhost:5000/images/home/about-icon1.png"></img>
               </div>
               <div className="about-title">最優質的活動資訊</div>
               <p>發掘最棒的展覽資訊、手作課程與最難忘的活動體驗！</p>
             </div>
             <div className="about-main-cont">
               <div className="about-icon">
-                <img src={abouticon2}></img>
+                <img src="http://localhost:5000/images/home/about-icon2.png"></img>
               </div>
               <div className="about-title">方便的地圖探索</div>
               <p>提供分類、定位搜尋，輕鬆顯示所有附近的活動資訊！</p>
             </div>
             <div className="about-main-cont">
               <div className="about-icon">
-                <img src={abouticon3}></img>
+                <img src="http://localhost:5000/images/home/about-icon3.png"></img>
               </div>
               <div className="about-title">即時的評價訊息</div>
               <p>我們鼓勵所有參與過活動的朋友們留下最誠實的評價！</p>
             </div>
             <div className="about-main-cont">
               <div className="about-icon">
-                <img src={abouticon4}></img>
+                <img src="http://localhost:5000/images/home/about-icon4.png"></img>
               </div>
               <div className="about-title">安全的購買系統</div>
               <p>加密付費及憑證，以安心的方式，預訂精彩的活動！</p>
@@ -232,9 +283,12 @@ function Home(props) {
                 <div className="activity-main-cont">
                   <div className="activity-picture">
                     <div className="activity-follow">
-                      <FaHeart onClick={()=>{
-                        setHeart(!heart)
-                      }} className={wishChangeClass}/>
+                      <FaHeart
+                        onClick={() => {
+                          setHeart(!heart)
+                        }}
+                        className={wishChangeClass}
+                      />
                     </div>
                     <img src={activity} />
                   </div>
@@ -366,7 +420,7 @@ function Home(props) {
                 </p>
                 <div className="countdown-main-cont">
                   <div className="countdown-picture">
-                    <div className="countdown-follow">
+                    <div className="countdown-follow active">
                       <FaHeart />
                     </div>
                     <img src={activity} />
