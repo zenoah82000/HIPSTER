@@ -49,6 +49,8 @@ function UserOrder() {
       }
     }, 500)
   }, [orderlist])
+
+  //商品展開判斷
   //把資料分頁
   const getdatapage = ()=>{
     let perPage = orderlist.perPage
@@ -86,7 +88,7 @@ function UserOrder() {
                 <div className="card-body order-body">
                   {orderlist.orderdetails
                     .filter((value) => value.orderId == item.orderId)
-                    .map((value,index) => {
+                    .map((value) => {
                       return (
                         <>
                           <div className="d-flex product-box border-bottom">
