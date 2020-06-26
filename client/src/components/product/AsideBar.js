@@ -26,6 +26,7 @@ function AsideBar(props) {
 
   const { productCatogryData, getProductCategoryAsync } = props
   const [activeClass, setActiveClass] = useState(false)
+  const [categorySection, setCategorySection] = useState('')
 
   const activeClassName = activeClass
     ? 'checkbox-dropdown-list active'
@@ -63,11 +64,19 @@ function AsideBar(props) {
               className="drop-title"
               onClick={() => {
                 setActiveClass(!activeClass)
+                setCategorySection(item.categoryName)
               }}
             >
               <h5>{item.categoryName}</h5>
             </div>
-            <ul className={activeClassName} key={item.categoryId}>
+            <ul
+              className={
+                item.categoryName === categorySection
+                  ? activeClassName
+                  : 'checkbox-dropdown-list'
+              }
+              key={item.categoryId}
+            >
               {productCatogryData.map((category, i) => {
                 if (category.categoryParentId === item.categoryId) {
                   return (
