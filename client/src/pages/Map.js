@@ -9,6 +9,7 @@ import MyMapComponent from '../components/event/MyMapComponent'
 
 class Map extends React.Component {
   constructor(props) {
+    
     super(props)
     this.state = {
       viewport: {
@@ -19,28 +20,29 @@ class Map extends React.Component {
       cafeActive: true,
       clicked: false,
       clickData: [],
+      myViewport:this.props.myViewport
     }
-    console.log(props)
+console.log(this.props.myViewport)
   }
 
-  // 取得目前位置
-  getLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(this.updateLocation);
-    }
-  }
+  // // 取得目前位置
+  // getLocation = () => {
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition(this.updateLocation);
+  //   }
+  // }
 
-  // 取得目前位置後插上marker並且將現在位置設定為中心點
-  updateLocation = (position) => {
-    this.setState(
-      {
-        viewport: {
-          center: [position.coords.latitude, position.coords.longitude],
-          zoom: 15,
-        }
-      }
-    )
-  }
+  // // 取得目前位置後插上marker並且將現在位置設定為中心點
+  // updateLocation = (position) => {
+  //   this.setState(
+  //     {
+  //       viewport: {
+  //         center: [position.coords.latitude, position.coords.longitude],
+  //         zoom: 15,
+  //       }
+  //     }
+  //   )
+  // }
 
 
 

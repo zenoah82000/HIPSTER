@@ -40,6 +40,23 @@ import Swal from 'sweetalert2'
 function App(props) {
   // console.log(props)
 
+
+//地圖定位
+const [myViewport, setMyViewport] = useState([])
+const getLocation = () => {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(updateLocation);
+  }
+}
+const updateLocation = (position) => {
+  console.log(position.coords.latitude, position.coords.longitude)
+  setMyViewport([position.coords.latitude, position.coords.longitude])
+console.log(myViewport)
+}
+getLocation ()
+
+
+
   //判斷使用者是否已登入
   const [userSuccess, setuserSuccess] = useState(false)
   const userlocalStorage = JSON.parse(localStorage.getItem('member')) || []
@@ -97,7 +114,11 @@ function App(props) {
     return total
   }
 
+
   return (
+
+
+
     <Router>
       <>
         <Mynavbar
@@ -143,9 +164,10 @@ function App(props) {
               userSuccess={userSuccess}
             />
           </Route>
-          <Route path="/map">
-            <Map />
+           <Route path="/map">        
+            <Map myViewport={myViewport}/>
           </Route>
+          
           <Route path="/paymentDetail">
             <PaymentDetail sum={sum} />
           </Route>
