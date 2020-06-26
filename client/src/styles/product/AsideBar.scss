@@ -26,8 +26,7 @@
       padding: 10px 20px;
       transition: 0.15s ease-in-out 0s;
 
-      &:hover,
-      &.active {
+      &:hover {
         background-color: rgba(104, 142, 103, 0.15);
       }
 
@@ -43,15 +42,15 @@
     .checkbox-dropdown-list {
       display: none;
       list-style: none;
+      height: 0;
       overflow: hidden;
       font-size: 14px;
       line-height: 21px;
-      transition: .5s;
-      
+
       &.active {
         display: block;
-        margin-bottom: 15px;       
-        
+        height: unset;
+        margin-bottom: 15px;
       }
 
       .checkbox {
@@ -62,12 +61,9 @@
 
         & > .fa-square {
           transform: scale(1.1);
-          margin-right: 5px;
-          color: #684b386e;
         }
-        
-        &:hover .fa-square{
-          color: #684b38;
+        i {
+          width: 20px;
         }
       }
     }
