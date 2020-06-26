@@ -39,6 +39,7 @@ function UserContent() {
   useEffect(() => {
     memberData(userId)
   }, [])
+  console.log(mdata)
 
   //抓取該會員全部資料
   async function memberData(item) {

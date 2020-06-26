@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-
 import '../styles/home.scss'
 import {
   FaSearch,
@@ -10,14 +9,37 @@ import {
   FaStar,
 } from 'react-icons/fa'
 import Slider from 'react-slick'
-
 import activity from '../images/home/activity-test.jpg'
 
 function Home(props) {
   //搜尋bar切換狀態 0=地點 1=分類 2=時間
   const [searchbar, setsearchbar] = useState(0)
+  //商品區塊>關注
   const [heart, setHeart] = useState(false)
-  // console.log(searchbar)
+
+  const [ProductEndlist, setProductEndlist] = useState('')
+
+  useEffect(() => {
+    homeProductEndlist()
+  }, [])
+  // console.log(ProductEndlist[0].productId)
+
+  //找出倒數結束5筆商品
+  async function homeProductEndlist(item) {
+    // 注意資料格式要設定，伺服器才知道是json格式
+    const request = new Request('http://localhost:5000/homeproductendlist/', {
+      method: 'POST',
+      body: JSON.stringify(item),
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }),
+    })
+    const response = await fetch(request)
+    const data = await response.json()
+    // console.log('5筆商品', data.length)
+    setProductEndlist(data)
+  }
 
   //地點搜尋bar
   const location = (
@@ -119,6 +141,8 @@ function Home(props) {
   const localbtnChangeClass = searchbar == 0 ? 'btn active' : 'btn'
   const activenamebtnChangeClass = searchbar == 1 ? 'btn active' : 'btn'
   const timebtnChangeClass = searchbar == 2 ? 'btn active' : 'btn'
+
+  //商品區塊>關注
   const wishChangeClass = heart == true ? 'heart' : ''
   //輪播-精選
   var activitys = {
@@ -139,6 +163,15 @@ function Home(props) {
     slidesToShow: 4,
     slidesToScroll: 1,
   }
+
+  // const display = ProductEndlist.map((item, index) => {
+  //   return (
+  //     <>
+  //       <h1>{item.productName}</h1>
+  //     </>
+  //   )
+  // })
+  // console.log(display)
 
   return (
     <>
@@ -197,6 +230,7 @@ function Home(props) {
             <span className="txt">關於我們</span>
             <span className="line"></span>
           </div>
+
           <p className="text-center">
             文青地圖致力於提供最優質的手作課程與展覽活動，透過我們所提供的快速搜尋服務，讓繁忙的
             <br />
@@ -386,7 +420,7 @@ function Home(props) {
                 </p>
                 <div className="countdown-main-cont">
                   <div className="countdown-picture">
-                    <div className="countdown-follow">
+                    <div className="countdown-follow active">
                       <FaHeart />
                     </div>
                     <img src={activity} />
