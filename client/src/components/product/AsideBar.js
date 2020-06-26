@@ -3,6 +3,7 @@ import { Dropdown } from 'react-bootstrap'
 import Calendar from 'react-calendar'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
+import { Collapse } from '@material-ui/core'
 
 import '../../styles/product/AsideBar.scss'
 
@@ -27,6 +28,10 @@ function AsideBar(props) {
   const { productCatogryData, getProductCategoryAsync } = props
   const [activeClass, setActiveClass] = useState(false)
   const [categorySection, setCategorySection] = useState('')
+  const [checked, setChecked] = useState(false)
+  const handleChange = () => {
+    setChecked((prev) => !prev)
+  }
 
   const activeClassName = activeClass
     ? 'checkbox-dropdown-list active'
@@ -110,22 +115,24 @@ function AsideBar(props) {
           </Dropdown.Toggle>
           <Dropdown.Menu></Dropdown.Menu>
         </Dropdown>
-        <div className="aside-wrapper-filter-box">
+        <div className="aside-wrapper-filter-box" onClick={handleChange}>
           <h3>導覽語言</h3>
-          <ul className="checkbox-dropdown-list active">
-            <li className="checkbox px-0" key="all">
-              <i className="far fa-square"></i>全部
-            </li>
-            <li className="checkbox px-0" key="Chinese">
-              <i className="far fa-square"></i>中文
-            </li>
-            <li className="checkbox px-0" key="English">
-              <i className="far fa-square"></i>English
-            </li>
-            <li className="checkbox px-0" key="Japanese">
-              <i className="far fa-square"></i>日本語
-            </li>
-          </ul>
+          <Collapse in={checked} timeout={200}>
+            <ul className="checkbox-dropdown-list active">
+              <li className="checkbox px-0" key="all">
+                <i className="far fa-square"></i>全部
+              </li>
+              <li className="checkbox px-0" key="Chinese">
+                <i className="far fa-square"></i>中文
+              </li>
+              <li className="checkbox px-0" key="English">
+                <i className="far fa-square"></i>English
+              </li>
+              <li className="checkbox px-0" key="Japanese">
+                <i className="far fa-square"></i>日本語
+              </li>
+            </ul>
+          </Collapse>
         </div>
         <div className="aside-wrapper-filter-box">
           <h3>行程時間</h3>
