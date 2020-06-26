@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 
 import { Modal, Button, Form } from 'react-bootstrap'
+import Logo from '../images/home/logo.png'
+import loginiconf from '../images/home/login-f.png'
+import loginiconw from '../images/home/login-w.png'
+import loginicong from '../images/home/login-g.png'
+import loginicont from '../images/home/login-t.png'
 import { FaHeart, FaShoppingCart } from 'react-icons/fa'
 import { IoMdClose } from 'react-icons/io'
 
@@ -198,19 +203,19 @@ function Mynavbar(props) {
             <p className="communitylogin-title">使用社交平台帳號登入</p>
             <div className="communityicon">
               <div className="c-icon">
-                <img src="http://localhost:5000/images/home/login-f.png"></img>
+                <img src={loginiconf}></img>
                 <div className="icon-name">Facebook</div>
               </div>
               <div className="c-icon">
-                <img src="http://localhost:5000/images/home/login-g.png"></img>
+                <img src={loginicong}></img>
                 <div className="icon-name">Google</div>
               </div>
               <div className="c-icon">
-                <img src="http://localhost:5000/images/home/login-w.png"></img>
+                <img src={loginiconw}></img>
                 <div className="icon-name">微信</div>
               </div>
               <div className="c-icon">
-                <img src="http://localhost:5000/images/home/login-t.png"></img>
+                <img src={loginicont}></img>
                 <div className="icon-name">Twitter</div>
               </div>
             </div>
@@ -376,7 +381,7 @@ function Mynavbar(props) {
       <nav>
         <div className="navbar container ">
           <a href="/" className="logo">
-            <img src="http://localhost:5000/images/home/logo.png" />
+            <img src={Logo} />
           </a>
           <div className="burger none" id="burger">
             ☰

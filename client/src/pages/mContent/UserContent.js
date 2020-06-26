@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Form, Button, Col, Figure, Modal } from 'react-bootstrap'
+import { Form, Button, Col } from 'react-bootstrap'
 import '../../styles/mContent/usercontent.scss'
 
 function UserContent() {
@@ -7,8 +7,6 @@ function UserContent() {
   const [edit, setedit] = useState(false)
   //編輯下>切換生日輸入欄樣式
   const [brthdayedit, setbrthdayedit] = useState(false)
-
-  const [showUpdateOk, setshowUpdateOk] = useState(false)
 
   const userId = {
     memberId: JSON.parse(localStorage.getItem('member')).id,
@@ -31,17 +29,22 @@ function UserContent() {
     editmemberBirth,
     editmemberPhone,
     editmemberAddress,
+    editmemberMail,
     editmemberPwd,
-    editmemberImg,
     editAllData
 
-  //網頁仔入時啟動
+  // function datainput(){
+  //   (editmemberName.value == '')? memberName : editmemberName.value,
+  //   (editmemberGender.value == '')? memberGender : editmemberGender.value,
+  //   (editmemberBirth.value == '')? memberBirth : editmemberBirth.value,
+  //   (editmemberPhone.value == '') ? memberPhone : editmemberPhone.value,
+  //   (editmemberAddress.value == '') ? memberAddress : editmemberAddress.value,
+  // }
+
   useEffect(() => {
     memberData(userId)
   }, [])
-  console.log(mdata)
 
-  //抓取該會員全部資料
   async function memberData(item) {
     // 注意資料格式要設定，伺服器才知道是json格式
     const request = new Request('http://localhost:5000/getmemberdata/', {
@@ -57,36 +60,20 @@ function UserContent() {
     setmdata(data)
   }
 
-  //更新會員資料
-  async function memberUpdate(item) {
-    // 注意資料格式要設定，伺服器才知道是json格式
-    const request = new Request('http://localhost:5000/updatememberdata/', {
-      method: 'POST',
-      body: JSON.stringify(item),
-      headers: new Headers({
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      }),
-    })
-    const response = await fetch(request)
-    const data = await response.json()
-    console.log(data)
-  }
-
   const dataDisplay = (
     <>
-      <Figure>
-        <Figure.Image
-          className="memberimg"
-          alt="會員頭像"
-          src={`http://localhost:5000/images/member/${memberImg}`}
-        />
-      </Figure>
       <Form.Row>
         <Col sm={4}>
           <Form.Group controlId="displaymemberName">
             <Form.Label>會員名稱：</Form.Label>
             <Form.Text className="text-muted">{memberName}</Form.Text>
+            {/* <Form.Control
+              type="email"
+              id="username"
+              plaintext
+              readOnly
+              Value={memberName}
+            /> */}
           </Form.Group>
         </Col>
         <Col sm={4}>
@@ -146,26 +133,13 @@ function UserContent() {
 
   const editDisplay = (
     <>
-      <Figure className="Figurepic">
-        <Figure.Image
-          className="memberimg"
-          alt="會員頭像"
-          src={`http://localhost:5000/images/member/${memberImg}`}
-        />
-      </Figure>
-
-      <Form.File.Input
-        id="ControlFile1"
-        ref={(value) => (editmemberImg = value)}
-      />
-
       <Form.Row>
         <Col sm={4}>
           <Form.Group controlId="exampleForm.ControlInput1">
             <Form.Label>會員名稱：</Form.Label>
             <Form.Control
-              ref={(input) => (input == '' ? '' : (editmemberName = input))}
-              type="text"
+              ref={(input) => (editmemberName = input)}
+              type="email"
               id="editmemberName"
               placeholder={memberName}
             />
@@ -175,11 +149,11 @@ function UserContent() {
           <Form.Group controlId="exampleForm.ControlSelect1">
             <Form.Label>性別：</Form.Label>
             <Form.Control
-              ref={(input) => (editmemberGender = input)}
+              // ref={(input) => (editmemberGender = input)}
               id="editmemberGender"
               as="select"
+              defaultValue={memberGender}
             >
-              <option value={memberGender}>{memberGender}</option>
               <option value="男">男</option>
               <option value="女">女</option>
             </Form.Control>
@@ -193,15 +167,11 @@ function UserContent() {
                 <Form.Control
                   type="date"
                   id="editmemberBirth"
-                  defaultValue={memberBirth}
-                  ref={(input) =>
-                    input == '' ? memberBirth : (editmemberBirth = input)
-                  }
+                  ref={(input) => (editmemberBirth = input)}
                 />
               </>
             ) : (
               <Form.Control
-                ref={(value) => (editmemberBirth = value)}
                 type="text"
                 value={memberBirth}
                 onClick={() => {
@@ -218,7 +188,7 @@ function UserContent() {
           <Form.Group controlId="exampleForm.ControlInput1">
             <Form.Label>連絡電話：</Form.Label>
             <Form.Control
-              ref={(input) => (input == '' ? '' : (editmemberPhone = input))}
+              ref={(input) => (editmemberPhone = input)}
               type="text"
               placeholder={memberPhone}
               id="editmemberPhone"
@@ -229,7 +199,7 @@ function UserContent() {
           <Form.Group controlId="exampleForm.ControlInput1">
             <Form.Label>連絡地址：</Form.Label>
             <Form.Control
-              ref={(input) => (input == '' ? '' : (editmemberAddress = input))}
+              ref={(input) => (editmemberAddress = input)}
               type="text"
               placeholder={memberAddress}
               id="editmemberAddress"
@@ -248,7 +218,7 @@ function UserContent() {
           <Form.Group controlId="exampleForm.ControlInput1">
             <Form.Label>登入密碼：</Form.Label>
             <Form.Control
-              ref={(input) => (input == '' ? '' : (editmemberPwd = input))}
+              ref={(input) => (editmemberPwd = input)}
               type="text"
               id="editmemberPwd"
               placeholder="如未需更換，則不用填寫"
@@ -273,63 +243,23 @@ function UserContent() {
         type="button"
         onClick={() => {
           editAllData = {
-            memberId: JSON.parse(localStorage.getItem('member')).id,
-            memberName:
-              editmemberName.value == '' ? memberName : editmemberName.value,
-            memberGender: editmemberGender.value,
-            memberBirth:
-              editmemberBirth.value == '' ? memberBirth : editmemberBirth.value,
-            memberPhone:
-              editmemberPhone.value == '' ? memberPhone : editmemberPhone.value,
-            memberAddress:
-              editmemberAddress.value == ''
-                ? memberAddress
-                : editmemberAddress.value,
-            memberPwd:
-              editmemberPwd.value == '' ? memberPwd : editmemberPwd.value,
-            memberImg: memberImg,
+            memberName: editmemberName.value,
+            memberGender: editmemberGender,
+            memberBirth: editmemberBirth.value,
+            memberPhone: editmemberPhone.value,
+            memberAddress: editmemberAddress.value,
+            memberPwd: editmemberPwd.value,
           }
-          // console.log(editAllData)
-          // console.log(document.getElementById('ControlFile1').value)
-
-          memberUpdate(editAllData)
-          setshowUpdateOk(true)
+          console.log(editAllData)
         }}
       >
-        更新
+        送出
       </Button>
     </>
   )
-  //更新完成視窗
-  function UpdateOk(props) {
-    return (
-      <Modal
-        className="SignOk"
-        {...props}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Body className="SignOk-bg">
-          <p className="SignOk-title">更新成功</p>
-          <div
-            className="SignOkbtn"
-            onClick={() => {
-              memberData(userId)
-              setedit(false)
-              setshowUpdateOk(false)
-            }}
-          >
-            確認
-          </div>
-        </Modal.Body>
-      </Modal>
-    )
-  }
 
   return (
     <>
-      <UpdateOk show={showUpdateOk} onHide={() => setshowUpdateOk(false)} />
       <div className="contentBlock">
         <div className="contentTitle">會員資料</div>
 

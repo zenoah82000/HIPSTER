@@ -130,25 +130,6 @@ router.post('/loginmember', async (req, res, next) =>{
 })
 
 
-//更新會員資料
-  router.post('/updatememberdata', async (req, res, next) => {
-  console.log(req.body)
-  const memberId = req.body.memberId
-  const memberName = req.body.memberName
-  const memberGender = req.body.memberGender
-  const memberBirth = req.body.memberBirth
-  const memberPhone = req.body.memberPhone
-  const memberAddress = req.body.memberAddress
-  const memberPwd = req.body.memberPwd
-  const memberImg =  req.body.memberImg
-
-  const getMemberSql = "UPDATE `member` SET `memberName`=?,`memberGender`=?,`memberBirth`=?,`memberPhone`=?,`memberAddress`=?,`memberPwd`=?,`memberImg`=? WHERE  `memberId`=? "
-
-  const [r1] = await db.query(getMemberSql, [memberName,memberGender,memberBirth,memberPhone,memberAddress,memberPwd,memberImg,memberId]);
-  res.json(r1)
-})
-
-
 
 
 module.exports = router;
