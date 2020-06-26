@@ -26,38 +26,27 @@ function AsideBar(props) {
   // }
 
   const { productCatogryData, getProductCategoryAsync } = props
-  const [activeClass, setActiveClass] = useState(false)
-  const [categorySection, setCategorySection] = useState('')
+
+  const [activeClass, setActiveClass] = useState(true)
+  const [categorySection, setCategorySection] = useState([])
   const [checked, setChecked] = useState(false)
   const handleChange = () => {
     setChecked((prev) => !prev)
   }
 
-  const activeClassName = activeClass
-    ? 'checkbox-dropdown-list active'
-    : 'checkbox-dropdown-list'
+  async function AddcategorySection(category) {
+    if (categorySection.includes(category)) {
+      let index = categorySection.indexOf(category)
+      await categorySection.splice(index, 1)
+    } else {
+      await categorySection.push(category)
+    }
+    setCategorySection(categorySection)
+  }
 
   useEffect(() => {
     getProductCategoryAsync()
   }, [])
-
-  // console.log('props', props)
-  // console.log('productData', productData)
-  // let arr1 = []
-  // productCatogryData.forEach((item, index) => {
-  //   if (item.categoryParentId === 0) {
-  //     arr1.push(item)
-  //   } else {
-  //     arr1.splice(
-  //       arr1.findIndex(
-  //         (element) => element.categoryId === item.categoryParentId
-  //       ) + 1,
-  //       0,
-  //       item
-  //     )
-  //   }
-  // })
-  // console.log(arr1)
 
   const display = productCatogryData.map((item, index) => {
     if (item.categoryParentId === 0) {
@@ -69,15 +58,16 @@ function AsideBar(props) {
               className="drop-title"
               onClick={() => {
                 setActiveClass(!activeClass)
-                setCategorySection(item.categoryName)
+                AddcategorySection(item.categoryName)
+                console.log(categorySection)
               }}
             >
               <h5>{item.categoryName}</h5>
             </div>
             <ul
               className={
-                item.categoryName === categorySection
-                  ? activeClassName
+                categorySection.includes(item.categoryName)
+                  ? 'checkbox-dropdown-list active'
                   : 'checkbox-dropdown-list'
               }
               key={item.categoryId}
