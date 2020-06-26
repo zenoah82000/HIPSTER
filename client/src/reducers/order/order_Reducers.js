@@ -19,15 +19,6 @@ const cartData = (state = [], action) => {
       return state
   }
 }
-//願望清單
-const wishData = (state = [], action) => {
-  switch (action.type) {
-    case 'GET_WISH':
-      return action.value
-    default:
-      return state
-  }
-}
 //買家資料
 const buyerData = (state=[],action)=>{
   switch(action.type){
@@ -41,7 +32,6 @@ const buyerData = (state=[],action)=>{
 const orderReducer = combineReducers({
   memberCheckOutResponse,
   cartData,
-  wishData,
   buyerData
 })
 export { orderReducer }

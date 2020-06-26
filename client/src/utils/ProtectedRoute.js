@@ -15,12 +15,12 @@ const ProtectedRoute = ({ children, ...rest }) => {
     <Route
       {...rest}
       render={(props) =>
-        children.props.userSuccess === true ? (
+        children.props.isAuth === true ? (
           children
         ) : (
           <Redirect
             to={{
-              pathname: '/',
+              pathname: '/login',
               state: { from: props.location },
             }}
           />

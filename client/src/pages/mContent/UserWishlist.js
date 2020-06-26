@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { connect } from 'react-redux'
+
 import { FaHeart, FaShoppingCart } from 'react-icons/fa'
 import { BsTrash } from 'react-icons/bs'
 
@@ -7,29 +7,37 @@ import Swal from 'sweetalert2'
 
 import '../../styles/wishlist.scss'
 
-function UserWishlist(props) {
-  const {wishlist} =props
-  
-//刪除願望清單
-const deleteWishlist = (id) => {
-  Swal.fire({
-    text: '是否刪除該商品?',
-    icon: 'warning',
-    confirmButtonText: '確定',
-    showCancelButton: true,
-    cancelButtonText: '取消',
-  }).then((result) => {
-    if (result.value) {
-      const index = wishlist.findIndex((item) => item.id === id)
-      if (index !== -1) {
-        const localWishlist = [...wishlist]
-        localWishlist.splice(index, 1)
-        props.dispatch({type:'GET_WISH',value:localWishlist})
-        localStorage.setItem('wishlist', JSON.stringify(localWishlist))
+function UserWishlist() {
+  const [wishlist, setWishlist] = useState([])
+
+  //取得願望清單
+  const localWishlist = JSON.parse(localStorage.getItem('wishlist')) || []
+  async function getCartFromLocalStorage() {
+    setWishlist(localWishlist)
+  }
+  //刪除願望清單
+  const deleteWishlist = (id) => {
+    Swal.fire({
+      text: '是否刪除該商品?',
+      icon: 'warning',
+      confirmButtonText: '確定',
+      showCancelButton: true,
+      cancelButtonText: '取消',
+    }).then((result) => {
+      if (result.value) {
+        const index = localWishlist.findIndex((item) => item.id === id)
+        if (index !== -1) {
+          localWishlist.splice(index, 1)
+          localStorage.setItem('wishlist', JSON.stringify(localWishlist))
+          getCartFromLocalStorage()
+        }
       }
-    }
-  })
-}
+    })
+  }
+  useEffect(() => {
+    getCartFromLocalStorage()
+  }, [])
+
   const display =
     wishlist != null && wishlist.length >= 1 ? (
       <div className="wishlistbox ">
@@ -90,12 +98,5 @@ const deleteWishlist = (id) => {
     </>
   )
 }
-const mapStateToProps = (store) => {
-  return {
-    wishlist:store.orderReducer.wishData,
-  }
-}
 
-const mapDispatchToProps = null
-
-export default connect(mapStateToProps, mapDispatchToProps)(UserWishlist)
+export default UserWishlist
