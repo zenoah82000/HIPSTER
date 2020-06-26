@@ -9,15 +9,12 @@ import {
   FaStar,
 } from 'react-icons/fa'
 import Slider from 'react-slick'
-<<<<<<< HEAD
-=======
 
 import Title from '../images/home/title.png'
 import abouticon1 from '../images/home/about-icon1.png'
 import abouticon2 from '../images/home/about-icon2.png'
 import abouticon3 from '../images/home/about-icon3.png'
 import abouticon4 from '../images/home/about-icon4.png'
->>>>>>> a0ef3a31c39dc900bf318134452b2d1e11f15e64
 import activity from '../images/home/activity-test.jpg'
 
 function Home(props) {
