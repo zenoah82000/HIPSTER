@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { withRouter } from 'react-router-dom'
-
+import { withRouter,Link } from 'react-router-dom'
 import $ from 'jquery'
-
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
@@ -162,6 +160,7 @@ function ShoppingCar(props) {
           src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
         />
         <p>購物車是空的!</p>
+        <Link className="emptylink" to="/productlist">快去選擇喜愛的活動吧!</Link>
       </div>
     )
 

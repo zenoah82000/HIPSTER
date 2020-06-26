@@ -77,14 +77,16 @@ function UserOrder() {
           return (
             <>
               <div className="card order-box">
-                <div className="card-header order-title d-flex">
-                  <div className="col">訂單編號:{item.orderId}</div>
-                  <div className="col">購買時間:{item.created_at}</div>
+                <div className="card-header order-title">
+                  <div className="orderid"><h6>訂單編號:{item.orderId}</h6></div>
+                  <div className="ordertime"><h6>購買時間:{item.created_at}</h6></div>
+                  <div className="orderstatus"><h6>已付款</h6></div>
+                  <div className="ordertotal"><h6>付款金額:NT${item.orderTotal}</h6></div>
                 </div>
                 <div className="card-body order-body">
                   {orderlist.orderdetails
                     .filter((value) => value.orderId == item.orderId)
-                    .map((value) => {
+                    .map((value,index) => {
                       return (
                         <>
                           <div className="d-flex product-box border-bottom">
@@ -99,7 +101,7 @@ function UserOrder() {
                                 <p>數量:{value.checkQty}</p>
                               </div>
                               <div>
-                                <p>價格:{value.checkPrice}</p>
+                                <p>價格:NT${value.checkPrice}</p>
                               </div>
                               <div>
                                 <p>活動時間:{value.date}</p>
@@ -110,17 +112,15 @@ function UserOrder() {
                       )
                     })}
                 </div>
-                <div className="card-footer order-footer d-flex justify-content-end">
-                  <div>
-                    購買金額:<span>NT${item.orderTotal}</span>
-                  </div>
-                  <button className="order-button">取消整筆訂單</button>
-                </div>
+                
               </div>
             </>
           )
         })}
       </div>
+      <ul className="orderpage ">
+        {creatpage()}
+        </ul>
     </div>
   ) : (
     <div className="empty text-center">
@@ -137,9 +137,7 @@ function UserOrder() {
       <div className="usercontainer">
         <h2 className="usertitle">我的訂單</h2>
         {loading ? <h2>載入中</h2> : display}
-        <ul className="orderpage ">
-        {creatpage()}
-        </ul>
+        
         
       </div>
     </>

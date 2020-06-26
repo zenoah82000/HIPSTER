@@ -12,9 +12,45 @@
       background-color: white;
       margin: 20px 0px;
       .order-title {
+        display: flex;
+        flex-wrap: wrap;
         font-size: bold;
         padding: 5px 20px;
         background-color: #879e87;
+        .orderid {
+          width: 33%;
+          margin-bottom: 10px;
+          h6 {
+            color: white;
+            font-weight: lighter;
+            font-size: 16px;
+            margin: 0;
+          }
+        }
+        .ordertime {
+          width: 33%;
+          text-align: left;
+          h6 {
+            color: white;
+            font-size: 16px;
+            margin: 0;
+          }
+        }
+        .orderstatus {
+          width: 33%;
+          h6 {
+            margin: 0;
+            text-align: right;
+            color: darkgreen;
+          }
+        }
+        .ordertotal {
+          h6 {
+            color: white;
+            font-size: 16px;
+            margin: 0;
+          }
+        }
       }
       .order-body {
         padding: 0;
