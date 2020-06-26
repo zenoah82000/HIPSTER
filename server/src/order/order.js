@@ -8,6 +8,14 @@ require("dotenv").config();
 //訂單列表
 router.get("/member/order/:memberId", async (req, res) => {
   console.log("買家訂單請求");
+  let page = parseInt(req.params.page) || 1;
+        const output = {
+            totalRows: 0, // 總筆數
+            perPage: perPage, // 每一頁最多幾筆
+            totalPages: 0, //總頁數
+            page: page, // 用戶要查看的頁數
+            rows: 0, // 當頁的資料
+        };
   const data = {
     status: true,
   };
@@ -107,6 +115,5 @@ router.post("/member/checkout", async (req, res) => {
   res.json(orderId);
 });
 
-//完成訂單寄發EMAIL
 
 module.exports = router;
