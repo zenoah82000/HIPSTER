@@ -132,7 +132,7 @@ function paymentDetail(props) {
                     </div>
                     <div className="d-flex justify-content-between">
                       <p>折價金額</p>
-                      <p>NT 100</p>
+                      <p>NT$100</p>
                     </div>
                   </div>
                   <div className="payPrice">

@@ -135,13 +135,13 @@ function ShoppingCar(props) {
           ref={(div) => (checkdiv = div)}
           className="totalbox bg-white mt-3 d-flex"
         >
-          <div className="col-6">
+          <div className="">
             <CouponAllData />
           </div>
-          <div className="col-4 text-right total ">
-            活動合計:<span className="total">NT${sum(mycart)}</span>
+          <div className="">
+            {mycart.length}個活動合計:<span className="total">NT${sum(mycart)}</span>
           </div>
-          <div className="col-2 text-right">
+          <div className="">
             <button
               className="button"
               onClick={() => {

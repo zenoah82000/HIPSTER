@@ -5,6 +5,7 @@ body {
 //購物車標題
 .cart-title {
   background-color: white;
+  font-size: 25px;
   display: flex;
   padding: 12px;
   justify-content: space-between;
@@ -52,29 +53,46 @@ body {
     width: 40%;
     display: flex;
     justify-content: space-between;
+    .productdate {
+      p {
+        font-size: 16px;
+        color: black;
+        letter-spacing: normal;
+      }
+    }
     .productsubtotal {
       width: 100px;
       text-align: right;
+      p {
+        font-size: 16px;
+        color: black;
+        letter-spacing: normal;
+      }
     }
   }
-  .add {
-    font-size: 25px;
-    border: 1px solid gray;
-    border-left: none;
-    height: 30px;
-    margin-bottom: 3px;
-  }
-  .Subtract {
-    font-size: 25px;
-    border: 1px solid gray;
-    border-right: none;
-    height: 30px;
-    margin-bottom: 3px;
-  }
-  .amount {
-    width: 50px;
-    text-align: center;
-    outline: none;
+  .amountbox {
+    display: flex;
+    align-items: center;
+    margin-right: -50px;
+    .amountadd {
+      color: white;
+      cursor: pointer;
+      font-size: 25px;
+    }
+    .subtract {
+      cursor: pointer;
+      font-size: 25px;
+    }
+    .subtractopt {
+      opacity: 0.2;
+    }
+    .amount {
+      font-size: 16px;
+      border: none;
+      width: 50px;
+      text-align: center;
+      outline: none;
+    }
   }
 }
 
