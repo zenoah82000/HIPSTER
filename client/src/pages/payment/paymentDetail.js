@@ -17,14 +17,14 @@ function paymentDetail(props) {
 
   //下一頁(填寫付款資訊)
   const nextPage = () => {
-    if (
-      email.value == '' ||
-      phone.value == '' ||
-      lastName.value == '' ||
-      firstName.value == ''
-    ) {
-      return
-    }
+    // // if (
+    // //   email.value == '' ||
+    // //   phone.value == '' ||
+    // //   lastName.value == '' ||
+    // //   firstName.value == ''
+    // // ) {
+    // //   return
+    // }
     let data = {
       email: email.value,
       phone: phone.value,
@@ -37,8 +37,11 @@ function paymentDetail(props) {
   }
   //上一頁(返回購物車)
   const backPage = () => {
-    props.dispatch({type:'GET_CART',value:buyerinfo.product})
-    localStorage.setItem('cart',JSON.stringify(buyerinfo.product))
+    if(buyerinfo.product){
+      props.dispatch({type:'GET_CART',value:buyerinfo.product})
+      localStorage.setItem('cart',JSON.stringify(buyerinfo.product))
+      props.history.push('/shoppingcar')
+    }
     props.history.push('/shoppingcar')
   }
   return (
@@ -115,6 +118,7 @@ function paymentDetail(props) {
                       id="inputNumber"
                       placeholder=""
                       ref={(input) => (phone = input)}
+                      pattern="09\d{2}\-?\d{3}\-?\d{3}"
                     
                     />
                   </div>
@@ -151,7 +155,7 @@ function paymentDetail(props) {
                     返回上一步
                   </button>
                   <button
-                    type="submit"
+                    type="button"
                     onClick={() => {
                       nextPage()
                     }}

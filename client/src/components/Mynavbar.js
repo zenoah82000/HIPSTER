@@ -445,7 +445,7 @@ function Mynavbar(props) {
                                       <span>{value.date}</span>
                                     </div>
                                     <div className="item-price">
-                                      <span>NT${value.price}</span>
+                                      <span>NT${value.price.toString().replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}</span>
                                       <button
                                         onClick={() => {
                                           deleteCart(value.id)

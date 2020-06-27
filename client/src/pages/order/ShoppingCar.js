@@ -139,7 +139,7 @@ function ShoppingCar(props) {
             <CouponAllData />
           </div>
           <div className="">
-            {mycart.length}個活動合計:<span className="total">NT${sum(mycart)}</span>
+            {mycart.length}個活動合計:<span className="total">NT${sum(mycart).toString().replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}</span>
           </div>
           <div className="">
             <button
