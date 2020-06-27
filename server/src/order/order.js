@@ -8,13 +8,28 @@ require("dotenv").config();
 //訂單列表
 router.get("/member/order/:memberId", async (req, res) => {
   console.log("買家訂單請求");
+
+  //每一頁幾筆
+  const perPage = 4;
+
+
   const data = {
     status: true,
+    totalRows: 0, // 總筆數
+    perPage: perPage, // 每一頁最多幾筆
+    totalPages: 0, //總頁數
   };
+
+  //取得總筆數
+  const totalsql = "SELECT COUNT(1) num FROM `orderlist` WHERE `memberId` = 2";
+  const [totalPages] = await db.query(totalsql, [req.params.memberId]);
+  data.totalRows = totalPages[0].num;
+  data.totalPages = Math.ceil(data.totalRows / perPage);
+  const sqlorder = `SELECT * FROM orderlist WHERE memberId = ? ORDER BY created_at DESC`;
+
   const sqlorderlist =
     "SELECT `product`.`productName`,`item_lists`.`orderId`,`item_lists`.`date`,`item_lists`.`checkPrice`,`item_lists`.`checkQty`,`item_lists`.`checkSubtotal`,`item_lists`.`created_at`FROM `member` INNER JOIN `orderlist` ON `member`.`memberId` = `orderlist`.`memberId` INNER JOIN `item_lists` ON `orderlist`.`orderId`=`item_lists`.`orderId` INNER JOIN `product` ON `item_lists`.`productId` = `product`.`productId` WHERE `member`.`memberId`=?";
 
-  const sqlorder = "SELECT * FROM `orderlist` WHERE `memberId` = ? ORDER BY `created_at` DESC";
   const [r1] = await db.query(sqlorder, [req.params.memberId]);
   const [r2] = await db.query(sqlorderlist, [req.params.memberId]);
   if (r1.length > 0 && r2.length > 0) {
@@ -23,9 +38,9 @@ router.get("/member/order/:memberId", async (req, res) => {
     });
     r2.forEach((item) => {
       item.date = item.date.toLocaleDateString();
-      data.orderdetails = r2;
-      data.order = r1;
     });
+    data.orderdetails = r2;
+    data.order = r1;
   }
 
   res.json(data);
@@ -38,12 +53,12 @@ router.post("/member/checkout", async (req, res) => {
   let date = new Date().getDate().toString();
   const memberId = 2;
   const orderItems = req.body.orderItems;
-  const email = req.body.email
+  const email = req.body.email;
   //取得總筆數
   let orderId;
   const total = "show table status like 'orderlist'";
   const [r1] = await db.query(total);
-  console.log(r1)
+  console.log(r1);
   let rows = (r1[0].Auto_increment + 1).toString();
   rows = rows.padStart(5, 0);
   //訂單編號
@@ -106,7 +121,5 @@ router.post("/member/checkout", async (req, res) => {
   });
   res.json(orderId);
 });
-
-//完成訂單寄發EMAIL
 
 module.exports = router;

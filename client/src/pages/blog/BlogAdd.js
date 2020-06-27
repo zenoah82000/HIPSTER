@@ -5,6 +5,7 @@ import { Container } from 'react-bootstrap'
 
 import CKEditor from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+// import SimpleUploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/simpleuploadadapter'
 
 import MyBreadcrumb from '../../components/MyBreadcrumb'
 
@@ -14,10 +15,10 @@ import { getBlogDataAsync,addBlogContentDataAsync } from '../../actions/blog'
 function BlogAdd(props) {
   // console.log('BlogAdd-props:', props)
   const [addContentTitle, setAddContentTitle] =  useState([null])
-  const [addContentCategory, setAddContentCategory] =  useState([null])
+  const [addContentCategory, setAddContentCategory] =  useState(1)
   const [addContent, setAddContent] =  useState([null])
-  const [addTag1, setAddTag1] =  useState([null])
-  const [addTag2, setAddTag2] =  useState([null])
+  // const [addTag1, setAddTag1] =  useState([null])
+  // const [addTag2, setAddTag2] =  useState([null])
   // const [imgFile, setImgFile] =  useState([null])
   // const [imgDataFiles, setImgDataFiles] =  useState([null])
 
@@ -36,20 +37,24 @@ function BlogAdd(props) {
       addContentTitle,
       addContentCategory,
       addContent,
-      addTag1,
-      addTag2,
+      // addTag1,
+      // addTag2,
       // imgDataFiles,
     }
   
     const addContentData_fd = new FormData()
-    addContentData_fd.append('blogTitle', addContentData.addContentTitle)
-    addContentData_fd.append('categoryName', addContentData.addContentCategory)
-    addContentData_fd.append('blogContent', addContentData.addContent)
-    addContentData_fd.append('tagName1', addContentData.addTag1)
-    addContentData_fd.append('tagName2', addContentData.addTag2)
+    addContentData_fd.append('articleTitle', addContentData.addContentTitle)
+    console.log('GETFD',addContentData_fd.get("articleTitle"))
+    console.log('addContentData_fd',addContentData_fd)
+    addContentData_fd.append('categoryId', addContentData.addContentCategory)
+    addContentData_fd.append('articleContent', addContentData.addContent)
+    // addContentData_fd.append('tagName1', addContentData.addTag1)
+    // addContentData_fd.append('tagName2', addContentData.addTag2)
     // addContentData_fd.append('addImg', addContentData.imgDataFiles)
   
-    addBlogContentDataAsync(addContentData_fd, () => alert('成功新增'))  
+    addBlogContentDataAsync(addContentData_fd
+      // () => alert('成功新增')
+      )  
   }
 
   return (
@@ -59,16 +64,19 @@ function BlogAdd(props) {
         <ul className="list-unstyled blog-add-ul">
           <li className="d-flex justify-content-between">
             <div>
-              <select className="blog-select-category" onChange={event => setAddContentCategory(event.target.value)}>
-                <option selected>請選擇類別</option>
-                <option>心情抒發</option>
-                <option>靈感啟發</option>
-                <option>活動分享</option>
+              <select className="blog-select-category" onChange={event => setAddContentCategory(event.target.value)} value={addContentCategory}>                
+                <option value="1">心情抒發</option>
+                <option value="2">靈感啟發</option>
+                <option value="3">活動分享</option>
               </select>
             </div>
             <div className="blog-add-btn">
               <button className="btn">取消發文</button>
-              <button className="btn">發佈文章</button>
+              <button className="btn" onClick={e => {
+                  e.preventDefault()
+                  handleSubmit()
+                    // props.history.push('/blog')
+                  }}>發佈文章</button>
             </div>
           </li>
           <li>
@@ -76,15 +84,17 @@ function BlogAdd(props) {
               className="blog-add-title"
               type="text"
               placeholder="請輸入文章標題..."
-              onChange={event => setAddContentTitle(event.target.value)}
+              onChange={event => {
+                setAddContentTitle(event.target.value)            
+                }}
             />
           </li>
           <li>
             <CKEditor
-              // config={{ ckfinder: {
-              //   // 此處設定上傳圖片之 API 路由
-              //   uploadUrl: '/blogAdd'
-              // } }}
+              config={{ ckfinder: {
+                // 此處設定上傳圖片之 API 路由
+                uploadUrl: '/blogAdd'
+              } }}
               editor={ClassicEditor}
               // data="<p>請輸入文章內容...</p>"
               onInit={(editor) => {
