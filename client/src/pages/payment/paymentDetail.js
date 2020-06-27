@@ -36,11 +36,8 @@ function paymentDetail(props) {
   }
   //上一頁(返回購物車)
   const backPage = () => {
-    if(buyerinfo.product){
-      props.dispatch({type:'GET_CART',value:buyerinfo.product})
-      localStorage.setItem('cart',JSON.stringify(buyerinfo.product))
-      props.history.push('/shoppingcar')
-    }
+    props.dispatch({type:'GET_CART',value:buyerinfo.product})
+    localStorage.setItem('cart',JSON.stringify(buyerinfo.product))
     props.history.push('/shoppingcar')
   }
   return (
@@ -114,7 +111,6 @@ function paymentDetail(props) {
                       id="inputNumber"
                       placeholder=""
                       ref={(input) => (phone = input)}
-                      pattern="09\d{2}\-?\d{3}\-?\d{3}"
                     
                     />
                   </div>
@@ -132,7 +128,7 @@ function paymentDetail(props) {
                     </div>
                     <div className="d-flex justify-content-between">
                       <p>折價金額</p>
-                      <p>NT$100</p>
+                      <p>NT 100</p>
                     </div>
                   </div>
                   <div className="payPrice">
@@ -151,7 +147,7 @@ function paymentDetail(props) {
                     返回上一步
                   </button>
                   <button
-                    type="button"
+                    type="submit"
                     onClick={() => {
                       nextPage()
                     }}

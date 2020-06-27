@@ -57,8 +57,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(require(__dirname + "/user-qanda"));
-
 app.use(require(__dirname + "/user-comment"));
 
 app.use(require(__dirname + "/user-map"));
@@ -74,6 +72,7 @@ app.use(require(__dirname + "/productList"));
 app.use(require(__dirname + "/map/map"));
 
 app.use(require(__dirname + "/member/users-router"));
+app.use(require(__dirname + "/home/home-router"));
 
 app.use(require(__dirname + "/user-map"));
 

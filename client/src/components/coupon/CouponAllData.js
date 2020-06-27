@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link, NavLink, withRouter } from 'react-router-dom'
-import '../../styles/couponalldata.scss'
+import '../../styles/mContent/usercoupon.scss'
 import Swal from 'sweetalert2'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -12,29 +12,21 @@ function CouponAllData(props) {
   useEffect(() => {
     getUserCouponDetaiAsync()
   }, [])
-  const [discountPercent, setdiscountPercent] = useState([])
-  console.log('discountPercent', discountPercent)
+  //   console.log('uCoupon-props', props)
+  //   console.log('userCouponData', userCouponData)
+  //   console.log('userCouponData.coupon123', userCouponData[0])
   let couponList = userCouponData.map((item) => {
     return <option value={item.discountPercent}>{item.discountCode}</option>
   })
 
   return (
     <>
-      <div className="couponalldata-container">
-        <div className="row">
-          <form className="couponalldata-form">
-            <div class="form-group row couponalldata-form">
-              <label className="couponalldata-label" for="couponControlSelect1">
-                選擇優惠券
-              </label>
-              <select
-                className="form-control couponalldata-select"
-                id="couponFormControlSelect1"
-                onChange={(event) => setdiscountPercent(event.target.value)}
-              >
-                <option selected value="1">
-                  choose coupon
-                </option>
+      <div class="container">
+        <div class="row">
+          <form>
+            <div class="form-group row">
+              <label for="couponControlSelect1">選擇優惠券</label>
+              <select class="form-control" id="couponFormControlSelect1">
                 {couponList}
               </select>
             </div>

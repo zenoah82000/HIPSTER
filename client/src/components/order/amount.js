@@ -37,22 +37,19 @@ function Amount(props) {
 
   return (
     <>
-    <div className="amountbox">
-    <GrFormSubtract
-        className={amount == 1 ? 'subtract subtractopt':'subtract'}
+      <GrFormSubtract
+        className="Subtract"
         onClick={() => {
           changeAmount('dec')
         }}
       />
       <input className="amount" value={amount} readOnly />
       <GrFormAdd
-        className="amountadd"
+        className="add"
         onClick={() => {
           changeAmount('add')
         }}
       />
-    </div>
-     
     </>
   )
 }

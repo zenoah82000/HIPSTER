@@ -12,52 +12,12 @@
       background-color: white;
       margin: 20px 0px;
       .order-title {
-        display: flex;
-        flex-wrap: wrap;
         font-size: bold;
         padding: 5px 20px;
         background-color: #879e87;
-        .orderid {
-          width: 33%;
-          margin-bottom: 10px;
-          h6 {
-            color: white;
-            font-weight: lighter;
-            font-size: 16px;
-            margin: 0;
-          }
-        }
-        .ordertime {
-          width: 33%;
-          text-align: left;
-          h6 {
-            color: white;
-            font-size: 16px;
-            margin: 0;
-          }
-        }
-        .orderstatus {
-          width: 33%;
-          h6 {
-            margin: 0;
-            text-align: right;
-            color: white;
-          }
-        }
-        .ordertotal {
-          h6 {
-            color: white;
-            font-size: 16px;
-            margin: 0;
-          }
-        }
       }
       .order-body {
         padding: 0;
-        position: relative;
-        max-height: 145px;
-        overflow: hidden;
-        transition: 0.5s;
         .product-box {
           padding: 10px;
           .productimg {
@@ -97,37 +57,4 @@
     width: 200px;
     height: 150px;
   }
-}
-
-//分頁
-.orderpage {
-  list-style: none;
-  padding: 30px 0;
-  display: flex;
-  justify-content: center;
-
-  & li {
-    margin: 0 5px;
-    display: inline-block;
-    color: #684b38;
-    text-decoration: none;
-    padding: 4px 10px;
-    background: white;
-    border: 1px solid #707070;
-    cursor: pointer;
-    &.active {
-      background: #684b38;
-      color: white;
-    }
-  }
-}
-//展開的按鈕
-.unfold {
-  color: #684b38;
-  border: none;
-  background-color: transparent;
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  outline: none;
 }

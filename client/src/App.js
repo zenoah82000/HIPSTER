@@ -51,7 +51,7 @@ function App(props) {
 
   // console.log(userid)
 
-  const { mycart,wishlist } = props
+  const { mycart, wishlist } = props
   //取得購物車資料
   const localCart = JSON.parse(localStorage.getItem('cart')) || []
   //取得願望清單資料
@@ -148,7 +148,7 @@ function App(props) {
           <Route path="/Contact">
             <Contact />
           </Route>
-          <Route path="/productlist">
+          <Route path="/productlist/:id?">
             <ProductList />
           </Route>
           <Route path="/product">
@@ -164,19 +164,19 @@ function App(props) {
           <Route path="/map">
             <Map />
           </Route>
-          
+
           <Route path="/memberuser">
             <MemberUser />
           </Route>
           {/* 保護路由 */}
           <Route path="/paymentDetail">
-            <PaymentDetail sum={sum} userSuccess={userSuccess}/>
+            <PaymentDetail sum={sum} userSuccess={userSuccess} />
           </Route>
           <Route path="/paymentFinish">
-            <PaymentFinish userSuccess={userSuccess}/>
+            <PaymentFinish userSuccess={userSuccess} />
           </Route>
           <Route path="/paymentType">
-            <PaymentType sum={sum} userSuccess={userSuccess}/>
+            <PaymentType sum={sum} userSuccess={userSuccess} />
           </Route>
 
           <Route exact path="/">
@@ -185,8 +185,6 @@ function App(props) {
           <Route exact path="*">
             <NotFoundPage />
           </Route>
-
-          
         </Switch>
 
         <Myfooter />
@@ -197,7 +195,7 @@ function App(props) {
 const mapStateToProps = (store) => {
   return {
     mycart: store.orderReducer.cartData,
-    wishlist:store.orderReducer.wishData,
+    wishlist: store.orderReducer.wishData,
   }
 }
 const mapDispatchToProps = null
