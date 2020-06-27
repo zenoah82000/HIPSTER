@@ -1,11 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-
-import { FiEdit } from 'react-icons/fi'
-import { BsTrash } from 'react-icons/bs'
 import { GoX } from 'react-icons/go'
-import { GrFormAdd } from 'react-icons/gr'
-import { GrFormSubtract } from 'react-icons/gr'
+
 
 import Amount from '../../components/order/amount'
 
@@ -33,12 +29,12 @@ function MyCart(props) {
                
               </div>
               <div className="productright">
-                <div className="productdate">{value.date}</div>
+                <div className="productdate"><p>{value.date}</p></div>
                 <div className="productamount">
                   <Amount index={index} value={value.amount} />
                 </div>
                 <div className="productsubtotal">
-                  NT${value.price * value.amount}
+                  <p>NT${(value.price * value.amount).toString().replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}</p>
                 </div>
               </div>
             </div>

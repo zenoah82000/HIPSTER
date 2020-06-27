@@ -104,6 +104,9 @@ nav {
                   object-fit: cover;
                   width: 100%;
                   height: 100%;
+                  &:hover {
+                    opacity: 0.8;
+                  }
                 }
               }
               .item-text {
@@ -113,6 +116,9 @@ nav {
                     font-size: 12px;
                     font-weight: bold;
                     line-height: 15px;
+                    &:hover {
+                      opacity: 0.8;
+                    }
                   }
                 }
                 .item-date {
@@ -122,6 +128,8 @@ nav {
                   }
                 }
                 .item-price {
+                  display: flex;
+                  justify-content: space-between;
                   span {
                     color: black;
                     font-size: 14px;
@@ -375,7 +383,7 @@ nav {
         font-weight: 600;
         .link-title {
           color: white;
-          font-size: 18px;
+          font-size: 20px;
         }
         .link-content {
           margin-top: 10px;
