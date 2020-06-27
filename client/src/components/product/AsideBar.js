@@ -30,6 +30,7 @@ function AsideBar(props) {
   const [activeClass, setActiveClass] = useState(true)
   const [categorySection, setCategorySection] = useState([])
   const [checked, setChecked] = useState(false)
+
   const handleChange = () => {
     setChecked((prev) => !prev)
   }
@@ -48,6 +49,12 @@ function AsideBar(props) {
     getProductCategoryAsync()
   }, [])
 
+  // const checkcategory = (item) => {
+  //   return categorySection.includes(item)
+  //     ? 'checkbox-dropdown-list active'
+  //     : 'checkbox-dropdown-list'
+  // }
+
   const display = productCatogryData.map((item, index) => {
     if (item.categoryParentId === 0) {
       return (
@@ -57,7 +64,7 @@ function AsideBar(props) {
               key={item.categoryName}
               className="drop-title"
               onClick={() => {
-                setActiveClass(!activeClass)
+                // setActiveClass(!activeClass)
                 AddcategorySection(item.categoryName)
                 console.log(categorySection)
               }}
@@ -66,6 +73,7 @@ function AsideBar(props) {
             </div>
             <ul
               className={
+                // checkcategory(item.categoryName)
                 categorySection.includes(item.categoryName)
                   ? 'checkbox-dropdown-list active'
                   : 'checkbox-dropdown-list'
@@ -90,6 +98,7 @@ function AsideBar(props) {
       )
     }
   })
+
   // console.log(display)
 
   return (
