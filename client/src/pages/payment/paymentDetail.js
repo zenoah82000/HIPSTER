@@ -1,16 +1,15 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import { withRouter } from 'react-router-dom'
+import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import '../../styles/Payment.scss'
-import { GrNext } from 'react-icons/gr'
-import { BsExclamationCircle } from 'react-icons/bs'
+
 
 //引入自訂元件
 
 function paymentDetail(props) {
   //取得購物車的資料,個人資料
   const { sum, buyerinfo ,userSuccess} = props
-  console.log(userSuccess)
 
   //需要輸入的欄位
   let email, phone, lastName, firstName
@@ -62,12 +61,9 @@ function paymentDetail(props) {
                   <div className="col-6 form-group">
                     <label for="inputEmail  ">電子郵件*</label>
                     <input
-                      ref={(input) => {
-                        const email = input
-                      }}
                       type="email"
                       class="form-control"
-                      id="inputEmail"
+                      id="inputEmail"                  
                       placeholder="name@example.com"
                       required
                       ref={(input) => (email = input)}

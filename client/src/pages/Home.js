@@ -20,6 +20,13 @@ function Home(props) {
 
   const [ProductEndlist, setProductEndlist] = useState('')
 
+<<<<<<< HEAD
+=======
+  useEffect(() => {
+    homeProductEndlist()
+  }, [])
+  console.log({ ...ProductEndlist[0] }.productId)
+>>>>>>> 3abda86cc7c355f2b22811ce317669202b6c5f09
   //找出倒數結束5筆商品
   async function homeProductEndlist(item) {
     // 注意資料格式要設定，伺服器才知道是json格式
