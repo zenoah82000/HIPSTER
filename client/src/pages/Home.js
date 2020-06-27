@@ -20,11 +20,6 @@ function Home(props) {
 
   const [ProductEndlist, setProductEndlist] = useState('')
 
-  useEffect(() => {
-    homeProductEndlist()
-  }, [])
-  // console.log(ProductEndlist[0].productId)
-
   //找出倒數結束5筆商品
   async function homeProductEndlist(item) {
     // 注意資料格式要設定，伺服器才知道是json格式
@@ -165,14 +160,80 @@ function Home(props) {
     slidesToScroll: 1,
   }
 
-  // const display = ProductEndlist.map((item, index) => {
-  //   return (
-  //     <>
-  //       <h1>{item.productName}</h1>
-  //     </>
-  //   )
-  // })
-  // console.log(display)
+  // 設置倒數計時: 結束時間 - 當前時間
+  const countdowntime = (datatime) => {
+    // 當前時間
+    var time = new Date()
+    var nowTime = time.getTime() // 獲取當前毫秒數
+
+    var endTime = new Date(datatime) //結束轉毫秒
+
+    // 倒數計時: 差值
+    var offsetTime = (endTime - nowTime) / 1000 // ** 以秒為單位
+    var sec = parseInt(offsetTime % 60) // 秒
+    var min = parseInt((offsetTime / 60) % 60) // 分 ex: 90秒
+    var hr = parseInt(offsetTime / 60 / 60) // 時
+    // console.log('開始時間', time)
+    // console.log('結束時間', endTime)
+    console.log('相差', offsetTime, '秒')
+    console.log('相差', hr, '時', min, '分', sec, '秒')
+
+    return (
+      <>
+        <span className="large">{hr}</span>時
+        <span className="large">{min}</span>分
+        <span className="large">{sec}</span>秒
+      </>
+    )
+  }
+
+  //倒數結束5筆商品顯示
+  let ProductEnd = Array.from(ProductEndlist)
+  const display = ProductEnd.map((item, index) => {
+    return (
+      <>
+        <a href="#">
+          <p className="countdown-num">
+            {countdowntime(item.productEndingDate)}
+          </p>
+          <div className="countdown-main-cont">
+            <div className="countdown-picture">
+              <div className="countdown-follow active">
+                <FaHeart />
+              </div>
+              <img
+                src={`http://localhost:5000/images/product/${item.productImg}`}
+              />
+            </div>
+            <div className="countdown-title">
+              <p>{item.productName}</p>
+            </div>
+            <div className="countdown-local">
+              <p>
+                <FaMapMarkerAlt />
+                {item.productAddress}
+              </p>
+            </div>
+            <div className="home-countdown-price">
+              <p>${item.productPrice}</p>
+            </div>
+          </div>
+        </a>
+      </>
+    )
+  })
+
+  const test = () => {
+    console.log('ok')
+  }
+
+  //網頁載入時執行
+  useEffect(() => {
+    homeProductEndlist()
+    setInterval(() => {
+      test()
+    }, 1000)
+  }, [])
 
   return (
     <>
@@ -412,144 +473,7 @@ function Home(props) {
             <span className="line"></span>
           </div>
           <div className="countdown-main">
-            <Slider {...countdowns}>
-              <a href="#">
-                <p className="countdown-num">
-                  <span className="large">12</span>時
-                  <span className="large">01</span>分
-                  <span className="large">30</span>秒
-                </p>
-                <div className="countdown-main-cont">
-                  <div className="countdown-picture">
-                    <div className="countdown-follow active">
-                      <FaHeart />
-                    </div>
-                    <img src={activity} />
-                  </div>
-                  <div className="countdown-title">
-                    <p>【花蓮七星潭 GLAMPING 】 ｜露營帳篷／露營車</p>
-                  </div>
-                  <div className="countdown-local">
-                    <p>
-                      <FaMapMarkerAlt />
-                      台灣 宜蘭
-                    </p>
-                  </div>
-                  <div className="home-countdown-price">
-                    <p>$2500</p>
-                  </div>
-                </div>
-              </a>
-
-              <a href="#">
-                <p className="countdown-num">
-                  <span className="large">12</span>時
-                  <span className="large">25</span>分
-                  <span className="large">30</span>秒
-                </p>
-                <div className="countdown-main-cont">
-                  <div className="countdown-picture">
-                    <div className="countdown-follow">
-                      <FaHeart />
-                    </div>
-                    <img src={activity} />
-                  </div>
-                  <div className="countdown-title">
-                    <p>【花蓮七星潭 GLAMPING 】 ｜露營帳篷／露營車</p>
-                  </div>
-                  <div className="countdown-local">
-                    <p>
-                      <FaMapMarkerAlt />
-                      台灣 宜蘭
-                    </p>
-                  </div>
-                  <div className="home-countdown-price">
-                    <p>$2500</p>
-                  </div>
-                </div>
-              </a>
-
-              <a href="#">
-                <p className="countdown-num">
-                  <span className="large">2</span>時
-                  <span className="large">25</span>分
-                  <span className="large">30</span>秒
-                </p>
-                <div className="countdown-main-cont">
-                  <div className="countdown-picture">
-                    <div className="countdown-follow">
-                      <FaHeart />
-                    </div>
-                    <img src={activity} />
-                  </div>
-                  <div className="countdown-title">
-                    <p>【花蓮七星潭 GLAMPING 】 ｜露營帳篷／露營車</p>
-                  </div>
-                  <div className="countdown-local">
-                    <p>
-                      <FaMapMarkerAlt />
-                      台灣 宜蘭
-                    </p>
-                  </div>
-                  <div className="home-countdown-price">
-                    <p>$2500</p>
-                  </div>
-                </div>
-              </a>
-
-              <a href="#">
-                <p className="countdown-num">
-                  <span className="large">25</span>分
-                  <span className="large">30</span>秒
-                </p>
-                <div className="countdown-main-cont">
-                  <div className="countdown-picture">
-                    <div className="countdown-follow">
-                      <FaHeart />
-                    </div>
-                    <img src={activity} />
-                  </div>
-                  <div className="countdown-title">
-                    <p>【花蓮七星潭 GLAMPING 】 ｜露營帳篷／露營車</p>
-                  </div>
-                  <div className="countdown-local">
-                    <p>
-                      <FaMapMarkerAlt />
-                      台灣 宜蘭
-                    </p>
-                  </div>
-                  <div className="home-countdown-price">
-                    <p>$2500</p>
-                  </div>
-                </div>
-              </a>
-
-              <a href="#">
-                <p className="countdown-num">
-                  <span className="large">30</span>秒
-                </p>
-                <div className="countdown-main-cont">
-                  <div className="countdown-picture">
-                    <div className="countdown-follow">
-                      <FaHeart />
-                    </div>
-                    <img src={activity} />
-                  </div>
-                  <div className="countdown-title">
-                    <p>【花蓮七星潭 GLAMPING 】 ｜露營帳篷／露營車</p>
-                  </div>
-                  <div className="countdown-local">
-                    <p>
-                      <FaMapMarkerAlt />
-                      台灣 宜蘭
-                    </p>
-                  </div>
-                  <div className="home-countdown-price">
-                    <p>$2500</p>
-                  </div>
-                </div>
-              </a>
-            </Slider>
+            <Slider {...countdowns}>{display}</Slider>
           </div>
 
           <a href="#" className="more-countdown-btn">

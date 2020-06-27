@@ -90,6 +90,7 @@ async function executeSQL(
 
   const [r1] = await db.query(addMemberSql, [memberMail,memberPwd]);
   res.json(r1)
+
 })
 
 
