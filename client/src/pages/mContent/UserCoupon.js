@@ -16,11 +16,12 @@ function UserCoupon(props) {
   const [discountCode, setdiscountCode] = useState([])
   useEffect(() => {
     getUserCouponDetaiAsync()
+  }, [userCouponData])
+  useEffect(() => {
     addUserCouponDataAsync()
   }, [])
 
   console.log('uCoupon-props', props)
-
   console.log('userCouponData', userCouponData)
   console.log('userCouponData.coupon123', userCouponData[0])
 
@@ -56,6 +57,7 @@ function UserCoupon(props) {
               <ul class="list-unstyled">
                 <li>可用數量：{item.memberCouponNum}</li>
                 <li>優惠代碼：{item.discountCode}</li>
+                <li>優惠折扣：{item.discountPercent * 100}折</li>
               </ul>
             </div>
           </div>

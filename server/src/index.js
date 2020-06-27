@@ -57,6 +57,8 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(require(__dirname + "/user-qanda"));
+
 app.use(require(__dirname + "/user-comment"));
 
 app.use(require(__dirname + "/user-map"));

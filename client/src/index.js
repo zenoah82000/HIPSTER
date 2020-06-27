@@ -13,6 +13,7 @@ import { orderReducer } from './reducers/order/order_Reducers'
 import { couponReducer } from './reducers/coupon/couponReducer'
 import { blogReducer } from './reducers/blog'
 import { productReducer } from './reducers/product/productReducer'
+import { qandaReducer } from './reducers/qanda/qandaReducer'
 
 //引入中介軟體
 import thunk from 'redux-thunk'
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   couponReducer,
   blogReducer,
   productReducer,
+  qandaReducer,
 })
 //使用中介軟體時，建立store的方法，需要額外建立一個composeEnhancers
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
