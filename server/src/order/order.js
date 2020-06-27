@@ -10,7 +10,7 @@ router.get("/member/order/:memberId", async (req, res) => {
   console.log("買家訂單請求");
 
   //每一頁幾筆
-  const perPage = 2;
+  const perPage = 4;
 
 
   const data = {

@@ -54,6 +54,10 @@
       }
       .order-body {
         padding: 0;
+        position: relative;
+        max-height: 145px;
+        overflow: hidden;
+        transition: 0.5s;
         .product-box {
           padding: 10px;
           .productimg {
@@ -117,7 +121,13 @@
     }
   }
 }
-//展開
+//展開的按鈕
 .unfold {
-  display: none;
+  color: #684b38;
+  border: none;
+  background-color: transparent;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  outline: none;
 }
