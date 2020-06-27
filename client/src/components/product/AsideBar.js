@@ -4,6 +4,7 @@ import Calendar from 'react-calendar'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 import { Collapse } from '@material-ui/core'
+import InputRange from 'react-input-range'
 
 import '../../styles/product/AsideBar.scss'
 
@@ -49,11 +50,15 @@ function AsideBar(props) {
     getProductCategoryAsync()
   }, [])
 
-  // const checkcategory = (item) => {
-  //   return categorySection.includes(item)
-  //     ? 'checkbox-dropdown-list active'
-  //     : 'checkbox-dropdown-list'
-  // }
+  function checkcategory(item) {
+    if (categorySection.includes(item)) {
+      console.log('categorySection', categorySection)
+      return 'checkbox-dropdown-list active'
+    } else {
+      console.log('categorySection', categorySection)
+      return 'checkbox-dropdown-list'
+    }
+  }
 
   const display = productCatogryData.map((item, index) => {
     if (item.categoryParentId === 0) {
@@ -64,7 +69,7 @@ function AsideBar(props) {
               key={item.categoryName}
               className="drop-title"
               onClick={() => {
-                // setActiveClass(!activeClass)
+                setActiveClass(!activeClass)
                 AddcategorySection(item.categoryName)
                 console.log(categorySection)
               }}
@@ -73,10 +78,10 @@ function AsideBar(props) {
             </div>
             <ul
               className={
-                // checkcategory(item.categoryName)
-                categorySection.includes(item.categoryName)
-                  ? 'checkbox-dropdown-list active'
-                  : 'checkbox-dropdown-list'
+                checkcategory(item.categoryName)
+                // categorySection.includes(item.categoryName)
+                //   ? 'checkbox-dropdown-list active'
+                //   : 'checkbox-dropdown-list'
               }
               key={item.categoryId}
             >
@@ -98,8 +103,6 @@ function AsideBar(props) {
       )
     }
   })
-
-  // console.log(display)
 
   return (
     <>
