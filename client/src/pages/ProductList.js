@@ -22,6 +22,7 @@ function ProductList(props) {
 
   console.log(page, cat)
 
+  console.log(page, cat)
   useEffect(() => {
     getProductListAsync()
   }, [])

@@ -1,11 +1,6 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
-
-import { FiEdit } from 'react-icons/fi'
-import { BsTrash } from 'react-icons/bs'
+import { Link } from 'react-router-dom'
 import { GoX } from 'react-icons/go'
-import { GrFormAdd } from 'react-icons/gr'
-import { GrFormSubtract } from 'react-icons/gr'
 
 import Amount from '../../components/order/amount'
 
@@ -24,13 +19,17 @@ function MyCart(props) {
                     deleteCart(value.id)
                   }}
                 />
-                <Link to="/"><img
-                  className="productImg"
-                  src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
-                  alt=""
-                /></Link>
-                <Link to="/"> <p>{value.name}</p></Link>
-               
+                <Link to="/">
+                  <img
+                    className="productImg"
+                    src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
+                    alt=""
+                  />
+                </Link>
+                <Link to="/">
+                  {' '}
+                  <p>{value.name}</p>
+                </Link>
               </div>
               <div className="productright">
                 <div className="productdate">{value.date}</div>
@@ -38,7 +37,12 @@ function MyCart(props) {
                   <Amount index={index} value={value.amount} />
                 </div>
                 <div className="productsubtotal">
-                  NT${value.price * value.amount}
+                  <p>
+                    NT$
+                    {(value.price * value.amount)
+                      .toString()
+                      .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
+                  </p>
                 </div>
               </div>
             </div>
