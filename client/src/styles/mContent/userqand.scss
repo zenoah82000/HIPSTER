@@ -6,16 +6,5 @@
 
 .qa-pane {
   //   border-bottom: 1px solid #eaeaea;
-  // padding-bottom: 5px;
-  border-bottom: 1px solid #eaeaea;
-  padding: 15px 10px 30px;
-}
-
-div.bg-white.ml-md-2.sidebarright > div > div.qa-pane:nth-of-type(1) {
-  padding-top: 0;
-  // background-color: blue;
-}
-
-div.bg-white.ml-md-2.sidebarright > div > div.qa-pane:last-of-type {
-  border-bottom: 0px solid #eaeaea;
+  padding-bottom: 5px;
 }

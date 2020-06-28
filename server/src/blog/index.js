@@ -29,38 +29,14 @@ router.get('/blog', async (req, res) => {
   res.json(output)
 })
 
-//新增文章圖片
-router.post('/blogAdd', upload.none(), (req, res)=>{
+//新增文章
+router.post('/blogAdd', upload.single('addImg'), (req, res)=>{
   // console.log(req.body)
   
-//   res.json({
-//     uploaded: true,
-//     url: "http://127.0.0.1/image001.jpg",
-//     filename: req.file.filename,
-//     body: req.body
-// });
-  const output ={
-    success: false,
-    error:'',
-    status: 0,
-    body: req.body,
-  }
-  const sql = "INSERT INTO `article`(`articleTitle`,`articleContent`,`categoryId`) VALUES(?,?,?)";
-
-  db.query(sql , [
-    req.body.articleTitle,
-    req.body.articleContent,
-    req.body.categoryId,
-    ])
-  .then(r=>{
-      output.result = r;
-      output.success = true;
-      console.log('result:', r);
-      res.json(output);
-  })
-  .catch(error=>{
-      return res.json(output);
-  })
+  res.json({
+    filename: req.file.filename,
+    body: req.body
+});
 
 })
 
