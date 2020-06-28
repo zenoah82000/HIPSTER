@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-
+import $ from 'jquery'
 import { FaHeart, FaShoppingCart } from 'react-icons/fa'
 import { BsTrash } from 'react-icons/bs'
 
