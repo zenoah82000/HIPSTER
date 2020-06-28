@@ -39,7 +39,7 @@ function UserContent() {
   useEffect(() => {
     memberData(userId)
   }, [])
-  console.log(mdata)
+  // console.log(mdata)
 
   //抓取該會員全部資料
   async function memberData(item) {
@@ -70,7 +70,7 @@ function UserContent() {
     })
     const response = await fetch(request)
     const data = await response.json()
-    console.log(data)
+    // console.log(data)
   }
 
   const dataDisplay = (
@@ -156,7 +156,7 @@ function UserContent() {
 
       <Form.File.Input
         id="ControlFile1"
-        ref={(value) => (editmemberImg = value)}
+        ref={(file) => (editmemberImg = file)}
       />
 
       <Form.Row>
@@ -287,9 +287,12 @@ function UserContent() {
                 : editmemberAddress.value,
             memberPwd:
               editmemberPwd.value == '' ? memberPwd : editmemberPwd.value,
-            memberImg: memberImg,
+            memberImg: editmemberImg.files.length
+              ? editmemberImg.files[0].name
+              : memberImg,
+            memberImgState: editmemberImg.files.length,
           }
-          // console.log(editAllData)
+          console.log(editmemberImg.files.length)
           // console.log(document.getElementById('ControlFile1').value)
 
           memberUpdate(editAllData)

@@ -79,16 +79,61 @@ async function executeSQL(
 // 以下為路由
 
 
+// 首頁>精選商品
+  router.post('/homeproductfeaturedlist', async (req, res, next) => {
+  // 測試response，會自動解析為物件
+  // console.log(typeof req.body)
+  // console.log(req.body)
+  const Sql = "SELECT `productId`,`productImg`,`productName`,`productAddress`,`rating` FROM `product` INNER JOIN `comments` ON `productId`=`itemId` ORDER BY `rating` DESC LIMIT 3 "
+  const [r1] = await db.query(Sql);
+  res.json(r1)
+
+})
+
+
+// 首頁>中間banner商品
+  router.post('/homeslickbannerdata', async (req, res, next) => {
+  // 測試response，會自動解析為物件
+  // console.log(typeof req.body)
+  // console.log(req.body)
+  const productId = 67;  //商品id
+  const Sql = "SELECT `product`.`productId`,`productName`,`productContent`,`productAddress`,`productImgs` FROM `product` LEFT JOIN `multiple_imgs` ON `product`.`productId` = `multiple_imgs`.`productId` WHERE `product`.`productId` =?  LIMIT 1"
+  const [r1] = await db.query(Sql,productId);
+  res.json(r1)
+
+})
+// 首頁>中間banner商品-多圖
+  router.post('/homeslickbannerimgdata', async (req, res, next) => {
+  // 測試response，會自動解析為物件
+  // console.log(typeof req.body)
+  // console.log(req.body)
+  const productId = 67;  //商品id
+  const Sql = "SELECT `product`.`productId`,`productName`,`productContent`,`productAddress`,`productImgs` FROM `product` LEFT JOIN `multiple_imgs` ON `product`.`productId` = `multiple_imgs`.`productId` WHERE `product`.`productId` =?  "
+  const [r1] = await db.query(Sql,productId);
+  res.json(r1)
+
+})
+
 // 首頁>即將結束商品
   router.post('/homeproductendlist', async (req, res, next) => {
   // 測試response，會自動解析為物件
   // console.log(typeof req.body)
   // console.log(req.body)
-  const memberMail = req.body.memberMail
-  const memberPwd = req.body.memberPwd
-  const addMemberSql = "SELECT `productId`,`productImg`,`productName`,`productPrice`,`productAddress`,`productEndingDate` FROM `product` ORDER BY `productEndingDate` LIMIT 5 "
+  const Sql = "SELECT `productId`,`productImg`,`productName`,`productPrice`,`productAddress`,`productEndingDate` FROM `product` ORDER BY `productEndingDate` LIMIT 5 "
+  const [r1] = await db.query(Sql);
+  res.json(r1)
 
-  const [r1] = await db.query(addMemberSql, [memberMail,memberPwd]);
+})
+
+
+// 首頁>最新文章
+  router.post('/homearticleslist', async (req, res, next) => {
+  // 測試response，會自動解析為物件
+  // console.log(typeof req.body)
+  // console.log(req.body)
+  const Sql = "SELECT `articleId`,`article`.`memberId`,`member`.`memberName` ,`articleTitle`,`articleContent`,`img`,`article`.`created_at` ,`member`.`memberImg` FROM `article` LEFT JOIN `member` ON `article`.`memberId` = `member`.`memberId` ORDER BY `created_at` DESC LIMIT 6  "
+
+  const [r1] = await db.query(Sql);
   res.json(r1)
 
 })

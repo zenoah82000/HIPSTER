@@ -375,27 +375,27 @@ function Mynavbar(props) {
       <LogoutOkMassage show={showLogoutOk} />
       <nav>
         <div className="navbar container ">
-          <a href="/" className="logo">
+          <Link to="/" className="logo">
             <img src="http://localhost:5000/images/home/logo.png" />
-          </a>
+          </Link>
           <div className="burger none" id="burger">
             ☰
           </div>
           <ul className="menu">
             <li>
-              <a href="/about">品牌介紹</a>
+              <Link to="/about">品牌介紹</Link>
             </li>
             <li>
-              <a href="/map">地圖探索</a>
+              <Link to="/map">地圖探索</Link>
             </li>
             <li>
-              <a href="/blog">文章專欄</a>
+              <Link to="/blog">文章專欄</Link>
             </li>
             <li>
-              <a href="/productlist">活動列表</a>
+              <Link to="/productlist">活動列表</Link>
             </li>
             <li>
-              <a href="/contact">聯絡我們</a>
+              <Link to="/contact">聯絡我們</Link>
             </li>
           </ul>
           {/* ========================================================= */}
@@ -489,9 +489,9 @@ function Mynavbar(props) {
               <ul className="member">
                 <li>{username},您好</li>
                 <li>
-                  <a href="./memberuser" className="memberbtn">
+                  <Link to="/memberuser/user/" className="memberbtn">
                     會員中心
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <Link

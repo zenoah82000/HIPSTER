@@ -142,10 +142,10 @@ router.post('/loginmember', async (req, res, next) =>{
   const memberPwd = req.body.memberPwd
   const memberImg =  req.body.memberImg
 
-  const getMemberSql = "UPDATE `member` SET `memberName`=?,`memberGender`=?,`memberBirth`=?,`memberPhone`=?,`memberAddress`=?,`memberPwd`=?,`memberImg`=? WHERE  `memberId`=? "
+  // const updateMemberSql = "UPDATE `member` SET `memberName`=?,`memberGender`=?,`memberBirth`=?,`memberPhone`=?,`memberAddress`=?,`memberPwd`=?,`memberImg`=? WHERE  `memberId`=? "
 
-  const [r1] = await db.query(getMemberSql, [memberName,memberGender,memberBirth,memberPhone,memberAddress,memberPwd,memberImg,memberId]);
-  res.json(r1)
+  // const [r1] = await db.query(updateMemberSql, [memberName,memberGender,memberBirth,memberPhone,memberAddress,memberPwd,memberImg,memberId]);
+  // res.json(r1)
 })
 
 
