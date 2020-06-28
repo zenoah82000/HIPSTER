@@ -148,7 +148,7 @@ function App(props) {
           <Route path="/Contact">
             <Contact />
           </Route>
-          <Route path="/productlist/">
+          <Route path="/productlist/:id?">
             <ProductList />
           </Route>
           <Route path="/product">

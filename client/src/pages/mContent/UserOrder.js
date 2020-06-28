@@ -162,12 +162,6 @@ function UserOrder() {
                       )
                     })}
                 </div>
-                <div className="card-footer order-footer d-flex justify-content-end">
-                  <div>
-                    購買金額:<span>NT${item.orderTotal}</span>
-                  </div>
-                  <button className="order-button">取消整筆訂單</button>
-                </div>
               </div>
             </>
           )
