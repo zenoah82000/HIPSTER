@@ -12,8 +12,6 @@ function CouponAllData(props) {
   useEffect(() => {
     getUserCouponDetaiAsync()
   }, [])
-  const [discountPercent, setdiscountPercent] = useState([])
-  console.log('discountPercent', discountPercent)
   let couponList = userCouponData.map((item) => {
     return <option value={item.discountPercent}>{item.discountCode}</option>
   })
@@ -30,7 +28,7 @@ function CouponAllData(props) {
               <select
                 className="form-control couponalldata-select"
                 id="couponFormControlSelect1"
-                onChange={(event) => setdiscountPercent(event.target.value)}
+                onChange={(event) => props.onChange(event.target.value)}
               >
                 <option selected value="1">
                   choose coupon
