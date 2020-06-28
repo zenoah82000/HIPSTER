@@ -17,6 +17,8 @@ router.get('/member/coupon/:memberId', async (req, res) => {
         r1.forEach((item) => {
           item.startTime = item.startTime.toLocaleString('zh');
           item.endTime = item.endTime.toLocaleString('zh');
+          item.created_at = item.created_at.toLocaleString('zh');
+          item.updated_at = item.updated_at.toLocaleString('zh');
         });
         data.coupon = r1;
         res.json(data);

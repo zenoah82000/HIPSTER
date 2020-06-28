@@ -47,7 +47,6 @@ p {
   background-position: center center;
   position: relative;
   // margin-top: 100px;
-  overflow: hidden;
 
   .banner-title {
     width: 375px;
@@ -337,11 +336,11 @@ p {
 //////////////////home-countdown/////////////////////
 .countdown-num {
   text-align: center;
-  font-size: 16px;
+  font-size: 20px;
   color: #ff3400;
   margin: 5px 0;
   .large {
-    font-size: 30px;
+    font-size: 35px;
     font-weight: 600;
   }
 }
@@ -362,7 +361,6 @@ p {
 
 .home-countdown {
   @extend .home-activity;
-
   .countdown-main {
     @extend .activity-main;
 
@@ -386,10 +384,8 @@ p {
       }
       .countdown-local {
         @extend .activity-local;
-        width: 30%;
+        width: 40%;
         float: left;
-        overflow: hidden;
-        height: 30px;
       }
       .home-countdown-price {
         @extend .home-activity-star;

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+
 import '../styles/home.scss'
 import {
   FaSearch,
@@ -10,74 +11,31 @@ import {
 } from 'react-icons/fa'
 import Slider from 'react-slick'
 
+import Title from '../images/home/title.png'
+import abouticon1 from '../images/home/about-icon1.png'
+import abouticon2 from '../images/home/about-icon2.png'
+import abouticon3 from '../images/home/about-icon3.png'
+import abouticon4 from '../images/home/about-icon4.png'
 import activity from '../images/home/activity-test.jpg'
 
 function Home(props) {
   //搜尋bar切換狀態 0=地點 1=分類 2=時間
   const [searchbar, setsearchbar] = useState(0)
-  //商品區塊>關注
-  const [heart, setHeart] = useState(false)
-
-  const [ProductEndlist, setProductEndlist] = useState('')
-
-<<<<<<< HEAD
-=======
-  useEffect(() => {
-    homeProductEndlist()
-  }, [])
-  console.log({ ...ProductEndlist[0] }.productId)
->>>>>>> 3abda86cc7c355f2b22811ce317669202b6c5f09
-  //找出倒數結束5筆商品
-  async function homeProductEndlist(item) {
-    // 注意資料格式要設定，伺服器才知道是json格式
-    const request = new Request('http://localhost:5000/homeproductendlist/', {
-      method: 'POST',
-      body: JSON.stringify(item),
-      headers: new Headers({
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      }),
-    })
-    const response = await fetch(request)
-    const data = await response.json()
-    // console.log('5筆商品', data.length)
-    setProductEndlist(data)
-  }
+  const [heart,setHeart]=useState(false)
+  // console.log(searchbar)
 
   //地點搜尋bar
   const location = (
     <div id="location-search" className="search-bar">
       <select id="city">
-        <option>新北市</option>
-        <option>臺北市</option>
-        <option>基隆市</option>
-        <option>連江縣</option>
-        <option>宜蘭縣</option>
-        <option>新竹市</option>
-        <option>新竹縣</option>
-        <option>桃園市</option>
-        <option>苗栗縣</option>
-        <option>臺中市</option>
-        <option>彰化縣</option>
-        <option>南投縣</option>
-        <option>嘉義市</option>
-        <option>嘉義縣</option>
-        <option>雲林縣</option>
-        <option>臺南市</option>
+        <option>台北市</option>
+        <option>台中市</option>
+        <option>高雄市</option>
       </select>
       <select id="area">
-        <option>請選擇</option>
+        <option>內湖區</option>
         <option>中正區</option>
         <option>大同區</option>
-        <option>中山區</option>
-        <option>松山區</option>
-        <option>大安區</option>
-        <option>信義區</option>
-        <option>士林區</option>
-        <option>北投區</option>
-        <option>內湖區</option>
-        <option>南港區</option>
-        <option>文山區</option>
       </select>
       <input
         type="text"
@@ -144,9 +102,7 @@ function Home(props) {
   const localbtnChangeClass = searchbar == 0 ? 'btn active' : 'btn'
   const activenamebtnChangeClass = searchbar == 1 ? 'btn active' : 'btn'
   const timebtnChangeClass = searchbar == 2 ? 'btn active' : 'btn'
-
-  //商品區塊>關注
-  const wishChangeClass = heart == true ? 'heart' : ''
+  const wishChangeClass = heart  == true?  'heart':''
   //輪播-精選
   var activitys = {
     arrows: true,
@@ -167,87 +123,12 @@ function Home(props) {
     slidesToScroll: 1,
   }
 
-  // 設置倒數計時: 結束時間 - 當前時間
-  const countdowntime = (datatime) => {
-    // 當前時間
-    var time = new Date()
-    var nowTime = time.getTime() // 獲取當前毫秒數
-
-    var endTime = new Date(datatime) //結束轉毫秒
-
-    // 倒數計時: 差值
-    var offsetTime = (endTime - nowTime) / 1000 // ** 以秒為單位
-    var sec = parseInt(offsetTime % 60) // 秒
-    var min = parseInt((offsetTime / 60) % 60) // 分 ex: 90秒
-    var hr = parseInt(offsetTime / 60 / 60) // 時
-    // console.log('開始時間', time)
-    // console.log('結束時間', endTime)
-    console.log('相差', offsetTime, '秒')
-    console.log('相差', hr, '時', min, '分', sec, '秒')
-
-    return (
-      <>
-        <span className="large">{hr}</span>時
-        <span className="large">{min}</span>分
-        <span className="large">{sec}</span>秒
-      </>
-    )
-  }
-
-  //倒數結束5筆商品顯示
-  let ProductEnd = Array.from(ProductEndlist)
-  const display = ProductEnd.map((item, index) => {
-    return (
-      <>
-        <a href="#">
-          <p className="countdown-num">
-            {countdowntime(item.productEndingDate)}
-          </p>
-          <div className="countdown-main-cont">
-            <div className="countdown-picture">
-              <div className="countdown-follow active">
-                <FaHeart />
-              </div>
-              <img
-                src={`http://localhost:5000/images/product/${item.productImg}`}
-              />
-            </div>
-            <div className="countdown-title">
-              <p>{item.productName}</p>
-            </div>
-            <div className="countdown-local">
-              <p>
-                <FaMapMarkerAlt />
-                {item.productAddress}
-              </p>
-            </div>
-            <div className="home-countdown-price">
-              <p>${item.productPrice}</p>
-            </div>
-          </div>
-        </a>
-      </>
-    )
-  })
-
-  const test = () => {
-    console.log('ok')
-  }
-
-  //網頁載入時執行
-  useEffect(() => {
-    homeProductEndlist()
-    setInterval(() => {
-      test()
-    }, 1000)
-  }, [])
-
   return (
     <>
       <div className="banner">
         <div className="video">
           <video
-            // src="http://localhost:5000/images/home/test.mp4"
+            src="http://127.0.0.1:3000/test.mp4"
             loop
             autoPlay
             muted
@@ -255,7 +136,7 @@ function Home(props) {
         </div>
         <div className="container">
           <div className="banner-title">
-            <img src="http://localhost:5000/images/home/title.png" />
+            <img src={Title} />
           </div>
           <div className="searchbar-chang-btn">
             <div className="btnList">
@@ -299,7 +180,6 @@ function Home(props) {
             <span className="txt">關於我們</span>
             <span className="line"></span>
           </div>
-
           <p className="text-center">
             文青地圖致力於提供最優質的手作課程與展覽活動，透過我們所提供的快速搜尋服務，讓繁忙的
             <br />
@@ -309,28 +189,28 @@ function Home(props) {
           <div className="about-main">
             <div className="about-main-cont">
               <div className="about-icon">
-                <img src="http://localhost:5000/images/home/about-icon1.png"></img>
+                <img src={abouticon1}></img>
               </div>
               <div className="about-title">最優質的活動資訊</div>
               <p>發掘最棒的展覽資訊、手作課程與最難忘的活動體驗！</p>
             </div>
             <div className="about-main-cont">
               <div className="about-icon">
-                <img src="http://localhost:5000/images/home/about-icon2.png"></img>
+                <img src={abouticon2}></img>
               </div>
               <div className="about-title">方便的地圖探索</div>
               <p>提供分類、定位搜尋，輕鬆顯示所有附近的活動資訊！</p>
             </div>
             <div className="about-main-cont">
               <div className="about-icon">
-                <img src="http://localhost:5000/images/home/about-icon3.png"></img>
+                <img src={abouticon3}></img>
               </div>
               <div className="about-title">即時的評價訊息</div>
               <p>我們鼓勵所有參與過活動的朋友們留下最誠實的評價！</p>
             </div>
             <div className="about-main-cont">
               <div className="about-icon">
-                <img src="http://localhost:5000/images/home/about-icon4.png"></img>
+                <img src={abouticon4}></img>
               </div>
               <div className="about-title">安全的購買系統</div>
               <p>加密付費及憑證，以安心的方式，預訂精彩的活動！</p>
@@ -352,12 +232,9 @@ function Home(props) {
                 <div className="activity-main-cont">
                   <div className="activity-picture">
                     <div className="activity-follow">
-                      <FaHeart
-                        onClick={() => {
-                          setHeart(!heart)
-                        }}
-                        className={wishChangeClass}
-                      />
+                      <FaHeart onClick={()=>{
+                        setHeart(!heart)
+                      }} className={wishChangeClass}/>
                     </div>
                     <img src={activity} />
                   </div>
@@ -480,7 +357,144 @@ function Home(props) {
             <span className="line"></span>
           </div>
           <div className="countdown-main">
-            <Slider {...countdowns}>{display}</Slider>
+            <Slider {...countdowns}>
+              <a href="#">
+                <p className="countdown-num">
+                  <span className="large">12</span>時
+                  <span className="large">01</span>分
+                  <span className="large">30</span>秒
+                </p>
+                <div className="countdown-main-cont">
+                  <div className="countdown-picture">
+                    <div className="countdown-follow">
+                      <FaHeart />
+                    </div>
+                    <img src={activity} />
+                  </div>
+                  <div className="countdown-title">
+                    <p>【花蓮七星潭 GLAMPING 】 ｜露營帳篷／露營車</p>
+                  </div>
+                  <div className="countdown-local">
+                    <p>
+                      <FaMapMarkerAlt />
+                      台灣 宜蘭
+                    </p>
+                  </div>
+                  <div className="home-countdown-price">
+                    <p>$2500</p>
+                  </div>
+                </div>
+              </a>
+
+              <a href="#">
+                <p className="countdown-num">
+                  <span className="large">12</span>時
+                  <span className="large">25</span>分
+                  <span className="large">30</span>秒
+                </p>
+                <div className="countdown-main-cont">
+                  <div className="countdown-picture">
+                    <div className="countdown-follow">
+                      <FaHeart />
+                    </div>
+                    <img src={activity} />
+                  </div>
+                  <div className="countdown-title">
+                    <p>【花蓮七星潭 GLAMPING 】 ｜露營帳篷／露營車</p>
+                  </div>
+                  <div className="countdown-local">
+                    <p>
+                      <FaMapMarkerAlt />
+                      台灣 宜蘭
+                    </p>
+                  </div>
+                  <div className="home-countdown-price">
+                    <p>$2500</p>
+                  </div>
+                </div>
+              </a>
+
+              <a href="#">
+                <p className="countdown-num">
+                  <span className="large">2</span>時
+                  <span className="large">25</span>分
+                  <span className="large">30</span>秒
+                </p>
+                <div className="countdown-main-cont">
+                  <div className="countdown-picture">
+                    <div className="countdown-follow">
+                      <FaHeart />
+                    </div>
+                    <img src={activity} />
+                  </div>
+                  <div className="countdown-title">
+                    <p>【花蓮七星潭 GLAMPING 】 ｜露營帳篷／露營車</p>
+                  </div>
+                  <div className="countdown-local">
+                    <p>
+                      <FaMapMarkerAlt />
+                      台灣 宜蘭
+                    </p>
+                  </div>
+                  <div className="home-countdown-price">
+                    <p>$2500</p>
+                  </div>
+                </div>
+              </a>
+
+              <a href="#">
+                <p className="countdown-num">
+                  <span className="large">25</span>分
+                  <span className="large">30</span>秒
+                </p>
+                <div className="countdown-main-cont">
+                  <div className="countdown-picture">
+                    <div className="countdown-follow">
+                      <FaHeart />
+                    </div>
+                    <img src={activity} />
+                  </div>
+                  <div className="countdown-title">
+                    <p>【花蓮七星潭 GLAMPING 】 ｜露營帳篷／露營車</p>
+                  </div>
+                  <div className="countdown-local">
+                    <p>
+                      <FaMapMarkerAlt />
+                      台灣 宜蘭
+                    </p>
+                  </div>
+                  <div className="home-countdown-price">
+                    <p>$2500</p>
+                  </div>
+                </div>
+              </a>
+
+              <a href="#">
+                <p className="countdown-num">
+                  <span className="large">30</span>秒
+                </p>
+                <div className="countdown-main-cont">
+                  <div className="countdown-picture">
+                    <div className="countdown-follow">
+                      <FaHeart />
+                    </div>
+                    <img src={activity} />
+                  </div>
+                  <div className="countdown-title">
+                    <p>【花蓮七星潭 GLAMPING 】 ｜露營帳篷／露營車</p>
+                  </div>
+                  <div className="countdown-local">
+                    <p>
+                      <FaMapMarkerAlt />
+                      台灣 宜蘭
+                    </p>
+                  </div>
+                  <div className="home-countdown-price">
+                    <p>$2500</p>
+                  </div>
+                </div>
+              </a>
+            </Slider>
           </div>
 
           <a href="#" className="more-countdown-btn">
