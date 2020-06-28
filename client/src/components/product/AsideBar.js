@@ -7,6 +7,7 @@ import { Collapse } from '@material-ui/core'
 import InputRange from 'react-input-range'
 
 import '../../styles/product/AsideBar.scss'
+import 'react-input-range/lib/css/index.css'
 
 import { getProductCategoryAsync } from '../../actions/product/getProductCategory'
 import { element } from 'prop-types'
@@ -30,7 +31,9 @@ function AsideBar(props) {
 
   const [activeClass, setActiveClass] = useState(true)
   const [categorySection, setCategorySection] = useState([])
+  const [value, setValue] = useState({ min: 5, max: 10 })
   const [checked, setChecked] = useState(false)
+  const [checked2, setChecked2] = useState(false)
 
   const handleChange = () => {
     setChecked((prev) => !prev)
@@ -52,10 +55,8 @@ function AsideBar(props) {
 
   function checkcategory(item) {
     if (categorySection.includes(item)) {
-      console.log('categorySection', categorySection)
       return 'checkbox-dropdown-list active'
     } else {
-      console.log('categorySection', categorySection)
       return 'checkbox-dropdown-list'
     }
   }
@@ -118,40 +119,33 @@ function AsideBar(props) {
           <Dropdown.Menu></Dropdown.Menu>
         </Dropdown>
         <div className="aside-wrapper-filter-box" onClick={handleChange}>
-          <h3>導覽語言</h3>
+          <h3>行程時間</h3>
           <Collapse in={checked} timeout={200}>
             <ul className="checkbox-dropdown-list active">
-              <li className="checkbox px-0" key="all">
-                <i className="far fa-square"></i>全部
+              <li className="checkbox px-0" key="0-1">
+                <i className="far fa-square"></i> 0 - 1 小時
               </li>
-              <li className="checkbox px-0" key="Chinese">
-                <i className="far fa-square"></i>中文
+              <li className="checkbox px-0" key="1-3">
+                <i className="far fa-square"></i> 1 - 3 小時
               </li>
-              <li className="checkbox px-0" key="English">
-                <i className="far fa-square"></i>English
+              <li className="checkbox px-0" key="3-5">
+                <i className="far fa-square"></i> 3 - 5 小時
               </li>
-              <li className="checkbox px-0" key="Japanese">
-                <i className="far fa-square"></i>日本語
+              <li className="checkbox px-0" key="5++">
+                <i className="far fa-square"></i> 5 小時以上
               </li>
             </ul>
           </Collapse>
         </div>
         <div className="aside-wrapper-filter-box">
-          <h3>行程時間</h3>
-          <ul className="checkbox-dropdown-list active">
-            <li className="checkbox px-0" key="0-1">
-              <i className="far fa-square"></i> 0 - 1 小時
-            </li>
-            <li className="checkbox px-0" key="1-3">
-              <i className="far fa-square"></i> 1 - 3 小時
-            </li>
-            <li className="checkbox px-0" key="3-5">
-              <i className="far fa-square"></i> 3 - 5 小時
-            </li>
-            <li className="checkbox px-0" key="5++">
-              <i className="far fa-square"></i> 5 小時以上
-            </li>
-          </ul>
+          <h3>價格</h3>
+          <InputRange
+            maxValue={20}
+            minValue={0}
+            value={value}
+            onChange={(value) => setValue(value)}
+            onChangeComplete={(value) => console.log(value)}
+          />
         </div>
       </aside>
     </>

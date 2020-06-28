@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from 'react'
-
-import { FaHeart, FaShoppingCart } from 'react-icons/fa'
-import { BsTrash } from 'react-icons/bs'
-
-import Swal from 'sweetalert2'
+import $ from 'jquery'
 
 import '../../styles/order.scss'
-import { GrOrderedList } from 'react-icons/gr'
 
 function UserOrder() {
   const [orderlist, setOrderlist] = useState([])
+  const [datapage, setDatapage] = useState([])
   const [loading, setLoading] = useState(false)
+  const [currentPage, setCurrentPage] = useState(1)
 
   const getOrderlistAsync = async () => {
-    const request = new Request('http://localhost:5000/member/order/2', {
+    const request = new Request(`http://localhost:5000/member/order/2`, {
       method: 'get',
       headers: new Headers({
         Accept: 'application/json',
@@ -28,36 +25,108 @@ function UserOrder() {
     getOrderlistAsync()
   }, [])
 
+  //點擊頁數重新取得資料
+  useEffect(() => {
+    getdatapage()
+  }, [currentPage])
+
   // 渲染後載入商品
   useEffect(() => {
     setLoading(true)
 
     setTimeout(() => {
       if (orderlist.status) {
-        console.log(orderlist)
         setLoading(false)
+        getdatapage()
       }
     }, 500)
   }, [orderlist])
 
-  const display =
-    orderlist.order ? (
-      <div className="orderlistbox ">
-        <div className="row">
-          {orderlist.order.map((item) => {
-            return (
-              <>
-                <div className="card order-box">
-                  <div className="card-header order-title d-flex">
-                    <div className="col">訂單編號:{item.orderId}</div>
-                    <div className="col">購買時間:{item.created_at}</div>
+  //商品展開判斷
+  const unfold = (e) => {
+    if (e.target.value == '展開更多') {
+      $(e.target).closest('.order-body').css('maxHeight', '1000px')
+      e.target.value = '收起'
+    } else {
+      $(e.target).closest('.order-body').css('maxHeight', '145px')
+      e.target.value = '展開更多'
+    }
+  }
+  //把資料分頁
+  const getdatapage = () => {
+    let perPage = orderlist.perPage
+    let page = currentPage
+    if (orderlist.order) {
+      const newdata = orderlist.order.slice(
+        (page - 1) * perPage,
+        page * perPage
+      )
+      setDatapage(newdata)
+    }
+  }
+  //頁碼
+  const creatpage = () => {
+    let pages = []
+    for (let i = 1; i <= orderlist.totalPages; i++) {
+      pages.push(
+        <li
+          onClick={() => {
+            setCurrentPage(i)
+          }}
+          key={i}
+          className={currentPage == i ? 'active' : ''}
+        >
+          {i}
+        </li>
+      )
+    }
+    return pages
+  }
+  const display = orderlist.order ? (
+    <div className="orderlistbox ">
+      <div className="row">
+        {datapage.map((item) => {
+          return (
+            <>
+              <div className="card order-box">
+                <div className="card-header order-title">
+                  <div className="orderid">
+                    <h6>訂單編號:{item.orderId}</h6>
                   </div>
-                  <div className="card-body order-body">
-                    {orderlist.orderdetails
-                      .filter((value) => value.orderId == item.orderId)
-                      .map((value) => {
-                        return (
-                          <>
+                  <div className="ordertime">
+                    <h6>購買時間:{item.created_at}</h6>
+                  </div>
+                  <div className="orderstatus">
+                    <h6>已付款</h6>
+                  </div>
+                  <div className="ordertotal">
+                    <h6>
+                      付款金額:NT$
+                      {item.orderTotal
+                        .toString()
+                        .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
+                    </h6>
+                  </div>
+                </div>
+                <div className="card-body order-body unfoldbox">
+                  {orderlist.orderdetails
+                    .filter((value) => value.orderId == item.orderId)
+                    .map((value, index) => {
+                      return (
+                        <>
+                          {/* index有兩個就加上展開 */}
+                          {index == 1 ? (
+                            <input
+                              type="button"
+                              className="unfold"
+                              value="展開更多"
+                              onClick={(e) => {
+                                unfold(e)
+                              }}
+                            />
+                          ) : (
+                            ''
+                          )}
                           <div className="d-flex product-box border-bottom">
                             <div className="productimg mr-3">
                               <img src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg" />
@@ -70,39 +139,42 @@ function UserOrder() {
                                 <p>數量:{value.checkQty}</p>
                               </div>
                               <div>
-                                <p>價格:{value.checkPrice}</p>
+                                <p>
+                                  價格:NT$
+                                  {value.checkPrice
+                                    .toString()
+                                    .replace(
+                                      /(\d)(?=(\d{3})+(?:\.\d+)?$)/g,
+                                      '$1,'
+                                    )}
+                                </p>
                               </div>
                               <div>
                                 <p>活動時間:{value.date}</p>
                               </div>
                             </div>
-                            </div>
-                          </>
-                        )
-                      })}
-                  </div>
-                  <div className="card-footer order-footer d-flex justify-content-end">
-                    <div>
-                      購買金額:<span>NT${item.orderTotal}</span>
-                    </div>
-                    <button className="order-button">取消整筆訂單</button>
-                  </div>
+                          </div>
+                        </>
+                      )
+                    })}
                 </div>
-              </>
-            )
-          })}
-        </div>
+              </div>
+            </>
+          )
+        })}
       </div>
-    ) : (
-      <div className="empty text-center">
-        <img
-          className="emptyImg mb-3"
-          src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
-        />
-        <p>暫時未有活動處理預訂記錄</p>
-        <p>探索精彩活動並體驗輕鬆的網上預訂流程</p>
-      </div>
-    )
+      <ul className="orderpage ">{creatpage()}</ul>
+    </div>
+  ) : (
+    <div className="empty text-center">
+      <img
+        className="emptyImg mb-3"
+        src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
+      />
+      <p>暫時未有活動處理預訂記錄</p>
+      <p>探索精彩活動並體驗輕鬆的網上預訂流程</p>
+    </div>
+  )
   return (
     <>
       <div className="usercontainer">

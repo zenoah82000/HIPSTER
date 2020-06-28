@@ -135,7 +135,6 @@ async function executeSQL(
 
   const [r1] = await db.query(Sql);
   res.json(r1)
-
 })
 
 

@@ -16,20 +16,20 @@ function Amount(props) {
         newAmount = amount + 1
         setAmount(newAmount)
         newCart[index].amount = newAmount
-        props.dispatch({type:'GET_CART',value:newCart})
+        props.dispatch({ type: 'GET_CART', value: newCart })
         localStorage.setItem('cart', JSON.stringify(newCart))
         break
       case 'dec':
         if (amount <= 1) {
-           newAmount = 1
+          newAmount = 1
           setAmount(1)
         } else {
           setAmount(amount - 1)
-          newAmount = amount -1
+          newAmount = amount - 1
         }
         setAmount(newAmount)
         newCart[index].amount = newAmount
-        props.dispatch({type:'GET_CART',value:newCart})
+        props.dispatch({ type: 'GET_CART', value: newCart })
         localStorage.setItem('cart', JSON.stringify(newCart))
         break
     }
@@ -37,26 +37,28 @@ function Amount(props) {
 
   return (
     <>
-      <GrFormSubtract
-        className="Subtract"
-        onClick={() => {
-          changeAmount('dec')
-        }}
-      />
-      <input className="amount" value={amount} readOnly />
-      <GrFormAdd
-        className="add"
-        onClick={() => {
-          changeAmount('add')
-        }}
-      />
+      <div className="amountbox">
+        <GrFormSubtract
+          className={amount == 1 ? 'subtract subtractopt' : 'subtract'}
+          onClick={() => {
+            changeAmount('dec')
+          }}
+        />
+        <input className="amount" value={amount} readOnly />
+        <GrFormAdd
+          className="amountadd"
+          onClick={() => {
+            changeAmount('add')
+          }}
+        />
+      </div>
     </>
   )
 }
 
-const mapStateToProps = store=>{
-  return{
-    mycart:store.orderReducer.cartData
+const mapStateToProps = (store) => {
+  return {
+    mycart: store.orderReducer.cartData,
   }
 }
 const mapDispatchToProps = null

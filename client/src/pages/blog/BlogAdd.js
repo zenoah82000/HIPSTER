@@ -2,28 +2,22 @@ import React,{ useState,useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
-
+import $ from 'jquery'
 import CKEditor from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 
 import MyBreadcrumb from '../../components/MyBreadcrumb'
-
 import { getBlogDataAsync,addBlogContentDataAsync } from '../../actions/blog'
-
 
 function BlogAdd(props) {
   // console.log('BlogAdd-props:', props)
-  const [addContentTitle, setAddContentTitle] =  useState([null])
-  const [addContentCategory, setAddContentCategory] =  useState([null])
-  const [addContent, setAddContent] =  useState([null])
-  const [addTag1, setAddTag1] =  useState([null])
-  const [addTag2, setAddTag2] =  useState([null])
-  // const [imgFile, setImgFile] =  useState([null])
-  // const [imgDataFiles, setImgDataFiles] =  useState([null])
+  const [addArticleTitle, setAddArticleTitle] =  useState('')
+  const [addArticleCategory, setAddArticleCategory] =  useState(1)
+  const [addArticleContent, setAddArticleContent] =  useState('')
+  const [addArticleImg, setAddArticleImg] =  useState('')
 
   const { blogData,getBlogDataAsync,addBlogContentDataAsync } = props
   // console.log('blogData', blogData)
-
 
   useEffect(() => {
     getBlogDataAsync()
@@ -32,24 +26,24 @@ function BlogAdd(props) {
 
   //Submit
   const handleSubmit = (event)=>{
-    const addContentData = { 
-      addContentTitle,
-      addContentCategory,
-      addContent,
-      addTag1,
-      addTag2,
-      // imgDataFiles,
+    const addArticleContentData = { 
+      addArticleTitle,
+      addArticleCategory,
+      addArticleContent,      
+      addArticleImg,      
     }
   
-    const addContentData_fd = new FormData()
-    addContentData_fd.append('blogTitle', addContentData.addContentTitle)
-    addContentData_fd.append('categoryName', addContentData.addContentCategory)
-    addContentData_fd.append('blogContent', addContentData.addContent)
-    addContentData_fd.append('tagName1', addContentData.addTag1)
-    addContentData_fd.append('tagName2', addContentData.addTag2)
-    // addContentData_fd.append('addImg', addContentData.imgDataFiles)
+    const addArticleContentData_fd = new FormData()
+    addArticleContentData_fd.append('articleTitle', addArticleContentData.addArticleTitle)
+    console.log('GETFD',addArticleContentData_fd.get("articleTitle"))
+    console.log('addArticleContentData_fd',addArticleContentData_fd)
+    addArticleContentData_fd.append('categoryId', addArticleContentData.addArticleCategory)
+    addArticleContentData_fd.append('articleContent', addArticleContentData.addArticleContent)    
+    addArticleContentData_fd.append('articleImg', addArticleContentData.addArticleImg)    
   
-    addBlogContentDataAsync(addContentData_fd, () => alert('成功新增'))  
+    addBlogContentDataAsync(addArticleContentData_fd
+      // ,() => alert('成功新增')
+      )  
   }
 
   return (
@@ -59,16 +53,19 @@ function BlogAdd(props) {
         <ul className="list-unstyled blog-add-ul">
           <li className="d-flex justify-content-between">
             <div>
-              <select className="blog-select-category" onChange={event => setAddContentCategory(event.target.value)}>
-                <option selected>請選擇類別</option>
-                <option>心情抒發</option>
-                <option>靈感啟發</option>
-                <option>活動分享</option>
+              <select className="blog-select-category" onChange={event => setAddArticleCategory(event.target.value)} value={addArticleCategory}>                
+                <option value="1">心情抒發</option>
+                <option value="2">靈感啟發</option>
+                <option value="3">活動分享</option>
               </select>
             </div>
             <div className="blog-add-btn">
               <button className="btn">取消發文</button>
-              <button className="btn">發佈文章</button>
+              <button className="btn" onClick={e => {
+                  e.preventDefault()
+                  handleSubmit()
+                    // props.history.push('/blog')
+                  }}>發佈文章</button>
             </div>
           </li>
           <li>
@@ -76,32 +73,40 @@ function BlogAdd(props) {
               className="blog-add-title"
               type="text"
               placeholder="請輸入文章標題..."
-              onChange={event => setAddContentTitle(event.target.value)}
+              onChange={event => {
+                setAddArticleTitle(event.target.value)            
+                }}
             />
           </li>
           <li>
             <CKEditor
-              // config={{ ckfinder: {
-              //   // 此處設定上傳圖片之 API 路由
-              //   uploadUrl: '/blogAdd'
-              // } }}
+              config={{ ckfinder: {
+                // 此處設定上傳圖片之 API 路由
+                uploadUrl: 'http://localhost:5000/blogAddImg'
+              } }}
               editor={ClassicEditor}
               // data="<p>請輸入文章內容...</p>"
-              onInit={(editor) => {
+              onInit={(editor) => {                
                 // You can store the "editor" and use when it is needed.
-                console.log('Editor is ready to use!', editor)
+                // console.log('Editor is ready to use!', editor)
               }}
               onChange={(event, editor) => {
-                const data = editor.getData()
-                setAddContent(data)
+                let data = editor.getData()
+                data = data.replace(/\"/g,"'")                
+                setAddArticleContent(data)
                 console.log({ event, editor, data })
-                // console.log('typeof data',typeof data)
+                // console.log('img-length',$(".ck-content img").length)
+                if($(".ck-content img").length){
+                  const src = $(".ck-content img").attr("src")
+                  console.log("src",src)
+                  setAddArticleImg(src)                  
+                }
               }}
               onBlur={(event, editor) => {
-                console.log('Blur.', editor)
+                // console.log('Blur.', editor)
               }}
               onFocus={(event, editor) => {
-                console.log('Focus.', editor)
+                // console.log('Focus.', editor)
               }}
             />
           </li>
@@ -111,12 +116,6 @@ function BlogAdd(props) {
   )
 }
 const mapStateToProps = (store) =>({ blogData: store.blogReducer.blogData})
-
-// 綁定store的dispatch方法到這個元件的props
-// const mapDispatchToProps = (dispatch) => {
-//   return bindActionCreators({ addValue, minusValue }, dispatch)
-// }
-
 
 export default withRouter(connect(mapStateToProps, {
   getBlogDataAsync,

@@ -1,7 +1,7 @@
 const express = require('express')
 const moment = require('moment-timezone')
 // const multer = require('multer')
-const upload = require(__dirname + './../upload-module');
+const upload = require('./upload-module')
 const router = express.Router()
 const fs =require('fs')
 
@@ -13,7 +13,7 @@ const getBlogList = async (req) => {
     rows: [],
   }
   
-  const sql = `SELECT * FROM article ORDER BY articleId ASC`
+  const sql = "SELECT * FROM article ORDER BY articleId ASC"
   const [r] = await db.query(sql)
   if (r) output.rows = r
   for (let i of r) {
@@ -29,15 +29,40 @@ router.get('/blog', async (req, res) => {
   res.json(output)
 })
 
-//新增文章
-router.post('/blogAdd', upload.single('addImg'), (req, res)=>{
-  // console.log(req.body)
+//新增圖片到CKEditor
+router.post('/blogAddImg', upload.single('upload'), (req, res)=>{
+  console.log('req.file',req.file)
   
   res.json({
-    filename: req.file.filename,
-    body: req.body
+    uploaded: true,
+    url: 'http://localhost:5000/images/blog/'+req.file.filename
 });
+})
 
+//新增文章
+router.post('/blogAdd', upload.none(), async (req, res)=>{
+  console.log(req.body)
+  const output ={
+    success: false,
+    error:'',
+    status: 0,
+    body: req.body,
+  }
+  const sql = "INSERT INTO `article`(`articleTitle`,`articleContent`,`categoryId`,`articleImg`) VALUES(?,?,?,?)"
+
+
+  const [r] = await db.query(sql , [
+    req.body.articleTitle,
+    req.body.articleContent,
+    req.body.categoryId,
+    req.body.articleImg,
+    ])
+  if (r) {
+      output.result = r;
+      output.success = true;
+      console.log('result:', r);
+    }
+  res.json(output);
 })
 
 module.exports = router
