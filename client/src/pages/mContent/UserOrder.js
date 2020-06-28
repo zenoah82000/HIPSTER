@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import $ from 'jquery'
-import { FaHeart, FaShoppingCart } from 'react-icons/fa'
-import { BsTrash } from 'react-icons/bs'
-import $ from 'jquery'
-import Swal from 'sweetalert2'
 
 import '../../styles/order.scss'
-import { GrOrderedList } from 'react-icons/gr'
 
 function UserOrder() {
   const [orderlist, setOrderlist] = useState([])
@@ -29,6 +24,7 @@ function UserOrder() {
   useEffect(() => {
     getOrderlistAsync()
   }, [])
+
   //點擊頁數重新取得資料
   useEffect(() => {
     getdatapage()
@@ -161,12 +157,6 @@ function UserOrder() {
                         </>
                       )
                     })}
-                </div>
-                <div className="card-footer order-footer d-flex justify-content-end">
-                  <div>
-                    購買金額:<span>NT${item.orderTotal}</span>
-                  </div>
-                  <button className="order-button">取消整筆訂單</button>
                 </div>
               </div>
             </>

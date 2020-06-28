@@ -12,6 +12,8 @@
       background-color: white;
       margin: 20px 0px;
       .order-title {
+        display: flex;
+        flex-wrap: wrap;
         font-size: bold;
         padding: 5px 20px;
         background-color: #879e87;
@@ -97,6 +99,7 @@
   }
 }
 
+//分頁
 .orderpage {
   list-style: none;
   padding: 30px 0;

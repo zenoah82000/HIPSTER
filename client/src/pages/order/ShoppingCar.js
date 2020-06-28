@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { withRouter } from 'react-router-dom'
-
+import { withRouter, Link } from 'react-router-dom'
 import $ from 'jquery'
-
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
@@ -19,7 +17,7 @@ import Mycart from '../../components/order/MyCart'
 import CouponAllData from '../../components/coupon/CouponAllData'
 
 function ShoppingCar(props) {
-  const { mycart, buyerinfo,deleteCart, sum, userSuccess } = props
+  const { mycart, buyerinfo, deleteCart, sum, userSuccess } = props
   let checkdiv
   console.log(mycart)
 
@@ -27,10 +25,9 @@ function ShoppingCar(props) {
   const [login, setLogin] = useState(false)
   //結帳視窗
   const [checkoutok, setCheckoutok] = useState(false)
-  
 
-   //請登入視窗
-   function Checklogin(props) {
+  //請登入視窗
+  function Checklogin(props) {
     return (
       <Modal
         className="SignOk"
@@ -54,7 +51,7 @@ function ShoppingCar(props) {
     )
   }
   //結帳視窗
-  
+
   //前往結帳，送出訂單
   const checkOut = () => {
     //判斷是否登入
@@ -78,11 +75,11 @@ function ShoppingCar(props) {
         confirmButtonColor: 'rgba(104, 142, 103, 0.8)',
       }).then((result) => {
         if (result.value) {
-          let buydata ={
-            product:[...mycart],
+          let buydata = {
+            product: [...mycart],
           }
-          props.dispatch({type:'BUYER_DATA',value:buydata})
-          props.dispatch({type:'GET_CART',value:[]})
+          props.dispatch({ type: 'BUYER_DATA', value: buydata })
+          props.dispatch({ type: 'GET_CART', value: [] })
           localStorage.removeItem('cart')
           props.history.push('/paymentDetail')
         }
@@ -96,13 +93,13 @@ function ShoppingCar(props) {
       let scrollTop = $(window).scrollTop()
       let pageHeight = $(window).innerHeight()
       let checktop = $('#checkdiv').offset().top
-      if(pageHeight+scrollTop >checktop){
+      if (pageHeight + scrollTop > checktop) {
         $('#checkdiv').removeClass('checkfix')
-      }else{
+      } else {
         $('#checkdiv').addClass('checkfix')
       }
       $(window).scroll(function () {
-         scrollTop = $(this).scrollTop()
+        scrollTop = $(this).scrollTop()
         if (pageHeight + scrollTop <= checktop) {
           $('#checkdiv').addClass('checkfix')
         } else {
@@ -137,13 +134,19 @@ function ShoppingCar(props) {
           ref={(div) => (checkdiv = div)}
           className="totalbox bg-white mt-3 d-flex"
         >
-          <div className="col-6">
+          <div className="">
             <CouponAllData />
           </div>
-          <div className="col-4 text-right total ">
-            活動合計:<span className="total">NT${sum(mycart)}</span>
+          <div className="">
+            {mycart.length}個活動合計:
+            <span className="total">
+              NT$
+              {sum(mycart)
+                .toString()
+                .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
+            </span>
           </div>
-          <div className="col-2 text-right">
+          <div className="">
             <button
               className="button"
               onClick={() => {
@@ -162,12 +165,15 @@ function ShoppingCar(props) {
           src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
         />
         <p>購物車是空的!</p>
+        <Link className="emptylink" to="/productlist">
+          快去選擇喜愛的活動吧!
+        </Link>
       </div>
     )
 
   return (
     <>
-    <Checklogin show={login} onHide={() => setLogin(false)} />
+      <Checklogin show={login} onHide={() => setLogin(false)} />
       <div className="container">
         <h1 className="py-4">購物車</h1>
         {display}

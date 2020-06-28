@@ -32,7 +32,9 @@ function MyCart(props) {
                 </Link>
               </div>
               <div className="productright">
-                <div className="productdate">{value.date}</div>
+                <div className="productdate">
+                  <p>{value.date}</p>
+                </div>
                 <div className="productamount">
                   <Amount index={index} value={value.amount} />
                 </div>
