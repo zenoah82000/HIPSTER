@@ -32,7 +32,7 @@ import MemberUser from './pages/members/MemberUser'
 //blog
 import Blog from './pages/blog/Blog'
 import BlogEdit from './pages/blog/BlogEdit'
-import BlogContent from './pages/blog/BlogContent'
+import BlogDetail from './pages/blog/BlogDetail'
 import BlogAdd from './pages/blog/BlogAdd'
 
 import Swal from 'sweetalert2'
@@ -133,8 +133,8 @@ function App(props) {
           <Route path="/blogEdit">
             <BlogEdit />
           </Route>
-          <Route path="/blogContent">
-            <BlogContent />
+          <Route path="/blogDetail/:articleId?">
+            <BlogDetail />
           </Route>
           <Route path="/blog">
             <Blog />
