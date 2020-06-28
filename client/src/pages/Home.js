@@ -92,14 +92,6 @@ function Home(props) {
     setslickBannerImgData(data)
   }
 
-<<<<<<< HEAD
-=======
-  useEffect(() => {
-    homeProductEndlist()
-  }, [])
-  console.log({ ...ProductEndlist[0] }.productId)
-
->>>>>>> bd115ed43189ed6747d71ac3700ba62a8ed54068
   //找出倒數結束5筆商品
   async function homeProductEndlist(item) {
     // 注意資料格式要設定，伺服器才知道是json格式
@@ -718,24 +710,6 @@ function Home(props) {
         </div>
       </div>
       {/* ----------------------------------------------- */}
-<<<<<<< HEAD
-      <div className="home-blog">
-        <div className="container">
-          <div className="title">
-            <span className="line"></span>
-            <span className="txt">精選文章</span>
-            <span className="line"></span>
-          </div>
-
-          <div className="home-blog-content">{Articlesdisplay}</div>
-
-          <Link to="/blog" className="more-blog-btn">
-            查看更多文章
-          </Link>
-        </div>
-      </div>
-=======
->>>>>>> bd115ed43189ed6747d71ac3700ba62a8ed54068
     </>
   )
 }
