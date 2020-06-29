@@ -14,11 +14,14 @@ function UserCoupon(props) {
   const { adduserCouponData, addUserCouponDataAsync } = props
   const memberId = 2
   const [discountCode, setdiscountCode] = useState([])
+
   useEffect(() => {
-    getUserCouponDetaiAsync()
+    //getUserCouponDetaiAsync()
   }, [userCouponData])
+
   useEffect(() => {
-    addUserCouponDataAsync()
+    //addUserCouponDataAsync()
+    getUserCouponDetaiAsync()
   }, [])
 
   console.log('uCoupon-props', props)

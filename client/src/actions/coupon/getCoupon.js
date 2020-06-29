@@ -22,10 +22,14 @@ export const getUserCouponDetaiAsync = (usercoupondata) => {
 }
 
 //新增優惠券
-export const addUserCoupon = (data) => ({
-  type: 'ADD_UserCouponDATA',
-  value: data,
-})
+export const addUserCoupon = (data) => {
+  console.log('Action addUserCoupon', data)
+
+  return {
+    type: 'ADD_UserCouponDATA',
+    value: data,
+  }
+}
 
 export const addUserCouponDataAsync = (addcouponData, callback) => {
   console.log('addcouponData', addcouponData)
@@ -44,6 +48,7 @@ export const addUserCouponDataAsync = (addcouponData, callback) => {
     const data = await response.json()
     console.log('伺服器回傳的json資料', data)
 
-    dispatch(addUserCouponDataAsync(data))
+    dispatch(addUserCoupon(addcouponData))
+    window.location.reload()
   }
 }

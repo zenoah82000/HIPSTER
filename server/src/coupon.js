@@ -4,7 +4,7 @@ const upload = require(__dirname + '/upload-module');
 const router = express.Router()
 
 router.get('/member/coupon/:memberId', async (req, res) => {
-    console.log("買家優惠券請求");
+    // console.log("買家優惠券請求");
     const data = {
         status: true,
         coupon: [],
@@ -32,17 +32,23 @@ router.get('/member/coupon/:memberId', async (req, res) => {
 
 //會員新增優惠券
 router.post("/member/addcoupon", async (req, res) => {
-    // console.log(req.body)  
+      
     const addcoupon =
-      "INSERT INTO `rel_member_coupon` (`discountCode`, `memberId`, `memberCouponNum`) VALUES(?,?,?)";
-    const [r2] = await db.query(addcoupon, [
-      req.body.discountCode,
-      req.body.memberId,
-      "1",
-    ]);
-    
-    // console.log(`優惠券新增成功，優惠券代碼 ${req.body.discountCode}`);
-    res.send(`優惠券新增成功，會員${req.body.memberId}優惠券代碼 ${req.body.discountCode}`);
+      "INSERT INTO `rel_member_coupon` (`discountCode`, `memberId`, `memberCouponNum`) VALUES ('"+
+      req.body.discountCode +"','"+
+      req.body.memberId + "','1')";
+    // const [r2] = await db.query(addcoupon, [
+    //   req.body.discountCode,
+    //   req.body.memberId,
+    //   "1",
+    // ]);
+
+    console.log(addcoupon) 
+
+    const result = await db.query(addcoupon)
+    //res.send(`優惠券新增成功，會員${req.body.memberId}優惠券代碼 ${req.body.discountCode}`);
+    res.json(`優惠券新增成功，會員${req.body.memberId}優惠券代碼 ${req.body.discountCode}`);
+   // res.json(data);
   });
 
 module.exports = router
