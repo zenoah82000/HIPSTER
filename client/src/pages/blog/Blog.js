@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
