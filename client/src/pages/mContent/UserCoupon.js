@@ -58,6 +58,7 @@ function UserCoupon(props) {
               <ul class="list-unstyled">
                 <li>可用數量：{item.memberCouponNum}</li>
                 <li>優惠代碼：{item.discountCode}</li>
+                <li>優惠折扣：{item.discountPercent * 100}折</li>
               </ul>
             </div>
           </div>
