@@ -392,7 +392,7 @@ function Mynavbar(props) {
               <Link to="/blog">文章專欄</Link>
             </li>
             <li>
-              <Link to="/productlist">活動列表</Link>
+              <Link to="/productlist/">活動列表</Link>
             </li>
             <li>
               <Link to="/contact">聯絡我們</Link>
