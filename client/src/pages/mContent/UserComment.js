@@ -67,7 +67,7 @@ function UserComment(props) {
   const [myCommentlist, setMyCommentList] = useState([])
   const [noCommentlist, setNoCommentList] = useState([])
 
-  // 後端傳資料
+  // 後端傳已評論資料
   const commentAsync = async (order) => {
     const request = new Request('http://localhost:5000/comments/2', {
       method: 'get',
@@ -84,6 +84,7 @@ function UserComment(props) {
     setMyCommentList(data.comment)
     setNoCommentList(data.notcomment)
   }
+
 
   useEffect(() => {
     commentAsync()
