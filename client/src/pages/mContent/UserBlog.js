@@ -13,10 +13,45 @@ function UserBlog(props) {
 
   const { blogData,getBlogDataAsync } = props
   console.log('blogData', blogData)
-  
+  let blogDataRp = []
+  // if(blogData){console.log('blogData', blogData)}
+
+  if(blogData[0]){
+    console.log('blogData-Content', blogData[0].articleContent)
+    blogDataRp = blogData.map((item)=>{
+      const reg = /<(?:.|\s)*?>/g      
+      item.articleContent=item.articleContent.replace(reg,'')
+      return item
+    })  
+  }  
+
   useEffect(() => {
     getBlogDataAsync()   
   }, [])  
+
+  const showBlogList = blogDataRp.map((item)=>{
+    return (
+    <>
+      <hr />      
+      <div className="row userblog-list-item" key={item.articleId}>
+        <Link to={"/blogDetail/" + item.articleId} className="d-block col-2">
+          <img src={item.articleImg} />
+        </Link>
+        <Link to={"/blogDetail/" + item.articleId} className="d-block col-8">
+          <h3>{item.articleTitle}</h3>
+          <p>{item.articleContent}</p>
+          <p>{item.created_at}</p>
+        </Link>
+        <div className="col-2">
+          <Link to={"/blogEdit/" + item.articleId} className="btn"><i class="fas fa-edit"></i></Link>
+          <button className="btn">
+            <i className="fa fa-trash" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>      
+    </>
+    )
+  })
 
   return (
     <>
@@ -25,40 +60,9 @@ function UserBlog(props) {
         <img src={userBlogTop} />
       </div>
       <div className="row userblog-btn-row">
-        <button className="btn userblog-btn d-block">發表新文章</button>
+        <Link to="/blogAdd/" className="btn userblog-btn d-block">發表新文章</Link>
       </div>
-      <hr />
-      <div className="row userblog-list-item">
-        <div className="col-2">
-          <img src={author1} alt="author1" />
-        </div>
-        <div className="col-8">
-          <h3>個人的文章標題</h3>
-          <p>個人的文章內容</p>
-        </div>
-        <div className="col-2">
-          <button className="btn">編輯</button>
-          <button className="btn">
-            <i className="fa fa-trash" aria-hidden="true"></i>
-          </button>
-        </div>
-      </div>
-      <hr />
-      <div className="row userblog-list-item">
-        <div className="col-2">
-          <img src={author1} alt="author1" />
-        </div>
-        <div className="col-8">
-          <h3>個人的文章標題</h3>
-          <p>個人的文章內容</p>
-        </div>
-        <div className="col-2">
-          <button className="btn">編輯</button>
-          <button className="btn">
-            <i className="fa fa-trash" aria-hidden="true"></i>
-          </button>
-        </div>
-      </div>
+      {showBlogList}     
     </>
   )
 }

@@ -25,21 +25,21 @@ function BlogAdd(props) {
 
   //Submit
   const handleSubmit = (event)=>{
-    const addArticleContentData = { 
-      addArticleTitle,
-      addArticleCategory,
-      addArticleContent,      
-      addArticleImg,      
-    }
+    // const addArticleContentData = { 
+    //   addArticleTitle,
+    //   addArticleCategory,
+    //   addArticleContent,      
+    //   addArticleImg,      
+    // }
   
     const addArticleContentData_fd = new FormData()
-    addArticleContentData_fd.append('articleTitle', addArticleContentData.addArticleTitle)
-    console.log('GETFD',addArticleContentData_fd.get("articleTitle"))
-    console.log('addArticleContentData_fd',addArticleContentData_fd)
-    addArticleContentData_fd.append('categoryId', addArticleContentData.addArticleCategory)
-    addArticleContentData_fd.append('articleContent', addArticleContentData.addArticleContent)    
-    addArticleContentData_fd.append('articleImg', addArticleContentData.addArticleImg)    
-  
+    addArticleContentData_fd.append('articleTitle', addArticleTitle)    
+    addArticleContentData_fd.append('categoryId', addArticleCategory)
+    addArticleContentData_fd.append('articleContent', addArticleContent)    
+    addArticleContentData_fd.append('articleImg', addArticleImg)    
+    
+    console.log('FormData.get()',addArticleContentData_fd.get("articleTitle"))
+
     addBlogContentDataAsync(addArticleContentData_fd
       // ,() => alert('成功新增')
       )  
