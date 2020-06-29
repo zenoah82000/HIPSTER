@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { withRouter } from 'react-router-dom'
 import '../../styles/mContent/userComment.scss'
 import RatingStar from './ratingStar'
 import { BsPlusCircle } from 'react-icons/bs'
@@ -6,29 +7,25 @@ import { IconContext } from 'react-icons'
 
 //確認框
 import Swal from 'sweetalert2'
+import { checkPropTypes } from 'prop-types'
 
-function ReplyComment({ commentData }) {
+function ReplyComment({ handleDelete, index, commentData, history }) {
   //state
   const [image, setImage] = useState({ file: [], preview: [], raw: '' })
   const [text, setText] = useState('')
-  const [list, setList] = useState([])
   const [ratingValue, setRatingValue] = useState('')
 
-
-
-
-
-  
   // 評論送出
   const secdCommentData = {
     commentMemberId: '',
     comment: {
-    itemListId:"",
-    content:"",
-    star:""}
+      itemListId: '',
+      content: '',
+      star: '',
+    },
   }
-
   const sendCommentAsync = async (comment) => {
+    console.log(comment)
     const request = new Request('http://localhost:5000/sendComments', {
       method: 'post',
       body: JSON.stringify(comment),
@@ -39,9 +36,6 @@ function ReplyComment({ commentData }) {
     })
     const response = await fetch(request)
     const data = await response.json()
-    // const orderId = {...buyerinfo}
-    // orderId.orderId = data
-    // props.dispatch({ type: 'BUYER_DATA', value: orderId })
   }
 
   // 上傳圖片
@@ -87,46 +81,51 @@ function ReplyComment({ commentData }) {
     console.log(text)
   }
 
-  const handleSubmit = (e, index) => {
-    // alert('submit')
-    text !== ''
-      ? Swal.fire({
-          text: '成功送出評論',
-          icon: 'success',
-          confirmButtonText: '確定',
-          confirmButtonColor: 'rgba(104, 142, 103, 0.8)',
-        }) && handleDelete(index)
-      : // && sendCommentAsync(commentData)
-        Swal.fire({
-          text: '評論不能為空白',
-          icon: 'warning',
-          confirmButtonText: '確定',
-          confirmButtonColor: 'rgba(104, 142, 103, 0.8)',
-        })
-
-    e.preventDefault()
-  }
-
-  const handleDelete = (index) => {
-    const newList = [...list]
-    newList.splice(index, 1)
-    setList(newList)
-  }
-
   //子元素回傳星等
   const getRatingValue = (value) => {
-    setRatingValue(value)
-    console.log(ratingValue + 1)
+    setRatingValue(value + 1)
+    console.log(value + 1)
+  }
+
+  //送出
+  const sendComment = (e, index, text, id) => {
+    e.preventDefault()
+    let commentData = {
+      itemListId: id,
+      commentContent: text,
+      star: ratingValue,
+    }
+    if (text !== null && text !== '') {
+      sendCommentAsync(commentData)
+      setText('')
+
+      Swal.fire({
+        text: '成功送出評論',
+        icon: 'success',
+        confirmButtonText: '確定',
+        confirmButtonColor: 'rgba(104, 142, 103, 0.8)',
+      }).then(() => {
+        handleDelete(index)
+        history.push('/memberuser/comment/notcomment')
+      })
+    } else {
+      Swal.fire({
+        text: '評論不能為空白',
+        icon: 'warning',
+        confirmButtonText: '確定',
+        confirmButtonColor: 'rgba(104, 142, 103, 0.8)',
+      })
+    }
   }
 
   return (
     <>
       <form
-        onSubmit={handleSubmit}
+        onSubmit={(e) => sendComment(e, index, text, commentData.itemListId)}
         method="POST"
-        action="/{commentData.memberId}"
+        // action="/{commentData.memberId}"
         enctype="multipart/form-data"
-        key={commentData.orderId}
+        key={index}
       >
         <div className="reply-listview">
           <div className="comment-tbhead">
@@ -188,7 +187,7 @@ function ReplyComment({ commentData }) {
                         ''
                       ) : (
                         <>
-                          <label htmlFor={commentData.orderId}>
+                          <label htmlFor={commentData.itemListId}>
                             <div className="commentImgPlus">
                               <IconContext.Provider
                                 value={{
@@ -203,7 +202,7 @@ function ReplyComment({ commentData }) {
 
                           <input
                             type="file"
-                            id={commentData.orderId}
+                            id={commentData.itemListId}
                             style={{ display: 'none' }}
                             onChange={handleChange}
                             // ref={divRef}
@@ -222,15 +221,17 @@ function ReplyComment({ commentData }) {
                       rows="6"
                       onChange={(index) => handleTextChange(index)}
                       //  key={index}
-                    ></textarea>
+                    >
+                      {text}
+                    </textarea>
                   </li>
                 </ul>
                 <button
                   className="btn buttonstyle float-right mt-3"
                   type="submit"
                   // id={commentData.orderId}
-                  value="Submit"
-                  // onClick={()=>handleDelete(index)}
+                  // value="Submit"
+
                   // onClick={handleUpload}
                   // onClick={()=>{setAccount("")}}
                 >
@@ -245,4 +246,4 @@ function ReplyComment({ commentData }) {
   )
 }
 
-export default ReplyComment
+export default withRouter(ReplyComment)
