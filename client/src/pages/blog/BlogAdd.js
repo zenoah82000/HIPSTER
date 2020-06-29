@@ -21,7 +21,6 @@ function BlogAdd(props) {
 
   useEffect(() => {
     getBlogDataAsync()
-    addBlogContentDataAsync()
   }, [])
 
   //Submit

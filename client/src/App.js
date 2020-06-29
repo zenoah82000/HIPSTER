@@ -59,6 +59,7 @@ function App(props) {
 
   //寫入購物車資料
   useEffect(() => {
+    getLocation()
     userlocalStorage.success ? setuserSuccess(true) : setuserSuccess(false)
     props.dispatch({ type: 'GET_CART', value: localCart })
     props.dispatch({ type: 'GET_WISH', value: localWishlist })
@@ -115,6 +116,30 @@ function App(props) {
       localStorage.setItem('wishlist', JSON.stringify(localWishlist))
     }
   }
+
+  //地圖定位
+  const [viewport, setViewport] = useState({ center: [0, 0], zoom: 15 })
+  const [clickData, setClickData] = useState([])
+  const [myLocation, setMylocation] = useState([0, 0])
+
+  const getLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(updateLocation)
+    }
+  }
+  const updateLocation = (position) => {
+    setViewport({
+      center: [position.coords.latitude, position.coords.longitude],
+    })
+    setMylocation([position.coords.latitude, position.coords.longitude])
+  }
+
+  const cardClickReset = (clickData) => {
+    // console.log(clickData)
+    setClickData(clickData)
+    setViewport({ center: [clickData.lat, clickData.log] })
+  }
+
   return (
     <Router>
       <>
@@ -162,7 +187,12 @@ function App(props) {
             />
           </Route>
           <Route path="/map">
-            <Map />
+            <Map
+              viewport={viewport}
+              getLocation={getLocation}
+              cardClickReset={cardClickReset}
+              myLocation={myLocation}
+            />
           </Route>
 
           <Route path="/memberuser">

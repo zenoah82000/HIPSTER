@@ -1,9 +1,23 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
+import { Link, withRouter } from 'react-router-dom'
+import { Container } from 'react-bootstrap'
+
+import MyBreadcrumb from '../../components/MyBreadcrumb'
+import { getBlogDataAsync } from '../../actions/blog'
 
 import author1 from '../../images/blog/author1.jpg'
 import userBlogTop from '../../images/blog/userBlogTop.png'
 
-function UserBlog() {
+function UserBlog(props) {
+
+  const { blogData,getBlogDataAsync } = props
+  console.log('blogData', blogData)
+  
+  useEffect(() => {
+    getBlogDataAsync()   
+  }, [])  
+
   return (
     <>
       <h3 className="ml-3 mt-3">我的文章</h3>
@@ -49,4 +63,8 @@ function UserBlog() {
   )
 }
 
-export default UserBlog
+const mapStateToProps = (store) =>({ blogData: store.blogReducer.blogData})
+
+export default withRouter(connect(mapStateToProps, {
+  getBlogDataAsync,
+})(UserBlog))
