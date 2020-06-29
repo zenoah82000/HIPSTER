@@ -155,7 +155,7 @@ function App(props) {
             <About />
           </Route>
           {/* Blog Routes */}
-          <Route path="/blogEdit">
+          <Route path="/blogEdit/:articleId?">
             <BlogEdit />
           </Route>
           <Route path="/blogDetail/:articleId?">
@@ -176,7 +176,7 @@ function App(props) {
           <Route path="/productlist/">
             <ProductList />
           </Route>
-          <Route path="/product">
+          <Route path="/product/:id">
             <Product />
           </Route>
           <Route path="/shoppingcar">

@@ -59,15 +59,15 @@ Date.prototype.pattern = function (fmt) {
   return fmt
 }
 
-
 function UserComment(props) {
   //state
   const [image, setImage] = useState({ file: [], preview: [], raw: '' })
   const [text, setText] = useState('')
   const [myCommentlist, setMyCommentList] = useState([])
   const [noCommentlist, setNoCommentList] = useState([])
+ 
 
-  // 後端傳已評論資料
+  // 後端傳資料
   const commentAsync = async (order) => {
     const request = new Request('http://localhost:5000/comments/2', {
       method: 'get',
@@ -85,10 +85,17 @@ function UserComment(props) {
     setNoCommentList(data.notcomment)
   }
 
-
   useEffect(() => {
     commentAsync()
   }, [])
+
+  //提交評論
+
+  const handleDelete = (index) => {
+    const newList = [...noCommentlist]
+    newList.splice(index, 1)
+    setNoCommentList(newList)
+  }
 
   //顯示已評論
   const displayMyComment =
@@ -99,11 +106,19 @@ function UserComment(props) {
             <div className="reply-listview">
               <div className="comment-tbhead">
                 <div class="row">
-                  <div class="col-9 pl-1"><h5 className="eventTitle " style={{ fontWeight: "bold" }}>{item.productName}</h5></div>
+                  <div class="col-9 pl-1">
+                    <h5 className="eventTitle " style={{ fontWeight: 'bold' }}>
+                      {item.productName}
+                    </h5>
+                  </div>
                   <div class="col-3 pr-1">
-                    <ul className="float-right list-unstyled" >
-                      <li><small>訂單編號:{item.orderId}</small></li>
-                      <li><small>活動日期:{item.date.substring(0,10)}</small></li>
+                    <ul className="float-right list-unstyled">
+                      <li>
+                        <small>訂單編號:{item.orderId}</small>
+                      </li>
+                      <li>
+                        <small>活動日期:{item.date.substring(0, 10)}</small>
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -117,28 +132,32 @@ function UserComment(props) {
                     />
                   </div>
                   <div className="col-9 pl-3">
-
                     <ul className=" list-unstyled">
                       <li className="d-flex">
-                        <p style={{fontWeight:"bold"}}>評價星等:</p><p><RatingStarValue ratingValue={item.star} /></p>
+                        <p style={{ fontWeight: 'bold' }}>評價星等:</p>
+                        <p>
+                          <RatingStarValue ratingValue={item.star} />
+                        </p>
                       </li>
                       <li className="d-flex">
-                        <p style={{fontWeight:"bold"}}>活動相片:</p>
-                        {image.preview.length > 0
-                        ? image.preview.map((item) => {
-                          return (
-                            <>
-                              <div className="commentImg">
-                                <img
-                                  className="commentImgPhoto"
-                                  src={item}
-                                  alt=""
-                                />
-                              </div>
-                            </>
-                          )
-                        })
-                        : (<p>未上傳相片</p>)}
+                        <p style={{ fontWeight: 'bold' }}>活動相片:</p>
+                        {image.preview.length > 0 ? (
+                          image.preview.map((item) => {
+                            return (
+                              <>
+                                <div className="commentImg">
+                                  <img
+                                    className="commentImgPhoto"
+                                    src={item}
+                                    alt=""
+                                  />
+                                </div>
+                              </>
+                            )
+                          })
+                        ) : (
+                          <p>未上傳相片</p>
+                        )}
                         {/* <div className="d-flex">
                           <div className="commentImg">
                             <img
@@ -150,12 +169,14 @@ function UserComment(props) {
                         </div> */}
                       </li>
                       <li>
-                        <p style={{fontWeight:"bold"}}>我的評論:</p>
+                        <p style={{ fontWeight: 'bold' }}>我的評論:</p>
                       </li>
                       <li className="myReply pb-3">
                         <p className="pt-2 text">{item.content}</p>
                       </li>
-                      <small className="float-right">回覆日期: {item.updated_at.substring(0,10)}</small>
+                      <small className="float-right">
+                        回覆日期: {item.updated_at.substring(0, 10)}
+                      </small>
                     </ul>
                   </div>
                 </div>
@@ -165,14 +186,14 @@ function UserComment(props) {
         )
       })
     ) : (
-        <div className="empty text-center">
-          <img
-            className="emptyImg mb-3"
-            src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
-          />
-          <h6>尚未有評價，趕緊探索你下一次的旅程，並標記你心儀的活動體驗</h6>
-        </div>
-      )
+      <div className="empty text-center">
+        <img
+          className="emptyImg mb-3"
+          src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
+        />
+        <h6>尚未有評價，趕緊探索你下一次的旅程，並標記你心儀的活動體驗</h6>
+      </div>
+    )
 
   return (
     <>
@@ -205,45 +226,51 @@ function UserComment(props) {
           <div className="tab-pane">{displayMyComment}</div>
         </>
       ) : (
-          <>
-            <div className="usercontainer">
-              <h2 className="usertitle mb-3   ">我的評價</h2>
-              <div className="d-flex comment-bar border-bottom">
-                <div className="tabcontainer couponactive">
-                  <NavLink
-                    to={`./notcomment`}
-                    activeClassName="currentcoupon"
-                    className="coupontab-a"
-                  >
-                    尚未評價
+        <>
+          <div className="usercontainer">
+            <h2 className="usertitle mb-3   ">我的評價</h2>
+            <div className="d-flex comment-bar border-bottom">
+              <div className="tabcontainer couponactive">
+                <NavLink
+                  to={`./notcomment`}
+                  activeClassName="currentcoupon"
+                  className="coupontab-a"
+                >
+                  尚未評價
                 </NavLink>
-                </div>
-                <div className="tabcontainer">
-                  <NavLink
-                    to={`./mycomment`}
-                    activeClassName="currentcoupon"
-                    className="coupontab-a"
-                  >
-                    已評價
+              </div>
+              <div className="tabcontainer">
+                <NavLink
+                  to={`./mycomment`}
+                  activeClassName="currentcoupon"
+                  className="coupontab-a"
+                >
+                  已評價
                 </NavLink>
-                </div>
               </div>
             </div>
-            <div className="tab-pane">
-              {noCommentlist.length >= 1 ? (
-                noCommentlist.map((item, index) => <ReplyComment commentData={item} />)
-              ) : (
-                  <div className="empty text-center">
-                    <img
-                      className="emptyImg mb-3"
-                      src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
-                    />
-                    <h6>尚未有評價</h6>
-                  </div>
-                )}
-            </div>
-          </>
-        )}
+          </div>
+          <div className="tab-pane">
+            {noCommentlist.length >= 1 ? (
+              noCommentlist.map((item, index) => (
+                <ReplyComment
+                  commentData={item}
+                  index={index}
+                  handleDelete={handleDelete}
+                />
+              ))
+            ) : (
+              <div className="empty text-center">
+                <img
+                  className="emptyImg mb-3"
+                  src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
+                />
+                <h6>尚未有評價</h6>
+              </div>
+            )}
+          </div>
+        </>
+      )}
     </>
   )
 }
