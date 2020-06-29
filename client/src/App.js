@@ -155,7 +155,7 @@ function App(props) {
             <About />
           </Route>
           {/* Blog Routes */}
-          <Route path="/blogEdit">
+          <Route path="/blogEdit/:articleId?">
             <BlogEdit />
           </Route>
           <Route path="/blogDetail/:articleId?">
