@@ -52,7 +52,7 @@ function Blog(props) {
     return (
       <div key={item.articleId} className="blog-list-card">
       <Link to={"/blogDetail/" + item.articleId} className="d-block">
-        <img src={item.articleImg} />
+        <img src={item.articleImg} alt={item.articleId} />
         <h3 className="ml-3">{item.articleTitle}</h3>
         <p className="ml-3">
         {item.articleContent}
