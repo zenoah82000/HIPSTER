@@ -378,9 +378,7 @@ function Mynavbar(props) {
           <Link to="/" className="logo">
             <img src="http://localhost:5000/images/home/logo.png" />
           </Link>
-          <div className="burger none" id="burger">
-            ☰
-          </div>
+
           <ul className="menu">
             <li>
               <Link to="/about">品牌介紹</Link>
@@ -484,6 +482,9 @@ function Mynavbar(props) {
             </li>
           </ul>
           {/* ========================================================= */}
+          <div className="burger " id="burger">
+            ☰
+          </div>
           {userSuccess ? (
             <>
               <ul className="member">

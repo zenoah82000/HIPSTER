@@ -133,7 +133,7 @@ router.post('/loginmember', async (req, res, next) =>{
 
 
 // 更新會員資料
-  router.post('/updatememberdata', async (req, res, next) => {
+  router.post('/updatememberdata',upload.single('avatar'), async (req, res, next) => {
   console.log(req.body)
   
   const filename = req.body.memberImg.split('.').pop()
@@ -149,24 +149,49 @@ router.post('/loginmember', async (req, res, next) =>{
 
   // console.log("memberid_"+req.body.memberId+"."+filename)
 
-  const updateMemberSql = "UPDATE `member` SET `memberName`=?,`memberGender`=?,`memberBirth`=?,`memberPhone`=?,`memberAddress`=?,`memberPwd`=?,`memberImg`=? WHERE  `memberId`=? "
+  // const updateMemberSql = "UPDATE `member` SET `memberName`=?,`memberGender`=?,`memberBirth`=?,`memberPhone`=?,`memberAddress`=?,`memberPwd`=?,`memberImg`=? WHERE  `memberId`=? "
 
-  const [r1] = await db.query(updateMemberSql, [memberName,memberGender,memberBirth,memberPhone,memberAddress,memberPwd,memberImg,memberId]);
-  res.json(r1)
+  // const [r1] = await db.query(updateMemberSql, [memberName,memberGender,memberBirth,memberPhone,memberAddress,memberPwd,memberImg,memberId]);
+  // res.json(r1)
 })
+
+
+
 
 
 
 // 更新會員圖片
-  router.post('/updatememberimgdata',upload.single('avatar'), async (req, res) => {
+//   router.post('/updatememberimgdata', async (req, res) => {
 
-    console.log(req.file)
-  //   res.json({
-  //     filename :req.file.filename,
-  //     body :req.body
-  // });
+//     try {
+//       if(!req.files) {
+//           res.send({
+//               status: false,
+//               message: 'No file uploaded'
+//           });
+//       } else {
+//           //使用輸入框的名稱來獲取上傳檔案 (例如 "avatar")
+//           let avatar = req.files.avatar;
+          
+//           //使用 mv() 方法來移動上傳檔案到要放置的目錄裡 (例如 "uploads")
+//           avatar.mv('../../public/images/member/' + avatar.name);
 
-})
+//           //送出回應
+//           res.send({
+//               status: true,
+//               message: 'File is uploaded',
+//               data: {
+//                   name: avatar.name,
+//                   mimetype: avatar.mimetype,
+//                   size: avatar.size
+//               }
+//           });
+//       }
+//   } catch (err) {
+//       res.status(500).send(err);
+//   }
+
+// })
 
 
 

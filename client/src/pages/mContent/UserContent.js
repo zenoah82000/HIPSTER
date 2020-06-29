@@ -73,24 +73,25 @@ function UserContent() {
     const data = await response.json()
     // console.log(data)
   }
-  //更新會員圖片
-  async function memberimgUpdate(item) {
-    let formData = new FormData()
-    formData.append('avatar', item)
-    // 注意資料格式要設定，伺服器才知道是json格式
-    const request = new Request('http://localhost:5000/updatememberimgdata/', {
-      method: 'POST',
-      body: formData,
-      headers: new Headers({
-        Accept: 'application/json',
-        'Content-Type': 'multipart/form-data',
-      }),
-    })
 
-    const response = await fetch(request)
-    const data = await response.json()
-    // console.log(data)
-  }
+  //更新會員圖片
+  // async function memberimgUpdate(item) {
+  //   console.log('item', item)
+  //   const formData = new FormData()
+  //   formData.append('file', item)
+  //   console.log('formData', formData)
+  //   const request = new Request('http://localhost:5000/updatememberimgdata/', {
+  //     method: 'POST',
+  //     body: formData,
+  //     headers: new Headers({
+  //       Accept: 'application/json',
+  //       'Content-Type': 'multipart/form-data',
+  //     }),
+  //   })
+  //   const response = await fetch(request)
+  //   const data = await response.json()
+  //   // console.log(data)
+  // }
 
   const dataDisplay = (
     <>
@@ -165,175 +166,161 @@ function UserContent() {
 
   const editDisplay = (
     <>
-      <Form>
-        <Figure className="Figurepic">
-          <Figure.Image
-            className="memberimg"
-            alt="會員頭像"
-            src={`http://localhost:5000/images/member/${memberImg}`}
-          />
-        </Figure>
-
-        <Form.File.Input
-          id="ControlFile1"
-          name="memberimg"
-          ref={(file) => (editmemberImg = file)}
+      <Figure className="Figurepic">
+        <Figure.Image
+          className="memberimg"
+          alt="會員頭像"
+          src={`http://localhost:5000/images/member/${memberImg}`}
         />
+      </Figure>
 
-        <Form.Row>
-          <Col sm={4}>
-            <Form.Group controlId="exampleForm.ControlInput1">
-              <Form.Label>會員名稱：</Form.Label>
-              <Form.Control
-                ref={(input) => (input == '' ? '' : (editmemberName = input))}
-                type="text"
-                id="editmemberName"
-                placeholder={memberName}
-              />
-            </Form.Group>
-          </Col>
-          <Col sm={4}>
-            <Form.Group controlId="exampleForm.ControlSelect1">
-              <Form.Label>性別：</Form.Label>
-              <Form.Control
-                ref={(input) => (editmemberGender = input)}
-                id="editmemberGender"
-                as="select"
-              >
-                <option value={memberGender}>{memberGender}</option>
-                <option value="男">男</option>
-                <option value="女">女</option>
-              </Form.Control>
-            </Form.Group>
-          </Col>
-          <Col sm={4}>
-            <Form.Group controlId="exampleForm.ControlInput1">
-              <Form.Label>出生日期：</Form.Label>
-              {brthdayedit ? (
-                <>
-                  <Form.Control
-                    type="date"
-                    id="editmemberBirth"
-                    defaultValue={memberBirth}
-                    ref={(input) =>
-                      input == '' ? memberBirth : (editmemberBirth = input)
-                    }
-                  />
-                </>
-              ) : (
+      <Form.File.Input
+        id="ControlFile1"
+        name="memberimg"
+        ref={(file) => (editmemberImg = file)}
+        onChange="memberimgUpdate(event)"
+      />
+
+      <Form.Row>
+        <Col sm={4}>
+          <Form.Group controlId="exampleForm.ControlInput1">
+            <Form.Label>會員名稱：</Form.Label>
+            <Form.Control
+              ref={(input) => (input == '' ? '' : (editmemberName = input))}
+              type="text"
+              id="editmemberName"
+              placeholder={memberName}
+            />
+          </Form.Group>
+        </Col>
+        <Col sm={4}>
+          <Form.Group controlId="exampleForm.ControlSelect1">
+            <Form.Label>性別：</Form.Label>
+            <Form.Control
+              ref={(input) => (editmemberGender = input)}
+              id="editmemberGender"
+              as="select"
+            >
+              <option value={memberGender}>{memberGender}</option>
+              <option value="男">男</option>
+              <option value="女">女</option>
+            </Form.Control>
+          </Form.Group>
+        </Col>
+        <Col sm={4}>
+          <Form.Group controlId="exampleForm.ControlInput1">
+            <Form.Label>出生日期：</Form.Label>
+            {brthdayedit ? (
+              <>
                 <Form.Control
-                  ref={(value) => (editmemberBirth = value)}
-                  type="text"
-                  value={memberBirth}
-                  onClick={() => {
-                    setbrthdayedit(true)
-                  }}
+                  type="date"
+                  id="editmemberBirth"
+                  defaultValue={memberBirth}
+                  ref={(input) =>
+                    input == '' ? memberBirth : (editmemberBirth = input)
+                  }
                 />
-              )}
-            </Form.Group>
-          </Col>
-        </Form.Row>
-
-        <Form.Row>
-          <Col sm={4}>
-            <Form.Group controlId="exampleForm.ControlInput1">
-              <Form.Label>連絡電話：</Form.Label>
+              </>
+            ) : (
               <Form.Control
-                ref={(input) => (input == '' ? '' : (editmemberPhone = input))}
+                ref={(value) => (editmemberBirth = value)}
                 type="text"
-                placeholder={memberPhone}
-                id="editmemberPhone"
+                value={memberBirth}
+                onClick={() => {
+                  setbrthdayedit(true)
+                }}
               />
-            </Form.Group>
-          </Col>
-          <Col sm={8}>
-            <Form.Group controlId="exampleForm.ControlInput1">
-              <Form.Label>連絡地址：</Form.Label>
-              <Form.Control
-                ref={(input) =>
-                  input == '' ? '' : (editmemberAddress = input)
-                }
-                type="text"
-                placeholder={memberAddress}
-                id="editmemberAddress"
-              />
-            </Form.Group>
-          </Col>
-        </Form.Row>
-        <Form.Row>
-          <Col sm={4}>
-            <Form.Group controlId="exampleForm.ControlInput1">
-              <Form.Label>信箱帳號：</Form.Label>
-              <Form.Control type="email" disabled placeholder={memberMail} />
-            </Form.Group>
-          </Col>
-          <Col sm={4}>
-            <Form.Group controlId="exampleForm.ControlInput1">
-              <Form.Label>登入密碼：</Form.Label>
-              <Form.Control
-                ref={(input) => (input == '' ? '' : (editmemberPwd = input))}
-                type="text"
-                id="editmemberPwd"
-                placeholder="如未需更換，則不用填寫"
-              />
-            </Form.Group>
-          </Col>
-        </Form.Row>
+            )}
+          </Form.Group>
+        </Col>
+      </Form.Row>
 
-        <Button
-          className="cancelBtn"
-          variant="primary"
-          type="button"
-          onClick={() => {
-            setedit(false)
-          }}
-        >
-          取消
-        </Button>
-        <Button
-          className="submitBtn"
-          variant="primary"
-          type="Button"
-          onClick={() => {
-            editAllData = {
-              memberId: JSON.parse(localStorage.getItem('member')).id,
-              memberName:
-                editmemberName.value == '' ? memberName : editmemberName.value,
-              memberGender: editmemberGender.value,
-              memberBirth:
-                editmemberBirth.value == ''
-                  ? memberBirth
-                  : editmemberBirth.value,
-              memberPhone:
-                editmemberPhone.value == ''
-                  ? memberPhone
-                  : editmemberPhone.value,
-              memberAddress:
-                editmemberAddress.value == ''
-                  ? memberAddress
-                  : editmemberAddress.value,
-              memberPwd:
-                editmemberPwd.value == '' ? memberPwd : editmemberPwd.value,
-              memberImg: editmemberImg.files.length
-                ? // ? editmemberImg.files[0].name
-                  editmemberImg.files
-                : memberImg,
-              memberImgState: editmemberImg.files.length,
-            }
-            console.log(editmemberImg.files)
-            imgdata = {
-              memberId: JSON.parse(localStorage.getItem('member')).id,
-              memberImgState: editmemberImg.files.length,
-            }
+      <Form.Row>
+        <Col sm={4}>
+          <Form.Group controlId="exampleForm.ControlInput1">
+            <Form.Label>連絡電話：</Form.Label>
+            <Form.Control
+              ref={(input) => (input == '' ? '' : (editmemberPhone = input))}
+              type="text"
+              placeholder={memberPhone}
+              id="editmemberPhone"
+            />
+          </Form.Group>
+        </Col>
+        <Col sm={8}>
+          <Form.Group controlId="exampleForm.ControlInput1">
+            <Form.Label>連絡地址：</Form.Label>
+            <Form.Control
+              ref={(input) => (input == '' ? '' : (editmemberAddress = input))}
+              type="text"
+              placeholder={memberAddress}
+              id="editmemberAddress"
+            />
+          </Form.Group>
+        </Col>
+      </Form.Row>
+      <Form.Row>
+        <Col sm={4}>
+          <Form.Group controlId="exampleForm.ControlInput1">
+            <Form.Label>信箱帳號：</Form.Label>
+            <Form.Control type="email" disabled placeholder={memberMail} />
+          </Form.Group>
+        </Col>
+        <Col sm={4}>
+          <Form.Group controlId="exampleForm.ControlInput1">
+            <Form.Label>登入密碼：</Form.Label>
+            <Form.Control
+              ref={(input) => (input == '' ? '' : (editmemberPwd = input))}
+              type="text"
+              id="editmemberPwd"
+              placeholder="如未需更換，則不用填寫"
+            />
+          </Form.Group>
+        </Col>
+      </Form.Row>
 
-            memberUpdate(editAllData)
-            setshowUpdateOk(true)
-            // memberimgUpdate(imgdata)
-          }}
-        >
-          更新
-        </Button>
-      </Form>
+      <Button
+        className="cancelBtn"
+        variant="primary"
+        type="button"
+        onClick={() => {
+          setedit(false)
+        }}
+      >
+        取消
+      </Button>
+      <Button
+        className="submitBtn"
+        variant="primary"
+        type="Button"
+        onClick={() => {
+          editAllData = {
+            memberId: JSON.parse(localStorage.getItem('member')).id,
+            memberName:
+              editmemberName.value == '' ? memberName : editmemberName.value,
+            memberGender: editmemberGender.value,
+            memberBirth:
+              editmemberBirth.value == '' ? memberBirth : editmemberBirth.value,
+            memberPhone:
+              editmemberPhone.value == '' ? memberPhone : editmemberPhone.value,
+            memberAddress:
+              editmemberAddress.value == ''
+                ? memberAddress
+                : editmemberAddress.value,
+            memberPwd:
+              editmemberPwd.value == '' ? memberPwd : editmemberPwd.value,
+            memberImg: editmemberImg.files.length
+              ? editmemberImg.files[0].name
+              : memberImg,
+            memberImgState: editmemberImg.files.length,
+          }
+
+          memberUpdate(editAllData)
+          setshowUpdateOk(true)
+        }}
+      >
+        更新
+      </Button>
     </>
   )
   //更新完成視窗
