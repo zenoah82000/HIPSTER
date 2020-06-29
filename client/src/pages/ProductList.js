@@ -100,6 +100,18 @@ function ProductList(props) {
   })
   console.log(display)
 
+  // 測試
+  // let display2 = []
+  // let n = 0
+  // const count = productListData.map((item, index) => {
+  //   if (+item.categoryId === 16) {
+  //     n += 1
+  //     display2.push(item)
+  //   }
+  // })
+  // console.log(n)
+  // console.log(display2)
+
   return (
     <>
       <div className="container product-content">
