@@ -33,25 +33,21 @@ function AsideBar(props) {
   const [categorySection, setCategorySection] = useState([])
   const [value, setValue] = useState({ min: 5, max: 10 })
   const [checked, setChecked] = useState(false)
-  const [checked2, setChecked2] = useState(false)
 
   const handleChange = () => {
     setChecked((prev) => !prev)
   }
 
-  async function AddcategorySection(category) {
+  function AddcategorySection(category) {
     if (categorySection.includes(category)) {
       let index = categorySection.indexOf(category)
-      await categorySection.splice(index, 1)
+      categorySection.splice(index, 1)
     } else {
-      await categorySection.push(category)
+      categorySection.push(category)
     }
-    setCategorySection(categorySection)
+    const data = [...categorySection]
+    setCategorySection(data)
   }
-
-  useEffect(() => {
-    getProductCategoryAsync()
-  }, [])
 
   function checkcategory(item) {
     if (categorySection.includes(item)) {
@@ -60,6 +56,10 @@ function AsideBar(props) {
       return 'checkbox-dropdown-list'
     }
   }
+
+  useEffect(() => {
+    getProductCategoryAsync()
+  }, [])
 
   const display = productCatogryData.map((item, index) => {
     if (item.categoryParentId === 0) {
@@ -70,7 +70,7 @@ function AsideBar(props) {
               key={item.categoryName}
               className="drop-title"
               onClick={() => {
-                setActiveClass(!activeClass)
+                // setActiveClass(!activeClass)
                 AddcategorySection(item.categoryName)
                 console.log(categorySection)
               }}
