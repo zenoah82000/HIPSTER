@@ -26,6 +26,9 @@ function ShoppingCar(props) {
   //結帳視窗
   const [checkoutok, setCheckoutok] = useState(false)
 
+  //設置折扣
+  const [discount, setDiscount] = useState(1)
+
   //請登入視窗
   function Checklogin(props) {
     return (
@@ -135,13 +138,15 @@ function ShoppingCar(props) {
           className="totalbox bg-white mt-3 d-flex"
         >
           <div className="">
-            <CouponAllData />
+            <CouponAllData
+              onChange={(couponvalue) => setDiscount(couponvalue)}
+            />
           </div>
           <div className="">
             {mycart.length}個活動合計:
             <span className="total">
               NT$
-              {sum(mycart)
+              {(sum(mycart) * discount)
                 .toString()
                 .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
             </span>
