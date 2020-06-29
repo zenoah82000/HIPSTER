@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import '../../styles/product/ProductListPageBar.scss'
+import { logDOM } from '@testing-library/react'
 
 function ProductListPageBar(props) {
   const { productnumbers, currentpage } = props
@@ -26,6 +27,9 @@ function ProductListPageBar(props) {
           <Link
             className={i === +currentPage ? 'active' : ''}
             to={`?page=${i}`}
+            onClick={() => {
+              window.scrollTo({ top: 0, behavior: 'smooth' })
+            }}
           >
             {i}
           </Link>
