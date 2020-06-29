@@ -12,7 +12,6 @@ router.get("/member/order/:memberId", async (req, res) => {
   //每一頁幾筆
   const perPage = 4;
 
-
   const data = {
     status: true,
     totalRows: 0, // 總筆數
@@ -85,9 +84,15 @@ router.post("/member/checkout", async (req, res) => {
       orderItems[i].checkPrice,
       orderItems[i].checkQty,
       orderItems[i].checkSubtotal,
-    ]);
+    ]).then(([res, f]) => {
+      console.log(res + f);
+    });
   }
   console.log("訂單新增成功" + orderId);
+
+  // const additemListId = "INSERT INTO `comments` (`itemListId`) VALUES(?)";
+  // const [r2] = await db.query(additemListId, [orderId]);
+
   //訂單成功送出email
   console.log("送出電子郵件");
   const transporter = nodemailer.createTransport({
