@@ -53,6 +53,19 @@ function UserQanda(props) {
       <div className="usercontainer">
         <h2 className="usertitle">問與答</h2>
         {qandaList}
+        <div class="form-group">
+          <label for="FormControlTextareaqa">提出問題</label>
+          <textarea
+            className="form-control qatextarea-container"
+            id="FormControlTextareaqa"
+            cols="6"
+            rows="6"
+          ></textarea>
+          <div className="text-center">
+            <button className="rt-button rt-button-submit">提出問題</button>
+            <button className="rt-button rt-button-default">重新填寫</button>
+          </div>
+        </div>
       </div>
     </>
   )

@@ -13,9 +13,8 @@ router.get("/comments/:memberId", async (req, res) => {
   const sqlcommentlist =
     "SELECT `comments`.`commentId`, `comments`.`itemListId`,`comments`.`content`, `comments`.`star`, `comments`.`created_at`, `comments`.`updated_at`,`item_lists`.`productId`,`item_lists`.`orderId`,`item_lists`.`date`,`product`.`productName`, `item_lists`.`memberId` FROM `comments`LEFT JOIN `item_lists` ON `comments`.`itemListId` =`item_lists`.`itemListId` LEFT JOIN `product`ON `item_lists`.`productId` =`product`.`productId` LEFT JOIN `orderlist` ON `item_lists`.`orderId` =`orderlist`.`orderId` WHERE `item_lists`.`memberId` = ?";
 
-  const sqlnotcommentlist = "SELECT `item_lists`.`itemListId`, `item_lists`.`orderId`, `item_lists`.`memberId`, `item_lists`.`productId`, `item_lists`.`date`, `item_lists`.`checkPrice`, `item_lists`.`checkQty`, `item_lists`.`checkSubtotal`, `item_lists`.`created_at`, `item_lists`.`updated_at`,`product`.`productName` FROM `item_lists` LEFT JOIN `product`ON `item_lists`.`productId` =`product`.`productId`  WHERE `item_lists`.`memberId` = ?";
-
- 
+  const sqlnotcommentlist =
+    "SELECT `item_lists`.`itemListId`, `item_lists`.`orderId`, `item_lists`.`memberId`, `item_lists`.`productId`, `item_lists`.`date`, `item_lists`.`checkPrice`, `item_lists`.`checkQty`, `item_lists`.`checkSubtotal`, `item_lists`.`created_at`, `item_lists`.`updated_at`,`product`.`productName` FROM `item_lists` LEFT JOIN `product`ON `item_lists`.`productId` =`product`.`productId`  WHERE `comments`.`content`= null &&`item_lists`.`memberId` = ?";
 
   const [r1] = await db.query(sqlcommentlist, [req.params.memberId]);
   const [r2] = await db.query(sqlnotcommentlist, [req.params.memberId]);
@@ -27,21 +26,18 @@ router.get("/comments/:memberId", async (req, res) => {
 });
 
 //訂單新增
-router.post("/sendComments/:memberId", async (req, res) => {
-
+router.post("/sendComments", async (req, res) => {
   const addCommentList =
     "INSERT INTO `comments` (`itemListId`,`content`, `star`) VALUES (?,?,?)";
-
-
   //新增評論到資料庫
+
   const [r2] = await db.query(addCommentList, [
     req.body.itemListId,
     req.body.content,
     req.body.star,
   ]);
-  
-  console.log("訂單新增成功" + orderId);
-
-})
+  res.json("ok");
+  // console.log("訂單新增成功" + orderId);
+});
 
 module.exports = router;

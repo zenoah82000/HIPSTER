@@ -4,6 +4,8 @@ const userCouponData = (state = [], action) => {
   switch (action.type) {
     case 'GET_USERCOUPON':
       return action.value
+    case 'ADD_UserCouponDATA':
+      return [...state, action.value]
     default:
       return state
   }
@@ -12,8 +14,8 @@ const userCouponData = (state = [], action) => {
 //新增優惠券
 const adduserCouponData = (state = [], action) => {
   switch (action.type) {
-    case 'ADD_UserCouponDATA':
-      return action.value
+    // case 'ADD_UserCouponDATA':
+    //   return action.value
     default:
       return state
   }
@@ -21,6 +23,6 @@ const adduserCouponData = (state = [], action) => {
 
 const couponReducer = combineReducers({
   userCouponData,
-  adduserCouponData,
+  // adduserCouponData,
 })
 export { couponReducer }

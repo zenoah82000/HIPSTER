@@ -37,11 +37,8 @@ export const productTagIcon = new L.Icon({
 export default class ViewportExample extends Component {
   constructor(props) {
     super(props)
+    console.log(this.props.viewport.center)
     this.state = {
-      viewport: {
-        center: [25.0338438, 121.54335],
-        zoom: 20,
-      },
       data: [],
       cafedata: [],
       productdata: [],
@@ -85,7 +82,6 @@ export default class ViewportExample extends Component {
   render() {
     let { viewport, clicked, cafeActive, clickData } = this.props
     console.log(viewport.center)
-    // console.log(viewport.center[0] - 0.001, viewport.center[0], clicked)
     return (
       <div>
         <Map viewport={viewport}>
@@ -252,7 +248,7 @@ export default class ViewportExample extends Component {
             icon={pointerIcon}
             className="mylocation"
             //  ref={this.openPopup}
-            position={viewport.center}
+            position={this.props.myLocation}
           >
             {/* <Popup  >
                      我的位置
