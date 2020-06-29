@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import '../styles/home.scss'
+import CountdownProduct from '../components/home/CountdownProduct'
 import {
   FaSearch,
   FaStreetView,
@@ -14,12 +15,12 @@ import Slider from 'react-slick'
 function Home(props) {
   //搜尋bar切換狀態 0=地點 1=分類 2=時間
   const [searchbar, setsearchbar] = useState(0)
-  //商品區塊>關注
+  // //商品區塊>關注
   const [heart, setheart] = useState(false)
-  //控制關注愛心class
-  const heartClass = heart ? 'activity-follow active' : 'activity-follow'
+
   //存放倒數結束5筆商品資料
   const [ProductEndlist, setProductEndlist] = useState('')
+
   //存放精選3筆商品資料
   const [ProductFeaturedlist, setProductFeaturedlist] = useState('')
   //存放6筆最新文章資料
@@ -35,6 +36,9 @@ function Home(props) {
   let searchBarCategory1, searchBarCategory2, searchBarName, searchBarActiveData
   //存放搜尋bar-時間搜尋內容
   let searchBarStartTime, searchBarEndTime, searchBarTimeData
+
+  // //控制關注愛心class
+  const heartClass = heart ? 'activity-follow active' : 'activity-follow'
 
   //找出精選3筆商品
   async function homeProductFeaturedlist(item) {
@@ -319,6 +323,7 @@ function Home(props) {
     autoplay: true,
     slidesToShow: 4,
     slidesToScroll: 1,
+    autoplaySpeed: 5000,
   }
 
   //精選商品>星數顯示
@@ -453,70 +458,12 @@ function Home(props) {
     )
   })
 
-  // 設置倒數計時: 結束時間 - 當前時間
-  const countdowntime = (datatime) => {
-    // 當前時間
-    var time = new Date()
-    var nowTime = time.getTime() // 獲取當前毫秒數
-
-    var endTime = new Date(datatime) //結束轉毫秒
-
-    // 倒數計時: 差值
-    var offsetTime = (endTime - nowTime) / 1000 // ** 以秒為單位
-    var sec = parseInt(offsetTime % 60) // 秒
-    var min = parseInt((offsetTime / 60) % 60) // 分 ex: 90秒
-    var hr = parseInt(offsetTime / 60 / 60) // 時
-    // console.log('開始時間', time)
-    // console.log('結束時間', endTime)
-    // console.log('相差', offsetTime, '秒')
-    // console.log('相差', hr, '時', min, '分', sec, '秒')
-
-    return (
-      <>
-        <span className="large">{hr}</span>時
-        <span className="large">{min}</span>分
-        <span className="large">{sec}</span>秒
-      </>
-    )
-  }
-
   //倒數結束5筆商品顯示
   let ProductEnd = Array.from(ProductEndlist)
   const ProductEnddisplay = ProductEnd.map((item, index) => {
     return (
       <>
-        <Link to="#">
-          <p className="countdown-num">
-            {countdowntime(item.productEndingDate)}
-          </p>
-          <div className="countdown-main-cont">
-            <div className="countdown-picture">
-              <div
-                className={heartClass}
-                onClick={() => {
-                  setheart(!heart)
-                }}
-              >
-                <FaHeart />
-              </div>
-              <img
-                src={`http://localhost:5000/images/product/${item.productImg}`}
-              />
-            </div>
-            <div className="countdown-title">
-              <p>{item.productName}</p>
-            </div>
-            <div className="countdown-local">
-              <p>
-                <FaMapMarkerAlt />
-                {item.productAddress}
-              </p>
-            </div>
-            <div className="home-countdown-price">
-              <p>${item.productPrice}</p>
-            </div>
-          </div>
-        </Link>
+        <CountdownProduct item={item} />
       </>
     )
   })
@@ -671,26 +618,6 @@ function Home(props) {
         </div>
       </div>
       {/* ----------------------slick-banner------------------------- */}
-      {/* <Link to="/" className="home-slick-banner">
-        <div className="black-bg">
-          <div className="content">
-            <p className="slick-banner-title">
-              花蓮七星潭 GLAMPING 踏浪星辰 Camp｜露營帳篷／露營車
-            </p>
-            <p className="slick-banner-local">
-              <FaMapMarkerAlt />
-              台灣 宜蘭
-            </p>
-            <p className="slick-banner-text">
-              立即訂購外國人喜歡的台灣伴手禮佳德鳳梨酥，直接寄送至全台灣住家和飯店！免排隊，立即線上購買，當日送達！輕鬆訂購現貨供應的伴手禮-鳳凰酥免排隊，立即線上購買，當日送達！輕鬆訂購現貨供應的伴手禮-鳳凰酥.....
-            </p>
-          </div>
-        </div>
-        <Slider {...banner}>
-          <img className="slick-banner-img" src={activity} />
-          <img className="slick-banner-img" src={activity2} />
-        </Slider>
-      </Link> */}
       {slickBannerdisplay}
       {/* ----------------------------------------------------------- */}
       <div className="home-countdown">
@@ -710,6 +637,22 @@ function Home(props) {
         </div>
       </div>
       {/* ----------------------------------------------- */}
+
+      <div className="home-blog">
+        <div className="container">
+          <div className="title">
+            <span className="line"></span>
+            <span className="txt">精選文章</span>
+            <span className="line"></span>
+          </div>
+
+          <div className="home-blog-content">{Articlesdisplay}</div>
+
+          <Link to="/blog" className="more-blog-btn">
+            查看更多文章
+          </Link>
+        </div>
+      </div>
     </>
   )
 }
