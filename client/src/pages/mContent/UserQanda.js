@@ -8,8 +8,12 @@ import {
   addUserQandaDataAsync,
 } from '../../actions/qanda/qanda_Action'
 import '../../styles/mContent/userqand.scss'
+import $ from 'jquery'
+import { getProductListAsync } from '../../actions/product/getProductList'
+
 function UserQanda(props) {
   const { userQandaData, getUserQandaAsync } = props
+  const { productListData, getProductListAsync } = props
   const { adduserQandaData, addUserQandaDataAsync } = props
   const memberId = 2
   const [discountCode, setdiscountCode] = useState([])
@@ -18,10 +22,12 @@ function UserQanda(props) {
   // }, [userQandaData])
   useEffect(() => {
     getUserQandaAsync()
+    getProductListAsync()
     addUserQandaDataAsync()
   }, [])
   console.log('uQA-props', props)
   console.log('userQAData', userQandaData)
+  console.log('productListData', productListData)
   console.log('uQA-props-userQandaData', props.userQandaData)
   // const addGiviData = async () => {
   //   const GiviFormData = {
@@ -54,16 +60,26 @@ function UserQanda(props) {
         <h2 className="usertitle">問與答</h2>
         {qandaList}
         <div class="form-group">
-          <label for="FormControlTextareaqa">提出問題</label>
+          <label for="FormControlTextareaqa" className="qa-textarea-label">
+            提出問題
+          </label>
+          <div>可留下您的疑問我們將盡速問您解答。</div>
           <textarea
             className="form-control qatextarea-container"
             id="FormControlTextareaqa"
             cols="6"
             rows="6"
           ></textarea>
-          <div className="text-center">
+          <div className="qa-button-center">
             <button className="rt-button rt-button-submit">提出問題</button>
-            <button className="rt-button rt-button-default">重新填寫</button>
+            <button
+              className="rt-button rt-button-default"
+              onClick={() => {
+                $('#FormControlTextareaqa').val('')
+              }}
+            >
+              重新填寫
+            </button>
           </div>
         </div>
       </div>
@@ -74,6 +90,7 @@ const qandaStateToProps = (store) => {
   return {
     userQandaData: store.qandaReducer.userQandaData,
     adduserQandaData: store.qandaReducer.adduserQandaData,
+    productListData: store.productReducer.productListData,
   }
 }
 
@@ -81,5 +98,6 @@ export default withRouter(
   connect(qandaStateToProps, {
     getUserQandaAsync,
     addUserQandaDataAsync,
+    getProductListAsync,
   })(UserQanda)
 )
