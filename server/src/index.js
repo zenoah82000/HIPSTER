@@ -71,6 +71,8 @@ app.use(require(__dirname + "/productCategory"));
 
 app.use(require(__dirname + "/productList"));
 
+app.use(require(__dirname + "/productInfo"));
+
 app.use(require(__dirname + "/map/map"));
 
 app.use(require(__dirname + "/member/users-router"));

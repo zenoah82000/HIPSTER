@@ -1,4 +1,7 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { Link, withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
+
 import '../styles/Product.scss'
 
 import MyBreadcrumb from '../components/MyBreadcrumb'
@@ -11,7 +14,18 @@ import Productinfoicon from '../components/product/Productinfoicon'
 import ProductDescription from '../components/product/ProductDescription'
 import ProductHowtoArea from '../components/product/ProductHowtoArea'
 
+import { getProductInfoAsync } from '../actions/product/getProductInfo'
+
 function Product(props) {
+  const { productListData, getProductInfoAsync } = props
+
+  useEffect(() => {
+    console.log(props.match.params.id)
+    getProductInfoAsync(props.match.params.id)
+  }, [])
+
+  const product = { ...productListData[0] }
+  // console.log(product)
   return (
     <>
       <div className="bg-white text-brown">
@@ -20,7 +34,7 @@ function Product(props) {
           <MyBreadcrumb />
           <BookArea />
           <div className="product-main-left">
-            <h1 className="product-title">綠島進階深潛體驗</h1>
+            <h1 className="product-title">{product.productName}</h1>
             <ProductStarBar />
             <ProductTime />
             <Productinfoicon />
@@ -34,4 +48,12 @@ function Product(props) {
   )
 }
 
-export default Product
+const mapStateToProps = (store) => {
+  return { productListData: store.productReducer.productListData }
+}
+
+export default withRouter(
+  connect(mapStateToProps, {
+    getProductInfoAsync,
+  })(Product)
+)

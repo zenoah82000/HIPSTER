@@ -16,46 +16,45 @@ import ReactStars from 'react-rating-stars-component'
 
 function ProductList(props) {
   const { productListData, getProductListAsync } = props
+  const [date, setDate] = useState(new Date())
   const searchParams = new URLSearchParams(props.location.search)
-  const page = searchParams.get('page')
+  const currentpage = searchParams.get('page')
   const cat = searchParams.getAll('cat')
 
-  console.log(page, cat)
+  // console.log(currentpage, cat)
 
-  console.log(page, cat)
   useEffect(() => {
     getProductListAsync()
+    setDate(new Date())
   }, [])
 
   const display = productListData.map((item, index) => {
     return (
       <>
-        <div className="product-list-search-info">
-          <a href="">
+        <div className="product-list-search-info" key={item.productId}>
+          <a href={`/product/${item.productId}`}>
             <div className="row">
               <div className="col-sm-5 col-lg-4">
-                <img src="" />
+                <img
+                  src={`http://localhost:5000/images/product/product_20200505083531.jpg`}
+                  alt=""
+                />
               </div>
               <div className="col-sm-7 col-lg-8 px-15">
                 <div className="product-detail">
                   <div className="product-label"></div>
-                  <h3>
-                    台灣澎湖跳島一日遊 |
-                    探索浪漫七美＆絕美藍洞＆南方四島＆雙心石滬等 |
-                    自選遊覽車或機車環島
-                  </h3>
-                  <p className="product-description">
-                    無經驗的新手也能輕鬆做出甜點！位於台北捷運國父記念館站的Funsiamo
-                    玩美烘焙體驗，透過
-                    iPad數位教學，搭配現場服務人員的親切協助，每個走進店裡的人都能帶走精美成品與滿滿成就感，無論是自行享用或送禮都非常合適。
-                  </p>
+                  <h3>{item.productName}</h3>
+                  <p className="product-description">{item.productContent}</p>
                   <div className="product-place">
                     <i className="fas fa-map-marker-alt"></i>
-                    台灣 澎湖
+                    {item.productAddress}
                   </div>
                   <div className="product-time">
                     <i className="far fa-calendar"></i>
-                    最早可使用日期：今日
+                    最早可使用日期：
+                    {date >= new Date(item.productEndingDate)
+                      ? '今日'
+                      : new Date(item.productEndingDate).toLocaleDateString()}
                   </div>
                   <div className="product-footer ">
                     <div className="product-star">
@@ -153,7 +152,10 @@ function ProductList(props) {
               </a>
             </div>
             {/* -------商品列表區域------ */}
-            <ProductListPageBar />
+            <ProductListPageBar
+              productnumbers={productListData.length}
+              currentpage={currentpage}
+            />
           </ProductListMainContent>
         </div>
       </div>

@@ -13,6 +13,8 @@ const productListData = (state = [], action) => {
   switch (action.type) {
     case 'GET_ProductList':
       return action.payload
+    case 'GET_ProductInfo':
+      return action.payload
     default:
       return state
   }
