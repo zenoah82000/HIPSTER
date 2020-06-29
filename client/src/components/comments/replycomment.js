@@ -14,6 +14,7 @@ function ReplyComment({ handleDelete, index, commentData, history }) {
   const [image, setImage] = useState({ file: [], preview: [], raw: '' })
   const [text, setText] = useState('')
   const [ratingValue, setRatingValue] = useState('')
+  const [load, setLoad] = useState(false)
 
   // 評論送出
   const secdCommentData = {
@@ -98,6 +99,7 @@ function ReplyComment({ handleDelete, index, commentData, history }) {
     if (text !== null && text !== '') {
       sendCommentAsync(commentData)
       setText('')
+      setLoad(true)
 
       Swal.fire({
         text: '成功送出評論',
@@ -106,7 +108,10 @@ function ReplyComment({ handleDelete, index, commentData, history }) {
         confirmButtonColor: 'rgba(104, 142, 103, 0.8)',
       }).then(() => {
         handleDelete(index)
+        console.log('123222222')
         history.push('/memberuser/comment/notcomment')
+        setLoad(false)
+        
       })
     } else {
       Swal.fire({
@@ -120,8 +125,7 @@ function ReplyComment({ handleDelete, index, commentData, history }) {
 
   return (
     <>
-      <form
-        onSubmit={(e) => sendComment(e, index, text, commentData.itemListId)}
+      {load? <div style={{width:'100%',height:'476px'}} />:(<><form
         method="POST"
         // action="/{commentData.memberId}"
         enctype="multipart/form-data"
@@ -220,15 +224,17 @@ function ReplyComment({ handleDelete, index, commentData, history }) {
                       // id={commentData.orderId}
                       rows="6"
                       onChange={(index) => handleTextChange(index)}
+                      value={text}
                       //  key={index}
-                    >
-                      {text}
-                    </textarea>
+                    />
+                    
+    
                   </li>
                 </ul>
                 <button
                   className="btn buttonstyle float-right mt-3"
                   type="submit"
+                  onClick={(e) => sendComment(e, index, text, commentData.itemListId)}
                   // id={commentData.orderId}
                   // value="Submit"
 
@@ -241,7 +247,7 @@ function ReplyComment({ handleDelete, index, commentData, history }) {
             </div>
           </div>
         </div>
-      </form>
+      </form></>)}
     </>
   )
 }

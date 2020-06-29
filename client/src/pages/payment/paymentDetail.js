@@ -59,29 +59,6 @@ function PaymentDetail(props) {
               <div className=" mr-3">
                 <div className="p-5 mt-3 contentBox">
                   <div className="subTitle">
-                    <p>填寫附加資訊</p>
-                  </div>
-                  <div className="col-6 form-group">
-                    <label for="email">電子郵件</label>
-                    <Form.Group>
-                      <Form.Control
-                        required
-                        ref={(input) => (email = input)}
-                        name="email"
-                        id="email"
-                        size="lg"
-                        type="email"
-                        placeholder="電子郵件地址"
-                        pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{3,6}(?:\.[a-z]{2})?)$"
-                        // onChange={(e) => getformInfo(e, 'email')}
-                      />
-                      <Form.Control.Feedback>正確!</Form.Control.Feedback>
-                      <Form.Control.Feedback type="invalid">
-                        請輸入email
-                      </Form.Control.Feedback>
-                    </Form.Group>
-                  </div>
-                  <div className="subTitle mt-5">
                     <p>聯絡資訊</p>
                   </div>
                   <div className="d-flex">
@@ -126,6 +103,26 @@ function PaymentDetail(props) {
                       ref={(input) => (phone = input)}
                       pattern="09\d{2}\-?\d{3}\-?\d{3}"
                     />
+                  </div>
+                  <div className="col-6 form-group">
+                    <label for="email">電子郵件</label>
+                    <Form.Group>
+                      <Form.Control
+                        required
+                        ref={(input) => (email = input)}
+                        name="email"
+                        id="email"
+                        size="lg"
+                        type="email"
+                        placeholder="電子郵件地址"
+                        pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{3,6}(?:\.[a-z]{2})?)$"
+                        // onChange={(e) => getformInfo(e, 'email')}
+                      />
+                      <Form.Control.Feedback>正確!</Form.Control.Feedback>
+                      <Form.Control.Feedback type="invalid">
+                        請輸入email
+                      </Form.Control.Feedback>
+                    </Form.Group>
                   </div>
                 </div>
               </div>
