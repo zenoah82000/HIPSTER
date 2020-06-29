@@ -11,6 +11,7 @@
       background: white;
       margin-bottom: 15px;
       border-radius: 6px;
+
       a {
         text-decoration: none;
         color: #684b38;
@@ -21,6 +22,10 @@
       .px-15 {
         padding: 0 15px 0 15px;
         box-sizing: border-box;
+      }
+      img {
+        height: 100%;
+        object-fit: cover;
       }
       .product-detail {
         padding: 0 15px 10px 0;
@@ -48,6 +53,7 @@
           line-height: 1.6;
           max-height: 43px;
           text-align: justify;
+          color: #684b38;
           display: -webkit-box;
           overflow: hidden;
           -webkit-box-orient: vertical;

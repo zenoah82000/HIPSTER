@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import { connect } from 'react-redux'
@@ -6,7 +6,8 @@ import '../../styles/Payment.scss'
 
 //引入自訂元件
 
-function paymentDetail(props) {
+function PaymentDetail(props) {
+  const [validated, setValidated] = useState(false)
   //取得購物車的資料,個人資料
   const { sum, buyerinfo, userSuccess } = props
 
@@ -14,24 +15,23 @@ function paymentDetail(props) {
   let email, phone, lastName, firstName
 
   //下一頁(填寫付款資訊)
-  const nextPage = () => {
-    if (
-      email.value == '' ||
-      phone.value == '' ||
-      lastName.value == '' ||
-      firstName.value == ''
-    ) {
-      return
+  const nextPage = (e) => {
+    const form = e.currentTarget
+    if (form.checkValidity() === false) {
+      e.preventDefault()
+    } else if (form.checkValidity() === true) {
+      e.preventDefault()
+      let data = {
+        email: email.value,
+        phone: phone.value,
+        lastName: lastName.value,
+        firstName: firstName.value,
+        product: [...buyerinfo.product],
+      }
+      props.dispatch({ type: 'BUYER_DATA', value: data })
+      props.history.push('/paymentType')
     }
-    let data = {
-      email: email.value,
-      phone: phone.value,
-      lastName: lastName.value,
-      firstName: firstName.value,
-      product: [...buyerinfo.product],
-    }
-    props.dispatch({ type: 'BUYER_DATA', value: data })
-    props.history.push('/paymentType')
+    setValidated(true)
   }
   //上一頁(返回購物車)
   const backPage = () => {
@@ -44,11 +44,12 @@ function paymentDetail(props) {
   }
   return (
     <>
-      <form
-        action=""
-        method=""
-        onSubmit={() => {
-          return false
+      <Form
+        name="checkout"
+        noValidate
+        validated={validated}
+        onSubmit={(e) => {
+          nextPage(e)
         }}
       >
         <div className="container mb-5">
@@ -58,20 +59,6 @@ function paymentDetail(props) {
               <div className=" mr-3">
                 <div className="p-5 mt-3 contentBox">
                   <div className="subTitle">
-                    <p>填寫附加資訊</p>
-                  </div>
-                  <div className="col-6 form-group">
-                    <label for="inputEmail  ">電子郵件*</label>
-                    <input
-                      type="email"
-                      class="form-control"
-                      id="inputEmail"
-                      placeholder="name@example.com"
-                      required
-                      ref={(input) => (email = input)}
-                    />
-                  </div>
-                  <div className="subTitle mt-5">
                     <p>聯絡資訊</p>
                   </div>
                   <div className="d-flex">
@@ -83,18 +70,7 @@ function paymentDetail(props) {
                       </select>
                     </div>
                     <div className="col-4 form-group mx-1">
-                      <label for="inputFirstname  ">名字(需與護照一致)</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="inputFirstname"
-                        placeholder="First name"
-                        ref={(input) => (firstName = input)}
-                        required
-                      />
-                    </div>
-                    <div className="col-4 form-group mx-1">
-                      <label for="inputLastname  ">姓氏(需與護照一致)</label>
+                      <label for="inputLastname  ">姓氏</label>
                       <input
                         type="text"
                         className="form-control"
@@ -104,9 +80,21 @@ function paymentDetail(props) {
                         required
                       />
                     </div>
+                    <div className="col-4 form-group mx-1">
+                      <label for="inputFirstname  ">名字</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="inputFirstname"
+                        placeholder="First name"
+                        ref={(input) => (firstName = input)}
+                        required
+                      />
+                    </div>
+                    
                   </div>
                   <div className="col-6 form-group">
-                    <label for="inputNumber  ">聯絡電話*</label>
+                    <label for="inputNumber  ">聯絡電話</label>
                     <input
                       type="text"
                       className="form-control"
@@ -115,6 +103,26 @@ function paymentDetail(props) {
                       ref={(input) => (phone = input)}
                       pattern="09\d{2}\-?\d{3}\-?\d{3}"
                     />
+                  </div>
+                  <div className="col-6 form-group">
+                    <label for="email">電子郵件</label>
+                    <Form.Group>
+                      <Form.Control
+                        required
+                        ref={(input) => (email = input)}
+                        name="email"
+                        id="email"
+                        size="lg"
+                        type="email"
+                        placeholder="電子郵件地址"
+                        pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{3,6}(?:\.[a-z]{2})?)$"
+                        // onChange={(e) => getformInfo(e, 'email')}
+                      />
+                      <Form.Control.Feedback>正確!</Form.Control.Feedback>
+                      <Form.Control.Feedback type="invalid">
+                        請輸入email
+                      </Form.Control.Feedback>
+                    </Form.Group>
                   </div>
                 </div>
               </div>
@@ -148,20 +156,13 @@ function paymentDetail(props) {
                   >
                     返回上一步
                   </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      nextPage()
-                    }}
-                  >
-                    下一步
-                  </button>
+                  <button type="submit">下一步</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </form>
+      </Form>
     </>
   )
 }
@@ -174,5 +175,5 @@ const mapStateToProps = (store) => {
 const mapDispatchToProps = null
 
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(paymentDetail)
+  connect(mapStateToProps, mapDispatchToProps)(PaymentDetail)
 )

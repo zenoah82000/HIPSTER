@@ -76,6 +76,8 @@ class mapList extends React.Component {
       date: new Date(),
       dateClicked: false,
       active: true,
+      cafeupdatedList: [],
+      productupdatedList: [],
     }
   }
 
@@ -178,7 +180,7 @@ class mapList extends React.Component {
 
   //點擊咖啡廳卡片
   cardClick = (item) => {
-    this.props.cardClickReset(item)
+    this.props.cardClick(item)
     // this.state.cafedata.forEach((item) => {
     //   if (item.mapCafe_Id === cid) {
     //     console.log(item.lat, item.log)
@@ -191,7 +193,7 @@ class mapList extends React.Component {
   productCardClick = (item) => {
     // console.log(cid)
 
-    this.props.cardClickReset(item)
+    this.props.cardClick(item)
     // this.state.productdata.forEach((item) => {
     //   console.log(item)
     //   if (item.productId === cid) {
@@ -220,19 +222,19 @@ class mapList extends React.Component {
             item.mapCafe_Name
               .toLowerCase()
               .indexOf(this.state.search.toLowerCase()) !== -1 &&
-               item.star > 4.5
+            item.star > 4.5
           )
         } else if (this.state.searchBtn3 == '4分以上') {
           return (
             item.mapCafe_Name
               .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1  && item.star > 4
+              .indexOf(this.state.search.toLowerCase()) !== -1 && item.star > 4
           )
         } else if (this.state.searchBtn3 == '3.5分以上') {
           return (
             item.mapCafe_Name
               .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1  &&
+              .indexOf(this.state.search.toLowerCase()) !== -1 &&
             item.star > 3.5
           )
         } else {
@@ -247,7 +249,7 @@ class mapList extends React.Component {
           return (
             item.mapCafe_Name
               .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1  &&
+              .indexOf(this.state.search.toLowerCase()) !== -1 &&
             item.category == '咖啡廳' &&
             item.star > 4.5
           )
@@ -255,7 +257,7 @@ class mapList extends React.Component {
           return (
             item.mapCafe_Name
               .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1  &&
+              .indexOf(this.state.search.toLowerCase()) !== -1 &&
             item.category == '咖啡廳' &&
             item.star > 4.5
           )
@@ -263,7 +265,7 @@ class mapList extends React.Component {
           return (
             item.mapCafe_Name
               .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1  &&
+              .indexOf(this.state.search.toLowerCase()) !== -1 &&
             item.category == '咖啡廳' &&
             item.star > 3.5
           )
@@ -271,7 +273,7 @@ class mapList extends React.Component {
           return (
             item.mapCafe_Name
               .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1  &&
+              .indexOf(this.state.search.toLowerCase()) !== -1 &&
             item.category == '咖啡廳'
           )
         }
@@ -288,7 +290,7 @@ class mapList extends React.Component {
           return (
             item.mapCafe_Name
               .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1  &&
+              .indexOf(this.state.search.toLowerCase()) !== -1 &&
             item.category == '手作課程' &&
             item.star > 4.5
           )
@@ -296,7 +298,7 @@ class mapList extends React.Component {
           return (
             item.mapCafe_Name
               .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1  &&
+              .indexOf(this.state.search.toLowerCase()) !== -1 &&
             item.category == '手作課程' &&
             item.star > 3.5
           )
@@ -304,7 +306,7 @@ class mapList extends React.Component {
           return (
             item.mapCafe_Name
               .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1  &&
+              .indexOf(this.state.search.toLowerCase()) !== -1 &&
             item.category == '手作課程'
           )
         }
@@ -313,7 +315,7 @@ class mapList extends React.Component {
           return (
             item.mapCafe_Name
               .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1  &&
+              .indexOf(this.state.search.toLowerCase()) !== -1 &&
             item.category == '文藝展覽' &&
             item.star > 4.5
           )
@@ -321,7 +323,7 @@ class mapList extends React.Component {
           return (
             item.mapCafe_Name
               .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1  &&
+              .indexOf(this.state.search.toLowerCase()) !== -1 &&
             item.category == '文藝展覽' &&
             item.star > 4.5
           )
@@ -343,6 +345,7 @@ class mapList extends React.Component {
         }
       }
     })
+    console.log(updatedList)
 
     let data = updatedList.map((item, index, array) => {
       return (
@@ -379,7 +382,9 @@ class mapList extends React.Component {
                       {item.category}
                     </div>
                   </li>
-                  <li><RatingStarValue ratingValue={item.star}/></li>
+                  {/* <li>
+                    <RatingStarValue ratingValue={item.star} />
+                  </li> */}
                   <li>
                     <span className="mr-2">
                       <FaRegClock />
@@ -405,6 +410,7 @@ class mapList extends React.Component {
         </Fade>
       )
     })
+    // this.setState({ cafeupdatedList: updatedList })
     return data
   }
 
@@ -421,8 +427,8 @@ class mapList extends React.Component {
           return (
             item.productName
               .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1 && 
-              item.star > 4.5
+              .indexOf(this.state.search.toLowerCase()) !== -1 &&
+            item.star > 4.5
           )
         } else if (this.state.searchBtn3 == '4分以上') {
           return (
@@ -441,8 +447,8 @@ class mapList extends React.Component {
           return (
             item.productName
               .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1 || 
-              item.productAddress
+              .indexOf(this.state.search.toLowerCase()) !== -1 ||
+            item.productAddress
               .toLowerCase()
               .indexOf(this.state.search.toLowerCase()) !== -1
           )
@@ -584,7 +590,9 @@ class mapList extends React.Component {
                       {item.category}
                     </div>
                   </li>
-                  <li><RatingStarValue ratingValue={item.star}/></li>
+                  <li>
+                    <RatingStarValue ratingValue={item.star} />
+                  </li>
                   <li>
                     <span className="mr-2">
                       <FaRegClock />
@@ -775,12 +783,12 @@ class mapList extends React.Component {
                 }}
               >
                 <option value="" disabled selected style={{ display: 'none' }}>
-                  排序方式
+                  商品排序方式
                 </option>
-                <option value="starAsc">評分由低到高</option>
-                <option value="starDsc">評分由高到低</option>
-                <option value="priceAsc">價格由低到高</option>
-                <option value="priceDesc">價格由高到低</option>
+                <option value="starAsc">星等由低到高</option>
+                <option value="starDsc">星等由高到低</option>
+                {/* <option value="priceAsc">價格由低到高</option>
+                <option value="priceDesc">價格由高到低</option> */}
               </select>
             </div>
           </div>

@@ -18,3 +18,45 @@ div.bg-white.ml-md-2.sidebarright > div > div.qa-pane:nth-of-type(1) {
 div.bg-white.ml-md-2.sidebarright > div > div.qa-pane:last-of-type {
   border-bottom: 0px solid #eaeaea;
 }
+
+.qatextarea-container {
+  width: 80%;
+  margin: 16px auto 0;
+}
+
+.qa-button-center {
+  text-align: center;
+  margin-top: 22px;
+}
+
+.rt-button-submit {
+  background: #f05940;
+  color: #fff;
+  border-color: #f05940;
+  border-bottom-color: rgba(0, 0, 0, 0.2);
+}
+
+.rt-button-default {
+  background: #fff;
+  color: #6d6d6d;
+}
+
+.rt-button {
+  margin: 0 2px;
+  border-radius: 2px;
+  padding: 5px 26px;
+}
+
+.rt-button-submit:hover {
+  background: #e21c00;
+}
+
+.rt-button-default:hover {
+  background: #f4f4f4;
+}
+
+.qa-textarea-label {
+  font-weight: 900;
+  font-size: 18px;
+  margin-bottom: 16px;
+}

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { withRouter } from 'react-router-dom'
 import '../../styles/mContent/userComment.scss'
 import RatingStar from './ratingStar'
 import { BsPlusCircle } from 'react-icons/bs'
@@ -6,47 +7,47 @@ import { IconContext } from 'react-icons'
 
 //確認框
 import Swal from 'sweetalert2'
+import { checkPropTypes } from 'prop-types'
 
-function ReplyComment({ commentData }) {
+function ReplyComment({ handleDelete, index, commentData, history }) {
   //state
   const [image, setImage] = useState({ file: [], preview: [], raw: '' })
   const [text, setText] = useState('')
-  const [list, setList] = useState([])
   const [ratingValue, setRatingValue] = useState('')
+  const [load, setLoad] = useState(false)
 
-
-//評論送出
-// const commentData ={
-//   commentMemberId:"",
-//   comment:[]
-// }
-
-// const sendCommentAsync = async (comment) => {
-//   const request = new Request('http://localhost:5000/sendComments/2', {
-//     method: 'post',
-//     body: JSON.stringify(comment),
-//     headers: new Headers({
-//       Accept: 'application/json',
-//       'Content-Type': 'application/json',
-//     }),
-//   })
-//   const response = await fetch(request)
-//   const data = await response.json()
-//   const orderId = {...buyerinfo}
-//   orderId.orderId = data
-//   props.dispatch({ type: 'BUYER_DATA', value: orderId })
-// }
-
+  // 評論送出
+  const secdCommentData = {
+    commentMemberId: '',
+    comment: {
+      itemListId: '',
+      content: '',
+      star: '',
+    },
+  }
+  const sendCommentAsync = async (comment) => {
+    console.log(comment)
+    const request = new Request('http://localhost:5000/sendComments', {
+      method: 'post',
+      body: JSON.stringify(comment),
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }),
+    })
+    const response = await fetch(request)
+    const data = await response.json()
+  }
 
   // 上傳圖片
   let fileObj = []
   let fileArray = []
 
   const handleChange = (e) => {
-    console.log("test")
+    console.log('test')
     fileObj.push(e.target.files)
     console.log(fileObj)
-    console.log("test")
+    console.log('test')
     for (let i = 0; i < fileObj[0].length; i++) {
       fileArray.push(URL.createObjectURL(fileObj[0][i]))
       console.log(fileObj)
@@ -81,55 +82,71 @@ function ReplyComment({ commentData }) {
     console.log(text)
   }
 
-  const handleSubmit = (e, index) => {
-    // alert('submit')
-    text !== ''
-      ? Swal.fire({
+  //子元素回傳星等
+  const getRatingValue = (value) => {
+    setRatingValue(value + 1)
+    console.log(value + 1)
+  }
+
+  //送出
+  const sendComment = (e, index, text, id) => {
+    e.preventDefault()
+    let commentData = {
+      itemListId: id,
+      commentContent: text,
+      star: ratingValue,
+    }
+    if (text !== null && text !== '') {
+      sendCommentAsync(commentData)
+      setText('')
+      setLoad(true)
+
+      Swal.fire({
         text: '成功送出評論',
         icon: 'success',
         confirmButtonText: '確定',
         confirmButtonColor: 'rgba(104, 142, 103, 0.8)',
-      }) && handleDelete(index) 
-      // && sendCommentAsync(commentData)
-      : Swal.fire({
+      }).then(() => {
+        handleDelete(index)
+        console.log('123222222')
+        history.push('/memberuser/comment/notcomment')
+        setLoad(false)
+        
+      })
+    } else {
+      Swal.fire({
         text: '評論不能為空白',
         icon: 'warning',
         confirmButtonText: '確定',
         confirmButtonColor: 'rgba(104, 142, 103, 0.8)',
       })
-
-    e.preventDefault()
-  }
-
-  const handleDelete = (index) => {
-    const newList = [...list]
-    newList.splice(index, 1)
-    setList(newList)
-  }
-
-  //子元素回傳星等
-  const getRatingValue = (value) => {
-    setRatingValue(value)
-    console.log(ratingValue + 1)
+    }
   }
 
   return (
     <>
-      <form
-        onSubmit={handleSubmit}
+      {load? <div style={{width:'100%',height:'476px'}} />:(<><form
         method="POST"
-        action="/{commentData.memberId}"
+        // action="/{commentData.memberId}"
         enctype="multipart/form-data"
-        key={commentData.orderId}
+        key={index}
       >
         <div className="reply-listview">
           <div className="comment-tbhead">
             <div class="row">
-              <div class="col-9 pl-1"><h5 className="eventTitle " style={{ fontWeight: "bold" }}>{commentData.productName}</h5></div>
+              <div class="col-9 pl-1">
+                <h5 className="eventTitle " style={{ fontWeight: 'bold' }}>
+                  {commentData.productName}
+                </h5>
+              </div>
               <div class="col-3 pr-1">
-                <ul className="float-right list-unstyled" >
-                  <li><small>訂單編號:{commentData.orderId}</small></li>
-                  <li><small>活動日期:{commentData.date.substring(0, 10)}</small></li>
+                <ul className="float-right list-unstyled">
+                  <li>
+                    <small>訂單編號:{commentData.orderId}</small>
+                  </li>
+                  <li>
+                    <small>活動日期:{commentData.date.substring(0, 10)}</small>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -148,77 +165,81 @@ function ReplyComment({ commentData }) {
                     <p>活動日期:{commentData.date}</p>
                   </li> */}
                   <li className="d-flex">
-                    <p style={{fontWeight:"bold"}}>輸入星等:</p>
+                    <p style={{ fontWeight: 'bold' }}>輸入星等:</p>
                     <RatingStar getRatingValue={getRatingValue} />
                   </li>
                   <li className="d-flex">
-                    <p style={{fontWeight:"bold"}}>上傳相片:</p>
+                    <p style={{ fontWeight: 'bold' }}>上傳相片:</p>
                     <div className="d-flex">
                       {image.preview.length > 0
                         ? image.preview.map((item) => {
-                          return (
-                            <>
-                              <div className="commentImg">
-                                <img
-                                  className="commentImgPhoto"
-                                  src={item}
-                                  alt=""
-                                />
-                              </div>
-                            </>
-                          )
-                        })
+                            return (
+                              <>
+                                <div className="commentImg">
+                                  <img
+                                    className="commentImgPhoto"
+                                    src={item}
+                                    alt=""
+                                  />
+                                </div>
+                              </>
+                            )
+                          })
                         : ''}
 
                       {image.preview.length >= 3 ? (
                         ''
                       ) : (
-                          <>
-                            <label htmlFor={commentData.orderId}>
-                              <div className="commentImgPlus">
-                                <IconContext.Provider
-                                  value={{
-                                    color: 'rgba(104, 142, 103, 0.8)',
-                                    size: '40px',
-                                  }}
-                                >
-                                  <BsPlusCircle />
-                                </IconContext.Provider>
-                              </div>
-                            </label>
+                        <>
+                          <label htmlFor={commentData.itemListId}>
+                            <div className="commentImgPlus">
+                              <IconContext.Provider
+                                value={{
+                                  color: 'rgba(104, 142, 103, 0.8)',
+                                  size: '40px',
+                                }}
+                              >
+                                <BsPlusCircle />
+                              </IconContext.Provider>
+                            </div>
+                          </label>
 
-                            <input
-                              type="file"
-                              id={commentData.orderId}
-                              style={{ display: 'none' }}
-                              onChange={handleChange}
-                              // ref={divRef}
-                              multiple
+                          <input
+                            type="file"
+                            id={commentData.itemListId}
+                            style={{ display: 'none' }}
+                            onChange={handleChange}
+                            // ref={divRef}
+                            multiple
                             // value={text}
-                            />
-                          </>
-                        )}
+                          />
+                        </>
+                      )}
                     </div>
                   </li>
                   <li>
-                    <p style={{fontWeight:"bold"}}  >輸入評論:</p>
+                    <p style={{ fontWeight: 'bold' }}>輸入評論:</p>
                     <textarea
                       className="form-control"
                       // id={commentData.orderId}
                       rows="6"
                       onChange={(index) => handleTextChange(index)}
-                    //  key={index}
-                    ></textarea>
+                      value={text}
+                      //  key={index}
+                    />
+                    
+    
                   </li>
                 </ul>
                 <button
                   className="btn buttonstyle float-right mt-3"
                   type="submit"
+                  onClick={(e) => sendComment(e, index, text, commentData.itemListId)}
                   // id={commentData.orderId}
-                  value="Submit"
-                // onClick={()=>handleDelete(index)}
-                // onClick={handleUpload}
-                // onClick={()=>{setAccount("")}}
+                  // value="Submit"
+
+                  // onClick={handleUpload}
+                  // onClick={()=>{setAccount("")}}
                 >
                   提交評論
                 </button>
@@ -226,9 +247,9 @@ function ReplyComment({ commentData }) {
             </div>
           </div>
         </div>
-      </form>
+      </form></>)}
     </>
   )
 }
 
-export default ReplyComment
+export default withRouter(ReplyComment)
