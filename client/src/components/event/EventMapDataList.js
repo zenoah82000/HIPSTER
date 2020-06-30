@@ -207,7 +207,143 @@ class mapList extends React.Component {
   onItemClick = (event) => {
     event.openPopup()
   }
-
+  // cafelist = this.state.cafedata.filter((item) => {
+  //   // console.log(this.state.searchBtn1, this.state.searchBtn3)
+  //   if (
+  //     this.state.searchBtn1 === '全部類別' ||
+  //     this.state.searchBtn1 === '類別'
+  //   ) {
+  //     // console.log('texs')
+  //     if (this.state.searchBtn3 == '4.5分以上') {
+  //       return (
+  //         item.mapCafe_Name
+  //           .toLowerCase()
+  //           .indexOf(this.state.search.toLowerCase()) !== -1 &&
+  //         item.star > 4.5
+  //       )
+  //     } else if (this.state.searchBtn3 == '4分以上') {
+  //       return (
+  //         item.mapCafe_Name
+  //           .toLowerCase()
+  //           .indexOf(this.state.search.toLowerCase()) !== -1 && item.star > 4
+  //       )
+  //     } else if (this.state.searchBtn3 == '3.5分以上') {
+  //       return (
+  //         item.mapCafe_Name
+  //           .toLowerCase()
+  //           .indexOf(this.state.search.toLowerCase()) !== -1 &&
+  //         item.star > 3.5
+  //       )
+  //     } else {
+  //       return (
+  //         item.mapCafe_Name
+  //           .toLowerCase()
+  //           .indexOf(this.state.search.toLowerCase()) !== -1
+  //       )
+  //     }
+  //   } else if (this.state.searchBtn1 == '咖啡廳') {
+  //     if (this.state.searchBtn3 == '4.5分以上') {
+  //       return (
+  //         item.mapCafe_Name
+  //           .toLowerCase()
+  //           .indexOf(this.state.search.toLowerCase()) !== -1 &&
+  //         item.category == '咖啡廳' &&
+  //         item.star > 4.5
+  //       )
+  //     } else if (this.state.searchBtn3 == '4分以上') {
+  //       return (
+  //         item.mapCafe_Name
+  //           .toLowerCase()
+  //           .indexOf(this.state.search.toLowerCase()) !== -1 &&
+  //         item.category == '咖啡廳' &&
+  //         item.star > 4.5
+  //       )
+  //     } else if (this.state.searchBtn3 == '3.5分以上') {
+  //       return (
+  //         item.mapCafe_Name
+  //           .toLowerCase()
+  //           .indexOf(this.state.search.toLowerCase()) !== -1 &&
+  //         item.category == '咖啡廳' &&
+  //         item.star > 3.5
+  //       )
+  //     } else {
+  //       return (
+  //         item.mapCafe_Name
+  //           .toLowerCase()
+  //           .indexOf(this.state.search.toLowerCase()) !== -1 &&
+  //         item.category == '咖啡廳'
+  //       )
+  //     }
+  //   } else if (this.state.searchBtn1 == '手作課程') {
+  //     if (this.state.searchBtn3 == '4.5分以上') {
+  //       return (
+  //         item.mapCafe_Name
+  //           .toLowerCase()
+  //           .indexOf(this.state.search.toLowerCase()) &&
+  //         item.category == '手作課程' &&
+  //         item.star > 4.5
+  //       )
+  //     } else if (this.state.searchBtn3 == '4分以上') {
+  //       return (
+  //         item.mapCafe_Name
+  //           .toLowerCase()
+  //           .indexOf(this.state.search.toLowerCase()) !== -1 &&
+  //         item.category == '手作課程' &&
+  //         item.star > 4.5
+  //       )
+  //     } else if (this.state.searchBtn3 == '3.5分以上') {
+  //       return (
+  //         item.mapCafe_Name
+  //           .toLowerCase()
+  //           .indexOf(this.state.search.toLowerCase()) !== -1 &&
+  //         item.category == '手作課程' &&
+  //         item.star > 3.5
+  //       )
+  //     } else {
+  //       return (
+  //         item.mapCafe_Name
+  //           .toLowerCase()
+  //           .indexOf(this.state.search.toLowerCase()) !== -1 &&
+  //         item.category == '手作課程'
+  //       )
+  //     }
+  //   } else if (this.state.searchBtn1 == '文藝展覽') {
+  //     if (this.state.searchBtn3 == '4.5分以上') {
+  //       return (
+  //         item.mapCafe_Name
+  //           .toLowerCase()
+  //           .indexOf(this.state.search.toLowerCase()) !== -1 &&
+  //         item.category == '文藝展覽' &&
+  //         item.star > 4.5
+  //       )
+  //     } else if (this.state.searchBtn3 == '4分以上') {
+  //       return (
+  //         item.mapCafe_Name
+  //           .toLowerCase()
+  //           .indexOf(this.state.search.toLowerCase()) !== -1 &&
+  //         item.category == '文藝展覽' &&
+  //         item.star > 4.5
+  //       )
+  //     } else if (this.state.searchBtn3 == '3.5分以上') {
+  //       return (
+  //         item.mapCafe_Name
+  //           .toLowerCase()
+  //           .indexOf(this.state.search.toLowerCase()) !== -1 &&
+  //         item.category == '文藝展覽' &&
+  //         item.star > 3.5
+  //       )
+  //     } else {
+  //       return (
+  //         item.mapCafe_Name
+  //           .toLowerCase()
+  //           .indexOf(this.state.search.toLowerCase()) !== -1 &&
+  //         item.category == '文藝展覽'
+  //       )
+  //     }
+  //   }
+  //   console.log(this.cafelist)
+  // })
+  
   //咖啡廳列表
   filterList() {
     let updatedList = this.state.cafedata.filter((item) => {

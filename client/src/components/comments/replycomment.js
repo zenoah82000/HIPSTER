@@ -4,6 +4,7 @@ import '../../styles/mContent/userComment.scss'
 import RatingStar from './ratingStar'
 import { BsPlusCircle } from 'react-icons/bs'
 import { IconContext } from 'react-icons'
+import Fade from 'react-reveal/Fade';
 
 //確認框
 import Swal from 'sweetalert2'
@@ -125,6 +126,7 @@ function ReplyComment({ handleDelete, index, commentData, history }) {
 
   return (
     <>
+    <Fade >
       {load? <div style={{width:'100%',height:'476px'}} />:(<><form
         method="POST"
         // action="/{commentData.memberId}"
@@ -247,7 +249,11 @@ function ReplyComment({ handleDelete, index, commentData, history }) {
             </div>
           </div>
         </div>
-      </form></>)}
+      </form>
+      
+
+      </>)}
+      </Fade>
     </>
   )
 }

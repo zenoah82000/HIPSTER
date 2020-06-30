@@ -1,23 +1,23 @@
 .myReplyBox {
-  background: #E6DED7;
+  background: #e6ded7;
   width: 100%;
   padding: 20px 10px 10px 10px;
 }
 
 .mynotReplyBox {
+  border: 1px solid #cecece;
   background: #ffffff;
   width: 100%;
   padding: 20px 10px 10px 10px;
 }
 
-.comment-bar{
+.comment-bar {
   border-bottom: 1px solid #cecece;
   margin-bottom: 15px;
 }
 
 .reply-listview {
-  border-bottom: 1px solid #cecece;
-  padding: 10px 10px 20px 10px ;
+  padding: 10px 10px 20px 10px;
 }
 
 .myReply {
@@ -35,42 +35,39 @@
   height: 200px;
   object-fit: cover;
   // padding-top: 8px;;
- border-radius: 3px;  
-
+  border-radius: 3px;
 }
 
-.commentImg{
-  width:80px;
-   height: 80px;
-   border: 1px solid rgba(167, 165, 165, 0.726);
-    // object-fit: full;
-     overflow: hidden;
-      margin: 5px; 
-     
+.commentImg {
+  width: 80px;
+  height: 80px;
+  border: 1px solid rgba(167, 165, 165, 0.726);
+  // object-fit: full;
+  overflow: hidden;
+  margin: 5px;
 }
-.commentImgPhoto{
-  width:100%;
-  height: 100%;  
+.commentImgPhoto {
+  width: 100%;
+  height: 100%;
 }
 
-.commentImgPlus{
-  width:80px;
-   height: 80px;
-     margin: 5px; 
-    text-align: center;
-    line-height: 80px;
-    background: rgba(241, 241, 241, 0.726);
-    border: 1px solid rgba(167, 165, 165, 0.726);
-    cursor: pointer;
+.commentImgPlus {
+  width: 80px;
+  height: 80px;
+  margin: 5px;
+  text-align: center;
+  line-height: 80px;
+  background: rgba(241, 241, 241, 0.726);
+  border: 1px solid rgba(167, 165, 165, 0.726);
+  cursor: pointer;
 }
-.commentImgPlus:hover{
+.commentImgPlus:hover {
   background: rgba(167, 165, 165, 0.726);
 }
 
-
-.text{
-  word-wrap:break-word; 
-  word-break:normal;
+.text {
+  word-wrap: break-word;
+  word-break: normal;
 }
 //starRating
 
@@ -78,29 +75,31 @@
   position: absolute;
   overflow: hidden;
   clip: rect(0 0 0 0);
-  height: 1px; width: 1px;
-  margin: -1px; padding: 0; border: 0;
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
 }
 
 .star-rating {
-
   &__star {
     display: inline-block;
     padding: 3px;
     vertical-align: middle;
     line-height: 1;
     font-size: 1.5em;
-    color: #ABABAB;
-    transition: color .2s ease-out;
+    color: #ababab;
+    transition: color 0.2s ease-out;
 
     &:hover {
       cursor: pointer;
     }
-    
+
     &.is-selected {
-      color: #FFD700;
+      color: #ffd700;
     }
-    
+
     &.is-disabled:hover {
       cursor: default;
     }
@@ -111,14 +110,13 @@
   }
 }
 
-.fa-star{
+.fa-star {
   color: rgb(255, 192, 20);
-  
 }
 
-.comment-tbhead{
+.comment-tbhead {
   background-color: rgba(104, 142, 103, 0.8);
-    padding: 5px;
-    border-radius: 4px 4px 0 0;
-    color: white;
+  padding: 5px;
+  border-radius: 4px 4px 0 0;
+  color: white;
 }
