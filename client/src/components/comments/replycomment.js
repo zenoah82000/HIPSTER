@@ -4,7 +4,7 @@ import '../../styles/mContent/userComment.scss'
 import RatingStar from './ratingStar'
 import { BsPlusCircle } from 'react-icons/bs'
 import { IconContext } from 'react-icons'
-import Fade from 'react-reveal/Fade';
+import Fade from 'react-reveal/Fade'
 
 //確認框
 import Swal from 'sweetalert2'
@@ -112,7 +112,6 @@ function ReplyComment({ handleDelete, index, commentData, history }) {
         console.log('123222222')
         history.push('/memberuser/comment/notcomment')
         setLoad(false)
-        
       })
     } else {
       Swal.fire({
@@ -126,133 +125,144 @@ function ReplyComment({ handleDelete, index, commentData, history }) {
 
   return (
     <>
-    <Fade >
-      {load? <div style={{width:'100%',height:'476px'}} />:(<><form
-        method="POST"
-        // action="/{commentData.memberId}"
-        enctype="multipart/form-data"
-        key={index}
-      >
-        <div className="reply-listview">
-          <div className="comment-tbhead">
-            <div class="row">
-              <div class="col-9 pl-1">
-                <h5 className="eventTitle " style={{ fontWeight: 'bold' }}>
-                  {commentData.productName}
-                </h5>
-              </div>
-              <div class="col-3 pr-1">
-                <ul className="float-right list-unstyled">
-                  <li>
-                    <small>訂單編號:{commentData.orderId}</small>
-                  </li>
-                  <li>
-                    <small>活動日期:{commentData.date.substring(0, 10)}</small>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div className="mynotReplyBox d-flex">
-              <div className="eventImgBox col-3">
-                <img
-                  src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
-                  alt=""
-                />
-              </div>
-              <div className=" col-9 pl-3">
-                <ul className=" list-unstyled">
-                  {/* <li className="d-flex">
+      <Fade>
+        {load ? (
+          <div style={{ width: '100%', height: '476px' }} />
+        ) : (
+          <>
+            <form
+              method="POST"
+              // action="/{commentData.memberId}"
+              enctype="multipart/form-data"
+              key={index}
+            >
+              <div className="reply-listview">
+                <div className="comment-tbhead">
+                  <div class="row">
+                    <div class="col-9 pl-1">
+                      <h5
+                        className="eventTitle "
+                        style={{ fontWeight: 'bold' }}
+                      >
+                        {commentData.productName}
+                      </h5>
+                    </div>
+                    <div class="col-3 pr-1">
+                      <ul className="float-right list-unstyled">
+                        <li>
+                          <small>訂單編號:{commentData.orderId}</small>
+                        </li>
+                        <li>
+                          <small>
+                            活動日期:{commentData.date.substring(0, 10)}
+                          </small>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div className="mynotReplyBox d-flex">
+                    <div className="eventImgBox col-3">
+                      <img
+                        src={
+                          'http://localhost:5000/images/product/' +
+                          commentData.productImg
+                        }
+                        alt=""
+                      />
+                    </div>
+                    <div className=" col-9 pl-3">
+                      <ul className=" list-unstyled">
+                        {/* <li className="d-flex">
                     <p>活動日期:{commentData.date}</p>
                   </li> */}
-                  <li className="d-flex">
-                    <p style={{ fontWeight: 'bold' }}>輸入星等:</p>
-                    <RatingStar getRatingValue={getRatingValue} />
-                  </li>
-                  <li className="d-flex">
-                    <p style={{ fontWeight: 'bold' }}>上傳相片:</p>
-                    <div className="d-flex">
-                      {image.preview.length > 0
-                        ? image.preview.map((item) => {
-                            return (
+                        <li className="d-flex">
+                          <p style={{ fontWeight: 'bold' }}>輸入星等:</p>
+                          <RatingStar getRatingValue={getRatingValue} />
+                        </li>
+                        <li className="d-flex">
+                          <p style={{ fontWeight: 'bold' }}>上傳相片:</p>
+                          <div className="d-flex">
+                            {image.preview.length > 0
+                              ? image.preview.map((item) => {
+                                  return (
+                                    <>
+                                      <div className="commentImg">
+                                        <img
+                                          className="commentImgPhoto"
+                                          src={item}
+                                          alt=""
+                                        />
+                                      </div>
+                                    </>
+                                  )
+                                })
+                              : ''}
+
+                            {image.preview.length >= 3 ? (
+                              ''
+                            ) : (
                               <>
-                                <div className="commentImg">
-                                  <img
-                                    className="commentImgPhoto"
-                                    src={item}
-                                    alt=""
-                                  />
-                                </div>
+                                <label htmlFor={commentData.itemListId}>
+                                  <div className="commentImgPlus">
+                                    <IconContext.Provider
+                                      value={{
+                                        color: 'rgba(104, 142, 103, 0.8)',
+                                        size: '40px',
+                                      }}
+                                    >
+                                      <BsPlusCircle />
+                                    </IconContext.Provider>
+                                  </div>
+                                </label>
+
+                                <input
+                                  type="file"
+                                  id={commentData.itemListId}
+                                  style={{ display: 'none' }}
+                                  onChange={handleChange}
+                                  // ref={divRef}
+                                  multiple
+                                  // value={text}
+                                />
                               </>
-                            )
-                          })
-                        : ''}
-
-                      {image.preview.length >= 3 ? (
-                        ''
-                      ) : (
-                        <>
-                          <label htmlFor={commentData.itemListId}>
-                            <div className="commentImgPlus">
-                              <IconContext.Provider
-                                value={{
-                                  color: 'rgba(104, 142, 103, 0.8)',
-                                  size: '40px',
-                                }}
-                              >
-                                <BsPlusCircle />
-                              </IconContext.Provider>
-                            </div>
-                          </label>
-
-                          <input
-                            type="file"
-                            id={commentData.itemListId}
-                            style={{ display: 'none' }}
-                            onChange={handleChange}
-                            // ref={divRef}
-                            multiple
-                            // value={text}
+                            )}
+                          </div>
+                        </li>
+                        <li>
+                          <p style={{ fontWeight: 'bold' }}>輸入評論:</p>
+                          <textarea
+                            className="form-control"
+                            // id={commentData.orderId}
+                            rows="6"
+                            onChange={(index) => handleTextChange(index)}
+                            value={text}
+                            //  key={index}
                           />
-                        </>
-                      )}
+                        </li>
+                      </ul>
+                      <button
+                        className="btn buttonstyle float-right mt-3"
+                        type="submit"
+                        onClick={(e) =>
+                          sendComment(e, index, text, commentData.itemListId)
+                        }
+                        // id={commentData.orderId}
+                        // value="Submit"
+
+                        // onClick={handleUpload}
+                        // onClick={()=>{setAccount("")}}
+                      >
+                        提交評論
+                      </button>
                     </div>
-                  </li>
-                  <li>
-                    <p style={{ fontWeight: 'bold' }}>輸入評論:</p>
-                    <textarea
-                      className="form-control"
-                      // id={commentData.orderId}
-                      rows="6"
-                      onChange={(index) => handleTextChange(index)}
-                      value={text}
-                      //  key={index}
-                    />
-                    
-    
-                  </li>
-                </ul>
-                <button
-                  className="btn buttonstyle float-right mt-3"
-                  type="submit"
-                  onClick={(e) => sendComment(e, index, text, commentData.itemListId)}
-                  // id={commentData.orderId}
-                  // value="Submit"
-
-                  // onClick={handleUpload}
-                  // onClick={()=>{setAccount("")}}
-                >
-                  提交評論
-                </button>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </form>
-      
-
-      </>)}
+            </form>
+          </>
+        )}
       </Fade>
     </>
   )
