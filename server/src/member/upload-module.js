@@ -23,5 +23,7 @@ const storage = multer.diskStorage({
 const fileFilter=(req,file,cb)=>{
     cb(null,!!extMap[file.mimetype]);
 };
+
 const upload=multer({storage,fileFilter});
+
 module.exports=upload;
