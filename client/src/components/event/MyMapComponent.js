@@ -7,6 +7,7 @@ import { FaMapMarkerAlt } from 'react-icons/fa'
 import { FaRegClock } from 'react-icons/fa'
 import { FaRegCalendarCheck } from 'react-icons/fa'
 import { GiCoffeeCup } from 'react-icons/gi'
+import { RiMoneyCnyCircleLine } from 'react-icons/ri'
 
 export const pointerIcon = new L.Icon({
   iconUrl: require('../../images/myplace.svg'),
@@ -72,16 +73,17 @@ export default class ViewportExample extends Component {
 
   openPopup(marker) {
     if (marker && marker.leafletElement) {
-      console.log('test')
+      // console.log('test')
       window.setTimeout(() => {
         marker.leafletElement.openPopup()
+        // console.log('test')
       })
     }
   }
 
   render() {
     let { viewport, clicked, cafeActive, clickData } = this.props
-    console.log(viewport.center)
+    console.log(this.props)
     return (
       <div>
         <Map viewport={viewport}>
@@ -119,17 +121,20 @@ export default class ViewportExample extends Component {
                     </li>
                     <li
                       style={{
-                        width: '460px',
+                        width: '300px',
                         height: '200px',
                         objectFit: 'cover',
                         overflow: 'hidden',
                         marginTop: '10px',
                       }}
                     >
-                      <img
-                        src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
+                      {/* <img
+                        src={
+                          'http://localhost:5000/images/mapCafe/' +
+                          clickData.Img
+                        }
                         alt=""
-                      />
+                      /> */}
                     </li>
                     <li>{/* <span>星等{clickData.star}</span> */}</li>
                     <li>
@@ -196,7 +201,7 @@ export default class ViewportExample extends Component {
                       </li>
                       <li
                         style={{
-                          width: '460px',
+                          width: '300px',
                           height: '200px',
                           objectFit: 'cover',
                           overflow: 'hidden',
@@ -204,11 +209,15 @@ export default class ViewportExample extends Component {
                         }}
                       >
                         <img
-                          src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
+                          src={
+                            'http://localhost:5000/images/mapCafe/' + item.Img
+                          }
                           alt=""
                         />
                       </li>
-                      <li>{/* <span>星等{item.star}</span> */}</li>
+                      <li>
+                        <RatingStarValue ratingValue={item.star} />
+                      </li>
                       <li>
                         <span className="mr-2">
                           <FaRegClock />
@@ -247,26 +256,30 @@ export default class ViewportExample extends Component {
           <Marker
             icon={pointerIcon}
             className="mylocation"
-            //  ref={this.openPopup}
+            ref={this.openPopup}
             position={this.props.myLocation}
           >
-            {/* <Popup  >
-                     我的位置
-            </Popup> */}
+            <Popup
+              style={{
+                width: '50px',
+                height: '50px',
+                fontFamily: '微軟正黑體',
+              }}
+            >
+              我的位置
+            </Popup>
           </Marker>
 
           {/* 商品地標 */}
           {clicked ? (
             <Marker
-              position={viewport.center}
               ref={this.openPopup}
+              // ref={this.openPopup}
+              position={viewport.center}
               icon={productTagIcon}
             >
               <Popup className="locationCard">
-                <h5>
-                  <GiCoffeeCup className="h5 mr-1" />
-                  {clickData.productName}
-                </h5>
+                <span style={{ width: '100%' }}>{clickData.productName}</span>
                 <ul className="cardList list-unstyled">
                   <li>
                     <div
@@ -283,17 +296,20 @@ export default class ViewportExample extends Component {
                   </li>
                   <li
                     style={{
-                      width: '460px',
+                      width: '300px',
                       height: '200px',
                       objectFit: 'cover',
                       overflow: 'hidden',
                       marginTop: '10px',
                     }}
                   >
-                    <img
-                      src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
+                    {/* <img
+                      src={
+                        'http://localhost:5000/images/product/' +
+                        clickData.productImg
+                      }
                       alt=""
-                    />
+                    /> */}
                   </li>
                   <li>
                     <span>
@@ -305,7 +321,7 @@ export default class ViewportExample extends Component {
                     <span className="mr-2">
                       <FaRegClock />
                     </span>
-                    <span>營業時間</span>
+                    <span>活動時間</span>
                   </li>
                   <li>
                     <span className="mr-2">
@@ -348,10 +364,7 @@ export default class ViewportExample extends Component {
                 // }}
               >
                 <Popup className="locationCard">
-                  <h5>
-                    <GiCoffeeCup className="h5 mr-1" />
-                    {item.productName}
-                  </h5>
+                  <h5>{item.productName}</h5>
                   <ul className="cardList list-unstyled">
                     <li>
                       <div
@@ -368,7 +381,7 @@ export default class ViewportExample extends Component {
                     </li>
                     <li
                       style={{
-                        width: '460px',
+                        width: '300px',
                         height: '200px',
                         objectFit: 'cover',
                         overflow: 'hidden',
@@ -376,19 +389,23 @@ export default class ViewportExample extends Component {
                       }}
                     >
                       <img
-                        src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
+                        src={
+                          'http://localhost:5000/images/product/' +
+                          item.productImg
+                        }
                         alt=""
+                        style={{ height: '100%', objectFit: 'cover' }}
                       />
                     </li>
                     <li>
-                      <span>星等:{item.star}</span>
+                      <RatingStarValue ratingValue={item.star} />
                     </li>
                     <li>
                       <span className="mr-2">
                         <FaRegClock />
                       </span>
                       <span>
-                        營業時間: {item.openTime}-{item.closeTime}
+                        活動日期: {item.openTime}-{item.closeTime}
                       </span>
                     </li>
                     <li>
@@ -399,9 +416,14 @@ export default class ViewportExample extends Component {
                     </li>
                     <li>
                       <span className="mr-2 ">
-                        <FaRegCalendarCheck />
+                        <RiMoneyCnyCircleLine />
                       </span>
-                      <span>電話：{item.productPhone}</span>
+                      <span>
+                        價格：NT$
+                        {item.productPrice
+                          .toString()
+                          .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
+                      </span>
                     </li>
                   </ul>
                   <div className="cardButton">

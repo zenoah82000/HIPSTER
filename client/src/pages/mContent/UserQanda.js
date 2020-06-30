@@ -16,7 +16,8 @@ function UserQanda(props) {
   const { productListData, getProductListAsync } = props
   const { adduserQandaData, addUserQandaDataAsync } = props
   const memberId = 2
-  const [discountCode, setdiscountCode] = useState([])
+  const [productName, setproductName] = useState([])
+  const [question, setQuestion] = useState([])
   // useEffect(() => {
   //   getUserQandaAsync()
   // }, [userQandaData])
@@ -29,16 +30,22 @@ function UserQanda(props) {
   console.log('userQAData.memberId', userQandaData[0])
   console.log('productListData', productListData)
   console.log('uQA-props-userQandaData', props.userQandaData)
-  // const addGiviData = async () => {
-  //   const GiviFormData = {
-  //     memberId,
-  //     discountCode,
-  //   }
-  //   console.log('GiviFormData', GiviFormData)
-  //   props.addUserCouponDataAsync(GiviFormData)
-  // }
-  // console.log('discountCode', discountCode)
-  // console.log('adduserCouponData', adduserCouponData)
+  const answer = ' '
+  const addQaData = async () => {
+    const GiviFormData = {
+      memberId,
+      question,
+      productName,
+      answer,
+    }
+    console.log('GiviFormData', GiviFormData)
+    props.addUserQandaDataAsync(GiviFormData)
+  }
+
+  let productList = productListData.map((item) => {
+    return <option value={item.productName}>{item.productName}</option>
+  })
+
   let qandaList = userQandaData.map((item) => {
     if (item.memberId == 2) {
       // console.log('item', item.memberId == 2)
@@ -48,7 +55,7 @@ function UserQanda(props) {
             <div class="col-1 qaleft-title mt-2 pl-4 font-weight-bold">
               問題
             </div>
-            <div class="col-11 mt-2 pl-4">{item.question}</div>
+            <div class="col-11 mt-2 pl-4 text-break">{item.question}</div>
             <div class="col-1 qaleft-title mt-2 pl-4 font-weight-bold">
               商品
             </div>
@@ -56,8 +63,8 @@ function UserQanda(props) {
             <div class="col-1 qa left-title mt-2 pl-4 font-weight-bold">
               答覆
             </div>
-            <div class="col-11 mt-2 pl-4">{item.answer}</div>
-            <div class="col-11 mt-2 pl-4">{item.memberId}</div>
+            <div class="col-11 mt-2 pl-4 text-break">{item.answer}</div>
+            {/* <div class="col-11 mt-2 pl-4">{item.memberId}</div> */}
           </div>
         </div>
       )
@@ -73,15 +80,34 @@ function UserQanda(props) {
           <label for="FormControlTextareaqa" className="qa-textarea-label">
             提出問題
           </label>
-          <div>可留下您的疑問我們將盡速問您解答。</div>
+          <div>可留下您的疑問，我們將盡速問您解答。</div>
+          <select
+            className="form-control productalldata-select"
+            id="productControlSelect1"
+            onChange={(event) => setproductName(event.target.value)}
+          >
+            <option selected value="1">
+              請選擇想提問的產品
+            </option>
+            {productList}
+          </select>
           <textarea
             className="form-control qatextarea-container"
             id="FormControlTextareaqa"
             cols="6"
             rows="6"
+            onChange={(event) => setQuestion(event.target.value)}
           ></textarea>
           <div className="qa-button-center">
-            <button className="rt-button rt-button-submit">提出問題</button>
+            <button
+              className="rt-button rt-button-submit"
+              onClick={() => {
+                addQaData()
+                $('#FormControlTextareaqa').val('')
+              }}
+            >
+              提出問題
+            </button>
             <button
               className="rt-button rt-button-default"
               onClick={() => {

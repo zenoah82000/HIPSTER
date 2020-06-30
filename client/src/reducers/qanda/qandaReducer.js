@@ -4,6 +4,8 @@ const userQandaData = (state = [], action) => {
   switch (action.type) {
     case 'GET_USERQANDA':
       return action.value
+    case 'ADD_UserQandaDATA':
+      return [...state, action.value]
     default:
       return state
   }
@@ -12,8 +14,8 @@ const userQandaData = (state = [], action) => {
 //新增QA
 const adduserQandaData = (state = [], action) => {
   switch (action.type) {
-    case 'ADD_UserQandaDATA':
-      return action.value
+    // case 'ADD_UserQandaDATA':
+    //   return action.value
     default:
       return state
   }
@@ -21,6 +23,6 @@ const adduserQandaData = (state = [], action) => {
 
 const qandaReducer = combineReducers({
   userQandaData,
-  adduserQandaData,
+  // adduserQandaD ata,
 })
 export { qandaReducer }

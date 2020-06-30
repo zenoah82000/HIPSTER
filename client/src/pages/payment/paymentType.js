@@ -1,12 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
+import $ from 'jquery'
 import { connect } from 'react-redux'
+import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import { withRouter, Link } from 'react-router-dom'
 import '../../styles/Payment.scss'
 
 //引入自訂元件
 
-function paymentType(props) {
+function PaymentType(props) {
   const { sum, buyerinfo } = props
+
+  //驗證
+  const [validated, setValidated] = useState(false)
 
   //訂單初始化
   const orderData = {
@@ -26,89 +31,190 @@ function paymentType(props) {
     })
     const response = await fetch(request)
     const data = await response.json()
-    const orderId = {...buyerinfo}
+    const orderId = { ...buyerinfo }
     orderId.orderId = data
     props.dispatch({ type: 'BUYER_DATA', value: orderId })
   }
   const backPage = () => {
     props.history.push('/paymentDetail')
   }
-  const checkOut = () => {
-    let total = sum(buyerinfo.product)
-    buyerinfo.product.forEach((item, i) => {
-      itemData.productId = item.id
-      itemData.date = item.date
-      itemData.name = item.name
-      itemData.checkPrice = item.price
-      itemData.checkQty = item.amount
-      itemData.checkSubtotal = +item.price * +item.amount
-      orderData.orderItems.push(itemData)
-      itemData = {}
-    })
-    //取得總額跟信箱
-    orderData.total = total
-    orderData.email = buyerinfo.email
-    //訂單資料傳資料庫
-    checkoutAsync(orderData)
-    props.history.push('/paymentFinish')
+  const checkOut = (e) => {
+    const form = e.currentTarget
+    if (form.checkValidity() === false) {
+      e.preventDefault()
+    } else if (form.checkValidity() === true) {
+      e.preventDefault()
+      let total = sum(buyerinfo.product)
+      buyerinfo.product.forEach((item, i) => {
+        itemData.productId = item.id
+        itemData.date = item.date
+        itemData.name = item.name
+        itemData.checkPrice = item.price
+        itemData.checkQty = item.amount
+        itemData.checkSubtotal = +item.price * +item.amount
+        orderData.orderItems.push(itemData)
+        itemData = {}
+      })
+      //取得總額跟信箱
+      orderData.total = total
+      orderData.email = buyerinfo.email
+      //訂單資料傳資料庫
+      checkoutAsync(orderData)
+      //跳轉頁面
+      props.history.push('/paymentFinish')
+    }
+    setValidated(true)
+  }
+  //卡片輸入判斷
+  const cardInput = (e) => {
+    let length = $(e.currentTarget).val().length
+    let maxlength = $(e.currentTarget).attr('maxlength')
+    if (length == maxlength) {
+      $(e.currentTarget).parent().next().find('.cardInput').focus() //要注意是不是同層
+    } else {
+      $(e.currentTarget).focus()
+    }
   }
   return (
     <>
+      <Form
+        name="checkcard"
+        noValidate
+        validated={validated}
+        onSubmit={(e) => {
+          checkOut(e)
+        }}
+      >
       <div className="container mb-5">
         <div className="row">
           <div className="prograssBar2 mt-5"></div>
           <div className="col-9">
             <div className=" mr-3">
               <div className="p-5 mt-3 contentBox">
-                <div className="subTitle">
-                  <p>填寫付款資訊</p>
+                <div className="paytitle-border">
+                  <div className="subTitle">
+                    <p>輸入信用卡資訊</p>
+                  </div>
                 </div>
 
-                <div className="paymentBox">
-                  <div class="p-3 borderBottom bgColor">請選擇付款方式</div>
-                  <div className=" p-3 borderBottom">
-                    <input
-                      className=""
-                      type="radio"
-                      name="gridRadios"
-                      id="gridRadios1"
-                      value="option1"
-                      checked
+                <Form.Row>
+                  <Form.Group as={Col} xs={3} sm={3} md={3}>
+                    <Form.Control
+                      required
+                      className="cardInput"
+                      name="cardNumber"
+                      size="lg"
+                      type="text"
+                      placeholder="0000"
+                      maxlength="4"
+                      pattern="[0-9]{4}"
+                      onKeyUp={(e) => {
+                        cardInput(e)
+                      }}
+                      // onBlur={(e) => getformInfo(e, 'cardNumber')}
                     />
-                    <label className="p-1 form-check-label" for="gridRadios1">
-                      Pay Pal
-                    </label>
-                  </div>
-                  <div className=" p-3 borderBottom">
-                    <input
-                      className=""
-                      type="radio"
-                      name="gridRadios"
-                      id="gridRadios2"
-                      value="option2"
+                  </Form.Group>
+                  <Form.Group as={Col} xs={3} sm={3} md={3}>
+                    <Form.Control
+                      required
+                      className="cardInput"
+                      name="cardNumber"
+                      size="lg"
+                      type="text"
+                      placeholder="0000"
+                      maxlength="4"
+                      pattern="[0-9]{4}"
+                      onKeyUp={(e) => {
+                        cardInput(e)
+                      }}
+                      // onBlur={(e) => getformInfo(e, 'cardNumber')}
                     />
-                    <label className="p-1 form-check-label" for="gridRadios2">
-                      信用卡/記帳卡
-                    </label>
-                  </div>
-                  <div className=" p-3">
-                    <p>已保存的卡片資訊</p>
-                    <div className="d-flex justify-content-between">
-                      <label className="p-1 form-check-label" for="gridRadios3">
-                        <input
-                          className=""
-                          type="radio"
-                          name="gridRadios"
-                          id="gridRadios3"
-                          value="option3"
-                        />
-                        **** **** **** 0000
-                      </label>
-                      <a href="#">刪除</a>
-                    </div>
-                    <a href="#">+添加新卡</a>
-                  </div>
-                </div>
+                  </Form.Group>
+                  <Form.Group as={Col} xs={3} sm={3} md={3}>
+                    <Form.Control
+                      required
+                      className="cardInput"
+                      name="cardNumber"
+                      size="lg"
+                      type="text"
+                      placeholder="0000"
+                      maxlength="4"
+                      pattern="[0-9]{4}"
+                      onKeyUp={(e) => {
+                        cardInput(e)
+                      }}
+                      // onBlur={(e) => getformInfo(e, 'cardNumber')}
+                    />
+                  </Form.Group>
+                  <Form.Group as={Col} xs={3} sm={3} md={3}>
+                    <Form.Control
+                      required
+                      className="cardInput"
+                      name="cardNumber"
+                      size="lg"
+                      type="text"
+                      placeholder="0000"
+                      maxlength="4"
+                      pattern="[0-9]{4}"
+                      onKeyUp={(e) => {
+                        cardInput(e)
+                      }}
+                      // onBlur={(e) => getformInfo(e, 'cardNumber')}
+                    />
+                  </Form.Group>
+                  <Form.Control.Feedback>正確!</Form.Control.Feedback>
+                  <Form.Control.Feedback type="invalid">
+                    請輸入卡號
+                  </Form.Control.Feedback>
+                </Form.Row>
+
+                <Form.Row>
+                  <Form.Group as={Col} xs={3} sm={4} md={4}>
+                    <Form.Control
+                      required
+                      name="valid"
+                      size="lg"
+                      type="text"
+                      maxlength="5"
+                      placeholder="MM/YY"
+                      pattern="^\d{2}\/\d{2}$"
+                    />
+                    <Form.Control.Feedback>正確!</Form.Control.Feedback>
+                    <Form.Control.Feedback type="invalid">
+                      請輸入到期月年
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                  <Form.Group as={Col} xs={3} sm={3} md={3}>
+                    <Form.Control
+                      required
+                      name="ccv"
+                      size="lg"
+                      type="text"
+                      placeholder="安全碼"
+                      maxlength="3"
+                      pattern="^\d{3}$"
+                    />
+                    <Form.Control.Feedback>正確!</Form.Control.Feedback>
+                    <Form.Control.Feedback type="invalid">
+                      請輸入安全碼
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                  <Form.Group as={Col} xs={6} sm={5} md={5}>
+                    <Form.Control
+                      required
+                      name="owner"
+                      size="lg"
+                      type="text"
+                      placeholder="卡片持有人"
+                      pattern="^\D+$"
+                      // onChange={(e) => getformInfo(e, 'owner')}
+                    />
+                    <Form.Control.Feedback>正確!</Form.Control.Feedback>
+                    <Form.Control.Feedback type="invalid">
+                      請輸入卡片持有人
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                </Form.Row>
               </div>
             </div>
           </div>
@@ -119,7 +225,8 @@ function paymentType(props) {
                 <div className="totalPrice">
                   <div className="d-flex justify-content-between ">
                     <p>總價</p>
-                    <p>NT${sum(buyerinfo.product)}</p>
+                    <p>NT${sum(buyerinfo.product).toString()
+                          .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}</p>
                   </div>
                   <div className="d-flex justify-content-between">
                     <p>折價金額</p>
@@ -129,7 +236,8 @@ function paymentType(props) {
                 <div className="payPrice">
                   <div className="d-flex justify-content-between">
                     <p>結帳金額</p>
-                    <p>NT${sum(buyerinfo.product)}</p>
+                    <p>NT${sum(buyerinfo.product).toString()
+                          .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}</p>
                   </div>
                 </div>
               </div>
@@ -142,9 +250,7 @@ function paymentType(props) {
                   返回上一步
                 </button>
                 <button
-                  onClick={() => {
-                    checkOut()
-                  }}
+                type='submit'
                 >
                   確認付款
                 </button>
@@ -153,6 +259,7 @@ function paymentType(props) {
           </div>
         </div>
       </div>
+      </Form>
     </>
   )
 }
@@ -164,5 +271,5 @@ const mapStateToProps = (store) => {
 }
 const mapDispatchToProps = null
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(paymentType)
+  connect(mapStateToProps, mapDispatchToProps)(PaymentType)
 )

@@ -27,7 +27,7 @@ function paymentFinish(props) {
               感謝使用文青地圖，預定憑證及使用詳情將寄至您的電子信箱
               {buyerinfo.email}
             </p>
-            <div className="bgColor p-4">
+            <div className="">
               <h4 className="py-2">
                 訂單編號:{buyerinfo.orderId ? buyerinfo.orderId : ''}
               </h4>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+
 import { withRouter } from 'react-router-dom'
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import { connect } from 'react-redux'
@@ -58,72 +59,79 @@ function PaymentDetail(props) {
             <div className="col-9">
               <div className=" mr-3">
                 <div className="p-5 mt-3 contentBox">
-                  <div className="subTitle">
-                    <p>聯絡資訊</p>
+                  <div className="paytitle-border">
+                    <div className="subTitle">
+                      <p>聯絡資訊</p>
+                    </div>
                   </div>
+
                   <div className="d-flex">
-                    <div className="col-4 form-group mx-1">
-                      <label for="inputSelect  ">稱謂</label>
-                      <select class="form-control" id="inputSelect">
-                        <option>先生</option>
-                        <option>小姐</option>
-                      </select>
-                    </div>
-                    <div className="col-4 form-group mx-1">
-                      <label for="inputLastname  ">姓氏</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="inputLastname"
-                        placeholder="Last name"
-                        ref={(input) => (lastName = input)}
-                        required
-                      />
-                    </div>
-                    <div className="col-4 form-group mx-1">
-                      <label for="inputFirstname  ">名字</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="inputFirstname"
-                        placeholder="First name"
-                        ref={(input) => (firstName = input)}
-                        required
-                      />
-                    </div>
-                    
-                  </div>
-                  <div className="col-6 form-group">
-                    <label for="inputNumber  ">聯絡電話</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="inputNumber"
-                      placeholder=""
-                      ref={(input) => (phone = input)}
-                      pattern="09\d{2}\-?\d{3}\-?\d{3}"
-                    />
-                  </div>
-                  <div className="col-6 form-group">
-                    <label for="email">電子郵件</label>
-                    <Form.Group>
+                    <Form.Group as={Col} xs={12} sm={12} md={6}>
                       <Form.Control
                         required
-                        ref={(input) => (email = input)}
-                        name="email"
-                        id="email"
+                        name="lastName"
                         size="lg"
-                        type="email"
-                        placeholder="電子郵件地址"
-                        pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{3,6}(?:\.[a-z]{2})?)$"
-                        // onChange={(e) => getformInfo(e, 'email')}
+                        type="text"
+                        placeholder="姓氏"
+                        ref={input=>lastName = input}
                       />
                       <Form.Control.Feedback>正確!</Form.Control.Feedback>
                       <Form.Control.Feedback type="invalid">
-                        請輸入email
+                        請輸入姓氏
+                      </Form.Control.Feedback>
+                    </Form.Group>
+                    <Form.Group as={Col} xs={12} sm={12} md={6}>
+                      <Form.Control
+                        required
+                        name="firstName"
+                        size="lg"
+                        type="text"
+                        placeholder="名字"
+                        ref={input=>firstName = input}
+                        // onChange={(e) => getformInfo(e, 'firstName')}
+                      />
+                      <Form.Control.Feedback>正確!</Form.Control.Feedback>
+                      <Form.Control.Feedback type="invalid">
+                        請輸入名字
                       </Form.Control.Feedback>
                     </Form.Group>
                   </div>
+                  <Form.Group>
+                    <Form.Control
+                      required
+                      id="mobile"
+                      name="mobile"
+                      size="lg"
+                      type="text"
+                      placeholder="行動電話或家用電話"
+                      ref={input=>phone = input}
+                      pattern="^09[0-9]{2}-?[0-9]{3}-?[0-9]{3}$|^\(?\d{2,3}\)?-?\d{4}-?\d{4}$"
+                      // onChange={(e) => getformInfo(e, 'mobile')}
+                    />
+                    <Form.Control.Feedback>正確!</Form.Control.Feedback>
+                    <Form.Control.Feedback type="invalid">
+                      請輸入正確的電話號碼
+                    </Form.Control.Feedback>
+                    <br />
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Control
+                      required
+                      ref={(input) => (email = input)}
+                      name="email"
+                      id="email"
+                      size="lg"
+                      type="email"
+                      placeholder="電子郵件地址"
+                      ref={input=>email = input}
+                      pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{3,6}(?:\.[a-z]{2})?)$"
+                      // onChange={(e) => getformInfo(e, 'email')}
+                    />
+                    <Form.Control.Feedback>正確!</Form.Control.Feedback>
+                    <Form.Control.Feedback type="invalid">
+                      請輸入email
+                    </Form.Control.Feedback>
+                  </Form.Group>
                 </div>
               </div>
             </div>
@@ -134,7 +142,12 @@ function PaymentDetail(props) {
                   <div className="totalPrice">
                     <div className="d-flex justify-content-between">
                       <p>總價</p>
-                      <p>NT${sum(buyerinfo.product)}</p>
+                      <p>
+                        NT$
+                        {sum(buyerinfo.product)
+                          .toString()
+                          .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
+                      </p>
                     </div>
                     <div className="d-flex justify-content-between">
                       <p>折價金額</p>
@@ -144,7 +157,12 @@ function PaymentDetail(props) {
                   <div className="payPrice">
                     <div className="d-flex justify-content-between">
                       <p>結帳金額</p>
-                      <p>NT${sum(buyerinfo.product)}</p>
+                      <p>
+                        NT$
+                        {sum(buyerinfo.product)
+                          .toString()
+                          .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
+                      </p>
                     </div>
                   </div>
                 </div>

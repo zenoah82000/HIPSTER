@@ -15,6 +15,7 @@ class Map extends React.Component {
       cafeActive: true,
       clicked: false,
       clickData: [],
+      filterData: '',
     }
   }
 
@@ -27,6 +28,14 @@ class Map extends React.Component {
     this.props.cardClickReset(clickData)
   }
 
+  setFileterData = (data) => {
+    console.log(data)
+    let filterData = data
+    this.setState({
+      filterData,
+    })
+  }
+
   cafeActiveReset = () => {
     this.setState({
       cafeActive: !this.state.cafeActive,
@@ -36,7 +45,7 @@ class Map extends React.Component {
   render() {
     return (
       <>
-        <div className="row">
+        <div className="row" style={{ background: 'rgb(230, 222, 216)' }}>
           <div className="col-4">
             <EventMapDataList
               onClickReset={this.onClickReset}
@@ -44,6 +53,7 @@ class Map extends React.Component {
               cafeActiveReset={this.cafeActiveReset}
               cafeActive={this.state.cafeActive}
               CafeData={CafeData}
+              setFileterData={this.setFileterData}
             />
           </div>
           <div className="col-8">
