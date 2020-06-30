@@ -14,53 +14,6 @@ import { FaSearch, FaStreetView } from 'react-icons/fa'
 import { GiCoffeeCup } from 'react-icons/gi'
 import { RiMoneyCnyCircleLine } from 'react-icons/ri'
 
-//轉換日期格式
-Date.prototype.pattern = function (fmt) {
-  var o = {
-    'M+': this.getMonth() + 1, //月份
-    'd+': this.getDate(), //日
-    'h+': this.getHours() % 12 == 0 ? 12 : this.getHours() % 12, //小时
-    'H+': this.getHours(), //小时
-    'm+': this.getMinutes(), //分
-    's+': this.getSeconds(), //秒
-    'q+': Math.floor((this.getMonth() + 3) / 3), //季度
-    S: this.getMilliseconds(), //毫秒
-  }
-  var week = {
-    '0': '/u65e5',
-    '1': '/u4e00',
-    '2': '/u4e8c',
-    '3': '/u4e09',
-    '4': '/u56db',
-    '5': '/u4e94',
-    '6': '/u516d',
-  }
-  if (/(y+)/.test(fmt)) {
-    fmt = fmt.replace(
-      RegExp.$1,
-      (this.getFullYear() + '').substr(4 - RegExp.$1.length)
-    )
-  }
-  if (/(E+)/.test(fmt)) {
-    fmt = fmt.replace(
-      RegExp.$1,
-      (RegExp.$1.length > 1
-        ? RegExp.$1.length > 2
-          ? '/u661f/u671f'
-          : '/u5468'
-        : '') + week[this.getDay() + '']
-    )
-  }
-  for (var k in o) {
-    if (new RegExp('(' + k + ')').test(fmt)) {
-      fmt = fmt.replace(
-        RegExp.$1,
-        RegExp.$1.length == 1 ? o[k] : ('00' + o[k]).substr(('' + o[k]).length)
-      )
-    }
-  }
-  return fmt
-}
 
 //地圖列表
 class mapList extends React.Component {
@@ -77,6 +30,7 @@ class mapList extends React.Component {
       date: new Date(),
       dateClicked: false,
       active: true,
+      display:true,
     }
   }
 
@@ -173,9 +127,10 @@ class mapList extends React.Component {
   }
 
   //選日期
-  showDate = () => {
+  showDate = (event) => {
     this.setState({
-      searchBtn2: this.state.date.pattern('yyyy-MM-dd'),
+      searchBtn2: event.target.value,
+      display:false,
     })
   }
   changeClickState = () => {
@@ -184,10 +139,10 @@ class mapList extends React.Component {
     })
     console.log(this.state.dateClicked)
   }
-  pickDate = (date, event) => {
-    this.setState({ date })
-    this.showDate()
-  }
+  // pickDate = (date, event) => {
+  //   this.setState({ date })
+  //   this.showDate()
+  // }
 
   //地圖定位
   handleClick() {
@@ -424,25 +379,25 @@ class mapList extends React.Component {
         this.state.searchBtn1 === '類別'
       ) {
         // console.log('texs')
-        if (this.state.searchBtn3 == '4.5分以上') {
+        if (this.state.searchBtn3 == '5分') {
           return (
             item.productName
               .toLowerCase()
               .indexOf(this.state.search.toLowerCase()) !== -1 &&
-            item.star > 4.5
+            item.star == 5
           )
         } else if (this.state.searchBtn3 == '4分以上') {
           return (
             item.productName
               .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1 && item.star > 4
+              .indexOf(this.state.search.toLowerCase()) !== -1 && item.star >= 4
           )
-        } else if (this.state.searchBtn3 == '3.5分以上') {
+        } else if (this.state.searchBtn3 == '3分以上') {
           return (
             item.productName
               .toLowerCase()
               .indexOf(this.state.search.toLowerCase()) !== -1 &&
-            item.star > 3.5
+            item.star >= 3
           )
         } else {
           return (
@@ -455,13 +410,13 @@ class mapList extends React.Component {
           )
         }
       } else if (this.state.searchBtn1 == '咖啡廳') {
-        if (this.state.searchBtn3 == '4.5分以上') {
+        if (this.state.searchBtn3 == '5分') {
           return (
             item.productName
               .toLowerCase()
               .indexOf(this.state.search.toLowerCase()) !== -1 &&
             item.category == '咖啡廳' &&
-            item.star > 4.5
+            item.star == 5
           )
         } else if (this.state.searchBtn3 == '4分以上') {
           return (
@@ -469,15 +424,15 @@ class mapList extends React.Component {
               .toLowerCase()
               .indexOf(this.state.search.toLowerCase()) !== -1 &&
             item.category == '咖啡廳' &&
-            item.star > 4.5
+            item.star >= 4
           )
-        } else if (this.state.searchBtn3 == '3.5分以上') {
+        } else if (this.state.searchBtn3 == '3分以上') {
           return (
             item.productName
               .toLowerCase()
               .indexOf(this.state.search.toLowerCase()) !== -1 &&
             item.category == '咖啡廳' &&
-            item.star > 3.5
+            item.star >= 3
           )
         } else {
           return (
@@ -488,13 +443,13 @@ class mapList extends React.Component {
           )
         }
       } else if (this.state.searchBtn1 == '手作課程') {
-        if (this.state.searchBtn3 == '4.5分以上') {
+        if (this.state.searchBtn3 == '5分') {
           return (
             item.productName
               .toLowerCase()
               .indexOf(this.state.search.toLowerCase()) &&
             item.category == '手作課程' &&
-            item.star > 4.5
+            item.star == 5
           )
         } else if (this.state.searchBtn3 == '4分以上') {
           return (
@@ -502,15 +457,15 @@ class mapList extends React.Component {
               .toLowerCase()
               .indexOf(this.state.search.toLowerCase()) !== -1 &&
             item.category == '手作課程' &&
-            item.star > 4.5
+            item.star >= 4
           )
-        } else if (this.state.searchBtn3 == '3.5分以上') {
+        } else if (this.state.searchBtn3 == '3分以上') {
           return (
             item.productName
               .toLowerCase()
               .indexOf(this.state.search.toLowerCase()) !== -1 &&
             item.category == '手作課程' &&
-            item.star > 3.5
+            item.star >= 3
           )
         } else {
           return (
@@ -521,13 +476,13 @@ class mapList extends React.Component {
           )
         }
       } else if (this.state.searchBtn1 == '文藝展覽') {
-        if (this.state.searchBtn3 == '4.5分以上') {
+        if (this.state.searchBtn3 == '5分') {
           return (
             item.productName
               .toLowerCase()
               .indexOf(this.state.search.toLowerCase()) !== -1 &&
             item.category == '文藝展覽' &&
-            item.star > 4.5
+            item.star == 5
           )
         } else if (this.state.searchBtn3 == '4分以上') {
           return (
@@ -535,7 +490,7 @@ class mapList extends React.Component {
               .toLowerCase()
               .indexOf(this.state.search.toLowerCase()) !== -1 &&
             item.category == '文藝展覽' &&
-            item.star > 4.5
+            item.star >= 4
           )
         } else if (this.state.searchBtn3 == '3.5分以上') {
           return (
@@ -543,7 +498,7 @@ class mapList extends React.Component {
               .toLowerCase()
               .indexOf(this.state.search.toLowerCase()) !== -1 &&
             item.category == '文藝展覽' &&
-            item.star > 3.5
+            item.star >= 3
           )
         } else {
           return (
@@ -698,7 +653,7 @@ class mapList extends React.Component {
                   </Dropdown.Menu>
                 </Dropdown>
 
-                <Dropdown>
+                <Dropdown  onClick={()=>this.setState({display:true})}>
                   <Dropdown.Toggle
                     className="mapSearch  btn-small"
                     variant="success"
@@ -707,12 +662,9 @@ class mapList extends React.Component {
                   >
                     {this.state.searchBtn2}
                   </Dropdown.Toggle>
-                  <Dropdown.Menu>
-                    {/* className={this.state.dateClicked? "displayNone":""}  */}
-                    <Calendar
-                      onChange={this.pickDate}
-                      value={this.state.date}
-                    />
+                  
+                  <Dropdown.Menu style={this.state.display?{display:"block"}:{display:"none"}}>
+                    <input type="date" onChange={(event) => this.showDate(event)} />
                   </Dropdown.Menu>
                 </Dropdown>
 
@@ -737,10 +689,10 @@ class mapList extends React.Component {
                     <Dropdown.Item
                       href=""
                       className="btn3"
-                      name="4.5分以上"
+                      name="5分"
                       onClick={(event) => this.showStar(event)}
                     >
-                      4.5分以上
+                      5分
                     </Dropdown.Item>
                     <Dropdown.Item
                       href=""
@@ -753,10 +705,10 @@ class mapList extends React.Component {
                     <Dropdown.Item
                       href=""
                       className="btn3"
-                      name="3.5分以上"
+                      name="3分以上"
                       onClick={(event) => this.showStar(event)}
                     >
-                      3.5分以上
+                      3分以上
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
