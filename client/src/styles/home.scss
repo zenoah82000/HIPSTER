@@ -406,7 +406,7 @@ p {
       .home-countdown-price {
         @extend .home-activity-star;
         float: right;
-        width: 40%;
+        width: 55%;
         text-align: right;
         margin-right: 5px;
         a {
@@ -415,7 +415,8 @@ p {
         p {
           color: #ff3400;
           font-weight: 600;
-          font-size: 20px;
+          font-size: 17px;
+          letter-spacing: 3px;
         }
       }
     }
