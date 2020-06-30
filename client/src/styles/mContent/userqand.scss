@@ -21,11 +21,12 @@ div.bg-white.ml-md-2.sidebarright > div > div.qa-pane:last-of-type {
 
 .qatextarea-container {
   width: 80%;
-  margin: 0 auto;
+  margin: 16px auto 0;
 }
 
-.text-center {
+.qa-button-center {
   text-align: center;
+  margin-top: 22px;
 }
 
 .rt-button-submit {
@@ -52,4 +53,10 @@ div.bg-white.ml-md-2.sidebarright > div > div.qa-pane:last-of-type {
 
 .rt-button-default:hover {
   background: #f4f4f4;
+}
+
+.qa-textarea-label {
+  font-weight: 900;
+  font-size: 18px;
+  margin-bottom: 16px;
 }

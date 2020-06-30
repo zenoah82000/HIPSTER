@@ -1,7 +1,6 @@
 const express = require('express')
-// const User = require(__dirname + '/users-sql')
-
-
+const upload = require('./upload-module')
+const fileUpload = require('express-fileupload');
 // mysql2 async-await用的
 const db = require(__dirname + './../db_connect2')
 
@@ -112,7 +111,7 @@ router.post('/loginmember', async (req, res, next) =>{
   // console.log(req.body)
   const memberMail = req.body.memberMail
   const memberPwd = req.body.memberPwd
-  const addMemberSql = `INSERT INTO member(memberName, memberGender, memberBirth, memberPhone, 	memberAddress	,	memberMail,	memberPwd,	memberImg, memberStatus) VALUES('訪客','男','2020-01-01','0900000000','請輸入地址',?,?,'tmp','true')`
+  const addMemberSql = `INSERT INTO member(memberName, memberGender, memberBirth, memberPhone, 	memberAddress	,	memberMail,	memberPwd,	memberImg, memberStatus) VALUES('訪客','男','2020-01-01','0900000000','請輸入地址',?,?,'tmp.jpg','true')`
 
   const [r1] = await db.query(addMemberSql, [memberMail,memberPwd]);
   res.json(req.body)
@@ -130,9 +129,14 @@ router.post('/loginmember', async (req, res, next) =>{
 })
 
 
-//更新會員資料
-  router.post('/updatememberdata', async (req, res, next) => {
+
+
+
+// 更新會員資料
+  router.post('/updatememberdata',upload.single('avatar'), async (req, res, next) => {
   console.log(req.body)
+  
+  const filename = req.body.memberImg.split('.').pop()
   const memberId = req.body.memberId
   const memberName = req.body.memberName
   const memberGender = req.body.memberGender
@@ -140,13 +144,54 @@ router.post('/loginmember', async (req, res, next) =>{
   const memberPhone = req.body.memberPhone
   const memberAddress = req.body.memberAddress
   const memberPwd = req.body.memberPwd
-  const memberImg =  req.body.memberImg
+  const memberImg = req.body.memberImg
+  // const memberImg = req.body.memberImgState? `memberid_${req.body.memberId}.${filename}`  : req.body.memberImg
+
+  // console.log("memberid_"+req.body.memberId+"."+filename)
 
   // const updateMemberSql = "UPDATE `member` SET `memberName`=?,`memberGender`=?,`memberBirth`=?,`memberPhone`=?,`memberAddress`=?,`memberPwd`=?,`memberImg`=? WHERE  `memberId`=? "
 
   // const [r1] = await db.query(updateMemberSql, [memberName,memberGender,memberBirth,memberPhone,memberAddress,memberPwd,memberImg,memberId]);
   // res.json(r1)
 })
+
+
+
+
+
+
+// 更新會員圖片
+//   router.post('/updatememberimgdata', async (req, res) => {
+
+//     try {
+//       if(!req.files) {
+//           res.send({
+//               status: false,
+//               message: 'No file uploaded'
+//           });
+//       } else {
+//           //使用輸入框的名稱來獲取上傳檔案 (例如 "avatar")
+//           let avatar = req.files.avatar;
+          
+//           //使用 mv() 方法來移動上傳檔案到要放置的目錄裡 (例如 "uploads")
+//           avatar.mv('../../public/images/member/' + avatar.name);
+
+//           //送出回應
+//           res.send({
+//               status: true,
+//               message: 'File is uploaded',
+//               data: {
+//                   name: avatar.name,
+//                   mimetype: avatar.mimetype,
+//                   size: avatar.size
+//               }
+//           });
+//       }
+//   } catch (err) {
+//       res.status(500).send(err);
+//   }
+
+// })
 
 
 

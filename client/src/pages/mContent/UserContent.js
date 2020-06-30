@@ -33,7 +33,8 @@ function UserContent() {
     editmemberAddress,
     editmemberPwd,
     editmemberImg,
-    editAllData
+    editAllData,
+    imgdata
 
   //網頁仔入時啟動
   useEffect(() => {
@@ -72,6 +73,25 @@ function UserContent() {
     const data = await response.json()
     // console.log(data)
   }
+
+  //更新會員圖片
+  // async function memberimgUpdate(item) {
+  //   console.log('item', item)
+  //   const formData = new FormData()
+  //   formData.append('file', item)
+  //   console.log('formData', formData)
+  //   const request = new Request('http://localhost:5000/updatememberimgdata/', {
+  //     method: 'POST',
+  //     body: formData,
+  //     headers: new Headers({
+  //       Accept: 'application/json',
+  //       'Content-Type': 'multipart/form-data',
+  //     }),
+  //   })
+  //   const response = await fetch(request)
+  //   const data = await response.json()
+  //   // console.log(data)
+  // }
 
   const dataDisplay = (
     <>
@@ -156,7 +176,9 @@ function UserContent() {
 
       <Form.File.Input
         id="ControlFile1"
+        name="memberimg"
         ref={(file) => (editmemberImg = file)}
+        onChange="memberimgUpdate(event)"
       />
 
       <Form.Row>
@@ -270,7 +292,7 @@ function UserContent() {
       <Button
         className="submitBtn"
         variant="primary"
-        type="button"
+        type="Button"
         onClick={() => {
           editAllData = {
             memberId: JSON.parse(localStorage.getItem('member')).id,
@@ -292,8 +314,6 @@ function UserContent() {
               : memberImg,
             memberImgState: editmemberImg.files.length,
           }
-          console.log(editmemberImg.files.length)
-          // console.log(document.getElementById('ControlFile1').value)
 
           memberUpdate(editAllData)
           setshowUpdateOk(true)

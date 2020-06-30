@@ -6,7 +6,7 @@ export const getUserQandaDetail = (data) => ({
 
 export const getUserQandaAsync = (userqamdadata) => {
   return async (dispatch) => {
-    const request = new Request(`http://localhost:5000/member/qanda/2`, {
+    const request = new Request(`http://localhost:5000/member/qanda`, {
       method: 'GET',
       headers: new Headers({
         Accept: 'application/json',
