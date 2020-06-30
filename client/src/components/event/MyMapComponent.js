@@ -72,16 +72,16 @@ export default class ViewportExample extends Component {
 
   openPopup(marker) {
     if (marker && marker.leafletElement) {
-      console.log('test')
+      // console.log('test')
       window.setTimeout(() => {
         marker.leafletElement.openPopup()
+        // console.log('test')
       })
     }
   }
 
   render() {
     let { viewport, clicked, cafeActive, clickData } = this.props
-    console.log(viewport.center)
     return (
       <div>
         <Map viewport={viewport}>
@@ -119,7 +119,7 @@ export default class ViewportExample extends Component {
                     </li>
                     <li
                       style={{
-                        width: '460px',
+                        width: '300px',
                         height: '200px',
                         objectFit: 'cover',
                         overflow: 'hidden',
@@ -196,7 +196,7 @@ export default class ViewportExample extends Component {
                       </li>
                       <li
                         style={{
-                          width: '460px',
+                          width: '300px',
                           height: '200px',
                           objectFit: 'cover',
                           overflow: 'hidden',
@@ -208,7 +208,9 @@ export default class ViewportExample extends Component {
                           alt=""
                         />
                       </li>
-                      <li>{/* <span>星等{item.star}</span> */}</li>
+                      <li>
+                        <RatingStarValue ratingValue={item.star} />
+                      </li>
                       <li>
                         <span className="mr-2">
                           <FaRegClock />
@@ -247,26 +249,30 @@ export default class ViewportExample extends Component {
           <Marker
             icon={pointerIcon}
             className="mylocation"
-            //  ref={this.openPopup}
+            ref={this.openPopup}
             position={this.props.myLocation}
           >
-            {/* <Popup  >
-                     我的位置
-            </Popup> */}
+            <Popup
+              style={{
+                width: '50px',
+                height: '50px',
+                fontFamily: '微軟正黑體',
+              }}
+            >
+              我的位置
+            </Popup>
           </Marker>
 
           {/* 商品地標 */}
           {clicked ? (
             <Marker
-              position={viewport.center}
               ref={this.openPopup}
+              // ref={this.openPopup}
+              position={viewport.center}
               icon={productTagIcon}
             >
               <Popup className="locationCard">
-                <h5>
-                  <GiCoffeeCup className="h5 mr-1" />
-                  {clickData.productName}
-                </h5>
+                <span style={{ width: '100%' }}>{clickData.productName}</span>
                 <ul className="cardList list-unstyled">
                   <li>
                     <div
@@ -283,7 +289,7 @@ export default class ViewportExample extends Component {
                   </li>
                   <li
                     style={{
-                      width: '460px',
+                      width: '300px',
                       height: '200px',
                       objectFit: 'cover',
                       overflow: 'hidden',
@@ -305,7 +311,7 @@ export default class ViewportExample extends Component {
                     <span className="mr-2">
                       <FaRegClock />
                     </span>
-                    <span>營業時間</span>
+                    <span>活動時間</span>
                   </li>
                   <li>
                     <span className="mr-2">
@@ -348,10 +354,7 @@ export default class ViewportExample extends Component {
                 // }}
               >
                 <Popup className="locationCard">
-                  <h5>
-                    <GiCoffeeCup className="h5 mr-1" />
-                    {item.productName}
-                  </h5>
+                  <h5>{item.productName}</h5>
                   <ul className="cardList list-unstyled">
                     <li>
                       <div
@@ -368,7 +371,7 @@ export default class ViewportExample extends Component {
                     </li>
                     <li
                       style={{
-                        width: '460px',
+                        width: '300px',
                         height: '200px',
                         objectFit: 'cover',
                         overflow: 'hidden',
@@ -381,14 +384,14 @@ export default class ViewportExample extends Component {
                       />
                     </li>
                     <li>
-                      <span>星等:{item.star}</span>
+                      <RatingStarValue ratingValue={item.star} />
                     </li>
                     <li>
                       <span className="mr-2">
                         <FaRegClock />
                       </span>
                       <span>
-                        營業時間: {item.openTime}-{item.closeTime}
+                        活動時間: {item.openTime}-{item.closeTime}
                       </span>
                     </li>
                     <li>
