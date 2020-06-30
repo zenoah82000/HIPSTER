@@ -201,7 +201,7 @@ export default class ViewportExample extends Component {
                       </li>
                       <li
                         style={{
-                          width: '460px',
+                          width: '300px',
                           height: '200px',
                           objectFit: 'cover',
                           overflow: 'hidden',
@@ -214,7 +214,7 @@ export default class ViewportExample extends Component {
                         />
                       </li>
                       <li>
-                        <span>星等{item.star}</span>
+                        <RatingStarValue ratingValue={item.star} />
                       </li>
                       <li>
                         <span className="mr-2">

@@ -36,7 +36,7 @@ class Map extends React.Component {
   render() {
     return (
       <>
-        <div className="row">
+        <div className="row" style={{ background: 'rgb(230, 222, 216)' }}>
           <div className="col-4">
             <EventMapDataList
               onClickReset={this.onClickReset}
