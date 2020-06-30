@@ -33,22 +33,43 @@ router.get('/member/coupon/:memberId', async (req, res) => {
 //會員新增優惠券
 router.post("/member/addcoupon", async (req, res) => {
       
-    const addcoupon =
-      "INSERT INTO `rel_member_coupon` (`discountCode`, `memberId`, `memberCouponNum`) VALUES ('"+
-      req.body.discountCode +"','"+
-      req.body.memberId + "','1')";
-    // const [r2] = await db.query(addcoupon, [
-    //   req.body.discountCode,
-    //   req.body.memberId,
-    //   "1",
-    // ]);
+    // const addcoupon =
+    //   "INSERT INTO `rel_member_coupon` (`discountCode`, `memberId`, `memberCouponNum`) VALUES ('"+
+    //   req.body.discountCode +"','"+
+    //   req.body.memberId + "','1')";
+    // // const [r2] = await db.query(addcoupon, [
+    // //   req.body.discountCode,
+    // //   req.body.memberId,
+    // //   "1",
+    // // ]);
 
-    console.log(addcoupon) 
+    // console.log(addcoupon) 
 
-    const result = await db.query(addcoupon)
-    //res.send(`優惠券新增成功，會員${req.body.memberId}優惠券代碼 ${req.body.discountCode}`);
-    res.json(`優惠券新增成功，會員${req.body.memberId}優惠券代碼 ${req.body.discountCode}`);
-   // res.json(data);
+    // const result = await db.query(addcoupon)
+    // res.json(`優惠券新增成功，會員${req.body.memberId}優惠券代碼 ${req.body.discountCode}`);
+
+    const output = {
+      status: false,
+      discountCode: req.body.discountCode,
+      memberId: req.body.memberId,
+      memberCouponNum: req.body.memberCouponNum,
+      rows: []
+    }
+    const addcouponsql =
+      "INSERT INTO `rel_member_coupon` (`discountCode`,`memberId`, `memberCouponNum`) VALUES(?,?,1)";
+    db.query(addcouponsql, [
+      req.body.discountCode,
+      req.body.memberId,
+      req.body.memberCouponNum,
+    ])
+    .then(([r])=>{
+      output.results = r;
+      if(r.affectedRows && r.insertId){
+        output.status = true; 
+      }
+      res.json(output);
+    })
+   
   });
 
 module.exports = router

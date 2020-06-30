@@ -55,22 +55,29 @@ router.get('/product/qanda/:productId', async (req, res) => {
 // 會員新增QA
 router.post("/member/addqa", async (req, res) => {
     // console.log(req.body)  
-    const addqa =
+    const output = {
+      status: false,
+      memberId: req.body.memberId,
+      question: req.body.question,
+      productName: req.body.productName,
+      answer: req.body.answer,
+      rows: []
+    }
+    const addqasql =
       "INSERT INTO `qalist` (`memberId`,`question`, `productName`,`answer`) VALUES(?,?,?,?)";
-    const [r2] = await db.query(addqa, [
+    db.query(addqasql, [
       req.body.memberId,
       req.body.question,
       req.body.productName,
       req.body.answer,
-    ]);
-
-    // console.log(`優惠券新增成功，優惠券代碼 ${req.body.discountCode}`);
-    res.send(`QA新增成功，
-              memberId${req.body.memberId}/n
-              question ${req.body.question}/n
-              productName ${req.body.productName}/n
-              answer ${req.body.answer}
-              `);
+    ])
+    .then(([r])=>{
+      output.results = r;
+      if(r.affectedRows && r.insertId){
+        output.status = true; 
+      }
+      res.json(output);
+    })
   });
 
 module.exports = router
