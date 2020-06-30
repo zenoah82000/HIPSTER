@@ -26,7 +26,7 @@ function UserQanda(props) {
     addUserQandaDataAsync()
   }, [])
   console.log('uQA-props', props)
-  console.log('userQAData', userQandaData)
+  console.log('userQAData.memberId', userQandaData[0])
   console.log('productListData', productListData)
   console.log('uQA-props-userQandaData', props.userQandaData)
   // const addGiviData = async () => {
@@ -40,18 +40,28 @@ function UserQanda(props) {
   // console.log('discountCode', discountCode)
   // console.log('adduserCouponData', adduserCouponData)
   let qandaList = userQandaData.map((item) => {
-    return (
-      <div className="qa-pane">
-        <div class="row">
-          <div class="col-1 qaleft-title mt-2 pl-4 font-weight-bold">問題</div>
-          <div class="col-11 mt-2 pl-4">{item.question}</div>
-          <div class="col-1 qaleft-title mt-2 pl-4 font-weight-bold">商品</div>
-          <div class="col-11 mt-2 pl-4">{item.productName}</div>
-          <div class="col-1 qa left-title mt-2 pl-4 font-weight-bold">答覆</div>
-          <div class="col-11 mt-2 pl-4">{item.answer}</div>
+    if (item.memberId == 2) {
+      // console.log('item', item.memberId == 2)
+      return (
+        <div className="qa-pane">
+          <div class="row">
+            <div class="col-1 qaleft-title mt-2 pl-4 font-weight-bold">
+              問題
+            </div>
+            <div class="col-11 mt-2 pl-4">{item.question}</div>
+            <div class="col-1 qaleft-title mt-2 pl-4 font-weight-bold">
+              商品
+            </div>
+            <div class="col-11 mt-2 pl-4">{item.productName}</div>
+            <div class="col-1 qa left-title mt-2 pl-4 font-weight-bold">
+              答覆
+            </div>
+            <div class="col-11 mt-2 pl-4">{item.answer}</div>
+            <div class="col-11 mt-2 pl-4">{item.memberId}</div>
+          </div>
         </div>
-      </div>
-    )
+      )
+    }
   })
 
   return (
