@@ -1,7 +1,7 @@
 // couponhead
 .currentcoupon {
-  border-bottom: 3px solid #ff3400;
-  color: #ff3400;
+  border-bottom: 3px solid rgba(185, 163, 136, 0.918);
+  color: rgba(185, 163, 136, 0.918);
   font-weight: 800;
 }
 
@@ -12,7 +12,7 @@
 }
 .coupontab-a:hover {
   text-decoration: none;
-  color: #ff3400;
+  color: rgba(185, 163, 136, 0.918);
 }
 
 .usercontainer {
@@ -26,7 +26,7 @@
 }
 
 .buttonstyle {
-  background: #ff3400;
+  background: rgba(185, 163, 136, 0.918);
   width: 135px;
   color: #fff;
   font-weight: bold;

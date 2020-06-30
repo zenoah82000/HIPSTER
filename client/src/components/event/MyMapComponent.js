@@ -7,6 +7,7 @@ import { FaMapMarkerAlt } from 'react-icons/fa'
 import { FaRegClock } from 'react-icons/fa'
 import { FaRegCalendarCheck } from 'react-icons/fa'
 import { GiCoffeeCup } from 'react-icons/gi'
+import { RiMoneyCnyCircleLine } from 'react-icons/ri'
 
 export const pointerIcon = new L.Icon({
   iconUrl: require('../../images/myplace.svg'),
@@ -82,6 +83,7 @@ export default class ViewportExample extends Component {
 
   render() {
     let { viewport, clicked, cafeActive, clickData } = this.props
+    console.log(this.props)
     return (
       <div>
         <Map viewport={viewport}>
@@ -126,10 +128,13 @@ export default class ViewportExample extends Component {
                         marginTop: '10px',
                       }}
                     >
-                      <img
-                        src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
+                      {/* <img
+                        src={
+                          'http://localhost:5000/images/mapCafe/' +
+                          clickData.Img
+                        }
                         alt=""
-                      />
+                      /> */}
                     </li>
                     <li>{/* <span>星等{clickData.star}</span> */}</li>
                     <li>
@@ -204,7 +209,9 @@ export default class ViewportExample extends Component {
                         }}
                       >
                         <img
-                          src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
+                          src={
+                            'http://localhost:5000/images/mapCafe/' + item.Img
+                          }
                           alt=""
                         />
                       </li>
@@ -296,10 +303,13 @@ export default class ViewportExample extends Component {
                       marginTop: '10px',
                     }}
                   >
-                    <img
-                      src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
+                    {/* <img
+                      src={
+                        'http://localhost:5000/images/product/' +
+                        clickData.productImg
+                      }
                       alt=""
-                    />
+                    /> */}
                   </li>
                   <li>
                     <span>
@@ -379,8 +389,12 @@ export default class ViewportExample extends Component {
                       }}
                     >
                       <img
-                        src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
+                        src={
+                          'http://localhost:5000/images/product/' +
+                          item.productImg
+                        }
                         alt=""
+                        style={{ height: '100%', objectFit: 'cover' }}
                       />
                     </li>
                     <li>
@@ -391,7 +405,7 @@ export default class ViewportExample extends Component {
                         <FaRegClock />
                       </span>
                       <span>
-                        活動時間: {item.openTime}-{item.closeTime}
+                        活動日期: {item.openTime}-{item.closeTime}
                       </span>
                     </li>
                     <li>
@@ -402,9 +416,14 @@ export default class ViewportExample extends Component {
                     </li>
                     <li>
                       <span className="mr-2 ">
-                        <FaRegCalendarCheck />
+                        <RiMoneyCnyCircleLine />
                       </span>
-                      <span>電話：{item.productPhone}</span>
+                      <span>
+                        價格：NT$
+                        {item.productPrice
+                          .toString()
+                          .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
+                      </span>
                     </li>
                   </ul>
                   <div className="cardButton">

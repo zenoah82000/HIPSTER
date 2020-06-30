@@ -7,15 +7,18 @@ function UserContent() {
   const [edit, setedit] = useState(false)
   //編輯下>切換生日輸入欄樣式
   const [brthdayedit, setbrthdayedit] = useState(false)
-
+  //更新完成小視窗
   const [showUpdateOk, setshowUpdateOk] = useState(false)
-
+  //存放上傳圖片資訊
+  const [imgData, setimgData] = useState('')
+  console.log('imgData:', imgData)
   const userId = {
     memberId: JSON.parse(localStorage.getItem('member')).id,
   }
 
   //顯示會員資料
   const [mdata, setmdata] = useState('') //回傳資料存放
+  const memberId = mdata.memberId
   const memberName = mdata.memberName
   const memberGender = mdata.memberGender
   const memberBirth = new Date(mdata.memberBirth).toLocaleDateString()
@@ -24,6 +27,7 @@ function UserContent() {
   const memberMail = mdata.memberMail
   const memberPwd = mdata.memberPwd
   const memberImg = mdata.memberImg
+  // console.log(mdata)
 
   //存放個欄位輸入值
   let editmemberName,
@@ -74,24 +78,25 @@ function UserContent() {
     // console.log(data)
   }
 
-  //更新會員圖片
-  // async function memberimgUpdate(item) {
-  //   console.log('item', item)
-  //   const formData = new FormData()
-  //   formData.append('file', item)
-  //   console.log('formData', formData)
-  //   const request = new Request('http://localhost:5000/updatememberimgdata/', {
-  //     method: 'POST',
-  //     body: formData,
-  //     headers: new Headers({
-  //       Accept: 'application/json',
-  //       'Content-Type': 'multipart/form-data',
-  //     }),
-  //   })
-  //   const response = await fetch(request)
-  //   const data = await response.json()
-  //   // console.log(data)
-  // }
+  // 更新會員圖片
+  const memberimgUpdate = (data) => {
+    let formData = new FormData()
+    formData.append('avatar', data)
+    formData.append('memberId', memberId)
+    formData.append('memberImg', memberImg)
+    formData.append('memberImgState', editmemberImg.files.length)
+    console.log(formData.get('avatar'))
+    fetch('http://localhost:5000/updatememberimgdata', {
+      method: 'POST',
+      body: formData,
+    })
+      .then((res) => {
+        console.log(res)
+        console.log(res.statusText)
+        return res.json()
+      })
+      .then((obj) => {})
+  }
 
   const dataDisplay = (
     <>
@@ -175,10 +180,16 @@ function UserContent() {
       </Figure>
 
       <Form.File.Input
+        type="file"
+        multiple="multiple"
         id="ControlFile1"
         name="memberimg"
         ref={(file) => (editmemberImg = file)}
-        onChange="memberimgUpdate(event)"
+        onChange={(e) => {
+          setimgData(e.target.files[0])
+          // console.log('imgData', imgData)
+          // memberimgUpdate(e.target.files[0])
+        }}
       />
 
       <Form.Row>
@@ -309,12 +320,11 @@ function UserContent() {
                 : editmemberAddress.value,
             memberPwd:
               editmemberPwd.value == '' ? memberPwd : editmemberPwd.value,
-            memberImg: editmemberImg.files.length
-              ? editmemberImg.files[0].name
-              : memberImg,
+            memberImg: memberImg,
             memberImgState: editmemberImg.files.length,
           }
 
+          memberimgUpdate(imgData)
           memberUpdate(editAllData)
           setshowUpdateOk(true)
         }}
@@ -338,9 +348,13 @@ function UserContent() {
           <div
             className="SignOkbtn"
             onClick={() => {
+              // localStorage.setItem('member').name = JSON.stringify(
+              //   editmemberName.value
+              // )
               memberData(userId)
               setedit(false)
               setshowUpdateOk(false)
+              setimgData('')
             }}
           >
             確認

@@ -12,6 +12,7 @@ import { FaRegClock } from 'react-icons/fa'
 import { FaRegCalendarCheck } from 'react-icons/fa'
 import { FaSearch, FaStreetView } from 'react-icons/fa'
 import { GiCoffeeCup } from 'react-icons/gi'
+import { RiMoneyCnyCircleLine } from 'react-icons/ri'
 
 //轉換日期格式
 Date.prototype.pattern = function (fmt) {
@@ -76,8 +77,6 @@ class mapList extends React.Component {
       date: new Date(),
       dateClicked: false,
       active: true,
-      cafeupdatedList: [],
-      productupdatedList: [],
     }
   }
 
@@ -101,6 +100,10 @@ class mapList extends React.Component {
       search: '',
     })
     this.getOrderlistAsync()
+  }
+
+  sendData(item) {
+    this.props.setFileterData(item)
   }
 
   //搜尋
@@ -137,7 +140,7 @@ class mapList extends React.Component {
   sortByPriceAsc = () => {
     let sortedProductsAsc
     sortedProductsAsc = this.state.productdata.sort((a, b) => {
-      return parseInt(a.price) - parseInt(b.price)
+      return parseInt(a.productPrice) - parseInt(b.productPrice)
     })
 
     this.setState({
@@ -148,7 +151,7 @@ class mapList extends React.Component {
   sortByPriceDsc = () => {
     let sortedProductsDsc
     sortedProductsDsc = this.state.productdata.sort((a, b) => {
-      return parseInt(b.price) - parseInt(a.price)
+      return parseInt(b.productPrice) - parseInt(a.productPrice)
     })
 
     this.setState({
@@ -407,6 +410,7 @@ class mapList extends React.Component {
         </Fade>
       )
     })
+
     // this.setState({ cafeupdatedList: updatedList })
     return data
   }
@@ -565,7 +569,9 @@ class mapList extends React.Component {
             <div className="eventContentBox d-flex">
               <div className="eventImgBox col-4">
                 <img
-                  src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
+                  src={
+                    'http://localhost:5000/images/product/' + item.productImg
+                  }
                   alt=""
                 />
               </div>
@@ -604,9 +610,12 @@ class mapList extends React.Component {
                   </li>
                   <li>
                     <span className="mr-2">
-                      <FaRegCalendarCheck />
+                      <RiMoneyCnyCircleLine />
                     </span>
-                    價格：
+                    價格：NT${' '}
+                    {item.productPrice
+                      .toString()
+                      .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
                   </li>
                 </ul>
               </div>
@@ -644,7 +653,7 @@ class mapList extends React.Component {
                   </button>
                 </div>
               </div>
-              <div className=" d-flex m-2 ">
+              <div className=" d-flex m-2 justify-content-between">
                 <Dropdown className="">
                   <Dropdown.Toggle
                     className="mapSearch btn-small"
@@ -751,15 +760,16 @@ class mapList extends React.Component {
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
-
-                <p>
-                  <i class="fas fa-coffee"></i>顯示咖啡廳{' '}
-                </p>
-                <SwitchButton
-                  type="button"
-                  cafeActiveReset={this.props.cafeActiveReset}
-                  cafeActive={this.props.cafeActive}
-                />
+                <div className="d-flex ">
+                  <p style={{ fontSize: '15px' }}>
+                    <i className="mr-2 fas fa-coffee"></i>顯示咖啡廳{' '}
+                  </p>
+                  <SwitchButton
+                    type="button"
+                    cafeActiveReset={this.props.cafeActiveReset}
+                    cafeActive={this.props.cafeActive}
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -778,7 +788,7 @@ class mapList extends React.Component {
                     case 'starDsc':
                       this.sortByStarDsc()
                       break
-                    case 'priceDsc':
+                    case 'priceAsc':
                       this.sortByPriceAsc()
                       break
 
@@ -794,7 +804,7 @@ class mapList extends React.Component {
                 <option value="starAsc">星等由低到高</option>
                 <option value="starDsc">星等由高到低</option>
                 <option value="priceAsc">價格由低到高</option>
-                <option value="priceDesc">價格由高到低</option>
+                <option value="priceDsc">價格由高到低</option>
               </select>
             </div>
           </div>
