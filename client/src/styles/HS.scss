@@ -13,8 +13,12 @@ $black: #000000;
 $white: #ffffff;
 
 // Others----------------------------------------
+.nav-item {
+  margin: auto;
+}
 #membername {
   color: #b98f50;
+  text-align: center;
 }
 
 .otherlogin {

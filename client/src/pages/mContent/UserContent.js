@@ -11,7 +11,7 @@ function UserContent() {
   const [showUpdateOk, setshowUpdateOk] = useState(false)
   //存放上傳圖片資訊
   const [imgData, setimgData] = useState('')
-  console.log('imgData:', imgData)
+  // console.log('imgData:', imgData)
   const userId = {
     memberId: JSON.parse(localStorage.getItem('member')).id,
   }
@@ -29,6 +29,21 @@ function UserContent() {
   const memberImg = mdata.memberImg
   // console.log(mdata)
 
+  //拿取local端member資料(更新時替換)
+  const [localstate, setlocalstate] = useState(false)
+  const localMember = JSON.parse(localStorage.getItem('member'))
+  console.log('1', localMember.name)
+  localMember.name = JSON.stringify(memberName)
+  console.log('2', localMember)
+  localStorage.setItem('member', JSON.stringify(localMember))
+  // console.log(localMember.name)
+
+  // function localchang(memberName) {
+  //   localMember.name = memberName
+  //   console.log(localMember)
+  //   localStorage.setItem('member', JSON.stringify(localMember))
+  // }
+
   //存放個欄位輸入值
   let editmemberName,
     editmemberGender,
@@ -37,14 +52,19 @@ function UserContent() {
     editmemberAddress,
     editmemberPwd,
     editmemberImg,
-    editAllData,
-    imgdata
+    editAllData
 
   //網頁仔入時啟動
   useEffect(() => {
     memberData(userId)
   }, [])
-  // console.log(mdata)
+
+  // useEffect(() => {
+  //
+
+  //   //
+  //   //
+  // }, [localstate])
 
   //抓取該會員全部資料
   async function memberData(item) {
@@ -75,7 +95,6 @@ function UserContent() {
     })
     const response = await fetch(request)
     const data = await response.json()
-    // console.log(data)
   }
 
   // 更新會員圖片
@@ -85,14 +104,14 @@ function UserContent() {
     formData.append('memberId', memberId)
     formData.append('memberImg', memberImg)
     formData.append('memberImgState', editmemberImg.files.length)
-    console.log(formData.get('avatar'))
+    // console.log(formData.get('avatar'))
     fetch('http://localhost:5000/updatememberimgdata', {
       method: 'POST',
       body: formData,
     })
       .then((res) => {
-        console.log(res)
-        console.log(res.statusText)
+        // console.log(res)
+        // console.log(res.statusText)
         return res.json()
       })
       .then((obj) => {})
@@ -323,7 +342,6 @@ function UserContent() {
             memberImg: memberImg,
             memberImgState: editmemberImg.files.length,
           }
-
           memberimgUpdate(imgData)
           memberUpdate(editAllData)
           setshowUpdateOk(true)
@@ -348,13 +366,12 @@ function UserContent() {
           <div
             className="SignOkbtn"
             onClick={() => {
-              // localStorage.setItem('member').name = JSON.stringify(
-              //   editmemberName.value
-              // )
               memberData(userId)
               setedit(false)
+              setlocalstate(true)
               setshowUpdateOk(false)
               setimgData('')
+              window.location.href = '/memberuser/user/'
             }}
           >
             確認

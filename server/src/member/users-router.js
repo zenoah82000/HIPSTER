@@ -92,13 +92,15 @@ router.post('/loginmember', async (req, res, next) =>{
 
   const memberId = [r1][0][0].memberId
   const memberName = [r1][0][0].memberName
+  const memberImg = [r1][0][0].memberImg
   const memberSuccess = ([r1][0].length)?true:false;
   // console.log(memberId,memberName,memberSuccess)
 
   const output = {  //建立判斷登入
     success:memberSuccess,
-    id:[r1][0][0].memberId,
-    name:[r1][0][0].memberName,
+    id:memberId,
+    name:memberName,
+    img:memberImg,
   }
 
 
@@ -154,6 +156,22 @@ router.post('/loginmember', async (req, res, next) =>{
   const updateMemberSql = "UPDATE `member` SET `memberName`=?,`memberGender`=?,`memberBirth`=?,`memberPhone`=?,`memberAddress`=?,`memberPwd`=?,`memberImg`=? WHERE  `memberId`=? "
 
   const [r1] = await db.query(updateMemberSql, [memberName,memberGender,memberBirth,memberPhone,memberAddress,memberPwd,memberImg,memberId]);
+
+  console.log(r1)
+  // const localmemberId = [r1][0][0].memberId
+  // const localmemberName = [r1][0][0].memberName
+  // const localmemberImg = [r1][0][0].memberImg
+  // const localmemberSuccess = ([r1][0].length)?true:false;
+  // // console.log(memberId,memberName,memberSuccess)
+
+  // const output = {  //建立判斷登入
+  //   success:localmemberSuccess,
+  //   id:localmemberId,
+  //   name:localmemberName,
+  //   img:localmemberImg,
+  // }
+
+
   res.json(r1)
 })
 
@@ -161,8 +179,8 @@ router.post('/loginmember', async (req, res, next) =>{
 
 // 更新會員圖片
   router.post('/updatememberimgdata',upload.single('avatar'), async (req, res) => {
-    console.log(req.file)//撈上傳檔案的資訊
-    console.log(req.body)//撈額外提供的資訊
+    // console.log(req.file)//撈上傳檔案的資訊
+    // console.log(req.body)//撈額外提供的資訊
     const filename = req.body.memberImg.split('.').pop()//副檔名
     if(req.file && req.file.path){
       fs.rename(req.file.path, __dirname + '/../../public/images/member/' + "memberid_"+req.body.memberId+"."+filename, error=>{});

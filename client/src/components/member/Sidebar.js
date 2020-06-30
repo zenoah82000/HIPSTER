@@ -9,6 +9,9 @@ import '../../styles/HS.scss'
 
 function Sidebar(props) {
   // console.log(props)
+  const userlocalStorage = JSON.parse(localStorage.getItem('member')) || []
+  const username = userlocalStorage.name
+  const userimg = userlocalStorage.img
   return (
     <>
       <main role="main" className="flex-shrink-0 mb-5">
@@ -19,8 +22,7 @@ function Sidebar(props) {
                 <li className="nav-item">
                   <img
                     className="rounded-circle avatar mt-4 "
-                    src="
-                    https://cdn.pixabay.com/photo/2017/03/30/18/17/girl-2189247_960_720.jpg"
+                    src={`http://localhost:5000/images/member/${userimg}`}
                     alt="cat"
                   ></img>
                 </li>
@@ -29,7 +31,7 @@ function Sidebar(props) {
                     className="nav-link sidebarlink-hs font-weight-bold"
                     id="membername"
                   >
-                    Member Name
+                    {username}
                   </div>
                 </li>
                 <li className="nav-item">
