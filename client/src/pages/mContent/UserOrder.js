@@ -1,13 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import $ from 'jquery'
+import { Modal, Button, Form } from 'react-bootstrap'
 
 import '../../styles/order.scss'
 
 function UserOrder() {
   const [orderlist, setOrderlist] = useState([])
-  const [datapage, setDatapage] = useState([])
+
   const [loading, setLoading] = useState(false)
+  //詳細資料狀態
+  const [detail, setDetail] = useState(false)
+  //詳細資料
+  const [detaildata, setDetaildata] = useState([])
+  //目前頁數
   const [currentPage, setCurrentPage] = useState(1)
+  //每頁的資料
+  const [datapage, setDatapage] = useState([])
 
   const getOrderlistAsync = async () => {
     const request = new Request(`http://localhost:5000/member/order/2`, {
@@ -82,6 +90,40 @@ function UserOrder() {
     }
     return pages
   }
+  //傳入訂單詳情
+  const showdetail = (item) => {
+    setDetaildata(item)
+    setDetail(true)
+  }
+  //訂單詳情
+  function Orderdetail(props) {
+    return (
+      <Modal className="SignOk"
+        {...props}
+        size="md"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Body className="SignOk-bg">
+          <div className="orderdetailbox">
+            <div>
+              <h6>聯絡人資訊</h6>
+              <p>姓名:{detaildata.contact}</p>
+              <p>電話:{detaildata.mobile}</p>
+              <p>信箱:{detaildata.email}</p>
+            </div>
+            <div>
+              <h6>付款資訊</h6>
+              <p>付款方式:</p>
+              <p>小計</p>
+              <p>優惠碼</p>
+              <p>總計</p>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
+    )
+  }
   const display = orderlist.order ? (
     <div className="orderlistbox ">
       <div className="row">
@@ -106,6 +148,14 @@ function UserOrder() {
                         .toString()
                         .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
                     </h6>
+                    <input
+                      type="button"
+                      className="order-detail"
+                      value="訂單詳情"
+                      onClick={() => {
+                        showdetail(item)
+                      }}
+                    />
                   </div>
                 </div>
                 <div className="card-body order-body unfoldbox">
@@ -177,6 +227,7 @@ function UserOrder() {
   )
   return (
     <>
+      <Orderdetail show={detail} onHide={() => setDetail(false)} />
       <div className="usercontainer">
         <h2 className="usertitle">我的訂單</h2>
         {loading ? <h2>載入中</h2> : display}

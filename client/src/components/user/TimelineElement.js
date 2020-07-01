@@ -55,7 +55,7 @@ function TimelineElement({ myMapData }) {
                       <img
                         src={
                           'http://localhost:5000/images/comments/' +
-                          myMapData.commentImg
+                          myMapData.commentImg1
                         }
                         alt="first"
                       />
@@ -68,7 +68,7 @@ function TimelineElement({ myMapData }) {
                       <img
                         src={
                           'http://localhost:5000/images/comments/' +
-                          myMapData.commentImg
+                          myMapData.commentImg2
                         }
                         alt="first"
                       />
@@ -81,7 +81,7 @@ function TimelineElement({ myMapData }) {
                       <img
                         src={
                           'http://localhost:5000/images/comments/' +
-                          myMapData.commentImg
+                          myMapData.commentImg3
                         }
                         alt="first"
                       />

@@ -3,7 +3,8 @@ const db = require(__dirname + "/db_connect2");
 const upload = require(__dirname + "/upload-module");
 const router = express.Router();
 
-//訂單列表
+
+//個人地圖列表
 router.get("/mymap/:memberId", async (req, res) => {
   const data = {
     myItemList: [],
@@ -18,5 +19,9 @@ router.get("/mymap/:memberId", async (req, res) => {
 
   res.json(data);
 });
+
+
+
+
 
 module.exports = router;

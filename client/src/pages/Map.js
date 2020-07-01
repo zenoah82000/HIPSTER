@@ -25,7 +25,9 @@ class Map extends React.Component {
   }
 
   cardClick = (clickData) => {
+    this.setState({ clickData: clickData })
     this.props.cardClickReset(clickData)
+    console.log(clickData)
   }
 
   setFileterData = (data) => {
@@ -65,6 +67,7 @@ class Map extends React.Component {
               cafeActive={this.state.cafeActive}
               CafeData={CafeData}
               myLocation={this.props.myLocation}
+              clickData={this.state.clickData}
             />
           </div>
         </div>

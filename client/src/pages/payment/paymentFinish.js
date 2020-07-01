@@ -23,9 +23,9 @@ function paymentFinish(props) {
               <BsCheckCircle />
               <span className="h2 pl-2">付款完成</span>
             </h1>
-            <p className="mb-4">
+            <p className="infoemailbox">
               感謝使用文青地圖，預定憑證及使用詳情將寄至您的電子信箱
-              {buyerinfo.email}
+              <span className="infoemail">{buyerinfo.email}</span>
             </p>
             <div className="orderdetail">
               <div className="orderdetail-title d-flex justify-content-between">
@@ -51,9 +51,10 @@ function paymentFinish(props) {
                               src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
                             />
                           </div>
-                          <div className="productinfo">
-                            <p className="title">{item.name}</p>
-                            <p className="date">預定日期: {item.date}</p>
+                          <div className="productinfo align-items-center">
+                            <p className="infoname">{item.name}</p>
+                            <p className="infoprice">NT${item.price}</p>
+                            <p className="infodate">預定日期: {item.date}</p>
                           </div>
                         </div>
                       </>

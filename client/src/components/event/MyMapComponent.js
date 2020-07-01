@@ -84,6 +84,7 @@ export default class ViewportExample extends Component {
   render() {
     let { viewport, clicked, cafeActive, clickData } = this.props
     console.log(this.props)
+    console.log(clickData.mapId)
     return (
       <div>
         <Map viewport={viewport}>
@@ -91,6 +92,10 @@ export default class ViewportExample extends Component {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           />
+
+          {clickData.mapId != ''
+            ? console.log(clickData.lat, clickData.log)
+            : console.log(clickData.mapId)}
 
           {/* 顯示咖啡廳 */}
           {cafeActive ? (
@@ -251,7 +256,6 @@ export default class ViewportExample extends Component {
           ) : (
             ''
           )}
-
           {/* My location */}
           <Marker
             icon={pointerIcon}
@@ -274,8 +278,7 @@ export default class ViewportExample extends Component {
           {clicked ? (
             <Marker
               ref={this.openPopup}
-              // ref={this.openPopup}
-              position={viewport.center}
+              position={[123, 123]}
               icon={productTagIcon}
             >
               <Popup className="locationCard">

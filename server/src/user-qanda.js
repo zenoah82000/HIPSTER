@@ -4,7 +4,7 @@ const upload = require(__dirname + '/upload-module');
 const router = express.Router()
 
 router.get('/member/qanda', async (req, res) => {
-    console.log("請求使用者問與答");
+    console.log("使用者請求問與答");
     const data = {
         status: true,
         qalist: [],
@@ -28,15 +28,15 @@ router.get('/member/qanda', async (req, res) => {
       }    
 });
 
-router.get('/product/qanda/:productId', async (req, res) => {
-  console.log("請求產品問與答");
+router.get('/product/qanda', async (req, res) => {
+  console.log("產品請求問與答");
   const data = {
       status: true,
       qalist: [],
     };
-  const sqlqanda = "SELECT `product`.`productId`, `product`.`productImg`, `product`.`productName`, `product`.`productPrice`, `product`.`productAmount`, `product`.`categoryId`, `product`.`mapId`, `product`.`productAddress`, `product`.`productContent`, `product`.`productEndingDate`, `product`.`companyId`, `qalist`.`id`, `qalist`.`memberId`, `qalist`.`question`, `qalist`.`productName`, `qalist`.`answer`,`qalist`.`created_at` FROM `product` INNER JOIN `qalist` ON `product`.`productName` = `qalist`.`productName` WHERE `product`.`productId`= ? ORDER BY `qalist`.`created_at`";
+  const sqlqanda = "SELECT `product`.`productId`, `product`.`productName`, `product`.`productAddress`, `qalist`.`memberId`, `qalist`.`question`, `qalist`.`productName`, `qalist`.`answer`,`qalist`.`created_at`,`member`.`memberName` FROM `product` INNER JOIN `qalist` ON `product`.`productName` = `qalist`.`productName` INNER JOIN `member` ON `member`.`memberId` = `qalist`.`memberId` ORDER BY `qalist`.`created_at`";
 
-  const [r1] = await db.query(sqlqanda, [req.params.productId]);
+  const [r1] = await db.query(sqlqanda);
 
   if (r1.length > 0 ) {
       r1.forEach((item) => {
