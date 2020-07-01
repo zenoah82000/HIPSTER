@@ -9,40 +9,29 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import MyBreadcrumb from '../../components/MyBreadcrumb'
 import { getBlogDataAsync,addBlogContentDataAsync } from '../../actions/blog'
 
-function BlogAdd(props) {
-  // console.log('BlogAdd-props:', props)
+function BlogAdd(props) {  
+  const { blogData,getBlogDataAsync,addBlogContentDataAsync } = props
+
   const [addArticleTitle, setAddArticleTitle] =  useState('')
   const [addArticleCategory, setAddArticleCategory] =  useState(1)
   const [addArticleContent, setAddArticleContent] =  useState('')
-  const [addArticleImg, setAddArticleImg] =  useState('')
-
-  const { blogData,getBlogDataAsync,addBlogContentDataAsync } = props
-  // console.log('blogData', blogData)
+  const [addArticleImg, setAddArticleImg] =  useState('')  
 
   useEffect(() => {
     getBlogDataAsync()
+    console.log('componentDidMount')
   }, [])
 
-  //Submit
-  const handleSubmit = (event)=>{
-    const addArticleContentData = { 
-      addArticleTitle,
-      addArticleCategory,
-      addArticleContent,      
-      addArticleImg,      
-    }
-  
-    const addArticleContentData_fd = new FormData()
-    addArticleContentData_fd.append('articleTitle', addArticleContentData.addArticleTitle)
-    console.log('GETFD',addArticleContentData_fd.get("articleTitle"))
-    console.log('addArticleContentData_fd',addArticleContentData_fd)
-    addArticleContentData_fd.append('categoryId', addArticleContentData.addArticleCategory)
-    addArticleContentData_fd.append('articleContent', addArticleContentData.addArticleContent)    
-    addArticleContentData_fd.append('articleImg', addArticleContentData.addArticleImg)    
-  
-    addBlogContentDataAsync(addArticleContentData_fd
-      // ,() => alert('成功新增')
-      )  
+  const handleSubmit = ()=>{      
+    const addArticleFd = new FormData()
+    addArticleFd.append('articleTitle', addArticleTitle)    
+    addArticleFd.append('categoryId', addArticleCategory)
+    addArticleFd.append('articleContent', addArticleContent)    
+    addArticleFd.append('articleImg', addArticleImg)    
+    // for(let pair of addArticleFd.entries()) {
+    //   console.log('addArticleFd內所有的鍵值對: ',pair[0]+ ', '+ pair[1]); 
+    // }
+    addBlogContentDataAsync(addArticleFd)  
   }
 
   return (
@@ -93,7 +82,7 @@ function BlogAdd(props) {
                 let data = editor.getData()
                 data = data.replace(/\"/g,"'")                
                 setAddArticleContent(data)
-                console.log({ event, editor, data })
+                // console.log({ event, editor, data })
                 // console.log('img-length',$(".ck-content img").length)
                 if($(".ck-content img").length){
                   const src = $(".ck-content img").attr("src")
