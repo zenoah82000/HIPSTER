@@ -226,8 +226,14 @@ p {
   }
   #time1,
   #time2 {
-    width: 40%;
+    width: 95%;
     height: 40px;
+    margin: 0px 5px;
+  }
+  .arrow {
+    transform: rotate(90deg);
+    font-size: 25px;
+    margin: 5px 0;
   }
   #active-btn {
     margin-top: 15px;
@@ -307,6 +313,11 @@ p {
       margin: auto;
       border-radius: 10px;
       box-shadow: 3px 3px 5px rgba($color: #000000, $alpha: 0.3);
+      transition: 0.3s;
+      &:hover {
+        box-shadow: 1px 1px 3px rgba($color: #000000, $alpha: 0.3);
+        transform: scale(0.95);
+      }
       .activity-picture {
         width: 100%;
         height: 220px;
@@ -447,6 +458,28 @@ p {
   }
 }
 
+@media screen and (max-width: 599px) {
+  .home-slick-banner {
+    height: 420px;
+    .black-bg {
+      width: 100%;
+      height: 210px;
+      top: 210px;
+      .content {
+        width: 100%;
+        margin: 0;
+        padding: 0 10px;
+        .slick-banner-title {
+          font-size: 16px;
+        }
+        .slick-banner-text {
+          -webkit-line-clamp: 2;
+        }
+      }
+    }
+  }
+}
+
 //////////////////home-countdown/////////////////////
 .countdown-num {
   text-align: center;
@@ -549,6 +582,11 @@ p {
       justify-content: space-between;
       margin-bottom: 30px;
       text-decoration: none;
+      transition: 0.3s;
+      &:hover {
+        box-shadow: 1px 1px 3px rgba($color: #000000, $alpha: 0.3);
+        transform: scale(0.95);
+      }
       .blog-image {
         width: 140px;
         height: 140px;
@@ -614,5 +652,37 @@ p {
     // margin-top: 50px;
     // margin-bottom: 50px;
     // box-shadow: 3px 3px 5px rgba($color: #000000, $alpha: 0.3);
+  }
+}
+
+@media screen and (max-width: 599px) {
+  .home-blog {
+    .home-blog-content {
+      padding: 0 10px;
+      .blog-group {
+        width: 100%;
+        height: 155px;
+        .blog-image {
+          width: 30%;
+          height: auto;
+          img {
+          }
+        }
+        .blog-content {
+          width: 65%;
+          .blog-title {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+          }
+          .blog-text {
+            -webkit-line-clamp: 2;
+            height: auto;
+          }
+        }
+      }
+    }
   }
 }

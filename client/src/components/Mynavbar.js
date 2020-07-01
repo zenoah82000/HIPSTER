@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
+import Fade from 'react-reveal/Fade'
 
 import { Modal, Button, Form } from 'react-bootstrap'
 import { FaHeart, FaShoppingCart } from 'react-icons/fa'
@@ -379,211 +380,213 @@ function Mynavbar(props) {
       <SignOkMassage show={showSignOk} onHide={() => setShowSignOk(false)} />
       <LoginOkMassage show={showLoginOk} onHide={() => setShowLoginOk(false)} />
       <LogoutOkMassage show={showLogoutOk} />
-      <nav>
-        <div className="navbar container ">
-          <Link to="/" className="logo">
-            <img src="http://localhost:5000/images/home/logo.png" />
-          </Link>
+      <Fade>
+        <nav>
+          <div className="navbar container ">
+            <Link to="/" className="logo">
+              <img src="http://localhost:5000/images/home/logo.png" />
+            </Link>
 
-          <ul className="menu" style={burgerstate ? { width: '100%' } : {}}>
-            <li>
-              <Link to="/about">品牌介紹</Link>
-            </li>
-            <li>
-              <Link to="/map">地圖探索</Link>
-            </li>
-            <li>
-              <Link to="/blog">文章專欄</Link>
-            </li>
-            <li>
-              <Link to="/productlist">活動列表</Link>
-            </li>
-            <li>
-              <Link to="/contact">聯絡我們</Link>
-            </li>
-          </ul>
-          {/* ========================================================= */}
-          <ul className="shop-group">
-            <li>
-              <div className="navbar-cart">
-                <FaShoppingCart
-                  className="car-img"
-                  onClick={() => {
-                    showMenu()
-                  }}
-                />
-                {mycart.length >= 1 ? (
-                  <div className="cart-dot">
-                    <span>{mycart.length}</span>
-                  </div>
-                ) : (
-                  ''
-                )}
+            <ul className="menu" style={burgerstate ? { width: '100%' } : {}}>
+              <li>
+                <Link to="/about">品牌介紹</Link>
+              </li>
+              <li>
+                <Link to="/map">地圖探索</Link>
+              </li>
+              <li>
+                <Link to="/blog">文章專欄</Link>
+              </li>
+              <li>
+                <Link to="/productlist">活動列表</Link>
+              </li>
+              <li>
+                <Link to="/contact">聯絡我們</Link>
+              </li>
+            </ul>
+            {/* ========================================================= */}
+            <ul className="shop-group">
+              <li>
+                <div className="navbar-cart">
+                  <FaShoppingCart
+                    className="car-img"
+                    onClick={() => {
+                      showMenu()
+                    }}
+                  />
+                  {mycart.length >= 1 ? (
+                    <div className="cart-dot">
+                      <span>{mycart.length}</span>
+                    </div>
+                  ) : (
+                    ''
+                  )}
 
-                {showCart ? (
-                  <>
-                    <div className="card mt-3">
-                      <div className="card-body">
-                        {mycart != null && mycart.length >= 1 ? (
-                          <>
-                            {mycart.map((value, index) => {
-                              return (
-                                <div className="card-item d-flex align-items-center">
-                                  <div className="productimgbox mr-4">
-                                    <Link to="/">
-                                      <img src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg" />
-                                    </Link>
-                                  </div>
-                                  <div className="item-text">
-                                    <div className="item-name">
+                  {showCart ? (
+                    <>
+                      <div className="card mt-3">
+                        <div className="card-body">
+                          {mycart != null && mycart.length >= 1 ? (
+                            <>
+                              {mycart.map((value, index) => {
+                                return (
+                                  <div className="card-item d-flex align-items-center">
+                                    <div className="productimgbox mr-4">
                                       <Link to="/">
-                                        <p>{value.name}</p>
+                                        <img src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg" />
                                       </Link>
                                     </div>
-                                    <div className="item-date">
-                                      <span>{value.date}</span>
-                                    </div>
-                                    <div className="item-price">
-                                      <span>NT${value.price}</span>
-                                      <button
-                                        onClick={() => {
-                                          deleteCart(value.id)
-                                        }}
-                                      >
-                                        <BsTrash />
-                                        移除
-                                      </button>
+                                    <div className="item-text">
+                                      <div className="item-name">
+                                        <Link to="/">
+                                          <p>{value.name}</p>
+                                        </Link>
+                                      </div>
+                                      <div className="item-date">
+                                        <span>{value.date}</span>
+                                      </div>
+                                      <div className="item-price">
+                                        <span>NT${value.price}</span>
+                                        <button
+                                          onClick={() => {
+                                            deleteCart(value.id)
+                                          }}
+                                        >
+                                          <BsTrash />
+                                          移除
+                                        </button>
+                                      </div>
                                     </div>
                                   </div>
-                                </div>
-                              )
-                            })}
-                          </>
-                        ) : (
-                          <p className="text-center">購物車是空的喔!</p>
-                        )}
+                                )
+                              })}
+                            </>
+                          ) : (
+                            <p className="text-center">購物車是空的喔!</p>
+                          )}
+                        </div>
+                        <div className="card-footer">
+                          <Link
+                            className="link text-center"
+                            to="/shoppingcar"
+                            onClick={() => {
+                              showMenu()
+                            }}
+                          >
+                            <p>查看我的購物車</p>
+                          </Link>
+                        </div>
                       </div>
-                      <div className="card-footer">
-                        <Link
-                          className="link text-center"
-                          to="/shoppingcar"
-                          onClick={() => {
-                            showMenu()
-                          }}
-                        >
-                          <p>查看我的購物車</p>
-                        </Link>
-                      </div>
-                    </div>
-                  </>
-                ) : (
-                  ''
-                )}
-              </div>
-            </li>
-            <li>
-              <Link to="/memberuser/wishlist">
-                <FaHeart />
-              </Link>
-            </li>
-          </ul>
-          {/* ========================================================= */}
-          <div
-            className="burger "
-            id="burger"
-            onClick={() => {
-              setburgerstate(!burgerstate)
-            }}
-          >
-            {burgerstate ? 'X' : '☰'}
+                    </>
+                  ) : (
+                    ''
+                  )}
+                </div>
+              </li>
+              <li>
+                <Link to="/memberuser/wishlist">
+                  <FaHeart />
+                </Link>
+              </li>
+            </ul>
+            {/* ========================================================= */}
+            <div
+              className="burger "
+              id="burger"
+              onClick={() => {
+                setburgerstate(!burgerstate)
+              }}
+            >
+              {burgerstate ? 'X' : '☰'}
+            </div>
+            {userSuccess ? (
+              <>
+                <ul
+                  className="member"
+                  style={burgerstate ? { width: '100%' } : {}}
+                >
+                  <li>{username},您好</li>
+                  <li>
+                    <Link to="/memberuser/user/" className="memberbtn">
+                      會員中心
+                    </Link>
+                    <Link
+                      className="memberbtnPhone"
+                      onClick={() => {
+                        setmembercenterstate(!membercenterstate)
+                      }}
+                    >
+                      會員中心
+                    </Link>
+                    <ul
+                      className="membercenterPhone"
+                      style={membercenterstate ? { height: 480 } : {}}
+                    >
+                      <li>
+                        <Link>個人資訊</Link>
+                      </li>
+                      <li>
+                        <Link>我的評價</Link>
+                      </li>
+                      <li>
+                        <Link>我的訂單</Link>
+                      </li>
+                      <li>
+                        <Link>我的文章</Link>
+                      </li>
+                      <li>
+                        <Link>問與答</Link>
+                      </li>
+                      <li>
+                        <Link>優惠卷</Link>
+                      </li>
+                      <li>
+                        <Link>個人地圖</Link>
+                      </li>
+                      <li>
+                        <Link>願望清單</Link>
+                      </li>
+                    </ul>
+                  </li>
+
+                  <li>
+                    <Link
+                      href="#"
+                      className="memberbtn logout"
+                      onClick={() => {
+                        setuserSuccess(false)
+                        setShowLogoutOk(true)
+                      }}
+                    >
+                      登出
+                    </Link>
+                  </li>
+                </ul>
+              </>
+            ) : (
+              <>
+                <ul
+                  className="sign "
+                  style={burgerstate ? { width: '100%' } : {}}
+                >
+                  <li>
+                    <Link
+                      href=""
+                      onClick={() => {
+                        setShowlogin(true)
+                      }}
+                    >
+                      註冊 / 登入
+                    </Link>
+                  </li>
+                </ul>
+              </>
+            )}
+
+            {/* ========================================================= */}
           </div>
-          {userSuccess ? (
-            <>
-              <ul
-                className="member"
-                style={burgerstate ? { width: '100%' } : {}}
-              >
-                <li>{username},您好</li>
-                <li>
-                  <Link to="/memberuser/user/" className="memberbtn">
-                    會員中心
-                  </Link>
-                  <Link
-                    className="memberbtnPhone"
-                    onClick={() => {
-                      setmembercenterstate(!membercenterstate)
-                    }}
-                  >
-                    會員中心
-                  </Link>
-                  <ul
-                    className="membercenterPhone"
-                    style={membercenterstate ? { height: 480 } : {}}
-                  >
-                    <li>
-                      <Link>個人資訊</Link>
-                    </li>
-                    <li>
-                      <Link>我的評價</Link>
-                    </li>
-                    <li>
-                      <Link>我的訂單</Link>
-                    </li>
-                    <li>
-                      <Link>我的文章</Link>
-                    </li>
-                    <li>
-                      <Link>問與答</Link>
-                    </li>
-                    <li>
-                      <Link>優惠卷</Link>
-                    </li>
-                    <li>
-                      <Link>個人地圖</Link>
-                    </li>
-                    <li>
-                      <Link>願望清單</Link>
-                    </li>
-                  </ul>
-                </li>
-
-                <li>
-                  <Link
-                    href="#"
-                    className="memberbtn logout"
-                    onClick={() => {
-                      setuserSuccess(false)
-                      setShowLogoutOk(true)
-                    }}
-                  >
-                    登出
-                  </Link>
-                </li>
-              </ul>
-            </>
-          ) : (
-            <>
-              <ul
-                className="sign "
-                style={burgerstate ? { width: '100%' } : {}}
-              >
-                <li>
-                  <Link
-                    href=""
-                    onClick={() => {
-                      setShowlogin(true)
-                    }}
-                  >
-                    註冊 / 登入
-                  </Link>
-                </li>
-              </ul>
-            </>
-          )}
-
-          {/* ========================================================= */}
-        </div>
-      </nav>
+        </nav>
+      </Fade>
     </>
   )
 }
