@@ -17,7 +17,7 @@ import author7 from '../../images/blog/author7.jpg'
 import author8 from '../../images/blog/author8.jpg'
 
 function Blog(props) {  
-  
+    
   const { blogData,getBlogDataAsync } = props
   let blogDataRp = []
   // if(blogData){console.log('blogData', blogData)}
@@ -33,7 +33,8 @@ function Blog(props) {
   // console.log('blogDataRp', blogDataRp)
   
   useEffect(() => {
-    getBlogDataAsync()   
+    getBlogDataAsync() 
+    console.log('componentDidMount')  
   }, [])  
   
   const authorImgArr = [
