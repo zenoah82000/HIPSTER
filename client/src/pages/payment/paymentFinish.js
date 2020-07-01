@@ -27,10 +27,19 @@ function paymentFinish(props) {
               感謝使用文青地圖，預定憑證及使用詳情將寄至您的電子信箱
               {buyerinfo.email}
             </p>
-            <div className="">
-              <h4 className="py-2">
-                訂單編號:{buyerinfo.orderId ? buyerinfo.orderId : ''}
-              </h4>
+            <div className="orderdetail">
+              <div className="orderdetail-title d-flex justify-content-between">
+                <h4>訂單明細</h4>
+                <div>
+                  <h6 className="">
+                    訂單編號:{buyerinfo.orderId ? buyerinfo.orderId : ''}
+                  </h6>
+                  <h6 className="">
+                    購買日期:{buyerinfo.buytime ? buyerinfo.buytime : ''}
+                  </h6>
+                </div>
+              </div>
+              <hr />
               {buyerinfo.product
                 ? buyerinfo.product.map((item) => {
                     return (

@@ -32,7 +32,8 @@ function PaymentType(props) {
     const response = await fetch(request)
     const data = await response.json()
     const orderId = { ...buyerinfo }
-    orderId.orderId = data
+    orderId.orderId = data.orderId
+    orderId.buytime = data.buytime
     props.dispatch({ type: 'BUYER_DATA', value: orderId })
   }
   const backPage = () => {
@@ -58,6 +59,9 @@ function PaymentType(props) {
       //取得總額跟信箱
       orderData.total = total
       orderData.email = buyerinfo.email
+      orderData.lastName=buyerinfo.lastName
+      orderData.firstName=buyerinfo.firstName
+      orderData.phone=buyerinfo.phone
       //訂單資料傳資料庫
       checkoutAsync(orderData)
       //跳轉頁面

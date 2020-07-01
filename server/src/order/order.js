@@ -53,11 +53,13 @@ router.post("/member/checkout", async (req, res) => {
   const memberId = 2;
   const orderItems = req.body.orderItems;
   const email = req.body.email;
+  const phone = req.body.phone;
+  const contact = req.body.lastName+req.body.firstName
+  
   //取得總筆數
   let orderId;
   const total = "show table status like 'orderlist'";
   const [r1] = await db.query(total);
-  console.log(r1);
   let rows = (r1[0].Auto_increment + 1).toString();
   rows = rows.padStart(5, 0);
   //訂單編號
@@ -66,7 +68,7 @@ router.post("/member/checkout", async (req, res) => {
   const addorderlist =
     "INSERT INTO `item_lists` (`orderId`,`memberId`,`productId`,`date`,`checkPrice`,`checkQty`,`checkSubtotal`) VALUES (?,?,?,?,?,?,?)";
   const addorder =
-    "INSERT INTO `orderlist` (`orderId`,`memberId`,`orderTotal`,`paymentTypeId`) VALUES(?,?,?,?)";
+    "INSERT INTO `orderlist` (`orderId`,`memberId`,`orderTotal`,`paymentTypeId`,`contact`,`mobile`,`email`) VALUES(?,?,?,?,?,?,?)";
 
   //新增商品到訂單
   const [r2] = await db.query(addorder, [
@@ -74,6 +76,9 @@ router.post("/member/checkout", async (req, res) => {
     memberId,
     req.body.total,
     "2",
+    contact,
+    phone,
+    email,
   ]);
   for (let i = 0; i < orderItems.length; i++) {
     db.query(addorderlist, [
@@ -85,7 +90,7 @@ router.post("/member/checkout", async (req, res) => {
       orderItems[i].checkQty,
       orderItems[i].checkSubtotal,
     ]).then(([res]) => {
-      console.log(res);
+
       const additemListId = "INSERT INTO `comments` (`itemListId`) VALUES(?)";
       return db.query(additemListId,[res.insertId])
 
@@ -124,7 +129,16 @@ router.post("/member/checkout", async (req, res) => {
       return console.log(err);
     }
   });
-  res.json(orderId);
+  const ordertime = "SELECT * FROM `orderlist` WHERE `orderListId`= ?"
+  const [r3] =await db.query(ordertime,[r2.insertId])
+  //傳送回前端
+  const buytime = r3[0].created_at.toLocaleString()
+  let data ={
+    orderId,
+    buytime,
+  }
+  
+  res.json(data);
 });
 
 module.exports = router;
