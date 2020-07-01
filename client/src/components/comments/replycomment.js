@@ -17,15 +17,53 @@ function ReplyComment({ handleDelete, index, commentData, history }) {
   const [ratingValue, setRatingValue] = useState('')
   const [load, setLoad] = useState(false)
 
-  // 評論送出
-  const secdCommentData = {
-    commentMemberId: '',
-    comment: {
-      itemListId: '',
-      content: '',
-      star: '',
-    },
+  // 前端上傳圖片
+  let fileObj = []
+  let fileArray = []
+
+  const handleChange = (e) => {
+    // console.log('test')
+    fileObj.push(e.target.files)
+    // console.log(fileObj)
+    // console.log('test')
+    for (let i = 0; i < fileObj[0].length; i++) {
+      fileArray.push(URL.createObjectURL(fileObj[0][i]))
+      // console.log(fileObj)
+      console.log(fileArray)
+    }
+    // setImage({ file: fileArray })
+    if (e.target.files.length) {
+      setImage({
+        preview: fileArray,
+        raw: e.target.files[0],
+      })
+    }
   }
+
+  // 上傳評論圖片到後端
+  const commentimgUpload = (data) => {
+    let formData = new FormData()
+    formData.append('avatar', data)
+    // console.log(data)
+    fetch('http://localhost:5000/commentimgdata', {
+      method: 'POST',
+      body: formData,
+    })
+      .then((res) => {
+        // console.log(res)
+        // console.log(res.statusText)
+        return res.json()
+      })
+      .then((obj) => {})
+  }
+
+  const handleTextChange = (e) => {
+    setText(e.target.value)
+    console.log('test')
+    console.log(text)
+  }
+
+  // 評論送到資料庫
   const sendCommentAsync = async (comment) => {
     console.log(comment)
     const request = new Request('http://localhost:5000/sendComments', {
@@ -40,49 +78,6 @@ function ReplyComment({ handleDelete, index, commentData, history }) {
     const data = await response.json()
   }
 
-  // 上傳圖片
-  let fileObj = []
-  let fileArray = []
-
-  const handleChange = (e) => {
-    console.log('test')
-    fileObj.push(e.target.files)
-    console.log(fileObj)
-    console.log('test')
-    for (let i = 0; i < fileObj[0].length; i++) {
-      fileArray.push(URL.createObjectURL(fileObj[0][i]))
-      console.log(fileObj)
-      console.log(fileArray)
-    }
-    // setImage({ file: fileArray })
-    if (e.target.files.length) {
-      setImage({
-        preview: fileArray,
-        raw: e.target.files[0],
-      })
-    }
-  }
-
-  const handleUpload = async (e) => {
-    e.preventDefault()
-    const formData = new FormData()
-    formData.append('image', image.raw)
-
-    await fetch('YOUR_URL', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-      body: formData,
-    })
-  }
-
-  const handleTextChange = (e) => {
-    setText(e.target.value)
-    console.log('test')
-    console.log(text)
-  }
-
   //子元素回傳星等
   const getRatingValue = (value) => {
     setRatingValue(value + 1)
@@ -90,12 +85,13 @@ function ReplyComment({ handleDelete, index, commentData, history }) {
   }
 
   //送出
-  const sendComment = (e, index, text, id) => {
+  const sendComment = (e, index, text, id, file) => {
     e.preventDefault()
     let commentData = {
       itemListId: id,
       commentContent: text,
       star: ratingValue,
+      commentImg: file,
     }
     if (text !== null && text !== '') {
       sendCommentAsync(commentData)
@@ -245,14 +241,16 @@ function ReplyComment({ handleDelete, index, commentData, history }) {
                       <button
                         className="btn buttonstyle float-right mt-3"
                         type="submit"
-                        onClick={(e) =>
-                          sendComment(e, index, text, commentData.itemListId)
-                        }
-                        // id={commentData.orderId}
-                        // value="Submit"
-
-                        // onClick={handleUpload}
-                        // onClick={()=>{setAccount("")}}
+                        onClick={(e) => {
+                          sendComment(
+                            e,
+                            index,
+                            text,
+                            commentData.itemListId,
+                            image.preview
+                          )
+                          commentimgUpload(image.preview)
+                        }}
                       >
                         提交評論
                       </button>

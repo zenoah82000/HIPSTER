@@ -14,7 +14,6 @@ import { FaSearch, FaStreetView } from 'react-icons/fa'
 import { GiCoffeeCup } from 'react-icons/gi'
 import { RiMoneyCnyCircleLine } from 'react-icons/ri'
 
-
 //地圖列表
 class mapList extends React.Component {
   constructor(props) {
@@ -30,7 +29,7 @@ class mapList extends React.Component {
       date: new Date(),
       dateClicked: false,
       active: true,
-      display:true,
+      display: true,
     }
   }
 
@@ -130,7 +129,7 @@ class mapList extends React.Component {
   showDate = (event) => {
     this.setState({
       searchBtn2: event.target.value,
-      display:false,
+      display: false,
     })
   }
   changeClickState = () => {
@@ -157,6 +156,7 @@ class mapList extends React.Component {
   //點擊商品卡片
   productCardClick = (item) => {
     this.props.cardClick(item)
+    console.log(item)
   }
 
   //popup資訊小卡
@@ -383,8 +383,7 @@ class mapList extends React.Component {
           return (
             item.productName
               .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1 &&
-            item.star == 5
+              .indexOf(this.state.search.toLowerCase()) !== -1 && item.star == 5
           )
         } else if (this.state.searchBtn3 == '4分以上') {
           return (
@@ -396,8 +395,7 @@ class mapList extends React.Component {
           return (
             item.productName
               .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1 &&
-            item.star >= 3
+              .indexOf(this.state.search.toLowerCase()) !== -1 && item.star >= 3
           )
         } else {
           return (
@@ -653,7 +651,7 @@ class mapList extends React.Component {
                   </Dropdown.Menu>
                 </Dropdown>
 
-                <Dropdown  onClick={()=>this.setState({display:true})}>
+                <Dropdown onClick={() => this.setState({ display: true })}>
                   <Dropdown.Toggle
                     className="mapSearch  btn-small"
                     variant="success"
@@ -662,9 +660,18 @@ class mapList extends React.Component {
                   >
                     {this.state.searchBtn2}
                   </Dropdown.Toggle>
-                  
-                  <Dropdown.Menu style={this.state.display?{display:"block"}:{display:"none"}}>
-                    <input type="date" onChange={(event) => this.showDate(event)} />
+
+                  <Dropdown.Menu
+                    style={
+                      this.state.display
+                        ? { display: 'block' }
+                        : { display: 'none' }
+                    }
+                  >
+                    <input
+                      type="date"
+                      onChange={(event) => this.showDate(event)}
+                    />
                   </Dropdown.Menu>
                 </Dropdown>
 

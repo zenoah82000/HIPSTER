@@ -25,12 +25,15 @@ router.get("/comments/:memberId", async (req, res) => {
   res.json(data);
 });
 
-//評論新增
+//新增評論到資料庫
 router.post("/sendComments", async (req, res) => {
-  console.log(req.body.star);
+  console.log(
+    req.body.commentImg[0],
+    req.body.commentImg[1],
+    req.body.commentImg[2]
+  );
   const addCommentList =
     "INSERT INTO `comments` (`itemListId`,`content`, `star`) VALUES (?,?,?)";
-  //新增評論到資料庫
 
   const [r2] = await db.query(addCommentList, [
     req.body.itemListId,
@@ -38,7 +41,11 @@ router.post("/sendComments", async (req, res) => {
     req.body.star,
   ]);
   res.json("ok");
-  // console.log("訂單新增成功" + orderId);
+});
+
+// 評論圖片新增到後端資料夾
+router.post("/commentimgdata", upload.single("avatar"), async (req, res) => {
+  res.json("ok");
 });
 
 module.exports = router;
