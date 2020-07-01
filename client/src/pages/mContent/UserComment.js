@@ -65,7 +65,6 @@ function UserComment(props) {
   const [text, setText] = useState('')
   const [myCommentlist, setMyCommentList] = useState([])
   const [noCommentlist, setNoCommentList] = useState([])
- 
 
   // 後端傳資料
   const commentAsync = async (order) => {
@@ -126,7 +125,10 @@ function UserComment(props) {
                 <div className="myReplyBox d-flex">
                   <div className="eventImgBox col-3">
                     <img
-                      src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
+                      src={
+                        'http://localhost:5000/images/product/' +
+                        item.productImg
+                      }
                       alt=""
                     />
                   </div>

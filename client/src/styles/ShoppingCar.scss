@@ -1,24 +1,31 @@
 body {
-  background-color: #dedfdd;
+  background-color: #ebebeb;
 }
 
 //購物車標題
 .cart-title {
-  background-color: white;
+  background-color: #fff;
   font-size: 25px;
   display: flex;
   padding: 12px;
   justify-content: space-between;
+  // border: 3px solid rgba(182, 181, 181, 0.363);
   .productname {
     width: 40%;
     display: flex;
     margin-right: 20px;
     align-items: center;
+    p {
+      font-size: 16px;
+    }
   }
   .productright {
     width: 40%;
     display: flex;
     justify-content: space-between;
+    p {
+      font-size: 16px;
+    }
   }
 }
 
@@ -26,7 +33,7 @@ body {
 .cartproductbox {
   background-color: white;
   display: flex;
-  margin-top: 20px;
+  margin-top: 3px;
   padding: 12px;
   align-items: center;
   justify-content: space-between;
@@ -97,6 +104,7 @@ body {
 
 //購物車總額
 .totalbox {
+  margin-top: 3px;
   padding: 12px;
   .button {
     color: white;
@@ -107,6 +115,9 @@ body {
   }
   .total {
     font-size: 20px;
+    color: #ff3400;
+    margin-left: 10px;
+    font-weight: 800;
     span {
       font-size: 24px;
       font-weight: bold;
@@ -148,4 +159,22 @@ body {
       background-color: #586b49;
     }
   }
+}
+
+.cart-bottom-left {
+  width: 55%;
+}
+
+.cart-bottom-mid {
+  width: 35%;
+  padding-right: 30px;
+}
+
+.cart-bottom-right {
+  width: 10%;
+  padding-left: 12px;
+}
+
+.reduceTotal {
+  padding-top: 3px;
 }

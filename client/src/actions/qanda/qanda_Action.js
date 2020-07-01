@@ -22,10 +22,12 @@ export const getUserQandaAsync = (userqamdadata) => {
 }
 
 //新增QA
-export const addUserQanda = (data) => ({
-  type: 'ADD_UserQandaDATA',
-  value: data,
-})
+export const addUserQanda = (data) => {
+  return {
+    type: 'ADD_UserQandaDATA',
+    value: data,
+  }
+}
 
 export const addUserQandaDataAsync = (addqandaData, callback) => {
   console.log('addqandaData', addqandaData)
@@ -38,12 +40,13 @@ export const addUserQandaDataAsync = (addqandaData, callback) => {
         'Content-Type': 'application/json',
       }),
     })
-    console.log('request', request)
+    // console.log('request', request)
     const response = await fetch(request)
-    console.log('response', response)
+    // console.log('response', response)
     const data = await response.json()
-    console.log('伺服器回傳的json資料', data)
+    // console.log('伺服器回傳的json資料', data)
 
-    dispatch(addUserQandaDataAsync(data))
+    dispatch(addUserQanda(addqandaData))
+    // window.location.reload()
   }
 }

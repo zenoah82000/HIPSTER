@@ -47,7 +47,8 @@ function App(props) {
   const [userSuccess, setuserSuccess] = useState(false)
   const userlocalStorage = JSON.parse(localStorage.getItem('member')) || []
   const username = userlocalStorage.name
-  const userid = userlocalStorage.id
+  // const [userlocal]
+  const userimg = userlocalStorage.name
 
   // console.log(userid)
 

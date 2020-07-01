@@ -3,6 +3,8 @@ const upload = require('./upload-module')
 const fileUpload = require('express-fileupload');
 // mysql2 async-await用的
 const db = require(__dirname + './../db_connect2')
+const multer = require('multer');
+const fs = require('fs'); 
 
 const router = express.Router()
 
@@ -90,13 +92,15 @@ router.post('/loginmember', async (req, res, next) =>{
 
   const memberId = [r1][0][0].memberId
   const memberName = [r1][0][0].memberName
+  const memberImg = [r1][0][0].memberImg
   const memberSuccess = ([r1][0].length)?true:false;
   // console.log(memberId,memberName,memberSuccess)
 
   const output = {  //建立判斷登入
     success:memberSuccess,
-    id:[r1][0][0].memberId,
-    name:[r1][0][0].memberName,
+    id:memberId,
+    name:memberName,
+    img:memberImg,
   }
 
 
@@ -133,8 +137,8 @@ router.post('/loginmember', async (req, res, next) =>{
 
 
 // 更新會員資料
-  router.post('/updatememberdata',upload.single('avatar'), async (req, res, next) => {
-  console.log(req.body)
+  router.post('/updatememberdata', async (req, res, next) => {
+  // console.log(req.body)
   
   const filename = req.body.memberImg.split('.').pop()
   const memberId = req.body.memberId
@@ -144,54 +148,49 @@ router.post('/loginmember', async (req, res, next) =>{
   const memberPhone = req.body.memberPhone
   const memberAddress = req.body.memberAddress
   const memberPwd = req.body.memberPwd
-  const memberImg = req.body.memberImg
-  // const memberImg = req.body.memberImgState? `memberid_${req.body.memberId}.${filename}`  : req.body.memberImg
+  // const memberImg = req.body.memberImg
+  const memberImg = req.body.memberImgState? `memberid_${req.body.memberId}.${filename}`  : req.body.memberImg
 
   // console.log("memberid_"+req.body.memberId+"."+filename)
 
-  // const updateMemberSql = "UPDATE `member` SET `memberName`=?,`memberGender`=?,`memberBirth`=?,`memberPhone`=?,`memberAddress`=?,`memberPwd`=?,`memberImg`=? WHERE  `memberId`=? "
+  const updateMemberSql = "UPDATE `member` SET `memberName`=?,`memberGender`=?,`memberBirth`=?,`memberPhone`=?,`memberAddress`=?,`memberPwd`=?,`memberImg`=? WHERE  `memberId`=? "
 
-  // const [r1] = await db.query(updateMemberSql, [memberName,memberGender,memberBirth,memberPhone,memberAddress,memberPwd,memberImg,memberId]);
-  // res.json(r1)
+  const [r1] = await db.query(updateMemberSql, [memberName,memberGender,memberBirth,memberPhone,memberAddress,memberPwd,memberImg,memberId]);
+
+  console.log(r1)
+  // const localmemberId = [r1][0][0].memberId
+  // const localmemberName = [r1][0][0].memberName
+  // const localmemberImg = [r1][0][0].memberImg
+  // const localmemberSuccess = ([r1][0].length)?true:false;
+  // // console.log(memberId,memberName,memberSuccess)
+
+  // const output = {  //建立判斷登入
+  //   success:localmemberSuccess,
+  //   id:localmemberId,
+  //   name:localmemberName,
+  //   img:localmemberImg,
+  // }
+
+
+  res.json(r1)
 })
 
 
 
-
-
-
 // 更新會員圖片
-//   router.post('/updatememberimgdata', async (req, res) => {
+  router.post('/updatememberimgdata',upload.single('avatar'), async (req, res) => {
+    // console.log(req.file)//撈上傳檔案的資訊
+    // console.log(req.body)//撈額外提供的資訊
+    const filename = req.body.memberImg.split('.').pop()//副檔名
+    if(req.file && req.file.path){
+      fs.rename(req.file.path, __dirname + '/../../public/images/member/' + "memberid_"+req.body.memberId+"."+filename, error=>{});
+    }
 
-//     try {
-//       if(!req.files) {
-//           res.send({
-//               status: false,
-//               message: 'No file uploaded'
-//           });
-//       } else {
-//           //使用輸入框的名稱來獲取上傳檔案 (例如 "avatar")
-//           let avatar = req.files.avatar;
-          
-//           //使用 mv() 方法來移動上傳檔案到要放置的目錄裡 (例如 "uploads")
-//           avatar.mv('../../public/images/member/' + avatar.name);
+    res.json({
 
-//           //送出回應
-//           res.send({
-//               status: true,
-//               message: 'File is uploaded',
-//               data: {
-//                   name: avatar.name,
-//                   mimetype: avatar.mimetype,
-//                   size: avatar.size
-//               }
-//           });
-//       }
-//   } catch (err) {
-//       res.status(500).send(err);
-//   }
+    })
 
-// })
+})
 
 
 

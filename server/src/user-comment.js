@@ -11,10 +11,10 @@ router.get("/comments/:memberId", async (req, res) => {
   };
 
   const sqlcommentlist =
-    "SELECT `comments`.`commentId`, `comments`.`itemListId`,`comments`.`content`, `comments`.`star`, `comments`.`created_at`, `comments`.`updated_at`,`item_lists`.`productId`,`item_lists`.`orderId`,`item_lists`.`date`,`product`.`productName`, `item_lists`.`memberId` FROM `comments`LEFT JOIN `item_lists` ON `comments`.`itemListId` =`item_lists`.`itemListId` LEFT JOIN `product`ON `item_lists`.`productId` =`product`.`productId` LEFT JOIN `orderlist` ON `item_lists`.`orderId` =`orderlist`.`orderId` WHERE `item_lists`.`memberId` = ?";
+    "SELECT `comments`.`commentId`, `comments`.`itemListId`,`comments`.`content`, `comments`.`star`, `comments`.`created_at`, `comments`.`updated_at`,`item_lists`.`productId`,`item_lists`.`orderId`,`item_lists`.`date`,`product`.`productName`,`product`.`productImg`, `item_lists`.`memberId` FROM `comments`LEFT JOIN `item_lists` ON `comments`.`itemListId` =`item_lists`.`itemListId` LEFT JOIN `product`ON `item_lists`.`productId` =`product`.`productId` LEFT JOIN `orderlist` ON `item_lists`.`orderId` =`orderlist`.`orderId` WHERE `item_lists`.`memberId` = ?";
 
   const sqlnotcommentlist =
-    "SELECT `item_lists`.`itemListId`, `item_lists`.`orderId`, `item_lists`.`memberId`, `item_lists`.`productId`, `item_lists`.`date`, `item_lists`.`checkPrice`, `item_lists`.`checkQty`, `item_lists`.`checkSubtotal`, `item_lists`.`created_at`, `item_lists`.`updated_at`,`product`.`productName`,`comments`.`content` FROM `item_lists` LEFT JOIN `product`ON `item_lists`.`productId` =`product`.`productId` LEFT JOIN `comments` ON `item_lists`.`itemListId` = `comments`.`itemListId` WHERE `comments`.`content` is null and `item_lists`.`memberId` = ?";
+    "SELECT `item_lists`.`itemListId`, `item_lists`.`orderId`, `item_lists`.`memberId`, `item_lists`.`productId`, `item_lists`.`date`, `item_lists`.`checkPrice`, `item_lists`.`checkQty`, `item_lists`.`checkSubtotal`, `item_lists`.`created_at`, `item_lists`.`updated_at`,`product`.`productName`,`product`.`productImg`, `comments`.`content` FROM `item_lists` LEFT JOIN `product`ON `item_lists`.`productId` =`product`.`productId` LEFT JOIN `comments` ON `item_lists`.`itemListId` = `comments`.`itemListId` WHERE `comments`.`content` is null and `item_lists`.`memberId` = ?";
 
   const [r1] = await db.query(sqlcommentlist, [req.params.memberId]);
   const [r2] = await db.query(sqlnotcommentlist, [req.params.memberId]);

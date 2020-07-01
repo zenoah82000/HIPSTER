@@ -41,7 +41,10 @@
     color: #586b49 !important;
   }
   .memberimg {
-    width: 100px;
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 50%;
   }
   .Figurepic {
     margin-bottom: 0;

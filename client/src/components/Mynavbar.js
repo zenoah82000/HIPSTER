@@ -39,6 +39,10 @@ function Mynavbar(props) {
   //登入完成視窗文字顯示:失敗?成功?
   const [loginOk, setloginOk] = useState(false)
 
+  //手機版-漢堡選單狀態 0=關閉
+  const [burgerstate, setburgerstate] = useState(0)
+  //手機版
+
   //註冊會員傳後端
   async function addNewMember(item) {
     // 注意資料格式要設定，伺服器才知道是json格式
@@ -267,7 +271,7 @@ function Mynavbar(props) {
                 LoginMember(loginData) //寫入資料庫
                 setShowlogin(false) //關閉註冊登入視窗
                 setTimeout(() => {
-                  setShowLoginOk(true) //跳出註冊完成視窗
+                  setShowLoginOk(true) //跳出登入完成視窗
                 }, 300)
               }}
             >
@@ -493,11 +497,42 @@ function Mynavbar(props) {
                   <Link to="/memberuser/user/" className="memberbtn">
                     會員中心
                   </Link>
+                  <Link className="memberbtnPhone">會員中心</Link>
+                  <ul className="membercenterPhone">
+                    <li>
+                      <Link>個人資訊</Link>
+                    </li>
+                    <li>
+                      <Link>我的評價</Link>
+                    </li>
+                    <li>
+                      <Link>我的訂單</Link>
+                    </li>
+                    <li>
+                      <Link>我的文章</Link>
+                    </li>
+                    <li>
+                      <Link>問與答</Link>
+                    </li>
+                    <li>
+                      <Link>優惠卷</Link>
+                    </li>
+                    <li>
+                      <Link>個人地圖</Link>
+                    </li>
+                    <li>
+                      <Link>願望清單</Link>
+                    </li>
+                    <li>
+                      <Link>返回</Link>
+                    </li>
+                  </ul>
                 </li>
+
                 <li>
                   <Link
                     href="#"
-                    className="memberbtn"
+                    className="memberbtn logout"
                     onClick={() => {
                       setuserSuccess(false)
                       setShowLogoutOk(true)

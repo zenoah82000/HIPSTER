@@ -29,6 +29,28 @@ function ShoppingCar(props) {
   //設置折扣
   const [discount, setDiscount] = useState(1)
 
+  let discountline
+  if (discount < 1) {
+    discountline = (
+      <div className="row justify-content-between">
+        <div className="reduceTotal">折扣金額:</div>
+        <div className="total">
+          -NT$
+          {(sum(mycart) * (1 - discount))
+            .toString()
+            .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
+        </div>
+      </div>
+    )
+  } else {
+    discountline = (
+      <div className="row justify-content-between">
+        <div className="reduceTotal">折扣金額:</div>
+        <div className="total">0</div>
+      </div>
+    )
+  }
+
   //請登入視窗
   function Checklogin(props) {
     return (
@@ -70,7 +92,7 @@ function ShoppingCar(props) {
       })
     } else {
       Swal.fire({
-        text: `確定商品總金額 NT$！${sum(mycart)}`,
+        text: `確定商品總金額 NT$！${sum(mycart) * discount}`,
         icon: 'info',
         confirmButtonText: '確定',
         showCancelButton: true,
@@ -135,23 +157,26 @@ function ShoppingCar(props) {
         <div
           id="checkdiv"
           ref={(div) => (checkdiv = div)}
-          className="totalbox bg-white mt-3 d-flex"
+          className="totalbox bg-white d-flex"
         >
-          <div className="">
+          <div className="cart-bottom-left">
             <CouponAllData
               onChange={(couponvalue) => setDiscount(couponvalue)}
             />
           </div>
-          <div className="">
-            {mycart.length}個活動合計:
-            <span className="total">
-              NT$
-              {(sum(mycart) * discount)
-                .toString()
-                .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
-            </span>
+          <div className="cart-bottom-mid">
+            {discountline}
+            <div className="row justify-content-between">
+              <div>{mycart.length}個活動合計:</div>
+              <span className="total">
+                NT$
+                {(sum(mycart) * discount)
+                  .toString()
+                  .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
+              </span>
+            </div>
           </div>
-          <div className="">
+          <div className="cart-bottom-right">
             <button
               className="button"
               onClick={() => {
