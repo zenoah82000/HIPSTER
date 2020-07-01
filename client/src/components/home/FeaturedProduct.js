@@ -13,38 +13,38 @@ function FeaturedProduct(props) {
   //精選商品>星數顯示
   const start1 = (
     <>
-      <FaStar className="" />
-      <FaStar className="" />
-      <FaStar className="" />
-      <FaStar className="" />
       <FaStar className="start" />
+      <FaStar className="" />
+      <FaStar className="" />
+      <FaStar className="" />
+      <FaStar className="" />
     </>
   )
   const start2 = (
     <>
-      <FaStar className="" />
-      <FaStar className="" />
-      <FaStar className="" />
       <FaStar className="start" />
       <FaStar className="start" />
+      <FaStar className="" />
+      <FaStar className="" />
+      <FaStar className="" />
     </>
   )
   const start3 = (
     <>
+      <FaStar className="start" />
+      <FaStar className="start" />
+      <FaStar className="start" />
       <FaStar className="" />
       <FaStar className="" />
-      <FaStar className="start" />
-      <FaStar className="start" />
-      <FaStar className="start" />
     </>
   )
   const start4 = (
     <>
+      <FaStar className="start" />
+      <FaStar className="start" />
+      <FaStar className="start" />
+      <FaStar className="start" />
       <FaStar className="" />
-      <FaStar className="start" />
-      <FaStar className="start" />
-      <FaStar className="start" />
-      <FaStar className="start" />
     </>
   )
   const start5 = (

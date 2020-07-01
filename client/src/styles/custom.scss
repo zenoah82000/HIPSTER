@@ -21,6 +21,7 @@ img {
 }
 @media screen and (max-width: 599px) {
   .container {
+    max-width: 95%;
     padding: 0;
   }
 }
@@ -189,11 +190,17 @@ nav {
   .menu {
     display: block;
     z-index: 99;
-    width: 100%;
+    width: 0;
     background-color: #688e67;
     position: absolute;
-    top: 260px;
+    top: 259px;
     text-align: center;
+    height: 280px;
+    overflow: hidden;
+    transition: 0.2s;
+    position: absolute;
+    right: 0;
+
     li {
       padding: 15px 0px !important;
     }
@@ -205,16 +212,38 @@ nav {
   .member {
     display: block;
     background-color: #688e67;
-    width: 100%;
+    width: 0;
     z-index: 99;
     position: absolute;
     top: 99px;
     text-align: center;
-    padding-bottom: 15px;
+    overflow: hidden;
+    transition: 0.2s;
+    position: absolute;
+    right: 0;
     li {
       padding: 0px 0px !important;
       a {
         padding: 10px 0px !important;
+      }
+    }
+  }
+  .sign {
+    background-color: #688e67;
+    position: absolute;
+    right: 0;
+    top: 100px;
+    z-index: 99;
+    width: 0;
+    transition: 0.3s;
+    li {
+      margin: auto;
+      a {
+        font-size: 35px;
+        line-height: 160px;
+        text-align: center;
+        width: 100%;
+        display: block;
       }
     }
   }
@@ -274,11 +303,17 @@ nav {
     width: 18%;
     height: 40px;
     line-height: 20px;
+    margin-bottom: 15px;
   }
   .membercenterPhone {
     padding: 10px;
     display: block;
     height: 0;
+    background-color: #688e67;
+    transition: 0.3s;
+    li {
+      padding: 6px 0;
+    }
   }
 }
 

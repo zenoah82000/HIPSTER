@@ -16,7 +16,6 @@ function About(props) {
 
           <p className="text-center">
             文青地圖致力於提供最優質的手作課程與展覽活動，透過我們所提供的快速搜尋服務，讓繁忙的
-            <br />
             您活動安排變得更簡單、更即時，讓每趟行程充滿難忘的回憶。
           </p>
 
@@ -25,7 +24,7 @@ function About(props) {
               <div className="about-icon">
                 <img src="http://localhost:5000/images/home/about-icon1.png"></img>
               </div>
-              <div className="about-title">最優質的活動資訊</div>
+              <div className="about-title">優質的活動資訊</div>
               <p>發掘最棒的展覽資訊、手作課程與最難忘的活動體驗！</p>
             </div>
             <div className="about-main-cont">

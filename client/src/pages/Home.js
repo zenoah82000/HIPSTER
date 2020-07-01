@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import '../styles/home.scss'
+import Fade from 'react-reveal/Fade'
 import CountdownProduct from '../components/home/CountdownProduct'
 import FeaturedProduct from '../components/home/FeaturedProduct'
 import About from '../components/home/About'
@@ -291,12 +292,25 @@ function Home(props) {
 
   //輪播-精選
   var activitys = {
-    arrows: true,
+    arrows: false,
     dots: false,
     infinite: false,
     autoplay: false,
     slidesToShow: 3,
     slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 599,
+        settings: {
+          arrows: false,
+          dots: true,
+          infinite: true,
+          autoplay: true,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   }
 
   //輪播-大banner
@@ -458,10 +472,11 @@ function Home(props) {
             <span className="txt">精選活動</span>
             <span className="line"></span>
           </div>
-          <div className="activity-main">
-            <Slider {...activitys}>{ProductFeatureddisplay}</Slider>
-          </div>
-
+          <Fade>
+            <div className="activity-main">
+              <Slider {...activitys}>{ProductFeatureddisplay}</Slider>
+            </div>
+          </Fade>
           <Link to="/productlist" className="more-activity-btn">
             查看更多活動
           </Link>

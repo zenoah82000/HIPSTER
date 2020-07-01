@@ -40,8 +40,11 @@ function Mynavbar(props) {
   const [loginOk, setloginOk] = useState(false)
 
   //手機版-漢堡選單狀態 0=關閉
-  const [burgerstate, setburgerstate] = useState(0)
-  //手機版
+  const [burgerstate, setburgerstate] = useState(false)
+  //手機版-會員中心選單狀態 0=關閉
+  const [membercenterstate, setmembercenterstate] = useState(false)
+
+  //手機版-
 
   //註冊會員傳後端
   async function addNewMember(item) {
@@ -382,7 +385,7 @@ function Mynavbar(props) {
             <img src="http://localhost:5000/images/home/logo.png" />
           </Link>
 
-          <ul className="menu">
+          <ul className="menu" style={burgerstate ? { width: '100%' } : {}}>
             <li>
               <Link to="/about">品牌介紹</Link>
             </li>
@@ -485,19 +488,38 @@ function Mynavbar(props) {
             </li>
           </ul>
           {/* ========================================================= */}
-          <div className="burger " id="burger">
-            ☰
+          <div
+            className="burger "
+            id="burger"
+            onClick={() => {
+              setburgerstate(!burgerstate)
+            }}
+          >
+            {burgerstate ? 'X' : '☰'}
           </div>
           {userSuccess ? (
             <>
-              <ul className="member">
+              <ul
+                className="member"
+                style={burgerstate ? { width: '100%' } : {}}
+              >
                 <li>{username},您好</li>
                 <li>
                   <Link to="/memberuser/user/" className="memberbtn">
                     會員中心
                   </Link>
-                  <Link className="memberbtnPhone">會員中心</Link>
-                  <ul className="membercenterPhone">
+                  <Link
+                    className="memberbtnPhone"
+                    onClick={() => {
+                      setmembercenterstate(!membercenterstate)
+                    }}
+                  >
+                    會員中心
+                  </Link>
+                  <ul
+                    className="membercenterPhone"
+                    style={membercenterstate ? { height: 480 } : {}}
+                  >
                     <li>
                       <Link>個人資訊</Link>
                     </li>
@@ -522,9 +544,6 @@ function Mynavbar(props) {
                     <li>
                       <Link>願望清單</Link>
                     </li>
-                    <li>
-                      <Link>返回</Link>
-                    </li>
                   </ul>
                 </li>
 
@@ -544,7 +563,10 @@ function Mynavbar(props) {
             </>
           ) : (
             <>
-              <ul className="sign ">
+              <ul
+                className="sign "
+                style={burgerstate ? { width: '100%' } : {}}
+              >
                 <li>
                   <Link
                     href=""
