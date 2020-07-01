@@ -29,21 +29,6 @@ function UserContent() {
   const memberImg = mdata.memberImg
   // console.log(mdata)
 
-  //拿取local端member資料(更新時替換)
-  const [localstate, setlocalstate] = useState(false)
-  const localMember = JSON.parse(localStorage.getItem('member'))
-  console.log('1', localMember.name)
-  localMember.name = JSON.stringify(memberName)
-  console.log('2', localMember)
-  localStorage.setItem('member', JSON.stringify(localMember))
-  // console.log(localMember.name)
-
-  // function localchang(memberName) {
-  //   localMember.name = memberName
-  //   console.log(localMember)
-  //   localStorage.setItem('member', JSON.stringify(localMember))
-  // }
-
   //存放個欄位輸入值
   let editmemberName,
     editmemberGender,
@@ -58,13 +43,6 @@ function UserContent() {
   useEffect(() => {
     memberData(userId)
   }, [])
-
-  // useEffect(() => {
-  //
-
-  //   //
-  //   //
-  // }, [localstate])
 
   //抓取該會員全部資料
   async function memberData(item) {
@@ -95,6 +73,9 @@ function UserContent() {
     })
     const response = await fetch(request)
     const data = await response.json()
+    console.log(data)
+
+    localStorage.setItem('member', JSON.stringify(data))
   }
 
   // 更新會員圖片
@@ -368,7 +349,6 @@ function UserContent() {
             onClick={() => {
               memberData(userId)
               setedit(false)
-              setlocalstate(true)
               setshowUpdateOk(false)
               setimgData('')
               window.location.href = '/memberuser/user/'

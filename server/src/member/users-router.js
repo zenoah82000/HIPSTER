@@ -157,22 +157,27 @@ router.post('/loginmember', async (req, res, next) =>{
 
   const [r1] = await db.query(updateMemberSql, [memberName,memberGender,memberBirth,memberPhone,memberAddress,memberPwd,memberImg,memberId]);
 
-  console.log(r1)
-  // const localmemberId = [r1][0][0].memberId
-  // const localmemberName = [r1][0][0].memberName
-  // const localmemberImg = [r1][0][0].memberImg
-  // const localmemberSuccess = ([r1][0].length)?true:false;
-  // // console.log(memberId,memberName,memberSuccess)
+  // console.log(r1)
 
-  // const output = {  //建立判斷登入
-  //   success:localmemberSuccess,
-  //   id:localmemberId,
-  //   name:localmemberName,
-  //   img:localmemberImg,
-  // }
+  //重新撈該會員資料
+  const searchMemberSql = "SELECT * FROM member WHERE  `memberId`=? "
+  const [r2] = await db.query(searchMemberSql, [memberId]);
+  const localmemberId = [r2][0][0].memberId
+  const localmemberName = [r2][0][0].memberName
+  const localmemberImg = [r2][0][0].memberImg
+  const localmemberSuccess = ([r2][0].length)?true:false;
+  // console.log(localmemberId,localmemberName,localmemberSuccess,localmemberImg)
+  
+  //傳回前端
+  const output = {  
+    success:localmemberSuccess,
+    id:localmemberId,
+    name:localmemberName,
+    img:localmemberImg,
+  }
 
 
-  res.json(r1)
+  res.json(output)
 })
 
 
