@@ -23,6 +23,7 @@ const getBlogList = async (req) => {
   return output
 }
 
+//http://localhost:5000/blog
 router.get('/blog', async (req, res) => {
   const output = await getBlogList(req)
   
@@ -30,6 +31,7 @@ router.get('/blog', async (req, res) => {
 })
 
 //新增圖片到CKEditor
+//http://localhost:5000/blogAddImg
 router.post('/blogAddImg', upload.single('upload'), (req, res)=>{
   console.log('req.file',req.file)
   
@@ -40,16 +42,16 @@ router.post('/blogAddImg', upload.single('upload'), (req, res)=>{
 })
 
 //新增文章
+//http://localhost:5000/blogAdd
 router.post('/blogAdd', upload.none(), async (req, res)=>{
-  console.log(req.body)
+  console.log('req.body',req.body)
   const output ={
     success: false,
-    error:'',
-    status: 0,
+    // error:'',
+    // status: 0,
     body: req.body,
   }
   const sql = "INSERT INTO `article`(`articleTitle`,`articleContent`,`categoryId`,`articleImg`) VALUES(?,?,?,?)"
-
 
   const [r] = await db.query(sql , [
     req.body.articleTitle,
@@ -64,5 +66,56 @@ router.post('/blogAdd', upload.none(), async (req, res)=>{
     }
   res.json(output);
 })
+
+//修改文章
+//http://localhost:5000/blogEdit
+router.post('/blogEdit', upload.none(), async (req, res)=>{
+  console.log(req.body)
+  const output ={
+    success: false,
+    // error:'',
+    // status: 0,
+    body: req.body,
+  }
+  const sql = "UPDATE `article` SET `articleTitle`=?,`articleContent`=?,`categoryId`=?,`articleImg`=? WHERE `articleId`=?"
+
+  const [r] = await db.query(sql , [
+    req.body.articleTitle,
+    req.body.articleContent,
+    req.body.categoryId,
+    req.body.articleImg,
+    req.body.articleId,
+    ])
+  if (r) {
+      output.result = r;
+      output.success = true;
+      console.log('result:', r);
+    }
+  res.json(output);
+})
+
+//刪除文章
+//http://localhost:5000/blogDelete
+router.post('/blogDelete', upload.none(), async (req, res)=>{
+  console.log(req.body)
+  const output ={
+    success: false,
+    // error:'',
+    // status: 0,
+    body: req.body,
+  }
+  const sql = "DELETE FROM `article` WHERE `articleId`=?"
+
+  const [r] = await db.query(sql , [    
+    req.body.articleId,
+    ])
+  if (r) {
+      output.result = r;
+      output.success = true;
+      console.log('result:', r);
+    }
+  res.json(output);
+})
+
 
 module.exports = router

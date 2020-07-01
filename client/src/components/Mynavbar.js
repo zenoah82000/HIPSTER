@@ -83,9 +83,8 @@ function Mynavbar(props) {
       setloginOk(false)
       setuserSuccess(false)
     }
-
-    console.log('伺服器登入回傳的json資料', data)
-    console.log('loginOk', loginOk)
+    // console.log('伺服器登入回傳的json資料', data)
+    // console.log('loginOk', loginOk)
   }
 
   //登出處理

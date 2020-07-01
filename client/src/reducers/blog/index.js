@@ -41,20 +41,31 @@ const contentData = (state = {}, action) => {
   }
 }
 
-// //更新文章
-// const editContentData = (state = {}, action) => {
-//   switch (action.type) {
-//     case 'EDIT_CONTENTDATA':
-//       return action.value
-//     default:
-//       return state
-//   }
-// }
+//更新文章
+const editContentData = (state = {}, action) => {
+  switch (action.type) {
+    case 'EDIT_CONTENTDATA':
+      return action.payload
+    default:
+      return state
+  }
+}
+
+//刪除文章
+const deleteContentData = (state = {}, action) => {
+  switch (action.type) {
+    case 'DELETE_CONTENTDATA':
+      return action.payload
+    default:
+      return state
+  }
+}
 
 export const blogReducer = combineReducers({
   blogData,
   // blogCommentsData,
   // contentCommentsData,
   contentData,
-  // editContentData,
+  editContentData,
+  deleteContentData,
 })

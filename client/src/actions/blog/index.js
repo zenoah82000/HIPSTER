@@ -3,7 +3,7 @@ export const getBlogData = (payload) => {
   return { type: 'GET_BLOGDATA', payload }
 }
 
-export const getBlogDataAsync = (payload) => {
+export const getBlogDataAsync = () => {
   return async function getTotalFromServer(dispatch) {
     // 注意header資料格式要設定，伺服器才知道是json格式
     const request = new Request('http://localhost:5000/blog', {
@@ -15,12 +15,12 @@ export const getBlogDataAsync = (payload) => {
     })
 
     const response = await fetch(request)
-    const data = await response.json()
-    // console.log(data)
+    const payload = await response.json()
+    // console.log(payload)
     // 設定資料
-    console.log('getBlogDataAsync中的data',data)
+    console.log('getBlogDataAsync中的payload',payload)
 
-    dispatch(getBlogData(data.rows))
+    dispatch(getBlogData(payload.rows))
   }
 }
 
@@ -81,43 +81,63 @@ export const addBlogContentData = payload => ({
   payload,
 })
 
-export const addBlogContentDataAsync = (contentData, callback) => {
-  console.log(contentData)
+// 傳入的是FormData則不需要設定header
+export const addBlogContentDataAsync = (addArticleFd) => {
+  console.log('action中的addArticleFd',addArticleFd)
   return async dispatch => {
     const request = new Request('http://localhost:5000/blogadd', {
       method: 'POST',
-      body: contentData,
+      body: addArticleFd,
     })
 
     const response = await fetch(request)
-    const data = await response.json()
-    console.log('res data', data)
+    const payload = await response.json()
+    console.log('res payload', payload)
 
-    dispatch(addBlogContentData(data))
-
-    // callback()
+    dispatch(addBlogContentData(payload))
   }
 }
 
-// //更新文章
-// export const editContentData = data => ({
-//   type: 'EDIT_CONTENTDATA',
-//   value: data,
-// })
-// export const editContentDataAsync = (contentData, callback) => {
-//   console.log(contentData)
-//   return async dispatch => {
-//     const request = new Request('http://localhost:5000/edit', {
-//       method: 'POST',
-//       body: contentData,
-//     })
+//更新文章
+export const editContentData = payload => ({
+  type: 'EDIT_CONTENTDATA',
+  payload,
+})
+export const editContentDataAsync = (editArticleFd) => {
+  console.log('action中的editArticleFd',editArticleFd)
 
-//     const response = await fetch(request)
-//     const data = await response.json()
-//     console.log('res data', data)
+  return async dispatch => {
+    const request = new Request('http://localhost:5000/blogEdit', {
+      method: 'POST',
+      body: editArticleFd,
+    })
 
-//     dispatch(editContentData(data))
+    const response = await fetch(request)
+    const payload = await response.json()
+    console.log('res payload', payload)
 
-//     // callback()
-//   }
-// }
+    dispatch(editContentData(payload))
+  }
+}
+
+//刪除文章
+export const deleteContentData = payload => ({
+  type: 'DELETE_CONTENTDATA',
+  payload,
+})
+export const deleteContentDataAsync = (deleteArticleFd) => {
+  console.log('action中的deleteArticleFd',deleteArticleFd)
+
+  return async dispatch => {
+    const request = new Request('http://localhost:5000/blogDelete', {
+      method: 'POST',
+      body: deleteArticleFd,
+    })
+
+    const response = await fetch(request)
+    const payload = await response.json()
+    console.log('res payload', payload)
+
+    dispatch(deleteContentData(payload))
+  }
+}
