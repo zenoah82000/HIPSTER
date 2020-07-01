@@ -60,6 +60,10 @@
   min-width: 235px;
   height: 50px;
   background: #688e67;
+  border: none;
+  &:hover {
+    opacity: 0.8;
+  }
 }
 .prograssBar1 {
   width: 100%;
@@ -115,6 +119,16 @@
   width: 100%;
   // height: 800px;
   background: white;
+  .infoemailbox {
+    margin-bottom: 48px;
+    font-size: 16px;
+    span {
+      color: black;
+      font-weight: bold;
+      font-size: 16px;
+    }
+  }
+
   .orderdetail {
     .orderdetail-title {
       align-items: center;
@@ -128,7 +142,7 @@
     .productbox {
       margin: 20px 0;
       .productimgbox {
-        width: 100px;
+        width: 120px;
         .productimg {
           object-fit: cover;
           width: 100%;
@@ -136,8 +150,24 @@
         }
       }
       .productinfo {
-        .title {
+        width: 40%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        .infoname {
           font-weight: bold;
+          font-size: 16px;
+          color: black;
+          width: 100%;
+        }
+        .infoprice {
+          width: 100%;
+          font-size: 16px;
+          color: black;
+        }
+        .infodate {
+          font-size: 16px;
+          color: black;
         }
       }
     }

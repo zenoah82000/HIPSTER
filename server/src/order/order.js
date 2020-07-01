@@ -100,35 +100,35 @@ router.post("/member/checkout", async (req, res) => {
 
   //訂單成功送出email
   console.log("送出電子郵件");
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    secure: true,
-    auth: {
-      type: "OAuth2",
-      user: process.env.ACCOUNT,
-      clientId: process.env.CLINENTID,
-      clientSecret: process.env.CLINENTSECRET,
-      refreshToken: process.env.REFRESHTOKEN,
-    },
-    tls: {
-      rejectUnauthorized: false,
-    },
-  });
-  let text = orderItems.map((item) => {
-    return "<li>" + item.name + "<li>";
-  });
-  var mailOptions = {
-    from: '"Hipster文青地圖" <e24971234@gmail.com>',
-    to: email,
-    subject: "感謝您在本站消費",
-    html: "<p>訂單編號:" + orderId + "</p>" + text,
-  };
-  // 準備發送信件
-  transporter.sendMail(mailOptions, function (err, info) {
-    if (err) {
-      return console.log(err);
-    }
-  });
+  // const transporter = nodemailer.createTransport({
+  //   service: "gmail",
+  //   secure: true,
+  //   auth: {
+  //     type: "OAuth2",
+  //     user: process.env.ACCOUNT,
+  //     clientId: process.env.CLINENTID,
+  //     clientSecret: process.env.CLINENTSECRET,
+  //     refreshToken: process.env.REFRESHTOKEN,
+  //   },
+  //   tls: {
+  //     rejectUnauthorized: false,
+  //   },
+  // });
+  // let text = orderItems.map((item) => {
+  //   return "<li>" + item.name + "<li>";
+  // });
+  // var mailOptions = {
+  //   from: '"Hipster文青地圖" <e24971234@gmail.com>',
+  //   to: email,
+  //   subject: "感謝您在本站消費",
+  //   html: "<p>訂單編號:" + orderId + "</p>" + text,
+  // };
+  // // 準備發送信件
+  // transporter.sendMail(mailOptions, function (err, info) {
+  //   if (err) {
+  //     return console.log(err);
+  //   }
+  // });
   const ordertime = "SELECT * FROM `orderlist` WHERE `orderListId`= ?"
   const [r3] =await db.query(ordertime,[r2.insertId])
   //傳送回前端
