@@ -22,7 +22,7 @@ function ProductListPageBar(props) {
     let pages = []
     for (let i = 1; i <= totalpages; i++) {
       pages.push(
-        <li>
+        <li key={i}>
           <Link
             className={i === +currentPage ? 'active' : ''}
             to={`?page=${i}`}
