@@ -28,45 +28,34 @@ router.get("/comments/:memberId", async (req, res) => {
 //新增評論到資料庫
 router.post("/sendComments", async (req, res) => {
   console.log(req.body);
-  // const commentImg =
-  //   req.body.commentImg != "" ? `itemListId_${req.body.itemListId}_0.jpg` : "";
-  // const commentImg1 =
-  //   req.body.commentImg1 != "" ? `itemListId_${req.body.itemListId}_1.jpg` : "";
-  // const commentImg2 =
-  //   req.body.commentImg2 != "" ? `itemListId_${req.body.itemListId}_2.jpg` : "";
-  // const commentImg3 =
-  //   req.body.commentImg3 != ""
-  //     ? `itemListId_${req.body.itemListId}_3.jpg}`
-  //     : "";
+  const commentImg =  req.body.commentImg != ""? "/../../public/images/comments/" +
+  "commentImg_" +
+  req.body.itemListId +
+  ".jpg" :""
 
-  console.log(commentImg, commentImg1, commentImg2, commentImg3);
   const addCommentList =
-    "INSERT INTO `comments` (`itemListId`,`content`, `star`,`commentImg`,`commentImg1`,`commentImg2`,`commentImg3`) VALUES (?,?,?,?,?,?,?)";
+    "INSERT INTO `comments` (`itemListId`,`content`, `star`,`commentImg`) VALUES (?,?,?,?)";
 
   const [r2] = await db.query(addCommentList, [
     req.body.itemListId,
     req.body.commentContent,
     req.body.star,
-    req.body.commentImg[0],
-    req.body.commentImg[1],
-    req.body.commentImg[2],
-    req.body.commentImg[3],
+    commentImg
   ]);
   res.json("ok");
 });
 
 // 評論圖片新增到後端資料夾
 router.post("/commentimgdata", upload.single("avatar"), async (req, res) => {
-  const filename = req.body.memberImg.split(".").pop(); //副檔名
+
   if (req.file && req.file.path) {
     fs.rename(
       req.file.path,
       __dirname +
         "/../../public/images/comments/" +
-        "itemListId_" +
+        "commentImg_" +
         req.body.itemListId +
-        "." +
-        filename,
+        ".jpg" ,
       (error) => {}
     );
   }

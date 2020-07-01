@@ -5,6 +5,7 @@ import RatingStar from '../../components/comments/ratingStar'
 import RatingStarValue from '../../components/comments/ratingStarValue'
 import ReplyComment from '../../components/comments/replycomment'
 import myComment from '../../data/myComment.json'
+import Fade from 'react-reveal/Fade'
 
 import { BsPlusCircle } from 'react-icons/bs'
 import { IconContext } from 'react-icons'
@@ -101,6 +102,7 @@ function UserComment(props) {
       myCommentlist.map((item) => {
         return (
           <>
+          <Fade>
             <div className="reply-listview">
               <div className="comment-tbhead">
                 <div class="row">
@@ -183,6 +185,7 @@ function UserComment(props) {
                 </div>
               </div>
             </div>
+            </Fade>
           </>
         )
       })

@@ -7,7 +7,7 @@ import { Collapse } from '@material-ui/core'
 import InputRange from 'react-input-range'
 
 import '../../styles/product/AsideBar.scss'
-import 'react-input-range/lib/css/index.css'
+// import 'react-input-range/lib/css/index.css'
 
 import { getProductCategoryAsync } from '../../actions/product/getProductCategory'
 import { element } from 'prop-types'
@@ -29,9 +29,8 @@ function AsideBar(props) {
 
   const { productCatogryData, getProductCategoryAsync } = props
 
-  const [activeClass, setActiveClass] = useState(true)
   const [categorySection, setCategorySection] = useState([])
-  const [value, setValue] = useState({ min: 5, max: 10 })
+  const [value, setValue] = useState({ min: 32, max: 10000 })
   const [checked, setChecked] = useState(false)
 
   const handleChange = () => {
@@ -113,10 +112,16 @@ function AsideBar(props) {
           {display}
         </div>
         <Dropdown>
-          <Dropdown.Toggle className="aside-wrapper-filter-box" drop={'down'}>
+          <Dropdown.Toggle
+            className="aside-wrapper-filter-box"
+            drop={'down'}
+            variant={'success'}
+          >
             <h3>篩選出發日期</h3>
           </Dropdown.Toggle>
-          <Dropdown.Menu></Dropdown.Menu>
+          <Dropdown.Menu>
+            <Calendar />
+          </Dropdown.Menu>
         </Dropdown>
         <div className="aside-wrapper-filter-box" onClick={handleChange}>
           <h3>行程時間</h3>
@@ -137,15 +142,20 @@ function AsideBar(props) {
             </ul>
           </Collapse>
         </div>
-        <div className="aside-wrapper-filter-box">
+        <div className="aside-wrapper-filter-box" style={{ cursor: 'default' }}>
           <h3>價格</h3>
-          <InputRange
-            maxValue={20}
-            minValue={0}
-            value={value}
-            onChange={(value) => setValue(value)}
-            onChangeComplete={(value) => console.log(value)}
-          />
+          <div className="price-area">
+            {value.min} ~ {value.max}
+          </div>
+          <div className="range">
+            <InputRange
+              maxValue={10000}
+              minValue={32}
+              value={value}
+              onChange={(value) => setValue(value)}
+              onChangeComplete={(value) => console.log(value)}
+            />
+          </div>
         </div>
       </aside>
     </>
