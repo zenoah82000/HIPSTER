@@ -6,6 +6,8 @@ const userQandaData = (state = [], action) => {
       return action.value
     case 'ADD_UserQandaDATA':
       return [...state, action.value]
+    case 'GET_PRODUCTQANDA':
+      return action.value
     default:
       return state
   }
