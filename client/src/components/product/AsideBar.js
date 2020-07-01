@@ -29,7 +29,6 @@ function AsideBar(props) {
 
   const { productCatogryData, getProductCategoryAsync } = props
 
-  const [activeClass, setActiveClass] = useState(true)
   const [categorySection, setCategorySection] = useState([])
   const [value, setValue] = useState({ min: 5, max: 10 })
   const [checked, setChecked] = useState(false)

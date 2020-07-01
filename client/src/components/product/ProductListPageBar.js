@@ -26,6 +26,9 @@ function ProductListPageBar(props) {
           <Link
             className={i === +currentPage ? 'active' : ''}
             to={`?page=${i}`}
+            onClick={() => {
+              window.scrollTo({ top: 0, behavior: 'smooth' })
+            }}
           >
             {i}
           </Link>
