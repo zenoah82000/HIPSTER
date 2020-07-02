@@ -50,7 +50,6 @@ router.post("/member/checkout", async (req, res) => {
   let year = new Date().getFullYear().toString();
   let month = new Date().getMonth().toString();
   let date = new Date().getDate().toString();
-  console.log(req.body)
   const memberId = req.body.orderMemberId
   const orderItems = req.body.orderItems;
   const email = req.body.email;

@@ -235,13 +235,15 @@ function PaymentType(props) {
                   </div>
                   <div className="d-flex justify-content-between">
                     <p>折價金額</p>
-                    <p>NT 100</p>
+                    <p>{buyerinfo.sumless.toString()
+                          .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}</p>
                   </div>
                 </div>
                 <div className="payPrice">
                   <div className="d-flex justify-content-between">
                     <p>結帳金額</p>
-                    <p>NT${sum(buyerinfo.product).toString()
+                    <p>NT${buyerinfo.sumdiscount
+                          .toString()
                           .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}</p>
                   </div>
                 </div>
