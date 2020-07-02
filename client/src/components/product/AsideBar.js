@@ -26,17 +26,23 @@ function AsideBar(props) {
   //   const data = await response.json()
   //   console.log(data)
   // }
+  let searchParams = new URLSearchParams(props.location.search)
 
   const { productCatogryData, getProductCategoryAsync } = props
 
   const [categorySection, setCategorySection] = useState([])
   const [value, setValue] = useState({ min: 32, max: 10000 })
   const [checked, setChecked] = useState(false)
+  const [cat, setCat] = useState('?cat=1')
 
   const handleChange = () => {
     setChecked((prev) => !prev)
   }
 
+  console.log(searchParams.toString())
+  console.log(typeof searchParams)
+  console.log(searchParams.entries())
+  //類別選項收闔
   function AddcategorySection(category) {
     if (categorySection.includes(category)) {
       let index = categorySection.indexOf(category)
@@ -47,7 +53,6 @@ function AsideBar(props) {
     const data = [...categorySection]
     setCategorySection(data)
   }
-
   function checkcategory(item) {
     if (categorySection.includes(item)) {
       return 'checkbox-dropdown-list active'
@@ -60,6 +65,7 @@ function AsideBar(props) {
     getProductCategoryAsync()
   }, [])
 
+  //生成類別
   const display = productCatogryData.map((item, index) => {
     if (item.categoryParentId === 0) {
       return (
@@ -121,9 +127,18 @@ function AsideBar(props) {
           </h3>
           <Collapse in={checked} timeout={200}>
             <ul className="checkbox-dropdown-list active">
-              <li className="checkbox px-0" key="全部">
+              <li
+                className="checkbox px-0"
+                key="全部"
+                onClick={() => {
+                  searchParams.append('cat', '1')
+                  console.log(searchParams.toString())
+                  props.history.push(`?${searchParams.toString()}`)
+                }}
+              >
                 <i className="far fa-square"></i> 全部
               </li>
+
               <li className="checkbox px-0" key="北部">
                 <i className="far fa-square"></i> 北部
               </li>
@@ -182,6 +197,8 @@ const mapStateToProps = (store) => {
 }
 
 // 高階元件的樣式，必要的
-export default connect(mapStateToProps, {
-  getProductCategoryAsync,
-})(AsideBar)
+export default withRouter(
+  connect(mapStateToProps, {
+    getProductCategoryAsync,
+  })(AsideBar)
+)
