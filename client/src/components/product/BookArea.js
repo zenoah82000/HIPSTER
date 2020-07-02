@@ -20,7 +20,7 @@ function BookArea(props) {
             </li>
           </ul>
         </div>
-        <input type="submit" className="book-btn" value="訂購" />
+        <input type="submit" className="book-btn" value="加入購物車" />
       </div>
     </>
   )

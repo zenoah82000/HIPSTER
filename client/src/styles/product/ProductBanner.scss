@@ -1,5 +1,8 @@
 .product-banner {
   width: 100%;
   height: 460px;
-  background: image(src= '');
+  background-position: center;
+  background-size: cover;
+  margin-top: 20px;
+  display: inline-block;
 }

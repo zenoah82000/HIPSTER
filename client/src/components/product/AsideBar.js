@@ -85,6 +85,10 @@ function AsideBar(props) {
               }
               key={item.categoryId}
             >
+              <li className="checkbox" key={item.categoryId}>
+                <i className="far fa-square"></i>
+                全部
+              </li>
               {productCatogryData.map((category, i) => {
                 if (category.categoryParentId === item.categoryId) {
                   return (
@@ -111,37 +115,46 @@ function AsideBar(props) {
           <h3>所有商品類別</h3>
           {display}
         </div>
+        <div className="aside-wrapper-filter-box">
+          <h3 onClick={handleChange} style={{ cursor: 'pointer' }}>
+            地區
+          </h3>
+          <Collapse in={checked} timeout={200}>
+            <ul className="checkbox-dropdown-list active">
+              <li className="checkbox px-0" key="全部">
+                <i className="far fa-square"></i> 全部
+              </li>
+              <li className="checkbox px-0" key="北部">
+                <i className="far fa-square"></i> 北部
+              </li>
+              <li className="checkbox px-0" key="中部">
+                <i className="far fa-square"></i> 中部
+              </li>
+              <li className="checkbox px-0" key="南部">
+                <i className="far fa-square"></i> 南部
+              </li>
+              <li className="checkbox px-0" key="東部">
+                <i className="far fa-square"></i> 東部
+              </li>
+              <li className="checkbox px-0" key="外島">
+                <i className="far fa-square"></i> 外島
+              </li>
+            </ul>
+          </Collapse>
+        </div>
         <Dropdown>
           <Dropdown.Toggle
             className="aside-wrapper-filter-box"
             drop={'down'}
             variant={'success'}
           >
-            <h3>篩選出發日期</h3>
+            <h3>篩選日期</h3>
           </Dropdown.Toggle>
           <Dropdown.Menu>
             <Calendar />
           </Dropdown.Menu>
         </Dropdown>
-        <div className="aside-wrapper-filter-box" onClick={handleChange}>
-          <h3>行程時間</h3>
-          <Collapse in={checked} timeout={200}>
-            <ul className="checkbox-dropdown-list active">
-              <li className="checkbox px-0" key="0-1">
-                <i className="far fa-square"></i> 0 - 1 小時
-              </li>
-              <li className="checkbox px-0" key="1-3">
-                <i className="far fa-square"></i> 1 - 3 小時
-              </li>
-              <li className="checkbox px-0" key="3-5">
-                <i className="far fa-square"></i> 3 - 5 小時
-              </li>
-              <li className="checkbox px-0" key="5++">
-                <i className="far fa-square"></i> 5 小時以上
-              </li>
-            </ul>
-          </Collapse>
-        </div>
+
         <div className="aside-wrapper-filter-box" style={{ cursor: 'default' }}>
           <h3>價格</h3>
           <div className="price-area">
