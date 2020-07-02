@@ -85,6 +85,7 @@ export default class ViewportExample extends Component {
     let { viewport, clicked, cafeActive, clickData } = this.props
     console.log(this.props)
     console.log(clickData.mapId)
+    console.log(clickData.lat, clickData.log)
     return (
       <div>
         <Map viewport={viewport}>
@@ -92,10 +93,6 @@ export default class ViewportExample extends Component {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           />
-
-          {clickData.mapId != ''
-            ? console.log(clickData.lat, clickData.log)
-            : console.log(clickData.mapId)}
 
           {/* 顯示咖啡廳 */}
           {cafeActive ? (
@@ -275,97 +272,176 @@ export default class ViewportExample extends Component {
           </Marker>
 
           {/* 商品地標 */}
-          {clicked ? (
-            <Marker
-              ref={this.openPopup}
-              position={[123, 123]}
-              icon={productTagIcon}
-            >
-              <Popup className="locationCard">
-                <span style={{ width: '100%' }}>{clickData.productName}</span>
-                <ul className="cardList list-unstyled">
-                  <li>
-                    <div
-                      className={
-                        clickData.category == '咖啡廳'
-                          ? 'mapCategoryCafe'
-                          : clickData.category == '手作課程'
-                          ? 'mapCategoryItem'
-                          : 'mapCategoryItem2'
-                      }
+          {clickData.lat ? (
+            <>
+              <Marker
+                ref={this.openPopup}
+                position={[clickData.lat, clickData.log]}
+                icon={productTagIcon}
+              >
+                <Popup className="locationCard">
+                  <h5 style={{ width: '100%' }}>{clickData.productName}</h5>
+                  <ul className="cardList list-unstyled">
+                    <li>
+                      <div
+                        className={
+                          clickData.category == '咖啡廳'
+                            ? 'mapCategoryCafe'
+                            : clickData.category == '手作課程'
+                            ? 'mapCategoryItem'
+                            : 'mapCategoryItem2'
+                        }
+                      >
+                        <span>{clickData.category}</span>
+                      </div>
+                    </li>
+                    <li
+                      style={{
+                        width: '300px',
+                        height: '200px',
+                        objectFit: 'cover',
+                        overflow: 'hidden',
+                        marginTop: '10px',
+                      }}
                     >
-                      <span>{clickData.category}</span>
+                      <img
+                        src={
+                          'http://localhost:5000/images/product/' +
+                          clickData.productImg
+                        }
+                        alt=""
+                      />
+                    </li>
+                    <li>
+                      <span>
+                        <RatingStarValue ratingValue={clickData.star} />
+                      </span>
+                    </li>
+                    <li>
+                      <span className="mr-2">
+                        <FaRegClock />
+                      </span>
+                      <span>活動時間</span>
+                    </li>
+                    <li>
+                      <span className="mr-2">
+                        <FaMapMarkerAlt />
+                      </span>
+                      <span>地點: {clickData.productAddress}</span>
+                    </li>
+                    <li>
+                      <span className="mr-2 ">
+                        <FaRegCalendarCheck />
+                      </span>
+                      <span>
+                        活動日期：{clickData.openTime}-{clickData.closeTime}
+                      </span>
+                    </li>
+                    <li>
+                      <span className="mr-2 ">
+                        <FaRegCalendarCheck />
+                      </span>
+                      <span>電話：{clickData.productPhone}</span>
+                    </li>
+                  </ul>
+                  <div className="cardButton">
+                    <a value="" href={'/product/{item.productId}'}>
+                      立即預定商品
+                    </a>
+                  </div>
+                </Popup>
+              </Marker>
+
+              {this.state.productdata.map((item) => (
+                <Marker
+                  position={[item.lat, item.log]}
+                  icon={productTagIcon}
+                  // onMouseOver={(e) => {
+                  //   e.target.openPopup()
+                  // }}
+                  // onMouseOut={(e) => {
+                  //   e.target.closePopup()
+                  // }}
+                >
+                  <Popup className="locationCard">
+                    <h5>{item.productName}</h5>
+                    <ul className="cardList list-unstyled">
+                      <li>
+                        <div
+                          className={
+                            item.category == '咖啡廳'
+                              ? 'mapCategoryCafe'
+                              : item.category == '手作課程'
+                              ? 'mapCategoryItem'
+                              : 'mapCategoryItem2'
+                          }
+                        >
+                          <span>{item.category}</span>
+                        </div>
+                      </li>
+                      <li
+                        style={{
+                          width: '300px',
+                          height: '200px',
+                          objectFit: 'cover',
+                          overflow: 'hidden',
+                          marginTop: '10px',
+                        }}
+                      >
+                        <img
+                          src={
+                            'http://localhost:5000/images/product/' +
+                            item.productImg
+                          }
+                          alt=""
+                          style={{ height: '100%', objectFit: 'cover' }}
+                        />
+                      </li>
+                      <li>
+                        <RatingStarValue ratingValue={item.star} />
+                      </li>
+                      <li>
+                        <span className="mr-2">
+                          <FaRegClock />
+                        </span>
+                        <span>
+                          活動日期: {item.openTime}-{item.closeTime}
+                        </span>
+                      </li>
+                      <li>
+                        <span className="mr-2">
+                          <FaMapMarkerAlt />
+                        </span>
+                        <span>地點: {item.productAddress}</span>
+                      </li>
+                      <li>
+                        <span className="mr-2 ">
+                          <RiMoneyCnyCircleLine />
+                        </span>
+                        <span>
+                          價格：NT$
+                          {item.productPrice
+                            .toString()
+                            .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
+                        </span>
+                      </li>
+                    </ul>
+                    <div className="cardButton">
+                      <a
+                        value=""
+                        href={'/product/{item.productId}'}
+                        target="_blank"
+                      >
+                        立即預定商品
+                      </a>
                     </div>
-                  </li>
-                  <li
-                    style={{
-                      width: '300px',
-                      height: '200px',
-                      objectFit: 'cover',
-                      overflow: 'hidden',
-                      marginTop: '10px',
-                    }}
-                  >
-                    {/* <img
-                      src={
-                        'http://localhost:5000/images/product/' +
-                        clickData.productImg
-                      }
-                      alt=""
-                    /> */}
-                  </li>
-                  <li>
-                    <span>
-                      星等
-                      <RatingStarValue ratingValue={clickData.star} />
-                    </span>
-                  </li>
-                  <li>
-                    <span className="mr-2">
-                      <FaRegClock />
-                    </span>
-                    <span>活動時間</span>
-                  </li>
-                  <li>
-                    <span className="mr-2">
-                      <FaMapMarkerAlt />
-                    </span>
-                    <span>地點: {clickData.productAddress}</span>
-                  </li>
-                  <li>
-                    <span className="mr-2 ">
-                      <FaRegCalendarCheck />
-                    </span>
-                    <span>
-                      活動日期：{clickData.openTime}-{clickData.closeTime}
-                    </span>
-                  </li>
-                  <li>
-                    <span className="mr-2 ">
-                      <FaRegCalendarCheck />
-                    </span>
-                    <span>電話：{clickData.productPhone}</span>
-                  </li>
-                </ul>
-                <div className="cardButton">
-                  <a value="" href="/#">
-                    立即預定商品
-                  </a>
-                </div>
-              </Popup>
-            </Marker>
+                  </Popup>
+                </Marker>
+              ))}
+            </>
           ) : (
             this.state.productdata.map((item) => (
-              <Marker
-                position={[item.lat, item.log]}
-                icon={productTagIcon}
-                // onMouseOver={e => {
-                //   e.target.openPopup();
-                // }}
-                // onMouseOut={e => {
-                //   e.target.closePopup();
-                // }}
-              >
+              <Marker position={[item.lat, item.log]} icon={productTagIcon}>
                 <Popup className="locationCard">
                   <h5>{item.productName}</h5>
                   <ul className="cardList list-unstyled">
@@ -432,8 +508,7 @@ export default class ViewportExample extends Component {
                   <div className="cardButton">
                     <a
                       value=""
-                      href="
-            /product/{item.productId}"
+                      href={`/product/${item.productId}`}
                       target="_blank"
                     >
                       立即預定商品

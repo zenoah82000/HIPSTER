@@ -40,7 +40,7 @@ function Product(props) {
             <Productinfoicon />
             <ProductDescription productContent={product.productContent} />
             <ProductHowtoArea />
-            <CommtentList />
+            <CommtentList productName={product.productName} />
           </div>
         </div>
       </div>

@@ -28,6 +28,8 @@ function ShoppingCar(props) {
 
   //設置折扣
   const [discount, setDiscount] = useState(1)
+  const [discountcode, setDiscountcode] = useState('')
+  console.log('discountcode', discountcode)
 
   let discountline
   if (discount < 1) {
@@ -36,7 +38,7 @@ function ShoppingCar(props) {
         <div className="reduceTotal">折扣金額:</div>
         <div className="total">
           -NT$
-          {(sum(mycart) * (1 - discount))
+          {Math.round(sum(mycart) * (1 - discount))
             .toString()
             .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
         </div>
@@ -92,7 +94,7 @@ function ShoppingCar(props) {
       })
     } else {
       Swal.fire({
-        text: `確定商品總金額 NT$！${sum(mycart) * discount}`,
+        text: `確定商品總金額 NT$！${Math.round(sum(mycart) * discount)}`,
         icon: 'info',
         confirmButtonText: '確定',
         showCancelButton: true,
@@ -103,6 +105,9 @@ function ShoppingCar(props) {
           let buydata = {
             product: [...mycart],
           }
+          buydata.sumdiscount = Math.round(sum(mycart) * discount)
+          buydata.sumless = Math.round(sum(mycart) * (1 - discount))
+          buydata.discountcode = discountcode
           props.dispatch({ type: 'BUYER_DATA', value: buydata })
           props.dispatch({ type: 'GET_CART', value: [] })
           localStorage.removeItem('cart')
@@ -162,6 +167,7 @@ function ShoppingCar(props) {
           <div className="cart-bottom-left">
             <CouponAllData
               onChange={(couponvalue) => setDiscount(couponvalue)}
+              onBlur={(code) => setDiscountcode(code)}
             />
           </div>
           <div className="cart-bottom-mid">
@@ -170,7 +176,7 @@ function ShoppingCar(props) {
               <div>{mycart.length}個活動合計:</div>
               <span className="total">
                 NT$
-                {(sum(mycart) * discount)
+                {Math.round(sum(mycart) * discount)
                   .toString()
                   .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
               </span>

@@ -16,9 +16,12 @@ function UserOrder() {
   const [currentPage, setCurrentPage] = useState(1)
   //每頁的資料
   const [datapage, setDatapage] = useState([])
+  //讀取會員資料
+  const member =JSON.parse(localStorage.getItem('member'))
+ 
 
   const getOrderlistAsync = async () => {
-    const request = new Request(`http://localhost:5000/member/order/2`, {
+    const request = new Request(`http://localhost:5000/member/order/${member.id}`, {
       method: 'get',
       headers: new Headers({
         Accept: 'application/json',
@@ -98,21 +101,22 @@ function UserOrder() {
   //訂單詳情
   function Orderdetail(props) {
     return (
-      <Modal className="SignOk"
+      <Modal className="modal-border"
         {...props}
         size="md"
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
-        <Modal.Body className="SignOk-bg">
+        <Modal.Body className="modal-body">
           <div className="orderdetailbox">
-            <div>
+            <div className="ordercontact">
               <h6>聯絡人資訊</h6>
               <p>姓名:{detaildata.contact}</p>
               <p>電話:{detaildata.mobile}</p>
               <p>信箱:{detaildata.email}</p>
             </div>
-            <div>
+            <hr />
+            <div className="orderpayinfo">
               <h6>付款資訊</h6>
               <p>付款方式:</p>
               <p>小計</p>

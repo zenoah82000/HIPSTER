@@ -12,12 +12,13 @@ import { checkPropTypes } from 'prop-types'
 
 function ReplyComment({ handleDelete, index, commentData, history }) {
   //state
-  const [image, setImage] = useState({ file: [], preview: [],raw:[]})
+  const [image, setImage] = useState({ file: [], preview: [], raw: [] })
   const [text, setText] = useState('')
   const [ratingValue, setRatingValue] = useState('')
   const [load, setLoad] = useState(false)
 
   // 前端上傳圖片
+  let fileImg = ''
   let fileObj = []
   let fileArray = []
 
@@ -26,7 +27,7 @@ function ReplyComment({ handleDelete, index, commentData, history }) {
     fileObj.push(e.target.files)
 
     // console.log(e.target.files,e.target.files[0 ],e.target.files[0 ].name)
-    // cons 
+    // cons
     for (let i = 0; i < fileObj[0].length; i++) {
       fileArray.push(URL.createObjectURL(fileObj[0][i]))
       // console.log(fileObj)
@@ -35,24 +36,23 @@ function ReplyComment({ handleDelete, index, commentData, history }) {
     if (e.target.files.length) {
       setImage({
         preview: fileArray,
-        file:e.target.files[0]
+        file: e.target.files[0],
       })
-      
     }
   }
 
   // 上傳評論圖片到後端
   const commentimgUpload = (data) => {
+    console.log(data)
     let formData = new FormData()
     formData.append('avatar', data)
-    // console.log(data)
+    formData.append('itemListId', commentData.itemListId)
+    console.log(formData.get('itemListId'))
     fetch('http://localhost:5000/commentimgdata', {
       method: 'POST',
       body: formData,
     })
       .then((res) => {
-        // console.log(res)
-        // console.log(res.statusText)
         return res.json()
       })
       .then((obj) => {})
@@ -86,13 +86,14 @@ function ReplyComment({ handleDelete, index, commentData, history }) {
   }
 
   //送出
-  const sendComment = (e, index, text, id, file) => {
+  const sendComment = (e, index, text, id, fileLength, fileName) => {
     e.preventDefault()
     let commentData = {
       itemListId: id,
       commentContent: text,
       star: ratingValue,
-      commentImg: file,
+      fileLength: fileLength,
+      fileName: fileName,
     }
     if (text !== null && text !== '') {
       sendCommentAsync(commentData)
@@ -109,6 +110,7 @@ function ReplyComment({ handleDelete, index, commentData, history }) {
         console.log('123222222')
         history.push('/memberuser/comment/notcomment')
         setLoad(false)
+        // setImage({ file: [] })
       })
     } else {
       Swal.fire({
@@ -197,7 +199,7 @@ function ReplyComment({ handleDelete, index, commentData, history }) {
                                 })
                               : ''}
 
-                            {image.preview.length >= 3 ? (
+                            {image.preview.length >= 2 ? (
                               ''
                             ) : (
                               <>
@@ -216,6 +218,7 @@ function ReplyComment({ handleDelete, index, commentData, history }) {
 
                                 <input
                                   type="file"
+                                  ref={(file) => (fileImg = file)}
                                   id={commentData.itemListId}
                                   style={{ display: 'none' }}
                                   onChange={handleChange}
@@ -243,16 +246,15 @@ function ReplyComment({ handleDelete, index, commentData, history }) {
                         className="btn buttonstyle float-right mt-3"
                         type="submit"
                         onClick={(e) => {
-
                           sendComment(
                             e,
                             index,
                             text,
                             commentData.itemListId,
-                            image.file
+                            fileImg.files.length,
+                            fileImg.files[0].name
                           )
                           commentimgUpload(image.file)
-                          
                         }}
                       >
                         提交評論

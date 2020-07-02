@@ -10,11 +10,14 @@ import ProductListPageBar from '../product/ProductListPageBar'
 import ProductQanda from '../qanda/ProductQanda'
 
 class commtentList extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = { tabIndex: 0 }
   }
+  // state = { data: this.props.productName }
+
   render() {
+    console.log('comment-list-this.state', this.props.productName)
     return (
       <Tabs
         selectedIndex={this.state.tabIndex}
@@ -83,7 +86,7 @@ class commtentList extends Component {
                   </li>
                   <li>星等</li>
                 </ul> */}
-                <ProductQanda />
+                <ProductQanda productNameNow={this.props.productName} />
               </div>
             </div>
           </div>
