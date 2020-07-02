@@ -12,11 +12,12 @@ function ProductQanda(props) {
   useEffect(() => {
     getProductQandaAsync()
   }, [])
-  console.log('getProductQanda-props.productName', props.productName)
+  console.log('getProductQanda-props-productNameNow', props.productNameNow)
   console.log('productQandaData', productQandaData)
+  // console.log('this.props', this.props)
 
   let productQaList = productQandaData.map((item) => {
-    if (item.productName == 'DUO Taipei - 來一趟調酒世界') {
+    if (item.productName == props.productNameNow) {
       return (
         <div className="qa-product">
           <div class="row">
