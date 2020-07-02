@@ -138,6 +138,48 @@ async function executeSQL(
 })
 
 
+// 首頁>忘記密碼
+  router.post('/forgetpwdinput', async (req, res, next) => {
+  // console.log(req.body.forgetpwdmail)
+  const mail = req.body.forgetpwdmail
+  const Sql = `SELECT * FROM member WHERE  memberMail=? `
+  const [r1] = await db.query(Sql,mail);
+
+  const mailstate = r1.length?true:false
+
+  let memberId 
+  mailstate?memberId = [r1][0][0].memberId:memberId = ''
+
+// 亂數-數字產生
+  function randomusefloor(min,max) {
+    return Math.floor(Math.random()*(max-min+1)+min);
+  }
+  // 亂數-英文產生
+  function makerandomletter(max) {
+    var text = "";
+    var possible = "abcdefghijklmnopqrstuvwxyz";
+  
+    for (var i = 0; i < max; i++)
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+    return text;
+  }
+  const num = makerandomletter(2)+randomusefloor(1,999)
+
+
+
+
+
+  const output = {
+    success: mailstate,
+    id: memberId
+  };
+  
+  console.log(mailstate)
+
+  res.json(output)
+})
+
+
 
 
 

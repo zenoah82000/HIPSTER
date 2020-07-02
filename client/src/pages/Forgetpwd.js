@@ -5,10 +5,11 @@ import { Modal, Button, Form } from 'react-bootstrap'
 //引入自訂元件
 
 function Forgetpwd(props) {
-  //頁面顯示(驗證碼&密碼)
-  const [display, setdisplay] = useState(true)
+  console.log(props.match.params.memberId)
+  //頁面顯示(驗證碼true&密碼false)
+  const [display, setdisplay] = useState(false)
   //提示小視窗顯示與否
-  const [promptdisplay, setpromptdisplay] = useState(true)
+  const [promptdisplay, setpromptdisplay] = useState(false)
   //提示視窗內容切換
   const [promptchang, setpromptchang] = useState(0)
 
@@ -45,7 +46,7 @@ function Forgetpwd(props) {
   //提示視窗-密碼錯誤=2
   const promptPwdError = (
     <>
-      <p className="SignOk-title">密碼有誤，請確認密碼欄位與確認欄位必需相同</p>
+      <p className="SignOk-title">密碼有誤，請確認2個密碼欄位必需相同</p>
       <div
         className="SignOkbtn"
         onClick={() => {
@@ -59,7 +60,11 @@ function Forgetpwd(props) {
   //提示視窗-密碼正確=3
   const promptPwdOk = (
     <>
-      <p className="SignOk-title">密碼更新完成，還請重新登入網站</p>
+      <p className="SignOk-title">
+        密碼更新完成
+        <br />
+        還請重新登入網站
+      </p>
       <div
         className="SignOkbtn"
         onClick={() => {
@@ -142,7 +147,19 @@ function Forgetpwd(props) {
           placeholder="請再次輸入修改密碼"
         />
       </Form.Group>
-      <div className="forgetpwdbtn" onClick={() => {}}>
+      <div
+        className="forgetpwdbtn"
+        onClick={() => {
+          if (pwd1.value != pwd2.value) {
+            setpromptchang(2)
+          } else {
+            setpromptchang(3)
+            setTimeout(() => {
+              setpromptdisplay(true)
+            }, 300)
+          }
+        }}
+      >
         送出
       </div>
     </>
