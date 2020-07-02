@@ -21,7 +21,7 @@ img {
 }
 @media screen and (max-width: 599px) {
   .container {
-    max-width: 95%;
+    max-width: 100%;
     padding: 0;
   }
 }
@@ -245,6 +245,11 @@ nav {
         width: 100%;
         display: block;
       }
+    }
+  }
+  @media screen and (max-width: 599px) {
+    .sign {
+      overflow: hidden;
     }
   }
 }
@@ -527,8 +532,22 @@ nav {
           }
         }
       }
+
+      @media screen and (max-width: 599px) {
+        .link-group {
+          width: 100%;
+          .link-title {
+            font-size: 18px;
+            margin: 10px;
+          }
+          .link-content {
+            display: none;
+          }
+        }
+      }
     }
   }
+
   .footer-bottom {
     padding-top: 20px;
     .footer-icon {
@@ -540,6 +559,11 @@ nav {
       text-align: center;
       color: rgba($color: #fff, $alpha: 0.4);
       margin-top: 10px;
+    }
+    @media screen and (max-width: 599px) {
+      .copyright {
+        font-size: 13px;
+      }
     }
   }
 }

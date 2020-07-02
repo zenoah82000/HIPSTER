@@ -6,6 +6,13 @@ const userQandaData = (state = [], action) => {
       return action.value
     case 'ADD_UserQandaDATA':
       return [...state, action.value]
+    default:
+      return state
+  }
+}
+
+const productQandaData = (state = [], action) => {
+  switch (action.type) {
     case 'GET_PRODUCTQANDA':
       return action.value
     default:
@@ -25,6 +32,7 @@ const adduserQandaData = (state = [], action) => {
 
 const qandaReducer = combineReducers({
   userQandaData,
+  productQandaData,
   // adduserQandaD ata,
 })
 export { qandaReducer }

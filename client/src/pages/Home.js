@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import '../styles/home.scss'
 import Fade from 'react-reveal/Fade'
+
 import CountdownProduct from '../components/home/CountdownProduct'
 import FeaturedProduct from '../components/home/FeaturedProduct'
 import About from '../components/home/About'
@@ -252,7 +253,7 @@ function Home(props) {
         className="form-control"
         ref={(input) => (searchBarStartTime = input)}
       />
-      <FaLongArrowAltRight className="fonticon" />
+      <FaLongArrowAltRight className="fonticon arrow" />
       <input
         type="date"
         id="time2"
@@ -325,6 +326,23 @@ function Home(props) {
     fade: true,
     cssEase: 'linear',
     autoplaySpeed: 5000,
+    responsive: [
+      {
+        breakpoint: 599,
+        settings: {
+          arrows: false,
+          dots: false,
+          infinite: true,
+          autoplay: true,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          speed: 2000,
+          fade: true,
+          cssEase: 'linear',
+          autoplaySpeed: 5000,
+        },
+      },
+    ],
   }
 
   //輪播-時限
@@ -336,6 +354,20 @@ function Home(props) {
     slidesToShow: 4,
     slidesToScroll: 1,
     autoplaySpeed: 5000,
+    responsive: [
+      {
+        breakpoint: 599,
+        settings: {
+          arrows: false,
+          dots: true,
+          infinite: true,
+          autoplay: true,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          autoplaySpeed: 5000,
+        },
+      },
+    ],
   }
 
   //精選3筆商品顯示
@@ -366,17 +398,21 @@ function Home(props) {
     return (
       <>
         <Link to="/" className="home-slick-banner">
-          <div className="black-bg">
-            <div className="content">
-              <p className="slick-banner-title">{item.productName}</p>
-              <p className="slick-banner-local">
-                <FaMapMarkerAlt />
-                {item.productAddress}
-              </p>
-              <p className="slick-banner-text">{item.productContent}</p>
+          <Fade right>
+            <div className="black-bg">
+              <div className="content">
+                <p className="slick-banner-title">{item.productName}</p>
+                <p className="slick-banner-local">
+                  <FaMapMarkerAlt />
+                  {item.productAddress}
+                </p>
+                <p className="slick-banner-text">{item.productContent}</p>
+              </div>
             </div>
-          </div>
-          <Slider {...banner}>{slickBannerImgdisplay}</Slider>
+          </Fade>
+          <Fade>
+            <Slider {...banner}>{slickBannerImgdisplay}</Slider>
+          </Fade>
         </Link>
       </>
     )
@@ -427,6 +463,7 @@ function Home(props) {
           <div className="banner-title">
             <img src="http://localhost:5000/images/home/title.png" />
           </div>
+
           <div className="searchbar-chang-btn">
             <div className="btnList">
               <div
@@ -467,19 +504,23 @@ function Home(props) {
 
       <div className="home-activity">
         <div className="container">
-          <div className="title">
-            <span className="line"></span>
-            <span className="txt">精選活動</span>
-            <span className="line"></span>
-          </div>
-          <Fade>
+          <Fade top>
+            <div className="title">
+              <span className="line"></span>
+              <span className="txt">精選活動</span>
+              <span className="line"></span>
+            </div>
+          </Fade>
+          <Fade bottom>
             <div className="activity-main">
               <Slider {...activitys}>{ProductFeatureddisplay}</Slider>
             </div>
           </Fade>
-          <Link to="/productlist" className="more-activity-btn">
-            查看更多活動
-          </Link>
+          <Fade>
+            <Link to="/productlist" className="more-activity-btn">
+              查看更多活動
+            </Link>
+          </Fade>
         </div>
       </div>
       {/* ----------------------slick-banner------------------------- */}
@@ -487,15 +528,18 @@ function Home(props) {
       {/* ----------------------------------------------------------- */}
       <div className="home-countdown">
         <div className="container">
-          <div className="title">
-            <span className="line"></span>
-            <span className="txt">即將結束</span>
-            <span className="line"></span>
-          </div>
-          <div className="countdown-main">
-            <Slider {...countdowns}>{ProductEnddisplay}</Slider>
-          </div>
-
+          <Fade top>
+            <div className="title">
+              <span className="line"></span>
+              <span className="txt">即將結束</span>
+              <span className="line"></span>
+            </div>
+          </Fade>
+          <Fade bottom>
+            <div className="countdown-main">
+              <Slider {...countdowns}>{ProductEnddisplay}</Slider>
+            </div>
+          </Fade>
           <Link to="/productlist" className="more-countdown-btn">
             查看更多活動
           </Link>
@@ -505,17 +549,21 @@ function Home(props) {
 
       <div className="home-blog">
         <div className="container">
-          <div className="title">
-            <span className="line"></span>
-            <span className="txt">精選文章</span>
-            <span className="line"></span>
-          </div>
-
-          <div className="home-blog-content">{Articlesdisplay}</div>
-
-          <Link to="/blog" className="more-blog-btn">
-            查看更多文章
-          </Link>
+          <Fade top>
+            <div className="title">
+              <span className="line"></span>
+              <span className="txt">精選文章</span>
+              <span className="line"></span>
+            </div>
+          </Fade>
+          <Fade>
+            <div className="home-blog-content">{Articlesdisplay}</div>
+          </Fade>
+          <Fade>
+            <Link to="/blog" className="more-blog-btn">
+              查看更多文章
+            </Link>
+          </Fade>
         </div>
       </div>
     </>

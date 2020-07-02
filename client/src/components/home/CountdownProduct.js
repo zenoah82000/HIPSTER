@@ -82,9 +82,9 @@ function CountdownProduct(props) {
           <div className="home-countdown-price">
             <p>
               NT$
-              {/* {item.productPrice
+              {item.productPrice
                 .toString()
-                .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')} */}
+                .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
             </p>
           </div>
         </div>
