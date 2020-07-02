@@ -30,7 +30,16 @@ function ProductList(props) {
         })
     : !!searchParams.get('cat')
 
-  // console.log(currentpage, cat)
+  const loc = !!searchParams.get('loc')
+    ? searchParams
+        .get('loc')
+        .split(',')
+        .map((item, index) => {
+          return +item
+        })
+    : !!searchParams.get('loc')
+
+  console.log(loc, cat)
 
   useEffect(() => {
     getProductListAsync()
@@ -88,8 +97,9 @@ function ProductList(props) {
                         6.7K+ 個已訂購
                       </div>
                       <div className="product-price">
-                        <span>TWD</span>
-                        <h4>130</h4>
+                        <span>TWD </span>
+                        <h4>{item.productPrice}</h4>
+                        <span> 起</span>
                       </div>
                     </div>
                   </div>
@@ -120,9 +130,13 @@ function ProductList(props) {
     <>
       <div className="container product-content">
         <div className="row">
-          <AsideBar />
+          <AsideBar cat={cat} loc={loc} />
           <ProductListMainContent>
-            <ProductSearchResult productnumbers={productListData.length} />
+            {cat || loc ? (
+              <ProductSearchResult productnumbers={productListData.length} />
+            ) : (
+              ''
+            )}
             <ProductSearchResultSort />
             {/* -------商品列表區域------ */}
             {display}

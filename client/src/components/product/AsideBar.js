@@ -28,12 +28,12 @@ function AsideBar(props) {
   // }
   let searchParams = new URLSearchParams(props.location.search)
 
-  const { productCatogryData, getProductCategoryAsync } = props
+  const { loc, cat, productCatogryData, getProductCategoryAsync } = props
 
   const [categorySection, setCategorySection] = useState([])
   const [value, setValue] = useState({ min: 32, max: 10000 })
   const [checked, setChecked] = useState(false)
-  const [cat, setCat] = useState('?cat=1')
+  const [checked2, setChecked2] = useState(false)
 
   const handleChange = () => {
     setChecked((prev) => !prev)
@@ -42,6 +42,7 @@ function AsideBar(props) {
   console.log(searchParams.toString())
   console.log(typeof searchParams)
   console.log(searchParams.entries())
+
   //類別選項收闔
   function AddcategorySection(category) {
     if (categorySection.includes(category)) {
@@ -60,6 +61,22 @@ function AsideBar(props) {
       return 'checkbox-dropdown-list'
     }
   }
+  function checkloc(i = 0) {
+    if (loc) {
+      if (
+        loc.includes(1) &&
+        loc.includes(2) &&
+        loc.includes(3) &&
+        loc.includes(4)
+      ) {
+        return true
+      } else if (loc.includes(i)) {
+        return true
+      }
+      return false
+    }
+    return false
+  }
 
   useEffect(() => {
     getProductCategoryAsync()
@@ -73,7 +90,11 @@ function AsideBar(props) {
           <div>
             <div
               key={item.categoryName}
-              className="drop-title"
+              className={
+                categorySection.includes(item.categoryName)
+                  ? 'drop-title active'
+                  : 'drop-title'
+              }
               onClick={() => {
                 // setActiveClass(!activeClass)
                 AddcategorySection(item.categoryName)
@@ -124,19 +145,32 @@ function AsideBar(props) {
         <div className="aside-wrapper-filter-box">
           <h3 onClick={handleChange} style={{ cursor: 'pointer' }}>
             地區
+            <i class="fas fa-caret-down"></i>
           </h3>
+
           <Collapse in={checked} timeout={200}>
             <ul className="checkbox-dropdown-list active">
               <li
-                className="checkbox px-0"
+                className={
+                  checkloc() ? 'checkbox px-0 checked' : 'checkbox px-0 '
+                }
                 key="全部"
                 onClick={() => {
-                  searchParams.append('cat', '1')
-                  console.log(searchParams.toString())
+                  searchParams.get('loc')
+                    ? searchParams.get('loc') === '1,2,3,4'
+                      ? searchParams.delete('loc')
+                      : searchParams.set('loc', '1,2,3,4')
+                    : searchParams.append('loc', '1,2,3,4')
+
                   props.history.push(`?${searchParams.toString()}`)
                 }}
               >
-                <i className="far fa-square"></i> 全部
+                <i
+                  className={
+                    checkloc() ? 'fas fa-check-square' : 'far fa-square'
+                  }
+                ></i>
+                全部
               </li>
 
               <li className="checkbox px-0" key="北部">
@@ -157,18 +191,20 @@ function AsideBar(props) {
             </ul>
           </Collapse>
         </div>
-        <Dropdown>
-          <Dropdown.Toggle
+        <div>
+          <div
             className="aside-wrapper-filter-box"
-            drop={'down'}
-            variant={'success'}
+            onClick={() => {
+              setChecked2(!checked2)
+            }}
+            style={{ cursor: 'pointer' }}
           >
             <h3>篩選日期</h3>
-          </Dropdown.Toggle>
-          <Dropdown.Menu>
-            <Calendar />
-          </Dropdown.Menu>
-        </Dropdown>
+            <div className={checked2 ? 'calender active' : 'calender'}>
+              <Calendar />
+            </div>
+          </div>
+        </div>
 
         <div className="aside-wrapper-filter-box" style={{ cursor: 'default' }}>
           <h3>價格</h3>

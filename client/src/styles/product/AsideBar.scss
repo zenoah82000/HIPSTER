@@ -12,10 +12,7 @@
     margin-bottom: 15px;
     width: 100%;
     text-align: unset;
-
-    &:hover {
-      // background-color: white;
-    }
+    position: relative;
 
     h3 {
       font-size: 18px;
@@ -58,6 +55,7 @@
       &.active {
         display: block;
         margin-bottom: 15px;
+        
       }
 
       .checkbox {
@@ -72,11 +70,25 @@
           margin-right: 5px;
           color: #684b386e;
         }
+        & > .fa-check-square{
+          @extend .fa-square;
+          color: #684b38;
+        }
 
         &:hover .fa-square {
           color: #684b38;
         }
       }
+    }
+
+    .calender{
+      position: absolute;
+      display: none;
+      &.active {
+        display: block;
+        z-index: 100;
+      }
+
     }
 
     .price-area {
