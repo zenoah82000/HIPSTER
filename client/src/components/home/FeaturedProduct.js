@@ -72,12 +72,13 @@ function FeaturedProduct(props) {
 
   return (
     <>
-      <Link to="#">
+      <Link to={`/productlist/${item.productId}`}>
         <div className="activity-main-cont">
           <div className="activity-picture">
             <div
               className={heartClass}
-              onClick={() => {
+              onClick={(event) => {
+                event.preventDefault()
                 setheart(!heart)
               }}
             >

@@ -13,6 +13,7 @@ import NotFoundPage from './pages/NotFoundPage'
 
 import Home from './pages/Home'
 import About from './pages/About'
+import Forgetpwd from './pages/Forgetpwd'
 
 import Test from './pages/Test'
 import Contact from './pages/Contact'
@@ -209,10 +210,13 @@ function App(props) {
           <Route path="/paymentType">
             <PaymentType sum={sum} userSuccess={userSuccess} />
           </Route>
-
+          <Route path="/forgetpwd/:memberId?">
+            <Forgetpwd />
+          </Route>
           <Route exact path="/">
             <Home />
           </Route>
+
           <Route exact path="*">
             <NotFoundPage />
           </Route>

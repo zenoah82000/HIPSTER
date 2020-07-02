@@ -52,7 +52,7 @@ function CountdownProduct(props) {
 
   return (
     <>
-      <Link to="#">
+      <Link to={`/productlist/${item.productId}`}>
         <p className="countdown-num">
           {[countdowntime(item.productEndingDate)]}
         </p>
@@ -60,7 +60,8 @@ function CountdownProduct(props) {
           <div className="countdown-picture">
             <div
               className={heartClass}
-              onClick={() => {
+              onClick={(event) => {
+                event.preventDefault()
                 setheart(!heart)
               }}
             >
