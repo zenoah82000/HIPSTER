@@ -33,6 +33,7 @@ function AsideBar(props) {
   const [categorySection, setCategorySection] = useState([])
   const [value, setValue] = useState({ min: 32, max: 10000 })
   const [checked, setChecked] = useState(false)
+  const [checked2, setChecked2] = useState(false)
 
   const handleChange = () => {
     setChecked((prev) => !prev)
@@ -89,7 +90,11 @@ function AsideBar(props) {
           <div>
             <div
               key={item.categoryName}
-              className="drop-title"
+              className={
+                categorySection.includes(item.categoryName)
+                  ? 'drop-title active'
+                  : 'drop-title'
+              }
               onClick={() => {
                 // setActiveClass(!activeClass)
                 AddcategorySection(item.categoryName)
@@ -140,7 +145,9 @@ function AsideBar(props) {
         <div className="aside-wrapper-filter-box">
           <h3 onClick={handleChange} style={{ cursor: 'pointer' }}>
             地區
+            <i class="fas fa-caret-down"></i>
           </h3>
+
           <Collapse in={checked} timeout={200}>
             <ul className="checkbox-dropdown-list active">
               <li
@@ -160,7 +167,7 @@ function AsideBar(props) {
               >
                 <i
                   className={
-                    checkloc() ? 'far fa-check-square' : 'far fa-square'
+                    checkloc() ? 'fas fa-check-square' : 'far fa-square'
                   }
                 ></i>
                 全部
@@ -184,18 +191,20 @@ function AsideBar(props) {
             </ul>
           </Collapse>
         </div>
-        <Dropdown>
-          <Dropdown.Toggle
+        <div>
+          <div
             className="aside-wrapper-filter-box"
-            drop={'down'}
-            variant={'success'}
+            onClick={() => {
+              setChecked2(!checked2)
+            }}
+            style={{ cursor: 'pointer' }}
           >
             <h3>篩選日期</h3>
-          </Dropdown.Toggle>
-          <Dropdown.Menu>
-            <Calendar />
-          </Dropdown.Menu>
-        </Dropdown>
+            <div className={checked2 ? 'calender active' : 'calender'}>
+              <Calendar />
+            </div>
+          </div>
+        </div>
 
         <div className="aside-wrapper-filter-box" style={{ cursor: 'default' }}>
           <h3>價格</h3>
