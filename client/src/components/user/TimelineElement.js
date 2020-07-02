@@ -49,7 +49,7 @@ function TimelineElement({ myMapData }) {
                   ''
                 )}
 
-                <div className="d-flex  ">
+                {/* <div className="d-flex  ">
                   {myMapData.commentImg1 != '' ? (
                     <div className="mymapSmImg">
                       <img
@@ -89,7 +89,7 @@ function TimelineElement({ myMapData }) {
                   ) : (
                     ''
                   )}
-                </div>
+                </div> */}
               </SRLWrapper>
             </SimpleReactLightbox>
           </div>
