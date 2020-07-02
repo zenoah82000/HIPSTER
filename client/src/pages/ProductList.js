@@ -37,11 +37,7 @@ function ProductList(props) {
     ) {
       return (
         <>
-          <div
-            className="product-list-search-info"
-            key={item.productId}
-            dataValue={index}
-          >
+          <div className="product-list-search-info" key={item.productId}>
             <a href={`/product/${item.productId}`}>
               <div className="row">
                 <div className="col-sm-5 col-lg-4">
@@ -101,16 +97,16 @@ function ProductList(props) {
   console.log(display)
 
   // 測試
-  // let display2 = []
-  // let n = 0
-  // const count = productListData.map((item, index) => {
-  //   if (+item.categoryId === 16) {
-  //     n += 1
-  //     display2.push(item)
-  //   }
-  // })
-  // console.log(n)
-  // console.log(display2)
+  let display2 = []
+  let n = 0
+  const count = productListData.map((item, index) => {
+    if (+item.categoryId === 3) {
+      n += 1
+      display2.push({ ...item })
+    }
+  })
+  console.log(n)
+  console.log({ ...display2[0] })
 
   return (
     <>

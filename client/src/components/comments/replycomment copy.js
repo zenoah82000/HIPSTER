@@ -21,6 +21,7 @@ function ReplyComment({ handleDelete, index, commentData, history }) {
   let fileObj = []
   let fileArray = []
 
+
   const handleChange = (e) => {
     // console.log('test')
     fileObj.push(e.target.files)
@@ -35,7 +36,7 @@ function ReplyComment({ handleDelete, index, commentData, history }) {
     if (e.target.files.length) {
       setImage({
         preview: fileArray,
-        file:e.target.files[0]
+        file: fileObj
       })
       
     }
@@ -243,7 +244,6 @@ function ReplyComment({ handleDelete, index, commentData, history }) {
                         className="btn buttonstyle float-right mt-3"
                         type="submit"
                         onClick={(e) => {
-
                           sendComment(
                             e,
                             index,
@@ -252,7 +252,6 @@ function ReplyComment({ handleDelete, index, commentData, history }) {
                             image.file
                           )
                           commentimgUpload(image.file)
-                          
                         }}
                       >
                         提交評論
