@@ -57,6 +57,7 @@ function paymentFinish(props) {
                             <p className="infodate">預定日期: {item.date}</p>
                           </div>
                         </div>
+                        <hr />
                       </>
                     )
                   })
