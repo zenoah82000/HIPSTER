@@ -12,10 +12,11 @@ function PaymentType(props) {
 
   //驗證
   const [validated, setValidated] = useState(false)
-
+  //讀取會員
+  const member =JSON.parse(localStorage.getItem('member'))
   //訂單初始化
   const orderData = {
-    orderMemberId: '2',
+    orderMemberId: member.id,
     orderItems: [],
   }
   let itemData = {}
