@@ -27,7 +27,7 @@ function PaymentDetail(props) {
         phone: phone.value,
         lastName: lastName.value,
         firstName: firstName.value,
-        product: [...buyerinfo.product],
+        ...buyerinfo,
       }
       props.dispatch({ type: 'BUYER_DATA', value: data })
       props.history.push('/paymentType')
@@ -151,7 +151,8 @@ function PaymentDetail(props) {
                     </div>
                     <div className="d-flex justify-content-between">
                       <p>折價金額</p>
-                      <p>NT$100</p>
+                      <p>{buyerinfo.sumless.toString()
+                          .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}</p>
                     </div>
                   </div>
                   <div className="payPrice">
@@ -159,7 +160,7 @@ function PaymentDetail(props) {
                       <p>結帳金額</p>
                       <p>
                         NT$
-                        {sum(buyerinfo.product)
+                        {buyerinfo.sumdiscount
                           .toString()
                           .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
                       </p>
