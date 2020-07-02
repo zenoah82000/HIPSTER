@@ -1,5 +1,5 @@
 const express = require('express')
-const db = require('./db_connecthipster')
+const db = require(__dirname + "/db_connect2");
 const upload = require(__dirname + '/upload-module');
 const router = express.Router()
 

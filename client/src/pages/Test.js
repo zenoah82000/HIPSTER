@@ -4,14 +4,14 @@ import Swal from 'sweetalert2'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getUserCouponDetaiAsync } from '../actions/coupon/getCoupon'
-import CouponAllData from '../components/coupon/CouponAllData'
+import ProductQanda from '../components/qanda/ProductQanda'
 
 // import '../../styles/sidebar.scss'
 
 function Test() {
   return (
     <>
-      <CouponAllData />
+      <ProductQanda productName="123" />
     </>
   )
 }
