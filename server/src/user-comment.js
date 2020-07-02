@@ -1,6 +1,7 @@
 const express = require("express");
 const db = require(__dirname + "/db_connect2");
-const upload = require(__dirname + "/upload-module");
+const upload = require(__dirname + "/upload-module2");
+const multer = require("multer");
 const router = express.Router();
 
 //訂單列表
@@ -28,37 +29,44 @@ router.get("/comments/:memberId", async (req, res) => {
 //新增評論到資料庫
 router.post("/sendComments", async (req, res) => {
   console.log(req.body);
-  const commentImg =  req.body.commentImg != ""? "/../../public/images/comments/" +
-  "commentImg_" +
-  req.body.itemListId +
-  ".jpg" :""
 
   const addCommentList =
     "INSERT INTO `comments` (`itemListId`,`content`, `star`,`commentImg`) VALUES (?,?,?,?)";
+
+  const filename = req.body.fileName.split(".").pop();
+
+  const commentImg =
+    req.body.fileLength > 0
+      ? `commentImg_${req.body.itemListId}.${filename}`
+      : "";
 
   const [r2] = await db.query(addCommentList, [
     req.body.itemListId,
     req.body.commentContent,
     req.body.star,
-    commentImg
+    commentImg,
   ]);
   res.json("ok");
 });
 
 // 評論圖片新增到後端資料夾
 router.post("/commentimgdata", upload.single("avatar"), async (req, res) => {
+  console.log(req.file, req.body.itemListId);
 
+  const filename = req.file.filename.split(".").pop(); //副檔名
   if (req.file && req.file.path) {
     fs.rename(
       req.file.path,
       __dirname +
-        "/../../public/images/comments/" +
+        "/../public/images/comments/" +
         "commentImg_" +
         req.body.itemListId +
-        ".jpg" ,
+        "." +
+        filename,
       (error) => {}
     );
   }
+
   res.json("ok");
 });
 
