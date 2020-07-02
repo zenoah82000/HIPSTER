@@ -28,12 +28,11 @@ function AsideBar(props) {
   // }
   let searchParams = new URLSearchParams(props.location.search)
 
-  const { productCatogryData, getProductCategoryAsync } = props
+  const { loc, cat, productCatogryData, getProductCategoryAsync } = props
 
   const [categorySection, setCategorySection] = useState([])
   const [value, setValue] = useState({ min: 32, max: 10000 })
   const [checked, setChecked] = useState(false)
-  const [cat, setCat] = useState('?cat=1')
 
   const handleChange = () => {
     setChecked((prev) => !prev)
@@ -42,6 +41,7 @@ function AsideBar(props) {
   console.log(searchParams.toString())
   console.log(typeof searchParams)
   console.log(searchParams.entries())
+
   //類別選項收闔
   function AddcategorySection(category) {
     if (categorySection.includes(category)) {
@@ -59,6 +59,22 @@ function AsideBar(props) {
     } else {
       return 'checkbox-dropdown-list'
     }
+  }
+  function checkloc(i = 0) {
+    if (loc) {
+      if (
+        loc.includes(1) &&
+        loc.includes(2) &&
+        loc.includes(3) &&
+        loc.includes(4)
+      ) {
+        return true
+      } else if (loc.includes(i)) {
+        return true
+      }
+      return false
+    }
+    return false
   }
 
   useEffect(() => {
@@ -128,15 +144,26 @@ function AsideBar(props) {
           <Collapse in={checked} timeout={200}>
             <ul className="checkbox-dropdown-list active">
               <li
-                className="checkbox px-0"
+                className={
+                  checkloc() ? 'checkbox px-0 checked' : 'checkbox px-0 '
+                }
                 key="全部"
                 onClick={() => {
-                  searchParams.append('cat', '1')
-                  console.log(searchParams.toString())
+                  searchParams.get('loc')
+                    ? searchParams.get('loc') === '1,2,3,4'
+                      ? searchParams.delete('loc')
+                      : searchParams.set('loc', '1,2,3,4')
+                    : searchParams.append('loc', '1,2,3,4')
+
                   props.history.push(`?${searchParams.toString()}`)
                 }}
               >
-                <i className="far fa-square"></i> 全部
+                <i
+                  className={
+                    checkloc() ? 'far fa-check-square' : 'far fa-square'
+                  }
+                ></i>
+                全部
               </li>
 
               <li className="checkbox px-0" key="北部">

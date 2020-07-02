@@ -72,6 +72,10 @@
           margin-right: 5px;
           color: #684b386e;
         }
+        & > .fa-check-square{
+          @extend .fa-square;
+          color: #684b38;
+        }
 
         &:hover .fa-square {
           color: #684b38;

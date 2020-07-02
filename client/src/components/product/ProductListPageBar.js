@@ -18,20 +18,26 @@ function ProductListPageBar(props) {
   //   totalpages
   // )
 
+  let searchParams = new URLSearchParams(props.location.search)
+
   const display = () => {
     let pages = []
     for (let i = 1; i <= totalpages; i++) {
       pages.push(
         <li key={i}>
-          <Link
+          <a
             className={i === +currentPage ? 'active' : ''}
-            to={`?page=${i}`}
+            // to={`?page=${i}`}
             onClick={() => {
+              searchParams.get('page')
+                ? searchParams.set('page', i)
+                : searchParams.append('page', i)
               window.scrollTo({ top: 0, behavior: 'smooth' })
+              props.history.push(`?${searchParams.toString()}`)
             }}
           >
             {i}
-          </Link>
+          </a>
         </li>
       )
     }
@@ -45,4 +51,4 @@ function ProductListPageBar(props) {
   )
 }
 
-export default ProductListPageBar
+export default withRouter(ProductListPageBar)
