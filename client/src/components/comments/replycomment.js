@@ -199,7 +199,7 @@ function ReplyComment({ handleDelete, index, commentData, history }) {
                                 })
                               : ''}
 
-                            {image.preview.length >= 3 ? (
+                            {image.preview.length >= 2 ? (
                               ''
                             ) : (
                               <>

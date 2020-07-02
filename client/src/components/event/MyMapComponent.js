@@ -175,12 +175,12 @@ export default class ViewportExample extends Component {
                 <Marker
                   position={[item.lat, item.log]}
                   icon={cafeTagIcon}
-                  onMouseOver={(e) => {
-                    e.target.openPopup()
-                  }}
-                  onMouseOut={(e) => {
-                    e.target.closePopup()
-                  }}
+                  // onMouseOver={e => {
+                  //   e.target.openPopup();
+                  // }}
+                  // onMouseOut={e => {
+                  //   e.target.closePopup();
+                  // }}
                 >
                   <Popup className="locationCard">
                     <h5>
@@ -280,7 +280,7 @@ export default class ViewportExample extends Component {
                 icon={productTagIcon}
               >
                 <Popup className="locationCard">
-                  <span style={{ width: '100%' }}>{clickData.productName}</span>
+                  <h5 style={{ width: '100%' }}>{clickData.productName}</h5>
                   <ul className="cardList list-unstyled">
                     <li>
                       <div
@@ -345,7 +345,7 @@ export default class ViewportExample extends Component {
                     </li>
                   </ul>
                   <div className="cardButton">
-                    <a value="" href="/#">
+                    <a value="" href={'/product/{item.productId}'}>
                       立即預定商品
                     </a>
                   </div>
@@ -356,12 +356,12 @@ export default class ViewportExample extends Component {
                 <Marker
                   position={[item.lat, item.log]}
                   icon={productTagIcon}
-                  onMouseOver={(e) => {
-                    e.target.openPopup()
-                  }}
-                  onMouseOut={(e) => {
-                    e.target.closePopup()
-                  }}
+                  // onMouseOver={(e) => {
+                  //   e.target.openPopup()
+                  // }}
+                  // onMouseOut={(e) => {
+                  //   e.target.closePopup()
+                  // }}
                 >
                   <Popup className="locationCard">
                     <h5>{item.productName}</h5>
@@ -429,8 +429,7 @@ export default class ViewportExample extends Component {
                     <div className="cardButton">
                       <a
                         value=""
-                        href="
-            /product/{item.productId}"
+                        href={'/product/{item.productId}'}
                         target="_blank"
                       >
                         立即預定商品
@@ -442,16 +441,7 @@ export default class ViewportExample extends Component {
             </>
           ) : (
             this.state.productdata.map((item) => (
-              <Marker
-                position={[item.lat, item.log]}
-                icon={productTagIcon}
-                onMouseOver={(e) => {
-                  e.target.openPopup()
-                }}
-                onMouseOut={(e) => {
-                  e.target.closePopup()
-                }}
-              >
+              <Marker position={[item.lat, item.log]} icon={productTagIcon}>
                 <Popup className="locationCard">
                   <h5>{item.productName}</h5>
                   <ul className="cardList list-unstyled">
@@ -518,8 +508,7 @@ export default class ViewportExample extends Component {
                   <div className="cardButton">
                     <a
                       value=""
-                      href="
-            /product/{item.productId}"
+                      href={`/product/${item.productId}`}
                       target="_blank"
                     >
                       立即預定商品

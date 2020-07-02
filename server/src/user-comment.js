@@ -3,6 +3,7 @@ const db = require(__dirname + "/db_connect2");
 const upload = require(__dirname + "/upload-module2");
 const multer = require("multer");
 const router = express.Router();
+const fs = require("fs");
 
 //訂單列表
 router.get("/comments/:memberId", async (req, res) => {
@@ -38,8 +39,8 @@ router.post("/sendComments", async (req, res) => {
   const commentImg =
     req.body.fileLength > 0
       ? `commentImg_${req.body.itemListId}.${filename}`
-      : "";
-
+      : "0";
+  console.log(commentImg);
   const [r2] = await db.query(addCommentList, [
     req.body.itemListId,
     req.body.commentContent,
