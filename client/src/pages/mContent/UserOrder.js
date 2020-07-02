@@ -16,9 +16,13 @@ function UserOrder() {
   const [currentPage, setCurrentPage] = useState(1)
   //每頁的資料
   const [datapage, setDatapage] = useState([])
+  //讀取會員資料
+  const member =JSON.parse(localStorage.getItem('member'))
+  //展開商品數量判斷
+  const [productamount,setProductamount] = useState(0)
 
   const getOrderlistAsync = async () => {
-    const request = new Request(`http://localhost:5000/member/order/2`, {
+    const request = new Request(`http://localhost:5000/member/order/${member.id}`, {
       method: 'get',
       headers: new Headers({
         Accept: 'application/json',
