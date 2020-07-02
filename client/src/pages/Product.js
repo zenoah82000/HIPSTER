@@ -30,7 +30,7 @@ function Product(props) {
     <>
       <div className="bg-white text-brown">
         <div className="container position-relative">
-          <ProductBanner />
+          <ProductBanner productImg={product.productImg} />
           <MyBreadcrumb />
           <BookArea />
           <div className="product-main-left">
@@ -38,9 +38,9 @@ function Product(props) {
             <ProductStarBar />
             <ProductTime />
             <Productinfoicon />
-            <ProductDescription />
+            <ProductDescription productContent={product.productContent} />
             <ProductHowtoArea />
-            <CommtentList />
+            <CommtentList productName={product.productName} />
           </div>
         </div>
       </div>

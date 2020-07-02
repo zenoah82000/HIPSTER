@@ -115,7 +115,6 @@
   padding: 30px 0;
   display: flex;
   justify-content: center;
-
   & li {
     margin: 0 5px;
     display: inline-block;
@@ -140,4 +139,33 @@
   right: 0;
   bottom: 0;
   outline: none;
+}
+//詳細資訊
+.modal-body {
+  background-color: #e6ded8;
+  border: 8px solid #b98f50;
+  border-radius: 5px;
+  .orderdetailbox {
+    .ordercontact {
+      margin-bottom: 5px;
+      h6 {
+        color: black;
+        font-size: 18px;
+        font-weight: bold;
+      }
+      p {
+        color: black;
+      }
+    }
+    .orderpayinfo {
+      h6 {
+        color: black;
+        font-size: 18px;
+        font-weight: bold;
+      }
+      p {
+        color: black;
+      }
+    }
+  }
 }

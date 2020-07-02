@@ -8,7 +8,7 @@ require("dotenv").config();
 //訂單列表
 router.get("/member/order/:memberId", async (req, res) => {
   console.log("買家訂單請求");
-
+  const memberId = req.params.memberId
   //每一頁幾筆
   const perPage = 4;
 
@@ -20,8 +20,8 @@ router.get("/member/order/:memberId", async (req, res) => {
   };
 
   //取得總筆數
-  const totalsql = "SELECT COUNT(1) num FROM `orderlist` WHERE `memberId` = 2";
-  const [totalPages] = await db.query(totalsql, [req.params.memberId]);
+  const totalsql = "SELECT COUNT(1) num FROM `orderlist` WHERE `memberId` = ?";
+  const [totalPages] = await db.query(totalsql, [memberId]);
   data.totalRows = totalPages[0].num;
   data.totalPages = Math.ceil(data.totalRows / perPage);
   const sqlorder = `SELECT * FROM orderlist WHERE memberId = ? ORDER BY created_at DESC`;
@@ -29,8 +29,8 @@ router.get("/member/order/:memberId", async (req, res) => {
   const sqlorderlist =
     "SELECT `product`.`productName`,`item_lists`.`orderId`,`item_lists`.`date`,`item_lists`.`checkPrice`,`item_lists`.`checkQty`,`item_lists`.`checkSubtotal`,`item_lists`.`created_at`FROM `member` INNER JOIN `orderlist` ON `member`.`memberId` = `orderlist`.`memberId` INNER JOIN `item_lists` ON `orderlist`.`orderId`=`item_lists`.`orderId` INNER JOIN `product` ON `item_lists`.`productId` = `product`.`productId` WHERE `member`.`memberId`=?";
 
-  const [r1] = await db.query(sqlorder, [req.params.memberId]);
-  const [r2] = await db.query(sqlorderlist, [req.params.memberId]);
+  const [r1] = await db.query(sqlorder, [memberId]);
+  const [r2] = await db.query(sqlorderlist, [memberId]);
   if (r1.length > 0 && r2.length > 0) {
     r1.forEach((item) => {
       item.created_at = item.created_at.toLocaleString();
@@ -50,7 +50,7 @@ router.post("/member/checkout", async (req, res) => {
   let year = new Date().getFullYear().toString();
   let month = new Date().getMonth().toString();
   let date = new Date().getDate().toString();
-  const memberId = 2;
+  const memberId = req.body.orderMemberId
   const orderItems = req.body.orderItems;
   const email = req.body.email;
   const phone = req.body.phone;

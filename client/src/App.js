@@ -201,15 +201,15 @@ function App(props) {
             <MemberUser />
           </Route>
           {/* 保護路由 */}
-          <Route path="/paymentDetail">
+          <ProtectedRoute path="/paymentDetail">
             <PaymentDetail sum={sum} userSuccess={userSuccess} />
-          </Route>
-          <Route path="/paymentFinish">
+          </ProtectedRoute>
+          <ProtectedRoute path="/paymentFinish">
             <PaymentFinish userSuccess={userSuccess} />
-          </Route>
-          <Route path="/paymentType">
+          </ProtectedRoute>
+          <ProtectedRoute path="/paymentType">
             <PaymentType sum={sum} userSuccess={userSuccess} />
-          </Route>
+          </ProtectedRoute>
           <Route path="/forgetpwd/:memberId?">
             <Forgetpwd />
           </Route>

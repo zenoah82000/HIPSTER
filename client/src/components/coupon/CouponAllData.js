@@ -5,6 +5,7 @@ import Swal from 'sweetalert2'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getUserCouponDetaiAsync } from '../../actions/coupon/getCoupon'
+import $ from 'jquery'
 
 function CouponAllData(props) {
   // console.log('10行', window.location.pathname.indexOf('available'))
@@ -13,7 +14,11 @@ function CouponAllData(props) {
     getUserCouponDetaiAsync()
   }, [])
   let couponList = userCouponData.map((item) => {
-    return <option value={item.discountPercent}>{item.discountCode}</option>
+    return (
+      <option value={item.discountPercent} data-code={item.discountCode}>
+        {item.discountCode}
+      </option>
+    )
   })
 
   return (
@@ -28,7 +33,14 @@ function CouponAllData(props) {
               <select
                 className="form-control couponalldata-select"
                 id="couponControlSelect1"
-                onChange={(event) => props.onChange(event.target.value)}
+                onChange={(event) => {
+                  props.onChange(event.target.value)
+                  // console.log(
+                  //   'event.target.value',
+                  //   $('option:selected').attr('data-code')
+                  // )
+                  props.onBlur($('option:selected').attr('data-code'))
+                }}
               >
                 <option selected value="1">
                   choose coupon

@@ -18,10 +18,17 @@ function ProductList(props) {
   const { productListData, getProductListAsync } = props
   const [date, setDate] = useState(new Date())
   const searchParams = new URLSearchParams(props.location.search)
-  const currentpage = searchParams.get('page')
-  const currentPage = !!currentpage ? +currentpage : 1
+  // const currentpage = searchParams.get('page')
+  const currentPage = !!searchParams.get('page') ? +searchParams.get('page') : 1
   const perPage = 5
-  const cat = searchParams.getAll('cat')
+  const cat = !!searchParams.get('cat')
+    ? searchParams
+        .get('cat')
+        .split(',')
+        .map((item, index) => {
+          return +item
+        })
+    : !!searchParams.get('cat')
 
   // console.log(currentpage, cat)
 
@@ -94,19 +101,20 @@ function ProductList(props) {
       )
     }
   })
-  console.log(display)
+  // console.log(display)
 
   // 測試
-  let display2 = []
-  let n = 0
-  const count = productListData.map((item, index) => {
-    if (+item.categoryId === 3) {
-      n += 1
-      display2.push({ ...item })
+  console.log(cat)
+  const count = productListData.filter((item, index) => {
+    for (let i = 0; i < cat.length; i++) {
+      if (item.categoryId === cat[i]) {
+        return item
+      }
     }
   })
-  console.log(n)
-  console.log({ ...display2[0] })
+  console.log(count)
+  console.log(count.length)
+  console.log({ ...count[0] }.categoryId)
 
   return (
     <>
