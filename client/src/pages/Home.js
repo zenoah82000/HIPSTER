@@ -397,7 +397,10 @@ function Home(props) {
   const slickBannerdisplay = slickBanner.map((item, index) => {
     return (
       <>
-        <Link to="/" className="home-slick-banner">
+        <Link
+          to={`/productlist/${item.productId}`}
+          className="home-slick-banner"
+        >
           <Fade right>
             <div className="black-bg">
               <div className="content">
