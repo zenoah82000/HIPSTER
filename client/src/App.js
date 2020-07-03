@@ -59,6 +59,20 @@ function App(props) {
   //取得願望清單資料
   const localWishlist = JSON.parse(localStorage.getItem('wishlist')) || []
 
+  //取得願望清單
+  // const getwishAsync=async()=>{
+  //   const request = new Request(`http://localhost:5000/member/wishlist/${member.id}`, {
+  //     method: 'get',
+  //     headers: new Headers({
+  //       Accept: 'application/json',
+  //       'Content-Type': 'application/json',
+  //     }),
+  //   })
+  //   const response = await fetch(request)
+  //   const data = await response.json()
+  //   props.dispatch({ type: 'GET_WISH', value: data })
+  // }
+
   //寫入購物車資料
   useEffect(() => {
     getLocation()
@@ -105,6 +119,20 @@ function App(props) {
     }
     return total
   }
+
+  //加入願望清單
+  // const delwishlistAsync=async(productId)=>{
+  //   const request = new Request(`http://localhost:5000/member/wishlistAdd/${member.id}`, {
+  //     method: 'post',
+  //     body:JSON.stringify(productId),
+  //     headers: new Headers({
+  //       Accept: 'application/json',
+  //       'Content-Type': 'application/json',
+  //     }),
+  //   })
+  //   const response = await fetch(request)
+  //   const data = await response.json()
+  // }
   //加入願望清單
   const addwish = (value) => {
     const index = localWishlist.findIndex((item) => item.id == value.id)

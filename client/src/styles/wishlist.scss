@@ -22,10 +22,23 @@
         }
       }
       .card-body {
-        p {
-          font-size: 14px;
-          font-weight: bold;
-          line-height: 20px;
+        .whishnamebox {
+          margin-bottom: 10px;
+          p {
+            font-size: 14px;
+            font-weight: bold;
+            line-height: 20px;
+          }
+        }
+        .wishprice {
+          width: 100%;
+          text-align: right;
+          p {
+            color: #ff3400;
+            font-weight: 600;
+            font-size: 17px;
+            letter-spacing: 3px;
+          }
         }
         padding: 12px;
       }

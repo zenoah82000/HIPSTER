@@ -79,28 +79,28 @@
               height: 100%;
             }
           }
-          .productname {
-            p {
-              font-size: 16px;
+          .oderproductinfo {
+            .productname {
+              p {
+                font-size: 16px;
+              }
             }
           }
-        }
-      }
-      .order-footer {
-        border-top: none;
-        background-color: white;
-        padding: 10px 20px;
-        .order-button {
-          color: white;
-          width: 150px;
-          background: #688e67;
-          border: none;
+          .oderbutton {
+            width: 20%;
+            button {
+              color: blue;
+              background-color: transparent;
+              border: none;
+            }
+          }
         }
       }
     }
   }
 }
 
+//沒有訂單
 .empty {
   margin: 100px;
   .emptyImg {

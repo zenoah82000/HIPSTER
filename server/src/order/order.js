@@ -5,6 +5,45 @@ const router = express.Router();
 const nodemailer = require("nodemailer");
 require("dotenv").config();
 
+
+
+
+
+//願望清單查詢
+router.get("/member/wishlist/:memberId", async (req, res) => {
+  console.log('查詢願望清單')
+  const memberId = req.params.memberId
+  const wishsql="SELECT * FROM `wishlist` WHERE `memberId` = ?"
+  const [wishlist] = await db.query(wishsql,[memberId])
+
+
+  res.json(wishlist)
+
+})
+//願望清單新增
+
+router.post("/member/wishlistAdd/:memberId", async (req, res) => {
+  console.log('新增願望清單')
+  const memberId = req.params.memberId
+  const productId = req.body.productId
+  const wishsql="INSERT INTO `wishlist` (`memberId`,`productId`) VALUES(?,?)"
+  const [wishlist] = await db.query(wishsql,[memberId,productId])
+
+
+  res.json(wishlist)
+
+})
+//願望清單刪除
+router.delete("/member/wishlistDel/:memberId", async (req, res) => {
+  console.log(req.body.memberId+"刪除願望清單")
+  const memberId = req.params.memberId
+  const productId = req.body.productId
+  const wishsql="DELETE FROM `wishlist` WHERE `memberId` = ? && `productId`=?"
+  const [wishlist] = await db.query(wishsql,[memberId,productId])
+
+
+  res.json(wishlist)
+})
 //訂單列表
 router.get("/member/order/:memberId", async (req, res) => {
   console.log("買家訂單請求");
