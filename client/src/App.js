@@ -48,7 +48,6 @@ function App(props) {
   const username = userlocalStorage.name
 
   const { mycart, wishlist } = props
-  console.log(wishlist)
   //取得購物車資料
   const localCart = JSON.parse(localStorage.getItem('cart')) || []
 
@@ -66,8 +65,7 @@ function App(props) {
     )
     const response = await fetch(request)
     const data = await response.json()
-    const wishlist = data.map((item)=>item.productId)
-    props.dispatch({ type: 'GET_WISH', value: wishlist })
+    props.dispatch({ type: 'GET_WISH', value: data })
   }
   // 加入願望清單(資料庫)
   const addWishlistAsync = async (productId) => {
@@ -87,11 +85,13 @@ function App(props) {
   }
   //加入願望清單
   const addwishlist = (value) => {
-    if (!wishlist.includes(value)) {
+    const index = wishlist.findIndex((item)=>item.productId === value.productId)
+    if (index == -1) {
       const newWishlist = [...wishlist]
       newWishlist.push(value)
       props.dispatch({ type: 'GET_WISH', value: newWishlist })
-      addWishlistAsync(value)
+      console.log(value.productId)
+      addWishlistAsync(value.productId)
     } else {
       alert('已在願望清單')
     }
@@ -111,13 +111,13 @@ function App(props) {
   }
 
   //刪除願望清單
-  const deletewishlist = (productId) => {
-    const index = wishlist.indexOf(productId)
+  const deletewishlist = (value) => {
+    const index = wishlist.findIndex((item)=>item.productId === value.productId)
     if (index !== -1) {
       const localWishlist = [...wishlist]
       localWishlist.splice(index, 1)
       props.dispatch({ type: 'GET_WISH', value: localWishlist })
-      delwishlistAsync(productId)
+      delwishlistAsync(value.productId)
     }
   }
   //寫入購物車資料

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
+import { Modal, Button, Form } from 'react-bootstrap'
 import { FaHeart, FaShoppingCart } from 'react-icons/fa'
+import Calendar from 'react-calendar';
 import {AiFillStar} from 'react-icons/ai'
 import { BsTrash } from 'react-icons/bs'
 
@@ -10,21 +12,58 @@ import '../../styles/wishlist.scss'
 
 function UserWishlist(props) {
   const { wishlist } = props
+  //會員資料
+  const member = JSON.parse(localStorage.getItem("member")) || ''
 
-
-//刪除願望清單
-  // const delwishlistAsync=async(productId)=>{
-  //   const request = new Request(`http://localhost:5000/member/wishlistDel/${member.id}`, {
-  //     method: 'delete',
-  //     body:JSON.stringify(productId),
-  //     headers: new Headers({
-  //       Accept: 'application/json',
-  //       'Content-Type': 'application/json',
-  //     }),
-  //   })
-  //   const response = await fetch(request)
-  //   const data = await response.json()
-  // }
+  //加入購物車狀態
+  const [addcartstatus,setAddcartstatus] = useState(false)
+  //加入購物車視窗
+  function Addcart(props) {
+    return (
+      <Modal
+        {...props}
+        size="md"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Body className="modal-body">
+        <div className="wish-addcartbox">
+          <div className="wish-choosedate">
+            <h6>選擇日期</h6>
+           <input type="date" min="2020-07-01" max="2020-08-01"/>
+          </div>
+          <div className="wish-chooseamount">
+            <h6>選擇數量</h6>
+            <input type="text"/>
+          </div>
+          <div className="wish-choosebutton">
+            <button>確定</button>
+            <button onClick={()=>{
+              setAddcartstatus(false)
+            }}>取消</button>
+          </div>
+        </div>
+          
+        </Modal.Body>
+      </Modal>
+    )
+  }
+  const showaddcart =()=>{
+    setAddcartstatus(true)
+  }
+//刪除願望清單(資料庫)
+const delwishlistAsync = async(productId)=>{
+  const request = new Request(`http://localhost:5000/member/wishlistDel/${member.id}`, {
+    method: 'delete',
+    body:JSON.stringify({productId}),
+    headers: new Headers({
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    }),
+  })
+  const response = await fetch(request)
+  const data = await response.json()
+}
   //刪除願望清單
   const deleteWishlist = (id) => {
     Swal.fire({
@@ -35,12 +74,12 @@ function UserWishlist(props) {
       cancelButtonText: '取消',
     }).then((result) => {
       if (result.value) {
-        const index = wishlist.findIndex((item) => item.id === id)
+        const index = wishlist.findIndex((item) => item.productId === id)
         if (index !== -1) {
           const localWishlist = [...wishlist]
           localWishlist.splice(index, 1)
           props.dispatch({ type: 'GET_WISH', value: localWishlist })
-          localStorage.setItem('wishlist', JSON.stringify(localWishlist))
+          delwishlistAsync(id)
         }
       }
     })
@@ -64,27 +103,29 @@ function UserWishlist(props) {
               <>
                 <div className="card m-2">
                   <div className="card-header">
-                    <img src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg" />
+                    <img src={`http://localhost:5000/images/product/${item.productImg}`} />
                   </div>
 
                   <div className="card-body">
                     <div className="whishnamebox"> 
-                      <p>{item.name}</p>
+                      <p>{item.productName}</p>
                     </div>
                     <div>{stars(item.star)}</div>
                     <div className="wishprice">
-                      <p>NT${item.price}</p>
+                      <p>NT${item.productPrice}</p>
                     </div>
                   </div>
 
                   <div className="card-footer bg-white">
-                    <span>
+                    <span onClick={()=>{
+                      showaddcart()
+                    }}>
                       <FaShoppingCart />
                       加入購物車
                     </span>
                     <span
                       onClick={() => {
-                        deleteWishlist(item.id)
+                        deleteWishlist(item.productId)
                       }}
                     >
                       <BsTrash />
@@ -112,6 +153,7 @@ function UserWishlist(props) {
     )
   return (
     <>
+    <Addcart show={addcartstatus} onHide={() => setAddcartstatus(false)}/>
       <div className="usercontainer">
         <h2 className="usertitle">願望清單</h2>
 
