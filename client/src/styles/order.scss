@@ -170,3 +170,22 @@
     }
   }
 }
+//憑證視窗
+.prooftitle {
+  h6 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+  }
+}
+.proofqrcode {
+  text-align: center;
+}
+.proofinfo {
+  text-align: center;
+  p {
+    margin: 10px;
+    font-size: 18px;
+    color: black;
+  }
+}
