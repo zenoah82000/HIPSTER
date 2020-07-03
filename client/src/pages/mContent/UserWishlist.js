@@ -8,28 +8,42 @@ import Swal from 'sweetalert2'
 import '../../styles/wishlist.scss'
 
 function UserWishlist(props) {
-  const {wishlist} =props
-  
+  const { wishlist } = props
+
+
 //刪除願望清單
-const deleteWishlist = (id) => {
-  Swal.fire({
-    text: '是否刪除該商品?',
-    icon: 'warning',
-    confirmButtonText: '確定',
-    showCancelButton: true,
-    cancelButtonText: '取消',
-  }).then((result) => {
-    if (result.value) {
-      const index = wishlist.findIndex((item) => item.id === id)
-      if (index !== -1) {
-        const localWishlist = [...wishlist]
-        localWishlist.splice(index, 1)
-        props.dispatch({type:'GET_WISH',value:localWishlist})
-        localStorage.setItem('wishlist', JSON.stringify(localWishlist))
+  // const delwishlistAsync=async(productId)=>{
+  //   const request = new Request(`http://localhost:5000/member/wishlistDel/${member.id}`, {
+  //     method: 'delete',
+  //     body:JSON.stringify(productId),
+  //     headers: new Headers({
+  //       Accept: 'application/json',
+  //       'Content-Type': 'application/json',
+  //     }),
+  //   })
+  //   const response = await fetch(request)
+  //   const data = await response.json()
+  // }
+  //刪除願望清單
+  const deleteWishlist = (id) => {
+    Swal.fire({
+      text: '是否刪除該商品?',
+      icon: 'warning',
+      confirmButtonText: '確定',
+      showCancelButton: true,
+      cancelButtonText: '取消',
+    }).then((result) => {
+      if (result.value) {
+        const index = wishlist.findIndex((item) => item.id === id)
+        if (index !== -1) {
+          const localWishlist = [...wishlist]
+          localWishlist.splice(index, 1)
+          props.dispatch({ type: 'GET_WISH', value: localWishlist })
+          localStorage.setItem('wishlist', JSON.stringify(localWishlist))
+        }
       }
-    }
-  })
-}
+    })
+  }
   const display =
     wishlist != null && wishlist.length >= 1 ? (
       <div className="wishlistbox ">
@@ -43,8 +57,13 @@ const deleteWishlist = (id) => {
                   </div>
 
                   <div className="card-body">
-                    <p className="card-title">{item.name}</p>
-                    <span>NT${item.price}</span>
+                    <div className="whishnamebox"> 
+                      <p>{item.name}</p>
+                    </div>
+
+                    <div className="wishprice">
+                      <p>NT${item.price}</p>
+                    </div>
                   </div>
 
                   <div className="card-footer bg-white">
@@ -92,7 +111,7 @@ const deleteWishlist = (id) => {
 }
 const mapStateToProps = (store) => {
   return {
-    wishlist:store.orderReducer.wishData,
+    wishlist: store.orderReducer.wishData,
   }
 }
 

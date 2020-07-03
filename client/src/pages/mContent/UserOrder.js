@@ -181,11 +181,11 @@ function UserOrder() {
                           ) : (
                             ''
                           )}
-                          <div className="d-flex product-box border-bottom">
+                          <div className="d-flex product-box border-bottom align-items-center">
                             <div className="productimg mr-3">
                               <img src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg" />
                             </div>
-                            <div>
+                            <div className="oderproductinfo">
                               <div className="productname">
                                 <p>{value.productName}</p>
                               </div>
@@ -207,6 +207,7 @@ function UserOrder() {
                                 <p>活動時間:{value.date}</p>
                               </div>
                             </div>
+                            <div className="oderbutton"><button>檢視憑證</button></div>
                           </div>
                         </>
                       )

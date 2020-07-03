@@ -37,8 +37,8 @@ function Mynavbar(props) {
   const [showLogoutOk, setShowLogoutOk] = useState(false)
   //註冊完成視窗文字顯示:失敗?成功?
   const [signOk, setsignOk] = useState(false)
-  //登入完成視窗文字顯示:失敗?成功?
-  const [loginOk, setloginOk] = useState(false)
+  //登入完成視窗文字顯示:失敗0;成功1;忘記密碼送出2;查無帳號3
+  const [loginOk, setloginOk] = useState(0)
   //忘記密碼視窗
   const [showforgetPwd, setshowforgetPwd] = useState(false)
 
@@ -88,10 +88,10 @@ function Mynavbar(props) {
     const data = await response.json()
     if (data.success) {
       localStorage.setItem('member', JSON.stringify(data))
-      setloginOk(true)
+      setloginOk(1)
       setuserSuccess(true)
     } else {
-      setloginOk(false)
+      setloginOk(0)
       setuserSuccess(false)
     }
     // console.log('伺服器登入回傳的json資料', data)
@@ -101,6 +101,23 @@ function Mynavbar(props) {
   //登出處理
   async function LogoutMember(item) {
     localStorage.removeItem('member')
+  }
+
+  //忘記密碼傳後端
+  async function ForgetPwdinput(item) {
+    // 注意資料格式要設定，伺服器才知道是json格式
+    const request = new Request('http://localhost:5000/forgetpwdinput/', {
+      method: 'POST',
+      body: JSON.stringify(item),
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }),
+    })
+    const response = await fetch(request)
+    const data = await response.json()
+    console.log(data)
+    data.success ? setloginOk(2) : setloginOk(3)
   }
 
   //註冊會員表格
@@ -322,6 +339,49 @@ function Mynavbar(props) {
   }
 
   ////登入完成視窗
+  const loginOktrue = (
+    <>
+      <p className="SignOk-title">登入完成</p>
+    </>
+  )
+  const loginOkfalse = (
+    <>
+      <p className="SignOk-title">
+        登入失敗
+        <br />
+        請檢查帳號＆密碼是否正確
+      </p>
+    </>
+  )
+
+  const forgetpwdok = (
+    <>
+      <p className="SignOk-title">
+        重製密碼信件已寄出
+        <br />
+        請收取信件並按指示操作
+      </p>
+    </>
+  )
+
+  const forgetpwderror = (
+    <>
+      <p className="SignOk-title">查無此帳號</p>
+    </>
+  )
+
+  const Massage = () => {
+    if (loginOk == 0) {
+      return loginOkfalse
+    } else if (loginOk == 1) {
+      return loginOktrue
+    } else if (loginOk == 2) {
+      return forgetpwdok
+    } else if (loginOk == 3) {
+      return forgetpwderror
+    }
+  }
+
   function LoginOkMassage(props) {
     return (
       <Modal
@@ -332,16 +392,7 @@ function Mynavbar(props) {
         centered
       >
         <Modal.Body className="SignOk-bg">
-          {loginOk ? (
-            <p className="SignOk-title">登入完成</p>
-          ) : (
-            <p className="SignOk-title">
-              登入失敗
-              <br />
-              請檢查帳號＆密碼是否正確
-            </p>
-          )}
-
+          {Massage()}
           <div
             className="SignOkbtn"
             onClick={() => {
@@ -394,7 +445,7 @@ function Mynavbar(props) {
           <div className="closeMassage" onClick={props.onHide}>
             <IoMdClose />
           </div>
-          <p className="SignOk-title">請輸入當初註冊使用信箱</p>
+          <p className="SignOk-title">請輸入註冊時使用信箱帳號</p>
           <Form.Group className="forgetpwdgroup">
             <Form.Control
               ref={(input) => (forgetPwd = input)}
@@ -405,7 +456,7 @@ function Mynavbar(props) {
             />
           </Form.Group>
           <p className="forgetpwdtext">
-            我們會將重製密碼信件 寄至您指定信箱，還請確實填寫
+            我們會將重製密碼信件寄至您指定信箱，還請確實填寫
           </p>
           <div
             className="SignOkbtn"
@@ -413,6 +464,11 @@ function Mynavbar(props) {
               forgetpwdmailData = {
                 forgetpwdmail: forgetPwd.value,
               }
+              ForgetPwdinput(forgetpwdmailData)
+              setshowforgetPwd(false)
+              setTimeout(() => {
+                setShowLoginOk(true) //跳出登入完成視窗
+              }, 300)
             }}
           >
             送出
