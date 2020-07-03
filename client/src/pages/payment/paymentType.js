@@ -5,12 +5,14 @@ import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import { withRouter, Link } from 'react-router-dom'
 import '../../styles/Payment.scss'
 
+import { FaCcMastercard, FaCcVisa } from 'react-icons/fa'
+
 //引入自訂元件
 
 function PaymentType(props) {
   const { sum, buyerinfo } = props
 
-  //驗證
+  //驗證表單
   const [validated, setValidated] = useState(false)
   //讀取會員
   const member =JSON.parse(localStorage.getItem('member'))
@@ -101,7 +103,36 @@ function PaymentType(props) {
                     <p>輸入信用卡資訊</p>
                   </div>
                 </div>
-
+                <Form.Group>
+                <Form.Check
+                  required
+                  inline
+                  name="card"
+                  label="MasterCard"
+                  type="radio"
+                  id="MasterCard"
+                  onChange={(e) => {
+                    // getformInfo(e, 'card')
+                    // $('#master').fadeToggle()
+                    // $('#visa').fadeOut()
+                  }}
+                />
+                <FaCcMastercard id="master" size="25px" display="none" />
+                <Form.Check
+                  required
+                  inline
+                  name="card"
+                  label="VISA"
+                  type="radio"
+                  id="VISA"
+                  onChange={(e) => {
+                    // getformInfo(e, 'card')
+                    // $('#visa').fadeToggle()
+                    // $('#master').fadeOut()
+                  }}
+                />
+                <FaCcVisa id="visa" size="25px" display="none" />
+              </Form.Group>
                 <Form.Row>
                   <Form.Group as={Col} xs={3} sm={3} md={3}>
                     <Form.Control
