@@ -107,8 +107,9 @@ function ReplyComment({ handleDelete, index, commentData, history }) {
         confirmButtonColor: 'rgba(104, 142, 103, 0.8)',
       }).then(() => {
         handleDelete(index)
-        console.log('123222222')
-        history.push('/memberuser/comment/notcomment')
+        history.push('/memberuser/comment/mycomment')  
+        window.location.replace('/memberuser/comment/mycomment' )
+        // window.location.href = '/memberuser/comment/mycomment' 
         setLoad(false)
         // setImage({ file: [] })
       })
@@ -131,7 +132,7 @@ function ReplyComment({ handleDelete, index, commentData, history }) {
           <>
             <form
               method="POST"
-              // action="/{commentData.memberId}"
+              // action="/comment/mycomment"
               enctype="multipart/form-data"
               key={index}
             >
