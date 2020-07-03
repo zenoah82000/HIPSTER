@@ -13,6 +13,7 @@ import { FaRegCalendarCheck } from 'react-icons/fa'
 import { FaSearch, FaStreetView } from 'react-icons/fa'
 import { GiCoffeeCup } from 'react-icons/gi'
 import { RiMoneyCnyCircleLine } from 'react-icons/ri'
+import { AiFillStar } from 'react-icons/ai'
 
 //地圖列表
 class mapList extends React.Component {
@@ -58,7 +59,6 @@ class mapList extends React.Component {
   sendData(item) {
     this.props.setFileterData(item)
   }
-
   //搜尋
   updateSearch(event) {
     this.setState({
@@ -110,6 +110,13 @@ class mapList extends React.Component {
     this.setState({
       productdata: sortedProductsDsc,
     })
+  }
+  stars = (v) => {
+    const star = []
+    for (let i = 0; i < 5; i++) {
+      star.push(<AiFillStar className={v > i ? 'star1' : 'star2'} />)
+    }
+    return star
   }
 
   //搜尋btn
@@ -546,9 +553,7 @@ class mapList extends React.Component {
                       {item.category}
                     </div>
                   </li>
-                  <li>
-                    <RatingStarValue ratingValue={item.star} />
-                  </li>
+                  <li>{this.stars(item.star)}</li>
                   <li>
                     <span className="mr-2">
                       <FaRegClock />

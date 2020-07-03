@@ -17,41 +17,31 @@ class RatingValue extends React.Component {
     if (this.state.rating == 5) {
       return (
         <>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
+          <span>★★★★★</span>
         </>
       )
     } else if (this.state.rating == 4) {
       return (
         <>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
+          <span>★★★★</span>
         </>
       )
     } else if (this.state.rating == 3) {
       return (
         <>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
+          <span>★★★</span>
         </>
       )
     } else if (this.state.rating == 2) {
       return (
         <>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
+          <span>★★</span>
         </>
       )
     } else if (this.state.rating == 1) {
       return (
         <>
-          <i class="fas fa-star"></i>
+          <span>★</span>
         </>
       )
     } else {
