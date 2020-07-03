@@ -5,6 +5,7 @@ import L from 'leaflet'
 import TimelineElement from '../../components/user/TimelineElement';
 import SimpleReactLightbox from 'simple-react-lightbox'
 import { SRLWrapper } from 'simple-react-lightbox'
+import $ from 'jquery'
 
 import '../../styles/mContent/userMymap.scss'
 import 'react-vertical-timeline-component/style.min.css';
@@ -44,14 +45,31 @@ function UserMymap(props) {
     }, [])
 
 
+    $(document).ready(function(){
+        $(window).scroll(function () {
+                if ($(this).scrollTop() > 100) {
+                    $('#back-to-top').fadeIn();
+                } else {
+                    $('#back-to-top').fadeOut();
+                }
+            });
+            // scroll body to 0px on click
+            $('#back-to-top').click(function () {
+                $('body,html').animate({
+                    scrollTop: 0
+                }, 400);
+                return false;
+            });
+    });
+
     return (
         <>
             <div className="usercontainer">
                 <h2 className="usertitle">我的文青地圖</h2>
             </div>
             <div className="tab-pane">
-                <div style={{ background: "#E6DED8",padding:"20px 20px 0 20px" }} >
-                    <Map center={[25.0338438, 121.54335]} zoom={12} style={{ width:"100%", height: "350px"}}>
+                <div style={{ background: "#E6DED8", padding: "20px 20px 0 20px" }} >
+                    <Map center={[25.0338438, 121.54335]} zoom={12} style={{ width: "100%", height: "350px" }}>
                         <TileLayer
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -85,6 +103,7 @@ function UserMymap(props) {
                         )}
 
                 </div>
+                <a id="back-to-top" href="#" class="btn  btn-lg back-to-top" role="button"><i class="fas fa-chevron-up"></i></a>
             </div>
         </>
     )
