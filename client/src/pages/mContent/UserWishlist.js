@@ -51,7 +51,7 @@ function UserWishlist(props) {
     const star =[]
     // console.log(this.state.searchBtn1, this.state.searchBtn3)
     for(let i=0;i<5;i++){
-      star.push( <AiFillStar className={value > i ? 'starcolor':""}/>)
+      star.push( <AiFillStar className={value > i ? 'star1':"star2"}/>)
     }
     return star
   }
