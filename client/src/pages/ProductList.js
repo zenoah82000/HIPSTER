@@ -39,7 +39,7 @@ function ProductList(props) {
         })
     : !!searchParams.get('loc')
 
-  console.log(loc, cat)
+  // console.log(loc, cat)
 
   useEffect(() => {
     getProductListAsync()
