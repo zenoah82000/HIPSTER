@@ -5,6 +5,45 @@ const router = express.Router();
 const nodemailer = require("nodemailer");
 require("dotenv").config();
 
+
+
+
+
+//願望清單查詢
+router.get("/member/wishlist/:memberId", async (req, res) => {
+  console.log('查詢願望清單')
+  const memberId = req.params.memberId
+  const wishsql="SELECT * FROM `wishlist` WHERE `memberId` = ?"
+  const [wishlist] = await db.query(wishsql,[memberId])
+
+
+  res.json(wishlist)
+
+})
+//願望清單新增
+
+router.post("/member/wishlistAdd/:memberId", async (req, res) => {
+  console.log('新增願望清單')
+  const memberId = req.params.memberId
+  const productId = req.body.productId
+  const wishsql="INSERT INTO `wishlist` (`memberId`,`productId`) VALUES(?,?)"
+  const [wishlist] = await db.query(wishsql,[memberId,productId])
+
+
+  res.json(wishlist)
+
+})
+//願望清單刪除
+router.delete("/member/wishlistDel/:memberId", async (req, res) => {
+  console.log(req.body.memberId+"刪除願望清單")
+  const memberId = req.params.memberId
+  const productId = req.body.productId
+  const wishsql="DELETE FROM `wishlist` WHERE `memberId` = ? && `productId`=?"
+  const [wishlist] = await db.query(wishsql,[memberId,productId])
+
+
+  res.json(wishlist)
+})
 //訂單列表
 router.get("/member/order/:memberId", async (req, res) => {
   console.log("買家訂單請求");
@@ -27,7 +66,7 @@ router.get("/member/order/:memberId", async (req, res) => {
   const sqlorder = `SELECT * FROM orderlist WHERE memberId = ? ORDER BY created_at DESC`;
 
   const sqlorderlist =
-    "SELECT `product`.`productName`,`item_lists`.`orderId`,`item_lists`.`date`,`item_lists`.`checkPrice`,`item_lists`.`checkQty`,`item_lists`.`checkSubtotal`,`item_lists`.`created_at`FROM `member` INNER JOIN `orderlist` ON `member`.`memberId` = `orderlist`.`memberId` INNER JOIN `item_lists` ON `orderlist`.`orderId`=`item_lists`.`orderId` INNER JOIN `product` ON `item_lists`.`productId` = `product`.`productId` WHERE `member`.`memberId`=?";
+    "SELECT `product`.`productName`,`item_lists`.`orderId`,`item_lists`.`productId`,`item_lists`.`date`,`item_lists`.`checkPrice`,`item_lists`.`checkQty`,`item_lists`.`checkSubtotal`,`item_lists`.`created_at`FROM `member` INNER JOIN `orderlist` ON `member`.`memberId` = `orderlist`.`memberId` INNER JOIN `item_lists` ON `orderlist`.`orderId`=`item_lists`.`orderId` INNER JOIN `product` ON `item_lists`.`productId` = `product`.`productId` WHERE `member`.`memberId`=?";
 
   const [r1] = await db.query(sqlorder, [memberId]);
   const [r2] = await db.query(sqlorderlist, [memberId]);

@@ -3,15 +3,15 @@ const db = require(__dirname + "/db_connect2");
 const upload = require(__dirname + '/upload-module');
 const router = express.Router()
 
-router.get('/member/coupon/:memberId', async (req, res) => {
+router.get('/member/coupon', async (req, res) => {
     // console.log("買家優惠券請求");
     const data = {
         status: true,
         coupon: [],
       };
-    const sqlcoupon = "SELECT `coupon`.`couponId`, `coupon`.`discountName`, `coupon`.`discountCode`, `coupon`.`discountPercent`, `coupon`.`startTime`, `coupon`.`endTime`, `coupon`.`created_at`, `coupon`.`updated_at`,`rel_member_coupon`.`id`,`rel_member_coupon`.`memberId`,`rel_member_coupon`.`memberCouponNum` FROM `coupon` INNER JOIN `rel_member_coupon` ON `coupon`.`discountCode` = `rel_member_coupon`.`discountCode` WHERE `rel_member_coupon`.`memberId`=? ORDER BY `couponId`,`memberId` ASC";
+    const sqlcoupon = "SELECT `coupon`.`couponId`, `coupon`.`discountName`, `coupon`.`discountCode`, `coupon`.`discountPercent`, `coupon`.`startTime`, `coupon`.`endTime`, `coupon`.`created_at`, `coupon`.`updated_at`,`rel_member_coupon`.`id`,`rel_member_coupon`.`memberId`,`rel_member_coupon`.`memberCouponNum` FROM `coupon` INNER JOIN `rel_member_coupon` ON `coupon`.`discountCode` = `rel_member_coupon`.`discountCode` ORDER BY `couponId`,`memberId` ASC";
 
-    const [r1] = await db.query(sqlcoupon, [req.params.memberId]);
+    const [r1] = await db.query(sqlcoupon);
 
     if (r1.length > 0 ) {
         r1.forEach((item) => {
