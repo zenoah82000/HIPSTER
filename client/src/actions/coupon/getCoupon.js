@@ -6,7 +6,7 @@ export const getUserCouponDetail = (data) => ({
 
 export const getUserCouponDetaiAsync = (usercoupondata) => {
   return async (dispatch) => {
-    const request = new Request(`http://localhost:5000/member/coupon/2`, {
+    const request = new Request(`http://localhost:5000/member/coupon`, {
       method: 'GET',
       headers: new Headers({
         Accept: 'application/json',

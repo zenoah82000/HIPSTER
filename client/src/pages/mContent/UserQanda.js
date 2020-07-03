@@ -15,7 +15,7 @@ function UserQanda(props) {
   const { userQandaData, getUserQandaAsync } = props
   const { productListData, getProductListAsync } = props
   const { adduserQandaData, addUserQandaDataAsync } = props
-  const memberId = 2
+  const memberId = JSON.parse(localStorage.getItem('member')).id
   const [productName, setproductName] = useState([])
   const [question, setQuestion] = useState([])
   // useEffect(() => {
@@ -47,7 +47,7 @@ function UserQanda(props) {
   })
 
   let qandaList = userQandaData.map((item) => {
-    if (item.memberId == 2) {
+    if (item.memberId == memberId) {
       // console.log('item', item.memberId == 2)
       return (
         <div className="qa-pane">
