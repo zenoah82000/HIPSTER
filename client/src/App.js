@@ -42,22 +42,65 @@ import Swal from 'sweetalert2'
 import ProtectedRoute from './utils/ProtectedRoute'
 
 function App(props) {
-
   //判斷使用者是否已登入
   const [userSuccess, setuserSuccess] = useState(false)
   const userlocalStorage = JSON.parse(localStorage.getItem('member')) || []
   const username = userlocalStorage.name
 
   const { mycart, wishlist } = props
+  console.log(wishlist)
   //取得購物車資料
   const localCart = JSON.parse(localStorage.getItem('cart')) || []
-  //取得願望清單資料
-  // const localWishlist = JSON.parse(localStorage.getItem('wishlist')) || []
 
   //取得願望清單
-  const getwishAsync=async()=>{
-    const request = new Request(`http://localhost:5000/member/wishlist/${userlocalStorage.id}`, {
-      method: 'get',
+  const getwishAsync = async () => {
+    const request = new Request(
+      `http://localhost:5000/member/wishlist/${userlocalStorage.id}`,
+      {
+        method: 'get',
+        headers: new Headers({
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        }),
+      }
+    )
+    const response = await fetch(request)
+    const data = await response.json()
+    const wishlist = data.map((item)=>item.productId)
+    props.dispatch({ type: 'GET_WISH', value: wishlist })
+  }
+  // 加入願望清單(資料庫)
+  const addWishlistAsync = async (productId) => {
+    const request = new Request(
+      `http://localhost:5000/member/wishlistAdd/${userlocalStorage.id}`,
+      {
+        method: 'post',
+        body: JSON.stringify({ productId }),
+        headers: new Headers({
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        }),
+      }
+    )
+    const response = await fetch(request)
+    const data = await response.json()
+  }
+  //加入願望清單
+  const addwishlist = (value) => {
+    if (!wishlist.includes(value)) {
+      const newWishlist = [...wishlist]
+      newWishlist.push(value)
+      props.dispatch({ type: 'GET_WISH', value: newWishlist })
+      addWishlistAsync(value)
+    } else {
+      alert('已在願望清單')
+    }
+  }
+  //刪除願望清單(資料庫)
+  const delwishlistAsync = async(productId)=>{
+    const request = new Request(`http://localhost:5000/member/wishlistDel/${userlocalStorage.id}`, {
+      method: 'delete',
+      body:JSON.stringify({productId}),
       headers: new Headers({
         Accept: 'application/json',
         'Content-Type': 'application/json',
@@ -65,34 +108,18 @@ function App(props) {
     })
     const response = await fetch(request)
     const data = await response.json()
-    props.dispatch({ type: 'GET_WISH', value: data })
   }
-// 加入願望清單
-const delwishlistAsync=async(productId)=>{
-  const request = new Request(`http://localhost:5000/member/wishlistAdd/${userlocalStorage.id}`, {
-    method: 'post',
-    body:JSON.stringify(productId),
-    headers: new Headers({
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    }),
-  })
-  const response = await fetch(request)
-  const data = await response.json()
-}
-//加入願望清單
-const addwish = (value) => {
-  const index = wishlist.findIndex((item) => item.id == value.id)
-  if (index == -1) {
-    const newWishlist = [...wishlist]
-    newWishlist.push(value)
-    props.dispatch({ type: 'GET_WISH', value: newWishlist })
-    delwishlistAsync(value)
-    // localStorage.setItem('wishlist', JSON.stringify(localWishlist))
-  } else {
-   alert('已在願望清單')
+
+  //刪除願望清單
+  const deletewishlist = (productId) => {
+    const index = wishlist.indexOf(productId)
+    if (index !== -1) {
+      const localWishlist = [...wishlist]
+      localWishlist.splice(index, 1)
+      props.dispatch({ type: 'GET_WISH', value: localWishlist })
+      delwishlistAsync(productId)
+    }
   }
-}
   //寫入購物車資料
   useEffect(() => {
     getLocation()
@@ -139,8 +166,6 @@ const addwish = (value) => {
     }
     return total
   }
-
-  
 
   //地圖定位
   const [viewport, setViewport] = useState({ center: [0, 0], zoom: 15 })
@@ -237,7 +262,7 @@ const addwish = (value) => {
             <Forgetpwd />
           </Route>
           <Route exact path="/">
-            <Home addwish={addwish}/>
+            <Home addwishlist={addwishlist} deletewishlist={deletewishlist}/>
           </Route>
 
           <Route exact path="*">

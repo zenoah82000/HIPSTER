@@ -426,7 +426,7 @@ function Home(props) {
   const ProductEnddisplay = ProductEnd.map((item, index) => {
     return (
       <>
-        <CountdownProduct item={item} addwish={props.addwish}/>
+        <CountdownProduct item={item} addwishlist={props.addwishlist} deletewishlist={props.deletewishlist}/>
       </>
     )
   })

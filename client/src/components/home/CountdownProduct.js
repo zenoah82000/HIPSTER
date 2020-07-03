@@ -7,11 +7,12 @@ function CountdownProduct(props) {
   // 設置倒數計時: 結束時間 - 當前時間
   //控制關注愛心class
   //取得會員資料
-  const member =JSON.parse(localStorage.getItem('member'))||''
+  const member = JSON.parse(localStorage.getItem('member')) || ''
 
-  const { item,wishlist,addwish } = props
+  const { item, wishlist, addwishlist, deletewishlist } = props
   //商品區塊>關注
-  const [heart, setheart] = useState(false)
+  // const [heart, setheart] = useState(wishlist.includes(item.productId))
+  // console.log(heart)
   // const heartClass = heart ? 'activity-follow active' : 'activity-follow'
 
   const [thistime, setthistime] = useState('')
@@ -37,8 +38,6 @@ function CountdownProduct(props) {
     // console.log('相差', offsetTime, '秒')
     // console.log('相差', hr, '時', min, '分', sec, '秒')
 
-    
-
     return (
       <>
         <span className="large">{hr}</span>時
@@ -47,14 +46,17 @@ function CountdownProduct(props) {
       </>
     )
   }
-  const addWish = (e,productid) => {
-    if(member.id){
-      e.preventDefault()
-      addwish(productid)
-    }else{
+  const addWish = (e, productId) => {
+    e.preventDefault()
+    if (member.id) {
+      if (wishlist.includes(item.productId)) {
+        deletewishlist(productId)
+      } else {
+        addwishlist(productId)
+      }
+    } else {
       alert('請先登入')
     }
-    
   }
 
   useEffect(() => {
@@ -72,9 +74,9 @@ function CountdownProduct(props) {
         <div className="countdown-main-cont">
           <div className="countdown-picture">
             <div
-              className={wishlist.findIndex((value)=>value.productId == item.productId) != -1? 'activity-follow active':'activity-follow'}
+              className={wishlist.includes(item.productId)? 'activity-follow active' : 'activity-follow'}
               onClick={(e) => {
-                addWish(e,item.productId)
+                addWish(e, item.productId)
               }}
             >
               <FaHeart />
