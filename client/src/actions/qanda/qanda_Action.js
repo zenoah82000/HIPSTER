@@ -63,13 +63,13 @@ export const addUserQandaDataAsync = (addqandaData, callback) => {
         'Content-Type': 'application/json',
       }),
     })
-    // console.log('request', request)
+
     const response = await fetch(request)
-    // console.log('response', response)
     const data = await response.json()
-    // console.log('伺服器回傳的json資料', data)
 
     dispatch(addUserQanda(addqandaData))
-    // window.location.reload()
+    window.setTimeout(function () {
+      window.location.reload()
+    }, 0)
   }
 }
