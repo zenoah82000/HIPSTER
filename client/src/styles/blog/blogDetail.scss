@@ -1,0 +1,39 @@
+.blog-main-content {
+  background: #fff;
+  width: 100%;
+}
+.blog-content-aside {
+  button {
+    background: #b98f50;
+    color: #fff !important;
+    margin: 10px auto;
+  }
+  .card {
+    width: 80%;
+    margin: 10px auto;
+    .blog-author-avatar {
+      width: 70%;
+      border: none;
+      margin: 10px auto;
+      img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        margin: 10px auto;
+      }
+    }
+  }
+  .featured {
+    width: 80%;
+    margin: 10px auto;
+  }
+}
+.related-posts {
+  padding: 5px;
+  li {
+    padding: 10px;
+    img {
+      border-radius: 8px;
+    }
+  }
+}

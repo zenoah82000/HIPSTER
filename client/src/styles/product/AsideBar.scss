@@ -66,18 +66,20 @@
         cursor: pointer;
 
         & > .fa-square {
-          transform: scale(1.1);
+          transform: scale(1.2);
           margin-right: 5px;
           color: #684b386e;
+          
         }
         & > .fa-check-square{
           @extend .fa-square;
-          color: #684b38;
+          color: rgb(104, 142, 103);
         }
 
         &:hover .fa-square {
-          color: #684b38;
+          color: rgb(104, 142, 103);
         }
+        
       }
     }
 

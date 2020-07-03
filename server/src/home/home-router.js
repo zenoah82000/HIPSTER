@@ -1,6 +1,7 @@
 const express = require('express')
 // const User = require(__dirname + '/users-sql')
-
+const nodemailer = require("nodemailer");
+require("dotenv").config();
 
 // mysql2 async-await用的
 const db = require(__dirname + './../db_connect2')
@@ -96,7 +97,7 @@ async function executeSQL(
   // 測試response，會自動解析為物件
   // console.log(typeof req.body)
   // console.log(req.body)
-  const productId = 67;  //商品id
+  const productId = 16;  //商品id
   const Sql = "SELECT `product`.`productId`,`productName`,`productContent`,`productAddress`,`productImgs` FROM `product` LEFT JOIN `multiple_imgs` ON `product`.`productId` = `multiple_imgs`.`productId` WHERE `product`.`productId` =?  LIMIT 1"
   const [r1] = await db.query(Sql,productId);
   res.json(r1)
@@ -107,7 +108,7 @@ async function executeSQL(
   // 測試response，會自動解析為物件
   // console.log(typeof req.body)
   // console.log(req.body)
-  const productId = 67;  //商品id
+  const productId = 16;  //商品id
   const Sql = "SELECT `product`.`productId`,`productName`,`productContent`,`productAddress`,`productImgs` FROM `product` LEFT JOIN `multiple_imgs` ON `product`.`productId` = `multiple_imgs`.`productId` WHERE `product`.`productId` =?  "
   const [r1] = await db.query(Sql,productId);
   res.json(r1)
@@ -141,16 +142,15 @@ async function executeSQL(
 // 首頁>忘記密碼
   router.post('/forgetpwdinput', async (req, res, next) => {
   // console.log(req.body.forgetpwdmail)
-  const mail = req.body.forgetpwdmail
+  const mail = req.body.forgetpwdmail  //傳回信箱
   const Sql = `SELECT * FROM member WHERE  memberMail=? `
   const [r1] = await db.query(Sql,mail);
 
-  const mailstate = r1.length?true:false
+  const mailstate = r1.length?true:false  //判斷是否有該帳號
+  let memberId //先定義會員id
 
-  let memberId 
-  mailstate?memberId = [r1][0][0].memberId:memberId = ''
-
-// 亂數-數字產生
+  
+// 亂數-數字產生========================================================
   function randomusefloor(min,max) {
     return Math.floor(Math.random()*(max-min+1)+min);
   }
@@ -163,22 +163,96 @@ async function executeSQL(
       text += possible.charAt(Math.floor(Math.random() * possible.length));
     return text;
   }
-  const num = makerandomletter(2)+randomusefloor(1,999)
+  //======================================================================
+  const num = makerandomletter(2)+randomusefloor(1,999)  //產生亂數
+  // mailstate?memberId = [r1][0][0].memberId:memberId = ''
+
+//先定義寫入驗證碼sql
+  const Sqlcodeinput = "UPDATE `member` SET `code`=? WHERE `memberId`=?" 
+
+  //如果有帳號>寫入code
+  if(mailstate==true){
+    memberId = [r1][0][0].memberId 
+    memberMail=[r1][0][0].memberMail 
+    //執行寫入code
+    const [r2] = await db.query(Sqlcodeinput,[num,memberId]);
+
+    //訂單成功送出email
+    // console.log("送出電子郵件");
+    // const transporter = nodemailer.createTransport({
+    //   service: "gmail",
+    //   secure: true,
+    //   auth: {
+    //     type: "OAuth2",
+    //     user: process.env.ACCOUNT,
+    //     clientId: process.env.CLINENTID,
+    //     clientSecret: process.env.CLINENTSECRET,
+    //     refreshToken: process.env.REFRESHTOKEN,
+    //   },
+    //   tls: {
+    //     rejectUnauthorized: false,
+    //   },
+    // });
+
+    // var mailOptions = {
+    //   from: '"Hipster文青地圖" <e24971234@gmail.com>',
+    //   to: memberMail,
+    //   subject: "重製密碼信件",
+    //   html: "<p>驗證碼:" + num + "</p><br/><p>請點擊下列網址輸入上述驗證碼進行密碼重製：http://localhost:3000/forgetpwd/"+memberId+"</p>"
+    // };
+    // // 準備發送信件
+    // transporter.sendMail(mailOptions, function (err, info) {
+    //   if (err) {
+    //     return console.log(err);
+    //   }
+    // });
 
 
 
-
+  }else{
+    memberId = ''
+  }
 
   const output = {
     success: mailstate,
-    id: memberId
+    id:memberId
   };
   
-  console.log(mailstate)
+  // console.log(mailstate,memberId,num)
 
   res.json(output)
 })
 
+
+
+
+//忘記密碼頁-檢查驗證碼
+router.post('/codechecking', async (req, res, next) => {
+  
+  const memberid=req.body.memberid
+  const code = req.body.code
+  const Sql = "SELECT * FROM member WHERE  memberId=?  && code=? "
+
+  const [r1] = await db.query(Sql,[memberid,code]);
+  const codestate = r1.length?true:false  //判斷輸入code&id是否有該帳號
+  console.log(codestate)
+
+  res.json(codestate)
+})
+
+//忘記密碼頁-重設密碼
+router.post('/pwdchanging', async (req, res, next) => {
+  console.log(req.body)
+  const memberid=req.body.memberid
+  const pwd = req.body.pwd
+  const Sql = "UPDATE `member` SET `memberPwd`=? WHERE `memberId`=? "
+
+  const [r1] = await db.query(Sql,[pwd,memberid]);
+
+
+
+  res.json(r1)
+})
 
 
 

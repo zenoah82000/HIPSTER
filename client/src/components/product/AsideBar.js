@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { Dropdown } from 'react-bootstrap'
 import Calendar from 'react-calendar'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 import { Collapse } from '@material-ui/core'
 import InputRange from 'react-input-range'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { fas } from '@fortawesome/free-solid-svg-icons'
+import { far } from '@fortawesome/free-regular-svg-icons'
 
 import '../../styles/product/AsideBar.scss'
 // import 'react-input-range/lib/css/index.css'
@@ -40,8 +42,15 @@ function AsideBar(props) {
   }
 
   console.log(searchParams.toString())
-  console.log(typeof searchParams)
-  console.log(searchParams.entries())
+  console.log(loc)
+  // console.log(
+  //   loc.splice(
+  //     loc.findIndex((element) => element === 1),
+  //     1
+  //   )
+  // )
+  // console.log(typeof searchParams)
+  // console.log(searchParams.entries())
 
   //類別選項收闔
   function AddcategorySection(category) {
@@ -61,21 +70,49 @@ function AsideBar(props) {
       return 'checkbox-dropdown-list'
     }
   }
-  function checkloc(i = 0) {
-    if (loc) {
-      if (
-        loc.includes(1) &&
-        loc.includes(2) &&
-        loc.includes(3) &&
-        loc.includes(4)
-      ) {
-        return true
-      } else if (loc.includes(i)) {
-        return true
+
+  //確認篩選種類
+  function checkcat(item) {
+    if (searchParams.get('cat')) {
+      if (searchParams.get('cat').includes(item)) {
+        let paramsIndex = cat.findIndex((element) => element === +item)
+        cat.splice(paramsIndex, 1).join()
+        // console.log()
+        // console.log(paramsIndex)
+        if (searchParams.get('cat') === item) {
+          searchParams.delete('cat')
+        } else {
+          searchParams.set('cat', cat.join())
+        }
+      } else {
+        cat.push(+item)
+        searchParams.set('cat', cat.join())
       }
-      return false
+    } else {
+      searchParams.append('cat', item)
     }
-    return false
+  }
+
+  //確認篩選地點
+  function checkloc(item) {
+    if (searchParams.get('loc')) {
+      if (searchParams.get('loc').includes(item)) {
+        let paramsIndex = loc.findIndex((element) => element === +item)
+        loc.splice(paramsIndex, 1).join()
+        // console.log()
+        // console.log(paramsIndex)
+        if (searchParams.get('loc') === item) {
+          searchParams.delete('loc')
+        } else {
+          searchParams.set('loc', loc.join())
+        }
+      } else {
+        loc.push(+item)
+        searchParams.set('loc', loc.join())
+      }
+    } else {
+      searchParams.append('loc', item)
+    }
   }
 
   useEffect(() => {
@@ -112,7 +149,7 @@ function AsideBar(props) {
               }
               key={item.categoryId}
             >
-              <li className="checkbox" key={item.categoryId}>
+              <li className="checkbox" key={item.categoryId} onClick={() => {}}>
                 <i className="far fa-square"></i>
                 全部
               </li>
@@ -120,8 +157,26 @@ function AsideBar(props) {
                 if (category.categoryParentId === item.categoryId) {
                   return (
                     <>
-                      <li className="checkbox" key={category.categoryName}>
-                        <i className="far fa-square"></i>
+                      <li
+                        className="checkbox"
+                        key={category.categoryName}
+                        onClick={() => {
+                          checkcat(category.categoryId.toString())
+                          props.history.push(`?${searchParams.toString()}`)
+                        }}
+                        value={category.categoryId}
+                      >
+                        {searchParams.get('cat') ? (
+                          searchParams
+                            .get('cat')
+                            .includes(category.categoryId.toString()) ? (
+                            <FontAwesomeIcon icon={fas.faCheckSquare} />
+                          ) : (
+                            <FontAwesomeIcon icon={far.faSquare} />
+                          )
+                        ) : (
+                          <FontAwesomeIcon icon={far.faSquare} />
+                        )}{' '}
                         {category.categoryName}
                       </li>
                     </>
@@ -151,55 +206,142 @@ function AsideBar(props) {
           <Collapse in={checked} timeout={200}>
             <ul className="checkbox-dropdown-list active">
               <li
-                className={
-                  checkloc() ? 'checkbox px-0 checked' : 'checkbox px-0 '
-                }
+                className="checkbox px-0 "
                 key="全部"
                 onClick={() => {
                   searchParams.get('loc')
-                    ? searchParams.get('loc') === '1,2,3,4'
+                    ? searchParams.get('loc') === '1,2,3,4,5'
                       ? searchParams.delete('loc')
-                      : searchParams.set('loc', '1,2,3,4')
-                    : searchParams.append('loc', '1,2,3,4')
+                      : searchParams.set('loc', '1,2,3,4,5')
+                    : searchParams.append('loc', '1,2,3,4,5')
 
                   props.history.push(`?${searchParams.toString()}`)
                 }}
               >
-                <i
-                  className={
-                    checkloc() ? 'fas fa-check-square' : 'far fa-square'
-                  }
-                ></i>
+                {searchParams.get('loc') ? (
+                  searchParams.get('loc').includes('1') &&
+                  searchParams.get('loc').includes('2') &&
+                  searchParams.get('loc').includes('3') &&
+                  searchParams.get('loc').includes('4') &&
+                  searchParams.get('loc').includes('5') ? (
+                    <FontAwesomeIcon icon={fas.faCheckSquare} />
+                  ) : (
+                    <FontAwesomeIcon icon={far.faSquare} />
+                  )
+                ) : (
+                  <FontAwesomeIcon icon={far.faSquare} />
+                )}{' '}
                 全部
               </li>
 
-              <li className="checkbox px-0" key="北部">
-                <i className="far fa-square"></i> 北部
+              <li
+                className="checkbox px-0"
+                key="北部"
+                onClick={() => {
+                  checkloc('1')
+                  props.history.push(`?${searchParams.toString()}`)
+                }}
+              >
+                {searchParams.get('loc') ? (
+                  searchParams.get('loc').includes('1') ? (
+                    <FontAwesomeIcon icon={fas.faCheckSquare} />
+                  ) : (
+                    <FontAwesomeIcon icon={far.faSquare} />
+                  )
+                ) : (
+                  <FontAwesomeIcon icon={far.faSquare} />
+                )}{' '}
+                北部
               </li>
-              <li className="checkbox px-0" key="中部">
-                <i className="far fa-square"></i> 中部
+              <li
+                className="checkbox px-0"
+                key="中部"
+                onClick={() => {
+                  checkloc('2')
+                  props.history.push(`?${searchParams.toString()}`)
+                }}
+              >
+                {searchParams.get('loc') ? (
+                  searchParams.get('loc').includes('2') ? (
+                    <FontAwesomeIcon icon={fas.faCheckSquare} />
+                  ) : (
+                    <FontAwesomeIcon icon={far.faSquare} />
+                  )
+                ) : (
+                  <FontAwesomeIcon icon={far.faSquare} />
+                )}{' '}
+                中部
               </li>
-              <li className="checkbox px-0" key="南部">
-                <i className="far fa-square"></i> 南部
+              <li
+                className="checkbox px-0"
+                key="南部"
+                onClick={() => {
+                  checkloc('3')
+                  props.history.push(`?${searchParams.toString()}`)
+                }}
+              >
+                {searchParams.get('loc') ? (
+                  searchParams.get('loc').includes('3') ? (
+                    <FontAwesomeIcon icon={fas.faCheckSquare} />
+                  ) : (
+                    <FontAwesomeIcon icon={far.faSquare} />
+                  )
+                ) : (
+                  <FontAwesomeIcon icon={far.faSquare} />
+                )}{' '}
+                南部
               </li>
-              <li className="checkbox px-0" key="東部">
-                <i className="far fa-square"></i> 東部
+              <li
+                className="checkbox px-0"
+                key="東部"
+                onClick={() => {
+                  checkloc('4')
+                  props.history.push(`?${searchParams.toString()}`)
+                }}
+              >
+                {searchParams.get('loc') ? (
+                  searchParams.get('loc').includes('4') ? (
+                    <FontAwesomeIcon icon={fas.faCheckSquare} />
+                  ) : (
+                    <FontAwesomeIcon icon={far.faSquare} />
+                  )
+                ) : (
+                  <FontAwesomeIcon icon={far.faSquare} />
+                )}{' '}
+                東部
               </li>
-              <li className="checkbox px-0" key="外島">
-                <i className="far fa-square"></i> 外島
+              <li
+                className="checkbox px-0"
+                key="外島"
+                onClick={() => {
+                  checkloc('5')
+                  props.history.push(`?${searchParams.toString()}`)
+                }}
+              >
+                {searchParams.get('loc') ? (
+                  searchParams.get('loc').includes('5') ? (
+                    <FontAwesomeIcon icon={fas.faCheckSquare} />
+                  ) : (
+                    <FontAwesomeIcon icon={far.faSquare} />
+                  )
+                ) : (
+                  <FontAwesomeIcon icon={far.faSquare} />
+                )}{' '}
+                外島
               </li>
             </ul>
           </Collapse>
         </div>
         <div>
-          <div
-            className="aside-wrapper-filter-box"
-            onClick={() => {
-              setChecked2(!checked2)
-            }}
-            style={{ cursor: 'pointer' }}
-          >
-            <h3>篩選日期</h3>
+          <div className="aside-wrapper-filter-box">
+            <h3
+              onClick={() => {
+                setChecked2(!checked2)
+              }}
+              style={{ cursor: 'pointer' }}
+            >
+              篩選日期
+            </h3>
             <div className={checked2 ? 'calender active' : 'calender'}>
               <Calendar />
             </div>

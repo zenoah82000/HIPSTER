@@ -1,0 +1,45 @@
+@import './../HS.scss';
+
+.blog-list-card {
+  max-height: 500px;
+  background: #ffffff;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 3px 5px 0px;
+  img {
+    border-radius: 5px 5px 0 0;
+  }
+  h6 {
+    margin-top: 5px;
+    padding-top: 5px;
+    font-weight: bold;
+  }
+  p {
+    max-height: 500px;
+    // text-indent: 100%;
+    // white-space: nowrap;
+    //文字省略
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
+    font-weight: bold;
+    margin-left: 5px;
+  }
+  .author-date {
+    padding-bottom: 3px;
+    img {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      // padding-bottom: 3px;
+    }
+    .list-card-author {
+      // text-align: left;
+      overflow-x: hidden;
+    }
+    span {
+      display: block;
+      margin: 0 1px;
+    }
+  }
+}
