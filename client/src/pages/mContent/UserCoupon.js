@@ -12,7 +12,7 @@ import {
 function UserCoupon(props) {
   const { userCouponData, getUserCouponDetaiAsync } = props
   const { adduserCouponData, addUserCouponDataAsync } = props
-  const memberId = 2
+  const memberId = JSON.parse(localStorage.getItem('member')).id
   const [discountCode, setdiscountCode] = useState([])
 
   useEffect(() => {
@@ -41,33 +41,35 @@ function UserCoupon(props) {
   console.log('adduserCouponData', adduserCouponData)
 
   let couponList = userCouponData.map((item) => {
-    return (
-      <div className="tab-pane">
-        <div class="coupon-listview">
-          <div class="row">
-            <div class="col-sm-3">
-              <div class="coupon">
-                <span>{item.discountCode}</span>
+    if (item.memberId == memberId) {
+      return (
+        <div className="tab-pane">
+          <div class="coupon-listview">
+            <div class="row">
+              <div class="col-sm-3">
+                <div class="coupon">
+                  <span>{item.discountCode}</span>
+                </div>
+                <div class="coupon-code">{item.discountName}</div>
               </div>
-              <div class="coupon-code">{item.discountName}</div>
-            </div>
-            <div class="col-sm-4">
-              <ul class="list-unstyled">
-                <li>開始日期：{item.startTime}</li>
-                <li>截止日期：{item.endTime}</li>
-              </ul>
-            </div>
-            <div class="col-sm-5">
-              <ul class="list-unstyled">
-                <li>可用數量：{item.memberCouponNum}</li>
-                <li>優惠代碼：{item.discountCode}</li>
-                <li>優惠折扣：{item.discountPercent * 100}折</li>
-              </ul>
+              <div class="col-sm-4">
+                <ul class="list-unstyled">
+                  <li>開始日期：{item.startTime}</li>
+                  <li>截止日期：{item.endTime}</li>
+                </ul>
+              </div>
+              <div class="col-sm-5">
+                <ul class="list-unstyled">
+                  <li>可用數量：{item.memberCouponNum}</li>
+                  <li>優惠代碼：{item.discountCode}</li>
+                  <li>優惠折扣：{Math.round(item.discountPercent * 100)}折</li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    )
+      )
+    }
   })
 
   return (
