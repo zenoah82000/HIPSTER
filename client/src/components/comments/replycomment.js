@@ -107,9 +107,10 @@ function ReplyComment({ handleDelete, index, commentData, history }) {
         confirmButtonColor: 'rgba(104, 142, 103, 0.8)',
       }).then(() => {
         handleDelete(index)
-        history.push('/memberuser/comment/mycomment')  
-        window.location.replace('/memberuser/comment/mycomment' )
-        // window.location.href = '/memberuser/comment/mycomment' 
+
+        // window.location.replace('/memberuser/comment/mycomment')
+        window.location.href = '/memberuser/comment/mycomment'
+        history.push('/memberuser/comment/mycomment')
         setLoad(false)
         // setImage({ file: [] })
       })
