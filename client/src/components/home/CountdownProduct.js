@@ -6,11 +6,13 @@ import { connect } from 'react-redux'
 function CountdownProduct(props) {
   // 設置倒數計時: 結束時間 - 當前時間
   //控制關注愛心class
+  //取得會員資料
+  const member =JSON.parse(localStorage.getItem('member'))||''
 
-  const { item } = props
+  const { item,wishlist,addwish } = props
   //商品區塊>關注
   const [heart, setheart] = useState(false)
-  const heartClass = heart ? 'activity-follow active' : 'activity-follow'
+  // const heartClass = heart ? 'activity-follow active' : 'activity-follow'
 
   const [thistime, setthistime] = useState('')
 
@@ -35,6 +37,8 @@ function CountdownProduct(props) {
     // console.log('相差', offsetTime, '秒')
     // console.log('相差', hr, '時', min, '分', sec, '秒')
 
+    
+
     return (
       <>
         <span className="large">{hr}</span>時
@@ -42,6 +46,15 @@ function CountdownProduct(props) {
         <span className="large">{sec}</span>秒
       </>
     )
+  }
+  const addWish = (e,productid) => {
+    if(member.id){
+      e.preventDefault()
+      addwish(productid)
+    }else{
+      alert('請先登入')
+    }
+    
   }
 
   useEffect(() => {
@@ -59,10 +72,9 @@ function CountdownProduct(props) {
         <div className="countdown-main-cont">
           <div className="countdown-picture">
             <div
-              className={heartClass}
-              onClick={(event) => {
-                event.preventDefault()
-                setheart(!heart)
+              className={wishlist.findIndex((value)=>value.productId == item.productId) != -1? 'activity-follow active':'activity-follow'}
+              onClick={(e) => {
+                addWish(e,item.productId)
               }}
             >
               <FaHeart />
@@ -93,5 +105,10 @@ function CountdownProduct(props) {
     </>
   )
 }
-
-export default CountdownProduct
+const mapStateToProps = (store) => {
+  return {
+    wishlist: store.orderReducer.wishData,
+  }
+}
+const mapDispatchToProps = null
+export default connect(mapStateToProps, mapDispatchToProps)(CountdownProduct)

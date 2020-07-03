@@ -11,6 +11,8 @@ import { getBlogDataAsync,addBlogContentDataAsync } from '../../actions/blog'
 
 function BlogAdd(props) {  
   const { blogData,getBlogDataAsync,addBlogContentDataAsync } = props
+  const memberId = JSON.parse(localStorage.getItem('member')).id
+  const memberImg = JSON.parse(localStorage.getItem('member')).img
 
   const [addArticleTitle, setAddArticleTitle] =  useState('')
   const [addArticleCategory, setAddArticleCategory] =  useState(1)
@@ -22,16 +24,22 @@ function BlogAdd(props) {
     console.log('componentDidMount')
   }, [])
 
-  const handleSubmit = ()=>{      
-    const addArticleFd = new FormData()
-    addArticleFd.append('articleTitle', addArticleTitle)    
-    addArticleFd.append('categoryId', addArticleCategory)
-    addArticleFd.append('articleContent', addArticleContent)    
-    addArticleFd.append('articleImg', addArticleImg)    
-    // for(let pair of addArticleFd.entries()) {
-    //   console.log('addArticleFd內所有的鍵值對: ',pair[0]+ ', '+ pair[1]); 
-    // }
-    addBlogContentDataAsync(addArticleFd)  
+  const handleSubmit = ()=>{
+    if(!addArticleTitle){
+      alert('請填入標題後再發表文章')
+    }else{
+      const addArticleFd = new FormData()
+      addArticleFd.append('memberId', memberId)    
+      addArticleFd.append('articleTitle', addArticleTitle)    
+      addArticleFd.append('categoryId', addArticleCategory)
+      addArticleFd.append('articleContent', addArticleContent)    
+      addArticleFd.append('articleImg', addArticleImg)    
+      // for(let pair of addArticleFd.entries()) {
+      //   console.log('addArticleFd內所有的鍵值對: ',pair[0]+ ', '+ pair[1]); 
+      // }
+      addBlogContentDataAsync(addArticleFd)  
+      props.history.push('/blog')
+    } 
   }
 
   return (
@@ -43,16 +51,21 @@ function BlogAdd(props) {
             <div>
               <select className="blog-select-category" onChange={event => setAddArticleCategory(event.target.value)} value={addArticleCategory}>                
                 <option value="1">心情抒發</option>
-                <option value="2">靈感啟發</option>
-                <option value="3">活動分享</option>
+                <option value="2">靈感角落</option>
+                <option value="3">重點書評</option>
+                <option value="4">活動分享</option>
+                <option value="5">新人新書</option>
+                <option value="6">手寫日記</option>
               </select>
             </div>
             <div className="blog-add-btn">
-              <button className="btn">取消發文</button>
+              <button className="btn" onClick={e => {
+                  e.preventDefault()
+                  props.history.push('/blog')
+                  }}>取消發文</button>
               <button className="btn" onClick={e => {
                   e.preventDefault()
                   handleSubmit()
-                    // props.history.push('/blog')
                   }}>發佈文章</button>
             </div>
           </li>

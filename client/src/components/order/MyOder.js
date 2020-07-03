@@ -69,9 +69,8 @@ function MyOder(props) {
       </Modal>
     )
   }
-  
+  //檢視憑證視窗
   function Orderproof(props) {
-      console.log(proofdata)
     return (
       <Modal
         {...props}
@@ -85,9 +84,9 @@ function MyOder(props) {
         <div className="proofqrcode"><QRcode value={item.orderId+proofdata.productId} size="100" /></div>
         <hr/>
         <div className="proofinfo">
-            <p>使用者:</p>
-            <p>數量:</p>
-            <p>使用日期:</p>
+            <p>使用者:{item.contact}</p>
+            <p>數量:{proofdata.checkQty}</p>
+            <p>使用日期:{proofdata.date}</p>
         </div>
         </div>
         

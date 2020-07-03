@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { FaHeart, FaShoppingCart } from 'react-icons/fa'
+import {AiFillStar} from 'react-icons/ai'
 import { BsTrash } from 'react-icons/bs'
 
 import Swal from 'sweetalert2'
@@ -44,6 +45,16 @@ function UserWishlist(props) {
       }
     })
   }
+
+  //星等判斷
+  const stars = (value) => {
+    const star =[]
+    // console.log(this.state.searchBtn1, this.state.searchBtn3)
+    for(let i=0;i<5;i++){
+      star.push( <AiFillStar className={value > i ? 'star1':"star2"}/>)
+    }
+    return star
+  }
   const display =
     wishlist != null && wishlist.length >= 1 ? (
       <div className="wishlistbox ">
@@ -60,7 +71,7 @@ function UserWishlist(props) {
                     <div className="whishnamebox"> 
                       <p>{item.name}</p>
                     </div>
-
+                    <div>{stars(item.star)}</div>
                     <div className="wishprice">
                       <p>NT${item.price}</p>
                     </div>

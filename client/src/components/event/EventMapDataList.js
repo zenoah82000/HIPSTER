@@ -13,6 +13,7 @@ import { FaRegCalendarCheck } from 'react-icons/fa'
 import { FaSearch, FaStreetView } from 'react-icons/fa'
 import { GiCoffeeCup } from 'react-icons/gi'
 import { RiMoneyCnyCircleLine } from 'react-icons/ri'
+import { AiFillStar } from 'react-icons/ai'
 
 //地圖列表
 class mapList extends React.Component {
@@ -58,7 +59,6 @@ class mapList extends React.Component {
   sendData(item) {
     this.props.setFileterData(item)
   }
-
   //搜尋
   updateSearch(event) {
     this.setState({
@@ -110,6 +110,13 @@ class mapList extends React.Component {
     this.setState({
       productdata: sortedProductsDsc,
     })
+  }
+  stars = (v) => {
+    const star = []
+    for (let i = 0; i < 5; i++) {
+      star.push(<AiFillStar className={v > i ? 'star1' : 'star2'} />)
+    }
+    return star
   }
 
   //搜尋btn
@@ -546,9 +553,7 @@ class mapList extends React.Component {
                       {item.category}
                     </div>
                   </li>
-                  <li>
-                    <RatingStarValue ratingValue={item.star} />
-                  </li>
+                  <li>{this.stars(item.star)}</li>
                   <li>
                     <span className="mr-2">
                       <FaRegClock />
@@ -607,51 +612,52 @@ class mapList extends React.Component {
                 </div>
               </div>
               <div className=" d-flex m-2 justify-content-between">
-                <Dropdown className="">
-                  <Dropdown.Toggle
-                    className="mapSearch btn-small"
-                    variant="success"
-                    id="dropdown-basic"
-                  >
-                    {this.state.searchBtn1}
-                  </Dropdown.Toggle>
-                  <Dropdown.Menu>
-                    <Dropdown.Item
-                      href=""
-                      className="btn3 "
-                      name="全部類別"
-                      onClick={(event) => this.showCat(event)}
+                <div className=" d-flex">
+                  <Dropdown className="">
+                    <Dropdown.Toggle
+                      className="mapSearch btn-small"
+                      variant="success"
+                      id="dropdown-basic"
                     >
-                      全部類別
-                    </Dropdown.Item>
-                    <Dropdown.Item
-                      href=""
-                      className="btn3"
-                      name="文藝展覽"
-                      onClick={(event) => this.showCat(event)}
-                    >
-                      文藝展覽
-                    </Dropdown.Item>
-                    <Dropdown.Item
-                      href=""
-                      className="btn3"
-                      name="手作課程"
-                      onClick={(event) => this.showCat(event)}
-                    >
-                      手作課程
-                    </Dropdown.Item>
-                    <Dropdown.Item
-                      href=""
-                      className="btn3"
-                      name="咖啡廳"
-                      onClick={(event) => this.showCat(event)}
-                    >
-                      咖啡廳
-                    </Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
+                      {this.state.searchBtn1}
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                      <Dropdown.Item
+                        href=""
+                        className="btn3 "
+                        name="全部類別"
+                        onClick={(event) => this.showCat(event)}
+                      >
+                        全部類別
+                      </Dropdown.Item>
+                      <Dropdown.Item
+                        href=""
+                        className="btn3"
+                        name="文藝展覽"
+                        onClick={(event) => this.showCat(event)}
+                      >
+                        文藝展覽
+                      </Dropdown.Item>
+                      <Dropdown.Item
+                        href=""
+                        className="btn3"
+                        name="手作課程"
+                        onClick={(event) => this.showCat(event)}
+                      >
+                        手作課程
+                      </Dropdown.Item>
+                      <Dropdown.Item
+                        href=""
+                        className="btn3"
+                        name="咖啡廳"
+                        onClick={(event) => this.showCat(event)}
+                      >
+                        咖啡廳
+                      </Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
 
-                <Dropdown onClick={() => this.setState({ display: true })}>
+                  {/* <Dropdown onClick={() => this.setState({ display: true })}>
                   <Dropdown.Toggle
                     className="mapSearch  btn-small"
                     variant="success"
@@ -673,54 +679,55 @@ class mapList extends React.Component {
                       onChange={(event) => this.showDate(event)}
                     />
                   </Dropdown.Menu>
-                </Dropdown>
+                </Dropdown> */}
 
-                <Dropdown>
-                  <Dropdown.Toggle
-                    className="mapSearch  btn-small"
-                    variant="success"
-                    id="dropdown-basic"
-                  >
-                    {this.state.searchBtn3}
-                  </Dropdown.Toggle>
+                  <Dropdown>
+                    <Dropdown.Toggle
+                      className="mapSearch  btn-small"
+                      variant="success"
+                      id="dropdown-basic"
+                    >
+                      {this.state.searchBtn3}
+                    </Dropdown.Toggle>
 
-                  <Dropdown.Menu>
-                    <Dropdown.Item
-                      href=""
-                      className="btn3"
-                      name="全部星等"
-                      onClick={(event) => this.showStar(event)}
-                    >
-                      全部星等
-                    </Dropdown.Item>
-                    <Dropdown.Item
-                      href=""
-                      className="btn3"
-                      name="5分"
-                      onClick={(event) => this.showStar(event)}
-                    >
-                      5分
-                    </Dropdown.Item>
-                    <Dropdown.Item
-                      href=""
-                      className="btn3"
-                      name="4分以上"
-                      onClick={(event) => this.showStar(event)}
-                    >
-                      4分以上
-                    </Dropdown.Item>
-                    <Dropdown.Item
-                      href=""
-                      className="btn3"
-                      name="3分以上"
-                      onClick={(event) => this.showStar(event)}
-                    >
-                      3分以上
-                    </Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
+                    <Dropdown.Menu>
+                      <Dropdown.Item
+                        href=""
+                        className="btn3"
+                        name="全部星等"
+                        onClick={(event) => this.showStar(event)}
+                      >
+                        全部星等
+                      </Dropdown.Item>
+                      <Dropdown.Item
+                        href=""
+                        className="btn3"
+                        name="5分"
+                        onClick={(event) => this.showStar(event)}
+                      >
+                        5分
+                      </Dropdown.Item>
+                      <Dropdown.Item
+                        href=""
+                        className="btn3"
+                        name="4分以上"
+                        onClick={(event) => this.showStar(event)}
+                      >
+                        4分以上
+                      </Dropdown.Item>
+                      <Dropdown.Item
+                        href=""
+                        className="btn3"
+                        name="3分以上"
+                        onClick={(event) => this.showStar(event)}
+                      >
+                        3分以上
+                      </Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </div>
                 <div className="d-flex ">
-                  <p style={{ fontSize: '15px' }}>
+                  <p style={{ fontSize: '16px', fontWeight: 'bold' }}>
                     <i className="mr-2 fas fa-coffee"></i>顯示咖啡廳{' '}
                   </p>
                   <SwitchButton

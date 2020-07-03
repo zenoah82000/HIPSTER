@@ -5,15 +5,49 @@ import { Modal, Button, Form } from 'react-bootstrap'
 //引入自訂元件
 
 function Forgetpwd(props) {
-  console.log(props.match.params.memberId)
+  const userid = props.match.params.memberId //撈取網址id
   //頁面顯示(驗證碼true&密碼false)
-  const [display, setdisplay] = useState(false)
+  const [display, setdisplay] = useState(true)
   //提示小視窗顯示與否
   const [promptdisplay, setpromptdisplay] = useState(false)
   //提示視窗內容切換
   const [promptchang, setpromptchang] = useState(0)
 
-  let code, pwd1, pwd2
+  //存放驗證碼,密碼輸入資料
+  let codeinput, codedata, pwd1, pwd2, pwdata
+
+  //檢查驗證碼是否正確
+  async function CodeChecking(item) {
+    // 注意資料格式要設定，伺服器才知道是json格式
+    const request = new Request('http://localhost:5000/codechecking/', {
+      method: 'POST',
+      body: JSON.stringify(item),
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }),
+    })
+    const response = await fetch(request)
+    const data = await response.json()
+    data ? setpromptchang(1) : setpromptchang(0)
+    // console.log(data)
+  }
+
+  //重新寫入密碼
+  async function PwdChanging(item) {
+    // 注意資料格式要設定，伺服器才知道是json格式
+    const request = new Request('http://localhost:5000/pwdchanging/', {
+      method: 'POST',
+      body: JSON.stringify(item),
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }),
+    })
+    const response = await fetch(request)
+    const data = await response.json()
+    // console.log(data)
+  }
 
   //提示視窗-驗證碼錯誤=0
   const promptCodeError = (
@@ -36,6 +70,8 @@ function Forgetpwd(props) {
       <div
         className="SignOkbtn"
         onClick={() => {
+          setdisplay(false)
+
           setpromptdisplay(false)
         }}
       >
@@ -46,7 +82,11 @@ function Forgetpwd(props) {
   //提示視窗-密碼錯誤=2
   const promptPwdError = (
     <>
-      <p className="SignOk-title">密碼有誤，請確認2個密碼欄位必需相同</p>
+      <p className="SignOk-title">
+        密碼有誤
+        <br />
+        請確認2個密碼欄位必需相同
+      </p>
       <div
         className="SignOkbtn"
         onClick={() => {
@@ -109,19 +149,27 @@ function Forgetpwd(props) {
   const inputcode = (
     <>
       <p className="forgetpwd-title">請輸入驗證號碼</p>
-      <Form.Group className="">
+      <Form.Group className="codeinput">
         <Form.Control
-          ref={(input) => (code = input)}
+          ref={(input) => (codeinput = input)}
           type="text"
-          // id="forgetpwdinput"
-          // required="required"
           placeholder=""
         />
         <Form.Text className="text-muted text-center forgetpwd-text">
           請輸入系統重製密碼信件中所提供的驗證碼
         </Form.Text>
       </Form.Group>
-      <div className="forgetpwdbtn" onClick={() => {}}>
+      <div
+        className="forgetpwdbtn"
+        onClick={() => {
+          codedata = {
+            memberid: userid,
+            code: codeinput.value,
+          }
+          CodeChecking(codedata)
+          setpromptdisplay(true)
+        }}
+      >
         送出
       </div>
     </>
@@ -130,20 +178,16 @@ function Forgetpwd(props) {
   const inputpwd = (
     <>
       <p className="forgetpwd-title">請輸入更新密碼</p>
-      <Form.Group className="">
+      <Form.Group className="pwd">
         <Form.Control
           ref={(input) => (pwd1 = input)}
           type="text"
-          // id="forgetpwdinput"
-          // required="required"
           placeholder="請輸入修改密碼"
         />
         <br />
         <Form.Control
           ref={(input) => (pwd2 = input)}
           type="text"
-          // id="forgetpwdinput"
-          // required="required"
           placeholder="請再次輸入修改密碼"
         />
       </Form.Group>
@@ -152,7 +196,15 @@ function Forgetpwd(props) {
         onClick={() => {
           if (pwd1.value != pwd2.value) {
             setpromptchang(2)
+            setTimeout(() => {
+              setpromptdisplay(true)
+            }, 300)
           } else {
+            pwdata = {
+              memberid: userid,
+              pwd: pwd1.value,
+            }
+            PwdChanging(pwdata)
             setpromptchang(3)
             setTimeout(() => {
               setpromptdisplay(true)

@@ -8,6 +8,7 @@ import { FaRegClock } from 'react-icons/fa'
 import { FaRegCalendarCheck } from 'react-icons/fa'
 import { GiCoffeeCup } from 'react-icons/gi'
 import { RiMoneyCnyCircleLine } from 'react-icons/ri'
+import { AiFillStar } from 'react-icons/ai'
 
 export const pointerIcon = new L.Icon({
   iconUrl: require('../../images/myplace.svg'),
@@ -80,7 +81,13 @@ export default class ViewportExample extends Component {
       })
     }
   }
-
+  stars = (v) => {
+    const star = []
+    for (let i = 0; i < 5; i++) {
+      star.push(<AiFillStar className={v > i ? 'star1' : 'star1'} />)
+    }
+    return star
+  }
   render() {
     let { viewport, clicked, cafeActive, clickData } = this.props
     console.log(this.props)
@@ -314,7 +321,8 @@ export default class ViewportExample extends Component {
                     </li>
                     <li>
                       <span>
-                        <RatingStarValue ratingValue={clickData.star} />
+                        {this.stars(clickData.star)}
+                        {/* <RatingStarValue ratingValue={clickData.star} /> */}
                       </span>
                     </li>
                     <li>
@@ -341,7 +349,7 @@ export default class ViewportExample extends Component {
                       <span className="mr-2 ">
                         <FaRegCalendarCheck />
                       </span>
-                      <span>價格：{clickData.productPrice}</span>
+                      <span>價格：NT${clickData.productPrice}</span>
                     </li>
                   </ul>
                   <div className="cardButton">
