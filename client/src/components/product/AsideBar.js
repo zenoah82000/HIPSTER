@@ -40,9 +40,9 @@ function AsideBar(props) {
   const handleChange = () => {
     setChecked((prev) => !prev)
   }
-
+  const categorylist = [...productCatogryData]
   console.log(searchParams.toString())
-  console.log(loc)
+  console.log(loc, cat)
   // console.log(
   //   loc.splice(
   //     loc.findIndex((element) => element === 1),
@@ -72,20 +72,32 @@ function AsideBar(props) {
   }
 
   //確認篩選種類
-  function checkcat(item) {
+  function checkcat(item, itemParent) {
     if (searchParams.get('cat')) {
-      if (searchParams.get('cat').includes(item)) {
-        let paramsIndex = cat.findIndex((element) => element === +item)
-        cat.splice(paramsIndex, 1).join()
-        // console.log()
-        // console.log(paramsIndex)
+      if (cat.includes(item) || cat.includes(itemParent)) {
+        let paramsIndex = cat.findIndex((element) => element === item)
+        let paramsParentIndex = cat.findIndex(
+          (element) => element === itemParent
+        )
+
         if (searchParams.get('cat') === item) {
           searchParams.delete('cat')
         } else {
-          searchParams.set('cat', cat.join())
+          if (paramsIndex !== -1) {
+            cat.splice(paramsIndex, 1).join()
+            searchParams.set('cat', cat.join())
+          }
+          if (paramsParentIndex !== -1) {
+            if (searchParams.get('cat') === itemParent) {
+              searchParams.delete('cat')
+            } else {
+              cat.splice(paramsParentIndex, 1).join()
+              searchParams.set('cat', cat.join())
+            }
+          }
         }
       } else {
-        cat.push(+item)
+        cat.push(item)
         searchParams.set('cat', cat.join())
       }
     } else {
@@ -115,12 +127,47 @@ function AsideBar(props) {
     }
   }
 
+  //確認篩選子種類
+  function checkCatChild(arr) {
+    let flag = true
+    for (let i = 0; i < arr.length; i++) {
+      if (!!searchParams.get('cat').includes(arr[i])) {
+        flag = false
+      }
+    }
+    return flag
+  }
+
+  //刪掉子種類
+  function deleteCatChild(arr) {
+    for (let i = 0; i < arr.length; i++) {
+      let index = [...cat].indexOf(arr[i].toString())
+      if (index === -1) {
+        continue
+      } else {
+        cat.splice(index, 1)
+        searchParams.set('cat', cat.join())
+      }
+      if (searchParams.get('cat') == '') {
+        searchParams.delete('cat')
+      }
+    }
+  }
+
+  //增加子種類
+  function addCatChild(arr) {
+    for (let i = 0; i < arr.length; i++) {
+      cat.push(arr[i])
+    }
+    searchParams.set('cat', cat.join())
+  }
+
   useEffect(() => {
     getProductCategoryAsync()
   }, [])
 
   //生成類別
-  const display = productCatogryData.map((item, index) => {
+  const display = categorylist.map((item, index) => {
     if (item.categoryParentId === 0) {
       return (
         <>
@@ -141,30 +188,65 @@ function AsideBar(props) {
               <h5>{item.categoryName}</h5>
             </div>
             <ul
-              className={
-                checkcategory(item.categoryName)
-                // categorySection.includes(item.categoryName)
-                //   ? 'checkbox-dropdown-list active'
-                //   : 'checkbox-dropdown-list'
-              }
+              className={checkcategory(item.categoryName)}
               key={item.categoryId}
             >
-              <li className="checkbox" key={item.categoryId} onClick={() => {}}>
-                <i className="far fa-square"></i>
-                全部
-              </li>
-              {productCatogryData.map((category, i) => {
-                if (category.categoryParentId === item.categoryId) {
+              {categorylist.map((category, i) => {
+                if (
+                  category.categoryParentId === 0 &&
+                  category.categoryId === item.categoryId
+                ) {
+                  const categoryChild = categorylist
+                    .filter(
+                      (e, i) => e.categoryParentId === category.categoryId
+                    )
+                    .map((it, ind) => {
+                      return it.categoryId.toString()
+                    })
+                  console.log(categoryChild)
+
+                  return (
+                    <>
+                      <li
+                        className="checkbox"
+                        key={item.categoryId}
+                        onClick={() => {
+                          searchParams.get('cat')
+                            ? checkCatChild(categoryChild)
+                              ? deleteCatChild(categoryChild)
+                              : deleteCatChild(categoryChild) &&
+                                addCatChild(categoryChild)
+                            : searchParams.append('cat', categoryChild.join())
+                          props.history.push(`?${searchParams.toString()}`)
+                        }}
+                      >
+                        {searchParams.get('cat') ? (
+                          cat.includes(item.categoryId.toString()) ? (
+                            <FontAwesomeIcon icon={fas.faCheckSquare} />
+                          ) : (
+                            <FontAwesomeIcon icon={far.faSquare} />
+                          )
+                        ) : (
+                          <FontAwesomeIcon icon={far.faSquare} />
+                        )}{' '}
+                        全部
+                      </li>
+                    </>
+                  )
+                } else if (category.categoryParentId === item.categoryId) {
                   return (
                     <>
                       <li
                         className="checkbox"
                         key={category.categoryName}
                         onClick={() => {
-                          checkcat(category.categoryId.toString())
+                          checkcat(
+                            category.categoryId.toString(),
+                            category.categoryParentId.toString()
+                          )
                           props.history.push(`?${searchParams.toString()}`)
                         }}
-                        value={category.categoryId}
+                        value={category.categoryName}
                       >
                         {searchParams.get('cat') ? (
                           searchParams
