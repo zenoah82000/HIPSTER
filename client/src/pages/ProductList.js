@@ -26,7 +26,7 @@ function ProductList(props) {
         .get('cat')
         .split(',')
         .map((item, index) => {
-          return +item
+          return item
         })
     : !!searchParams.get('cat')
 
@@ -114,17 +114,17 @@ function ProductList(props) {
   // console.log(display)
 
   // 測試
-  console.log(cat)
-  const count = productListData.filter((item, index) => {
-    for (let i = 0; i < cat.length; i++) {
-      if (item.categoryId === cat[i]) {
-        return item
-      }
-    }
-  })
-  console.log(count)
-  console.log(count.length)
-  console.log({ ...count[0] }.categoryId)
+  // console.log(cat)
+  // const count = productListData.filter((item, index) => {
+  //   for (let i = 0; i < cat.length; i++) {
+  //     if (item.categoryId === cat[i]) {
+  //       return item
+  //     }
+  //   }
+  // })
+  // console.log(count)
+  // console.log(count.length)
+  // console.log({ ...count[0] }.categoryId)
 
   return (
     <>
