@@ -341,7 +341,7 @@ export default class ViewportExample extends Component {
                       <span className="mr-2 ">
                         <FaRegCalendarCheck />
                       </span>
-                      <span>價格：{clickData.productPrice}</span>
+                      <span>價格：NT${clickData.productPrice}</span>
                     </li>
                   </ul>
                   <div className="cardButton">

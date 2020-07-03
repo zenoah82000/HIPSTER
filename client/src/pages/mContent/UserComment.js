@@ -105,12 +105,14 @@ function UserComment(props) {
         return (
           <>
             <Fade>
-
               <div className="reply-listview">
                 <div className="comment-tbhead">
                   <div class="row">
                     <div class="col-9 pl-1">
-                      <h5 className="eventTitle " style={{ fontWeight: 'bold' }}>
+                      <h5
+                        className="eventTitle "
+                        style={{ fontWeight: 'bold' }}
+                      >
                         {item.productName}
                       </h5>
                     </div>
@@ -141,16 +143,19 @@ function UserComment(props) {
                       <ul className=" list-unstyled">
                         <li className="d-flex">
                           <p style={{ fontWeight: 'bold' }}>評價星等:</p>
-                          {item.star ? <p>
-                            <RatingStarValue ratingValue={item.star} />
-                          </p> : <p>未提交星等</p>}
-
+                          {item.star ? (
+                            <p>
+                              <RatingStarValue ratingValue={item.star} />
+                            </p>
+                          ) : (
+                            <p>未提交星等</p>
+                          )}
                         </li>
 
                         <li className="d-flex">
                           <p style={{ fontWeight: 'bold' }}>活動相片:</p>
 
-                          {item.commentImg ?
+                          {item.commentImg ? (
                             <>
                               <SimpleReactLightbox>
                                 <SRLWrapper>
@@ -164,11 +169,12 @@ function UserComment(props) {
                                       alt={item.content}
                                     />
                                   </div>
-
                                 </SRLWrapper>
                               </SimpleReactLightbox>
-                            </> : <p>未上傳相片</p>}
-
+                            </>
+                          ) : (
+                            <p>未上傳相片</p>
+                          )}
                         </li>
                         <li>
                           <p style={{ fontWeight: 'bold' }}>我的評論:</p>
@@ -189,14 +195,8 @@ function UserComment(props) {
         )
       })
     ) : (
-        <div className="empty text-center">
-          <img
-            className="emptyImg mb-3"
-            src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
-          />
-          <h6>尚未有評價，趕緊探索你下一次的旅程，並標記你心儀的活動體驗</h6>
-        </div>
-      )
+      <div className="empty text-center"></div>
+    )
 
   return (
     <>
@@ -227,62 +227,54 @@ function UserComment(props) {
             </div>
           </div>
           <div className="tab-pane">{displayMyComment}</div>
-          <ProductListPageBar
-              productnumbers={5}
-              currentpage={1}
-            />
         </>
       ) : (
-          <>
-            <div className="usercontainer">
-              <h2 className="usertitle mb-3   ">我的評價</h2>
-              <div className="d-flex comment-bar border-bottom">
-                <div className="tabcontainer couponactive">
-                  <NavLink
-                    to={`./notcomment`}
-                    activeClassName="currentcoupon"
-                    className="coupontab-a"
-                  >
-                    尚未評價
+        <>
+          <div className="usercontainer">
+            <h2 className="usertitle mb-3   ">我的評價</h2>
+            <div className="d-flex comment-bar border-bottom">
+              <div className="tabcontainer couponactive">
+                <NavLink
+                  to={`./notcomment`}
+                  activeClassName="currentcoupon"
+                  className="coupontab-a"
+                >
+                  尚未評價
                 </NavLink>
-                </div>
-                <div className="tabcontainer">
-                  <NavLink
-                    to={`./mycomment`}
-                    activeClassName="currentcoupon"
-                    className="coupontab-a"
-                  >
-                    已評價
+              </div>
+              <div className="tabcontainer">
+                <NavLink
+                  to={`./mycomment`}
+                  activeClassName="currentcoupon"
+                  className="coupontab-a"
+                >
+                  已評價
                 </NavLink>
-                </div>
               </div>
             </div>
-            <div className="tab-pane">
-              {noCommentlist.length >= 1 ? (
-                noCommentlist.map((item, index) => (
-                  <ReplyComment
-                    commentData={item}
-                    index={index}
-                    handleDelete={handleDelete}
-                  />
-                ))
-              ) : (
-                  <div className="empty text-center">
-                    <img
-                      className="emptyImg mb-3"
-                      src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
-                    />
-                    <h6>尚未有評價</h6>
-                  </div>
-                )}
-            </div>
-            <ProductListPageBar
-              productnumbers={5}
-              currentpage={1}
-            />  
-          </>
-        )}
-
+          </div>
+          <div className="tab-pane">
+            {noCommentlist.length >= 1 ? (
+              noCommentlist.map((item, index) => (
+                <ReplyComment
+                  commentData={item}
+                  index={index}
+                  handleDelete={handleDelete}
+                />
+              ))
+            ) : (
+              <div className="empty text-center">
+                <img
+                  className="emptyImg mb-3"
+                  src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
+                />
+                <h6>尚未有評價</h6>
+              </div>
+            )}
+          </div>
+          <ProductListPageBar productnumbers={5} currentpage={1} />
+        </>
+      )}
     </>
   )
 }
