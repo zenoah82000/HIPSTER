@@ -11,9 +11,8 @@ require("dotenv").config();
 
 //願望清單查詢
 router.get("/member/wishlist/:memberId", async (req, res) => {
-  console.log('查詢願望清單')
   const memberId = req.params.memberId
-  const wishsql="SELECT * FROM `wishlist` WHERE `memberId` = ?"
+  const wishsql="SELECT `productId` FROM `wishlist` WHERE `memberId` = ?"
   const [wishlist] = await db.query(wishsql,[memberId])
 
 
@@ -24,6 +23,7 @@ router.get("/member/wishlist/:memberId", async (req, res) => {
 
 router.post("/member/wishlistAdd/:memberId", async (req, res) => {
   console.log('新增願望清單')
+  console.log(req.body)
   const memberId = req.params.memberId
   const productId = req.body.productId
   const wishsql="INSERT INTO `wishlist` (`memberId`,`productId`) VALUES(?,?)"
