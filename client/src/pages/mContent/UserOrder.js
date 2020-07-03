@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-
+import Fade from 'react-reveal/Fade';
 import '../../styles/order.scss'
 import MyOrder from '../../components/order/MyOder'
 
@@ -88,7 +88,9 @@ function UserOrder() {
         {datapage.map((item) => {
           return (
             <>
+            <Fade bottom>
               <MyOrder orderlist={orderlist} item={item}/>
+              </Fade>
             </>
           )
         })}

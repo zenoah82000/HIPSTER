@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import $ from 'jquery'
 import QRcode from 'qrcode.react'
+
 import { Modal, Button, Form } from 'react-bootstrap'
 function MyOder(props) {
   const { item,orderlist} = props
@@ -41,7 +42,7 @@ function MyOder(props) {
   //訂單詳情modal
   function Orderdetail(props) {
     return (
-      <Modal className="modal-border"
+      <Modal
         {...props}
         size="md"
         aria-labelledby="contained-modal-title-vcenter"
@@ -72,17 +73,22 @@ function MyOder(props) {
   function Orderproof(props) {
       console.log(proofdata)
     return (
-      <Modal className="modal-border"
+      <Modal
         {...props}
         size="md"
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
         <Modal.Body className="modal-body">
-        <div><h6>{proofdata.productName}</h6>
+        <div className="prooftitle"><h6>{proofdata.productName}</h6>
         <hr/>
-        <div></div>
-        <QRcode value={item.orderId+proofdata.productId} size="100" />
+        <div className="proofqrcode"><QRcode value={item.orderId+proofdata.productId} size="100" /></div>
+        <hr/>
+        <div className="proofinfo">
+            <p>使用者:</p>
+            <p>數量:</p>
+            <p>使用日期:</p>
+        </div>
         </div>
         
           
