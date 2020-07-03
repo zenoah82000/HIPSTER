@@ -19,7 +19,6 @@ import CouponAllData from '../../components/coupon/CouponAllData'
 function ShoppingCar(props) {
   const { mycart, buyerinfo, deleteCart, sum, userSuccess } = props
   let checkdiv
-  console.log(mycart)
 
   //請先登入視窗
   const [login, setLogin] = useState(false)

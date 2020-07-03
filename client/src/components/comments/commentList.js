@@ -71,21 +71,8 @@ class commtentList extends Component {
 
         <TabPanel>
           <div>
-            <div className="eventContentBox d-flex">
-              {/* <div className="eventImgBox col-4">
-                <img
-                  src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
-                  alt=""
-                />
-              </div> */}
+            <div className="d-flex">
               <div className="eventDetailBox col-12 pl-3">
-                {/* <h2 className="eventTitle">問與答 </h2> */}
-                {/* <ul className=" list-unstyled">
-                  <li>
-                    <div className="">手作課程</div>
-                  </li>
-                  <li>星等</li>
-                </ul> */}
                 <ProductQanda productNameNow={this.props.productName} />
               </div>
             </div>

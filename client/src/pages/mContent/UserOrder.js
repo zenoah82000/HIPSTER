@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import $ from 'jquery'
-import { Modal, Button, Form } from 'react-bootstrap'
-
+import Fade from 'react-reveal/Fade';
 import '../../styles/order.scss'
+import MyOrder from '../../components/order/MyOder'
 
 function UserOrder() {
-  const [orderlist, setOrderlist] = useState([])
 
+  //訂單資料
+  const [orderlist, setOrderlist] = useState([])
+  //訂單顯示狀態
   const [loading, setLoading] = useState(false)
-  //詳細資料狀態
-  const [detail, setDetail] = useState(false)
-  //詳細資料
-  const [detaildata, setDetaildata] = useState([])
   //目前頁數
   const [currentPage, setCurrentPage] = useState(1)
   //每頁的資料
@@ -53,16 +50,7 @@ function UserOrder() {
     }, 500)
   }, [orderlist])
 
-  //商品展開判斷
-  const unfold = (e) => {
-    if (e.target.value == '展開更多') {
-      $(e.target).closest('.order-body').css('maxHeight', '1000px')
-      e.target.value = '收起'
-    } else {
-      $(e.target).closest('.order-body').css('maxHeight', '145px')
-      e.target.value = '展開更多'
-    }
-  }
+  
   //把資料分頁
   const getdatapage = () => {
     let perPage = orderlist.perPage
@@ -93,127 +81,16 @@ function UserOrder() {
     }
     return pages
   }
-  //傳入訂單詳情
-  const showdetail = (item) => {
-    setDetaildata(item)
-    setDetail(true)
-  }
-  //訂單詳情
-  function Orderdetail(props) {
-    return (
-      <Modal className="modal-border"
-        {...props}
-        size="md"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Body className="modal-body">
-          <div className="orderdetailbox">
-            <div className="ordercontact">
-              <h6>聯絡人資訊</h6>
-              <p>姓名:{detaildata.contact}</p>
-              <p>電話:{detaildata.mobile}</p>
-              <p>信箱:{detaildata.email}</p>
-            </div>
-            <hr />
-            <div className="orderpayinfo">
-              <h6>付款資訊</h6>
-              <p>付款方式:</p>
-              <p>小計</p>
-              <p>優惠碼</p>
-              <p>總計</p>
-            </div>
-          </div>
-        </Modal.Body>
-      </Modal>
-    )
-  }
+  
   const display = orderlist.order ? (
     <div className="orderlistbox ">
       <div className="row">
         {datapage.map((item) => {
           return (
             <>
-              <div className="card order-box">
-                <div className="card-header order-title">
-                  <div className="orderid">
-                    <h6>訂單編號:{item.orderId}</h6>
-                  </div>
-                  <div className="ordertime">
-                    <h6>購買時間:{item.created_at}</h6>
-                  </div>
-                  <div className="orderstatus">
-                    <h6>已付款</h6>
-                  </div>
-                  <div className="ordertotal">
-                    <h6>
-                      付款金額:NT$
-                      {item.orderTotal
-                        .toString()
-                        .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
-                    </h6>
-                    <input
-                      type="button"
-                      className="order-detail"
-                      value="訂單詳情"
-                      onClick={() => {
-                        showdetail(item)
-                      }}
-                    />
-                  </div>
-                </div>
-                <div className="card-body order-body unfoldbox">
-                  {orderlist.orderdetails
-                    .filter((value) => value.orderId == item.orderId)
-                    .map((value, index) => {
-                      return (
-                        <>
-                          {/* index有兩個就加上展開 */}
-                          {index == 1 ? (
-                            <input
-                              type="button"
-                              className="unfold"
-                              value="展開更多"
-                              onClick={(e) => {
-                                unfold(e)
-                              }}
-                            />
-                          ) : (
-                            ''
-                          )}
-                          <div className="d-flex product-box border-bottom align-items-center">
-                            <div className="productimg mr-3">
-                              <img src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg" />
-                            </div>
-                            <div className="oderproductinfo">
-                              <div className="productname">
-                                <p>{value.productName}</p>
-                              </div>
-                              <div>
-                                <p>數量:{value.checkQty}</p>
-                              </div>
-                              <div>
-                                <p>
-                                  價格:NT$
-                                  {value.checkPrice
-                                    .toString()
-                                    .replace(
-                                      /(\d)(?=(\d{3})+(?:\.\d+)?$)/g,
-                                      '$1,'
-                                    )}
-                                </p>
-                              </div>
-                              <div>
-                                <p>活動時間:{value.date}</p>
-                              </div>
-                            </div>
-                            <div className="oderbutton"><button>檢視憑證</button></div>
-                          </div>
-                        </>
-                      )
-                    })}
-                </div>
-              </div>
+            <Fade bottom>
+              <MyOrder orderlist={orderlist} item={item}/>
+              </Fade>
             </>
           )
         })}
@@ -232,7 +109,7 @@ function UserOrder() {
   )
   return (
     <>
-      <Orderdetail show={detail} onHide={() => setDetail(false)} />
+      
       <div className="usercontainer">
         <h2 className="usertitle">我的訂單</h2>
         {loading ? <h2>載入中</h2> : display}

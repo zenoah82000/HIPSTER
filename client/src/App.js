@@ -42,43 +42,63 @@ import Swal from 'sweetalert2'
 import ProtectedRoute from './utils/ProtectedRoute'
 
 function App(props) {
-  // console.log(props)
 
   //判斷使用者是否已登入
   const [userSuccess, setuserSuccess] = useState(false)
   const userlocalStorage = JSON.parse(localStorage.getItem('member')) || []
   const username = userlocalStorage.name
-  // const [userlocal]
-  const userimg = userlocalStorage.name
-
-  // console.log(userid)
 
   const { mycart, wishlist } = props
   //取得購物車資料
   const localCart = JSON.parse(localStorage.getItem('cart')) || []
   //取得願望清單資料
-  const localWishlist = JSON.parse(localStorage.getItem('wishlist')) || []
+  // const localWishlist = JSON.parse(localStorage.getItem('wishlist')) || []
 
   //取得願望清單
-  // const getwishAsync=async()=>{
-  //   const request = new Request(`http://localhost:5000/member/wishlist/${member.id}`, {
-  //     method: 'get',
-  //     headers: new Headers({
-  //       Accept: 'application/json',
-  //       'Content-Type': 'application/json',
-  //     }),
-  //   })
-  //   const response = await fetch(request)
-  //   const data = await response.json()
-  //   props.dispatch({ type: 'GET_WISH', value: data })
-  // }
-
+  const getwishAsync=async()=>{
+    const request = new Request(`http://localhost:5000/member/wishlist/${userlocalStorage.id}`, {
+      method: 'get',
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }),
+    })
+    const response = await fetch(request)
+    const data = await response.json()
+    props.dispatch({ type: 'GET_WISH', value: data })
+  }
+// 加入願望清單
+const delwishlistAsync=async(productId)=>{
+  const request = new Request(`http://localhost:5000/member/wishlistAdd/${userlocalStorage.id}`, {
+    method: 'post',
+    body:JSON.stringify(productId),
+    headers: new Headers({
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    }),
+  })
+  const response = await fetch(request)
+  const data = await response.json()
+}
+//加入願望清單
+const addwish = (value) => {
+  const index = wishlist.findIndex((item) => item.id == value.id)
+  if (index == -1) {
+    const newWishlist = [...wishlist]
+    newWishlist.push(value)
+    props.dispatch({ type: 'GET_WISH', value: newWishlist })
+    delwishlistAsync(value)
+    // localStorage.setItem('wishlist', JSON.stringify(localWishlist))
+  } else {
+   alert('已在願望清單')
+  }
+}
   //寫入購物車資料
   useEffect(() => {
     getLocation()
     userlocalStorage.success ? setuserSuccess(true) : setuserSuccess(false)
     props.dispatch({ type: 'GET_CART', value: localCart })
-    props.dispatch({ type: 'GET_WISH', value: localWishlist })
+    getwishAsync()
   }, [])
   //加入購物車
   const addCart = (value) => {
@@ -120,32 +140,7 @@ function App(props) {
     return total
   }
 
-  //加入願望清單
-  // const delwishlistAsync=async(productId)=>{
-  //   const request = new Request(`http://localhost:5000/member/wishlistAdd/${member.id}`, {
-  //     method: 'post',
-  //     body:JSON.stringify(productId),
-  //     headers: new Headers({
-  //       Accept: 'application/json',
-  //       'Content-Type': 'application/json',
-  //     }),
-  //   })
-  //   const response = await fetch(request)
-  //   const data = await response.json()
-  // }
-  //加入願望清單
-  const addwish = (value) => {
-    const index = localWishlist.findIndex((item) => item.id == value.id)
-    if (index == -1) {
-      localWishlist.push(value)
-      props.dispatch({ type: 'GET_WISH', value: localWishlist })
-      localStorage.setItem('wishlist', JSON.stringify(localWishlist))
-    } else {
-      localWishlist[index].amount += 1
-      props.dispatch({ type: 'GET_WISH', value: localWishlist })
-      localStorage.setItem('wishlist', JSON.stringify(localWishlist))
-    }
-  }
+  
 
   //地圖定位
   const [viewport, setViewport] = useState({ center: [0, 0], zoom: 15 })
@@ -242,7 +237,7 @@ function App(props) {
             <Forgetpwd />
           </Route>
           <Route exact path="/">
-            <Home />
+            <Home addwish={addwish}/>
           </Route>
 
           <Route exact path="*">

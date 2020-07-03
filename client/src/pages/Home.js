@@ -426,7 +426,7 @@ function Home(props) {
   const ProductEnddisplay = ProductEnd.map((item, index) => {
     return (
       <>
-        <CountdownProduct item={item} />
+        <CountdownProduct item={item} addwish={props.addwish}/>
       </>
     )
   })

@@ -1,6 +1,6 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import '../../styles/HS.scss'
+import { Link, withRouter } from 'react-router-dom'
 // import { bindActionCreators } from 'redux'
 
 //引入action
@@ -34,7 +34,7 @@ function Sidebar(props) {
                     {username}
                   </div>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item  my-2">
                   <Link
                     className="nav-link sidebarlink-hs"
                     to="/memberuser/user/:memberId"
@@ -42,7 +42,7 @@ function Sidebar(props) {
                     <i className="far fa-user"></i>個人資訊
                   </Link>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item  my-2">
                   <Link
                     className="nav-link sidebarlink-hs"
                     to="/memberuser/comment/notcomment"
@@ -50,7 +50,7 @@ function Sidebar(props) {
                     <i className="fas fa-comments"></i>我的評價
                   </Link>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item  my-2">
                   <Link
                     className="nav-link sidebarlink-hs"
                     to="/memberuser/order"
@@ -58,7 +58,7 @@ function Sidebar(props) {
                     <i className="fas fa-receipt"></i>我的訂單
                   </Link>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item  my-2">
                   <Link
                     className="nav-link sidebarlink-hs"
                     to="/memberuser/blog"
@@ -66,7 +66,7 @@ function Sidebar(props) {
                     <i className="far fa-edit"></i>我的文章
                   </Link>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item  my-2">
                   <Link
                     className="nav-link sidebarlink-hs"
                     to="/memberuser/qanda"
@@ -74,7 +74,7 @@ function Sidebar(props) {
                     <i className="fas fa-question-circle"></i>問與答
                   </Link>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item  my-2">
                   <Link
                     className="nav-link sidebarlink-hs"
                     to="/memberuser/coupon/available"
@@ -82,7 +82,7 @@ function Sidebar(props) {
                     <i className="fas fa-ticket-alt"></i>優惠券
                   </Link>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item my-2">
                   <Link
                     className="nav-link sidebarlink-hs"
                     to="/memberuser/mymap"
@@ -90,7 +90,7 @@ function Sidebar(props) {
                     <i className="fas fa-shoe-prints"></i>個人地圖
                   </Link>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item my-2">
                   <Link
                     className="nav-link sidebarlink-hs"
                     to="/memberuser/wishlist"
@@ -98,13 +98,15 @@ function Sidebar(props) {
                     <i className="fas fa-heart"></i>願望清單
                   </Link>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item my-2">
                   <Link
                     className="nav-link sidebarlink-hs"
                     to="/"
                     onClick={(event) => {
                       event.preventDefault()
-                      props.memberLogoutAsync()
+                      localStorage.removeItem('member')
+                      props.history.push('/')
+                      window.location.reload()
                     }}
                   >
                     <i className="fas fa-sign-out-alt"></i>登出
@@ -147,4 +149,4 @@ function Sidebar(props) {
 //   )
 // }
 
-export default Sidebar
+export default withRouter(Sidebar)

@@ -89,6 +89,7 @@
           .oderbutton {
             width: 20%;
             button {
+              outline: none;
               color: blue;
               background-color: transparent;
               border: none;
@@ -140,7 +141,7 @@
   bottom: 0;
   outline: none;
 }
-//詳細資訊
+//詳細資訊視窗
 .modal-body {
   background-color: #e6ded8;
   border: 8px solid #b98f50;
@@ -167,5 +168,24 @@
         color: black;
       }
     }
+  }
+}
+//憑證視窗
+.prooftitle {
+  h6 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+  }
+}
+.proofqrcode {
+  text-align: center;
+}
+.proofinfo {
+  text-align: center;
+  p {
+    margin: 10px;
+    font-size: 18px;
+    color: black;
   }
 }

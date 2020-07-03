@@ -173,3 +173,18 @@
   border-top: 1px solid #cfcccc;
   margin-top: 15px;
 }
+
+.back-to-top {
+  background:#688e67 ;
+  color: white;
+  position: fixed;
+  bottom: 25px;
+  right: 75px;
+  display: none;
+}
+
+.back-to-top:hover{
+  opacity: .5;
+  color: white;
+}
+
