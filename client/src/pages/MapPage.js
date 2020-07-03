@@ -7,7 +7,7 @@ import EventMapDataList from '../components/event/EventMapDataList'
 import EventSearchBar from '../components/event/EventSearchBar'
 import MyMapComponent from '../components/event/MyMapComponent'
 
-class Map extends React.Component {
+class MapPage extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -19,6 +19,9 @@ class Map extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    this.props.setViewport({ center: [25.0403394, 121.5309546], zoom: 15 })
+  }
   onClickReset = () => {
     this.props.getLocation()
     console.log(this.state.viewport)
@@ -76,4 +79,4 @@ class Map extends React.Component {
   }
 }
 
-export default Map
+export default MapPage
