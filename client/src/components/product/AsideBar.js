@@ -41,8 +41,8 @@ function AsideBar(props) {
     setChecked((prev) => !prev)
   }
   const categorylist = [...productCatogryData]
-  console.log(searchParams.toString())
-  console.log(loc, cat)
+  // console.log(searchParams.toString())
+  // console.log(loc, cat)
   // console.log(
   //   loc.splice(
   //     loc.findIndex((element) => element === 1),
@@ -63,11 +63,23 @@ function AsideBar(props) {
     const data = [...categorySection]
     setCategorySection(data)
   }
+  function checkCatChildForItem(arr) {
+    let flag = false
+    if (cat) {
+      for (let i = 0; i < arr.length; i++) {
+        if (!![...cat].includes(arr[i])) {
+          flag = true
+        }
+      }
+    }
+
+    return flag
+  }
   function checkcategory(item) {
     if (categorySection.includes(item)) {
-      return 'checkbox-dropdown-list active'
+      return true
     } else {
-      return 'checkbox-dropdown-list'
+      return false
     }
   }
 
@@ -109,7 +121,7 @@ function AsideBar(props) {
   function checkloc(item) {
     if (searchParams.get('loc')) {
       if (searchParams.get('loc').includes(item)) {
-        let paramsIndex = loc.findIndex((element) => element === +item)
+        let paramsIndex = loc.findIndex((element) => element === item)
         loc.splice(paramsIndex, 1).join()
         // console.log()
         // console.log(paramsIndex)
@@ -119,7 +131,7 @@ function AsideBar(props) {
           searchParams.set('loc', loc.join())
         }
       } else {
-        loc.push(+item)
+        loc.push(item)
         searchParams.set('loc', loc.join())
       }
     } else {
@@ -131,7 +143,7 @@ function AsideBar(props) {
   function checkCatChild(arr) {
     let flag = true
     for (let i = 0; i < arr.length; i++) {
-      if (!!searchParams.get('cat').includes(arr[i])) {
+      if (!searchParams.get('cat').includes(arr[i])) {
         flag = false
       }
     }
@@ -156,6 +168,7 @@ function AsideBar(props) {
 
   //增加子種類
   function addCatChild(arr) {
+    deleteCatChild(arr)
     for (let i = 0; i < arr.length; i++) {
       cat.push(arr[i])
     }
@@ -169,26 +182,53 @@ function AsideBar(props) {
   //生成類別
   const display = categorylist.map((item, index) => {
     if (item.categoryParentId === 0) {
+      const categoryChild = categorylist
+        .filter((e, i) => e.categoryParentId === item.categoryId)
+        .map((it, ind) => {
+          return it.categoryId.toString()
+        })
+
       return (
         <>
           <div>
             <div
               key={item.categoryName}
               className={
+                checkCatChildForItem(categoryChild) ||
                 categorySection.includes(item.categoryName)
                   ? 'drop-title active'
                   : 'drop-title'
               }
               onClick={() => {
-                // setActiveClass(!activeClass)
-                AddcategorySection(item.categoryName)
+                checkCatChildForItem(categoryChild)
+                  ? setCategorySection([])
+                  : AddcategorySection(item.categoryName)
                 console.log(categorySection)
               }}
             >
-              <h5>{item.categoryName}</h5>
+              <h5>
+                {item.categoryName}
+                {categorySection.includes(item.categoryName) ||
+                checkCatChildForItem(categoryChild) ? (
+                  <FontAwesomeIcon
+                    icon={fas.faAngleUp}
+                    style={{ fontSize: '18px' }}
+                  />
+                ) : (
+                  <FontAwesomeIcon
+                    icon={fas.faAngleDown}
+                    style={{ fontSize: '18px' }}
+                  />
+                )}
+              </h5>
             </div>
             <ul
-              className={checkcategory(item.categoryName)}
+              className={
+                checkcategory(item.categoryName) ||
+                checkCatChildForItem(categoryChild)
+                  ? 'checkbox-dropdown-list active'
+                  : 'checkbox-dropdown-list'
+              }
               key={item.categoryId}
             >
               {categorylist.map((category, i) => {
@@ -196,15 +236,6 @@ function AsideBar(props) {
                   category.categoryParentId === 0 &&
                   category.categoryId === item.categoryId
                 ) {
-                  const categoryChild = categorylist
-                    .filter(
-                      (e, i) => e.categoryParentId === category.categoryId
-                    )
-                    .map((it, ind) => {
-                      return it.categoryId.toString()
-                    })
-                  console.log(categoryChild)
-
                   return (
                     <>
                       <li
@@ -214,14 +245,13 @@ function AsideBar(props) {
                           searchParams.get('cat')
                             ? checkCatChild(categoryChild)
                               ? deleteCatChild(categoryChild)
-                              : deleteCatChild(categoryChild) &&
-                                addCatChild(categoryChild)
+                              : addCatChild(categoryChild)
                             : searchParams.append('cat', categoryChild.join())
                           props.history.push(`?${searchParams.toString()}`)
                         }}
                       >
                         {searchParams.get('cat') ? (
-                          cat.includes(item.categoryId.toString()) ? (
+                          checkCatChild(categoryChild) ? (
                             <FontAwesomeIcon icon={fas.faCheckSquare} />
                           ) : (
                             <FontAwesomeIcon icon={far.faSquare} />
@@ -282,7 +312,11 @@ function AsideBar(props) {
         <div className="aside-wrapper-filter-box">
           <h3 onClick={handleChange} style={{ cursor: 'pointer' }}>
             地區
-            <i class="fas fa-caret-down"></i>
+            {checked ? (
+              <FontAwesomeIcon icon={fas.faCaretUp} />
+            ) : (
+              <FontAwesomeIcon icon={fas.faCaretDown} />
+            )}
           </h3>
 
           <Collapse in={checked} timeout={200}>

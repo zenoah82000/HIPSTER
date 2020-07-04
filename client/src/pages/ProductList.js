@@ -35,11 +35,11 @@ function ProductList(props) {
         .get('loc')
         .split(',')
         .map((item, index) => {
-          return +item
+          return item
         })
     : !!searchParams.get('loc')
 
-  // console.log(loc, cat)
+  console.log(loc, cat)
 
   useEffect(() => {
     getProductListAsync()
