@@ -1,56 +1,27 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Modal, Button, Form } from 'react-bootstrap'
-import { FaHeart, FaShoppingCart } from 'react-icons/fa'
+import { FaShoppingCart } from 'react-icons/fa'
 import { AiFillStar } from 'react-icons/ai'
 import { BsTrash } from 'react-icons/bs'
-
-import { GrFormAdd } from 'react-icons/gr'
-import { GrFormSubtract } from 'react-icons/gr'
 
 import Swal from 'sweetalert2'
 
 import '../../styles/wishlist.scss'
 
+import WishAddCart from "../../components/order/WishAddCart"
+
 function UserWishlist(props) {
-  const { wishlist,addCart } = props
+  const { wishlist, addCart } = props
   //會員資料
   const member = JSON.parse(localStorage.getItem('member')) || ''
   //存要加到購物車的資料
   const [addcartdata, setAddcartdata] = useState([])
   //加入購物車狀態
   const [addcartstatus, setAddcartstatus] = useState(false)
-  //加入購物車數量
-  const [addcartamount, setAddcartamount] = useState(1)
-  //加入購物車日期
-  const [addcartdate, setAddcartdate] = useState('')
+ 
 
-
-  //增加到購物車
-  const wishAddCart = ()=>{
-    const newWish = {...addcartdata}
-    newWish.date = addcartdate
-    newWish.amount=addcartamount
-    addCart(newWish)
-    setAddcartamount(1)
-    setAddcartdate('')
-    setAddcartstatus(false)
-  }
-  //數量
-  const changeAmount=(type)=>{
-    switch (type) {
-      case 'add':
-        setAddcartamount(addcartamount +1)
-        break
-      case 'dec':
-        if (addcartamount <= 1) {
-          setAddcartamount(1)
-        } else {
-           setAddcartamount(addcartamount -1)
-        }
-        
-    }
-  }
+  
   //加入購物車視窗
   function Addcart(props) {
     return (
@@ -61,57 +32,7 @@ function UserWishlist(props) {
         centered
       >
         <Modal.Body className="modal-body">
-          <div className="wish-addcartbox">
-            <div className="wish-choosedate">
-              <h6>選擇日期</h6>
-              <input
-                className="wish-date"
-                type="date"
-                min="2020-07-01"
-                max="2020-08-01"
-                value={addcartdate}
-                onChange={(e) => {
-                  setAddcartdate(e.target.value)
-                }}
-              />
-            </div>
-            <div className="wish-chooseamount">
-              <h6>選擇數量</h6>
-              <div className="wish-amountbox">
-              <span className="wish-price">NT${addcartdata.productPrice}</span>
-                <GrFormSubtract
-                  className={addcartamount == 1 ? 'subtract subtractopt' : 'subtract'}
-                  onClick={() => {
-                    changeAmount('dec')
-                  }}
-                />
-                
-                <input className="wish-amount" value={addcartamount} readOnly />
-                <GrFormAdd
-                  className="amountadd"
-                  onClick={() => {
-                    changeAmount('add')
-                  }}
-                />
-              </div>
-            </div>
-            <div className="wish-total">
-              <h6>費用</h6>
-              <p>NT${addcartdata.productPrice * addcartamount}</p>
-            </div>
-            <div className="wish-choosebutton">
-              <button className="wish-button-ok" onClick={()=>{wishAddCart()}}>確定</button>
-              <button className="wish-button-cancel"
-                onClick={() => {
-                  setAddcartstatus(false);
-                  setAddcartamount(1);
-                  setAddcartdate('');
-                }}
-              >
-                取消
-              </button>
-            </div>
-          </div>
+          <WishAddCart setAddcartstatus={setAddcartstatus} addCart={addCart} addcartdata={addcartdata}/>
         </Modal.Body>
       </Modal>
     )
@@ -188,7 +109,8 @@ function UserWishlist(props) {
                     </div>
                     <div>{stars(item.star)}</div>
                     <div className="wishprice">
-                      <p>NT${item.productPrice}</p>
+                      <p>NT${item.productPrice.toString()
+                      .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}</p>
                     </div>
                   </div>
 

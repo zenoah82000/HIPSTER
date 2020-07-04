@@ -17,7 +17,7 @@ function UserOrder() {
 
   const getOrderlistAsync = async () => {
     const request = new Request(
-      `http://localhost:5000/member/order/2`,
+      `http://localhost:5000/member/order/${member.id}`,
       {
         method: 'get',
         headers: new Headers({
