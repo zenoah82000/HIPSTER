@@ -9,10 +9,10 @@ function WishAddCart(props) {
   //加入購物車日期
   const [addcartdate, setAddcartdate] = useState('')
   //日期提示
-  let isdate,date
+  let isdate, date
   //增加到購物車
   const wishAddCart = () => {
-    if(date.value){
+    if (date.value) {
       const newWish = { ...addcartdata }
       newWish.date = addcartdate
       newWish.amount = addcartamount
@@ -20,10 +20,9 @@ function WishAddCart(props) {
       setAddcartamount(1)
       setAddcartdate('')
       setAddcartstatus(false)
-    }else{
-      isdate.innerHTML='請選擇日期！'
+    } else {
+      isdate.innerHTML = '請選擇日期！'
     }
-    
   }
   //數量
   const changeAmount = (type) => {
@@ -45,7 +44,7 @@ function WishAddCart(props) {
         <div className="wish-choosedate">
           <h6>選擇日期</h6>
           <input
-            ref={input=>date=input}
+            ref={(input) => (date = input)}
             className="wish-date"
             type="date"
             min="2020-07-01"
@@ -55,13 +54,17 @@ function WishAddCart(props) {
               setAddcartdate(e.target.value)
             }}
           />
-          <div className="wish-isdate" ref={div=>isdate = div}></div>
+          <div className="wish-isdate" ref={(div) => (isdate = div)}></div>
         </div>
         <div className="wish-chooseamount">
           <h6>選擇數量</h6>
           <div className="wish-amountbox">
-            <span className="wish-price">單價NT${addcartdata.productPrice.toString()
-                      .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}</span>
+            <span className="wish-price">
+              單價NT$
+              {addcartdata.productPrice
+                .toString()
+                .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
+            </span>
             <GrFormSubtract
               className={
                 addcartamount == 1 ? 'subtract subtractopt' : 'subtract'
@@ -82,8 +85,12 @@ function WishAddCart(props) {
         </div>
         <div className="wish-total">
           <h6>費用</h6>
-          <p>NT${(addcartdata.productPrice * addcartamount).toString()
-                      .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}</p>
+          <p>
+            NT$
+            {(addcartdata.productPrice * addcartamount)
+              .toString()
+              .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
+          </p>
         </div>
         <div className="wish-choosebutton">
           <button
