@@ -22,5 +22,10 @@
       background: #684b38;
       color: white;
     }
+    &.disabled{
+      cursor: default;
+      pointer-events: none;
+      filter: opacity(0.5);
+    }
   }
 }

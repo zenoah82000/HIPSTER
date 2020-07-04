@@ -377,6 +377,7 @@ function AsideBar(props) {
                 key="中部"
                 onClick={() => {
                   checkloc('2')
+                  searchParams.set('page', 1)
                   props.history.push(`?${searchParams.toString()}`)
                 }}
               >
@@ -471,7 +472,7 @@ function AsideBar(props) {
         </div>
 
         <div className="aside-wrapper-filter-box" style={{ cursor: 'default' }}>
-          <h3>價格</h3>
+          <h3>價格 (TWD) </h3>
           <div className="price-area">
             {value.min} ~ {value.max}
           </div>
@@ -481,7 +482,9 @@ function AsideBar(props) {
               minValue={32}
               value={value}
               onChange={(value) => setValue(value)}
-              onChangeComplete={(value) => console.log(value)}
+              onChangeComplete={(value) => {
+                console.log(value)
+              }}
             />
           </div>
         </div>

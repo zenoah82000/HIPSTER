@@ -83,7 +83,7 @@ function ProductList(props) {
                 <div className="col-sm-5 col-lg-4">
                   <img
                     src={`http://localhost:5000/images/product/${item.productImg}`}
-                    alt=""
+                    alt={item.productImg}
                   />
                 </div>
                 <div className="col-sm-7 col-lg-8 px-15">
@@ -161,7 +161,7 @@ function ProductList(props) {
             {/* -------商品列表區域------ */}
             <ProductListPageBar
               productnumbers={count.length}
-              currentpage={currentPage}
+              currentPage={currentPage}
             />
           </ProductListMainContent>
         </div>
