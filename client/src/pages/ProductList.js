@@ -46,7 +46,31 @@ function ProductList(props) {
     setDate(new Date())
   }, [])
 
-  const display = productListData.map((item, index) => {
+  let length
+  if (!!loc && !!cat) {
+    length =
+      [...loc].length >= [...cat].length ? [...loc].length : [...cat].length
+  } else if (!!loc) {
+    length = [...loc].length
+  } else if (!!cat) {
+    length = [...cat].length
+  } else {
+    length = 0
+  }
+
+  const count = productListData.filter((item, index) => {
+    if (length === 0) {
+      return item
+    } else {
+      for (let i = 0; i < length; i++) {
+        if (item.categoryId === +cat[i] || item.locationParentId === +loc[i]) {
+          return item
+        }
+      }
+    }
+  })
+
+  const display = count.map((item, index) => {
     if (
       index >= currentPage * perPage - perPage &&
       index < currentPage * perPage
@@ -114,15 +138,9 @@ function ProductList(props) {
   // console.log(display)
 
   // 測試
-  // console.log(cat)
-  // const count = productListData.filter((item, index) => {
-  //   for (let i = 0; i < cat.length; i++) {
-  //     if (item.categoryId === cat[i]) {
-  //       return item
-  //     }
-  //   }
-  // })
+
   // console.log(count)
+  // console.log(length)
   // console.log(count.length)
   // console.log({ ...count[0] }.categoryId)
 
@@ -133,7 +151,7 @@ function ProductList(props) {
           <AsideBar cat={cat} loc={loc} />
           <ProductListMainContent>
             {cat || loc ? (
-              <ProductSearchResult productnumbers={productListData.length} />
+              <ProductSearchResult productnumbers={count.length} />
             ) : (
               ''
             )}
@@ -142,7 +160,7 @@ function ProductList(props) {
             {display}
             {/* -------商品列表區域------ */}
             <ProductListPageBar
-              productnumbers={productListData.length}
+              productnumbers={count.length}
               currentpage={currentPage}
             />
           </ProductListMainContent>
