@@ -15,16 +15,10 @@ function ProductListPageBar(props) {
   function startPageset(targetpage) {
     if (targetpage >= groupCount) {
       setStartPage(targetpage - 2)
-      console.log(startPage)
-      console.log(currentPage)
     } else if (targetpage < groupCount) {
       setStartPage(1)
-      console.log(startPage)
-      console.log(currentPage)
     } else if (currentPage === 1) {
       setStartPage(1)
-      console.log(startPage)
-      console.log(currentPage)
     }
   }
   const display = () => {

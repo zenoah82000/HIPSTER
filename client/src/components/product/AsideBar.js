@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { DateRangePicker } from 'rsuite'
 import Calendar from 'react-calendar'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
@@ -466,7 +467,15 @@ function AsideBar(props) {
               篩選日期
             </h3>
             <div className={checked2 ? 'calender active' : 'calender'}>
-              <Calendar />
+              <Calendar
+                selectRange={true}
+                returnValue="range"
+                showNeighboringMonth={false}
+                showDoubleView={true}
+                onChange={(value) => {
+                  console.log(value)
+                }}
+              />
             </div>
           </div>
         </div>
