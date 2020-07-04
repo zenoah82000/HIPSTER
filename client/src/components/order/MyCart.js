@@ -16,19 +16,18 @@ function MyCart(props) {
                 <GoX
                   className="mr-3 delete"
                   onClick={() => {
-                    deleteCart(value.id)
+                    deleteCart(value.productId)
                   }}
                 />
                 <Link to="/">
                   <img
                     className="productImg"
-                    src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
-                    alt=""
+                    src={`http://localhost:5000/images/product/${value.productImg}`}
                   />
                 </Link>
                 <Link to="/">
                   {' '}
-                  <p>{value.name}</p>
+                  <p>{value.productName}</p>
                 </Link>
               </div>
               <div className="productright">
@@ -41,7 +40,7 @@ function MyCart(props) {
                 <div className="productsubtotal">
                   <p>
                     NT$
-                    {(value.price * value.amount)
+                    {(value.productPrice * value.amount)
                       .toString()
                       .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
                   </p>

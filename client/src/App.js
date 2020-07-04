@@ -129,15 +129,14 @@ function App(props) {
   }, [])
   //加入購物車
   const addCart = (value) => {
-    const index = localCart.findIndex((item) => item.id == value.id)
+    const index = mycart.findIndex((item) => item.productId == value.productId)
     if (index == -1) {
-      localCart.push(value)
-      props.dispatch({ type: 'GET_CART', value: localCart })
-      localStorage.setItem('cart', JSON.stringify(localCart))
+      const newCart = [...mycart]
+      newCart.push(value)
+      props.dispatch({ type: 'GET_CART', value: newCart })
+      localStorage.setItem('cart', JSON.stringify(newCart))
     } else {
-      localCart[index].amount += 1
-      props.dispatch({ type: 'GET_CART', value: localCart })
-      localStorage.setItem('cart', JSON.stringify(localCart))
+      alert('已在購物車')
     }
   }
   //刪除購物車
@@ -150,9 +149,14 @@ function App(props) {
       cancelButtonText: '取消',
     }).then((result) => {
       if (result.value) {
-        const newCart = mycart.filter((item) => item.id != id)
-        props.dispatch({ type: 'GET_CART', value: newCart })
-        localStorage.setItem('cart', JSON.stringify(newCart))
+        const index = mycart.findIndex((item) => item.productId == id)
+        if(index != -1){
+          const newCart = [...mycart]
+          newCart.splice(index, 1)
+          props.dispatch({ type: 'GET_CART', value: newCart })
+          localStorage.setItem('cart', JSON.stringify(newCart))
+        }
+        
       }
     })
   }
@@ -161,7 +165,7 @@ function App(props) {
     let total = 0
     if (items != null) {
       for (let i = 0; i < items.length; i++) {
-        total += items[i].amount * items[i].price
+        total += items[i].amount * items[i].productPrice
       }
     }
     return total
@@ -246,7 +250,7 @@ function App(props) {
           </Route>
 
           <Route path="/memberuser">
-            <MemberUser />
+            <MemberUser addCart={addCart}/>
           </Route>
           {/* 保護路由 */}
           <ProtectedRoute path="/paymentDetail">
