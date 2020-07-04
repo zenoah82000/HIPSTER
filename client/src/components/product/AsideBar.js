@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { DateRangePicker } from 'rsuite'
 import Calendar from 'react-calendar'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
@@ -40,9 +41,9 @@ function AsideBar(props) {
   const handleChange = () => {
     setChecked((prev) => !prev)
   }
-
-  console.log(searchParams.toString())
-  console.log(loc)
+  const categorylist = [...productCatogryData]
+  // console.log(searchParams.toString())
+  // console.log(loc, cat)
   // console.log(
   //   loc.splice(
   //     loc.findIndex((element) => element === 1),
@@ -63,29 +64,53 @@ function AsideBar(props) {
     const data = [...categorySection]
     setCategorySection(data)
   }
+  function checkCatChildForItem(arr) {
+    let flag = false
+    if (cat) {
+      for (let i = 0; i < arr.length; i++) {
+        if (!![...cat].includes(arr[i])) {
+          flag = true
+        }
+      }
+    }
+
+    return flag
+  }
   function checkcategory(item) {
     if (categorySection.includes(item)) {
-      return 'checkbox-dropdown-list active'
+      return true
     } else {
-      return 'checkbox-dropdown-list'
+      return false
     }
   }
 
   //確認篩選種類
-  function checkcat(item) {
+  function checkcat(item, itemParent) {
     if (searchParams.get('cat')) {
-      if (searchParams.get('cat').includes(item)) {
-        let paramsIndex = cat.findIndex((element) => element === +item)
-        cat.splice(paramsIndex, 1).join()
-        // console.log()
-        // console.log(paramsIndex)
+      if (cat.includes(item) || cat.includes(itemParent)) {
+        let paramsIndex = cat.findIndex((element) => element === item)
+        let paramsParentIndex = cat.findIndex(
+          (element) => element === itemParent
+        )
+
         if (searchParams.get('cat') === item) {
           searchParams.delete('cat')
         } else {
-          searchParams.set('cat', cat.join())
+          if (paramsIndex !== -1) {
+            cat.splice(paramsIndex, 1).join()
+            searchParams.set('cat', cat.join())
+          }
+          if (paramsParentIndex !== -1) {
+            if (searchParams.get('cat') === itemParent) {
+              searchParams.delete('cat')
+            } else {
+              cat.splice(paramsParentIndex, 1).join()
+              searchParams.set('cat', cat.join())
+            }
+          }
         }
       } else {
-        cat.push(+item)
+        cat.push(item)
         searchParams.set('cat', cat.join())
       }
     } else {
@@ -97,7 +122,7 @@ function AsideBar(props) {
   function checkloc(item) {
     if (searchParams.get('loc')) {
       if (searchParams.get('loc').includes(item)) {
-        let paramsIndex = loc.findIndex((element) => element === +item)
+        let paramsIndex = loc.findIndex((element) => element === item)
         loc.splice(paramsIndex, 1).join()
         // console.log()
         // console.log(paramsIndex)
@@ -107,7 +132,7 @@ function AsideBar(props) {
           searchParams.set('loc', loc.join())
         }
       } else {
-        loc.push(+item)
+        loc.push(item)
         searchParams.set('loc', loc.join())
       }
     } else {
@@ -115,56 +140,146 @@ function AsideBar(props) {
     }
   }
 
+  //確認篩選子種類
+  function checkCatChild(arr) {
+    let flag = true
+    for (let i = 0; i < arr.length; i++) {
+      if (!searchParams.get('cat').includes(arr[i])) {
+        flag = false
+      }
+    }
+    return flag
+  }
+
+  //刪掉子種類
+  function deleteCatChild(arr) {
+    for (let i = 0; i < arr.length; i++) {
+      let index = [...cat].indexOf(arr[i].toString())
+      if (index === -1) {
+        continue
+      } else {
+        cat.splice(index, 1)
+        searchParams.set('cat', cat.join())
+      }
+      if (searchParams.get('cat') == '') {
+        searchParams.delete('cat')
+      }
+    }
+  }
+
+  //增加子種類
+  function addCatChild(arr) {
+    deleteCatChild(arr)
+    for (let i = 0; i < arr.length; i++) {
+      cat.push(arr[i])
+    }
+    searchParams.set('cat', cat.join())
+  }
+
   useEffect(() => {
     getProductCategoryAsync()
   }, [])
 
   //生成類別
-  const display = productCatogryData.map((item, index) => {
+  const display = categorylist.map((item, index) => {
     if (item.categoryParentId === 0) {
+      const categoryChild = categorylist
+        .filter((e, i) => e.categoryParentId === item.categoryId)
+        .map((it, ind) => {
+          return it.categoryId.toString()
+        })
+
       return (
         <>
           <div>
             <div
               key={item.categoryName}
               className={
+                checkCatChildForItem(categoryChild) ||
                 categorySection.includes(item.categoryName)
                   ? 'drop-title active'
                   : 'drop-title'
               }
               onClick={() => {
-                // setActiveClass(!activeClass)
-                AddcategorySection(item.categoryName)
-                console.log(categorySection)
+                checkCatChildForItem(categoryChild)
+                  ? setCategorySection([])
+                  : AddcategorySection(item.categoryName)
+                // console.log(categorySection)
               }}
             >
-              <h5>{item.categoryName}</h5>
+              <h5>
+                {item.categoryName}
+                {categorySection.includes(item.categoryName) ||
+                checkCatChildForItem(categoryChild) ? (
+                  <FontAwesomeIcon
+                    icon={fas.faAngleUp}
+                    style={{ fontSize: '18px' }}
+                  />
+                ) : (
+                  <FontAwesomeIcon
+                    icon={fas.faAngleDown}
+                    style={{ fontSize: '18px' }}
+                  />
+                )}
+              </h5>
             </div>
             <ul
               className={
-                checkcategory(item.categoryName)
-                // categorySection.includes(item.categoryName)
-                //   ? 'checkbox-dropdown-list active'
-                //   : 'checkbox-dropdown-list'
+                checkcategory(item.categoryName) ||
+                checkCatChildForItem(categoryChild)
+                  ? 'checkbox-dropdown-list active'
+                  : 'checkbox-dropdown-list'
               }
               key={item.categoryId}
             >
-              <li className="checkbox" key={item.categoryId} onClick={() => {}}>
-                <i className="far fa-square"></i>
-                全部
-              </li>
-              {productCatogryData.map((category, i) => {
-                if (category.categoryParentId === item.categoryId) {
+              {categorylist.map((category, i) => {
+                if (
+                  category.categoryParentId === 0 &&
+                  category.categoryId === item.categoryId
+                ) {
+                  return (
+                    <>
+                      <li
+                        className="checkbox"
+                        key={item.categoryId}
+                        onClick={() => {
+                          searchParams.get('cat')
+                            ? checkCatChild(categoryChild)
+                              ? deleteCatChild(categoryChild)
+                              : addCatChild(categoryChild)
+                            : searchParams.append('cat', categoryChild.join())
+                          searchParams.set('page', 1)
+                          props.history.push(`?${searchParams.toString()}`)
+                        }}
+                      >
+                        {searchParams.get('cat') ? (
+                          checkCatChild(categoryChild) ? (
+                            <FontAwesomeIcon icon={fas.faCheckSquare} />
+                          ) : (
+                            <FontAwesomeIcon icon={far.faSquare} />
+                          )
+                        ) : (
+                          <FontAwesomeIcon icon={far.faSquare} />
+                        )}{' '}
+                        全部
+                      </li>
+                    </>
+                  )
+                } else if (category.categoryParentId === item.categoryId) {
                   return (
                     <>
                       <li
                         className="checkbox"
                         key={category.categoryName}
                         onClick={() => {
-                          checkcat(category.categoryId.toString())
+                          checkcat(
+                            category.categoryId.toString(),
+                            category.categoryParentId.toString()
+                          )
+                          searchParams.set('page', 1)
                           props.history.push(`?${searchParams.toString()}`)
                         }}
-                        value={category.categoryId}
+                        value={category.categoryName}
                       >
                         {searchParams.get('cat') ? (
                           searchParams
@@ -200,7 +315,11 @@ function AsideBar(props) {
         <div className="aside-wrapper-filter-box">
           <h3 onClick={handleChange} style={{ cursor: 'pointer' }}>
             地區
-            <i class="fas fa-caret-down"></i>
+            {checked ? (
+              <FontAwesomeIcon icon={fas.faCaretUp} />
+            ) : (
+              <FontAwesomeIcon icon={fas.faCaretDown} />
+            )}
           </h3>
 
           <Collapse in={checked} timeout={200}>
@@ -214,7 +333,7 @@ function AsideBar(props) {
                       ? searchParams.delete('loc')
                       : searchParams.set('loc', '1,2,3,4,5')
                     : searchParams.append('loc', '1,2,3,4,5')
-
+                  searchParams.set('page', 1)
                   props.history.push(`?${searchParams.toString()}`)
                 }}
               >
@@ -239,6 +358,7 @@ function AsideBar(props) {
                 key="北部"
                 onClick={() => {
                   checkloc('1')
+                  searchParams.set('page', 1)
                   props.history.push(`?${searchParams.toString()}`)
                 }}
               >
@@ -258,6 +378,7 @@ function AsideBar(props) {
                 key="中部"
                 onClick={() => {
                   checkloc('2')
+                  searchParams.set('page', 1)
                   props.history.push(`?${searchParams.toString()}`)
                 }}
               >
@@ -277,6 +398,7 @@ function AsideBar(props) {
                 key="南部"
                 onClick={() => {
                   checkloc('3')
+                  searchParams.set('page', 1)
                   props.history.push(`?${searchParams.toString()}`)
                 }}
               >
@@ -296,6 +418,7 @@ function AsideBar(props) {
                 key="東部"
                 onClick={() => {
                   checkloc('4')
+                  searchParams.set('page', 1)
                   props.history.push(`?${searchParams.toString()}`)
                 }}
               >
@@ -315,6 +438,7 @@ function AsideBar(props) {
                 key="外島"
                 onClick={() => {
                   checkloc('5')
+                  searchParams.set('page', 1)
                   props.history.push(`?${searchParams.toString()}`)
                 }}
               >
@@ -343,13 +467,21 @@ function AsideBar(props) {
               篩選日期
             </h3>
             <div className={checked2 ? 'calender active' : 'calender'}>
-              <Calendar />
+              <Calendar
+                selectRange={true}
+                returnValue="range"
+                showNeighboringMonth={false}
+                showDoubleView={true}
+                onChange={(value) => {
+                  console.log(value)
+                }}
+              />
             </div>
           </div>
         </div>
 
         <div className="aside-wrapper-filter-box" style={{ cursor: 'default' }}>
-          <h3>價格</h3>
+          <h3>價格 (TWD) </h3>
           <div className="price-area">
             {value.min} ~ {value.max}
           </div>
@@ -359,7 +491,9 @@ function AsideBar(props) {
               minValue={32}
               value={value}
               onChange={(value) => setValue(value)}
-              onChangeComplete={(value) => console.log(value)}
+              onChangeComplete={(value) => {
+                console.log(value)
+              }}
             />
           </div>
         </div>

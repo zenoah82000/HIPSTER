@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import Fade from 'react-reveal/Fade';
+import Fade from 'react-reveal/Fade'
 import '../../styles/order.scss'
 import MyOrder from '../../components/order/MyOder'
 
 function UserOrder() {
-
   //訂單資料
   const [orderlist, setOrderlist] = useState([])
   //訂單顯示狀態
@@ -14,17 +13,19 @@ function UserOrder() {
   //每頁的資料
   const [datapage, setDatapage] = useState([])
   //讀取會員資料
-  const member =JSON.parse(localStorage.getItem('member'))
- 
+  const member = JSON.parse(localStorage.getItem('member'))
 
   const getOrderlistAsync = async () => {
-    const request = new Request(`http://localhost:5000/member/order/${member.id}`, {
-      method: 'get',
-      headers: new Headers({
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      }),
-    })
+    const request = new Request(
+      `http://localhost:5000/member/order/${member.id}`,
+      {
+        method: 'get',
+        headers: new Headers({
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        }),
+      }
+    )
     const response = await fetch(request)
     const data = await response.json()
     setOrderlist(data)
@@ -50,7 +51,6 @@ function UserOrder() {
     }, 500)
   }, [orderlist])
 
-  
   //把資料分頁
   const getdatapage = () => {
     let perPage = orderlist.perPage
@@ -81,15 +81,15 @@ function UserOrder() {
     }
     return pages
   }
-  
+
   const display = orderlist.order ? (
     <div className="orderlistbox ">
       <div className="row">
         {datapage.map((item) => {
           return (
             <>
-            <Fade bottom>
-              <MyOrder orderlist={orderlist} item={item}/>
+              <Fade bottom>
+                <MyOrder orderlist={orderlist} item={item} />
               </Fade>
             </>
           )
@@ -99,17 +99,20 @@ function UserOrder() {
     </div>
   ) : (
     <div className="empty text-center">
-      <img
-        className="emptyImg mb-3"
-        src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
-      />
-      <p>暫時未有活動處理預訂記錄</p>
-      <p>探索精彩活動並體驗輕鬆的網上預訂流程</p>
+      <div className="emptyimgbox mb-3">
+        <img
+          className="emptyImg "
+          src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
+        />
+      </div>
+      <div className="emptytext">
+        <p>暫時未有活動處理預訂記錄</p>
+        <p>探索精彩活動並體驗輕鬆的網上預訂流程</p>
+      </div>
     </div>
   )
   return (
     <>
-      
       <div className="usercontainer">
         <h2 className="usertitle">我的訂單</h2>
         {loading ? <h2>載入中</h2> : display}

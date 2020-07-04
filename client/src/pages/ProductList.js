@@ -26,7 +26,7 @@ function ProductList(props) {
         .get('cat')
         .split(',')
         .map((item, index) => {
-          return +item
+          return item
         })
     : !!searchParams.get('cat')
 
@@ -35,18 +35,42 @@ function ProductList(props) {
         .get('loc')
         .split(',')
         .map((item, index) => {
-          return +item
+          return item
         })
     : !!searchParams.get('loc')
 
-  // console.log(loc, cat)
+  console.log(loc, cat)
 
   useEffect(() => {
     getProductListAsync()
     setDate(new Date())
   }, [])
 
-  const display = productListData.map((item, index) => {
+  let length
+  if (!!loc && !!cat) {
+    length =
+      [...loc].length >= [...cat].length ? [...loc].length : [...cat].length
+  } else if (!!loc) {
+    length = [...loc].length
+  } else if (!!cat) {
+    length = [...cat].length
+  } else {
+    length = 0
+  }
+
+  const count = productListData.filter((item, index) => {
+    if (length === 0) {
+      return item
+    } else {
+      for (let i = 0; i < length; i++) {
+        if (item.categoryId === +cat[i] || item.locationParentId === +loc[i]) {
+          return item
+        }
+      }
+    }
+  })
+
+  const display = count.map((item, index) => {
     if (
       index >= currentPage * perPage - perPage &&
       index < currentPage * perPage
@@ -59,7 +83,7 @@ function ProductList(props) {
                 <div className="col-sm-5 col-lg-4">
                   <img
                     src={`http://localhost:5000/images/product/${item.productImg}`}
-                    alt=""
+                    alt={item.productImg}
                   />
                 </div>
                 <div className="col-sm-7 col-lg-8 px-15">
@@ -114,17 +138,11 @@ function ProductList(props) {
   // console.log(display)
 
   // 測試
-  console.log(cat)
-  const count = productListData.filter((item, index) => {
-    for (let i = 0; i < cat.length; i++) {
-      if (item.categoryId === cat[i]) {
-        return item
-      }
-    }
-  })
-  console.log(count)
-  console.log(count.length)
-  console.log({ ...count[0] }.categoryId)
+
+  // console.log(count)
+  // console.log(length)
+  // console.log(count.length)
+  // console.log({ ...count[0] }.categoryId)
 
   return (
     <>
@@ -133,7 +151,7 @@ function ProductList(props) {
           <AsideBar cat={cat} loc={loc} />
           <ProductListMainContent>
             {cat || loc ? (
-              <ProductSearchResult productnumbers={productListData.length} />
+              <ProductSearchResult productnumbers={count.length} />
             ) : (
               ''
             )}
@@ -142,8 +160,8 @@ function ProductList(props) {
             {display}
             {/* -------商品列表區域------ */}
             <ProductListPageBar
-              productnumbers={productListData.length}
-              currentpage={currentPage}
+              productnumbers={count.length}
+              currentPage={currentPage}
             />
           </ProductListMainContent>
         </div>

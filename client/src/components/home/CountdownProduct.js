@@ -49,7 +49,9 @@ function CountdownProduct(props) {
   const addWish = (e, productId) => {
     e.preventDefault()
     if (member.id) {
-      if (wishlist.includes(item.productId)) {
+      if (
+        wishlist.findIndex((value) => value.productId == item.productId) != -1
+      ) {
         deletewishlist(productId)
       } else {
         addwishlist(productId)
@@ -75,12 +77,14 @@ function CountdownProduct(props) {
           <div className="countdown-picture">
             <div
               className={
-                wishlist.includes(item.productId)
+                wishlist.findIndex(
+                  (value) => value.productId == item.productId
+                ) != -1
                   ? 'activity-follow active'
                   : 'activity-follow'
               }
               onClick={(e) => {
-                addWish(e, item.productId)
+                addWish(e, item)
               }}
             >
               <FaHeart />
