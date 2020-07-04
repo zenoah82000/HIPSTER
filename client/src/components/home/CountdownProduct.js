@@ -67,14 +67,18 @@ function CountdownProduct(props) {
 
   return (
     <>
-      <Link to={`/productlist/${item.productId}`}>
+      <Link to={`/product/${item.productId}`}>
         <p className="countdown-num">
           {[countdowntime(item.productEndingDate)]}
         </p>
         <div className="countdown-main-cont">
           <div className="countdown-picture">
             <div
-              className={wishlist.includes(item.productId)? 'activity-follow active' : 'activity-follow'}
+              className={
+                wishlist.includes(item.productId)
+                  ? 'activity-follow active'
+                  : 'activity-follow'
+              }
               onClick={(e) => {
                 addWish(e, item.productId)
               }}

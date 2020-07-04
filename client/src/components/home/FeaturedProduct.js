@@ -72,7 +72,7 @@ function FeaturedProduct(props) {
 
   return (
     <>
-      <Link to={`/productlist/${item.productId}`}>
+      <Link to={`/product/${item.productId}`}>
         <div className="activity-main-cont">
           <div className="activity-picture">
             <div
