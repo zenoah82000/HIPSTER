@@ -203,7 +203,7 @@ function AsideBar(props) {
                 checkCatChildForItem(categoryChild)
                   ? setCategorySection([])
                   : AddcategorySection(item.categoryName)
-                console.log(categorySection)
+                // console.log(categorySection)
               }}
             >
               <h5>
@@ -247,6 +247,7 @@ function AsideBar(props) {
                               ? deleteCatChild(categoryChild)
                               : addCatChild(categoryChild)
                             : searchParams.append('cat', categoryChild.join())
+                          searchParams.set('page', 1)
                           props.history.push(`?${searchParams.toString()}`)
                         }}
                       >
@@ -274,6 +275,7 @@ function AsideBar(props) {
                             category.categoryId.toString(),
                             category.categoryParentId.toString()
                           )
+                          searchParams.set('page', 1)
                           props.history.push(`?${searchParams.toString()}`)
                         }}
                         value={category.categoryName}
@@ -330,7 +332,7 @@ function AsideBar(props) {
                       ? searchParams.delete('loc')
                       : searchParams.set('loc', '1,2,3,4,5')
                     : searchParams.append('loc', '1,2,3,4,5')
-
+                  searchParams.set('page', 1)
                   props.history.push(`?${searchParams.toString()}`)
                 }}
               >
@@ -355,6 +357,7 @@ function AsideBar(props) {
                 key="北部"
                 onClick={() => {
                   checkloc('1')
+                  searchParams.set('page', 1)
                   props.history.push(`?${searchParams.toString()}`)
                 }}
               >
@@ -393,6 +396,7 @@ function AsideBar(props) {
                 key="南部"
                 onClick={() => {
                   checkloc('3')
+                  searchParams.set('page', 1)
                   props.history.push(`?${searchParams.toString()}`)
                 }}
               >
@@ -412,6 +416,7 @@ function AsideBar(props) {
                 key="東部"
                 onClick={() => {
                   checkloc('4')
+                  searchParams.set('page', 1)
                   props.history.push(`?${searchParams.toString()}`)
                 }}
               >
@@ -431,6 +436,7 @@ function AsideBar(props) {
                 key="外島"
                 onClick={() => {
                   checkloc('5')
+                  searchParams.set('page', 1)
                   props.history.push(`?${searchParams.toString()}`)
                 }}
               >
