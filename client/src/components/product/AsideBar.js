@@ -48,6 +48,8 @@ function AsideBar(props) {
 
   const [startDate, setStartDate] = useState(stdate)
   const [endDate, setEndDate] = useState(eddate)
+  console.log(stdate, eddate)
+  console.log(startDate, endDate)
 
   //設定開始日期與結束日期
   const d =
@@ -57,7 +59,7 @@ function AsideBar(props) {
           new Date(searchParams.get('endDate')),
         ]
       : [new Date(startDate), new Date(endDate)]
-
+  console.log(d)
   //設定價格區間
   const pricerange =
     searchParams.has('minPrice') && searchParams.has('maxPrice')
@@ -241,7 +243,12 @@ function AsideBar(props) {
   useEffect(() => {
     getProductCategoryAsync()
   }, [])
-  useEffect(() => {}, [startDate])
+
+  useEffect(() => {
+    setStartDate(stdate)
+    setEndDate(eddate)
+  }, [stdate])
+
   useEffect(() => {
     setDateValue([new Date(startDate), new Date(endDate)])
   }, [endDate])
@@ -575,6 +582,8 @@ function AsideBar(props) {
                     searchParams.delete('endDate')
                     props.history.push(`?${searchParams.toString()}`)
                     setChecked2(!checked2)
+                    setStartDate(stdate)
+                    setEndDate(eddate)
                   }}
                 >
                   清除

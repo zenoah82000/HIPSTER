@@ -162,6 +162,7 @@ function ProductList(props) {
             <ProductListPageBar
               productnumbers={count.length}
               currentPage={currentPage}
+              perPage={perPage}
             />
           </ProductListMainContent>
         </div>
