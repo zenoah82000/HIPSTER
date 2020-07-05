@@ -29,9 +29,17 @@ function AsideBar(props) {
   //   console.log(data)
   // }
 
-  let searchParams = new URLSearchParams(props.location.search)
+  const searchParams = new URLSearchParams(props.location.search)
 
-  const { loc, cat, productCatogryData, getProductCategoryAsync } = props
+  const {
+    loc,
+    cat,
+    productCatogryData,
+    getProductCategoryAsync,
+    pricerange,
+    price,
+    setPrice,
+  } = props
 
   //設定開始日期
   const stdate =
@@ -47,8 +55,8 @@ function AsideBar(props) {
 
   const [startDate, setStartDate] = useState(stdate)
   const [endDate, setEndDate] = useState(eddate)
-  console.log(stdate, eddate)
-  console.log(startDate, endDate)
+  // console.log(stdate, eddate)
+  // console.log(startDate, endDate)
 
   //設定開始日期與結束日期
   const d =
@@ -58,18 +66,18 @@ function AsideBar(props) {
           new Date(searchParams.get('endDate')),
         ]
       : [new Date(startDate), new Date(endDate)]
-  console.log(d)
+  // console.log(d)
   //設定價格區間
-  const pricerange =
-    searchParams.has('minPrice') && searchParams.has('maxPrice')
-      ? {
-          min: +searchParams.get('minPrice'),
-          max: +searchParams.get('maxPrice'),
-        }
-      : { min: 32, max: 10000 }
+  // const pricerange =
+  //   searchParams.has('minPrice') && searchParams.has('maxPrice')
+  //     ? {
+  //         min: +searchParams.get('minPrice'),
+  //         max: +searchParams.get('maxPrice'),
+  //       }
+  //     : { min: 32, max: 10000 }
 
   const [categorySection, setCategorySection] = useState([])
-  const [value, setValue] = useState(pricerange)
+  // const [price, setPrice] = useState(pricerange)
   const [checked, setChecked] = useState(false)
   const [checked2, setChecked2] = useState(false)
 
@@ -241,15 +249,19 @@ function AsideBar(props) {
 
   useEffect(() => {
     getProductCategoryAsync()
+
+    console.log(pricerange)
   }, [])
 
   useEffect(() => {
     setStartDate(stdate)
     setEndDate(eddate)
+    console.log(pricerange)
   }, [stdate])
 
   useEffect(() => {
     setDateValue([new Date(startDate), new Date(endDate)])
+    console.log(pricerange)
   }, [endDate])
 
   //生成類別
@@ -579,6 +591,7 @@ function AsideBar(props) {
                   onClick={() => {
                     searchParams.delete('startDate')
                     searchParams.delete('endDate')
+                    searchParams.set('page', 1)
                     props.history.push(`?${searchParams.toString()}`)
                     setChecked2(!checked2)
                     setStartDate(stdate)
@@ -592,6 +605,7 @@ function AsideBar(props) {
                   onClick={() => {
                     setStartDateEndDate(startDate, endDate)
                     setChecked2(!checked2)
+                    searchParams.set('page', 1)
                     props.history.push(`?${searchParams.toString()}`)
                   }}
                 >
@@ -605,18 +619,19 @@ function AsideBar(props) {
         <div className="aside-wrapper-filter-box" style={{ cursor: 'default' }}>
           <h3>價格 (TWD) </h3>
           <div className="price-area">
-            {value.min} ~ {value.max}
+            {{ ...price }.min} ~ {{ ...price }.max}
           </div>
           <div className="range">
             <InputRange
               maxValue={10000}
-              minValue={32}
-              value={value}
-              onChange={(value) => setValue(value)}
+              minValue={0}
+              value={price}
+              onChange={(value) => {
+                setPrice(value)
+              }}
               onChangeComplete={(value) => {
-                console.log(value.min)
-                console.log(value.max)
                 setMinPriceMaxPrice(value.min, value.max)
+                searchParams.set('page', 1)
                 props.history.push(`?${searchParams.toString()}`)
               }}
             />
