@@ -38,9 +38,6 @@ import BlogAdd from './pages/blog/BlogAdd'
 
 import Swal from 'sweetalert2'
 
-//coupon
-import AllCoupon from './pages/coupon/AllCoupon'
-
 //保護路由
 import ProtectedRoute from './utils/ProtectedRoute'
 
@@ -51,7 +48,6 @@ function App(props) {
   const username = userlocalStorage.name
 
   const { mycart, wishlist } = props
-  console.log(wishlist)
   //取得購物車資料
   const localCart = JSON.parse(localStorage.getItem('cart')) || []
 
@@ -69,8 +65,7 @@ function App(props) {
     )
     const response = await fetch(request)
     const data = await response.json()
-    const wishlist = data.map((item) => item.productId)
-    props.dispatch({ type: 'GET_WISH', value: wishlist })
+    props.dispatch({ type: 'GET_WISH', value: data })
   }
   // 加入願望清單(資料庫)
   const addWishlistAsync = async (productId) => {
@@ -90,40 +85,39 @@ function App(props) {
   }
   //加入願望清單
   const addwishlist = (value) => {
-    if (!wishlist.includes(value)) {
+    const index = wishlist.findIndex((item)=>item.productId === value.productId)
+    if (index == -1) {
       const newWishlist = [...wishlist]
       newWishlist.push(value)
       props.dispatch({ type: 'GET_WISH', value: newWishlist })
-      addWishlistAsync(value)
+      console.log(value.productId)
+      addWishlistAsync(value.productId)
     } else {
       alert('已在願望清單')
     }
   }
   //刪除願望清單(資料庫)
-  const delwishlistAsync = async (productId) => {
-    const request = new Request(
-      `http://localhost:5000/member/wishlistDel/${userlocalStorage.id}`,
-      {
-        method: 'delete',
-        body: JSON.stringify({ productId }),
-        headers: new Headers({
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        }),
-      }
-    )
+  const delwishlistAsync = async(productId)=>{
+    const request = new Request(`http://localhost:5000/member/wishlistDel/${userlocalStorage.id}`, {
+      method: 'delete',
+      body:JSON.stringify({productId}),
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }),
+    })
     const response = await fetch(request)
     const data = await response.json()
   }
 
   //刪除願望清單
-  const deletewishlist = (productId) => {
-    const index = wishlist.indexOf(productId)
+  const deletewishlist = (value) => {
+    const index = wishlist.findIndex((item)=>item.productId === value.productId)
     if (index !== -1) {
       const localWishlist = [...wishlist]
       localWishlist.splice(index, 1)
       props.dispatch({ type: 'GET_WISH', value: localWishlist })
-      delwishlistAsync(productId)
+      delwishlistAsync(value.productId)
     }
   }
   //寫入購物車資料
@@ -135,15 +129,14 @@ function App(props) {
   }, [])
   //加入購物車
   const addCart = (value) => {
-    const index = localCart.findIndex((item) => item.id == value.id)
+    const index = mycart.findIndex((item) => item.productId == value.productId)
     if (index == -1) {
-      localCart.push(value)
-      props.dispatch({ type: 'GET_CART', value: localCart })
-      localStorage.setItem('cart', JSON.stringify(localCart))
+      const newCart = [...mycart]
+      newCart.push(value)
+      props.dispatch({ type: 'GET_CART', value: newCart })
+      localStorage.setItem('cart', JSON.stringify(newCart))
     } else {
-      localCart[index].amount += 1
-      props.dispatch({ type: 'GET_CART', value: localCart })
-      localStorage.setItem('cart', JSON.stringify(localCart))
+      alert('已在購物車')
     }
   }
   //刪除購物車
@@ -156,9 +149,14 @@ function App(props) {
       cancelButtonText: '取消',
     }).then((result) => {
       if (result.value) {
-        const newCart = mycart.filter((item) => item.id != id)
-        props.dispatch({ type: 'GET_CART', value: newCart })
-        localStorage.setItem('cart', JSON.stringify(newCart))
+        const index = mycart.findIndex((item) => item.productId == id)
+        if(index != -1){
+          const newCart = [...mycart]
+          newCart.splice(index, 1)
+          props.dispatch({ type: 'GET_CART', value: newCart })
+          localStorage.setItem('cart', JSON.stringify(newCart))
+        }
+        
       }
     })
   }
@@ -167,7 +165,7 @@ function App(props) {
     let total = 0
     if (items != null) {
       for (let i = 0; i < items.length; i++) {
-        total += items[i].amount * items[i].price
+        total += items[i].amount * items[i].productPrice
       }
     }
     return total
@@ -252,7 +250,7 @@ function App(props) {
           </Route>
 
           <Route path="/memberuser">
-            <MemberUser />
+            <MemberUser addCart={addCart}/>
           </Route>
           {/* 保護路由 */}
           <ProtectedRoute path="/paymentDetail">
@@ -267,11 +265,8 @@ function App(props) {
           <Route path="/forgetpwd/:memberId?">
             <Forgetpwd />
           </Route>
-          <Route path="/allcoupon">
-            <AllCoupon />
-          </Route>
           <Route exact path="/">
-            <Home addwishlist={addwishlist} deletewishlist={deletewishlist} />
+            <Home addwishlist={addwishlist} deletewishlist={deletewishlist}/>
           </Route>
 
           <Route exact path="*">

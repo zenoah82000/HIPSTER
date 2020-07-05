@@ -62,7 +62,7 @@ function MemberUser(props) {
               <UserMymap />
             </Route>
             <Route path="/memberuser/wishlist">
-              <UserWishlist />
+              <UserWishlist addCart={props.addCart}/>
             </Route>
           </Switch>
         </Sidebar>

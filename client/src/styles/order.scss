@@ -7,10 +7,10 @@
   }
   .orderlistbox {
     .order-box {
-      width: 100%;
+      width: 760px;
       border: 1px solid gray;
       background-color: white;
-      margin: 20px 0px;
+      margin: 20px 10px;
       .order-title {
         display: flex;
         flex-wrap: wrap;
@@ -80,14 +80,35 @@
             }
           }
           .oderproductinfo {
+            width: 350px;
             .productname {
               p {
                 font-size: 16px;
+                color: black;
+                font-weight: bold;
+                letter-spacing: 1px;
+                line-height: 25px;
+              }
+            }
+            .productamount {
+              p {
+                line-height: 25px;
+              }
+            }
+            .productprice {
+              p {
+                line-height: 25px;
+              }
+            }
+            .productdate {
+              p {
+                line-height: 25px;
               }
             }
           }
           .oderbutton {
-            width: 20%;
+            width: 200px;
+            text-align: right;
             button {
               outline: none;
               color: blue;
@@ -98,15 +119,6 @@
         }
       }
     }
-  }
-}
-
-//沒有訂單
-.empty {
-  margin: 100px;
-  .emptyImg {
-    width: 200px;
-    height: 150px;
   }
 }
 
@@ -164,8 +176,41 @@
         font-size: 18px;
         font-weight: bold;
       }
-      p {
-        color: black;
+      .detail-paytype {
+        display: flex;
+        p {
+          color: black;
+        }
+      }
+      .detail-subtotal {
+        display: flex;
+        justify-content: space-between;
+        width: 60%;
+        p {
+          color: black;
+        }
+      }
+      .detail-coupon {
+        display: flex;
+        justify-content: space-between;
+        width: 60%;
+        border-bottom: 1px solid rgb(199, 198, 198);
+        p {
+          color: black;
+        }
+      }
+      .detail-total {
+        display: flex;
+        justify-content: space-between;
+        width: 60%;
+        p {
+          color: black;
+        }
+        span {
+          font-size: 20px;
+          font-weight: bold;
+          color: #ff3400;
+        }
       }
     }
   }
@@ -174,7 +219,7 @@
 .prooftitle {
   h6 {
     text-align: center;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bold;
   }
 }
@@ -185,7 +230,7 @@
   text-align: center;
   p {
     margin: 10px;
-    font-size: 18px;
+    font-size: 16px;
     color: black;
   }
 }

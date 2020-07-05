@@ -26,7 +26,7 @@ function MyOder(props) {
   //商品展開判斷
   const unfold = (e) => {
     if (unfoldtext == '展開更多') {
-      $(e.target).closest('.order-body').css('maxHeight', productamount.length*145+'px')
+      $(e.target).closest('.order-body').css('maxHeight', productamount.length*200+'px')
       setUnfoldtext('收起')
     } else {
       $(e.target).closest('.order-body').css('maxHeight', '145px')
@@ -59,10 +59,11 @@ function MyOder(props) {
             <hr />
             <div className="orderpayinfo">
               <h6>付款資訊</h6>
-              <p>付款方式:</p>
-              <p>小計</p>
-              <p>優惠碼</p>
-              <p>總計</p>
+              <div className="detail-paytype"><p>付款方式:</p><span>{detaildata.paymentTypeId}</span></div>
+              <div className="detail-subtotal"><p>總計:</p><span>NT${detaildata.orderTotal}</span></div>
+              <div className="detail-coupon"><p>優惠碼{detaildata.coupon? detaildata.coupon: '(未使用)'}:</p><span>-NT${detaildata.discount}</span></div>
+              <div className="detail-total"><p>付款金額:</p><span>NT${detaildata.paymentTotal}</span></div>
+              
             </div>
           </div>
         </Modal.Body>
@@ -118,7 +119,7 @@ function MyOder(props) {
           <div className="ordertotal">
             <h6>
               付款金額:NT$
-              {item.orderTotal
+              {item.paymentTotal
                 .toString()
                 .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
             </h6>
@@ -153,16 +154,16 @@ function MyOder(props) {
                   )}
                   <div className="d-flex product-box border-bottom align-items-center">
                     <div className="productimg mr-3">
-                      <img src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg" />
+                      <img src={`http://localhost:5000/images/product/${value.productImg}`} />
                     </div>
                     <div className="oderproductinfo">
                       <div className="productname">
                         <p>{value.productName}</p>
                       </div>
-                      <div>
+                      <div className="productamount">
                         <p>數量:{value.checkQty}</p>
                       </div>
-                      <div>
+                      <div className="productprice">
                         <p>
                           價格:NT$
                           {value.checkPrice
@@ -170,7 +171,7 @@ function MyOder(props) {
                             .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
                         </p>
                       </div>
-                      <div>
+                      <div className="productdate">
                         <p>活動時間:{value.date}</p>
                       </div>
                     </div>

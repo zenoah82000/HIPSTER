@@ -260,16 +260,25 @@ nav {
   padding: 0 12px;
 }
 .menu a,
-.shop-group a,
 .sign a,
 .member a {
   color: white;
   text-decoration: none;
 }
+.shop-group a {
+  color: rgb(211, 205, 205);
+}
+
 .menu a:hover,
-.shop-group a:hover,
 .sign a:hover {
-  color: rgba($color: #fff, $alpha: 0.5);
+  position: relative;
+  top: -5px;
+  border-bottom: 1.5px solid #fff;
+  padding-bottom: 5px;
+  transition: 0.3s;
+}
+.shop-group a:hover {
+  color: rgb(255, 255, 255);
 }
 
 .memberbtn {
