@@ -553,7 +553,7 @@ function Mynavbar(props) {
                               return (
                                 <div className="card-item d-flex align-items-center">
                                   <div className="productimgbox mr-4">
-                                    <Link to="/">
+                                    <Link to={`/product/${value.productId}`}>
                                       <img
                                         src={`http://localhost:5000/images/product/${value.productImg}`}
                                       />
@@ -561,7 +561,7 @@ function Mynavbar(props) {
                                   </div>
                                   <div className="item-text">
                                     <div className="item-name">
-                                      <Link to="/">
+                                      <Link to={`/product/${value.productId}`}>
                                         <p>{value.productName}</p>
                                       </Link>
                                     </div>
