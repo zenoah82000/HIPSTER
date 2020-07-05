@@ -3,8 +3,9 @@ const db = require(__dirname + "/db_connect2");
 const upload = require(__dirname + '/upload-module');
 const router = express.Router()
 
+//買家優惠券請求
 router.get('/member/coupon', async (req, res) => {
-    // console.log("買家優惠券請求");
+    console.log("買家優惠券請求");
     const data = {
         status: true,
         coupon: [],
@@ -28,6 +29,34 @@ router.get('/member/coupon', async (req, res) => {
             'msg':            '此會員尚無建立優惠券'
         })
       }    
+});
+
+//所有優惠券請求
+router.get('/all/coupon', async (req, res) => {
+  console.log("所有優惠券請求");
+  const data = {
+      status: true,
+      coupon: [],
+    };
+  const sqlcoupon = "SELECT * FROM `coupon` WHERE 1";
+
+  const [r1] = await db.query(sqlcoupon);
+
+  if (r1.length > 0 ) {
+      r1.forEach((item) => {
+        item.startTime = item.startTime.toLocaleString('zh');
+        item.endTime = item.endTime.toLocaleString('zh');
+        item.created_at = item.created_at.toLocaleString('zh');
+        item.updated_at = item.updated_at.toLocaleString('zh');
+      });
+      data.coupon = r1;
+      res.json(data);
+    }else{
+      res.json({
+          'status' :        404,
+          'msg':            '尚無建立優惠券'
+      })
+    }    
 });
 
 //會員新增優惠券

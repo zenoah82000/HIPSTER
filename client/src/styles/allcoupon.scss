@@ -1,0 +1,86 @@
+$background-color: #eee;
+$radius-size: 12px;
+
+.allcoupons {
+  background: $background-color;
+  padding: 20px;
+
+  .coupon-item {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: stretch;
+    justify-content: stretch;
+    width: 46%;
+    transition-duration: 0.3s;
+
+    > div {
+      padding: 10px 20px;
+      border-radius: $radius-size;
+    }
+
+    .coupon-intro {
+      position: relative;
+      background: #fff;
+      flex: 3;
+
+      ul {
+        color: #aaa;
+        padding-left: 20px;
+      }
+
+      &:after {
+        content: ' ';
+        border: 2px dashed $background-color;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        right: -2px;
+        z-index: 2;
+      }
+    }
+
+    .allcoupon-value {
+      display: flex;
+      flex: 1;
+      position: relative;
+      background: #688e67;
+      color: #fff;
+      font-size: 38px;
+      align-items: center;
+      justify-content: center;
+
+      &:before {
+        content: ' ';
+        width: $radius-size * 2;
+        height: $radius-size * 2;
+        position: absolute;
+        top: -$radius-size;
+        left: -$radius-size;
+        border-radius: 100%;
+        background: $background-color;
+      }
+      &:after {
+        content: ' ';
+        width: $radius-size * 2;
+        height: $radius-size * 2;
+        position: absolute;
+        bottom: -$radius-size;
+        left: -$radius-size;
+        border-radius: 100%;
+        background: $background-color;
+      }
+    }
+  }
+  .coupon-item:hover {
+    // box-shadow: 10px 10px 14px -3px rgba(209, 202, 209, 1);
+    transform: scale(1.05);
+  }
+}
+
+@media only screen and (max-width: 599px) {
+  .allcoupons {
+    .coupon-item {
+      width: 100%;
+    }
+  }
+}
