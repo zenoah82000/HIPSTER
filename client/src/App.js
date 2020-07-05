@@ -38,6 +38,9 @@ import BlogAdd from './pages/blog/BlogAdd'
 
 import Swal from 'sweetalert2'
 
+//coupon
+import AllCoupon from './pages/coupon/AllCoupon'
+
 //保護路由
 import ProtectedRoute from './utils/ProtectedRoute'
 
@@ -85,7 +88,9 @@ function App(props) {
   }
   //加入願望清單
   const addwishlist = (value) => {
-    const index = wishlist.findIndex((item)=>item.productId === value.productId)
+    const index = wishlist.findIndex(
+      (item) => item.productId === value.productId
+    )
     if (index == -1) {
       const newWishlist = [...wishlist]
       newWishlist.push(value)
@@ -97,22 +102,27 @@ function App(props) {
     }
   }
   //刪除願望清單(資料庫)
-  const delwishlistAsync = async(productId)=>{
-    const request = new Request(`http://localhost:5000/member/wishlistDel/${userlocalStorage.id}`, {
-      method: 'delete',
-      body:JSON.stringify({productId}),
-      headers: new Headers({
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      }),
-    })
+  const delwishlistAsync = async (productId) => {
+    const request = new Request(
+      `http://localhost:5000/member/wishlistDel/${userlocalStorage.id}`,
+      {
+        method: 'delete',
+        body: JSON.stringify({ productId }),
+        headers: new Headers({
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        }),
+      }
+    )
     const response = await fetch(request)
     const data = await response.json()
   }
 
   //刪除願望清單
   const deletewishlist = (value) => {
-    const index = wishlist.findIndex((item)=>item.productId === value.productId)
+    const index = wishlist.findIndex(
+      (item) => item.productId === value.productId
+    )
     if (index !== -1) {
       const localWishlist = [...wishlist]
       localWishlist.splice(index, 1)
@@ -150,13 +160,12 @@ function App(props) {
     }).then((result) => {
       if (result.value) {
         const index = mycart.findIndex((item) => item.productId == id)
-        if(index != -1){
+        if (index != -1) {
           const newCart = [...mycart]
           newCart.splice(index, 1)
           props.dispatch({ type: 'GET_CART', value: newCart })
           localStorage.setItem('cart', JSON.stringify(newCart))
         }
-        
       }
     })
   }
@@ -250,7 +259,7 @@ function App(props) {
           </Route>
 
           <Route path="/memberuser">
-            <MemberUser addCart={addCart}/>
+            <MemberUser addCart={addCart} />
           </Route>
           {/* 保護路由 */}
           <ProtectedRoute path="/paymentDetail">
@@ -265,8 +274,11 @@ function App(props) {
           <Route path="/forgetpwd/:memberId?">
             <Forgetpwd />
           </Route>
+          <Route path="/allcoupon">
+            <AllCoupon />
+          </Route>
           <Route exact path="/">
-            <Home addwishlist={addwishlist} deletewishlist={deletewishlist}/>
+            <Home addwishlist={addwishlist} deletewishlist={deletewishlist} />
           </Route>
 
           <Route exact path="*">
