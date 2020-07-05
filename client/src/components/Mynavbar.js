@@ -494,19 +494,35 @@ function Mynavbar(props) {
 
           <ul className="menu" style={burgerstate ? { width: '100%' } : {}}>
             <li>
-              <Link to="/about">品牌介紹</Link>
+              <Link className="hvr-float hvr-underline-from-center" to="/about">
+                品牌介紹
+              </Link>
             </li>
             <li>
-              <Link to="/map">地圖探索</Link>
+              <Link className="hvr-float hvr-underline-from-center" to="/map">
+                地圖探索
+              </Link>
             </li>
             <li>
-              <Link to="/blog">文章專欄</Link>
+              <Link className="hvr-float hvr-underline-from-center" to="/blog">
+                文章專欄
+              </Link>
             </li>
             <li>
-              <Link to="/productlist">活動列表</Link>
+              <Link
+                className="hvr-float hvr-underline-from-center"
+                to="/productlist"
+              >
+                活動列表
+              </Link>
             </li>
             <li>
-              <Link to="/contact">聯絡我們</Link>
+              <Link
+                className="hvr-float hvr-underline-from-center"
+                to="/contact"
+              >
+                聯絡我們
+              </Link>
             </li>
           </ul>
           {/* ========================================================= */}
@@ -514,7 +530,7 @@ function Mynavbar(props) {
             <li>
               <div className="navbar-cart">
                 <FaShoppingCart
-                  className="car-img"
+                  className="car-img hvr-grow"
                   onClick={() => {
                     showMenu()
                   }}
@@ -538,7 +554,9 @@ function Mynavbar(props) {
                                 <div className="card-item d-flex align-items-center">
                                   <div className="productimgbox mr-4">
                                     <Link to="/">
-                                      <img src={`http://localhost:5000/images/product/${value.productImg}`} />
+                                      <img
+                                        src={`http://localhost:5000/images/product/${value.productImg}`}
+                                      />
                                     </Link>
                                   </div>
                                   <div className="item-text">
@@ -590,7 +608,7 @@ function Mynavbar(props) {
             </li>
             <li>
               <Link to="/memberuser/wishlist">
-                <FaHeart />
+                <FaHeart className="hvr-pulse" />
               </Link>
             </li>
           </ul>
