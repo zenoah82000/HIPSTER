@@ -10,7 +10,6 @@ import { far } from '@fortawesome/free-regular-svg-icons'
 
 import '../../styles/product/AsideBar.scss'
 // import 'react-input-range/lib/css/index.css'
-import 'rsuite/dist/styles/rsuite-dark.css'
 
 import { getProductCategoryAsync } from '../../actions/product/getProductCategory'
 import { element } from 'prop-types'
