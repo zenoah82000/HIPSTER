@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import '../styles/forgetpwd.scss'
 import { Link, withRouter } from 'react-router-dom'
 import { Modal, Button, Form } from 'react-bootstrap'
+import $ from 'jquery'
 //引入自訂元件
 
 function Forgetpwd(props) {
@@ -15,6 +16,10 @@ function Forgetpwd(props) {
 
   //存放驗證碼,密碼輸入資料
   let codeinput, codedata, pwd1, pwd2, pwdata
+
+  const pwdid = () => {
+    document.getElementById('pwd1content').value('')
+  }
 
   //檢查驗證碼是否正確
   async function CodeChecking(item) {
@@ -30,6 +35,7 @@ function Forgetpwd(props) {
     const response = await fetch(request)
     const data = await response.json()
     data ? setpromptchang(1) : setpromptchang(0)
+
     // console.log(data)
   }
 
@@ -71,8 +77,10 @@ function Forgetpwd(props) {
         className="SignOkbtn"
         onClick={() => {
           setdisplay(false)
-
           setpromptdisplay(false)
+          setTimeout(() => {
+            $('#pwd1content').val('')
+          }, 10)
         }}
       >
         確認
@@ -174,20 +182,24 @@ function Forgetpwd(props) {
       </div>
     </>
   )
+
   //密碼頁面
   const inputpwd = (
     <>
-      <p className="forgetpwd-title">請輸入更新密碼</p>
+      <p className="forgetpwd-title" onClick={() => {}}>
+        請輸入更新密碼
+      </p>
       <Form.Group className="pwd">
         <Form.Control
           ref={(input) => (pwd1 = input)}
-          type="text"
+          type="password"
           placeholder="請輸入修改密碼"
+          id="pwd1content"
         />
         <br />
         <Form.Control
           ref={(input) => (pwd2 = input)}
-          type="text"
+          type="password"
           placeholder="請再次輸入修改密碼"
         />
       </Form.Group>

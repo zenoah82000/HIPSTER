@@ -139,7 +139,7 @@ function Mynavbar(props) {
           <Form.Label>密碼：</Form.Label>
           <Form.Control
             ref={(input) => (signPassword = input)}
-            type="text"
+            type="password"
             id="signPassword"
             required="required"
             placeholder="請輸入註冊密碼..."
@@ -167,7 +167,7 @@ function Mynavbar(props) {
           <Form.Label>密碼：</Form.Label>
           <Form.Control
             ref={(input) => (loginPassword = input)}
-            type="text"
+            type="password"
             id="loginPassword"
             required="required"
             placeholder="請輸入登入密碼..."
