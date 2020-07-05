@@ -38,6 +38,9 @@ import BlogAdd from './pages/blog/BlogAdd'
 
 import Swal from 'sweetalert2'
 
+//coupon
+import AllCoupon from './pages/coupon/AllCoupon'
+
 //保護路由
 import ProtectedRoute from './utils/ProtectedRoute'
 
@@ -66,7 +69,7 @@ function App(props) {
     )
     const response = await fetch(request)
     const data = await response.json()
-    const wishlist = data.map((item)=>item.productId)
+    const wishlist = data.map((item) => item.productId)
     props.dispatch({ type: 'GET_WISH', value: wishlist })
   }
   // 加入願望清單(資料庫)
@@ -97,15 +100,18 @@ function App(props) {
     }
   }
   //刪除願望清單(資料庫)
-  const delwishlistAsync = async(productId)=>{
-    const request = new Request(`http://localhost:5000/member/wishlistDel/${userlocalStorage.id}`, {
-      method: 'delete',
-      body:JSON.stringify({productId}),
-      headers: new Headers({
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      }),
-    })
+  const delwishlistAsync = async (productId) => {
+    const request = new Request(
+      `http://localhost:5000/member/wishlistDel/${userlocalStorage.id}`,
+      {
+        method: 'delete',
+        body: JSON.stringify({ productId }),
+        headers: new Headers({
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        }),
+      }
+    )
     const response = await fetch(request)
     const data = await response.json()
   }
@@ -261,8 +267,11 @@ function App(props) {
           <Route path="/forgetpwd/:memberId?">
             <Forgetpwd />
           </Route>
+          <Route path="/allcoupon">
+            <AllCoupon />
+          </Route>
           <Route exact path="/">
-            <Home addwishlist={addwishlist} deletewishlist={deletewishlist}/>
+            <Home addwishlist={addwishlist} deletewishlist={deletewishlist} />
           </Route>
 
           <Route exact path="*">

@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import '../styles/Myfooter.scss'
 
 function MyFooter(props) {
   return (
@@ -26,7 +28,9 @@ function MyFooter(props) {
                     <li>三大保證</li>
                     <li>合作夥伴</li>
                     <li>官方部落格</li>
-                    <li>會員好禮</li>
+                    <li className="footer-allcoupon">
+                      <Link to="/allcoupon">優惠券</Link>
+                    </li>
                   </ul>
                 </div>
               </div>
