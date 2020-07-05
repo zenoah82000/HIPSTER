@@ -42,6 +42,8 @@ function Mynavbar(props) {
   //忘記密碼視窗
   const [showforgetPwd, setshowforgetPwd] = useState(false)
 
+  let signcheckbox = false
+
   //手機版-漢堡選單狀態 0=關閉
   const [burgerstate, setburgerstate] = useState(false)
   //手機版-會員中心選單狀態 0=關閉
@@ -243,7 +245,13 @@ function Mynavbar(props) {
           {SignLogin ? (
             <Form.Group controlId="formBasicCheckbox" className="logincheck">
               <Form.Check type="checkbox">
-                <Form.Check.Input type="checkbox" />
+                <Form.Check.Input
+                  type="checkbox"
+                  onChange={() => {
+                    signcheckbox = !signcheckbox
+                    console.log(signcheckbox)
+                  }}
+                />
                 <Form.Check.Label>
                   我已詳細閱讀，並同意接受<span>會員權益</span>與
                   <span>個資同意條款</span>
@@ -268,20 +276,24 @@ function Mynavbar(props) {
               className="signbtn "
               type="submit"
               onClick={() => {
-                if (signAccount.value == '' || signPassword.value == '') {
-                  alert('帳號或密碼不可為空')
+                if (signcheckbox == false) {
+                  alert('請確認已詳細閱讀，並同意接受會員權益與個資同意條款')
                 } else {
-                  //撈取資料
-                  signData = {
-                    memberMail: signAccount.value,
-                    memberPwd: signPassword.value,
+                  if (signAccount.value == '' || signPassword.value == '') {
+                    alert('帳號或密碼不可為空')
+                  } else {
+                    //撈取資料
+                    signData = {
+                      memberMail: signAccount.value,
+                      memberPwd: signPassword.value,
+                    }
+                    // console.log(signData)
+                    addNewMember(signData) //寫入資料庫
+                    setShowlogin(false) //關閉註冊登入視窗
+                    setTimeout(() => {
+                      setShowSignOk(true) //跳出註冊完成視窗
+                    }, 300)
                   }
-                  // console.log(signData)
-                  addNewMember(signData) //寫入資料庫
-                  setShowlogin(false) //關閉註冊登入視窗
-                  setTimeout(() => {
-                    setShowSignOk(true) //跳出註冊完成視窗
-                  }, 300)
                 }
               }}
             >
@@ -553,7 +565,7 @@ function Mynavbar(props) {
                               return (
                                 <div className="card-item d-flex align-items-center">
                                   <div className="productimgbox mr-4">
-                                    <Link to="/">
+                                    <Link to={`/product/${value.productId}`}>
                                       <img
                                         src={`http://localhost:5000/images/product/${value.productImg}`}
                                       />
@@ -561,7 +573,7 @@ function Mynavbar(props) {
                                   </div>
                                   <div className="item-text">
                                     <div className="item-name">
-                                      <Link to="/">
+                                      <Link to={`/product/${value.productId}`}>
                                         <p>{value.productName}</p>
                                       </Link>
                                     </div>

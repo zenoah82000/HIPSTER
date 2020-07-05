@@ -19,14 +19,13 @@ function MyCart(props) {
                     deleteCart(value.productId)
                   }}
                 />
-                <Link to="/">
+                <Link to={`/product/${value.productId}`}>
                   <img
                     className="productImg"
                     src={`http://localhost:5000/images/product/${value.productImg}`}
                   />
                 </Link>
-                <Link to="/">
-                  {' '}
+                <Link to={`/product/${value.productId}`}>
                   <p>{value.productName}</p>
                 </Link>
               </div>

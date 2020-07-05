@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Fade from 'react-reveal/Fade'
 import '../../styles/order.scss'
 import MyOrder from '../../components/order/MyOder'
+import MyOrderPage from '../../components/order/MyOrderPage'
 
 function UserOrder() {
   //訂單資料
@@ -63,24 +64,6 @@ function UserOrder() {
       setDatapage(newdata)
     }
   }
-  //頁碼
-  const creatpage = () => {
-    let pages = []
-    for (let i = 1; i <= orderlist.totalPages; i++) {
-      pages.push(
-        <li
-          onClick={() => {
-            setCurrentPage(i)
-          }}
-          key={i}
-          className={currentPage == i ? 'active' : ''}
-        >
-          {i}
-        </li>
-      )
-    }
-    return pages
-  }
 
   const display = orderlist.order ? (
     <div className="orderlistbox ">
@@ -95,7 +78,7 @@ function UserOrder() {
           )
         })}
       </div>
-      <ul className="orderpage ">{creatpage()}</ul>
+      <MyOrderPage orderlist={orderlist} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
     </div>
   ) : (
     <div className="empty text-center">
