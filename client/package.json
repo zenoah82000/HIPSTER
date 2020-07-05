@@ -48,7 +48,6 @@
     "react-vertical-timeline-component": "^3.0.2",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "rsuite": "^4.7.5",
     "simple-react-calendar": "^2.2.1",
     "simple-react-lightbox": "^3.2.3-2",
     "slick-carousel": "^1.8.1",
