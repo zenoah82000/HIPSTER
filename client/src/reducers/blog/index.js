@@ -10,29 +10,8 @@ const blogData = (state = [], action) => {
   }
 }
 
-// //取得文章評論資料
-// const blogCommentsData = (state = {}, action) => {
-//   switch (action.type) {
-//     case 'GET_BLOGCOMMENTSDATA':
-//       return action.value
-//     default:
-//       return state
-//   }
-// }
-
-
-// //新增文章評論
-// const contentCommentsData = (state = {}, action) => {
-//   switch (action.type) {
-//     case 'ADD_CONTENTCOMMENTSDATA':
-//       return action.value
-//     default:
-//       return state
-//   }
-// }
-
 //新增文章
-const contentData = (state = {}, action) => {
+const addBlogData = (state = {}, action) => {
   switch (action.type) {
     case 'ADD_BLOGCONTENTDATA':
       return action.payload
@@ -42,7 +21,7 @@ const contentData = (state = {}, action) => {
 }
 
 //更新文章
-const editContentData = (state = {}, action) => {
+const editBlogData = (state = {}, action) => {
   switch (action.type) {
     case 'EDIT_CONTENTDATA':
       return action.payload
@@ -52,7 +31,7 @@ const editContentData = (state = {}, action) => {
 }
 
 //刪除文章
-const deleteContentData = (state = {}, action) => {
+const deleteBlogData = (state = {}, action) => {
   switch (action.type) {
     case 'DELETE_CONTENTDATA':
       return action.payload
@@ -61,11 +40,31 @@ const deleteContentData = (state = {}, action) => {
   }
 }
 
+//取得文章評論資料
+const blogCommentsData = (state = [], action) => {
+  switch (action.type) {
+    case 'GET_BLOGCOMMENTSDATA':
+      return action.payload
+    default:
+      return state
+  }
+}
+
+//新增文章評論
+const addBlogCommentsData = (state = [], action) => {
+  switch (action.type) {
+    case 'ADD_BLOGCOMMENTSDATA':
+      return action.payload
+    default:
+      return state
+  }
+}
+
 export const blogReducer = combineReducers({
   blogData,
-  // blogCommentsData,
-  // contentCommentsData,
-  contentData,
-  editContentData,
-  deleteContentData,
+  addBlogData,
+  editBlogData,
+  deleteBlogData,
+  blogCommentsData,
+  addBlogCommentsData,
 })

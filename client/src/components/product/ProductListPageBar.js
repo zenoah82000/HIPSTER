@@ -92,7 +92,7 @@ function ProductListPageBar(props) {
         )
       }
       for (let i = startPage; i < pageLength; i++) {
-        console.log(startPage)
+        // console.log(startPage)
         if (i <= totalpages - 1 && i > 1) {
           pages.push(
             <li key={i}>
