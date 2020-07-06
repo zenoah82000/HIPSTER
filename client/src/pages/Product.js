@@ -25,6 +25,9 @@ function Product(props) {
     deletewishlist,
   } = props
 
+  const searchParams = new URLSearchParams(props.location.search)
+  const currentPage = !!searchParams.get('page') ? +searchParams.get('page') : 1
+
   useEffect(() => {
     console.log(props.match.params.id)
     getProductInfoAsync(props.match.params.id)
@@ -60,7 +63,11 @@ function Product(props) {
               productAddress={product.productAddress}
               addCart={addCart}
             />
-            <CommtentList productName={product.productName} productId={product.productId}  />
+            <CommtentList
+              productName={product.productName}
+              productId={product.productId}
+              currentPage={currentPage}
+            />
           </div>
         </div>
       </div>
