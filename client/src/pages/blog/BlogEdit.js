@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
-import { Container } from 'react-bootstrap'
+import { Container, Form } from 'react-bootstrap'
 import $ from 'jquery'
 import CKEditor from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 
 import MyBreadcrumb from '../../components/MyBreadcrumb'
-import { getBlogDataAsync,editContentDataAsync } from '../../actions/blog'
+import { getBlogDataAsync,editBlogDataAsync } from '../../actions/blog'
 
 function BlogEdit(props) {
-  const { blogData,getBlogDataAsync,editContentDataAsync } = props
+  const { blogData,getBlogDataAsync,editBlogDataAsync } = props
   const { articleId } = props.match.params
+  const articleContent = localStorage.getItem('articleContent')
+  // console.log('articleContent',articleContent)
   
   const [editArticleTitle, setEditArticleTitle] = useState('')
   const [editArticleCategory, setEditArticleCategory] = useState('')
@@ -23,28 +25,35 @@ function BlogEdit(props) {
   let blogItemCategory= ""
   let blogItemContent= ""
   let blogItemImg = ""
-
-  //使用blogItem接收fetch後的初始值
-  if(blogData && blogData.length){
-    blogDataItem = blogData.find((item)=>item.articleId==articleId)
-    // console.log('blogDataItem',blogDataItem)
-    blogItemTitle = blogDataItem.articleTitle
-    blogItemCategory = blogDataItem.categoryId
-    blogItemContent = blogDataItem.articleContent
-    blogItemImg = blogDataItem.articleImg
-    console.log('blogItemContent',blogItemContent)  
-  }      
-
+    
   useEffect(() => {
     getBlogDataAsync()
     console.log('componentDidMount')    
-  }, [])      
+  }, []) 
 
-  // console.log('editArticleTitle',editArticleTitle)
+  useEffect(() => {
+    if(blogData && blogData.length){
+      blogDataItem = blogData.find((item)=>item.articleId==articleId)
+      // console.log('blogDataItem',blogDataItem)
+      //設定受控元件
+      setEditArticleTitle(blogDataItem.articleTitle)
+      setEditArticleCategory(blogDataItem.categoryId)
+      setEditArticleContent(blogDataItem.articleContent)
+      setEditArticleImg(blogDataItem.articleImg)
+      //儲存未修改前的data
+      blogItemTitle = blogDataItem.articleTitle
+      blogItemCategory = blogDataItem.categoryId
+      blogItemContent = blogDataItem.articleContent
+      blogItemImg = blogDataItem.articleImg
+      // console.log('blogItemContent',blogItemContent)  
+    }
+    console.log('componentDidUpdate')    
+  }, [blogData])       
   
   const handleSubmit = ()=>{      
     const editArticleFd = new FormData()
-    editArticleFd.append('articleId', articleId)    
+    editArticleFd.append('articleId', articleId)
+    //如果有改變則append改變後的state值，如未改變則append未修改的值    
     editArticleFd.append('articleTitle', editArticleTitle?editArticleTitle:blogItemTitle)    
     editArticleFd.append('categoryId', editArticleCategory?editArticleCategory:blogItemCategory)
     editArticleFd.append('articleContent', editArticleContent?editArticleContent:blogItemContent)    
@@ -52,7 +61,7 @@ function BlogEdit(props) {
     for(let pair of editArticleFd.entries()) {
       console.log('editArticleFd內所有的鍵值對: ',pair[0]+ ', '+ pair[1]); 
     }
-    editContentDataAsync(editArticleFd)  
+    editBlogDataAsync(editArticleFd)  
   }
   let showBlogEdit
   if(blogData && blogData.length){
@@ -60,28 +69,46 @@ function BlogEdit(props) {
         <ul className="list-unstyled blog-add-ul">
           <li className="d-flex justify-content-between">
             <div>
-              <select className="blog-select-category" defaultValue={blogItemCategory} onChange={event => setEditArticleCategory(event.target.value)}>                
+              <Form>
+                  <Form.Group>
+                    {/* <Form.Label>文章類別</Form.Label> */}
+                    <Form.Control as="select" className="blog-select-category" value={editArticleCategory} onChange={event => setEditArticleCategory(event.target.value)}>
+                      <option value="1">心情抒發</option>
+                      <option value="2">靈感角落</option>
+                      <option value="3">重點書評</option>
+                      <option value="4">活動分享</option>
+                      <option value="5">新人新書</option>
+                      <option value="6">手寫日記</option>
+                    </Form.Control>
+                  </Form.Group>
+                </Form>
+              {/* <select className="blog-select-category" value={editArticleCategory} onChange={event => setEditArticleCategory(event.target.value)}>                
                 <option value="1">心情抒發</option>
-                <option value="2">靈感啟發</option>
-                <option value="3">活動分享</option>
-              </select>
+                <option value="2">靈感角落</option>
+                <option value="3">重點書評</option>
+                <option value="4">活動分享</option>
+                <option value="5">新人新書</option>
+                <option value="6">手寫日記</option>
+              </select> */}
             </div>
             <div className="blog-add-btn">
               <button className="btn" 
-              // onClick={}
-              >取消發文</button>
+              onClick={e=>{
+                e.preventDefault()
+                props.history.go(-1)}}
+              >取消編輯</button>
               <button className="btn" onClick={e => {
                   e.preventDefault()
                   handleSubmit()
-                  // props.history.push('/blog')
-                  }}>發佈文章</button>
+                  props.history.push('/blog')
+                  }}>編輯完成</button>
             </div>
           </li>
           <li>
             <input
               className="blog-add-title"
               type="text"
-              defaultValue={blogItemTitle} 
+              value={editArticleTitle} 
               onChange={event => {
                 setEditArticleTitle(event.target.value)            
                 }}            
@@ -94,10 +121,9 @@ function BlogEdit(props) {
                 uploadUrl: 'http://localhost:5000/blogAddImg'
               } }}
               editor={ClassicEditor}
-              // data="<p>請輸入文章內容...</p>"
               onInit={(editor) => {
                 // You can store the "editor" and use when it is needed.
-                editor.setData(blogItemContent)
+                  editor.setData(articleContent)
                 // console.log('Editor is ready to use!', editor)
               }}
               onChange={(event, editor) => {
@@ -115,6 +141,7 @@ function BlogEdit(props) {
                 // console.log('Blur.', editor)
               }}
               onFocus={(event, editor) => {
+                editor.setData(editArticleContent)
                 // console.log('Focus.', editor)
               }}
             />
@@ -136,5 +163,5 @@ const mapStateToProps = (store) =>({ blogData: store.blogReducer.blogData})
 
 export default withRouter(connect(mapStateToProps, {
   getBlogDataAsync,
-  editContentDataAsync
+  editBlogDataAsync
 })(BlogEdit))

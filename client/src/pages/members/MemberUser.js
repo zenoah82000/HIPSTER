@@ -19,42 +19,56 @@ import UserQanda from '../mContent/UserQanda'
 import UserCoupon from '../mContent/UserCoupon'
 import UserMymap from '../mContent/UserMymap'
 import UserWishlist from '../mContent/UserWishlist'
+import NotFoundPage from '../NotFoundPage'
 
-function MemberUser() {
+function MemberUser(props) {
+  // const { userSuccess, setuserSuccess } = props
+  // console.log('userSuccess', userSuccess)
+  // console.log('JSON.parse.Boolean')
+  console.log('props', props)
+  let auth
+  if (Boolean(JSON.parse(localStorage.getItem('member')))) {
+    auth = true
+  } else {
+    auth = false
+  }
   return (
     <>
       {/* <Header />
       <Banner BannerImgSrc={image} /> */}
       {/* <!-- Page Content --> */}
-
-      <Sidebar>
-        <Switch>
-          <Route path="/memberuser/user">
-            <UserContent />
-          </Route>
-          <Route path="/memberuser/comment/:type">
-            <UserComment />
-          </Route>
-          <Route path="/memberuser/order">
-            <UserOrder />
-          </Route>
-          <Route path="/memberuser/blog">
-            <UserBlog />
-          </Route>
-          <Route path="/memberuser/qanda">
-            <UserQanda />
-          </Route>
-          <Route path="/memberuser/coupon/:type">
-            <UserCoupon />
-          </Route>
-          <Route path="/memberuser/mymap">
-            <UserMymap />
-          </Route>
-          <Route path="/memberuser/wishlist">
-            <UserWishlist />
-          </Route>
-        </Switch>
-      </Sidebar>
+      {auth ? (
+        <Sidebar>
+          <Switch>
+            <Route path="/memberuser/user">
+              <UserContent />
+            </Route>
+            <Route path="/memberuser/comment/:type">
+              <UserComment />
+            </Route>
+            <Route path="/memberuser/order">
+              <UserOrder />
+            </Route>
+            <Route path="/memberuser/blog">
+              <UserBlog />
+            </Route>
+            <Route path="/memberuser/qanda">
+              <UserQanda />
+            </Route>
+            <Route path="/memberuser/coupon/:type">
+              <UserCoupon />
+            </Route>
+            <Route path="/memberuser/mymap">
+              <UserMymap />
+            </Route>
+            <Route path="/memberuser/wishlist">
+              <UserWishlist addCart={props.addCart}/>
+            </Route>
+          </Switch>
+        </Sidebar>
+      ) : (
+        <NotFoundPage />
+      )}
     </>
   )
 }

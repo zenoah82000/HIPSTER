@@ -57,6 +57,7 @@ p {
   overflow: hidden;
 
   .banner-title {
+    filter: drop-shadow(2px 2px 2px black);
     width: 375px;
     position: absolute;
     left: 50%;
@@ -684,5 +685,8 @@ p {
         }
       }
     }
+  }
+  #back-to-top {
+    display: none !important;
   }
 }

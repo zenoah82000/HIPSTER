@@ -1,85 +1,143 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { Link, withRouter } from 'react-router-dom'
+import { Link, withRouter, NavLink } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
 import Masonry from 'react-masonry-css'
 
-import MyBreadcrumb from '../../components/MyBreadcrumb'
 import { getBlogDataAsync } from '../../actions/blog'
 
-import author1 from '../../images/blog/author1.jpg'
-import author2 from '../../images/blog/author2.jpg'
-import author3 from '../../images/blog/author3.jpg'
-import author4 from '../../images/blog/author4.jpg'
-import author5 from '../../images/blog/author5.jpg'
-import author6 from '../../images/blog/author6.jpg'
-import author7 from '../../images/blog/author7.jpg'
-import author8 from '../../images/blog/author8.jpg'
-
-function Blog(props) {  
-    
+function Blog(props) {      
   const { blogData,getBlogDataAsync } = props
-  let blogDataRp = []
-  // if(blogData){console.log('blogData', blogData)}
+  let { categoryId } = props.match.params || 0
+  console.log('categoryId',categoryId)
 
-  if(blogData[0]){
-    console.log('blogData-Content', blogData[0].articleContent)
+  let blogDataRp = []
+  let showBlogList
+
+  if(blogData && blogData.length){
+    // console.log('blogData-Content', blogData[0].articleContent)
     blogDataRp = blogData.map((item)=>{
       const reg = /<(?:.|\s)*?>/g      
-      item.articleContent=item.articleContent.replace(reg,'')
+      //去除html標籤和空格符號
+      item.articleContent=(item.articleContent.replace(reg,'')).replace(/&nbsp;/ig, "")
       return item
     })  
   }  
-  // console.log('blogDataRp', blogDataRp)
   
   useEffect(() => {
     getBlogDataAsync() 
     console.log('componentDidMount')  
-  }, [])  
-  
-  const authorImgArr = [
-    author1,
-    author2,
-    author3,
-    author4,
-    author5,
-    author6,
-    author7,
-    author8,
-  ] 
+  }, [])    
 
+  useEffect(() => {    
+    
+    console.log('componentDidUpdate')  
+  }, [categoryId])    
+  
   // Convert array to JSX items
-  const showBlogList = blogDataRp.map((item)=>{    
+  showBlogList = blogDataRp.map((item)=>{
+    if(!categoryId) {
     return (
       <div key={item.articleId} className="blog-list-card">
-      <Link to={"/blogDetail/" + item.articleId} className="d-block">
+      <Link to={"/blogDetail/" + item.articleId} className="d-block text-decoration-none">
         <img src={item.articleImg} />
-        <h3 className="ml-3">{item.articleTitle}</h3>
+        <h6 className="ml-3">{item.articleTitle}</h6>
         <p className="ml-3">
         {item.articleContent}
-        </p>
-        <p className="author-date d-flex justify-content-between ml-3">
-          <span>{item.author}</span>
-          <span>{item.created_at}</span>
-        </p>
+        </p>        
+        <Link to={"/blogDetail/" + item.articleId} className="d-block text-decoration-none ml-3 my-2">(閱讀更多)</Link>
+        <ul className="author-date d-flex justify-content-between list-unstyled ml-3 row">
+          <li className="col-2"><img src={`http://localhost:5000/images/member/${item.memberImg}`}/></li>
+          <li className="list-card-author col-7">{item.memberName}</li>
+          <li className="col-3">{item.created_at}</li>
+        </ul>
         </Link>
       </div>
-    )
+    )}else{
+      if(item.categoryId == categoryId)
+      return (
+        <div key={item.articleId} className="blog-list-card">
+        <Link to={"/blogDetail/" + item.articleId} className="d-block text-decoration-none">
+          <img src={item.articleImg} />
+          <h6 className="ml-3">{item.articleTitle}</h6>
+          <p className="ml-3">
+          {item.articleContent}
+          </p>        
+          <Link to={"/blogDetail/" + item.articleId} className="d-block text-decoration-none ml-3 my-2">(閱讀更多)</Link>
+          <ul className="author-date d-flex justify-content-between list-unstyled ml-3 row">
+            <li className="col-2"><img src={`http://localhost:5000/images/member/${item.memberImg}`}/></li>
+            <li className="list-card-author col-7">{item.memberName}</li>
+            <li className="col-3">{item.created_at}</li>
+          </ul>
+          </Link>
+        </div>
+      )
+    }
   })
   
   return (
     <>
-      <div>
-        開發用:
-        <Link to="/blogDetail">詳細頁</Link>/<Link to="/blogAdd">新增</Link>/
-        <Link to="/blogEdit">編輯</Link>
-      </div>
       <Container>
-        <MyBreadcrumb />
+        <ul className="list-unstyled">
+            <li className="">
+              <NavLink
+                to={'/blog/1'}
+                // activeClassName=""
+                // className=""               
+              >
+                心情抒發
+              </NavLink>              
+            </li>
+            <li className="">
+              <NavLink
+                to={'/blog/2'}
+                // activeClassName=""
+                // className=""
+              >
+                靈感角落
+              </NavLink>
+            </li>
+            <li className="">
+              <NavLink
+                to={'/blog/3'}
+                // activeClassName=""
+                // className=""
+              >
+                重點書評
+              </NavLink>
+            </li>
+            <li className="">
+              <NavLink
+                to={'/blog/4'}
+                // activeClassName=""
+                // className=""
+              >
+                活動分享
+              </NavLink>
+            </li>
+            <li className="">
+              <NavLink
+                to={'/blog/5'}
+                // activeClassName=""
+                // className=""
+              >
+                新人新書
+              </NavLink>
+            </li>
+            <li className="">
+              <NavLink
+                to={'/blog/6'}
+                // activeClassName=""
+                // className=""
+              >
+                手寫日記
+              </NavLink>
+            </li>
+          </ul>
         <Masonry
-          breakpointCols={{ default: 4, 800: 2 }}
-          classtitle="my-masonry-grid"
-          columnClasstitle="my-masonry-grid_column"
+          breakpointCols={{ default: 4, 1200:3, 600: 2 }}
+          className="my-masonry-grid"
+          columnClassName="my-masonry-grid_column"
         >
           {showBlogList}
         </Masonry>

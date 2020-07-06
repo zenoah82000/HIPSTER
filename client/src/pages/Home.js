@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import '../styles/home.scss'
 import Fade from 'react-reveal/Fade'
-
+import $ from 'jquery'
 import CountdownProduct from '../components/home/CountdownProduct'
 import FeaturedProduct from '../components/home/FeaturedProduct'
 import About from '../components/home/About'
@@ -397,10 +397,7 @@ function Home(props) {
   const slickBannerdisplay = slickBanner.map((item, index) => {
     return (
       <>
-        <Link
-          to={`/productlist/${item.productId}`}
-          className="home-slick-banner"
-        >
+        <Link to={`/product/${item.productId}`} className="home-slick-banner">
           <Fade right>
             <div className="black-bg">
               <div className="content">
@@ -426,7 +423,11 @@ function Home(props) {
   const ProductEnddisplay = ProductEnd.map((item, index) => {
     return (
       <>
-        <CountdownProduct item={item} />
+        <CountdownProduct
+          item={item}
+          addwishlist={props.addwishlist}
+          deletewishlist={props.deletewishlist}
+        />
       </>
     )
   })
@@ -439,6 +440,25 @@ function Home(props) {
         <Articles item={item} />
       </>
     )
+  })
+
+  //置頂按鈕
+  $(window).scroll(function () {
+    if ($(this).scrollTop() > 100) {
+      $('#back-to-top').fadeIn()
+    } else {
+      $('#back-to-top').fadeOut()
+    }
+  })
+  // scroll body to 0px on click
+  $('#back-to-top').click(function () {
+    $('body,html').animate(
+      {
+        scrollTop: 0,
+      },
+      400
+    )
+    return false
   })
 
   //網頁載入時執行
@@ -569,6 +589,14 @@ function Home(props) {
           </Fade>
         </div>
       </div>
+      <a
+        id="back-to-top"
+        href="#"
+        class="btn  btn-lg back-to-top"
+        role="button"
+      >
+        <i class="fas fa-chevron-up"></i>
+      </a>
     </>
   )
 }

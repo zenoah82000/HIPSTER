@@ -1,32 +1,34 @@
 const express = require('express')
 const moment = require('moment-timezone')
-// const multer = require('multer')
 const upload = require('./upload-module')
 const router = express.Router()
-const fs =require('fs')
 
 const db = require(__dirname + './../db_connect2')
 
 //取得文章資料
 const getBlogList = async (req) => {
-  const output = {          
+  const output = { 
+    success: false,         
     rows: [],
   }
   
-  const sql = "SELECT * FROM article ORDER BY articleId ASC"
+  const sql = "SELECT `article`.`articleId`,`article`.`memberId`,`article`.`articleTitle`,`article`.`categoryId`,`article`.`articleContent`,`article`.`articleImg`,`article`.`created_at`,`article`.`updated_at`,`member`.`memberId`,`member`.`memberName`,`member`.`memberImg` FROM `article` LEFT JOIN `member` ON `article`.`memberId` = `member`.`memberId` ORDER BY articleId ASC"
   const [r] = await db.query(sql)
-  if (r) output.rows = r
+  if (r) {
+    output.success = true;
+    output.rows = r;
+  }  
   for (let i of r) {
-    i.created_at = moment(i.created_at).format('YYYY-MM-DD')
-    i.updated_at = moment(i.updated_at).format('YYYY-MM-DD')
+    //設定時間格式
+    i.created_at = moment(i.created_at).format('MM/DD');
+    // i.updated_at = moment(i.updated_at).format('MM月DD日');
   }
   return output
 }
 
 //http://localhost:5000/blog
 router.get('/blog', async (req, res) => {
-  const output = await getBlogList(req)
-  
+  const output = await getBlogList(req)  
   res.json(output)
 })
 
@@ -51,9 +53,10 @@ router.post('/blogAdd', upload.none(), async (req, res)=>{
     // status: 0,
     body: req.body,
   }
-  const sql = "INSERT INTO `article`(`articleTitle`,`articleContent`,`categoryId`,`articleImg`) VALUES(?,?,?,?)"
+  const sql = "INSERT INTO `article`(`memberId`,`articleTitle`,`articleContent`,`categoryId`,`articleImg`) VALUES(?,?,?,?,?)"
 
   const [r] = await db.query(sql , [
+    req.body.memberId,
     req.body.articleTitle,
     req.body.articleContent,
     req.body.categoryId,
@@ -117,5 +120,58 @@ router.post('/blogDelete', upload.none(), async (req, res)=>{
   res.json(output);
 })
 
+//取得文章資料
+const getBlogComment = async (req) => {
+  const output = { 
+    success: false,         
+    rows: [],
+  }
+  
+  const sql = "SELECT `article_comment`.`commentId`, `article_comment`.`commentContent`,`article_comment`.`commentParentId`,`article_comment`.`articleId`,`article_comment`.`created_at`,`member`.`memberId`,`member`.`memberName`,`member`.`memberImg` FROM `article_comment` LEFT JOIN `member` ON `article_comment`.`memberId` = `member`.`memberId` ORDER BY commentId ASC"
+  const [r] = await db.query(sql)
+  if (r) {
+    output.success = true;
+    output.rows = r;
+  }  
+  for (let i of r) {
+    //設定時間格式
+    i.created_at = moment(i.created_at).format('MM/DD');
+    // i.updated_at = moment(i.updated_at).format('MM月DD日');
+  }
+  return output
+}
+
+//取得評論資料
+//http://localhost:5000/blogComment
+router.get('/blogComment', async (req, res) => {
+  const output = await getBlogComment(req)  
+  res.json(output)
+})
+
+//新增評論
+//http://localhost:5000/blogAddComment
+router.post('/blogAddComment', upload.none(), async (req, res)=>{
+  console.log('req.body',req.body)
+  const output ={
+    success: false,
+    // error:'',
+    // status: 0,
+    body: req.body,
+  }
+  const sql = "INSERT INTO `article_comment`(`articleId`,`memberId`,`commentContent`,`commentParentId`) VALUES(?,?,?,?)"
+
+  const [r] = await db.query(sql , [
+    req.body.articleId,
+    req.body.memberId,
+    req.body.commentContent,
+    req.body.commentParentId,    
+    ])
+  if (r) {
+      output.result = r;
+      output.success = true;
+      console.log('result:', r);
+    }
+  res.json(output);
+})
 
 module.exports = router

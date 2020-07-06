@@ -16,6 +16,15 @@ function PaymentType(props) {
   const [validated, setValidated] = useState(false)
   //讀取會員
   const member =JSON.parse(localStorage.getItem('member'))
+  //取得付款資訊
+  const getpaymentType =(e)=>{
+    let paymentType = {
+      paymentType:e.target.id,
+      ...buyerinfo
+    }
+    props.dispatch({ type: 'BUYER_DATA', value: paymentType })
+    
+  }
   //訂單初始化
   const orderData = {
     orderMemberId: member.id,
@@ -50,21 +59,25 @@ function PaymentType(props) {
       e.preventDefault()
       let total = sum(buyerinfo.product)
       buyerinfo.product.forEach((item, i) => {
-        itemData.productId = item.id
+        itemData.productId = item.productId
         itemData.date = item.date
-        itemData.name = item.name
-        itemData.checkPrice = item.price
+        itemData.name = item.productName
+        itemData.checkPrice = item.productPrice
         itemData.checkQty = item.amount
-        itemData.checkSubtotal = +item.price * +item.amount
+        itemData.checkSubtotal = +item.productPrice * +item.amount
         orderData.orderItems.push(itemData)
         itemData = {}
       })
-      //取得總額跟信箱
+      //取得額外資訊
       orderData.total = total
       orderData.email = buyerinfo.email
       orderData.lastName=buyerinfo.lastName
       orderData.firstName=buyerinfo.firstName
       orderData.phone=buyerinfo.phone
+      orderData.sumdiscount=buyerinfo.sumdiscount
+      orderData.sumless=buyerinfo.sumless
+      orderData.discountcode=buyerinfo.discountcode
+      orderData.paymentType=buyerinfo.paymentType
       //訂單資料傳資料庫
       checkoutAsync(orderData)
       //跳轉頁面
@@ -112,7 +125,7 @@ function PaymentType(props) {
                   type="radio"
                   id="MasterCard"
                   onChange={(e) => {
-                    // getformInfo(e, 'card')
+                    getpaymentType(e)
                     // $('#master').fadeToggle()
                     // $('#visa').fadeOut()
                   }}
@@ -126,9 +139,7 @@ function PaymentType(props) {
                   type="radio"
                   id="VISA"
                   onChange={(e) => {
-                    // getformInfo(e, 'card')
-                    // $('#visa').fadeToggle()
-                    // $('#master').fadeOut()
+                    getpaymentType(e)
                   }}
                 />
                 <FaCcVisa id="visa" size="25px" display="none" />
@@ -270,13 +281,13 @@ function PaymentType(props) {
                           .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}</p>
                   </div>
                 </div>
-                <div className="payPrice">
-                  <div className="d-flex justify-content-between">
-                    <p>結帳金額</p>
-                    <p>NT${buyerinfo.sumdiscount
+                <div className="payPricebox d-flex justify-content-between">
+                 
+                    <p >結帳金額</p>
+                    <p className="payPrice">NT${buyerinfo.sumdiscount
                           .toString()
                           .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}</p>
-                  </div>
+                  
                 </div>
               </div>
               <div className="mt-3 buttonBox">

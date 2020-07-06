@@ -1,6 +1,6 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import '../../styles/HS.scss'
+import { Link, withRouter } from 'react-router-dom'
 // import { bindActionCreators } from 'redux'
 
 //引入action
@@ -104,7 +104,9 @@ function Sidebar(props) {
                     to="/"
                     onClick={(event) => {
                       event.preventDefault()
-                      props.memberLogoutAsync()
+                      localStorage.removeItem('member')
+                      props.history.push('/')
+                      window.location.reload()
                     }}
                   >
                     <i className="fas fa-sign-out-alt"></i>登出
@@ -147,4 +149,4 @@ function Sidebar(props) {
 //   )
 // }
 
-export default Sidebar
+export default withRouter(Sidebar)

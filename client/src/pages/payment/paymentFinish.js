@@ -48,12 +48,12 @@ function paymentFinish(props) {
                           <div className="productimgbox mr-2">
                             <img
                               className="productimg"
-                              src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
+                              src={`http://localhost:5000/images/product/${item.productImg}`}
                             />
                           </div>
                           <div className="productinfo align-items-center">
-                            <p className="infoname">{item.name}</p>
-                            <p className="infoprice">NT${item.price}</p>
+                            <p className="infoname">{item.productName}</p>
+                            <p className="infoprice">NT${item.productPrice}</p>
                             <p className="infodate">預定日期: {item.date}</p>
                           </div>
                         </div>

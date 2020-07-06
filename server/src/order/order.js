@@ -9,11 +9,10 @@ require("dotenv").config();
 
 
 
-//願望清單查詢
+//願望清單取得
 router.get("/member/wishlist/:memberId", async (req, res) => {
-  console.log('查詢願望清單')
   const memberId = req.params.memberId
-  const wishsql="SELECT * FROM `wishlist` WHERE `memberId` = ?"
+  const wishsql="SELECT `wishlist`.`productId`,`product`.`productImg`,`product`.`productName`,`product`.`productPrice`,`product`.`productAddress` FROM `wishlist` INNER JOIN `product` ON `wishlist`.`productId` = `product`.`productId`  WHERE `memberId` = ?"
   const [wishlist] = await db.query(wishsql,[memberId])
 
 
@@ -24,6 +23,7 @@ router.get("/member/wishlist/:memberId", async (req, res) => {
 
 router.post("/member/wishlistAdd/:memberId", async (req, res) => {
   console.log('新增願望清單')
+  console.log(req.body)
   const memberId = req.params.memberId
   const productId = req.body.productId
   const wishsql="INSERT INTO `wishlist` (`memberId`,`productId`) VALUES(?,?)"
@@ -66,7 +66,7 @@ router.get("/member/order/:memberId", async (req, res) => {
   const sqlorder = `SELECT * FROM orderlist WHERE memberId = ? ORDER BY created_at DESC`;
 
   const sqlorderlist =
-    "SELECT `product`.`productName`,`item_lists`.`orderId`,`item_lists`.`productId`,`item_lists`.`date`,`item_lists`.`checkPrice`,`item_lists`.`checkQty`,`item_lists`.`checkSubtotal`,`item_lists`.`created_at`FROM `member` INNER JOIN `orderlist` ON `member`.`memberId` = `orderlist`.`memberId` INNER JOIN `item_lists` ON `orderlist`.`orderId`=`item_lists`.`orderId` INNER JOIN `product` ON `item_lists`.`productId` = `product`.`productId` WHERE `member`.`memberId`=?";
+    "SELECT `product`.`productName`,`product`.`productImg`,`item_lists`.`orderId`,`item_lists`.`productId`,`item_lists`.`date`,`item_lists`.`checkPrice`,`item_lists`.`checkQty`,`item_lists`.`checkSubtotal`,`item_lists`.`created_at`FROM `member` INNER JOIN `orderlist` ON `member`.`memberId` = `orderlist`.`memberId` INNER JOIN `item_lists` ON `orderlist`.`orderId`=`item_lists`.`orderId` INNER JOIN `product` ON `item_lists`.`productId` = `product`.`productId` WHERE `member`.`memberId`=?";
 
   const [r1] = await db.query(sqlorder, [memberId]);
   const [r2] = await db.query(sqlorderlist, [memberId]);
@@ -94,6 +94,10 @@ router.post("/member/checkout", async (req, res) => {
   const email = req.body.email;
   const phone = req.body.phone;
   const contact = req.body.lastName+req.body.firstName
+  const sumdiscount= req.body.sumdiscount
+  const sumless = req.body.sumless
+  const discountcode = req.body.discountcode
+  const paymentType = req.body.paymentType
   
   //取得總筆數
   let orderId;
@@ -107,14 +111,17 @@ router.post("/member/checkout", async (req, res) => {
   const addorderlist =
     "INSERT INTO `item_lists` (`orderId`,`memberId`,`productId`,`date`,`checkPrice`,`checkQty`,`checkSubtotal`) VALUES (?,?,?,?,?,?,?)";
   const addorder =
-    "INSERT INTO `orderlist` (`orderId`,`memberId`,`orderTotal`,`paymentTypeId`,`contact`,`mobile`,`email`) VALUES(?,?,?,?,?,?,?)";
+    "INSERT INTO `orderlist` (`orderId`,`memberId`,`coupon`,`discount`,`orderTotal`,`paymentTotal`,`paymentTypeId`,`contact`,`mobile`,`email`) VALUES(?,?,?,?,?,?,?,?,?,?)";
 
   //新增商品到訂單
   const [r2] = await db.query(addorder, [
     orderId,
     memberId,
+    discountcode,
+    sumless,
     req.body.total,
-    "2",
+    sumdiscount,
+    paymentType,
     contact,
     phone,
     email,
