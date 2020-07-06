@@ -2,6 +2,7 @@ import React from 'react'
 import '../../styles/product/ProductHowtoArea.scss'
 
 function ProductHowtoArea(props) {
+  const { productAddress } = props
   return (
     <>
       <div className="product-howto-area">
@@ -22,19 +23,17 @@ function ProductHowtoArea(props) {
         <div className="product-location">
           <h3>地址</h3>
           <ul>
-            <li className="li-16px">
-              桜京和服店京都市下京區醍醐町290番烏丸五條ビル2F（地下鉄五條站2號出口）
-            </li>
+            <li className="li-16px">{productAddress}</li>
           </ul>
         </div>
-        <div className="product-transport">
+        {/* <div className="product-transport">
           <h3>如何前往</h3>
           <ul>
             <li className="li-16px">
               地鐵：JR 烏丸線五條站，2號出口出來即可看到
             </li>
           </ul>
-        </div>
+        </div> */}
       </div>
     </>
   )

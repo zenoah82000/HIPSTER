@@ -20,8 +20,18 @@ const productListData = (state = [], action) => {
   }
 }
 
+const productMultiImg = (state = [], action) => {
+  switch (action.type) {
+    case 'GET_ProductMultiImg':
+      return action.payload
+    default:
+      return state
+  }
+}
+
 const productReducer = combineReducers({
   productCatogryData,
   productListData,
+  productMultiImg,
 })
 export { productReducer }

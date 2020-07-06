@@ -13,22 +13,22 @@ function AllCoupon(props) {
   useEffect(() => {
     getAllCouponDetaiAsync()
   }, [])
-  console.log('props', props)
-  console.log('allcoupon', allCouponData)
-  //   const copyboard = (element) => {
-  //     // var copyText = $(this).attr('className')
-  //     console.log('element', element)
-  //     // console.log('this', this)
-  //     var el = $(
-  //       '<input style="position: absolute; bottom: -120%" type="text" value="' +
-  //         element +
-  //         '"/>'
-  //     ).appendTo('body')
-  //     el[0].select()
-  //     document.execCommand('copy')
-  //     el.remove()
-  //     alert('複製成功', '123')
-  //   }
+  // console.log('props', props)
+  // console.log('allcoupon', allCouponData)
+  const copyboard = (element) => {
+    // var copyText = $(this).attr('className')
+    // console.log('element', element)
+    // console.log('this', this)
+    var el = $(
+      '<input style="position: absolute; bottom: -120%" type="text" value="' +
+        element +
+        '"/>'
+    ).appendTo('body')
+    el[0].select()
+    document.execCommand('copy')
+    el.remove()
+    alert(`複製成功，折扣代碼: ${element}`)
+  }
   let couponList = allCouponData.map((item) => {
     if (
       Date.parse(item.startTime).valueOf() < Date.parse(new Date()).valueOf() &&
@@ -39,14 +39,11 @@ function AllCoupon(props) {
           <div
             className="coupon-intro"
             data-code={item.discountCode}
-            // onClick={() => {
-            //   copyboard($('div.coupon-intro').attr('data-code'))
-            //   console.log(
-            //     '#root > div > div > div:nth-child(1) > div.coupon-intro',
-            //     // $(this).attr('data-code')
-            //     $('event.target').closest('div').attr('data-code')
-            //   )
-            // }}
+            onClick={() => {
+              copyboard(item.discountCode)
+              // const aaa = $(this).attr('data-code')
+              // console.log('this', item.discountCode)
+            }}
           >
             <h4>活動名稱：{item.discountName}</h4>
             <ul>
