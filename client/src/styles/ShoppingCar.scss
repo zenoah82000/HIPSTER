@@ -114,30 +114,32 @@ body {
 }
 
 //購物車總額
-.totalbox {
-  margin-top: 3px;
+.checkbox-footer {
   margin-bottom: 24px;
-  padding: 12px;
-  .button {
-    color: white;
-    width: 100px;
-    height: 50px;
-    background: #688e67;
-    outline: none;
-    border: none;
-    border-radius: 5px;
-    &:hover {
-      background-color: #5d704e;
+  .totalbox {
+    margin-top: 3px;
+    padding: 12px;
+    .button {
+      color: white;
+      width: 100px;
+      height: 50px;
+      background: #688e67;
+      outline: none;
+      border: none;
+      border-radius: 5px;
+      &:hover {
+        background-color: #5d704e;
+      }
     }
-  }
-  .total {
-    font-size: 20px;
-    color: #ff3400;
-    margin-left: 10px;
-    font-weight: 800;
-    span {
-      font-size: 24px;
-      font-weight: bold;
+    .total {
+      font-size: 20px;
+      color: #ff3400;
+      margin-left: 10px;
+      font-weight: 800;
+      span {
+        font-size: 24px;
+        font-weight: bold;
+      }
     }
   }
 }
@@ -149,7 +151,6 @@ body {
   position: fixed;
   bottom: 0;
   box-shadow: 0 0 2px black;
-  padding: 12px 190px;
 }
 
 //購物車為空
@@ -230,6 +231,11 @@ body {
             line-height: 18px;
             font-weight: bolder;
             margin-bottom: 5px;
+            display: -webkit-box;
+            -webkit-line-clamp: 1; //行數
+            -webkit-box-orient: vertical;
+            white-space: normal;
+            overflow: hidden;
           }
           .cartdetail-productamount {
             font-size: 12px;
@@ -237,6 +243,11 @@ body {
             color: black;
           }
           .cartdetail-productprice {
+            font-size: 12px;
+            line-height: 18px;
+            color: black;
+          }
+          .cartdetail-productdate {
             font-size: 12px;
             line-height: 18px;
             color: black;

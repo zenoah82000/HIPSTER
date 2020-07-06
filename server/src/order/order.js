@@ -12,7 +12,7 @@ require("dotenv").config();
 //願望清單取得
 router.get("/member/wishlist/:memberId", async (req, res) => {
   const memberId = req.params.memberId
-  const wishsql="SELECT `wishlist`.`productId`,`product`.`productImg`,`product`.`productName`,`product`.`productPrice`,`product`.`productAddress` FROM `wishlist` INNER JOIN `product` ON `wishlist`.`productId` = `product`.`productId`  WHERE `memberId` = ?"
+  const wishsql="SELECT `wishlist`.`productId`,`product`.`productImg`,`product`.`productName`,`product`.`productPrice`,`product`.`productEndingDate`,`product`.`productAddress` FROM `wishlist` INNER JOIN `product` ON `wishlist`.`productId` = `product`.`productId`  WHERE `memberId` = ?"
   const [wishlist] = await db.query(wishsql,[memberId])
 
 

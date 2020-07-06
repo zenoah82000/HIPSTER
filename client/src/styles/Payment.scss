@@ -234,6 +234,11 @@
             line-height: 18px;
             font-weight: bolder;
             margin-bottom: 5px;
+            display: -webkit-box;
+            -webkit-line-clamp: 1; //行數
+            -webkit-box-orient: vertical;
+            white-space: normal;
+            overflow: hidden;
           }
           .paymentdetail-productamount {
             font-size: 12px;
@@ -241,6 +246,11 @@
             color: black;
           }
           .paymentdetail-productprice {
+            font-size: 12px;
+            line-height: 18px;
+            color: black;
+          }
+          .paymentdetail-productdate {
             font-size: 12px;
             line-height: 18px;
             color: black;
