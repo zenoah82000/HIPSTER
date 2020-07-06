@@ -267,6 +267,7 @@ function UserComment(props) {
             {noCommentlist.length >= 1 ? (
               noCommentlist.map((item, index) => (
                 <ReplyComment
+                  key={item.itemListId}
                   commentData={item}
                   index={index}
                   handleDelete={handleDelete}

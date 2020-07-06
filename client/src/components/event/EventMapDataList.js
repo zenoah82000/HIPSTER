@@ -45,7 +45,10 @@ class mapList extends React.Component {
     })
     const response = await fetch(request)
     const data = await response.json()
-    this.setState({ cafedata: data.cafelist, productdata: data.productlist })
+    this.setState(
+      { cafedata: data.cafelist, productdata: data.productlist },
+      () => this.sortByPriceDsc()
+    )
   }
 
   //初始化
@@ -556,7 +559,7 @@ class mapList extends React.Component {
                   <li>{this.stars(item.star)}</li>
                   <li>
                     <span className="mr-2">
-                      <FaRegClock />
+                      <FaRegCalendarCheck />
                     </span>
                     活動時間
                   </li>
@@ -646,14 +649,14 @@ class mapList extends React.Component {
                       >
                         手作課程
                       </Dropdown.Item>
-                      <Dropdown.Item
+                      {/* <Dropdown.Item
                         href=""
                         className="btn3"
                         name="咖啡廳"
                         onClick={(event) => this.showCat(event)}
                       >
                         咖啡廳
-                      </Dropdown.Item>
+                      </Dropdown.Item> */}
                     </Dropdown.Menu>
                   </Dropdown>
 
@@ -764,12 +767,14 @@ class mapList extends React.Component {
                   }
                 }}
               >
-                <option value="" disabled selected style={{ display: 'none' }}>
+                {/* <option value="" disabled selected style={{ display: 'none' }}>
                   商品排序方式
-                </option>
+                </option> */}
                 <option value="starAsc">星等由低到高</option>
                 <option value="starDsc">星等由高到低</option>
-                <option value="priceAsc">價格由低到高</option>
+                <option value="priceAsc" selected>
+                  價格由低到高
+                </option>
                 <option value="priceDsc">價格由高到低</option>
               </select>
             </div>
