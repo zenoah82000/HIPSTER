@@ -9,7 +9,7 @@ import Swal from 'sweetalert2'
 
 import '../../styles/wishlist.scss'
 
-import WishAddCart from "../../components/order/WishAddCart"
+import WishAddCart from '../../components/order/WishAddCart'
 
 function UserWishlist(props) {
   const { wishlist, addCart } = props
@@ -19,9 +19,7 @@ function UserWishlist(props) {
   const [addcartdata, setAddcartdata] = useState([])
   //加入購物車狀態
   const [addcartstatus, setAddcartstatus] = useState(false)
- 
 
-  
   //加入購物車視窗
   function Addcart(props) {
     return (
@@ -32,7 +30,11 @@ function UserWishlist(props) {
         centered
       >
         <Modal.Body className="modal-body">
-          <WishAddCart setAddcartstatus={setAddcartstatus} addCart={addCart} addcartdata={addcartdata}/>
+          <WishAddCart
+            setAddcartstatus={setAddcartstatus}
+            addCart={addCart}
+            addcartdata={addcartdata}
+          />
         </Modal.Body>
       </Modal>
     )
@@ -93,7 +95,7 @@ function UserWishlist(props) {
     wishlist != null && wishlist.length >= 1 ? (
       <div className="wishlistbox ">
         <div className="row">
-        {wishlist !=null &&wishlist.length>=1? (<>{wishlist.map((item) => {
+          {wishlist.map((item) => {
             return (
               <>
                 <div key={item.productId} className="card m-2">
@@ -109,8 +111,12 @@ function UserWishlist(props) {
                     </div>
                     <div>{stars(item.star)}</div>
                     <div className="wishprice">
-                      <p>NT${item.productPrice.toString()
-                      .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}</p>
+                      <p>
+                        NT$
+                        {item.productPrice.toString()
+                          .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')
+                          }
+                      </p>
                     </div>
                   </div>
 
@@ -135,8 +141,7 @@ function UserWishlist(props) {
                 </div>
               </>
             )
-          })}</>):''}
-          
+          })}
         </div>
       </div>
     ) : (
