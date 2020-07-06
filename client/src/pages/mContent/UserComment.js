@@ -69,10 +69,10 @@ function UserComment(props) {
   const [text, setText] = useState('')
   const [myCommentlist, setMyCommentList] = useState([])
   const [noCommentlist, setNoCommentList] = useState([])
-
+  const member = JSON.parse(localStorage.getItem('member'))
   // 後端傳資料
   const commentAsync = async (order) => {
-    const request = new Request('http://localhost:5000/comments/2', {
+    const request = new Request(`http://localhost:5000/comments/${member.id}`, {
       method: 'get',
       // body: JSON.stringify(order),
       headers: new Headers({
