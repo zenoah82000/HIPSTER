@@ -48,7 +48,7 @@ function ProductStarBar(props) {
           ) != -1 ? (
             <FontAwesomeIcon icon={fas.faHeart} className="active" />
           ) : (
-            <FontAwesomeIcon icon={fas.faHeart} className="" />
+            <FontAwesomeIcon icon={far.faHeart} className="" />
           )}
           <span>心願清單</span>
         </div>
