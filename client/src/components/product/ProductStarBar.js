@@ -29,7 +29,7 @@ function ProductStarBar(props) {
         <div className="product-star-box">
           <p>
             <i className="fas fa-star"></i>
-            <span className="product-star-scores"> 4.8 </span>
+            <span className="product-star-scores"> {product.star} </span>
             <a href="#review" className="product-comment-num">
               (4則評論)
             </a>
