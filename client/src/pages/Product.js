@@ -17,7 +17,13 @@ import ProductHowtoArea from '../components/product/ProductHowtoArea'
 import { getProductInfoAsync } from '../actions/product/getProductInfo'
 
 function Product(props) {
-  const { productListData, getProductInfoAsync, addCart } = props
+  const {
+    productListData,
+    getProductInfoAsync,
+    addCart,
+    addwishlist,
+    deletewishlist,
+  } = props
 
   useEffect(() => {
     console.log(props.match.params.id)
@@ -42,7 +48,11 @@ function Product(props) {
           />
           <div className="product-main-left">
             <h1 className="product-title">{product.productName}</h1>
-            <ProductStarBar />
+            <ProductStarBar
+              product={{ ...product }}
+              addwishlist={addwishlist}
+              deletewishlist={deletewishlist}
+            />
             <ProductTime />
             <Productinfoicon />
             <ProductDescription productContent={product.productContent} />
