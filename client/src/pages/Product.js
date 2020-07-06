@@ -17,7 +17,7 @@ import ProductHowtoArea from '../components/product/ProductHowtoArea'
 import { getProductInfoAsync } from '../actions/product/getProductInfo'
 
 function Product(props) {
-  const { productListData, getProductInfoAsync } = props
+  const { productListData, getProductInfoAsync, addCart } = props
 
   useEffect(() => {
     console.log(props.match.params.id)
@@ -35,6 +35,10 @@ function Product(props) {
           <BookArea
             productPrice={product.productPrice}
             productEndingDate={product.productEndingDate}
+            productName={product.productName}
+            productId={product.productId}
+            productImg={product.productImg}
+            addCart={addCart}
           />
           <div className="product-main-left">
             <h1 className="product-title">{product.productName}</h1>
@@ -42,8 +46,11 @@ function Product(props) {
             <ProductTime />
             <Productinfoicon />
             <ProductDescription productContent={product.productContent} />
-            <ProductHowtoArea productAddress={product.productAddress} />
-            <CommtentList productName={product.productName} />
+            <ProductHowtoArea
+              productAddress={product.productAddress}
+              addCart={addCart}
+            />
+            {/* <CommtentList productName={product.productName} /> */}
           </div>
         </div>
       </div>

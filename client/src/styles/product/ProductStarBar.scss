@@ -45,6 +45,9 @@
     cursor: pointer;
     .fa-heart {
       font-size: 18px;
+      &.active {
+        color: rgb(252, 119, 221);
+      }
     }
     span {
       font-size: 14px;
