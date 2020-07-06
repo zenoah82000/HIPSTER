@@ -19,7 +19,7 @@ import Test from './pages/Test'
 import Contact from './pages/Contact'
 import ProductList from './pages/ProductList'
 import Product from './pages/Product'
-import Map from './pages/Map'
+import MapPage from './pages/MapPage'
 
 import ShoppingCar from './pages/order/ShoppingCar'
 
@@ -181,7 +181,10 @@ function App(props) {
   }
 
   //地圖定位
-  const [viewport, setViewport] = useState({ center: [0, 0], zoom: 15 })
+  const [viewport, setViewport] = useState({
+    center: [25.0403394, 121.5309546],
+    zoom: 15,
+  })
   const [clickData, setClickData] = useState([])
   const [myLocation, setMylocation] = useState([0, 0])
 
@@ -224,7 +227,7 @@ function App(props) {
           <Route path="/blogDetail/:articleId?">
             <BlogDetail />
           </Route>
-          <Route path="/blog">
+          <Route path="/blog/:categoryId?">
             <Blog />
           </Route>
           <Route path="/blogAdd">
@@ -250,11 +253,12 @@ function App(props) {
             />
           </Route>
           <Route path="/map">
-            <Map
+            <MapPage
               viewport={viewport}
               getLocation={getLocation}
               cardClickReset={cardClickReset}
               myLocation={myLocation}
+              setViewport={setViewport}
             />
           </Route>
 

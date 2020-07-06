@@ -1,7 +1,6 @@
 @import './../HS.scss';
 
 .blog-list-card {
-  max-height: 500px;
   background: #ffffff;
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.2) 0 3px 5px 0px;
@@ -15,15 +14,15 @@
   }
   p {
     max-height: 500px;
-    // text-indent: 100%;
-    // white-space: nowrap;
-    //文字省略
-    text-overflow: ellipsis;
     overflow: hidden;
-    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 
     font-weight: bold;
     margin-left: 5px;
+    margin-right: 5px;
   }
   .author-date {
     padding-bottom: 3px;
@@ -31,10 +30,8 @@
       width: 30px;
       height: 30px;
       border-radius: 50%;
-      // padding-bottom: 3px;
     }
     .list-card-author {
-      // text-align: left;
       overflow-x: hidden;
     }
     span {
