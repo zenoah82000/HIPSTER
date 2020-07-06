@@ -264,6 +264,14 @@ function AsideBar(props) {
     console.log(pricerange)
   }, [endDate])
 
+  // useEffect(() => {
+  //   pricerange.min = price.min
+  //   pricerange.max = price.max
+  //   price.min = pricerange.min
+  //   price.max = pricerange.max
+  //   console.log(pricerange)
+  // }, [price])
+
   //生成類別
   const display = categorylist.map((item, index) => {
     if (item.categoryParentId === 0) {

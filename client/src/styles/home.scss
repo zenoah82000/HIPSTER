@@ -614,6 +614,11 @@ p {
           font-size: 16px;
           font-weight: 600;
           letter-spacing: 2px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical;
         }
         .blog-text {
           height: 80px;

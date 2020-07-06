@@ -116,7 +116,7 @@ function ReplyComment({
 
         // window.location.replace('/memberuser/comment/mycomment')
         // window.location.href = '/memberuser/comment/mycomment'
-        history.push('/memberuser/comment/mycomment')
+        // history.push('/memberuser/comment/mycomment')
         setLoad(false)
         // setImage({ file: [] })
       })
@@ -141,7 +141,7 @@ function ReplyComment({
               method="POST"
               // action="/comment/mycomment"
               enctype="multipart/form-data"
-              key={index}
+              key={commentData.itemListId}
             >
               <div className="reply-listview">
                 <div className="comment-tbhead">

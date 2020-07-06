@@ -26,8 +26,8 @@ export const cafeTagIcon = new L.Icon({
   iconSize: [50, 55],
 })
 export const productTagIcon = new L.Icon({
-  iconUrl: require('../../images/pin.svg'),
-  iconRetinaUrl: require('../../images/pin.svg'),
+  iconUrl: require('../../images/point.svg'),
+  iconRetinaUrl: require('../../images/point.svg'),
   iconAnchor: [5, 55],
   popupAnchor: [10, -44],
   iconSize: [50, 55],
@@ -274,7 +274,15 @@ export default class ViewportExample extends Component {
                 fontFamily: '微軟正黑體',
               }}
             >
-              我的位置
+              <p
+                style={{
+                  fontFamily: '微軟正黑體',
+                  fontWeight: 'bold',
+                  color: 'rgba(104, 142, 103, 0.8)',
+                }}
+              >
+                我的位置
+              </p>
             </Popup>
           </Marker>
 
@@ -327,9 +335,11 @@ export default class ViewportExample extends Component {
                     </li>
                     <li>
                       <span className="mr-2">
-                        <FaRegClock />
+                        <FaRegCalendarCheck />
                       </span>
-                      <span>活動時間</span>
+                      <span>
+                        活動時間:{clickData.openTime}-{clickData.closeTime}
+                      </span>
                     </li>
                     <li>
                       <span className="mr-2">
@@ -337,14 +347,16 @@ export default class ViewportExample extends Component {
                       </span>
                       <span>地點: {clickData.productAddress}</span>
                     </li>
-                    <li>
+                    {/* <li>
+                      
+                    <FaRegClock />
                       <span className="mr-2 ">
                         <FaRegCalendarCheck />
                       </span>
                       <span>
                         活動日期：{clickData.openTime}-{clickData.closeTime}
                       </span>
-                    </li>
+                    </li> */}
                     <li>
                       <span className="mr-2 ">
                         <FaRegCalendarCheck />
