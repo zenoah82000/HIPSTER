@@ -269,6 +269,7 @@ function PaymentType(props) {
           <div className="col-3">
             <div className="mt-3">
               <div className="priceBox ">
+              <input className="checkout-info-button" value="檢視訂單資料" type="button"/>
                 <div className="totalPrice">
                   <div className="d-flex justify-content-between ">
                     <p>總價</p>

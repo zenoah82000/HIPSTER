@@ -98,7 +98,7 @@ function FeaturedProduct(props) {
             </p>
           </div>
           <div className="home-activity-star">
-            <div className="start-group">{startdisplay(item.rating)}</div>
+            <div className="start-group">{startdisplay(item.star)}</div>
           </div>
         </div>
       </Link>
