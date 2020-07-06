@@ -270,6 +270,7 @@ function UserComment(props) {
                   commentData={item}
                   index={index}
                   handleDelete={handleDelete}
+                  commentAsync={commentAsync}
                 />
               ))
             ) : (
@@ -282,7 +283,6 @@ function UserComment(props) {
               </div>
             )}
           </div>
-          <ProductListPageBar productnumbers={5} currentpage={1} />
         </>
       )}
     </>

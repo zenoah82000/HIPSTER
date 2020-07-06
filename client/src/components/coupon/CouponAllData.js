@@ -13,13 +13,21 @@ function CouponAllData(props) {
   useEffect(() => {
     getUserCouponDetaiAsync()
   }, [])
+  const memberId = JSON.parse(localStorage.getItem('member')).id
   let couponList = userCouponData.map((item) => {
-    return (
-      <option value={item.discountPercent} data-code={item.discountCode}>
-        {item.discountCode}
-      </option>
-    )
+    if (
+      item.memberId == memberId &&
+      Date.parse(item.startTime).valueOf() < Date.parse(new Date()).valueOf() &&
+      Date.parse(item.endTime).valueOf() > Date.parse(new Date()).valueOf()
+    ) {
+      return (
+        <option value={item.discountPercent} data-code={item.discountCode}>
+          {item.discountCode}
+        </option>
+      )
+    }
   })
+  console.log('userCouponData', userCouponData)
 
   return (
     <>

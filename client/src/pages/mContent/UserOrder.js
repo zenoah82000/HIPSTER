@@ -68,11 +68,11 @@ function UserOrder() {
   const display = orderlist.order ? (
     <div className="orderlistbox ">
       <div className="row">
-        {datapage.map((item) => {
+        {datapage.map((item,index) => {
           return (
             <>
               <Fade bottom>
-                <MyOrder orderlist={orderlist} item={item} />
+                <MyOrder key={item.orderId} orderlist={orderlist} item={item} />
               </Fade>
             </>
           )

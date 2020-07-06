@@ -36,7 +36,7 @@ function Sidebar(props) {
                 </li>
                 <li className="nav-item  my-2">
                   <Link
-                    className="nav-link sidebarlink-hs"
+                    className="nav-link sidebarlink-hs sidebar-underline"
                     to="/memberuser/user/:memberId"
                   >
                     <i className="far fa-user"></i>個人資訊
@@ -44,7 +44,7 @@ function Sidebar(props) {
                 </li>
                 <li className="nav-item  my-2">
                   <Link
-                    className="nav-link sidebarlink-hs"
+                    className="nav-link sidebarlink-hs sidebar-underline"
                     to="/memberuser/comment/notcomment"
                   >
                     <i className="fas fa-comments"></i>我的評價
@@ -52,7 +52,7 @@ function Sidebar(props) {
                 </li>
                 <li className="nav-item  my-2">
                   <Link
-                    className="nav-link sidebarlink-hs"
+                    className="nav-link sidebarlink-hs sidebar-underline"
                     to="/memberuser/order"
                   >
                     <i className="fas fa-receipt"></i>我的訂單
@@ -60,7 +60,7 @@ function Sidebar(props) {
                 </li>
                 <li className="nav-item  my-2">
                   <Link
-                    className="nav-link sidebarlink-hs"
+                    className="nav-link sidebarlink-hs sidebar-underline"
                     to="/memberuser/blog"
                   >
                     <i className="far fa-edit"></i>我的文章
@@ -68,7 +68,7 @@ function Sidebar(props) {
                 </li>
                 <li className="nav-item  my-2">
                   <Link
-                    className="nav-link sidebarlink-hs"
+                    className="nav-link sidebarlink-hs sidebar-underline"
                     to="/memberuser/qanda"
                   >
                     <i className="fas fa-question-circle"></i>問與答
@@ -76,7 +76,7 @@ function Sidebar(props) {
                 </li>
                 <li className="nav-item  my-2">
                   <Link
-                    className="nav-link sidebarlink-hs"
+                    className="nav-link sidebarlink-hs sidebar-underline"
                     to="/memberuser/coupon/available"
                   >
                     <i className="fas fa-ticket-alt"></i>優惠券
@@ -84,7 +84,7 @@ function Sidebar(props) {
                 </li>
                 <li className="nav-item my-2">
                   <Link
-                    className="nav-link sidebarlink-hs"
+                    className="nav-link sidebarlink-hs sidebar-underline"
                     to="/memberuser/mymap"
                   >
                     <i className="fas fa-shoe-prints"></i>個人地圖
@@ -92,7 +92,7 @@ function Sidebar(props) {
                 </li>
                 <li className="nav-item my-2">
                   <Link
-                    className="nav-link sidebarlink-hs"
+                    className="nav-link sidebarlink-hs sidebar-underline"
                     to="/memberuser/wishlist"
                   >
                     <i className="fas fa-heart"></i>願望清單
@@ -100,7 +100,7 @@ function Sidebar(props) {
                 </li>
                 <li className="nav-item my-2">
                   <Link
-                    className="nav-link sidebarlink-hs"
+                    className="nav-link sidebarlink-hs sidebar-underline"
                     to="/"
                     onClick={(event) => {
                       event.preventDefault()

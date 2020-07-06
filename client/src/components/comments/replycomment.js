@@ -10,7 +10,13 @@ import Fade from 'react-reveal/Fade'
 import Swal from 'sweetalert2'
 import { checkPropTypes } from 'prop-types'
 
-function ReplyComment({ handleDelete, index, commentData, history }) {
+function ReplyComment({
+  handleDelete,
+  index,
+  commentData,
+  history,
+  commentAsync,
+}) {
   //state
   const [image, setImage] = useState({ file: [], preview: [], raw: [] })
   const [text, setText] = useState('')
@@ -109,7 +115,7 @@ function ReplyComment({ handleDelete, index, commentData, history }) {
         handleDelete(index)
 
         // window.location.replace('/memberuser/comment/mycomment')
-        window.location.href = '/memberuser/comment/mycomment'
+        // window.location.href = '/memberuser/comment/mycomment'
         history.push('/memberuser/comment/mycomment')
         setLoad(false)
         // setImage({ file: [] })
@@ -257,6 +263,7 @@ function ReplyComment({ handleDelete, index, commentData, history }) {
                             fileImg.files[0].name
                           )
                           commentimgUpload(image.file)
+                          commentAsync()
                         }}
                       >
                         提交評論
