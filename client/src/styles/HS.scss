@@ -13,8 +13,7 @@ $black: #000000;
 $white: #ffffff;
 
 // Others----------------------------------------
-.nav-item {
-}
+
 #membername {
   color: #b98f50;
   text-align: center;
@@ -93,211 +92,26 @@ $white: #ffffff;
   }
 }
 
-// Login----------------------------------------
-.signincard-hs {
-  padding-top: 250px;
-  padding-bottom: 300px;
-  opacity: 0.92;
-}
-.hslogin {
-  a {
-    color: $black;
-    i {
-      color: $fontawesome;
-    }
-  }
-  .btn.btn-info,
-  .btn-info.custom-file-control::before {
-    color: $hipstercolordanger;
-  }
-  .sellerlogin {
-    margin-top: 20px;
-    a {
-      color: $hipstercolordanger;
-    }
-  }
-}
-
-//Register----------------------------------------
-.registerbg {
-  width: 100%;
-  height: 100%;
-}
-.hsregister {
-  .btn.btn-info,
-  .btn-info.custom-file-control::before {
-    color: $hipstercolordanger;
-  }
-  .agreementlink {
-    color: $hipstercolordanger;
-  }
-}
-.registercard-hs {
-  padding-top: 250px;
-  padding-bottom: 130px;
-  opacity: 0.92;
-}
-
-//Homepage-------------------------------------------
-.hshomepage {
-  height: 150vh;
-}
-
-//User-------------------------------------------
-.inputavatar {
-  width: 250px;
-  height: 40px;
-}
-.btn.btn-primary,
-.btn-primary.custom-file-control::before {
-  color: $hipstercolordanger;
-}
-.btn.btn-primary:hover,
-.btn-primary.custom-file-control:hover::before {
-  color: $hipstercolordanger;
-}
-.infocard-hs {
-  margin-bottom: 30px;
-  opacity: 0.92;
-  border-radius: 10px;
-}
-.pagetitle-hs {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  color: $black;
-}
-.hrline-hs {
-  height: 1px;
-  background: #c4cad1;
-  border: none;
-}
-.avatar-hs {
-  margin-top: 10px;
-  height: 140px;
-}
-.input-hs {
-  text-align: center;
-}
-
-//Order----------------------------------------
-.hsclass {
-  li {
-    a {
-      color: $white;
-    }
-    a:hover {
-      color: $hipstercolordanger;
-    }
-  }
-}
-.orderimg-hs {
-  width: 150px;
-  height: 150px;
-  margin-top: 30px;
-  border-radius: 5px;
-  object-fit: contain;
-}
-.orderselection-hs {
-  width: 90px;
-}
-
-//Class----------------------------------------
-.hsorder {
-  li {
-    a {
-      color: $white;
-    }
-    a:hover {
-      color: $hipstercolordanger;
-    }
-  }
-}
-.classselection-hs {
-  width: 90px;
-}
-.classimg-hs {
-  width: 150px;
-  height: 150px;
-  margin-top: 30px;
-  border-radius: 5px;
-}
-
-//Event----------------------------------------
-.hsevent {
-  li {
-    a {
-      color: $white;
-    }
-    a:hover {
-      color: $hipstercolordanger;
-    }
-  }
-}
-.eventselection-hs {
-  width: 90px;
-}
-.eventContent-MEMBER-JY {
-  max-height: 340px;
-  .col-sm-5,
-  .col-sm-7 {
-    max-height: 340px;
-  }
-}
-.eventimg-hs {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  // margin-top: 30px;
-  padding: 15px;
-  border-radius: 5px;
-  img {
-    width: 100%;
-    height: 100%;
-  }
-}
-
-.itemId-JY {
-  margin: 0;
-}
-
-.card-header-jy {
-  min-height: 50px;
-}
-
-.addClassForm {
-  background-color: white;
-
-  textarea {
-    resize: none;
-  }
-  .classDescBox {
-    height: 88.3%;
-    .form-control {
-      height: 100%;
-    }
-  }
-}
-.btn-box {
-  justify-content: center;
-  .btn {
-    width: 300px;
-  }
-}
-.select-jy {
-  color: rgba($color: #fff, $alpha: 0.6);
-  border-bottom: 1px solid rgba($color: #fff, $alpha: 0.6);
-}
-.switchbutton-jy {
-  min-height: 40px;
-  margin-right: 15px;
-  p {
-    margin: 0 5px 0 0;
-  }
-  color: rgba($color: #fff, $alpha: 0.6);
-}
-
 @media only screen and (max-width: 768px) {
   .container.mt-md-3 {
     padding: 0;
   }
+}
+
+.sidebar-underline {
+  position: relative;
+  text-decoration: none;
+  display: inline-block;
+}
+.sidebar-underline:after {
+  display: block;
+  content: '';
+  border-bottom: solid 3px $hipstercolordanger;
+  transform: scaleX(0);
+  transition: transform 250ms ease-in-out;
+  transform-origin: 100% 50%;
+}
+.sidebar-underline:hover:after {
+  transform: scaleX(1);
+  transform-origin: 0 50%;
 }

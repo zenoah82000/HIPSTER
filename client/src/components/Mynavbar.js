@@ -521,12 +521,13 @@ function Mynavbar(props) {
               </Link>
             </li>
             <li>
-              <Link
+              <a
                 className="hvr-float hvr-underline-from-center"
-                to="/productlist"
+                // to="/productlist"
+                href="/productlist"
               >
                 活動列表
-              </Link>
+              </a>
             </li>
             <li>
               <Link
