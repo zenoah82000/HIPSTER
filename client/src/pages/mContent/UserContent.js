@@ -191,8 +191,7 @@ function UserContent() {
           id="demoimg"
           className="memberimg"
           alt="會員頭像"
-          // src={`http://localhost:5000/images/member/${memberImg}`}
-          src=""
+          src={`http://localhost:5000/images/member/${memberImg}`}
         />
       </Figure>
 

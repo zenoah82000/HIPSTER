@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import $ from 'jquery'
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-
-//新增訂單
-import { memberCheckOutAsync } from '../../actions/order/order_Actions'
 
 //確認框
 import Swal from 'sweetalert2'
-import { Modal, Button, Form } from 'react-bootstrap'
+import { Modal } from 'react-bootstrap'
 
 import '../../styles/ShoppingCar.scss'
 
@@ -25,6 +21,84 @@ function ShoppingCar(props) {
   //結帳視窗
   const [checkoutok, setCheckoutok] = useState(false)
 
+  //結帳視窗
+  function MyCartDetail(props) {
+    return (
+      <Modal 
+        {...props}
+        size="md"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Body className="modal-body">
+          <div className="cartdetail-box">
+            <div className="cartdetail-title">
+              <p>訂單確認</p>
+            </div>
+            <hr />
+            <div className="cartdetail-product-box">
+              {mycart.map((item) => {
+                return (
+                  <>
+                    <div className="cartdetail-product">
+                      <div className="cartdetail-img">
+                        <img
+                          src={`http://localhost:5000/images/product/${item.productImg}`}
+                        />
+                      </div>
+                      <div className="cartdetail-productinfo">
+                        <p className="cartdetail-productname">
+                          {item.productName}
+                        </p>
+                        <p className="cartdetail-productamount">
+                          數量:{item.amount}
+                        </p>
+                        <p className="cartdetail-productprice">
+                          價格:NT${item.productPrice.toString()
+                      .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
+                        </p>
+                      </div>
+                      <div className="cartdetail-productsubtotal">NT${(item.productPrice*item.amount).toString()
+                      .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}</div>
+                    </div>
+                  </>
+                )
+              })}
+            </div>
+            <hr />
+            <div className="cartdetail-footer">
+              <div className="cartdetail-subtotal">
+                <p>總計:</p>
+                <span>NT${sum(mycart).toString()
+                      .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}</span>
+              </div>
+              <div className="cartdetail-coupon">
+                <p>
+                  優惠碼{discountcode ? discountcode : '(未使用)'}:
+                </p>
+                <span>-NT${Math.round(sum(mycart) * (1 - discount)).toString()
+                      .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}</span>
+              </div>
+              <div className="cartdetail-total">
+                <p>結帳金額:</p>
+                <span>NT${Math.round(sum(mycart) * discount).toString()
+                      .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}</span>
+              </div>
+            </div>
+            <hr/>
+            <div className="cartdetail-button">
+              <button onClick={()=>{
+                checkOutSend()
+              }} className="cartdetail-button-ok">確定送出</button>
+              <button onClick={()=>{
+                setCheckoutok(false)
+              }} className="cartdetail-button-cancel">取消</button>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
+    )
+  }
   //設置折扣
   const [discount, setDiscount] = useState(1)
   const [discountcode, setDiscountcode] = useState('')
@@ -76,44 +150,28 @@ function ShoppingCar(props) {
       </Modal>
     )
   }
-  //結帳視窗
 
-  //前往結帳，送出訂單
+  //確認訂單
   const checkOut = () => {
     //判斷是否登入
     if (!userSuccess) {
       setLogin(true)
-    } else if (mycart == null || mycart.length < 1) {
-      Swal.fire({
-        // title: 'Error!',
-        text: '購物車是空的喔！',
-        icon: 'warning',
-        confirmButtonText: '確定',
-        confirmButtonColor: 'rgba(104, 142, 103, 0.8)',
-      })
     } else {
-      Swal.fire({
-        text: `確定商品總金額 NT$！${Math.round(sum(mycart) * discount)}`,
-        icon: 'info',
-        confirmButtonText: '確定',
-        showCancelButton: true,
-        cancelButtonText: '取消',
-        confirmButtonColor: 'rgba(104, 142, 103, 0.8)',
-      }).then((result) => {
-        if (result.value) {
-          let buydata = {
-            product: [...mycart],
-          }
-          buydata.sumdiscount = Math.round(sum(mycart) * discount)
-          buydata.sumless = Math.round(sum(mycart) * (1 - discount))
-          buydata.discountcode = discountcode
-          props.dispatch({ type: 'BUYER_DATA', value: buydata })
-          props.dispatch({ type: 'GET_CART', value: [] })
-          localStorage.removeItem('cart')
-          props.history.push('/paymentDetail')
-        }
-      })
+      setCheckoutok(true)
     }
+  }
+  const checkOutSend = () => {
+    setCheckoutok(false)
+    let buydata = {
+      product: [...mycart],
+    }
+    buydata.sumdiscount = Math.round(sum(mycart) * discount)
+    buydata.sumless = Math.round(sum(mycart) * (1 - discount))
+    buydata.discountcode = discountcode
+    props.dispatch({ type: 'BUYER_DATA', value: buydata })
+    props.dispatch({ type: 'GET_CART', value: [] })
+    localStorage.removeItem('cart')
+    props.history.push('/paymentDetail')
   }
   useEffect(() => {
     //捲動事件
@@ -208,6 +266,7 @@ function ShoppingCar(props) {
 
   return (
     <>
+      <MyCartDetail show={checkoutok} onHide={() => setCheckoutok(false)} />
       <Checklogin show={login} onHide={() => setLogin(false)} />
       <div className="container">
         <h1 className="py-4">購物車</h1>
