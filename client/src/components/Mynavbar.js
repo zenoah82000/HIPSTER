@@ -276,11 +276,11 @@ function Mynavbar(props) {
               className="signbtn "
               type="submit"
               onClick={() => {
-                if (signcheckbox == false) {
-                  alert('請確認已詳細閱讀，並同意接受會員權益與個資同意條款')
+                if (signAccount.value == '' || signPassword.value == '') {
+                  alert('帳號或密碼不可為空')
                 } else {
-                  if (signAccount.value == '' || signPassword.value == '') {
-                    alert('帳號或密碼不可為空')
+                  if (signcheckbox == false) {
+                    alert('請確認已詳細閱讀，並同意接受會員權益與個資同意條款')
                   } else {
                     //撈取資料
                     signData = {
@@ -580,13 +580,22 @@ function Mynavbar(props) {
                                   <div className="mycart-textbox">
                                     <div className="item-name">
                                       <Link to={`/product/${value.productId}`}>
-                                        <p title={value.productName}>{value.productName}</p>
+                                        <p title={value.productName}>
+                                          {value.productName}
+                                        </p>
                                       </Link>
                                     </div>
 
                                     <div className="item-price">
-                                      <span>價格:NT${value.productPrice.toString()
-                          .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}</span>
+                                      <span>
+                                        價格:NT$
+                                        {value.productPrice
+                                          .toString()
+                                          .replace(
+                                            /(\d)(?=(\d{3})+(?:\.\d+)?$)/g,
+                                            '$1,'
+                                          )}
+                                      </span>
                                     </div>
                                     <div className="item-price">
                                       <span>數量:{value.amount}</span>
