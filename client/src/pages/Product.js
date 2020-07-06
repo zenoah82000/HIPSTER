@@ -13,6 +13,7 @@ import ProductTime from '../components/product/ProductTime'
 import Productinfoicon from '../components/product/Productinfoicon'
 import ProductDescription from '../components/product/ProductDescription'
 import ProductHowtoArea from '../components/product/ProductHowtoArea'
+import CommentList from '../components/product/commentList_f'
 
 import { getProductInfoAsync } from '../actions/product/getProductInfo'
 
@@ -64,6 +65,11 @@ function Product(props) {
               addCart={addCart}
             />
             <CommtentList
+              productName={product.productName}
+              productId={product.productId}
+              currentPage={currentPage}
+            />
+            <CommentList
               productName={product.productName}
               productId={product.productId}
               currentPage={currentPage}
