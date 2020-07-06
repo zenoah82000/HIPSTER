@@ -71,7 +71,7 @@ class commtentList extends Component {
                   </li>
 
                   <li className="d-flex">
-                    <SimpleReactLightbox>
+                    {/* <SimpleReactLightbox>
                       <SRLWrapper>
                         <div className="commentImg">
                           <img
@@ -84,7 +84,7 @@ class commtentList extends Component {
                           />
                         </div>
                       </SRLWrapper>
-                    </SimpleReactLightbox>
+                    </SimpleReactLightbox> */}
                   </li>
                 </ul>
               </div>
