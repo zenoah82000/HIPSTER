@@ -361,7 +361,12 @@ export default class ViewportExample extends Component {
                       <span className="mr-2 ">
                         <FaRegCalendarCheck />
                       </span>
-                      <span>價格：NT${clickData.productPrice}</span>
+                      <span>
+                        價格：NT$
+                        {clickData.productPrice
+                          .toString()
+                          .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
+                      </span>
                     </li>
                   </ul>
                   <div className="cardButton">

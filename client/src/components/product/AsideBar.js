@@ -341,6 +341,7 @@ function AsideBar(props) {
                               : addCatChild(categoryChild)
                             : searchParams.append('cat', categoryChild.join())
                           searchParams.set('page', 1)
+                          window.scrollTo({ top: 0, behavior: 'smooth' })
                           props.history.push(`?${searchParams.toString()}`)
                         }}
                       >
@@ -369,6 +370,7 @@ function AsideBar(props) {
                             category.categoryParentId.toString()
                           )
                           searchParams.set('page', 1)
+                          window.scrollTo({ top: 0, behavior: 'smooth' })
                           props.history.push(`?${searchParams.toString()}`)
                         }}
                         value={category.categoryName}
@@ -426,6 +428,7 @@ function AsideBar(props) {
                       : searchParams.set('loc', '1,2,3,4,5')
                     : searchParams.append('loc', '1,2,3,4,5')
                   searchParams.set('page', 1)
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
                   props.history.push(`?${searchParams.toString()}`)
                 }}
               >
@@ -451,6 +454,7 @@ function AsideBar(props) {
                 onClick={() => {
                   checkloc('1')
                   searchParams.set('page', 1)
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
                   props.history.push(`?${searchParams.toString()}`)
                 }}
               >
@@ -471,6 +475,7 @@ function AsideBar(props) {
                 onClick={() => {
                   checkloc('2')
                   searchParams.set('page', 1)
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
                   props.history.push(`?${searchParams.toString()}`)
                 }}
               >
@@ -491,6 +496,7 @@ function AsideBar(props) {
                 onClick={() => {
                   checkloc('3')
                   searchParams.set('page', 1)
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
                   props.history.push(`?${searchParams.toString()}`)
                 }}
               >
@@ -511,6 +517,7 @@ function AsideBar(props) {
                 onClick={() => {
                   checkloc('4')
                   searchParams.set('page', 1)
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
                   props.history.push(`?${searchParams.toString()}`)
                 }}
               >
@@ -531,6 +538,7 @@ function AsideBar(props) {
                 onClick={() => {
                   checkloc('5')
                   searchParams.set('page', 1)
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
                   props.history.push(`?${searchParams.toString()}`)
                 }}
               >
@@ -600,6 +608,7 @@ function AsideBar(props) {
                     searchParams.delete('startDate')
                     searchParams.delete('endDate')
                     searchParams.set('page', 1)
+                    window.scrollTo({ top: 0, behavior: 'smooth' })
                     props.history.push(`?${searchParams.toString()}`)
                     setChecked2(!checked2)
                     setStartDate(stdate)
@@ -611,6 +620,7 @@ function AsideBar(props) {
                 <div
                   className="apply_btn"
                   onClick={() => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' })
                     setStartDateEndDate(startDate, endDate)
                     setChecked2(!checked2)
                     searchParams.set('page', 1)
@@ -638,6 +648,7 @@ function AsideBar(props) {
                 setPrice(value)
               }}
               onChangeComplete={(value) => {
+                window.scrollTo({ top: 0, behavior: 'smooth' })
                 setMinPriceMaxPrice(value.min, value.max)
                 searchParams.set('page', 1)
                 props.history.push(`?${searchParams.toString()}`)

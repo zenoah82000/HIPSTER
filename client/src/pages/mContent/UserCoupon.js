@@ -24,21 +24,52 @@ function UserCoupon(props) {
     getUserCouponDetaiAsync()
   }, [])
 
-  console.log('uCoupon-props', props)
+  // console.log('uCoupon-props', props)
 
-  console.log('userCouponData', userCouponData)
-  console.log('userCouponData.coupon123', userCouponData[0])
+  // console.log('userCouponData', userCouponData)
+  // console.log('userCouponData.coupon123', userCouponData[0])
 
+  //原本的
+  // const addGiviData = async () => {
+  //   const GiviFormData = {
+  //     memberId,
+  //     discountCode,
+  //   }
+  //   console.log('GiviFormData', GiviFormData)
+  //   props.addUserCouponDataAsync(GiviFormData)
+  // }
+
+  //新的
   const addGiviData = async () => {
     const GiviFormData = {
       memberId,
       discountCode,
     }
-    console.log('GiviFormData', GiviFormData)
-    props.addUserCouponDataAsync(GiviFormData)
+    Swal.fire({
+      title: '確定新增此優惠券?',
+      icon: 'question',
+      showCancelButton: true,
+      html:
+        '<h5 class="alert-side">折扣代碼: ' +
+        GiviFormData.discountCode +
+        '</h5>',
+      confirmButtonText: '確定',
+      cancelButtonText: '取消',
+    }).then((result) => {
+      if (result.value) {
+        props.addUserCouponDataAsync(GiviFormData)
+        Swal.fire({
+          title: '優惠券新增成功',
+          icon: 'success',
+        }).then(() => {
+          props.history.go(0)
+        })
+      }
+    })
   }
-  console.log('discountCode', discountCode)
-  console.log('adduserCouponData', adduserCouponData)
+
+  // console.log('discountCode', discountCode)
+  // console.log('adduserCouponData', adduserCouponData)
 
   let couponList = userCouponData.map((item) => {
     if (

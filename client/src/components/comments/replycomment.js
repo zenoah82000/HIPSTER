@@ -146,7 +146,7 @@ function ReplyComment({
               <div className="reply-listview">
                 <div className="comment-tbhead">
                   <div class="row">
-                    <div class="col-9 pl-1">
+                    <div class="col-md-9 col-sm-12 pl-1">
                       <h5
                         className="eventTitle "
                         style={{ fontWeight: 'bold' }}
@@ -154,7 +154,7 @@ function ReplyComment({
                         {commentData.productName}
                       </h5>
                     </div>
-                    <div class="col-3 pr-1">
+                    <div class="col-md-3 col-sm-12 pr-1">
                       <ul className="float-right list-unstyled">
                         <li>
                           <small>訂單編號:{commentData.orderId}</small>
@@ -169,8 +169,8 @@ function ReplyComment({
                   </div>
                 </div>
                 <div class="row">
-                  <div className="mynotReplyBox d-flex">
-                    <div className="eventImgBox col-3">
+                  <div className="mynotReplyBox">
+                    <div className="eventImgBox col-md-3 col-sm-12">
                       <img
                         src={
                           'http://localhost:5000/images/product/' +
@@ -179,7 +179,7 @@ function ReplyComment({
                         alt=""
                       />
                     </div>
-                    <div className=" col-9 pl-3">
+                    <div className=" col-md-9 col-sm-12 pl-3">
                       <ul className=" list-unstyled">
                         {/* <li className="d-flex">
                     <p>活動日期:{commentData.date}</p>

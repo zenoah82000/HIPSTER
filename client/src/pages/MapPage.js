@@ -51,7 +51,7 @@ class MapPage extends React.Component {
     return (
       <>
         <div className="row" style={{ background: 'rgb(230, 222, 216)' }}>
-          <div className="col-4">
+          <div className="col-md-4 col-sm-12">
             <EventMapDataList
               onClickReset={this.onClickReset}
               cardClick={this.cardClick}
@@ -61,7 +61,7 @@ class MapPage extends React.Component {
               setFileterData={this.setFileterData}
             />
           </div>
-          <div className="col-8">
+          <div className="col-md-8 col-sm-12">
             <MyMapComponent
               clicked={this.state.clicked}
               viewport={this.props.viewport}

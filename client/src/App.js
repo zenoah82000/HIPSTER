@@ -243,7 +243,11 @@ function App(props) {
             <ProductList />
           </Route>
           <Route path="/product/:id">
-            <Product addCart={addCart} />
+            <Product
+              addCart={addCart}
+              addwishlist={addwishlist}
+              deletewishlist={deletewishlist}
+            />
           </Route>
           <Route path="/shoppingcar">
             <ShoppingCar
