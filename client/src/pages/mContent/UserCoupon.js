@@ -75,7 +75,8 @@ function UserCoupon(props) {
     if (
       item.memberId == memberId &&
       Date.parse(item.startTime).valueOf() < Date.parse(new Date()).valueOf() &&
-      Date.parse(item.endTime).valueOf() > Date.parse(new Date()).valueOf()
+      Date.parse(item.endTime).valueOf() > Date.parse(new Date()).valueOf() &&
+      item.memberCouponNum == 1
     ) {
       return (
         <div className="tab-pane">
@@ -189,7 +190,7 @@ function UserCoupon(props) {
                   activeClassName="currentcoupon"
                   className="coupontab-a"
                 >
-                  已過期
+                  不適用
                 </NavLink>
               </div>
             </div>
@@ -247,7 +248,7 @@ function UserCoupon(props) {
                   activeClassName="currentcoupon"
                   className="coupontab-a"
                 >
-                  已過期
+                  不適用
                 </NavLink>
               </div>
             </div>
