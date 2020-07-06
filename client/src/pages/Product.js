@@ -60,7 +60,7 @@ function Product(props) {
               productAddress={product.productAddress}
               addCart={addCart}
             />
-            {/* <CommtentList productName={product.productName} /> */}
+            <CommtentList productName={product.productName} productId={product.productId}  />
           </div>
         </div>
       </div>
