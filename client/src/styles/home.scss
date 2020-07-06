@@ -70,6 +70,17 @@ p {
     }
   }
 }
+@media screen and (max-width: 599px) {
+  .banner {
+    background-image: url(../images/home/home-banner.jpg) !important;
+    .video {
+      display: none;
+    }
+    .banner-title {
+      width: 80%;
+    }
+  }
+}
 
 ///////////搜尋條-切換紐/////////////
 .searchbar-chang-btn {
@@ -278,7 +289,7 @@ p {
     height: auto;
     padding: 80px 0;
     .text-center {
-      width: 100%;
+      width: 90%;
     }
     .about-main {
       margin-top: 50px;
@@ -423,7 +434,7 @@ p {
     right: 0;
     z-index: 99;
     .content {
-      width: 600px;
+      width: 77%;
       height: 220px;
       text-align: left;
       margin-top: 170px;

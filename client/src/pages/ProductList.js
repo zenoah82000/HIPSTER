@@ -49,10 +49,10 @@ function ProductList(props) {
       : Date.parse(new Date())
 
   const minPrice = searchParams.has('minPrice')
-    ? +searchParams.get('minPrice')
+    ? searchParams.get('minPrice')
     : false
   const maxPrice = searchParams.has('maxPrice')
-    ? +searchParams.get('maxPrice')
+    ? searchParams.get('maxPrice')
     : false
 
   const pricerange =
@@ -68,7 +68,7 @@ function ProductList(props) {
   const keyword = searchParams.has('keyword')
     ? searchParams.get('keyword')
     : false
-  console.log(!!keyword)
+  // console.log(!!keyword)
 
   const [price, setPrice] = useState(pricerange)
 
@@ -89,10 +89,10 @@ function ProductList(props) {
   const count = productListData.filter((item, index) => {
     if (length === 0) {
       if (+Date.parse(item.productEndingDate) >= +eddate) {
-        if (minPrice && maxPrice) {
+        if (!!minPrice && !!maxPrice) {
           if (
-            +item.productPrice >= minPrice &&
-            +item.productPrice <= maxPrice
+            +item.productPrice <= +maxPrice &&
+            +item.productPrice >= +minPrice
           ) {
             if (!!keyword) {
               if (
@@ -124,10 +124,10 @@ function ProductList(props) {
       for (let i = 0; i < length; i++) {
         if (item.categoryId === +cat[i] || item.locationParentId === +loc[i]) {
           if (+Date.parse(item.productEndingDate) >= +eddate) {
-            if (minPrice && maxPrice) {
+            if (!!minPrice && !!maxPrice) {
               if (
-                +item.productPrice >= minPrice &&
-                +item.productPrice <= maxPrice
+                +item.productPrice <= +maxPrice &&
+                +item.productPrice >= +minPrice
               ) {
                 if (!!keyword) {
                   if (

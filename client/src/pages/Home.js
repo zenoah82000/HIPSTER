@@ -134,9 +134,10 @@ function Home(props) {
   const location = (
     <div id="location-search" className="search-bar">
       <select id="city" ref={(input) => (searchBarCity = input)}>
-        <option value="新北市">新北市</option>
-        <option value="臺北市">臺北市</option>
-        <option value="基隆市">基隆市</option>
+        <option value="">請選擇</option>
+        <option value="">新北市</option>
+        <option value="1">臺北市</option>
+        <option value="">基隆市</option>
         <option>連江縣</option>
         <option>宜蘭縣</option>
         <option>新竹市</option>
@@ -179,10 +180,10 @@ function Home(props) {
         onClick={() => {
           searchBarLocationData = {
             City: searchBarCity.value,
-            Area: searchBarArea.value,
             Address: searchBarAddress.value,
           }
-          console.log(searchBarLocationData)
+          window.location.href = `/productlist?loc=${searchBarCity.value}&keyword=${searchBarAddress.value}`
+          // console.log(searchBarLocationData)
         }}
       >
         <FaSearch className="fonticon" />
@@ -204,20 +205,19 @@ function Home(props) {
     <div id="activename-search" className="search-bar">
       <select id="category1" ref={(input) => (searchBarCategory1 = input)}>
         <option value="">主分類</option>
-        <option value="玩樂廚房">玩樂廚房</option>
-        <option value="愛上戶外">愛上戶外</option>
+        <option value="">文藝展覽</option>
+        <option value="">手作課程</option>
+        {/* <option value="愛上戶外">愛上戶外</option>
         <option value="親子專區">親子專區</option>
         <option value="紓壓生活">紓壓生活</option>
-        <option value="藝文手作">藝文手作</option>
-        <option value="手工課程">手工課程</option>
+        <option value="藝文手作">藝文手作</option> */}
       </select>
       <select id="category2" ref={(input) => (searchBarCategory2 = input)}>
         <option value="">次分類</option>
-        <option value="烘焙/甜點">烘焙/甜點</option>
-        <option value="異國料理">異國料理</option>
-        <option value="中式料理">中式料理</option>
-        <option value="茶/酒/咖啡">茶/酒/咖啡</option>
-        <option value="主題餐會">主題餐會</option>
+        <option value="8">藝文空間</option>
+        <option value="9">美術館/博物館</option>
+        <option value="10">文化單位</option>
+        <option value="11">展演活動</option>
       </select>
       <input
         ref={(input) => (searchBarName = input)}
@@ -231,11 +231,11 @@ function Home(props) {
         className="search-btn btn btn-warning"
         onClick={() => {
           searchBarActiveData = {
-            Category1: searchBarCategory1.value,
             Category2: searchBarCategory2.value,
             Name: searchBarName.value,
           }
-          console.log(searchBarActiveData)
+          window.location.href = `/productlist?cat=${searchBarCategory2.value}&keyword=${searchBarName.value}`
+          // console.log(searchBarActiveData)
         }}
       >
         <FaSearch className="fonticon" />
