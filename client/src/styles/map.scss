@@ -82,6 +82,22 @@
   }
 }
 
+@media only screen and (max-width: 375px) {
+  .mapList {
+    height: 110px;
+  }
+  .mapSearch {
+    display: none;
+  }
+  .mapListBox {
+    display: none;
+  }
+  .cafeShow {
+    position: absolute;
+    left: 10px;
+  }
+}
+
 .btn-large {
   background-color: transparent;
 }

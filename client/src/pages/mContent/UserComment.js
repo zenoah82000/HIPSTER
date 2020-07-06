@@ -120,7 +120,7 @@ function UserComment(props) {
               <div className="reply-listview">
                 <div className="comment-tbhead">
                   <div class="row">
-                    <div class="col-9 pl-1">
+                    <div class="col-md-9 col-sm-12 pl-1">
                       <h5
                         className="eventTitle "
                         style={{ fontWeight: 'bold' }}
@@ -128,7 +128,7 @@ function UserComment(props) {
                         {item.productName}
                       </h5>
                     </div>
-                    <div class="col-3 pr-1">
+                    <div class="col-md-3 col-sm-12 pr-1">
                       <ul className="float-right list-unstyled">
                         <li>
                           <small>訂單編號:{item.orderId}</small>
@@ -141,8 +141,8 @@ function UserComment(props) {
                   </div>
                 </div>
                 <div class="row">
-                  <div className="myReplyBox d-flex">
-                    <div className="eventImgBox col-3">
+                  <div className="myReplyBox ">
+                    <div className="eventImgBox col-sm-12 col-md-3">
                       <img
                         src={
                           'http://localhost:5000/images/product/' +
@@ -151,7 +151,7 @@ function UserComment(props) {
                         alt=""
                       />
                     </div>
-                    <div className="col-9 pl-3">
+                    <div className="col-sm-12 col-md-9 pl-3">
                       <ul className=" list-unstyled">
                         <li className="d-flex">
                           <p style={{ fontWeight: 'bold' }}>評價星等:</p>
@@ -275,12 +275,18 @@ function UserComment(props) {
                 />
               ))
             ) : (
-              <div className="empty text-center">
-                <img
-                  className="emptyImg mb-3"
-                  src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
-                />
-                <h6>尚未有評價</h6>
+              <div className="empty ">
+                <div className="emptyimgbox mb-3">
+                  <img
+                    className="emptyImg mb-3"
+                    src="http://localhost:5000/images/order/wishlist.webp"
+                  />
+                </div>
+                <div className="emptytext text-center">
+                  <p>
+                    評價是空的！趕緊探索你下一次的旅程，並標記你心儀的活動體驗
+                  </p>
+                </div>
               </div>
             )}
           </div>

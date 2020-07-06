@@ -93,7 +93,7 @@ function UserWishlist(props) {
     wishlist != null && wishlist.length >= 1 ? (
       <div className="wishlistbox ">
         <div className="row">
-          {wishlist.map((item) => {
+        {wishlist !=null &&wishlist.length>=1? (<>{wishlist.map((item) => {
             return (
               <>
                 <div key={item.productId} className="card m-2">
@@ -135,7 +135,8 @@ function UserWishlist(props) {
                 </div>
               </>
             )
-          })}
+          })}</>):''}
+          
         </div>
       </div>
     ) : (

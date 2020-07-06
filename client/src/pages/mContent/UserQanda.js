@@ -31,6 +31,16 @@ function UserQanda(props) {
   console.log('productListData', productListData)
   console.log('uQA-props-userQandaData', props.userQandaData)
   const answer = ' '
+  // const addQaData = async () => {
+  //   const GiviFormData = {
+  //     memberId,
+  //     question,
+  //     productName,
+  //     answer,
+  //   }
+  //   console.log('GiviFormData', GiviFormData)
+  //   props.addUserQandaDataAsync(GiviFormData)
+  // }
   const addQaData = async () => {
     const GiviFormData = {
       memberId,
@@ -38,8 +48,34 @@ function UserQanda(props) {
       productName,
       answer,
     }
-    console.log('GiviFormData', GiviFormData)
-    props.addUserQandaDataAsync(GiviFormData)
+    Swal.fire({
+      title: '確定新增此商品問題?',
+      icon: 'question',
+      showCancelButton: true,
+      html:
+        '<h5 class="alert-side">商品名稱: ' +
+        '<strong>' +
+        GiviFormData.productName +
+        '</strong>' +
+        '</h5>' +
+        '<h5 class="alert-side">問題: ' +
+        '<strong>' +
+        GiviFormData.question +
+        '</strong>' +
+        '</h5>',
+      confirmButtonText: '確定',
+      cancelButtonText: '取消',
+    }).then((result) => {
+      if (result.value) {
+        props.addUserQandaDataAsync(GiviFormData)
+        Swal.fire({
+          title: '問題新增成功',
+          icon: 'success',
+        }).then(() => {
+          props.history.go(0)
+        })
+      }
+    })
   }
 
   let productList = productListData.map((item) => {
