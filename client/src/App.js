@@ -88,6 +88,7 @@ function App(props) {
   }
   //加入願望清單
   const addwishlist = (value) => {
+    console.log(value)
     const index = wishlist.findIndex(
       (item) => item.productId === value.productId
     )
@@ -95,10 +96,15 @@ function App(props) {
       const newWishlist = [...wishlist]
       newWishlist.push(value)
       props.dispatch({ type: 'GET_WISH', value: newWishlist })
-      console.log(value.productId)
       addWishlistAsync(value.productId)
     } else {
-      alert('已在願望清單')
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: '已加入願望清單',
+        showConfirmButton: false,
+        timer: 800
+      })
     }
   }
   //刪除願望清單(資料庫)
@@ -145,8 +151,21 @@ function App(props) {
       newCart.push(value)
       props.dispatch({ type: 'GET_CART', value: newCart })
       localStorage.setItem('cart', JSON.stringify(newCart))
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: '加入成功',
+        showConfirmButton: false,
+        timer: 800
+      })
     } else {
-      alert('已在購物車')
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: '商品已在購物車',
+        showConfirmButton: false,
+        timer: 800
+      })
     }
   }
   //刪除購物車

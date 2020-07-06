@@ -24,7 +24,7 @@ function ShoppingCar(props) {
   //結帳視窗
   function MyCartDetail(props) {
     return (
-      <Modal 
+      <Modal
         {...props}
         size="md"
         aria-labelledby="contained-modal-title-vcenter"
@@ -47,19 +47,31 @@ function ShoppingCar(props) {
                         />
                       </div>
                       <div className="cartdetail-productinfo">
-                        <p className="cartdetail-productname">
+                        <p
+                          className="cartdetail-productname"
+                          title={item.productName}
+                        >
                           {item.productName}
                         </p>
                         <p className="cartdetail-productamount">
                           數量:{item.amount}
                         </p>
                         <p className="cartdetail-productprice">
-                          價格:NT${item.productPrice.toString()
-                      .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
+                          價格:NT$
+                          {item.productPrice
+                            .toString()
+                            .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
+                        </p>
+                        <p className="cartdetail-productdate">
+                          日期:{item.date}
                         </p>
                       </div>
-                      <div className="cartdetail-productsubtotal">NT${(item.productPrice*item.amount).toString()
-                      .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}</div>
+                      <div className="cartdetail-productsubtotal">
+                        NT$
+                        {(item.productPrice * item.amount)
+                          .toString()
+                          .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
+                      </div>
                     </div>
                   </>
                 )
@@ -69,30 +81,50 @@ function ShoppingCar(props) {
             <div className="cartdetail-footer">
               <div className="cartdetail-subtotal">
                 <p>總計:</p>
-                <span>NT${sum(mycart).toString()
-                      .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}</span>
+                <span>
+                  NT$
+                  {sum(mycart)
+                    .toString()
+                    .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
+                </span>
               </div>
               <div className="cartdetail-coupon">
-                <p>
-                  優惠碼{discountcode ? discountcode : '(未使用)'}:
-                </p>
-                <span>-NT${Math.round(sum(mycart) * (1 - discount)).toString()
-                      .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}</span>
+                <p>優惠碼{discountcode ? discountcode : '(未使用)'}:</p>
+                <span>
+                  -NT$
+                  {Math.round(sum(mycart) * (1 - discount))
+                    .toString()
+                    .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
+                </span>
               </div>
               <div className="cartdetail-total">
                 <p>結帳金額:</p>
-                <span>NT${Math.round(sum(mycart) * discount).toString()
-                      .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}</span>
+                <span>
+                  NT$
+                  {Math.round(sum(mycart) * discount)
+                    .toString()
+                    .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
+                </span>
               </div>
             </div>
-            <hr/>
+            <hr />
             <div className="cartdetail-button">
-              <button onClick={()=>{
-                checkOutSend()
-              }} className="cartdetail-button-ok">確定送出</button>
-              <button onClick={()=>{
-                setCheckoutok(false)
-              }} className="cartdetail-button-cancel">取消</button>
+              <button
+                onClick={() => {
+                  checkOutSend()
+                }}
+                className="cartdetail-button-ok"
+              >
+                確定送出
+              </button>
+              <button
+                onClick={() => {
+                  setCheckoutok(false)
+                }}
+                className="cartdetail-button-cancel"
+              >
+                取消
+              </button>
             </div>
           </div>
         </Modal.Body>
@@ -162,16 +194,24 @@ function ShoppingCar(props) {
   }
   const checkOutSend = () => {
     setCheckoutok(false)
-    let buydata = {
-      product: [...mycart],
-    }
-    buydata.sumdiscount = Math.round(sum(mycart) * discount)
-    buydata.sumless = Math.round(sum(mycart) * (1 - discount))
-    buydata.discountcode = discountcode
-    props.dispatch({ type: 'BUYER_DATA', value: buydata })
-    props.dispatch({ type: 'GET_CART', value: [] })
-    localStorage.removeItem('cart')
-    props.history.push('/paymentDetail')
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: '送出成功，轉至結帳頁面',
+      showConfirmButton: false,
+      timer: 800,
+    }).then(() => {
+      let buydata = {
+        product: [...mycart],
+      }
+      buydata.sumdiscount = Math.round(sum(mycart) * discount)
+      buydata.sumless = Math.round(sum(mycart) * (1 - discount))
+      buydata.discountcode = discountcode
+      props.dispatch({ type: 'BUYER_DATA', value: buydata })
+      props.dispatch({ type: 'GET_CART', value: [] })
+      localStorage.removeItem('cart')
+      props.history.push('/paymentDetail')
+    })
   }
   useEffect(() => {
     //捲動事件
@@ -216,38 +256,40 @@ function ShoppingCar(props) {
           </div>
         </div>
         <Mycart deleteCart={deleteCart} mycart={mycart} />
-        <div
-          id="checkdiv"
-          ref={(div) => (checkdiv = div)}
-          className="totalbox bg-white d-flex"
-        >
-          <div className="cart-bottom-left">
-            <CouponAllData
-              onChange={(couponvalue) => setDiscount(couponvalue)}
-              onBlur={(code) => setDiscountcode(code)}
-            />
-          </div>
-          <div className="cart-bottom-mid">
-            {discountline}
-            <div className="row justify-content-between">
-              <div>{mycart.length}個活動合計:</div>
-              <span className="total">
-                NT$
-                {Math.round(sum(mycart) * discount)
-                  .toString()
-                  .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
-              </span>
+        <div className="checkbox-footer">
+          <div
+            id="checkdiv"
+            ref={(div) => (checkdiv = div)}
+            className="totalbox bg-white d-flex"
+          >
+            <div className="cart-bottom-left">
+              <CouponAllData
+                onChange={(couponvalue) => setDiscount(couponvalue)}
+                onBlur={(code) => setDiscountcode(code)}
+              />
             </div>
-          </div>
-          <div className="cart-bottom-right">
-            <button
-              className="button"
-              onClick={() => {
-                checkOut()
-              }}
-            >
-              結帳
-            </button>
+            <div className="cart-bottom-mid">
+              {discountline}
+              <div className="row justify-content-between">
+                <div>{mycart.length}個活動合計:</div>
+                <span className="total">
+                  NT$
+                  {Math.round(sum(mycart) * discount)
+                    .toString()
+                    .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
+                </span>
+              </div>
+            </div>
+            <div className="cart-bottom-right">
+              <button
+                className="button"
+                onClick={() => {
+                  checkOut()
+                }}
+              >
+                結帳
+              </button>
+            </div>
           </div>
         </div>
       </>
