@@ -25,21 +25,24 @@ function Product(props) {
   }, [])
 
   const product = { ...productListData[0] }
-  // console.log(product)
+  console.log(product)
   return (
     <>
       <div className="bg-white text-brown">
         <div className="container position-relative">
           <ProductBanner productImg={product.productImg} />
           <MyBreadcrumb />
-          <BookArea />
+          <BookArea
+            productPrice={product.productPrice}
+            productEndingDate={product.productEndingDate}
+          />
           <div className="product-main-left">
             <h1 className="product-title">{product.productName}</h1>
             <ProductStarBar />
             <ProductTime />
             <Productinfoicon />
             <ProductDescription productContent={product.productContent} />
-            <ProductHowtoArea />
+            <ProductHowtoArea productAddress={product.productAddress} />
             <CommtentList productName={product.productName} />
           </div>
         </div>
