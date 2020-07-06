@@ -17,7 +17,13 @@ import ProductHowtoArea from '../components/product/ProductHowtoArea'
 import { getProductInfoAsync } from '../actions/product/getProductInfo'
 
 function Product(props) {
-  const { productListData, getProductInfoAsync } = props
+  const {
+    productListData,
+    getProductInfoAsync,
+    addCart,
+    addwishlist,
+    deletewishlist,
+  } = props
 
   useEffect(() => {
     console.log(props.match.params.id)
@@ -25,22 +31,36 @@ function Product(props) {
   }, [])
 
   const product = { ...productListData[0] }
-  // console.log(product)
+  console.log(product)
   return (
     <>
       <div className="bg-white text-brown">
         <div className="container position-relative">
           <ProductBanner productImg={product.productImg} />
           <MyBreadcrumb />
-          <BookArea />
+          <BookArea
+            productPrice={product.productPrice}
+            productEndingDate={product.productEndingDate}
+            productName={product.productName}
+            productId={product.productId}
+            productImg={product.productImg}
+            addCart={addCart}
+          />
           <div className="product-main-left">
             <h1 className="product-title">{product.productName}</h1>
-            <ProductStarBar />
+            <ProductStarBar
+              product={{ ...product }}
+              addwishlist={addwishlist}
+              deletewishlist={deletewishlist}
+            />
             <ProductTime />
             <Productinfoicon />
             <ProductDescription productContent={product.productContent} />
-            <ProductHowtoArea />
-            <CommtentList productName={product.productName} />
+            <ProductHowtoArea
+              productAddress={product.productAddress}
+              addCart={addCart}
+            />
+            {/* <CommtentList productName={product.productName} /> */}
           </div>
         </div>
       </div>

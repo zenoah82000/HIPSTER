@@ -5,12 +5,18 @@ import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import '../../styles/Payment.scss'
 
+import OrderDetail from '../../components/order/OrderDetail'
+
+
+
 //引入自訂元件
 
 function PaymentDetail(props) {
   const [validated, setValidated] = useState(false)
   //取得購物車的資料,個人資料
   const { sum, buyerinfo, userSuccess } = props
+  
+  const [paymentDetailok,setPaymentDetailok] = useState(false)
 
   //需要輸入的欄位
   let email, phone, lastName, firstName
@@ -45,6 +51,7 @@ function PaymentDetail(props) {
   }
   return (
     <>
+    <OrderDetail sum={sum} paymentDetailok={paymentDetailok} setPaymentDetailok={setPaymentDetailok}/>
       <Form
         name="checkout"
         noValidate
@@ -139,7 +146,9 @@ function PaymentDetail(props) {
             <div className="col-3">
               <div className="mt-3">
                 <div className="priceBox ">
-                <input className="checkout-info-button" value="檢視訂單資料" type="button"/>
+                <input className="checkout-info-button" value="檢視訂單資料" type="button" onClick={()=>{
+                  setPaymentDetailok(true)
+                }}/>
                   <div className="totalPrice">
                     <div className="d-flex justify-content-between">
                       <p>總價</p>

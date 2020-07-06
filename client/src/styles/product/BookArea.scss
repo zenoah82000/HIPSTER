@@ -24,19 +24,73 @@
       }
     }
   }
+
+  .number_title {
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
   .book-btn {
     width: 100%;
     // height: 40px;
-    background-color: #b98f50;
-    border: unset ;
+    background-color: rgba(104, 142, 103, 0.8);
+    border-radius: 5px;
+    border: unset;
     font-size: 24px;
     text-align: center;
     color: white;
     padding: 5px 0;
 
-    &:hover {
-      background-color: #684b38;
+    &:hover,
+    &:focus {
+      border: unset;
+      background-color: rgb(104, 142, 103);
     }
-    
+  }
+  .calendarforbook {
+    width: 100%;
+    height: 390px;
+    margin-bottom: 15px;
+    box-shadow: 0 0 5px 0 rgba(128, 128, 128, 0.651);
+  }
+
+  .input-range {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding: 10px 10px;
+    box-shadow: 0 0 5px 0 rgba(128, 128, 128, 0.37);
+    .plus_btn,
+    .minus_btn {
+      display: inline-block;
+      width: 36px;
+      height: 36px;
+      font-size: 18px;
+      line-height: 36px;
+      text-align: center;
+      cursor: pointer;
+      border-radius: 5px;
+      color: white;
+      background: rgba(104, 142, 103, 0.8);
+      &.disable {
+        background: rgba(104, 142, 103, 0.486);
+        cursor: default;
+        pointer-events: none;
+      }
+
+      &:hover {
+        background: rgb(104, 142, 103);
+        color: white;
+      }
+    }
+    .numbersdisplay {
+      display: inline-block;
+      width: 50%;
+      height: 36px;
+      font-size: 26px;
+      line-height: 36px;
+      text-align: center;
+    }
   }
 }

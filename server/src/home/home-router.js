@@ -85,7 +85,7 @@ async function executeSQL(
   // 測試response，會自動解析為物件
   // console.log(typeof req.body)
   // console.log(req.body)
-  const Sql = "SELECT `productId`,`productImg`,`productName`,`productAddress`,`rating` FROM `product` INNER JOIN `comments` ON `productId`=`itemId` ORDER BY `rating` DESC LIMIT 3 "
+  const Sql = "SELECT `product`.`productId`,`product`.`productImg`,`product`.`productName`,`product`.`productAddress`,`comments`.`star` FROM `product` INNER JOIN `item_lists` ON `product`.`productId`=`item_lists`.`productId` INNER JOIN `comments` ON `comments`.`itemListId`=`item_lists`.`itemListId`  ORDER BY `star` DESC LIMIT 3"
   const [r1] = await db.query(Sql);
   res.json(r1)
 
@@ -97,7 +97,7 @@ async function executeSQL(
   // 測試response，會自動解析為物件
   // console.log(typeof req.body)
   // console.log(req.body)
-  const productId = 16;  //商品id
+  const productId = 3;  //商品id
   const Sql = "SELECT `product`.`productId`,`productName`,`productContent`,`productAddress`,`productImgs` FROM `product` LEFT JOIN `multiple_imgs` ON `product`.`productId` = `multiple_imgs`.`productId` WHERE `product`.`productId` =?  LIMIT 1"
   const [r1] = await db.query(Sql,productId);
   res.json(r1)
@@ -108,7 +108,7 @@ async function executeSQL(
   // 測試response，會自動解析為物件
   // console.log(typeof req.body)
   // console.log(req.body)
-  const productId = 16;  //商品id
+  const productId = 3;  //商品id
   const Sql = "SELECT `product`.`productId`,`productName`,`productContent`,`productAddress`,`productImgs` FROM `product` LEFT JOIN `multiple_imgs` ON `product`.`productId` = `multiple_imgs`.`productId` WHERE `product`.`productId` =?  "
   const [r1] = await db.query(Sql,productId);
   res.json(r1)
@@ -132,7 +132,7 @@ async function executeSQL(
   // 測試response，會自動解析為物件
   // console.log(typeof req.body)
   // console.log(req.body)
-  const Sql = "SELECT `articleId`,`article`.`memberId`,`member`.`memberName` ,`articleTitle`,`articleContent`,`img`,`article`.`created_at` ,`member`.`memberImg` FROM `article` LEFT JOIN `member` ON `article`.`memberId` = `member`.`memberId` ORDER BY `created_at` DESC LIMIT 6  "
+  const Sql = "SELECT `articleId`,`article`.`memberId`,`member`.`memberName` ,`articleTitle`,`articleContent`,`articleImg`,`article`.`created_at` ,`member`.`memberImg` FROM `article` LEFT JOIN `member` ON `article`.`memberId` = `member`.`memberId` ORDER BY `created_at` DESC LIMIT 6  "
 
   const [r1] = await db.query(Sql);
   res.json(r1)

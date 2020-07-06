@@ -6,11 +6,14 @@ import { withRouter, Link } from 'react-router-dom'
 import '../../styles/Payment.scss'
 
 import { FaCcMastercard, FaCcVisa } from 'react-icons/fa'
+//檢視訂單
+import OrderDetail from '../../components/order/OrderDetail'
 
 //引入自訂元件
 
 function PaymentType(props) {
   const { sum, buyerinfo } = props
+  const [paymentDetailok,setPaymentDetailok] = useState(false)
 
   //驗證表單
   const [validated, setValidated] = useState(false)
@@ -97,6 +100,7 @@ function PaymentType(props) {
   }
   return (
     <>
+    <OrderDetail sum={sum} paymentDetailok={paymentDetailok} setPaymentDetailok={setPaymentDetailok}/>
       <Form
         name="checkcard"
         noValidate
@@ -269,6 +273,7 @@ function PaymentType(props) {
           <div className="col-3">
             <div className="mt-3">
               <div className="priceBox ">
+              <input className="checkout-info-button" value="檢視訂單資料" type="button" onClick={()=>{setPaymentDetailok(true)}}/>
                 <div className="totalPrice">
                   <div className="d-flex justify-content-between ">
                     <p>總價</p>
