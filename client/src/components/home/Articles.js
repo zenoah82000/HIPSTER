@@ -5,12 +5,15 @@ import { connect } from 'react-redux'
 
 function Articles(props) {
   const { item } = props
-
+  const reg = /<(?:.|\s)*?>/g
+  item.articleContent = item.articleContent
+    .replace(reg, '')
+    .replace(/&nbsp;/gi, '')
   return (
     <>
       <Link to={`/blogDetail/${item.articleId}`} className="blog-group">
         <div className="blog-image">
-          <img src={`http://localhost:5000/images/article/${item.img}`} />
+          <img src={item.articleImg} />
         </div>
         <div className="blog-content">
           <p className="blog-title">{item.articleTitle}</p>
