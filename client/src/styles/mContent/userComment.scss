@@ -2,6 +2,7 @@
   background: #e6ded7;
   width: 100%;
   padding: 20px 10px 10px 10px;
+  display: flex;
 }
 
 .mynotReplyBox {
@@ -9,6 +10,7 @@
   background: #ffffff;
   width: 100%;
   padding: 20px 10px 10px 10px;
+  display: flex;
 }
 
 .comment-bar {
@@ -50,11 +52,10 @@
   width: 100%;
   height: 100%;
 }
-.commentImghover:hover{
+.commentImghover:hover {
   opacity: 0.5;
   cursor: pointer;
 }
-
 
 .commentImgPlus {
   width: 80px;
@@ -124,4 +125,16 @@
   padding: 5px;
   border-radius: 4px 4px 0 0;
   color: white;
+}
+
+@media only screen and (max-width: 375px) {
+  .myReplyBox {
+    display: block;
+  }
+  .mynotReplyBox {
+    display: block;
+  }
+  .buttonstyle {
+    width: 115px !important;
+  }
 }

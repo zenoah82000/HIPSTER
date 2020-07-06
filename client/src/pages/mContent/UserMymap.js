@@ -21,10 +21,11 @@ export const pointerIcon = new L.Icon({
 function UserMymap(props) {
   // console.log(props)
   const [myItemlist, setMyItemlist] = useState([])
-
+  const member = JSON.parse(localStorage.getItem('member'))
+  
   // 後端傳資料
   const checkoutAsync = async (order) => {
-    const request = new Request('http://localhost:5000/mymap/2', {
+    const request = new Request(`http://localhost:5000/mymap/${member.id}`, {
       method: 'get',
       // body: JSON.stringify(order),
       headers: new Headers({
@@ -100,12 +101,18 @@ function UserMymap(props) {
               ))}
             </VerticalTimeline>
           ) : (
-            <div className="empty text-center">
-              <img
-                className="emptyImg mb-3"
-                src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
-              />
-              <h6>尚未有文青足跡</h6>
+            <div className="empty ">
+              <div className="emptyimgbox mb-3">
+                <img
+                  className="emptyImg mb-3"
+                  src="http://localhost:5000/images/order/wishlist.webp"
+                />
+              </div>
+              <div className="emptytext text-center">
+                <p>
+                  文青足跡是空的！趕緊探索你下一次的旅程，並標記你心儀的活動體驗
+                </p>
+              </div>
             </div>
           )}
         </div>
