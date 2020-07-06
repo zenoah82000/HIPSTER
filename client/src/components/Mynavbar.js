@@ -361,7 +361,7 @@ function Mynavbar(props) {
       <p className="SignOk-title">
         登入失敗
         <br />
-        請檢查帳號＆密碼是否正確
+        請檢查帳號或密碼是否正確
       </p>
     </>
   )
