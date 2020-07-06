@@ -216,7 +216,7 @@ function ProductList(props) {
                     <div className="product-footer ">
                       <div className="product-star">
                         <ReactStars
-                          value={3}
+                          value={item.star}
                           count={5}
                           size={20}
                           half={true}
