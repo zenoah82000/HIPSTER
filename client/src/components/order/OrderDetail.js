@@ -40,6 +40,9 @@ function OrderDetail(props) {
                           價格:NT${item.productPrice.toString()
                       .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
                         </p>
+                        <p className="paymentdetail-productdate">
+                          日期:{item.date}
+                        </p>
                       </div>
                       <div className="paymentdetail-productsubtotal">NT${(item.productPrice*item.amount).toString()
                       .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}</div>

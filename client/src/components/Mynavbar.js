@@ -276,11 +276,11 @@ function Mynavbar(props) {
               className="signbtn "
               type="submit"
               onClick={() => {
-                if (signcheckbox == false) {
-                  alert('請確認已詳細閱讀，並同意接受會員權益與個資同意條款')
+                if (signAccount.value == '' || signPassword.value == '') {
+                  alert('帳號或密碼不可為空')
                 } else {
-                  if (signAccount.value == '' || signPassword.value == '') {
-                    alert('帳號或密碼不可為空')
+                  if (signcheckbox == false) {
+                    alert('請確認已詳細閱讀，並同意接受會員權益與個資同意條款')
                   } else {
                     //撈取資料
                     signData = {
@@ -361,7 +361,7 @@ function Mynavbar(props) {
       <p className="SignOk-title">
         登入失敗
         <br />
-        請檢查帳號＆密碼是否正確
+        請檢查帳號或密碼是否正確
       </p>
     </>
   )
@@ -568,21 +568,40 @@ function Mynavbar(props) {
                                   <div className="productimgbox mr-4">
                                     <Link to={`/product/${value.productId}`}>
                                       <img
+                                        onClck={() => {
+                                          props.history.push(
+                                            `/product/${value.productId}`
+                                          )
+                                        }}
                                         src={`http://localhost:5000/images/product/${value.productImg}`}
                                       />
                                     </Link>
                                   </div>
-                                  <div className="item-text">
+                                  <div className="mycart-textbox">
                                     <div className="item-name">
                                       <Link to={`/product/${value.productId}`}>
-                                        <p>{value.productName}</p>
+                                        <p title={value.productName}>
+                                          {value.productName}
+                                        </p>
                                       </Link>
                                     </div>
-                                    <div className="item-date">
-                                      <span>{value.date}</span>
+
+                                    <div className="item-price">
+                                      <span>
+                                        價格:NT$
+                                        {value.productPrice
+                                          .toString()
+                                          .replace(
+                                            /(\d)(?=(\d{3})+(?:\.\d+)?$)/g,
+                                            '$1,'
+                                          )}
+                                      </span>
                                     </div>
                                     <div className="item-price">
-                                      <span>NT${value.productPrice}</span>
+                                      <span>數量:{value.amount}</span>
+                                    </div>
+                                    <div className="item-date">
+                                      <span>日期:{value.date}</span>
                                       <button
                                         onClick={() => {
                                           deleteCart(value.productId)
@@ -602,6 +621,7 @@ function Mynavbar(props) {
                         )}
                       </div>
                       <div className="card-footer">
+                        <div></div>
                         <Link
                           className="link text-center"
                           to="/shoppingcar"

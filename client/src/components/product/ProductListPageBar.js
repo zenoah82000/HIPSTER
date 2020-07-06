@@ -3,9 +3,9 @@ import { Link, withRouter } from 'react-router-dom'
 import '../../styles/product/ProductListPageBar.scss'
 
 function ProductListPageBar(props) {
-  const { productnumbers, currentPage, perPage } = props
+  const { productnumbers, currentPage, perPage, moveto } = props
   const searchParams = new URLSearchParams(props.location.search)
-
+  const Top = moveto ? moveto : 0
   const perpage = perPage
   const totalpages =
     productnumbers === 0 ? 1 : Math.ceil(productnumbers / perpage)
@@ -30,7 +30,7 @@ function ProductListPageBar(props) {
           // to={`?page=${i}`}
           onClick={() => {
             searchParams.set('page', currentPage - 1)
-            window.scrollTo({ top: 0, behavior: 'smooth' })
+            window.scrollTo({ top: Top, behavior: 'smooth' })
             props.history.push(`?${searchParams.toString()}`)
             startPageset(currentPage - 1)
           }}
@@ -50,7 +50,7 @@ function ProductListPageBar(props) {
                 searchParams.get('page')
                   ? searchParams.set('page', i)
                   : searchParams.append('page', i)
-                window.scrollTo({ top: 0, behavior: 'smooth' })
+                window.scrollTo({ top: Top, behavior: 'smooth' })
                 props.history.push(`?${searchParams.toString()}`)
                 startPageset(i)
               }}
@@ -69,7 +69,7 @@ function ProductListPageBar(props) {
               searchParams.get('page')
                 ? searchParams.set('page', 1)
                 : searchParams.append('page', 1)
-              window.scrollTo({ top: 0, behavior: 'smooth' })
+              window.scrollTo({ top: Top, behavior: 'smooth' })
               props.history.push(`?${searchParams.toString()}`)
               startPageset(1)
             }}
@@ -102,7 +102,7 @@ function ProductListPageBar(props) {
                   searchParams.get('page')
                     ? searchParams.set('page', i)
                     : searchParams.append('page', i)
-                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                  window.scrollTo({ top: Top, behavior: 'smooth' })
                   props.history.push(`?${searchParams.toString()}`)
                   startPageset(i)
                 }}
@@ -128,7 +128,7 @@ function ProductListPageBar(props) {
               searchParams.get('page')
                 ? searchParams.set('page', totalpages)
                 : searchParams.append('page', totalpages)
-              window.scrollTo({ top: 0, behavior: 'smooth' })
+              window.scrollTo({ top: Top, behavior: 'smooth' })
               props.history.push(`?${searchParams.toString()}`)
               startPageset(totalpages)
             }}
@@ -146,7 +146,7 @@ function ProductListPageBar(props) {
           // to={`?page=${i}`}
           onClick={() => {
             searchParams.set('page', currentPage + 1)
-            window.scrollTo({ top: 0, behavior: 'smooth' })
+            window.scrollTo({ top: Top, behavior: 'smooth' })
             props.history.push(`?${searchParams.toString()}`)
             startPageset(currentPage + 1)
           }}

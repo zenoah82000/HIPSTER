@@ -29,9 +29,19 @@ const productMultiImg = (state = [], action) => {
   }
 }
 
+const productComment = (state = [], action) => {
+  switch (action.type) {
+    case 'GET_ProductComment':
+      return action.payload
+    default:
+      return state
+  }
+}
+
 const productReducer = combineReducers({
   productCatogryData,
   productListData,
   productMultiImg,
+  productComment,
 })
 export { productReducer }

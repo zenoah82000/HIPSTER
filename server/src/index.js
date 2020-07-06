@@ -75,6 +75,8 @@ app.use(require(__dirname + "/productInfo"));
 
 app.use(require(__dirname + "/productImgs"));
 
+app.use(require(__dirname + "/productComments"));
+
 app.use(require(__dirname + "/map/map"));
 
 app.use(require(__dirname + "/member/users-router"));
