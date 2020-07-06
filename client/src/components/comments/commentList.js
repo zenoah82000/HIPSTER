@@ -12,9 +12,29 @@ import ProductQanda from '../qanda/ProductQanda'
 class commtentList extends Component {
   constructor(props) {
     super(props)
-    this.state = { tabIndex: 0 }
+    this.state = {
+      tabIndex: 0,
+      data: [],
+    }
   }
   // state = { data: this.props.productName }
+
+  //資料庫傳資料
+  getOrderlistAsync = async () => {
+    const request = new Request(
+      `http://localhost:5000/productComment/${this.props.productId}`,
+      {
+        method: 'get',
+        headers: new Headers({
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        }),
+      }
+    )
+    const response = await fetch(request)
+    const data = await response.json()
+    this.setState({ data: data })
+  }
 
   render() {
     console.log('comment-list-this.state', this.props.productName)
@@ -43,24 +63,28 @@ class commtentList extends Component {
                 <ul className=" list-unstyled">
                   <li>用戶名</li>
                   <li>
-                    <RatingStar />
                     星等
+                    {this.state.data.star}
                   </li>
                   <li>
-                    <p className="">
-                      這是評價 這是評價 這是評價 這是評價 這是評價 這是評價
-                      這是評價 這是評價 這是評價 這 這是評價 這是評價 這是評價
-                      這是評價 這是評價 這是評價 這是評價 這是評價 這是評價
-                      這是評價 這是評價 這是評價 這是評價 這是評價 這是評價
-                      這是評價 這是評價 這是評價是評價 這是評價 這是評價
-                      這是評價 這是評價 這是評價 這是評價 這是評價 這是評價
-                    </p>
+                    <p className="">{this.state.data.content}</p>
                   </li>
 
                   <li className="d-flex">
-                    <CommentImg />
-                    <CommentImg />
-                    <CommentImg />
+                    {/* <SimpleReactLightbox>
+                      <SRLWrapper>
+                        <div className="commentImg">
+                          <img
+                            className="commentImgPhoto commentImghover"
+                            src={
+                              'http://localhost:5000/images/comments/' +
+                              this.state.data.commentImg
+                            }
+                            alt={this.state.data.content}
+                          />
+                        </div>
+                      </SRLWrapper>
+                    </SimpleReactLightbox> */}
                   </li>
                 </ul>
               </div>

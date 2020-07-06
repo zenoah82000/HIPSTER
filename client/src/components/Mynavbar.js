@@ -516,11 +516,6 @@ function Mynavbar(props) {
               </Link>
             </li>
             <li>
-              <Link className="hvr-float hvr-underline-from-center" to="/blog">
-                文章專欄
-              </Link>
-            </li>
-            <li>
               <a
                 className="hvr-float hvr-underline-from-center"
                 // to="/productlist"
@@ -528,6 +523,11 @@ function Mynavbar(props) {
               >
                 活動列表
               </a>
+            </li>
+            <li>
+              <Link className="hvr-float hvr-underline-from-center" to="/blog">
+                文章專欄
+              </Link>
             </li>
             <li>
               <Link

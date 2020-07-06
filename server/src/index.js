@@ -82,6 +82,8 @@ app.use(require(__dirname + "/home/home-router"));
 
 app.use(require(__dirname + "/user-map"));
 
+app.use(require(__dirname + "/productComment"));
+
 //設定公開資料夾
 app.use(express.static("public"));
 
