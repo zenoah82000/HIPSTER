@@ -46,15 +46,15 @@ function CountdownProduct(props) {
       </>
     )
   }
-  const addWish = (e, productId) => {
+  const addWish = (e) => {
     e.preventDefault()
     if (member.id) {
       if (
         wishlist.findIndex((value) => value.productId == item.productId) != -1
       ) {
-        deletewishlist(productId)
+        deletewishlist(item)
       } else {
-        addwishlist(productId)
+        addwishlist(item)
       }
     } else {
       alert('請先登入')
@@ -84,7 +84,7 @@ function CountdownProduct(props) {
                   : 'activity-follow'
               }
               onClick={(e) => {
-                addWish(e, item)
+                addWish(e)
               }}
             >
               <FaHeart />

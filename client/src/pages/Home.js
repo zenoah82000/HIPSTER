@@ -375,7 +375,8 @@ function Home(props) {
   const ProductFeatureddisplay = ProductFeatured.map((item, index) => {
     return (
       <>
-        <FeaturedProduct item={item} />
+        <FeaturedProduct item={item} addwishlist={props.addwishlist}
+          deletewishlist={props.deletewishlist}/>
       </>
     )
   })
