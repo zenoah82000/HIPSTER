@@ -39,12 +39,40 @@ function ProductList(props) {
         })
     : !!searchParams.get('loc')
 
-  console.log(loc, cat)
+  const stdate =
+    searchParams.has('startDate') && searchParams.has('endDate')
+      ? Date.parse(new Date(searchParams.get('startDate')))
+      : Date.parse(new Date())
+  const eddate =
+    searchParams.has('startDate') && searchParams.has('endDate')
+      ? Date.parse(new Date(searchParams.get('endDate')))
+      : Date.parse(new Date())
 
-  useEffect(() => {
-    getProductListAsync()
-    setDate(new Date())
-  }, [])
+  const minPrice = searchParams.has('minPrice')
+    ? +searchParams.get('minPrice')
+    : false
+  const maxPrice = searchParams.has('maxPrice')
+    ? +searchParams.get('maxPrice')
+    : false
+
+  const pricerange =
+    searchParams.has('minPrice') && searchParams.has('maxPrice')
+      ? {
+          min: +searchParams.get('minPrice'),
+          max: +searchParams.get('maxPrice'),
+        }
+      : { min: 0, max: 10000 }
+
+  const sort = searchParams.has('sort') ? searchParams.get('sort') : false
+
+  const keyword = searchParams.has('keyword')
+    ? searchParams.get('keyword')
+    : false
+  console.log(!!keyword)
+
+  const [price, setPrice] = useState(pricerange)
+
+  console.log(loc, cat, stdate, eddate, minPrice, maxPrice)
 
   let length
   if (!!loc && !!cat) {
@@ -60,15 +88,97 @@ function ProductList(props) {
 
   const count = productListData.filter((item, index) => {
     if (length === 0) {
-      return item
+      if (+Date.parse(item.productEndingDate) >= +eddate) {
+        if (minPrice && maxPrice) {
+          if (
+            +item.productPrice >= minPrice &&
+            +item.productPrice <= maxPrice
+          ) {
+            if (!!keyword) {
+              if (
+                new String(item.productName).toString().includes(keyword) ||
+                new String(item.productAddress).toString().includes(keyword) ||
+                new String(item.locationName).toString().includes(keyword)
+              ) {
+                return item
+              }
+            } else {
+              return item
+            }
+          }
+        } else {
+          if (!!keyword) {
+            if (
+              new String(item.productName).toString().includes(keyword) ||
+              new String(item.productAddress).toString().includes(keyword) ||
+              new String(item.locationName).toString().includes(keyword)
+            ) {
+              return item
+            }
+          } else {
+            return item
+          }
+        }
+      }
     } else {
       for (let i = 0; i < length; i++) {
         if (item.categoryId === +cat[i] || item.locationParentId === +loc[i]) {
-          return item
+          if (+Date.parse(item.productEndingDate) >= +eddate) {
+            if (minPrice && maxPrice) {
+              if (
+                +item.productPrice >= minPrice &&
+                +item.productPrice <= maxPrice
+              ) {
+                if (!!keyword) {
+                  if (
+                    new String(item.productName).toString().includes(keyword) ||
+                    new String(item.productAddress)
+                      .toString()
+                      .includes(keyword) ||
+                    new String(item.locationName).toString().includes(keyword)
+                  ) {
+                    return item
+                  }
+                } else {
+                  return item
+                }
+              }
+            } else {
+              if (!!keyword) {
+                if (
+                  new String(item.productName).toString().includes(keyword) ||
+                  new String(item.productAddress)
+                    .toString()
+                    .includes(keyword) ||
+                  new String(item.locationName).toString().includes(keyword)
+                ) {
+                  return item
+                }
+              } else {
+                return item
+              }
+            }
+          }
         }
       }
     }
   })
+
+  if (sort === 'PRICE_ASC') {
+    count.sort(function (a, b) {
+      return a.productPrice - b.productPrice
+    })
+  } else if (sort === 'PRICE_DESC') {
+    count.sort(function (a, b) {
+      return b.productPrice - a.productPrice
+    })
+  } else {
+  }
+
+  useEffect(() => {
+    getProductListAsync()
+    setDate(new Date())
+  }, [])
 
   const display = count.map((item, index) => {
     if (
@@ -97,10 +207,11 @@ function ProductList(props) {
                     </div>
                     <div className="product-time">
                       <i className="far fa-calendar"></i>
-                      最早可使用日期：
-                      {date >= new Date(item.productEndingDate)
+                      商品結束日期：
+                      {/* {date >= new Date(item.productEndingDate)
                         ? new Date(item.productEndingDate).toLocaleDateString()
-                        : '今日'}
+                        : '今日'} */}
+                      {new Date(item.productEndingDate).toLocaleDateString()}
                     </div>
                     <div className="product-footer ">
                       <div className="product-star">
@@ -148,20 +259,31 @@ function ProductList(props) {
     <>
       <div className="container product-content">
         <div className="row">
-          <AsideBar cat={cat} loc={loc} />
+          <AsideBar
+            cat={cat}
+            loc={loc}
+            price={price}
+            setPrice={setPrice}
+            pricerange={pricerange}
+          />
           <ProductListMainContent>
-            {cat || loc ? (
+            {cat ||
+            loc ||
+            (searchParams.has('startDate') && searchParams.has('endDate')) ||
+            (searchParams.has('minPrice') && searchParams.has('maxPrice')) ||
+            !!keyword ? (
               <ProductSearchResult productnumbers={count.length} />
             ) : (
               ''
             )}
-            <ProductSearchResultSort />
+            <ProductSearchResultSort searchParams={searchParams} />
             {/* -------商品列表區域------ */}
             {display}
             {/* -------商品列表區域------ */}
             <ProductListPageBar
               productnumbers={count.length}
               currentPage={currentPage}
+              perPage={perPage}
             />
           </ProductListMainContent>
         </div>

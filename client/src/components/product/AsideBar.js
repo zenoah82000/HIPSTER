@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { DateRangePicker } from 'rsuite'
 import Calendar from 'react-calendar'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
@@ -29,14 +28,60 @@ function AsideBar(props) {
   //   const data = await response.json()
   //   console.log(data)
   // }
-  let searchParams = new URLSearchParams(props.location.search)
 
-  const { loc, cat, productCatogryData, getProductCategoryAsync } = props
+  const searchParams = new URLSearchParams(props.location.search)
+
+  const {
+    loc,
+    cat,
+    productCatogryData,
+    getProductCategoryAsync,
+    pricerange,
+    price,
+    setPrice,
+  } = props
+
+  //設定開始日期
+  const stdate =
+    searchParams.has('startDate') && searchParams.has('endDate')
+      ? new Date(searchParams.get('startDate')).toLocaleDateString()
+      : new Date().toLocaleDateString()
+
+  //設定結束日期
+  const eddate =
+    searchParams.has('startDate') && searchParams.has('endDate')
+      ? new Date(searchParams.get('endDate')).toLocaleDateString()
+      : new Date().toLocaleDateString()
+
+  const [startDate, setStartDate] = useState(stdate)
+  const [endDate, setEndDate] = useState(eddate)
+  // console.log(stdate, eddate)
+  // console.log(startDate, endDate)
+
+  //設定開始日期與結束日期
+  const d =
+    searchParams.has('startDate') && searchParams.has('endDate')
+      ? [
+          new Date(searchParams.get('startDate')),
+          new Date(searchParams.get('endDate')),
+        ]
+      : [new Date(startDate), new Date(endDate)]
+  // console.log(d)
+  //設定價格區間
+  // const pricerange =
+  //   searchParams.has('minPrice') && searchParams.has('maxPrice')
+  //     ? {
+  //         min: +searchParams.get('minPrice'),
+  //         max: +searchParams.get('maxPrice'),
+  //       }
+  //     : { min: 32, max: 10000 }
 
   const [categorySection, setCategorySection] = useState([])
-  const [value, setValue] = useState({ min: 32, max: 10000 })
+  // const [price, setPrice] = useState(pricerange)
   const [checked, setChecked] = useState(false)
   const [checked2, setChecked2] = useState(false)
+
+  const [dateValue, setDateValue] = useState(d)
 
   const handleChange = () => {
     setChecked((prev) => !prev)
@@ -176,9 +221,48 @@ function AsideBar(props) {
     searchParams.set('cat', cat.join())
   }
 
+  //設定篩選日期
+  function setStartDateEndDate(startdate, enddate) {
+    if (searchParams.has('startDate') && searchParams.has('endDate')) {
+      searchParams.set('startDate', startdate)
+      searchParams.set('endDate', enddate)
+    } else {
+      searchParams.delete('startDate')
+      searchParams.delete('endDate')
+      searchParams.append('startDate', startdate)
+      searchParams.append('endDate', enddate)
+    }
+  }
+
+  //設定篩選價格
+  function setMinPriceMaxPrice(minprice, maxprice) {
+    if (searchParams.has('minPrice') && searchParams.has('maxPrice')) {
+      searchParams.set('minPrice', minprice)
+      searchParams.set('maxPrice', maxprice)
+    } else {
+      searchParams.delete('minPrice')
+      searchParams.delete('maxPrice')
+      searchParams.append('minPrice', minprice)
+      searchParams.append('maxPrice', maxprice)
+    }
+  }
+
   useEffect(() => {
     getProductCategoryAsync()
+
+    console.log(pricerange)
   }, [])
+
+  useEffect(() => {
+    setStartDate(stdate)
+    setEndDate(eddate)
+    console.log(pricerange)
+  }, [stdate])
+
+  useEffect(() => {
+    setDateValue([new Date(startDate), new Date(endDate)])
+    console.log(pricerange)
+  }, [endDate])
 
   //生成類別
   const display = categorylist.map((item, index) => {
@@ -458,24 +542,76 @@ function AsideBar(props) {
         </div>
         <div>
           <div className="aside-wrapper-filter-box">
-            <h3
+            <div
               onClick={() => {
                 setChecked2(!checked2)
               }}
-              style={{ cursor: 'pointer' }}
+              style={{ cursor: 'pointer', display: 'flex' }}
             >
-              篩選日期
-            </h3>
+              <span className="calendar_icon">
+                <FontAwesomeIcon icon={fas.faCalendarAlt} />
+              </span>
+              <div
+                className="calendar_title"
+                style={
+                  searchParams.has('startDate') && searchParams.has('endDate')
+                    ? {}
+                    : {
+                        fontSize: '18px',
+                        lineHeight: '27.2px',
+                      }
+                }
+              >
+                {searchParams.has('startDate') && searchParams.has('endDate')
+                  ? `${searchParams.get('startDate')}~${searchParams.get(
+                      'endDate'
+                    )}`
+                  : '篩選日期'}
+              </div>
+            </div>
+
             <div className={checked2 ? 'calender active' : 'calender'}>
               <Calendar
                 selectRange={true}
-                returnValue="range"
                 showNeighboringMonth={false}
                 showDoubleView={true}
+                value={dateValue}
                 onChange={(value) => {
-                  console.log(value)
+                  console.log(value[0].toLocaleDateString())
+                  setStartDate(value[0].toLocaleDateString())
+                  console.log(value[1].toLocaleDateString())
+                  setEndDate(value[1].toLocaleDateString())
+                  setDateValue([new Date(startDate), new Date(endDate)])
+                  setStartDateEndDate(startDate, endDate)
                 }}
               />
+              <div className="btn_area">
+                <div
+                  className="cancle_btn"
+                  onClick={() => {
+                    searchParams.delete('startDate')
+                    searchParams.delete('endDate')
+                    searchParams.set('page', 1)
+                    props.history.push(`?${searchParams.toString()}`)
+                    setChecked2(!checked2)
+                    setStartDate(stdate)
+                    setEndDate(eddate)
+                  }}
+                >
+                  清除
+                </div>
+                <div
+                  className="apply_btn"
+                  onClick={() => {
+                    setStartDateEndDate(startDate, endDate)
+                    setChecked2(!checked2)
+                    searchParams.set('page', 1)
+                    props.history.push(`?${searchParams.toString()}`)
+                  }}
+                >
+                  套用
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -483,16 +619,20 @@ function AsideBar(props) {
         <div className="aside-wrapper-filter-box" style={{ cursor: 'default' }}>
           <h3>價格 (TWD) </h3>
           <div className="price-area">
-            {value.min} ~ {value.max}
+            {{ ...price }.min} ~ {{ ...price }.max}
           </div>
           <div className="range">
             <InputRange
               maxValue={10000}
-              minValue={32}
-              value={value}
-              onChange={(value) => setValue(value)}
+              minValue={0}
+              value={price}
+              onChange={(value) => {
+                setPrice(value)
+              }}
               onChangeComplete={(value) => {
-                console.log(value)
+                setMinPriceMaxPrice(value.min, value.max)
+                searchParams.set('page', 1)
+                props.history.push(`?${searchParams.toString()}`)
               }}
             />
           </div>

@@ -5,13 +5,13 @@ import { GoX } from 'react-icons/go'
 import Amount from '../../components/order/Amount'
 
 function MyCart(props) {
-  const { deleteCart, setMycart, mycart } = props
+  const { deleteCart, mycart } = props
   return (
     <>
       {mycart.map((value, index) => {
         return (
           <>
-            <div className="cartproductbox">
+            <div key={value.productId} className="cartproductbox">
               <div className="productname">
                 <GoX
                   className="mr-3 delete"
@@ -19,14 +19,13 @@ function MyCart(props) {
                     deleteCart(value.productId)
                   }}
                 />
-                <Link to="/">
+                <Link to={`/product/${value.productId}`}>
                   <img
                     className="productImg"
                     src={`http://localhost:5000/images/product/${value.productImg}`}
                   />
                 </Link>
-                <Link to="/">
-                  {' '}
+                <Link to={`/product/${value.productId}`}>
                   <p>{value.productName}</p>
                 </Link>
               </div>

@@ -60,9 +60,10 @@ nav {
 
         .car-img {
           cursor: pointer;
-          color: rgb(211, 205, 205);
+          // color: rgb(211, 205, 205);
+          color: rgb(255, 255, 255);
           &:hover {
-            color: white;
+            // color: white;
           }
         }
 
@@ -266,21 +267,28 @@ nav {
   text-decoration: none;
 }
 .shop-group a {
-  color: rgb(211, 205, 205);
+  // color: rgb(211, 205, 205);
+  color: rgb(255, 255, 255);
+  transition: 0.3s;
 }
 
 .menu a:hover,
 .sign a:hover {
-  position: relative;
-  top: -5px;
-  border-bottom: 1.5px solid #fff;
-  padding-bottom: 5px;
-  transition: 0.3s;
+  // position: relative;
+  // top: -5px;
+  // border-bottom: 1.5px solid #fff;
+  // padding-bottom: 5px;
+  // transition: 0.3s;
 }
 .shop-group a:hover {
-  color: rgb(255, 255, 255);
+  // color: rgb(255, 255, 255);
+  // color: #fc77dd;
 }
-
+.hvr-underline-from-center {
+  &::before {
+    background: #fff;
+  }
+}
 .memberbtn {
   padding: 5px 10px !important;
   border-radius: 3px;

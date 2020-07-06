@@ -570,7 +570,7 @@ class mapList extends React.Component {
                     <span className="mr-2">
                       <RiMoneyCnyCircleLine />
                     </span>
-                    價格：NT${' '}
+                    價格：NT$
                     {item.productPrice
                       .toString()
                       .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
@@ -726,7 +726,7 @@ class mapList extends React.Component {
                     </Dropdown.Menu>
                   </Dropdown>
                 </div>
-                <div className="d-flex ">
+                <div className="d-flex cafeShow ">
                   <p style={{ fontSize: '16px', fontWeight: 'bold' }}>
                     <i className="mr-2 fas fa-coffee"></i>顯示咖啡廳{' '}
                   </p>

@@ -3,10 +3,10 @@ import { Link, withRouter } from 'react-router-dom'
 import '../../styles/product/ProductListPageBar.scss'
 
 function ProductListPageBar(props) {
-  const { productnumbers, currentPage } = props
+  const { productnumbers, currentPage, perPage } = props
   const searchParams = new URLSearchParams(props.location.search)
 
-  const perpage = 5
+  const perpage = perPage
   const totalpages =
     productnumbers === 0 ? 1 : Math.ceil(productnumbers / perpage)
   const groupCount = 5
@@ -92,7 +92,7 @@ function ProductListPageBar(props) {
         )
       }
       for (let i = startPage; i < pageLength; i++) {
-        console.log(startPage)
+        // console.log(startPage)
         if (i <= totalpages - 1 && i > 1) {
           pages.push(
             <li key={i}>

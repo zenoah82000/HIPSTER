@@ -120,4 +120,58 @@ router.post('/blogDelete', upload.none(), async (req, res)=>{
   res.json(output);
 })
 
+//取得文章資料
+const getBlogComment = async (req) => {
+  const output = { 
+    success: false,         
+    rows: [],
+  }
+  
+  const sql = "SELECT `article_comment`.`commentId`, `article_comment`.`commentContent`,`article_comment`.`commentParentId`,`article_comment`.`articleId`,`article_comment`.`created_at`,`member`.`memberId`,`member`.`memberName`,`member`.`memberImg` FROM `article_comment` LEFT JOIN `member` ON `article_comment`.`memberId` = `member`.`memberId` ORDER BY commentId ASC"
+  const [r] = await db.query(sql)
+  if (r) {
+    output.success = true;
+    output.rows = r;
+  }  
+  for (let i of r) {
+    //設定時間格式
+    i.created_at = moment(i.created_at).format('MM/DD');
+    // i.updated_at = moment(i.updated_at).format('MM月DD日');
+  }
+  return output
+}
+
+//取得評論資料
+//http://localhost:5000/blogComment
+router.get('/blogComment', async (req, res) => {
+  const output = await getBlogComment(req)  
+  res.json(output)
+})
+
+//新增評論
+//http://localhost:5000/blogAddComment
+router.post('/blogAddComment', upload.none(), async (req, res)=>{
+  console.log('req.body',req.body)
+  const output ={
+    success: false,
+    // error:'',
+    // status: 0,
+    body: req.body,
+  }
+  const sql = "INSERT INTO `article_comment`(`articleId`,`memberId`,`commentContent`,`commentParentId`) VALUES(?,?,?,?)"
+
+  const [r] = await db.query(sql , [
+    req.body.articleId,
+    req.body.memberId,
+    req.body.commentContent,
+    req.body.commentParentId,    
+    ])
+  if (r) {
+      output.result = r;
+      output.success = true;
+      console.log('result:', r);
+    }
+  res.json(output);
+})
+
 module.exports = router

@@ -9,6 +9,7 @@ import Fade from 'react-reveal/Fade'
 import SimpleReactLightbox from 'simple-react-lightbox'
 import { SRLWrapper } from 'simple-react-lightbox'
 
+import { AiFillStar } from 'react-icons/ai'
 import { BsPlusCircle } from 'react-icons/bs'
 import { IconContext } from 'react-icons'
 
@@ -88,7 +89,9 @@ function UserComment(props) {
   }
 
   useEffect(() => {
+    console.log('mount')
     commentAsync()
+    return () => console.log('unmount')
   }, [])
 
   //提交評論
@@ -96,6 +99,15 @@ function UserComment(props) {
     const newList = [...noCommentlist]
     newList.splice(index, 1)
     setNoCommentList(newList)
+  }
+
+  //
+  const stars = (v) => {
+    const star = []
+    for (let i = 0; i < 5; i++) {
+      star.push(<AiFillStar className={v > i ? 'star1' : 'star2'} />)
+    }
+    return star
   }
 
   //顯示已評論
@@ -144,9 +156,7 @@ function UserComment(props) {
                         <li className="d-flex">
                           <p style={{ fontWeight: 'bold' }}>評價星等:</p>
                           {item.star ? (
-                            <p>
-                              <RatingStarValue ratingValue={item.star} />
-                            </p>
+                            <p>{stars(item.star)}</p>
                           ) : (
                             <p>未提交星等</p>
                           )}
@@ -260,6 +270,7 @@ function UserComment(props) {
                   commentData={item}
                   index={index}
                   handleDelete={handleDelete}
+                  commentAsync={commentAsync}
                 />
               ))
             ) : (
@@ -272,7 +283,6 @@ function UserComment(props) {
               </div>
             )}
           </div>
-          <ProductListPageBar productnumbers={5} currentpage={1} />
         </>
       )}
     </>

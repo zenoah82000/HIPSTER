@@ -11,6 +11,9 @@
   .card {
     width: 80%;
     margin: 10px auto;
+    background: #ffffff;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 3px 5px 0px;
     .blog-author-avatar {
       width: 70%;
       border: none;
@@ -29,11 +32,31 @@
   }
 }
 .related-posts {
-  padding: 5px;
-  li {
-    padding: 10px;
+  h3 {
+    font-weight: 900;
+  }
+  ul {
+    padding: 5px;
+    li {
+      padding: 10px;
+      img {
+        border-radius: 8px;
+        width: 260px;
+        height: 180px;
+      }
+      h5 {
+        font-weight: 900;
+      }
+    }
+  }
+}
+
+.blog-comment {
+  .blog-comment-item {
     img {
-      border-radius: 8px;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
     }
   }
 }

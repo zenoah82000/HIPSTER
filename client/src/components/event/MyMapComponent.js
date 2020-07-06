@@ -58,7 +58,7 @@ export default class ViewportExample extends Component {
     })
     const response = await fetch(request)
     const data = await response.json()
-    // console.log(data)
+    console.log('mapdata', data)
     // console.log(data.productlist)
     // console.log(data.cafelist)
     this.setState({ cafedata: data.cafelist, productdata: data.productlist })
@@ -84,15 +84,15 @@ export default class ViewportExample extends Component {
   stars = (v) => {
     const star = []
     for (let i = 0; i < 5; i++) {
-      star.push(<AiFillStar className={v > i ? 'star1' : 'star1'} />)
+      star.push(<AiFillStar className={v > i ? 'star1' : 'star2'} />)
     }
     return star
   }
   render() {
     let { viewport, clicked, cafeActive, clickData } = this.props
     console.log(this.props)
-    console.log(clickData.mapId)
-    console.log(clickData.lat, clickData.log)
+    // console.log(clickData.mapId)
+    // console.log(clickData.lat, clickData.log)
     return (
       <div>
         <Map viewport={viewport}>

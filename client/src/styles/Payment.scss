@@ -3,25 +3,44 @@
   padding: 0 5px;
 }
 
+.checkout-info-button {
+  background-color: transparent;
+  outline: none;
+  font-weight: bold;
+  border: none;
+  font-size: 20px;
+  &:hover {
+    opacity: 0.8;
+  }
+  &:focus {
+    outline: none;
+  }
+}
 .priceBox {
   width: 100%;
   height: 200px;
   background: white;
+  text-align: center;
+  padding: 10px 10px;
 }
 
 .totalPrice {
   margin: 0 10px 0 10px;
-  padding: 20px;
+  padding: 10px 20px;
   font-size: 18px;
   border-bottom: 2px solid rgb(211, 211, 211);
 }
 
-.payPrice {
+.payPricebox {
   margin: 0 10px 0 10px;
   padding: 20px;
-  font-size: 18px;
+  font-size: 25px;
   color: #688e67;
   font-weight: bold;
+  .payPrice {
+    font-size: 16px;
+    color: #ff3400;
+  }
 }
 .paytitle-border {
   padding-bottom: 12px;
@@ -52,6 +71,12 @@
   width: 80%;
   height: 50px;
   background: #688e67;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  &:hover {
+    background-color: #5d704e;
+  }
 }
 
 .paymentButton {
@@ -62,7 +87,7 @@
   background: #688e67;
   border: none;
   &:hover {
-    opacity: 0.8;
+    background-color: #5d704e;
   }
 }
 .prograssBar1 {

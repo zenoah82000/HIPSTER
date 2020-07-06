@@ -281,13 +281,13 @@ function PaymentType(props) {
                           .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}</p>
                   </div>
                 </div>
-                <div className="payPrice">
-                  <div className="d-flex justify-content-between">
-                    <p>結帳金額</p>
-                    <p>NT${buyerinfo.sumdiscount
+                <div className="payPricebox d-flex justify-content-between">
+                 
+                    <p >結帳金額</p>
+                    <p className="payPrice">NT${buyerinfo.sumdiscount
                           .toString()
                           .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}</p>
-                  </div>
+                  
                 </div>
               </div>
               <div className="mt-3 buttonBox">

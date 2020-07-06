@@ -42,6 +42,8 @@ function Mynavbar(props) {
   //忘記密碼視窗
   const [showforgetPwd, setshowforgetPwd] = useState(false)
 
+  let signcheckbox = false
+
   //手機版-漢堡選單狀態 0=關閉
   const [burgerstate, setburgerstate] = useState(false)
   //手機版-會員中心選單狀態 0=關閉
@@ -243,7 +245,13 @@ function Mynavbar(props) {
           {SignLogin ? (
             <Form.Group controlId="formBasicCheckbox" className="logincheck">
               <Form.Check type="checkbox">
-                <Form.Check.Input type="checkbox" />
+                <Form.Check.Input
+                  type="checkbox"
+                  onChange={() => {
+                    signcheckbox = !signcheckbox
+                    console.log(signcheckbox)
+                  }}
+                />
                 <Form.Check.Label>
                   我已詳細閱讀，並同意接受<span>會員權益</span>與
                   <span>個資同意條款</span>
@@ -268,20 +276,24 @@ function Mynavbar(props) {
               className="signbtn "
               type="submit"
               onClick={() => {
-                if (signAccount.value == '' || signPassword.value == '') {
-                  alert('帳號或密碼不可為空')
+                if (signcheckbox == false) {
+                  alert('請確認已詳細閱讀，並同意接受會員權益與個資同意條款')
                 } else {
-                  //撈取資料
-                  signData = {
-                    memberMail: signAccount.value,
-                    memberPwd: signPassword.value,
+                  if (signAccount.value == '' || signPassword.value == '') {
+                    alert('帳號或密碼不可為空')
+                  } else {
+                    //撈取資料
+                    signData = {
+                      memberMail: signAccount.value,
+                      memberPwd: signPassword.value,
+                    }
+                    // console.log(signData)
+                    addNewMember(signData) //寫入資料庫
+                    setShowlogin(false) //關閉註冊登入視窗
+                    setTimeout(() => {
+                      setShowSignOk(true) //跳出註冊完成視窗
+                    }, 300)
                   }
-                  // console.log(signData)
-                  addNewMember(signData) //寫入資料庫
-                  setShowlogin(false) //關閉註冊登入視窗
-                  setTimeout(() => {
-                    setShowSignOk(true) //跳出註冊完成視窗
-                  }, 300)
                 }
               }}
             >
@@ -494,19 +506,35 @@ function Mynavbar(props) {
 
           <ul className="menu" style={burgerstate ? { width: '100%' } : {}}>
             <li>
-              <Link to="/about">品牌介紹</Link>
+              <Link className="hvr-float hvr-underline-from-center" to="/about">
+                品牌介紹
+              </Link>
             </li>
             <li>
-              <Link to="/map">地圖探索</Link>
+              <Link className="hvr-float hvr-underline-from-center" to="/map">
+                地圖探索
+              </Link>
             </li>
             <li>
-              <Link to="/blog">文章專欄</Link>
+              <Link className="hvr-float hvr-underline-from-center" to="/blog">
+                文章專欄
+              </Link>
             </li>
             <li>
-              <Link to="/productlist">活動列表</Link>
+              <Link
+                className="hvr-float hvr-underline-from-center"
+                to="/productlist"
+              >
+                活動列表
+              </Link>
             </li>
             <li>
-              <Link to="/contact">聯絡我們</Link>
+              <Link
+                className="hvr-float hvr-underline-from-center"
+                to="/contact"
+              >
+                聯絡我們
+              </Link>
             </li>
           </ul>
           {/* ========================================================= */}
@@ -514,7 +542,7 @@ function Mynavbar(props) {
             <li>
               <div className="navbar-cart">
                 <FaShoppingCart
-                  className="car-img"
+                  className="car-img hvr-grow"
                   onClick={() => {
                     showMenu()
                   }}
@@ -537,13 +565,15 @@ function Mynavbar(props) {
                               return (
                                 <div className="card-item d-flex align-items-center">
                                   <div className="productimgbox mr-4">
-                                    <Link to="/">
-                                      <img src={`http://localhost:5000/images/product/${value.productImg}`} />
+                                    <Link to={`/product/${value.productId}`}>
+                                      <img
+                                        src={`http://localhost:5000/images/product/${value.productImg}`}
+                                      />
                                     </Link>
                                   </div>
                                   <div className="item-text">
                                     <div className="item-name">
-                                      <Link to="/">
+                                      <Link to={`/product/${value.productId}`}>
                                         <p>{value.productName}</p>
                                       </Link>
                                     </div>
@@ -590,7 +620,7 @@ function Mynavbar(props) {
             </li>
             <li>
               <Link to="/memberuser/wishlist">
-                <FaHeart />
+                <FaHeart className="hvr-pulse" />
               </Link>
             </li>
           </ul>

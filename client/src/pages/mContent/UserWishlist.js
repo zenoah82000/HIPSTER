@@ -96,7 +96,7 @@ function UserWishlist(props) {
           {wishlist.map((item) => {
             return (
               <>
-                <div className="card m-2">
+                <div key={item.productId} className="card m-2">
                   <div className="card-header">
                     <img
                       src={`http://localhost:5000/images/product/${item.productImg}`}

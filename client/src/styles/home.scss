@@ -49,7 +49,7 @@ p {
 //////////////主圖//////////////
 .banner {
   height: 800px;
-  background-image: url(../images/home/home-banner.jpg);
+  // background-image: url(../images/home/home-banner.jpg);
   background-size: cover;
   background-position: center center;
   position: relative;
@@ -685,5 +685,8 @@ p {
         }
       }
     }
+  }
+  #back-to-top {
+    display: none !important;
   }
 }

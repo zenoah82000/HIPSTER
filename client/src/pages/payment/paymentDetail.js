@@ -73,7 +73,7 @@ function PaymentDetail(props) {
                         size="lg"
                         type="text"
                         placeholder="姓氏"
-                        ref={input=>lastName = input}
+                        ref={(input) => (lastName = input)}
                       />
                       <Form.Control.Feedback>正確!</Form.Control.Feedback>
                       <Form.Control.Feedback type="invalid">
@@ -87,7 +87,7 @@ function PaymentDetail(props) {
                         size="lg"
                         type="text"
                         placeholder="名字"
-                        ref={input=>firstName = input}
+                        ref={(input) => (firstName = input)}
                         // onChange={(e) => getformInfo(e, 'firstName')}
                       />
                       <Form.Control.Feedback>正確!</Form.Control.Feedback>
@@ -104,7 +104,7 @@ function PaymentDetail(props) {
                       size="lg"
                       type="text"
                       placeholder="行動電話或家用電話"
-                      ref={input=>phone = input}
+                      ref={(input) => (phone = input)}
                       pattern="^09[0-9]{2}-?[0-9]{3}-?[0-9]{3}$|^\(?\d{2,3}\)?-?\d{4}-?\d{4}$"
                       // onChange={(e) => getformInfo(e, 'mobile')}
                     />
@@ -123,7 +123,7 @@ function PaymentDetail(props) {
                       size="lg"
                       type="email"
                       placeholder="電子郵件地址"
-                      ref={input=>email = input}
+                      ref={(input) => (email = input)}
                       pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{3,6}(?:\.[a-z]{2})?)$"
                       // onChange={(e) => getformInfo(e, 'email')}
                     />
@@ -139,6 +139,7 @@ function PaymentDetail(props) {
             <div className="col-3">
               <div className="mt-3">
                 <div className="priceBox ">
+                <input className="checkout-info-button" value="檢視訂單資料" type="button"/>
                   <div className="totalPrice">
                     <div className="d-flex justify-content-between">
                       <p>總價</p>
@@ -151,20 +152,21 @@ function PaymentDetail(props) {
                     </div>
                     <div className="d-flex justify-content-between">
                       <p>折價金額</p>
-                      <p>{buyerinfo.sumless.toString()
-                          .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}</p>
-                    </div>
-                  </div>
-                  <div className="payPrice">
-                    <div className="d-flex justify-content-between">
-                      <p>結帳金額</p>
                       <p>
-                        NT$
-                        {buyerinfo.sumdiscount
+                        -NT${buyerinfo.sumless
                           .toString()
                           .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
                       </p>
                     </div>
+                  </div>
+                  <div className="payPricebox d-flex justify-content-between">
+                    <p>結帳金額</p>
+                    <p className="payPrice">
+                      NT$
+                      {buyerinfo.sumdiscount
+                        .toString()
+                        .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
+                    </p>
                   </div>
                 </div>
                 <div className="mt-3 buttonBox">

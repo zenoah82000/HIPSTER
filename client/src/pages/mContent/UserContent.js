@@ -98,15 +98,30 @@ function UserContent() {
       .then((obj) => {})
   }
 
+  //即時預覽上傳圖片
+  function previewFile() {
+    var preview = document.getElementById('demoimg')
+    var file = document.getElementById('ControlFile1').files[0]
+    var reader = new FileReader()
+    reader.onloadend = function () {
+      preview.src = reader.result
+    }
+    if (file) {
+      reader.readAsDataURL(file)
+    } else {
+      preview.src = ''
+    }
+  }
+
   const dataDisplay = (
     <>
-      <Figure>
+      {/* <Figure>
         <Figure.Image
           className="memberimg"
           alt="會員頭像"
           src={`http://localhost:5000/images/member/${memberImg}`}
         />
-      </Figure>
+      </Figure> */}
       <Form.Row>
         <Col sm={4}>
           <Form.Group controlId="displaymemberName">
@@ -173,6 +188,7 @@ function UserContent() {
     <>
       <Figure className="Figurepic">
         <Figure.Image
+          id="demoimg"
           className="memberimg"
           alt="會員頭像"
           src={`http://localhost:5000/images/member/${memberImg}`}
@@ -187,8 +203,7 @@ function UserContent() {
         ref={(file) => (editmemberImg = file)}
         onChange={(e) => {
           setimgData(e.target.files[0])
-          // console.log('imgData', imgData)
-          // memberimgUpdate(e.target.files[0])
+          previewFile()
         }}
       />
 
