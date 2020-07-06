@@ -136,7 +136,7 @@ function Home(props) {
       <select id="city" ref={(input) => (searchBarCity = input)}>
         <option value="">請選擇</option>
         <option value="">新北市</option>
-        <option value="1">臺北市</option>
+        <option value="1">台北市</option>
         <option value="">基隆市</option>
         <option>連江縣</option>
         <option>宜蘭縣</option>
@@ -154,11 +154,11 @@ function Home(props) {
       </select>
       <select id="area" ref={(input) => (searchBarArea = input)}>
         <option>請選擇</option>
+        <option value="大安區">大安區</option>
         <option value="中正區">中正區</option>
         <option value="大同區">大同區</option>
         <option value="中山區">中山區</option>
         <option value="松山區">松山區</option>
-        <option value="大安區">大安區</option>
         <option value="信義區">信義區</option>
         <option value="士林區">士林區</option>
         <option value="北投區">北投區</option>
@@ -214,10 +214,11 @@ function Home(props) {
       </select>
       <select id="category2" ref={(input) => (searchBarCategory2 = input)}>
         <option value="">次分類</option>
-        <option value="8">藝文空間</option>
-        <option value="9">美術館/博物館</option>
-        <option value="10">文化單位</option>
-        <option value="11">展演活動</option>
+        <option value="3">精油香氛</option>
+        <option value="4">植感花藝</option>
+        <option value="5">浪漫金工</option>
+        <option value="6">手作皮革</option>
+        <option value="7">木作雕刻</option>
       </select>
       <input
         ref={(input) => (searchBarName = input)}
@@ -375,7 +376,8 @@ function Home(props) {
   const ProductFeatureddisplay = ProductFeatured.map((item, index) => {
     return (
       <>
-        <FeaturedProduct item={item} />
+        <FeaturedProduct item={item} addwishlist={props.addwishlist}
+          deletewishlist={props.deletewishlist}/>
       </>
     )
   })

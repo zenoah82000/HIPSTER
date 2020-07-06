@@ -16,9 +16,11 @@ function ProductDescription(props) {
 
   const productImgs = [...productMultiImg]
 
-  console.log({ ...productImgs[0] }.productImgs)
+  console.log({ ...productImgs[0] })
   const img1 = { ...productImgs[0] }.productImgs
   const img2 = { ...productImgs[1] }.productImgs
+  const str1 = { ...productImgs[0] }.img_description
+  const str2 = { ...productImgs[1] }.img_description
 
   return (
     <>
@@ -33,7 +35,7 @@ function ProductDescription(props) {
             />
             <figcaption>
               <div className="triangle"></div>
-              和影壇永遠的女神－奧黛麗赫本並肩而坐，共享第凡內早餐
+              {str1}
             </figcaption>
           </figure>
           <figure className="product-images">
@@ -43,7 +45,7 @@ function ProductDescription(props) {
             />
             <figcaption>
               <div className="triangle"></div>
-              和影壇永遠的女神－奧黛麗赫本並肩而坐，共享第凡內早餐
+              {str2}
             </figcaption>
           </figure>
         </div>

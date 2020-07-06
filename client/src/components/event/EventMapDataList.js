@@ -593,7 +593,7 @@ class mapList extends React.Component {
     let { cafeActive } = this.props
 
     return (
-      <div>
+      <div className="mapList">
         <fieldset className="">
           <div className="px-4 p-3">
             <div class="box col-12">
@@ -743,7 +743,7 @@ class mapList extends React.Component {
             </div>
           </div>
         </fieldset>
-        <div className="px-4">
+        <div className="px-4 mapListBox">
           <div className="">
             <div className="select-1 mb-1 ">
               <select

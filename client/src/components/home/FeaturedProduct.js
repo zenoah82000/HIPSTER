@@ -4,12 +4,24 @@ import { FaStar, FaHeart, FaMapMarkerAlt } from 'react-icons/fa'
 import { connect } from 'react-redux'
 
 function FeaturedProduct(props) {
-  const { item } = props
-
+  const { item, wishlist, addwishlist, deletewishlist } = props
+  const member = JSON.parse(localStorage.getItem('member')) || ''
   // //商品區塊>關注
-  const [heart, setheart] = useState(false)
-  const heartClass = heart ? 'activity-follow active' : 'activity-follow'
 
+  const addWish = (e) => {
+    e.preventDefault()
+    if (member.id) {
+      if (
+        wishlist.findIndex((value) => value.productId == item.productId) != -1
+      ) {
+        deletewishlist(item)
+      } else {
+        addwishlist(item)
+      }
+    } else {
+      alert('請先登入')
+    }
+  }
   //精選商品>星數顯示
   const start1 = (
     <>
@@ -76,10 +88,15 @@ function FeaturedProduct(props) {
         <div className="activity-main-cont">
           <div className="activity-picture">
             <div
-              className={heartClass}
-              onClick={(event) => {
-                event.preventDefault()
-                setheart(!heart)
+              className={
+                wishlist.findIndex(
+                  (value) => value.productId == item.productId
+                ) != -1
+                  ? 'activity-follow active'
+                  : 'activity-follow'
+              }
+              onClick={(e) => {
+                addWish(e)
               }}
             >
               <FaHeart />
@@ -105,5 +122,11 @@ function FeaturedProduct(props) {
     </>
   )
 }
+const mapStateToProps = (store) => {
+  return {
+    wishlist: store.orderReducer.wishData,
+  }
+}
+const mapDispatchToProps = null
 
-export default FeaturedProduct
+export default connect(mapStateToProps, mapDispatchToProps)(FeaturedProduct)
