@@ -476,7 +476,7 @@ function Home(props) {
       <div className="banner">
         <div className="video">
           <video
-            // src="http://localhost:5000/images/home/test.mp4"
+            src="http://localhost:5000/images/home/test.mp4"
             loop
             autoPlay
             muted
