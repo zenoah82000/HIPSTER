@@ -540,9 +540,9 @@ function Home(props) {
             </div>
           </Fade>
           <Fade>
-            <Link to="/productlist" className="more-activity-btn">
+            <a href="/productlist" className="more-activity-btn">
               查看更多活動
-            </Link>
+            </a>
           </Fade>
         </div>
       </div>
@@ -563,9 +563,9 @@ function Home(props) {
               <Slider {...countdowns}>{ProductEnddisplay}</Slider>
             </div>
           </Fade>
-          <Link to="/productlist" className="more-countdown-btn">
+          <a href="/productlist" className="more-countdown-btn">
             查看更多活動
-          </Link>
+          </a>
         </div>
       </div>
       {/* ----------------------------------------------- */}
@@ -583,9 +583,9 @@ function Home(props) {
             <div className="home-blog-content">{Articlesdisplay}</div>
           </Fade>
           <Fade>
-            <Link to="/blog" className="more-blog-btn">
+            <a href="/blog" className="more-blog-btn">
               查看更多文章
-            </Link>
+            </a>
           </Fade>
         </div>
       </div>
