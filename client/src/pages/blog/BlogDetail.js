@@ -15,8 +15,6 @@ function BlogDetail(props) {
   const [addCommentContent, setAddCommentContent] =  useState('')  
   let categoryId
 
-  console.log('addCommentContent',addCommentContent)
-
   useEffect(() => {
     getBlogDataAsync()
     getBlogCommentsDataAsync()  
@@ -101,7 +99,7 @@ function BlogDetail(props) {
     return(
       <>
         <div className="row blog-comment-item">
-          <div className="col-1"><img src={`http://localhost:5000/images/member/${item.memberImg}`}/></div>
+          <div className="col-2"><img src={`http://localhost:5000/images/member/${item.memberImg}`}/></div>
           <div className="col-8">
             <div>{item.commentContent}</div>
             <div>
@@ -116,14 +114,14 @@ function BlogDetail(props) {
   })
 
   const handleSubmit = ()=>{
-    // if(!addArticleTitle || !addArticleContent){
-    //   Swal.fire({
-    //     title:'請輸入文章的標題和內容再發佈',
-    //     icon: 'warning'
-    //   })
-    // }else{
+    if(!addCommentContent){
       Swal.fire({
-        title: '確定發佈?',
+        title:'請輸入評論的內容再送出',
+        icon: 'warning'
+      })
+    }else{
+      Swal.fire({
+        title: '確定送出評論?',
         // text: '',
         icon: 'warning',
         showCancelButton: true,
@@ -149,7 +147,7 @@ function BlogDetail(props) {
           })                             
         }
       })
-    // } 
+    } 
   }
 
   return (
@@ -164,19 +162,21 @@ function BlogDetail(props) {
           </ul>
         </div>                       
       </div>
-      <div className="blog-comment">
-        <h3>{numBlogComment + '則評論'}</h3>
-        <hr />      
-        {showBlogComment}      
-        <ul className="list-unstyled">
-          <li><textarea col="50" row="30" onChange={(event) => {
-            setAddCommentContent(event.target.value)
-          }}></textarea></li>
-          <li><button onClick={()=>{
-            handleSubmit()
-          }}>送出評論</button></li>
-        </ul>
-      </div>
+      <div className="row">
+        <div className="blog-comment col-8">
+          <h3>{numBlogComment + '則評論'}</h3>
+          <hr />      
+          {showBlogComment}      
+          <ul className="list-unstyled">
+            <li><textarea col="50" row="30" onChange={(event) => {
+              setAddCommentContent(event.target.value)
+            }}></textarea></li>
+            <li><button className="btn" onClick={()=>{
+              handleSubmit()
+            }}>送出評論</button></li>
+          </ul>
+        </div>
+      </div>      
     </div>
   )
 }

@@ -101,7 +101,7 @@ function UserComment(props) {
     setNoCommentList(newList)
   }
 
-  //
+  //星等
   const stars = (v) => {
     const star = []
     for (let i = 0; i < 5; i++) {

@@ -103,7 +103,7 @@ function App(props) {
         icon: 'error',
         title: '已加入願望清單',
         showConfirmButton: false,
-        timer: 800
+        timer: 800,
       })
     }
   }
@@ -159,7 +159,7 @@ function App(props) {
         icon: 'success',
         title: '加入成功',
         showConfirmButton: false,
-        timer: 800
+        timer: 800,
       })
     } else {
       Swal.fire({
@@ -167,7 +167,7 @@ function App(props) {
         icon: 'error',
         title: '商品已在購物車',
         showConfirmButton: false,
-        timer: 800
+        timer: 800,
       })
     }
   }
@@ -225,7 +225,27 @@ function App(props) {
   const cardClickReset = (clickData) => {
     // console.log(clickData)
     setClickData(clickData)
-    setViewport({ center: [clickData.lat, clickData.log] })
+    setViewport({ center: [clickData.lat, clickData.log], zoom: 15 })
+  }
+
+  const SearchReset = (searching) => {
+    console.log(searching)
+    if (searching == '台北市中山區' || searching == '中山')
+      setViewport({ center: [25.0685406, 121.5280918], zoom: 15 })
+    if (searching == '台北市萬華區' || searching == '萬華')
+      setViewport({ center: [25.046325, 121.507721], zoom: 15 })
+    if (searching == '台北市信義區' || searching == '信義')
+      setViewport({ center: [25.030861, 121.5662571], zoom: 15 })
+    if (searching == '台北市中正區' || searching == '中正')
+      setViewport({ center: [25.0293387, 121.503073], zoom: 15 })
+    if (searching == '台北市大安區' || searching == '大安')
+      setViewport({ center: [25.0263453, 121.5263364], zoom: 15 })
+    if (searching == '中西區' || searching == '台南市中西區')
+      setViewport({ center: [22.9987639, 120.1920953], zoom: 15 })
+    if (searching == '台南')
+      setViewport({ center: [23.0229948, 120.2313002], zoom: 12 })
+    if (searching == '台北')
+      setViewport({ center: [25.0174719, 121.56623], zoom: 12 })
   }
 
   return (
@@ -249,7 +269,7 @@ function App(props) {
           <Route path="/blogDetail/:articleId?">
             <BlogDetail />
           </Route>
-          <Route path="/blog/:categoryId?">
+          <Route path="/blog">
             <Blog />
           </Route>
           <Route path="/blogAdd">
@@ -285,6 +305,7 @@ function App(props) {
               cardClickReset={cardClickReset}
               myLocation={myLocation}
               setViewport={setViewport}
+              SearchReset={SearchReset}
             />
           </Route>
 

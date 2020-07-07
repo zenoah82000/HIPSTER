@@ -7,6 +7,7 @@ import InputRange from 'react-input-range'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
+import Fade from 'react-reveal/Fade'
 
 import '../../styles/product/AsideBar.scss'
 // import 'react-input-range/lib/css/index.css'
@@ -283,117 +284,119 @@ function AsideBar(props) {
 
       return (
         <>
-          <div>
-            <div
-              key={item.categoryName}
-              className={
-                checkCatChildForItem(categoryChild) ||
-                categorySection.includes(item.categoryName)
-                  ? 'drop-title active'
-                  : 'drop-title'
-              }
-              onClick={() => {
-                checkCatChildForItem(categoryChild)
-                  ? setCategorySection([])
-                  : AddcategorySection(item.categoryName)
-                // console.log(categorySection)
-              }}
-            >
-              <h5>
-                {item.categoryName}
-                {categorySection.includes(item.categoryName) ||
-                checkCatChildForItem(categoryChild) ? (
-                  <FontAwesomeIcon
-                    icon={fas.faAngleUp}
-                    style={{ fontSize: '18px' }}
-                  />
-                ) : (
-                  <FontAwesomeIcon
-                    icon={fas.faAngleDown}
-                    style={{ fontSize: '18px' }}
-                  />
-                )}
-              </h5>
-            </div>
-            <ul
-              className={
-                checkcategory(item.categoryName) ||
-                checkCatChildForItem(categoryChild)
-                  ? 'checkbox-dropdown-list active'
-                  : 'checkbox-dropdown-list'
-              }
-              key={item.categoryId}
-            >
-              {categorylist.map((category, i) => {
-                if (
-                  category.categoryParentId === 0 &&
-                  category.categoryId === item.categoryId
-                ) {
-                  return (
-                    <>
-                      <li
-                        className="checkbox"
-                        key={item.categoryId}
-                        onClick={() => {
-                          searchParams.get('cat')
-                            ? checkCatChild(categoryChild)
-                              ? deleteCatChild(categoryChild)
-                              : addCatChild(categoryChild)
-                            : searchParams.append('cat', categoryChild.join())
-                          searchParams.set('page', 1)
-                          window.scrollTo({ top: 0, behavior: 'smooth' })
-                          props.history.push(`?${searchParams.toString()}`)
-                        }}
-                      >
-                        {searchParams.get('cat') ? (
-                          checkCatChild(categoryChild) ? (
-                            <FontAwesomeIcon icon={fas.faCheckSquare} />
-                          ) : (
-                            <FontAwesomeIcon icon={far.faSquare} />
-                          )
-                        ) : (
-                          <FontAwesomeIcon icon={far.faSquare} />
-                        )}{' '}
-                        全部
-                      </li>
-                    </>
-                  )
-                } else if (category.categoryParentId === item.categoryId) {
-                  return (
-                    <>
-                      <li
-                        className="checkbox"
-                        key={category.categoryName}
-                        onClick={() => {
-                          checkcat(
-                            category.categoryId.toString(),
-                            category.categoryParentId.toString()
-                          )
-                          searchParams.set('page', 1)
-                          window.scrollTo({ top: 0, behavior: 'smooth' })
-                          props.history.push(`?${searchParams.toString()}`)
-                        }}
-                        value={category.categoryName}
-                      >
-                        {searchParams.get('cat') ? (
-                          searchParams
-                            .get('cat')
-                            .includes(category.categoryId.toString()) ? (
-                            <FontAwesomeIcon icon={fas.faCheckSquare} />
-                          ) : (
-                            <FontAwesomeIcon icon={far.faSquare} />
-                          )
-                        ) : (
-                          <FontAwesomeIcon icon={far.faSquare} />
-                        )}{' '}
-                        {category.categoryName}
-                      </li>
-                    </>
-                  )
+          <Fade>
+            <div>
+              <div
+                key={item.categoryName}
+                className={
+                  checkCatChildForItem(categoryChild) ||
+                  categorySection.includes(item.categoryName)
+                    ? 'drop-title active'
+                    : 'drop-title'
                 }
-              })}
-            </ul>
-          </div>
+                onClick={() => {
+                  checkCatChildForItem(categoryChild)
+                    ? setCategorySection([])
+                    : AddcategorySection(item.categoryName)
+                  // console.log(categorySection)
+                }}
+              >
+                <h5>
+                  {item.categoryName}
+                  {categorySection.includes(item.categoryName) ||
+                  checkCatChildForItem(categoryChild) ? (
+                    <FontAwesomeIcon
+                      icon={fas.faAngleUp}
+                      style={{ fontSize: '18px' }}
+                    />
+                  ) : (
+                    <FontAwesomeIcon
+                      icon={fas.faAngleDown}
+                      style={{ fontSize: '18px' }}
+                    />
+                  )}
+                </h5>
+              </div>
+              <ul
+                className={
+                  checkcategory(item.categoryName) ||
+                  checkCatChildForItem(categoryChild)
+                    ? 'checkbox-dropdown-list active'
+                    : 'checkbox-dropdown-list'
+                }
+                key={item.categoryId}
+              >
+                {categorylist.map((category, i) => {
+                  if (
+                    category.categoryParentId === 0 &&
+                    category.categoryId === item.categoryId
+                  ) {
+                    return (
+                      <>
+                        <li
+                          className="checkbox"
+                          key={item.categoryId}
+                          onClick={() => {
+                            searchParams.get('cat')
+                              ? checkCatChild(categoryChild)
+                                ? deleteCatChild(categoryChild)
+                                : addCatChild(categoryChild)
+                              : searchParams.append('cat', categoryChild.join())
+                            searchParams.set('page', 1)
+                            window.scrollTo({ top: 0, behavior: 'smooth' })
+                            props.history.push(`?${searchParams.toString()}`)
+                          }}
+                        >
+                          {searchParams.get('cat') ? (
+                            checkCatChild(categoryChild) ? (
+                              <FontAwesomeIcon icon={fas.faCheckSquare} />
+                            ) : (
+                              <FontAwesomeIcon icon={far.faSquare} />
+                            )
+                          ) : (
+                            <FontAwesomeIcon icon={far.faSquare} />
+                          )}{' '}
+                          全部
+                        </li>
+                      </>
+                    )
+                  } else if (category.categoryParentId === item.categoryId) {
+                    return (
+                      <>
+                        <li
+                          className="checkbox"
+                          key={category.categoryName}
+                          onClick={() => {
+                            checkcat(
+                              category.categoryId.toString(),
+                              category.categoryParentId.toString()
+                            )
+                            searchParams.set('page', 1)
+                            window.scrollTo({ top: 0, behavior: 'smooth' })
+                            props.history.push(`?${searchParams.toString()}`)
+                          }}
+                          value={category.categoryName}
+                        >
+                          {searchParams.get('cat') ? (
+                            searchParams
+                              .get('cat')
+                              .includes(category.categoryId.toString()) ? (
+                              <FontAwesomeIcon icon={fas.faCheckSquare} />
+                            ) : (
+                              <FontAwesomeIcon icon={far.faSquare} />
+                            )
+                          ) : (
+                            <FontAwesomeIcon icon={far.faSquare} />
+                          )}{' '}
+                          {category.categoryName}
+                        </li>
+                      </>
+                    )
+                  }
+                })}
+              </ul>
+            </div>
+          </Fade>
         </>
       )
     }

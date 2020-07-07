@@ -33,6 +33,11 @@ class MapPage extends React.Component {
     console.log(clickData)
   }
 
+  searchInput = (searching) => {
+    console.log(searching)
+    this.props.SearchReset(searching)
+  }
+
   setFileterData = (data) => {
     console.log(data)
     let filterData = data
@@ -59,6 +64,7 @@ class MapPage extends React.Component {
               cafeActive={this.state.cafeActive}
               CafeData={CafeData}
               setFileterData={this.setFileterData}
+              searchInput={this.searchInput}
             />
           </div>
           <div className="col-md-8 col-sm-12">

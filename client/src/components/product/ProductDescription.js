@@ -16,7 +16,7 @@ function ProductDescription(props) {
 
   const productImgs = [...productMultiImg]
 
-  console.log({ ...productImgs[0] })
+  // console.log({ ...productImgs[0] })
   const img1 = { ...productImgs[0] }.productImgs
   const img2 = { ...productImgs[1] }.productImgs
   const str1 = { ...productImgs[0] }.img_description
