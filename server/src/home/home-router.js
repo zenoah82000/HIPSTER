@@ -146,7 +146,8 @@ async function executeSQL(
   const mail = req.body.forgetpwdmail  //傳回信箱
   const Sql = `SELECT * FROM member WHERE  memberMail=? `
   const [r1] = await db.query(Sql,mail);
-
+  
+  console.log('mail',mail)
   const mailstate = r1.length?true:false  //判斷是否有該帳號
   let memberId //先定義會員id
 
@@ -179,34 +180,34 @@ async function executeSQL(
     const [r2] = await db.query(Sqlcodeinput,[num,memberId]);
 
     //訂單成功送出email
-    console.log("送出電子郵件");
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      secure: true,
-      auth: {
-        type: "OAuth2",
-        user: process.env.ACCOUNT,
-        clientId: process.env.CLINENTID,
-        clientSecret: process.env.CLINENTSECRET,
-        refreshToken: process.env.REFRESHTOKEN,
-      },
-      tls: {
-        rejectUnauthorized: false,
-      },
-    });
+    // console.log("送出電子郵件");
+    // const transporter = nodemailer.createTransport({
+    //   service: "gmail",
+    //   secure: true,
+    //   auth: {
+    //     type: "OAuth2",
+    //     user: process.env.ACCOUNT,
+    //     clientId: process.env.CLINENTID,
+    //     clientSecret: process.env.CLINENTSECRET,
+    //     refreshToken: process.env.REFRESHTOKEN,
+    //   },
+    //   tls: {
+    //     rejectUnauthorized: false,
+    //   },
+    // });
 
-    var mailOptions = {
-      from: '"Hipster文青地圖" <e24971234@gmail.com>',
-      to: memberMail,
-      subject: "重製密碼信件",
-      html: "<p>驗證碼:" + num + "</p><br/><p>請點擊下列網址輸入上述驗證碼進行密碼重製：http://localhost:3000/forgetpwd/"+memberId+"</p>"
-    };
-    // 準備發送信件
-    transporter.sendMail(mailOptions, function (err, info) {
-      if (err) {
-        return console.log(err);
-      }
-    });
+    // var mailOptions = {
+    //   from: '"Hipster文青地圖" <e24971234@gmail.com>',
+    //   to: memberMail,
+    //   subject: "重製密碼信件",
+    //   html: "<p>驗證碼:" + num + "</p><br/><p>請點擊下列網址輸入上述驗證碼進行密碼重製：http://localhost:3000/forgetpwd/"+memberId+"</p>"
+    // };
+    // // 準備發送信件
+    // transporter.sendMail(mailOptions, function (err, info) {
+    //   if (err) {
+    //     return console.log(err);
+    //   }
+    // });
 
 
 
@@ -236,14 +237,14 @@ router.post('/codechecking', async (req, res, next) => {
 
   const [r1] = await db.query(Sql,[memberid,code]);
   const codestate = r1.length?true:false  //判斷輸入code&id是否有該帳號
-  console.log(codestate)
+  // console.log(codestate)
 
   res.json(codestate)
 })
 
 //忘記密碼頁-重設密碼
 router.post('/pwdchanging', async (req, res, next) => {
-  console.log(req.body)
+  // console.log(req.body)
   const memberid=req.body.memberid
   const pwd = req.body.pwd
   const Sql = "UPDATE `member` SET `memberPwd`=? WHERE `memberId`=? "

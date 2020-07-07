@@ -90,14 +90,14 @@ function Mynavbar(props) {
     const data = await response.json()
     if (data.success) {
       localStorage.setItem('member', JSON.stringify(data))
-      setloginOk(1)
+      setloginOk(1) //登入完成
       setuserSuccess(true)
     } else {
       setloginOk(0)
       setuserSuccess(false)
     }
     // console.log('伺服器登入回傳的json資料', data)
-    // console.log('loginOk', loginOk)
+    console.log('loginOk', loginOk)
   }
 
   //登出處理
@@ -119,7 +119,12 @@ function Mynavbar(props) {
     const response = await fetch(request)
     const data = await response.json()
     console.log(data)
-    data.success ? setloginOk(2) : setloginOk(3)
+    if (data.success) {
+      setloginOk(2) //
+    } else {
+      setloginOk(3)
+    }
+    console.log('loginOk', loginOk)
   }
 
   //註冊會員表格
@@ -408,6 +413,7 @@ function Mynavbar(props) {
           <div
             className="SignOkbtn"
             onClick={() => {
+              setloginOk(0)
               setShowLoginOk(false)
             }}
           >
@@ -473,14 +479,18 @@ function Mynavbar(props) {
           <div
             className="SignOkbtn"
             onClick={() => {
-              forgetpwdmailData = {
-                forgetpwdmail: forgetPwd.value,
+              if (forgetPwd.value == '') {
+                alert('請輸入註冊時使用信箱帳號')
+              } else {
+                forgetpwdmailData = {
+                  forgetpwdmail: forgetPwd.value,
+                }
+                ForgetPwdinput(forgetpwdmailData)
+                setshowforgetPwd(false)
+                setTimeout(() => {
+                  setShowLoginOk(true) //跳出完成視窗
+                }, 300)
               }
-              ForgetPwdinput(forgetpwdmailData)
-              setshowforgetPwd(false)
-              setTimeout(() => {
-                setShowLoginOk(true) //跳出登入完成視窗
-              }, 300)
             }}
           >
             送出
