@@ -116,7 +116,7 @@ function UserComment(props) {
       myCommentlist.map((item) => {
         return (
           <>
-            <Fade>
+            <Fade bottom>
               <div className="reply-listview">
                 <div className="comment-tbhead">
                   <div class="row">
@@ -284,7 +284,7 @@ function UserComment(props) {
                 </div>
                 <div className="emptytext text-center">
                   <p>
-                    評價是空的！趕緊探索你下一次的旅程，並標記你心儀的活動體驗
+                    目前無尚未評價！趕緊探索你下一次的旅程，並標記你心儀的活動體驗
                   </p>
                 </div>
               </div>
