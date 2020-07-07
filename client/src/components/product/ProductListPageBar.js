@@ -26,7 +26,7 @@ function ProductListPageBar(props) {
     pages.push(
       <li key={'previous'}>
         <a
-          className={+currentPage > 1 ? '' : 'disabled'}
+          className={+currentPage > 1 ? 'prepage' : 'prepage disabled'}
           // to={`?page=${i}`}
           onClick={() => {
             searchParams.set('page', currentPage - 1)
@@ -142,7 +142,9 @@ function ProductListPageBar(props) {
     pages.push(
       <li key={'next'}>
         <a
-          className={currentPage === totalpages ? 'disabled' : ''}
+          className={
+            currentPage === totalpages ? 'nextpage disabled' : 'nextpage'
+          }
           // to={`?page=${i}`}
           onClick={() => {
             searchParams.set('page', currentPage + 1)
