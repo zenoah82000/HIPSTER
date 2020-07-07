@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import {Link} from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Modal, Button, Form } from 'react-bootstrap'
 import { FaShoppingCart } from 'react-icons/fa'
@@ -100,9 +101,11 @@ function UserWishlist(props) {
               <>
                 <div key={item.productId} className="wishlist-card card m-2">
                   <div className="card-header">
+                  <Link to={`/product/${item.productId}`}>
                     <img
                       src={`http://localhost:5000/images/product/${item.productImg}`}
                     />
+                    </Link>
                   </div>
 
                   <div className="card-body">
