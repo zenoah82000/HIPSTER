@@ -338,7 +338,8 @@ export default class ViewportExample extends Component {
                         <FaRegCalendarCheck />
                       </span>
                       <span>
-                        活動時間:{clickData.openTime}-{clickData.closeTime}
+                        活動日期: 即日起 ~
+                        {clickData.productEndingDate.substring(0, 10)}
                       </span>
                     </li>
                     <li>
@@ -370,7 +371,7 @@ export default class ViewportExample extends Component {
                     </li>
                   </ul>
                   <div className="cardButton">
-                    <a value="" href={'/product/{item.productId}'}>
+                    <a value="" href={`/product/${clickData.productId}`}>
                       立即預定商品
                     </a>
                   </div>
@@ -430,7 +431,8 @@ export default class ViewportExample extends Component {
                           <FaRegClock />
                         </span>
                         <span>
-                          活動日期: {item.openTime}-{item.closeTime}
+                          活動日期: 即日起 ~{' '}
+                          {item.productEndingDate.substring(0, 10)}
                         </span>
                       </li>
                       <li>
@@ -454,7 +456,7 @@ export default class ViewportExample extends Component {
                     <div className="cardButton">
                       <a
                         value=""
-                        href={'/product/{item.productId}'}
+                        href={`/product/${item}.productId}`}
                         target="_blank"
                       >
                         立即預定商品

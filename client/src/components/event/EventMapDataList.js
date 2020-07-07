@@ -47,7 +47,7 @@ class mapList extends React.Component {
     const data = await response.json()
     this.setState(
       { cafedata: data.cafelist, productdata: data.productlist },
-      () => this.sortByPriceDsc()
+      () => this.sortByStarDsc()
     )
   }
 
@@ -68,6 +68,8 @@ class mapList extends React.Component {
       data: this.state.data,
       search: event.target.value,
     })
+    console.log(event.target.value)
+    this.props.searchInput(event.target.value)
   }
 
   //排序
@@ -561,7 +563,7 @@ class mapList extends React.Component {
                     <span className="mr-2">
                       <FaRegCalendarCheck />
                     </span>
-                    活動時間
+                    活動日期: 即日起 ~ {item.productEndingDate.substring(0, 10)}
                   </li>
                   <li>
                     <span className="mr-2">
@@ -602,7 +604,7 @@ class mapList extends React.Component {
                   className="form-control form-control-lg"
                   placeholder="尋找什麼活動嗎?  請輸入活動名稱或地址"
                   onChange={(event) => this.updateSearch(event)}
-                  value={this.state.search}
+                  // value={this.state.search}
                   type="text"
                 />
                 <div class="input-group-append">
@@ -771,10 +773,10 @@ class mapList extends React.Component {
                   商品排序方式
                 </option> */}
                 <option value="starAsc">星等由低到高</option>
-                <option value="starDsc">星等由高到低</option>
-                <option value="priceAsc" selected>
-                  價格由低到高
+                <option value="starDsc" selected>
+                  星等由高到低
                 </option>
+                <option value="priceAsc">價格由低到高</option>
                 <option value="priceDsc">價格由高到低</option>
               </select>
             </div>
