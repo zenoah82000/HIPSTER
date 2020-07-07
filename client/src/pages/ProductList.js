@@ -63,7 +63,7 @@ function ProductList(props) {
           min: +searchParams.get('minPrice'),
           max: +searchParams.get('maxPrice'),
         }
-      : { min: 0, max: 10000 }
+      : { min: 0, max: 5000 }
 
   const sort = searchParams.has('sort') ? searchParams.get('sort') : false
 
