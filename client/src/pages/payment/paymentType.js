@@ -112,8 +112,8 @@ function PaymentType(props) {
       <div className="container mb-5">
         <div className="row">
           <div className="prograssBar2 mt-5"></div>
-          <div className="col-9">
-            <div className=" mr-3">
+          <div className="col-12 col-md-9">
+            <div className="payment-mr">
               <div className="p-5 mt-3 contentBox">
                 <div className="paytitle-border">
                   <div className="subTitle">
@@ -270,9 +270,9 @@ function PaymentType(props) {
             </div>
           </div>
 
-          <div className="col-3">
+          <div className="col-12 col-md-3">
             <div className="mt-3">
-              <div className="priceBox ">
+              <div className="priceBox">
               <input className="checkout-info-button" value="檢視訂單資料" type="button" onClick={()=>{setPaymentDetailok(true)}}/>
                 <div className="totalPrice">
                   <div className="d-flex justify-content-between ">

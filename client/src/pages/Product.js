@@ -28,6 +28,8 @@ function Product(props) {
 
   const searchParams = new URLSearchParams(props.location.search)
   const currentPage = !!searchParams.get('page') ? +searchParams.get('page') : 1
+  const [star, setStar] = useState(0)
+  const [commentNum, setCommentNum] = useState(0)
 
   useEffect(() => {
     console.log(props.match.params.id)
@@ -35,7 +37,7 @@ function Product(props) {
   }, [])
 
   const product = { ...productListData[0] }
-  console.log(product)
+  // console.log(product)
   return (
     <>
       <div className="bg-white text-brown">
@@ -56,6 +58,8 @@ function Product(props) {
               product={{ ...product }}
               addwishlist={addwishlist}
               deletewishlist={deletewishlist}
+              commentNum={commentNum}
+              star={star}
             />
             <ProductTime />
             <Productinfoicon />
@@ -64,12 +68,16 @@ function Product(props) {
               productAddress={product.productAddress}
               addCart={addCart}
             />
-            <CommtentList
+            {/* <CommtentList
               productName={product.productName}
               productId={product.productId}
               currentPage={currentPage}
-            />
+            /> */}
             <CommentList
+              commentNum={commentNum}
+              setCommentNum={setCommentNum}
+              star={star}
+              setStar={setStar}
               productName={product.productName}
               productId={product.productId}
               currentPage={currentPage}

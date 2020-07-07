@@ -98,7 +98,7 @@ function UserWishlist(props) {
           {wishlist.map((item) => {
             return (
               <>
-                <div key={item.productId} className="card m-2">
+                <div key={item.productId} className="wishlist-card card m-2">
                   <div className="card-header">
                     <img
                       src={`http://localhost:5000/images/product/${item.productImg}`}
@@ -121,22 +121,22 @@ function UserWishlist(props) {
                   </div>
 
                   <div className="card-footer bg-white">
-                    <span
+                    <button className="wishlist-button-add"
                       onClick={() => {
                         showaddcart(item)
                       }}
                     >
-                      <FaShoppingCart />
+                      <FaShoppingCart  className="cart-icon"/>
                       加入購物車
-                    </span>
-                    <span
+                    </button>
+                    <button className="wishlist-button-del"
                       onClick={() => {
                         deleteWishlist(item.productId)
                       }}
                     >
                       <BsTrash />
                       刪除
-                    </span>
+                    </button>
                   </div>
                 </div>
               </>
