@@ -13,6 +13,8 @@ import ProductListPageBar from '../components/product/ProductListPageBar'
 import { getProductListAsync } from '../actions/product/getProductList'
 
 import ReactStars from 'react-rating-stars-component'
+import Fade from 'react-reveal/Fade'
+import Slide from 'react-reveal/Slide'
 
 function ProductList(props) {
   const { productListData, getProductListAsync } = props
@@ -88,7 +90,7 @@ function ProductList(props) {
 
   const count = productListData.filter((item, index) => {
     if (length === 0) {
-      if (+Date.parse(item.productEndingDate) >= +eddate) {
+      if (+Date.parse(item.productEndingDate) >= +stdate) {
         if (!!minPrice && !!maxPrice) {
           if (
             +item.productPrice <= +maxPrice &&
@@ -176,6 +178,11 @@ function ProductList(props) {
     count.sort(function (a, b) {
       return b.star - a.star
     })
+  } else if (sort === 'prec') {
+    count.sort(function (a, b) {
+      return +Date.parse(a.productEndingDate) - +Date.parse(b.productEndingDate)
+    })
+  } else {
   }
 
   function getRandomInt(min, max) {
@@ -196,61 +203,65 @@ function ProductList(props) {
     ) {
       return (
         <>
-          <div className="product-list-search-info" key={item.productId}>
-            <a href={`/product/${item.productId}`}>
-              <div className="row">
-                <div className="col-sm-5 col-lg-4">
-                  <img
-                    src={`http://localhost:5000/images/product/${item.productImg}`}
-                    alt={item.productImg}
-                  />
-                </div>
-                <div className="col-sm-7 col-lg-8 px-15">
-                  <div className="product-detail">
-                    <div className="product-label"></div>
-                    <h3>{item.productName}</h3>
-                    <p className="product-description">{item.productContent}</p>
-                    <div className="product-place">
-                      <i className="fas fa-map-marker-alt"></i>
-                      {item.locationName}
-                    </div>
-                    <div className="product-time">
-                      <i className="far fa-calendar"></i>
-                      商品結束日期：
-                      {/* {date >= new Date(item.productEndingDate)
+          <Fade bottom>
+            <div className="product-list-search-info" key={item.productId}>
+              <a href={`/product/${item.productId}`}>
+                <div className="row">
+                  <div className="col-sm-5 col-lg-4">
+                    <img
+                      src={`http://localhost:5000/images/product/${item.productImg}`}
+                      alt={item.productImg}
+                    />
+                  </div>
+                  <div className="col-sm-7 col-lg-8 px-15">
+                    <div className="product-detail">
+                      <div className="product-label"></div>
+                      <h3>{item.productName}</h3>
+                      <p className="product-description">
+                        {item.productContent}
+                      </p>
+                      <div className="product-place">
+                        <i className="fas fa-map-marker-alt"></i>
+                        {item.locationName}
+                      </div>
+                      <div className="product-time">
+                        <i className="far fa-calendar"></i>
+                        商品結束日期：
+                        {/* {date >= new Date(item.productEndingDate)
                         ? new Date(item.productEndingDate).toLocaleDateString()
                         : '今日'} */}
-                      {new Date(item.productEndingDate).toLocaleDateString()}
-                    </div>
-                    <div className="product-footer ">
-                      <div className="product-star">
-                        <ReactStars
-                          value={item.star}
-                          count={5}
-                          size={20}
-                          half={true}
-                          emptyIcon={<i className="far fa-star"></i>}
-                          halfIcon={<i className="fa fa-star-half-alt"></i>}
-                          fullIcon={<i className="fa fa-star"></i>}
-                          color2={'#ffd700'}
-                          edit={false}
-                        />
+                        {new Date(item.productEndingDate).toLocaleDateString()}
                       </div>
-                      <span className="divider"></span>
-                      <div className="product-booked-number">
-                        {getRandomInt(100, 1500)} 個已訂購
-                      </div>
-                      <div className="product-price">
-                        <span>TWD </span>
-                        <h4>{item.productPrice}</h4>
-                        <span> 起</span>
+                      <div className="product-footer ">
+                        <div className="product-star">
+                          <ReactStars
+                            value={item.star}
+                            count={5}
+                            size={20}
+                            half={true}
+                            emptyIcon={<i className="far fa-star"></i>}
+                            halfIcon={<i className="fa fa-star-half-alt"></i>}
+                            fullIcon={<i className="fa fa-star"></i>}
+                            color2={'#ffd700'}
+                            edit={false}
+                          />
+                        </div>
+                        <span className="divider"></span>
+                        <div className="product-booked-number">
+                          {getRandomInt(100, 1500)} 個已訂購
+                        </div>
+                        <div className="product-price">
+                          <span>TWD </span>
+                          <h4>{item.productPrice}</h4>
+                          <span> 起</span>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </a>
-          </div>
+              </a>
+            </div>
+          </Fade>
         </>
       )
     }
@@ -275,13 +286,16 @@ function ProductList(props) {
             setPrice={setPrice}
             pricerange={pricerange}
           />
+
           <ProductListMainContent>
             {cat ||
             loc ||
             (searchParams.has('startDate') && searchParams.has('endDate')) ||
             (searchParams.has('minPrice') && searchParams.has('maxPrice')) ||
             !!keyword ? (
-              <ProductSearchResult productnumbers={count.length} />
+              <Fade>
+                <ProductSearchResult productnumbers={count.length} />
+              </Fade>
             ) : (
               ''
             )}
@@ -289,11 +303,13 @@ function ProductList(props) {
             {/* -------商品列表區域------ */}
             {display}
             {/* -------商品列表區域------ */}
-            <ProductListPageBar
-              productnumbers={count.length}
-              currentPage={currentPage}
-              perPage={perPage}
-            />
+            <Slide bottom>
+              <ProductListPageBar
+                productnumbers={count.length}
+                currentPage={currentPage}
+                perPage={perPage}
+              />
+            </Slide>
           </ProductListMainContent>
         </div>
       </div>

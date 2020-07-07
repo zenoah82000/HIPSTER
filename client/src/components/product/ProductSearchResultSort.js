@@ -1,5 +1,9 @@
 import React from 'react'
 import { Link, withRouter } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { fas } from '@fortawesome/free-solid-svg-icons'
+import { far } from '@fortawesome/free-regular-svg-icons'
+
 import '../../styles/product/ProductSearchResultSort.scss'
 
 function ProductSearchResultSort(props) {
@@ -27,7 +31,8 @@ function ProductSearchResultSort(props) {
               props.history.push(`?${searchParams.toString()}`)
             }}
           >
-            <i className="far fa-thumbs-up"></i>網站推薦
+            <FontAwesomeIcon icon={fas.faCalendarAlt} />
+            結束日期
           </a>
         </span>
         <span>
