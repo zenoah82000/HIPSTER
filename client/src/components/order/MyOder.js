@@ -4,12 +4,12 @@ import QRcode from 'qrcode.react'
 
 import { Modal, Button, Form } from 'react-bootstrap'
 function MyOder(props) {
-  const { item,orderlist} = props
+  const { item, orderlist } = props
 
   //檢視憑證狀態
-  const [proof,setProof] = useState(false)
+  const [proof, setProof] = useState(false)
   //憑證資料
-  const [proofdata,setProofdata] = useState([])
+  const [proofdata, setProofdata] = useState([])
 
   //訂單詳情資料
   const [detaildata, setDetaildata] = useState([])
@@ -17,16 +17,19 @@ function MyOder(props) {
   const [detail, setDetail] = useState(false)
 
   //展開判斷
-  const [unfoldtext,setUnfoldtext] = useState('展開更多')
+  const [unfoldtext, setUnfoldtext] = useState('展開更多')
 
   //判斷商品數量
-  const productamount =  orderlist.orderdetails
-    .filter((value) => value.orderId == item.orderId)
+  const productamount = orderlist.orderdetails.filter(
+    (value) => value.orderId == item.orderId
+  )
 
   //商品展開判斷
   const unfold = (e) => {
     if (unfoldtext == '展開更多') {
-      $(e.target).closest('.order-body').css('maxHeight', productamount.length*200+'px')
+      $(e.target)
+        .closest('.order-body')
+        .css('maxHeight', productamount.length * 200 + 'px')
       setUnfoldtext('收起')
     } else {
       $(e.target).closest('.order-body').css('maxHeight', '145px')
@@ -59,11 +62,24 @@ function MyOder(props) {
             <hr />
             <div className="orderpayinfo">
               <h6>付款資訊</h6>
-              <div className="detail-paytype"><p>付款方式:</p><span>{detaildata.paymentTypeId}</span></div>
-              <div className="detail-subtotal"><p>總計:</p><span>NT${detaildata.orderTotal}</span></div>
-              <div className="detail-coupon"><p>優惠碼{detaildata.coupon? detaildata.coupon: '(未使用)'}:</p><span>-NT${detaildata.discount}</span></div>
-              <div className="detail-total"><p>付款金額:</p><span>NT${detaildata.paymentTotal}</span></div>
-              
+              <div className="detail-paytype">
+                <p>付款方式:</p>
+                <span>{detaildata.paymentTypeId}</span>
+              </div>
+              <div className="detail-subtotal">
+                <p>總計:</p>
+                <span>NT${detaildata.orderTotal}</span>
+              </div>
+              <div className="detail-coupon">
+                <p>
+                  優惠碼{detaildata.coupon ? detaildata.coupon : '(未使用)'}:
+                </p>
+                <span>-NT${detaildata.discount}</span>
+              </div>
+              <div className="detail-total">
+                <p>付款金額:</p>
+                <span>NT${detaildata.paymentTotal}</span>
+              </div>
             </div>
           </div>
         </Modal.Body>
@@ -80,18 +96,19 @@ function MyOder(props) {
         centered
       >
         <Modal.Body className="modal-body">
-        <div className="prooftitle"><h6>{proofdata.productName}</h6>
-        <hr/>
-        <div className="proofqrcode"><QRcode value={item.orderId+proofdata.productId} size="100" /></div>
-        <hr/>
-        <div className="proofinfo">
-            <p>使用者:{item.contact}</p>
-            <p>數量:{proofdata.checkQty}</p>
-            <p>使用日期:{proofdata.date}</p>
-        </div>
-        </div>
-        
-          
+          <div className="prooftitle">
+            <h6>{proofdata.productName}</h6>
+            <hr />
+            <div className="proofqrcode">
+              <QRcode value={item.orderId + proofdata.productId} size="100" />
+            </div>
+            <hr />
+            <div className="proofinfo">
+              <p>使用者:{item.contact}</p>
+              <p>數量:{proofdata.checkQty}</p>
+              <p>使用日期:{proofdata.date}</p>
+            </div>
+          </div>
         </Modal.Body>
       </Modal>
     )
@@ -103,8 +120,8 @@ function MyOder(props) {
   }
   return (
     <>
-    <Orderdetail show={detail} onHide={() => setDetail(false)} />
-    <Orderproof show={proof} onHide={() => setProof(false)} />
+      <Orderdetail show={detail} onHide={() => setDetail(false)} />
+      <Orderproof show={proof} onHide={() => setProof(false)} />
       <div className="card order-box">
         <div className="card-header order-title">
           <div className="orderid">
@@ -152,9 +169,11 @@ function MyOder(props) {
                   ) : (
                     ''
                   )}
-                  <div className="d-flex product-box border-bottom align-items-center">
+                  <div className="d-flex product-box">
                     <div className="productimg mr-3">
-                      <img src={`http://localhost:5000/images/product/${value.productImg}`} />
+                      <img
+                        src={`http://localhost:5000/images/product/${value.productImg}`}
+                      />
                     </div>
                     <div className="oderproductinfo">
                       <div className="productname">
@@ -176,9 +195,13 @@ function MyOder(props) {
                       </div>
                     </div>
                     <div className="oderbutton">
-                      <button onClick={()=>{
+                      <button
+                        onClick={() => {
                           showproof(value)
-                      }}>檢視憑證</button>
+                        }}
+                      >
+                        檢視憑證
+                      </button>
                     </div>
                   </div>
                 </>
