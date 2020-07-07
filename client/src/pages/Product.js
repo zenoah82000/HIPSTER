@@ -41,43 +41,46 @@ function Product(props) {
   return (
     <>
       <div className="bg-white text-brown">
-        <div className="container position-relative">
+        <div className="container">
           <ProductBanner productImg={product.productImg} />
           {/* <MyBreadcrumb /> */}
-          <BookArea
-            productPrice={product.productPrice}
-            productEndingDate={product.productEndingDate}
-            productName={product.productName}
-            productId={product.productId}
-            productImg={product.productImg}
-            addCart={addCart}
-          />
-          <div className="product-main-left">
-            <h1 className="product-title">{product.productName}</h1>
-            <ProductStarBar
-              product={{ ...product }}
-              addwishlist={addwishlist}
-              deletewishlist={deletewishlist}
-              commentNum={commentNum}
-              star={star}
-            />
-            <ProductTime />
-            <Productinfoicon />
-            <ProductDescription productContent={product.productContent} />
-            <ProductHowtoArea
-              productAddress={product.productAddress}
-              addCart={addCart}
-            />
 
-            <CommentList
-              commentNum={commentNum}
-              setCommentNum={setCommentNum}
-              star={star}
-              setStar={setStar}
-              productName={product.productName}
-              productId={product.productId}
-              currentPage={currentPage}
-            />
+          <div className="position-relative">
+            <div className="product-main-left">
+              <h1 className="product-title">{product.productName}</h1>
+              <ProductStarBar
+                product={{ ...product }}
+                addwishlist={addwishlist}
+                deletewishlist={deletewishlist}
+                commentNum={commentNum}
+                star={star}
+              />
+              <ProductTime />
+              <Productinfoicon />
+              <ProductDescription productContent={product.productContent} />
+              <ProductHowtoArea
+                productAddress={product.productAddress}
+                addCart={addCart}
+              />
+              <BookArea
+                productPrice={product.productPrice}
+                productEndingDate={product.productEndingDate}
+                productName={product.productName}
+                productId={product.productId}
+                productImg={product.productImg}
+                addCart={addCart}
+              />
+
+              <CommentList
+                commentNum={commentNum}
+                setCommentNum={setCommentNum}
+                star={star}
+                setStar={setStar}
+                productName={product.productName}
+                productId={product.productId}
+                currentPage={currentPage}
+              />
+            </div>
           </div>
         </div>
       </div>
