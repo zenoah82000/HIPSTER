@@ -72,7 +72,7 @@ function ProductList(props) {
 
   const [price, setPrice] = useState(pricerange)
 
-  console.log(loc, cat, stdate, eddate, minPrice, maxPrice)
+  // console.log(loc, cat, stdate, eddate, minPrice, maxPrice)
 
   let length
   if (!!loc && !!cat) {
@@ -172,7 +172,16 @@ function ProductList(props) {
     count.sort(function (a, b) {
       return b.productPrice - a.productPrice
     })
-  } else {
+  } else if (sort === 'comdesc') {
+    count.sort(function (a, b) {
+      return b.star - a.star
+    })
+  }
+
+  function getRandomInt(min, max) {
+    min = Math.ceil(min)
+    max = Math.floor(max)
+    return Math.floor(Math.random() * (max - min)) + min //不含最大值，含最小值
   }
 
   useEffect(() => {
@@ -229,7 +238,7 @@ function ProductList(props) {
                       </div>
                       <span className="divider"></span>
                       <div className="product-booked-number">
-                        6.7K+ 個已訂購
+                        {getRandomInt(100, 1500)} 個已訂購
                       </div>
                       <div className="product-price">
                         <span>TWD </span>

@@ -19,55 +19,79 @@ function CommentList(props) {
     productId,
     currentPage,
     productName,
+    star,
+    setStar,
+    commentNum,
+    setCommentNum,
   } = props
   const [tabIndex, setTabIndex] = useState(0)
 
   const data = productComment
   const perPage = 5
 
-  console.log(data.length)
+  console.log(data)
   // console.log({ ...data[0] }.memberName)
-
+  let starsum = 0
   const display = data.map((item, index) => {
     const itemObj = { ...item }
+    if (data.length === 0) {
+      setStar(0)
+      setCommentNum(0)
+    } else {
+      starsum += +itemObj.star
+      setStar(Math.ceil(starsum / data.length))
+      setCommentNum(data.length)
+    }
+
     if (
       index >= currentPage * perPage - perPage &&
       index < currentPage * perPage
     ) {
       return (
         <>
-          <h2 className="eventTitle">評論{index + 1} </h2>
-          <ul className=" list-unstyled">
-            <li>{itemObj.memberName}</li>
-            <li>
-              星等
-              {itemObj.star}
-            </li>
-            <li>
-              <p className="">{itemObj.content}</p>
-            </li>
+          <div className="commentList d-flex row">
+            <div className="col-md-2 col-sm-2">
+              <div className="iconBox">
+                <img
+                  src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
+                  alt=""
+                />
+              </div>
+            </div>
+            <div className="commentBox col-md-10 col-sm-10">
+              <h2 className="eventTitle">{itemObj.memberName} </h2>
+              <ul className=" list-unstyled">
+                <li>
+                  星等
+                  {itemObj.star}
+                </li>
+                <li>
+                  <p className="">{itemObj.content}</p>
+                </li>
 
-            <li className="d-flex">
-              <SimpleReactLightbox>
-                <SRLWrapper>
-                  <div className="commentImg">
-                    <img
-                      className="commentImgPhoto commentImghover"
-                      src={`http://localhost:5000/images/comments/${itemObj.commentImg}`}
-                      // this.state.data.commentImg
-                      alt={itemObj.commentImg}
-                    />
-                  </div>
-                </SRLWrapper>
-              </SimpleReactLightbox>
-            </li>
-          </ul>
-          <hr />
+                <li className="d-flex">
+                  <SimpleReactLightbox>
+                    <SRLWrapper>
+                      <div className="commentImg">
+                        <img
+                          className="commentImgPhoto commentImghover"
+                          src={`http://localhost:5000/images/comments/${itemObj.commentImg}`}
+                          // this.state.data.commentImg
+                          alt={itemObj.commentImg}
+                        />
+                      </div>
+                    </SRLWrapper>
+                  </SimpleReactLightbox>
+                </li>
+              </ul>
+            </div>
+          </div>
         </>
       )
     }
   })
-
+  console.log(star)
+  console.log(commentNum)
   useEffect(() => {
     getProductCommentAsync(props.match.params.id)
   }, [])
@@ -83,25 +107,12 @@ function CommentList(props) {
           <Tab>問與答</Tab>
         </TabList>
         <TabPanel>
-          <div>
-            <div className="commentList d-flex row">
-              <div className="col-md-2 col-sm-2">
-                <div className="iconBox">
-                  <img
-                    src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div className="commentBox col-md-10 col-sm-10">
-                {data.length === 0 ? (
-                  <h2 className="eventTitle">暫無評論 </h2>
-                ) : (
-                  display
-                )}
-              </div>
-            </div>
-          </div>
+          {data.length === 0 ? (
+            <h2 className="eventTitle">暫無評論 </h2>
+          ) : (
+            display
+          )}
+
           <ProductListPageBar
             currentPage={currentPage}
             productnumbers={data.length}
