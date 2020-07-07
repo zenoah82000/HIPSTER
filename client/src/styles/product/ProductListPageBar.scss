@@ -4,12 +4,13 @@
   display: flex;
   justify-content: center;
   @media screen and (max-width: 599px) {
-    width: 100%;
-    flex-wrap: wrap;
   }
 
   & li {
     margin: 0 10px;
+    @media screen and (max-width: 599px) {
+      margin: 0 1px;
+    }
   }
 
   & li > a {
@@ -21,6 +22,12 @@
     background: white;
     border: 1px solid #707070;
     cursor: pointer;
+    @media screen and (max-width: 599px) {
+      &.prepage,
+      &.nextpage {
+        display: none;
+      }
+    }
     &:hover,
     &.active {
       background: #684b38;
