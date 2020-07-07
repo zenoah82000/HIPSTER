@@ -506,7 +506,7 @@ function Mynavbar(props) {
 
           <ul className="menu" style={burgerstate ? { width: '100%' } : {}}>
             <li>
-              <Link className="hvr-float hvr-underline-from-center" to="/about">
+              <Link className="hvr-float hvr-underline-from-center">
                 品牌介紹
               </Link>
             </li>
@@ -530,10 +530,7 @@ function Mynavbar(props) {
               </Link>
             </li>
             <li>
-              <Link
-                className="hvr-float hvr-underline-from-center"
-                to="/contact"
-              >
+              <Link className="hvr-float hvr-underline-from-center">
                 聯絡我們
               </Link>
             </li>

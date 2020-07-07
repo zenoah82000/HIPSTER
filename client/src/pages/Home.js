@@ -269,6 +269,7 @@ function Home(props) {
             StartTime: searchBarStartTime.value,
             EndTime: searchBarEndTime.value,
           }
+          window.location.href = `/productlist?startDate=${searchBarStartTime.value}&endDate=${searchBarEndTime.value}`
           console.log(searchBarTimeData)
         }}
       >
@@ -376,8 +377,11 @@ function Home(props) {
   const ProductFeatureddisplay = ProductFeatured.map((item, index) => {
     return (
       <>
-        <FeaturedProduct item={item} addwishlist={props.addwishlist}
-          deletewishlist={props.deletewishlist}/>
+        <FeaturedProduct
+          item={item}
+          addwishlist={props.addwishlist}
+          deletewishlist={props.deletewishlist}
+        />
       </>
     )
   })
@@ -542,7 +546,7 @@ function Home(props) {
             </div>
           </Fade>
           <Fade>
-            <a href="/productlist" className="more-activity-btn">
+            <a href="/productlist?sort=comdesc" className="more-activity-btn">
               查看更多活動
             </a>
           </Fade>
@@ -565,7 +569,7 @@ function Home(props) {
               <Slider {...countdowns}>{ProductEnddisplay}</Slider>
             </div>
           </Fade>
-          <a href="/productlist" className="more-countdown-btn">
+          <a href="/productlist?sort=prec" className="more-countdown-btn">
             查看更多活動
           </a>
         </div>
