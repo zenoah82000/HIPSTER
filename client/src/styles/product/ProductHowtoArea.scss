@@ -5,11 +5,18 @@
 }
 .product-howto-area {
   padding-bottom: 15px;
+  @media screen and (max-width: 599px) {
+    padding: 0 12px 15px 12px;
+  }
   & > ul > li {
+    font-family: '微軟正黑體';
     margin-bottom: 6px;
     font-size: 18px;
     font-weight: 800;
     list-style-position: inside;
+    @media screen and (max-width: 599px) {
+      font-size: 16px;
+    }
   }
   .li-16px {
     font-size: 16px;
@@ -24,6 +31,9 @@
 
   .product-howto-title {
     @extend %h2Title;
+    @media screen and (max-width: 599px) {
+      margin: 24px 0 16px 0;
+    }
   }
 
   .product-business-time,

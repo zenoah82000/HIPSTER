@@ -6,6 +6,10 @@
   border-radius: 5px;
   padding: 20px;
   box-shadow: 0px 0px 5px 0px rgba(104, 75, 56, 0.4);
+  @media screen and (max-width: 599px) {
+    width: 100%;
+    bottom: 0;
+  }
   h2 {
     margin-bottom: 10px;
   }
@@ -63,7 +67,6 @@
     margin-bottom: 15px;
     padding: 10px 10px;
     box-shadow: 0 0 5px 0 rgba(128, 128, 128, 0.37);
-    
 
     .plus_btn,
     .minus_btn {

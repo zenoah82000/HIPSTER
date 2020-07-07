@@ -5,4 +5,8 @@
     font-weight: 400;
     letter-spacing: unset;
   }
+  @media screen and (max-width: 599px) {
+    padding: 0 12px;
+    margin-bottom: 14px;
+  }
 }
