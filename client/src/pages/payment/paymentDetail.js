@@ -20,7 +20,12 @@ function PaymentDetail(props) {
 
   //需要輸入的欄位
   let email, phone, lastName, firstName
-
+  useEffect(()=>{
+    email.value = buyerinfo.email ||''
+    phone.value = buyerinfo.phone ||''
+    lastName.value = buyerinfo.lastName ||''
+    firstName.value = buyerinfo.firstName ||''
+  },[])
   //下一頁(填寫付款資訊)
   const nextPage = (e) => {
     const form = e.currentTarget
@@ -63,8 +68,8 @@ function PaymentDetail(props) {
         <div className="container mb-5">
           <div className="row">
             <div className="prograssBar1 mt-5"></div>
-            <div className="col-9">
-              <div className=" mr-3">
+            <div className="col-12 col-md-9">
+              <div className="payment-mr">
                 <div className="p-5 mt-3 contentBox">
                   <div className="paytitle-border">
                     <div className="subTitle">
@@ -73,6 +78,7 @@ function PaymentDetail(props) {
                   </div>
 
                   <div className="d-flex">
+                    <Row>
                     <Form.Group as={Col} xs={12} sm={12} md={6}>
                       <Form.Control
                         required
@@ -102,6 +108,7 @@ function PaymentDetail(props) {
                         請輸入名字
                       </Form.Control.Feedback>
                     </Form.Group>
+                    </Row>
                   </div>
                   <Form.Group>
                     <Form.Control
@@ -143,7 +150,7 @@ function PaymentDetail(props) {
               </div>
             </div>
 
-            <div className="col-3">
+            <div className="col-12 col-md-3">
               <div className="mt-3">
                 <div className="priceBox ">
                 <input className="checkout-info-button" value="檢視訂單資料" type="button" onClick={()=>{

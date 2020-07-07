@@ -6,8 +6,15 @@ import { far } from '@fortawesome/free-regular-svg-icons'
 import '../../styles/product/ProductStarBar.scss'
 
 function ProductStarBar(props) {
-  const { wishlist, addwishlist, deletewishlist, product } = props
-  console.log(product)
+  const {
+    wishlist,
+    addwishlist,
+    deletewishlist,
+    product,
+    commentNum,
+    star,
+  } = props
+  // console.log(product)
   const member = JSON.parse(localStorage.getItem('member')) || ''
   const addWish = () => {
     if (member.id) {
@@ -31,7 +38,7 @@ function ProductStarBar(props) {
             <i className="fas fa-star"></i>
             <span className="product-star-scores"> {product.star} </span>
             <a href="#review" className="product-comment-num">
-              (4則評論)
+              ({commentNum}則評論)
             </a>
             <span className="separator"></span>
           </p>

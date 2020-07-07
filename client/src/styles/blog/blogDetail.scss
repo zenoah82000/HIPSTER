@@ -38,7 +38,7 @@
   ul {
     padding: 5px;
     li {
-      padding: 10px;
+      // padding: 10px;
       img {
         border-radius: 8px;
         width: 260px;
@@ -57,6 +57,21 @@
       width: 70px;
       height: 70px;
       border-radius: 50%;
+    }
+  }
+  ul {
+    li {
+      textarea {
+        width: 100%;
+        min-height: 135px;
+      }
+      button {
+        display: block;
+        height: 50px;
+        background: #b98f50;
+        color: #fff !important;
+        margin-bottom: 5px;
+      }
     }
   }
 }

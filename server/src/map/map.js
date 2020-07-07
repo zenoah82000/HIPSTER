@@ -11,7 +11,7 @@ router.get("/map", async (req, res) => {
     cafelist: [],
   };
   const sqlproductlist =
-    "SELECT `product`.`productId`,`product`.`productAddress`,`product`.`productName`,`product`.`productImg`,`product`.`categoryId`,`product`.`lat`,`product`.`log`,`product`.`category`,`product`.`productPrice`,`category`.`categoryName` FROM`product`LEFT JOIN `category` ON  `product`.`categoryId` =`category`.`categoryId`";
+    "SELECT `product`.`productId`,`product`.`productAddress`,`product`.`productName`,`product`.`productImg`,`product`.`categoryId`,`product`.`lat`,`product`.`log`,`product`.`category`,`product`.`productPrice`,`product`.`productPrice`,`product`.`star`,`product`.`productEndingDate`,`category`.`categoryName` FROM`product`LEFT JOIN `category` ON  `product`.`categoryId` =`category`.`categoryId`";
 
   const sqlcafelist = "SELECT * FROM `map_cafe`";
 

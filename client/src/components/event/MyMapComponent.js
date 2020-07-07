@@ -338,7 +338,8 @@ export default class ViewportExample extends Component {
                         <FaRegCalendarCheck />
                       </span>
                       <span>
-                        活動時間:{clickData.openTime}-{clickData.closeTime}
+                        活動日期: 即日起 ~
+                        {clickData.productEndingDate.substring(0, 10)}
                       </span>
                     </li>
                     <li>
@@ -362,15 +363,24 @@ export default class ViewportExample extends Component {
                         <FaRegCalendarCheck />
                       </span>
                       <span>
-                        價格：NT$
-                        {clickData.productPrice
-                          .toString()
-                          .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
+                        價格：
+                        <span
+                          className={clickData.productPrice == 0 ? 'blue' : ''}
+                        >
+                          {clickData.productPrice == 0
+                            ? '免費'
+                            : `NT${clickData.productPrice
+                                .toString()
+                                .replace(
+                                  /(\d)(?=(\d{3})+(?:\.\d+)?$)/g,
+                                  '$1,'
+                                )}`}
+                        </span>
                       </span>
                     </li>
                   </ul>
                   <div className="cardButton">
-                    <a value="" href={'/product/{item.productId}'}>
+                    <a value="" href={`/product/${clickData.productId}`}>
                       立即預定商品
                     </a>
                   </div>
@@ -430,7 +440,8 @@ export default class ViewportExample extends Component {
                           <FaRegClock />
                         </span>
                         <span>
-                          活動日期: {item.openTime}-{item.closeTime}
+                          活動日期: 即日起 ~{' '}
+                          {item.productEndingDate.substring(0, 10)}
                         </span>
                       </li>
                       <li>
@@ -444,17 +455,28 @@ export default class ViewportExample extends Component {
                           <RiMoneyCnyCircleLine />
                         </span>
                         <span>
-                          價格：NT$
-                          {item.productPrice
-                            .toString()
-                            .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
+                          價格：
+                          <span
+                            className={
+                              clickData.productPrice == 0 ? 'blue' : ''
+                            }
+                          >
+                            {item.productPrice == 0
+                              ? '免費'
+                              : `NT${item.productPrice
+                                  .toString()
+                                  .replace(
+                                    /(\d)(?=(\d{3})+(?:\.\d+)?$)/g,
+                                    '$1,'
+                                  )}`}
+                          </span>
                         </span>
                       </li>
                     </ul>
                     <div className="cardButton">
                       <a
                         value=""
-                        href={'/product/{item.productId}'}
+                        href={`/product/${item}.productId}`}
                         target="_blank"
                       >
                         立即預定商品
@@ -523,10 +545,19 @@ export default class ViewportExample extends Component {
                         <RiMoneyCnyCircleLine />
                       </span>
                       <span>
-                        價格：NT$
-                        {item.productPrice
-                          .toString()
-                          .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
+                        價格：
+                        <span
+                          className={clickData.productPrice == 0 ? 'blue' : ''}
+                        >
+                          {item.productPrice == 0
+                            ? '免費'
+                            : `NT${item.productPrice
+                                .toString()
+                                .replace(
+                                  /(\d)(?=(\d{3})+(?:\.\d+)?$)/g,
+                                  '$1,'
+                                )}`}
+                        </span>
                       </span>
                     </li>
                   </ul>

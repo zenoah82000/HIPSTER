@@ -7,7 +7,7 @@
   }
   .orderlistbox {
     .order-box {
-      width: 760px;
+      width: 100%;
       border: 1px solid gray;
       background-color: white;
       margin: 20px 10px;
@@ -69,6 +69,7 @@
         overflow: hidden;
         transition: 0.5s;
         .product-box {
+          align-items: center;
           padding: 10px;
           .productimg {
             width: 160px;
@@ -111,9 +112,104 @@
             text-align: right;
             button {
               outline: none;
-              color: blue;
-              background-color: transparent;
+              color: white;
+              background-color: #8d6c56;
               border: none;
+              border-radius: 5px;
+              padding: 5px 10px;
+              &:hover {
+                background-color: #664f40;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 576px) {
+  .usercontainer {
+    .usertitle {
+    }
+    .orderlistbox {
+      .order-box {
+        width: 300px;
+        .order-title {
+          .orderid {
+            width: 70%;
+            order: 1;
+            margin-bottom: 0;
+            h6 {
+              font-size: 14px;
+            }
+          }
+          .ordertime {
+            width: 100%;
+            order: 3;
+            h6 {
+              font-size: 14px;
+            }
+          }
+          .orderstatus {
+            width: 30%;
+            order: 2;
+            h6 {
+              font-size: 14px;
+            }
+          }
+          .ordertotal {
+            width: 100%;
+            order: 4;
+            h6 {
+              font-size: 14px;
+            }
+            .order-detail {
+              font-size: 14px;
+              padding: 0;
+            }
+          }
+        }
+        .order-body {
+          .product-box {
+            flex-wrap: wrap;
+            align-items: center;
+            .productimg {
+              width: 80px;
+              height: 80px;
+              img {
+              }
+            }
+            .oderproductinfo {
+              width: 65%;
+              .productname {
+                p {
+                  line-height: normal;
+                  font-size: 12px;
+                }
+              }
+              .productamount {
+                p {
+                  line-height: normal;
+                  letter-spacing: normal;
+                }
+              }
+              .productprice {
+                p {
+                  line-height: normal;
+                  letter-spacing: normal;
+                }
+              }
+              .productdate {
+                p {
+                  line-height: normal;
+                  letter-spacing: normal;
+                }
+              }
+            }
+            .oderbutton {
+              text-align: left;
+              button {
+              }
             }
           }
         }
@@ -145,6 +241,16 @@
       cursor: default;
       pointer-events: none;
       filter: opacity(0.4);
+    }
+  }
+}
+@media screen and (max-width: 576px) {
+  .orderpage {
+    & li {
+      &.active {
+      }
+      &.disabled {
+      }
     }
   }
 }

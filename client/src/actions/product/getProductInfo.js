@@ -16,7 +16,7 @@ export const getProductInfoAsync = (productId) => {
 
     const response = await fetch(request)
     const data = await response.json()
-    console.log(data)
+    // console.log(data)
     dispatch(getProductInfo(data))
   }
 }
