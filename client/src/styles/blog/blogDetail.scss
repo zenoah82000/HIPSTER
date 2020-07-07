@@ -1,5 +1,13 @@
-.blog-main-content {
+.blog-detail-main {
   background: #fff;
+  padding-right: 100px;
+}
+
+.blog-detail-title {
+  font-weight: 800;
+}
+
+.blog-detail-content {
   width: 100%;
 }
 .blog-content-aside {
@@ -31,7 +39,7 @@
     margin: 10px auto;
   }
 }
-.related-posts {
+.blog-related-posts {
   h3 {
     font-weight: 900;
   }
