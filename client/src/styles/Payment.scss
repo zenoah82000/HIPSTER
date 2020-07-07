@@ -111,9 +111,17 @@
 .contentBox {
   width: 100%;
   // height: 800px;
+  margin-right: 24px;
   background: white;
 }
-
+.payment-mr {
+  margin-right: 16px;
+}
+@media screen and (max-width: 576px) {
+  .payment-mr {
+    margin-right: 0px;
+  }
+}
 .contentBox h1,
 .contentBox span {
   color: #688e67;
