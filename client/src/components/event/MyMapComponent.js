@@ -363,10 +363,19 @@ export default class ViewportExample extends Component {
                         <FaRegCalendarCheck />
                       </span>
                       <span>
-                        價格：NT$
-                        {clickData.productPrice
-                          .toString()
-                          .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
+                        價格：
+                        <span
+                          className={clickData.productPrice == 0 ? 'blue' : ''}
+                        >
+                          {clickData.productPrice == 0
+                            ? '免費'
+                            : `NT${clickData.productPrice
+                                .toString()
+                                .replace(
+                                  /(\d)(?=(\d{3})+(?:\.\d+)?$)/g,
+                                  '$1,'
+                                )}`}
+                        </span>
                       </span>
                     </li>
                   </ul>
@@ -446,10 +455,21 @@ export default class ViewportExample extends Component {
                           <RiMoneyCnyCircleLine />
                         </span>
                         <span>
-                          價格：NT$
-                          {item.productPrice
-                            .toString()
-                            .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
+                          價格：
+                          <span
+                            className={
+                              clickData.productPrice == 0 ? 'blue' : ''
+                            }
+                          >
+                            {item.productPrice == 0
+                              ? '免費'
+                              : `NT${item.productPrice
+                                  .toString()
+                                  .replace(
+                                    /(\d)(?=(\d{3})+(?:\.\d+)?$)/g,
+                                    '$1,'
+                                  )}`}
+                          </span>
                         </span>
                       </li>
                     </ul>
@@ -525,10 +545,19 @@ export default class ViewportExample extends Component {
                         <RiMoneyCnyCircleLine />
                       </span>
                       <span>
-                        價格：NT$
-                        {item.productPrice
-                          .toString()
-                          .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
+                        價格：
+                        <span
+                          className={clickData.productPrice == 0 ? 'blue' : ''}
+                        >
+                          {item.productPrice == 0
+                            ? '免費'
+                            : `NT${item.productPrice
+                                .toString()
+                                .replace(
+                                  /(\d)(?=(\d{3})+(?:\.\d+)?$)/g,
+                                  '$1,'
+                                )}`}
+                        </span>
                       </span>
                     </li>
                   </ul>

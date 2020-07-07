@@ -11,6 +11,7 @@ import ProductListPageBar from './ProductListPageBar'
 import ProductQanda from '../qanda/ProductQanda'
 import SimpleReactLightbox from 'simple-react-lightbox'
 import { SRLWrapper } from 'simple-react-lightbox'
+import { AiFillStar } from 'react-icons/ai'
 
 function CommentList(props) {
   const {
@@ -28,6 +29,15 @@ function CommentList(props) {
 
   const data = productComment
   const perPage = 5
+
+  //星等
+  const stars = (v) => {
+    const star = []
+    for (let i = 0; i < 5; i++) {
+      star.push(<AiFillStar className={v > i ? 'star1' : 'star2'} />)
+    }
+    return star
+  }
 
   console.log(data)
   // console.log({ ...data[0] }.memberName)
@@ -49,22 +59,20 @@ function CommentList(props) {
     ) {
       return (
         <>
-          <div className="commentList d-flex row">
-            <div className="col-md-2 col-sm-2">
-              <div className="iconBox">
+          <div className="commentList d-flex row" id="review">
+            <div className="col-md-2 col-sm-2 text-center">
+              <div className="iconBox m-auto mb-1">
                 <img
-                  src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
-                  alt=""
+                  src={
+                    'http://localhost:5000/images/member/' + itemObj.memberImg
+                  }
                 />
               </div>
+              <p>{itemObj.memberName}</p>
             </div>
             <div className="commentBox col-md-10 col-sm-10">
-              <h2 className="eventTitle">{itemObj.memberName} </h2>
-              <ul className=" list-unstyled">
-                <li>
-                  星等
-                  {itemObj.star}
-                </li>
+              <h3 className="eventTitle">{stars(itemObj.star)} </h3>
+              <ul className=" list-unstyled box2">
                 <li>
                   <p className="">{itemObj.content}</p>
                 </li>
@@ -82,6 +90,11 @@ function CommentList(props) {
                       </div>
                     </SRLWrapper>
                   </SimpleReactLightbox>
+                </li>
+                <li>
+                  <small style={{ color: 'grey' }}>
+                    評論日期: {itemObj.updated_at.substring(0, 10)}
+                  </small>
                 </li>
               </ul>
             </div>

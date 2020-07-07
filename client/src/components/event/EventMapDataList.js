@@ -575,10 +575,14 @@ class mapList extends React.Component {
                     <span className="mr-2">
                       <RiMoneyCnyCircleLine />
                     </span>
-                    價格：NT$
-                    {item.productPrice
-                      .toString()
-                      .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
+                    價格：
+                    <span className={item.productPrice == 0 ? 'blue' : ''}>
+                      {item.productPrice == 0
+                        ? '免費'
+                        : `NT${item.productPrice
+                            .toString()
+                            .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}`}
+                    </span>
                   </li>
                 </ul>
               </div>
