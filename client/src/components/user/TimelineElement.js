@@ -42,7 +42,7 @@ function TimelineElement({ myMapData }) {
                         'http://localhost:5000/images/comments/' +
                         myMapData.commentImg
                       }
-                      alt="first"
+                      alt={myMapData.content}
                     />
                   </div>
                 ) : (

@@ -369,7 +369,7 @@ export default class ViewportExample extends Component {
                         >
                           {clickData.productPrice == 0
                             ? '免費'
-                            : `NT${clickData.productPrice
+                            : `NT$ ${clickData.productPrice
                                 .toString()
                                 .replace(
                                   /(\d)(?=(\d{3})+(?:\.\d+)?$)/g,
@@ -463,7 +463,7 @@ export default class ViewportExample extends Component {
                           >
                             {item.productPrice == 0
                               ? '免費'
-                              : `NT${item.productPrice
+                              : `NT$ ${item.productPrice
                                   .toString()
                                   .replace(
                                     /(\d)(?=(\d{3})+(?:\.\d+)?$)/g,
@@ -551,7 +551,7 @@ export default class ViewportExample extends Component {
                         >
                           {item.productPrice == 0
                             ? '免費'
-                            : `NT${item.productPrice
+                            : `NT$ ${item.productPrice
                                 .toString()
                                 .replace(
                                   /(\d)(?=(\d{3})+(?:\.\d+)?$)/g,
