@@ -8,17 +8,23 @@ import { getUserCouponDetaiAsync } from '../../actions/coupon/getCoupon'
 import $ from 'jquery'
 
 function CouponAllData(props) {
-  // console.log('10行', window.location.pathname.indexOf('available'))
   const { userCouponData, getUserCouponDetaiAsync } = props
+  let memberId = 0
+  if (JSON.parse(localStorage.getItem('member'))) {
+    memberId = JSON.parse(localStorage.getItem('member')).id
+  } else {
+    memberId = 0
+  }
   useEffect(() => {
     getUserCouponDetaiAsync()
   }, [])
-  const memberId = JSON.parse(localStorage.getItem('member')).id
+
   let couponList = userCouponData.map((item) => {
     if (
       item.memberId == memberId &&
       Date.parse(item.startTime).valueOf() < Date.parse(new Date()).valueOf() &&
-      Date.parse(item.endTime).valueOf() > Date.parse(new Date()).valueOf()
+      Date.parse(item.endTime).valueOf() > Date.parse(new Date()).valueOf() &&
+      item.memberCouponNum == 1
     ) {
       return (
         <option value={item.discountPercent} data-code={item.discountCode}>
