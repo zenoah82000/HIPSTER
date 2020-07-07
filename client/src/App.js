@@ -266,7 +266,7 @@ function App(props) {
           <Route path="/blogDetail/:articleId?">
             <BlogDetail />
           </Route>
-          <Route path="/blog/:categoryId?">
+          <Route path="/blog">
             <Blog />
           </Route>
           <Route path="/blogAdd">

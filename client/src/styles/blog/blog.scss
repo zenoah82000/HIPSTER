@@ -1,5 +1,22 @@
 @import './../HS.scss';
 
+.blog-list-bg {
+  background: rgb(230, 222, 216);
+}
+
+.blog-sort-nav {
+  margin-bottom: 10px;
+  li {    
+    a {
+      color: #684b38;
+      font-weight: bold;
+    }
+    .active {
+      border-bottom: 3px solid #b98f50;
+    }
+  }
+}
+
 .blog-list-card {
   background: #ffffff;
   border-radius: 5px;
