@@ -248,7 +248,8 @@ function ProductList(props) {
                         </div>
                         <span className="divider"></span>
                         <div className="product-booked-number">
-                          {getRandomInt(100, 1500)} 個已訂購
+                          {/* {getRandomInt(100, 1500)}  */}
+                          100+個已訂購
                         </div>
                         <div className="product-price">
                           <span>TWD </span>
