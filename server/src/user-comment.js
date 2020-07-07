@@ -32,7 +32,7 @@ router.post("/sendComments", async (req, res) => {
   console.log(req.body);
 
   const addCommentList =
-    "UPDATE `comments` SET `content`=?, `star` = ?,`commentImg`=?  WHERE `itemListId`=?";
+    "UPDATE `comments` SET `content`=?, `star` = ?,`commentImg`=? ,`updated_at`=? WHERE `itemListId`=?";
 
   const filename = req.body.fileName.split(".").pop();
 
@@ -40,11 +40,12 @@ router.post("/sendComments", async (req, res) => {
     req.body.fileLength > 0
       ? `commentImg_${req.body.itemListId}.${filename}`
       : "0";
-  console.log(commentImg);
+  // console.log(commentImg);
   const [r2] = await db.query(addCommentList, [
     req.body.commentContent,
     req.body.star,
     commentImg,
+    null,
     req.body.itemListId,
   ]);
   res.json("ok");

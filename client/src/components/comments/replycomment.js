@@ -102,7 +102,7 @@ function ReplyComment({
       fileName: fileName,
     }
     if (text !== null && text !== '') {
-      sendCommentAsync(commentData)
+      sendCommentAsync(commentData) 
       setText('')
       setLoad(true)
 
