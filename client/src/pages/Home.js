@@ -546,7 +546,7 @@ function Home(props) {
             </div>
           </Fade>
           <Fade>
-            <a href="/productlist" className="more-activity-btn">
+            <a href="/productlist?sort=comdesc" className="more-activity-btn">
               查看更多活動
             </a>
           </Fade>
@@ -569,7 +569,7 @@ function Home(props) {
               <Slider {...countdowns}>{ProductEnddisplay}</Slider>
             </div>
           </Fade>
-          <a href="/productlist" className="more-countdown-btn">
+          <a href="/productlist?sort=prec" className="more-countdown-btn">
             查看更多活動
           </a>
         </div>
