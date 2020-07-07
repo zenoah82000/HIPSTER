@@ -33,6 +33,7 @@ function BookArea(props) {
             </li>
           </ul>
         </div>
+        <div className="number_title">選擇日期:</div>
         <div className="calendarforbook">
           <Calendar
             value={selectDate}

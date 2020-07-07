@@ -11,7 +11,7 @@ function BlogDetail(props) {
   const { blogData, blogCommentsData, getBlogDataAsync, getBlogCommentsDataAsync, addBlogCommentsDataAsync } = props   
   const { articleId } = props.match.params
   const memberId = JSON.parse(localStorage.getItem('member')).id
-  const memberImg = JSON.parse(localStorage.getItem('member')).img
+  // const memberImg = JSON.parse(localStorage.getItem('member')).img
   const [addCommentContent, setAddCommentContent] =  useState('')  
   let categoryId
 
@@ -21,20 +21,30 @@ function BlogDetail(props) {
     console.log('componentDidMount') 
   }, [])    
 
-  const showBlogDetail = blogData.map((item)=>{
-    if(item.articleId==articleId){
-      //取得這篇文章的類別ID，給關連文章
-      categoryId = item.categoryId
+  const blogDataFt = blogData.filter((item)=>{
+     //取得這篇文章的類別ID，給關連文章
+    categoryId = item.categoryId
+    return item.articleId==articleId
+  })
+
+  const showBlogDetail = blogDataFt.map((item)=>{
     return (
-      <div className="d-flex">
-        <div className="col-8" key={item.articleId}>
-          <h1>{item.articleTitle}</h1>
+      <>
+        <div className="col-9">
+         <div className="blog-detail-main">
+           <h1 className="blog-detail-title">{item.articleTitle}</h1>
           <p>{'發文日期:'+item.created_at}</p>
-          <div className="blog-main-content" dangerouslySetInnerHTML={{__html: item.articleContent}}>        
-          </div>                   
-        </div>
-        <div className="col-1"></div>
-        <aside className="col-3 blog-content-aside">
+          <div className="blog-detail-content" dangerouslySetInnerHTML={{__html: item.articleContent}}>        
+          </div>
+         </div>                             
+        </div>              
+      </>
+    )
+  })
+
+  const showAuthor = blogDataFt.map((item)=>{
+    return(
+      <aside className="col-3 blog-content-aside">
           <div className="card">
             <p>作者資訊</p>
             <div className="blog-author-avatar">
@@ -42,7 +52,7 @@ function BlogDetail(props) {
             </div>
             <h3 className="text-center">{item.memberName}</h3>
             {/* <p className="text-center">發表文章數:999</p> */}
-            {/* <button className="btn d-block">看更多他的文</button> */}
+            <button className="btn d-block">看更多他的文</button>
           </div>
           {/* <div className="featured">
             <p>本月精選</p>
@@ -69,8 +79,7 @@ function BlogDetail(props) {
             </div>             
           </div> */}
         </aside>
-      </div>
-    )}
+    )
   })
 
   const BlogRelated = blogData.filter((item)=>(
@@ -151,17 +160,19 @@ function BlogDetail(props) {
   }
 
   return (
-    <div className="container">
-      <MyBreadcrumb />
-      <div>
-        {showBlogDetail} 
-        <div className="related-posts my-5">
-          <h3>相關文章</h3>
-          <ul className="row list-unstyled">
-            {showBlogRelated}             
-          </ul>
-        </div>                       
-      </div>
+    <div className="blog-list-bg">
+    <Container>
+      {/* <MyBreadcrumb /> */}
+      <div className="d-flex">
+        {showBlogDetail}
+        {showAuthor}
+      </div> 
+      <div className="blog-related-posts my-5">
+        <h3>相關文章</h3>
+        <ul className="row list-unstyled">
+          {showBlogRelated}             
+        </ul>
+      </div>   
       <div className="row">
         <div className="blog-comment col-8">
           <h3>{numBlogComment + '則評論'}</h3>
@@ -177,6 +188,7 @@ function BlogDetail(props) {
           </ul>
         </div>
       </div>      
+    </Container>
     </div>
   )
 }

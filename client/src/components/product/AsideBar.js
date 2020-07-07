@@ -559,7 +559,7 @@ function AsideBar(props) {
             </ul>
           </Collapse>
         </div>
-        <div>
+        <div className="calendar-filter-box">
           <div className="aside-wrapper-filter-box">
             <div
               onClick={() => {

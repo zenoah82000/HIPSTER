@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Route, withRouter, Link, NavLink, Switch, } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
-import Masonry from 'react-masonry-css'
 
 import BlogSort from '../../components/blog/BlogSort'
 import BlogList from '../../components/blog/BlogList'

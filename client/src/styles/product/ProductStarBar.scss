@@ -2,6 +2,10 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
+  @media screen and (max-width: 599px) {
+    padding: 0 12px;
+    margin-bottom: 14px;
+  }
 
   .product-star-box {
     p {
@@ -44,13 +48,16 @@
     align-items: center;
     cursor: pointer;
     .fa-heart {
-      font-size: 18px;
+      font-size: 22px;
       &.active {
         color: rgb(252, 119, 221);
       }
     }
     span {
-      font-size: 14px;
+      font-size: 20px;
+      @media screen and (max-width: 599px) {
+        font-size: 16px;
+      }
     }
   }
 }

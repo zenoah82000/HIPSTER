@@ -7,27 +7,47 @@
 .product-description {
   .product-description-title {
     @extend %h2Title;
+    @media screen and (max-width: 599px) {
+      padding: 0 12px;
+      margin: 24px 0 16px 0;
+    }
   }
 
   .product-content {
     font-size: 16px;
     font-weight: 500;
+    font-family: '微軟正黑體';
     letter-spacing: unset;
     line-height: 23.8px;
     margin-bottom: 24px;
     white-space: pre-wrap;
+    @media screen and (max-width: 599px) {
+      padding: 0 18px;
+      letter-spacing: 1px;
+      text-align: justify;
+    }
   }
 
   .product-images-area {
+    @media screen and (max-width: 599px) {
+      padding: 0 12px;
+    }
     .product-images {
       margin: 0 0 30px 0;
       width: 100%;
+      @media screen and (max-width: 599px) {
+        margin: 0 0 20px 0;
+      }
       img {
         height: 440px;
         object-fit: cover;
+        @media screen and (max-width: 599px) {
+          height: 220px;
+        }
       }
 
       figcaption {
+        font-family: '微軟正黑體';
         margin: 3px 0;
         font-size: 14px;
         line-height: 18px;
@@ -37,8 +57,13 @@
           background: #684b38;
           width: 16px;
           height: 18px;
-          margin: 0 8px;
+          margin: 0 8px 0 4px;
           clip-path: polygon(50% 21%, 0% 100%, 100% 100%);
+          @media screen and (max-width: 599px) {
+            width: 12px;
+            height: 13.5px;
+            margin: 0 6px 0 2px;
+          }
         }
       }
     }

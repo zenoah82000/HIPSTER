@@ -523,7 +523,7 @@ class mapList extends React.Component {
 
     let data = updatedList.map((item, index, array) => {
       return (
-        <Fade>
+        <Fade bottom>
           <li
             className="eventContentLi list-group-item"
             data-category={item.productName}
@@ -579,7 +579,7 @@ class mapList extends React.Component {
                     <span className={item.productPrice == 0 ? 'blue' : ''}>
                       {item.productPrice == 0
                         ? '免費'
-                        : `NT${item.productPrice
+                        : `NT$ ${item.productPrice
                             .toString()
                             .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}`}
                     </span>

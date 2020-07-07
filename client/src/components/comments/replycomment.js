@@ -102,7 +102,7 @@ function ReplyComment({
       fileName: fileName,
     }
     if (text !== null && text !== '') {
-      sendCommentAsync(commentData) 
+      sendCommentAsync(commentData)
       setText('')
       setLoad(true)
 
@@ -132,7 +132,7 @@ function ReplyComment({
 
   return (
     <>
-      <Fade>
+      <Fade bottom>
         {load ? (
           <div style={{ width: '100%', height: '476px' }} />
         ) : (

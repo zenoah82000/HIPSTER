@@ -17,6 +17,28 @@ function ProductSearchResultSort(props) {
           <a
             className={
               searchParams.has('sort')
+                ? searchParams.get('sort') === 'omdesc'
+                  ? 'active'
+                  : ''
+                : 'active'
+            }
+            onClick={() => {
+              searchParams.has('sort')
+                ? searchParams.set('sort', 'omdesc')
+                : searchParams.append('sort', 'omdesc')
+              searchParams.set('page', 1)
+              window.scrollTo({ top: 0, behavior: 'smooth' })
+              props.history.push(`?${searchParams.toString()}`)
+            }}
+          >
+            <i class="fas fa-thumbs-up"></i> 網站推薦
+          </a>
+        </span>
+        <span>
+          <span className="gap">|</span>
+          <a
+            className={
+              searchParams.has('sort')
                 ? searchParams.get('sort') === 'prec'
                   ? 'active'
                   : ''
@@ -33,28 +55,6 @@ function ProductSearchResultSort(props) {
           >
             <FontAwesomeIcon icon={fas.faCalendarAlt} />
             結束日期
-          </a>
-        </span>
-        <span>
-          <span className="gap">|</span>
-          <a
-            className={
-              searchParams.has('sort')
-                ? searchParams.get('sort') === 'omdesc'
-                  ? 'active'
-                  : ''
-                : ''
-            }
-            onClick={() => {
-              searchParams.has('sort')
-                ? searchParams.set('sort', 'omdesc')
-                : searchParams.append('sort', 'omdesc')
-              searchParams.set('page', 1)
-              window.scrollTo({ top: 0, behavior: 'smooth' })
-              props.history.push(`?${searchParams.toString()}`)
-            }}
-          >
-            <i className="fab fa-hotjar"></i> 熱門程度
           </a>
         </span>
         <span>
