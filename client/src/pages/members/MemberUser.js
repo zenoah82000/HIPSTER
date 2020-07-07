@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import { withRouter } from 'react-router'
+import { Modal } from 'react-bootstrap'
 // import { connect } from 'react-redux'
 // import { userLoginAsync } from '../../actions/member/memberActions'
 import '../../styles/HS.scss'
@@ -20,6 +21,7 @@ import UserCoupon from '../mContent/UserCoupon'
 import UserMymap from '../mContent/UserMymap'
 import UserWishlist from '../mContent/UserWishlist'
 import NotFoundPage from '../NotFoundPage'
+import NeedLogin from '../NeedLogin'
 
 function MemberUser(props) {
   // const { userSuccess, setuserSuccess } = props
@@ -62,12 +64,12 @@ function MemberUser(props) {
               <UserMymap />
             </Route>
             <Route path="/memberuser/wishlist">
-              <UserWishlist addCart={props.addCart}/>
+              <UserWishlist addCart={props.addCart} />
             </Route>
           </Switch>
         </Sidebar>
       ) : (
-        <NotFoundPage />
+        <NeedLogin />
       )}
     </>
   )
