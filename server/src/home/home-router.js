@@ -179,34 +179,34 @@ async function executeSQL(
     const [r2] = await db.query(Sqlcodeinput,[num,memberId]);
 
     //訂單成功送出email
-    // console.log("送出電子郵件");
-    // const transporter = nodemailer.createTransport({
-    //   service: "gmail",
-    //   secure: true,
-    //   auth: {
-    //     type: "OAuth2",
-    //     user: process.env.ACCOUNT,
-    //     clientId: process.env.CLINENTID,
-    //     clientSecret: process.env.CLINENTSECRET,
-    //     refreshToken: process.env.REFRESHTOKEN,
-    //   },
-    //   tls: {
-    //     rejectUnauthorized: false,
-    //   },
-    // });
+    console.log("送出電子郵件");
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      secure: true,
+      auth: {
+        type: "OAuth2",
+        user: process.env.ACCOUNT,
+        clientId: process.env.CLINENTID,
+        clientSecret: process.env.CLINENTSECRET,
+        refreshToken: process.env.REFRESHTOKEN,
+      },
+      tls: {
+        rejectUnauthorized: false,
+      },
+    });
 
-    // var mailOptions = {
-    //   from: '"Hipster文青地圖" <e24971234@gmail.com>',
-    //   to: memberMail,
-    //   subject: "重製密碼信件",
-    //   html: "<p>驗證碼:" + num + "</p><br/><p>請點擊下列網址輸入上述驗證碼進行密碼重製：http://localhost:3000/forgetpwd/"+memberId+"</p>"
-    // };
-    // // 準備發送信件
-    // transporter.sendMail(mailOptions, function (err, info) {
-    //   if (err) {
-    //     return console.log(err);
-    //   }
-    // });
+    var mailOptions = {
+      from: '"Hipster文青地圖" <e24971234@gmail.com>',
+      to: memberMail,
+      subject: "重製密碼信件",
+      html: "<p>驗證碼:" + num + "</p><br/><p>請點擊下列網址輸入上述驗證碼進行密碼重製：http://localhost:3000/forgetpwd/"+memberId+"</p>"
+    };
+    // 準備發送信件
+    transporter.sendMail(mailOptions, function (err, info) {
+      if (err) {
+        return console.log(err);
+      }
+    });
 
 
 

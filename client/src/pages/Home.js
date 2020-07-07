@@ -269,6 +269,7 @@ function Home(props) {
             StartTime: searchBarStartTime.value,
             EndTime: searchBarEndTime.value,
           }
+          window.location.href = `/productlist?startDate=${searchBarStartTime.value}&endDate=${searchBarEndTime.value}`
           console.log(searchBarTimeData)
         }}
       >
@@ -376,8 +377,11 @@ function Home(props) {
   const ProductFeatureddisplay = ProductFeatured.map((item, index) => {
     return (
       <>
-        <FeaturedProduct item={item} addwishlist={props.addwishlist}
-          deletewishlist={props.deletewishlist}/>
+        <FeaturedProduct
+          item={item}
+          addwishlist={props.addwishlist}
+          deletewishlist={props.deletewishlist}
+        />
       </>
     )
   })
