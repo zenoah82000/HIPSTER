@@ -141,8 +141,11 @@ function App(props) {
     getLocation()
     userlocalStorage.success ? setuserSuccess(true) : setuserSuccess(false)
     props.dispatch({ type: 'GET_CART', value: localCart })
-    getwishAsync()
+    
   }, [])
+  useEffect(()=>{
+    getwishAsync()
+  },[userSuccess])
   //加入購物車
   const addCart = (value) => {
     const index = mycart.findIndex((item) => item.productId == value.productId)

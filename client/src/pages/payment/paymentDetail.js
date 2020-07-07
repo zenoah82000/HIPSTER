@@ -7,25 +7,23 @@ import '../../styles/Payment.scss'
 
 import OrderDetail from '../../components/order/OrderDetail'
 
-
-
 //引入自訂元件
 
 function PaymentDetail(props) {
   const [validated, setValidated] = useState(false)
   //取得購物車的資料,個人資料
   const { sum, buyerinfo, userSuccess } = props
-  
-  const [paymentDetailok,setPaymentDetailok] = useState(false)
+
+  const [paymentDetailok, setPaymentDetailok] = useState(false)
 
   //需要輸入的欄位
   let email, phone, lastName, firstName
-  useEffect(()=>{
-    email.value = buyerinfo.email ||''
-    phone.value = buyerinfo.phone ||''
-    lastName.value = buyerinfo.lastName ||''
-    firstName.value = buyerinfo.firstName ||''
-  },[])
+  useEffect(() => {
+    email.value = buyerinfo.email || ''
+    phone.value = buyerinfo.phone || ''
+    lastName.value = buyerinfo.lastName || ''
+    firstName.value = buyerinfo.firstName || ''
+  }, [])
   //下一頁(填寫付款資訊)
   const nextPage = (e) => {
     const form = e.currentTarget
@@ -56,7 +54,11 @@ function PaymentDetail(props) {
   }
   return (
     <>
-    <OrderDetail sum={sum} paymentDetailok={paymentDetailok} setPaymentDetailok={setPaymentDetailok}/>
+      <OrderDetail
+        sum={sum}
+        paymentDetailok={paymentDetailok}
+        setPaymentDetailok={setPaymentDetailok}
+      />
       <Form
         name="checkout"
         noValidate
@@ -77,75 +79,76 @@ function PaymentDetail(props) {
                     </div>
                   </div>
 
-                  <div className="d-flex">
-                    <Row>
-                    <Form.Group as={Col} xs={12} sm={12} md={6}>
+                  <div className="">
+                    <Form.Row>
+                      <Form.Group as={Col} sm={12} md={6}>
+                        <Form.Control
+                          required
+                          name="lastName"
+                          size="lg"
+                          type="text"
+                          placeholder="姓氏"
+                          ref={(input) => (lastName = input)}
+                        />
+                        <Form.Control.Feedback>正確!</Form.Control.Feedback>
+                        <Form.Control.Feedback type="invalid">
+                          請輸入姓氏
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                      <Form.Group as={Col} sm={12} md={6}>
+                        <Form.Control
+                          required
+                          name="firstName"
+                          size="lg"
+                          type="text"
+                          placeholder="名字"
+                          ref={(input) => (firstName = input)}
+                          // onChange={(e) => getformInfo(e, 'firstName')}
+                        />
+                        <Form.Control.Feedback>正確!</Form.Control.Feedback>
+                        <Form.Control.Feedback type="invalid">
+                          請輸入名字
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                    </Form.Row>
+
+                    <Form.Group>
                       <Form.Control
                         required
-                        name="lastName"
+                        id="mobile"
+                        name="mobile"
                         size="lg"
                         type="text"
-                        placeholder="姓氏"
-                        ref={(input) => (lastName = input)}
+                        placeholder="行動電話或家用電話"
+                        ref={(input) => (phone = input)}
+                        pattern="^09[0-9]{2}-?[0-9]{3}-?[0-9]{3}$|^\(?\d{2,3}\)?-?\d{4}-?\d{4}$"
+                        // onChange={(e) => getformInfo(e, 'mobile')}
                       />
                       <Form.Control.Feedback>正確!</Form.Control.Feedback>
                       <Form.Control.Feedback type="invalid">
-                        請輸入姓氏
+                        請輸入正確的電話號碼
                       </Form.Control.Feedback>
+                      <br />
                     </Form.Group>
-                    <Form.Group as={Col} xs={12} sm={12} md={6}>
+                    <Form.Group>
                       <Form.Control
                         required
-                        name="firstName"
+                        ref={(input) => (email = input)}
+                        name="email"
+                        id="email"
                         size="lg"
-                        type="text"
-                        placeholder="名字"
-                        ref={(input) => (firstName = input)}
-                        // onChange={(e) => getformInfo(e, 'firstName')}
+                        type="email"
+                        placeholder="電子郵件地址"
+                        ref={(input) => (email = input)}
+                        pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{3,6}(?:\.[a-z]{2})?)$"
+                        // onChange={(e) => getformInfo(e, 'email')}
                       />
                       <Form.Control.Feedback>正確!</Form.Control.Feedback>
                       <Form.Control.Feedback type="invalid">
-                        請輸入名字
+                        請輸入email
                       </Form.Control.Feedback>
                     </Form.Group>
-                    </Row>
                   </div>
-                  <Form.Group>
-                    <Form.Control
-                      required
-                      id="mobile"
-                      name="mobile"
-                      size="lg"
-                      type="text"
-                      placeholder="行動電話或家用電話"
-                      ref={(input) => (phone = input)}
-                      pattern="^09[0-9]{2}-?[0-9]{3}-?[0-9]{3}$|^\(?\d{2,3}\)?-?\d{4}-?\d{4}$"
-                      // onChange={(e) => getformInfo(e, 'mobile')}
-                    />
-                    <Form.Control.Feedback>正確!</Form.Control.Feedback>
-                    <Form.Control.Feedback type="invalid">
-                      請輸入正確的電話號碼
-                    </Form.Control.Feedback>
-                    <br />
-                  </Form.Group>
-                  <Form.Group>
-                    <Form.Control
-                      required
-                      ref={(input) => (email = input)}
-                      name="email"
-                      id="email"
-                      size="lg"
-                      type="email"
-                      placeholder="電子郵件地址"
-                      ref={(input) => (email = input)}
-                      pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{3,6}(?:\.[a-z]{2})?)$"
-                      // onChange={(e) => getformInfo(e, 'email')}
-                    />
-                    <Form.Control.Feedback>正確!</Form.Control.Feedback>
-                    <Form.Control.Feedback type="invalid">
-                      請輸入email
-                    </Form.Control.Feedback>
-                  </Form.Group>
                 </div>
               </div>
             </div>
@@ -153,9 +156,14 @@ function PaymentDetail(props) {
             <div className="col-12 col-md-3">
               <div className="mt-3">
                 <div className="priceBox ">
-                <input className="checkout-info-button" value="檢視訂單資料" type="button" onClick={()=>{
-                  setPaymentDetailok(true)
-                }}/>
+                  <input
+                    className="checkout-info-button"
+                    value="檢視訂單資料"
+                    type="button"
+                    onClick={() => {
+                      setPaymentDetailok(true)
+                    }}
+                  />
                   <div className="totalPrice">
                     <div className="d-flex justify-content-between">
                       <p>總價</p>
@@ -169,7 +177,8 @@ function PaymentDetail(props) {
                     <div className="d-flex justify-content-between">
                       <p>折價金額</p>
                       <p>
-                        -NT${buyerinfo.sumless
+                        -NT$
+                        {buyerinfo.sumless
                           .toString()
                           .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
                       </p>
