@@ -74,3 +74,34 @@ export const addUserCouponDataAsync = (addcouponData, callback) => {
     window.location.reload()
   }
 }
+
+//更新優惠券數量
+export const updateUserCoupon = (data) => {
+  console.log('Action addUserCoupon', data)
+  return {
+    type: 'UPDATE_USERCOUPON',
+    value: data,
+  }
+}
+
+export const updateUserCouponAsync = (updatecouponData, callback) => {
+  console.log('updatecouponData', updatecouponData)
+  return async (dispatch) => {
+    const request = new Request('http://localhost:5000/couponUpdate', {
+      method: 'POST',
+      body: JSON.stringify(updatecouponData),
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }),
+    })
+    // console.log('request', request)
+    const response = await fetch(request)
+    // console.log('response', response)
+    const data = await response.json()
+    console.log('伺服器回傳的json資料', data)
+
+    dispatch(updateUserCoupon(updatecouponData))
+    window.location.reload()
+  }
+}
