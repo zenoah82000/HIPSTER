@@ -668,7 +668,7 @@ function Mynavbar(props) {
                 className="member"
                 style={burgerstate ? { width: '100%' } : {}}
               >
-                <li>{username},您好</li>
+                <li>{username} , 您好</li>
                 <li>
                   <Link to="/memberuser/user/" className="memberbtn">
                     會員中心
@@ -683,31 +683,63 @@ function Mynavbar(props) {
                   </Link>
                   <ul
                     className="membercenterPhone"
-                    style={membercenterstate ? { height: 480 } : {}}
+                    style={membercenterstate ? { height: 390 } : {}}
                   >
-                    <li>
-                      <Link>個人資訊</Link>
+                    <li
+                      onClick={() => {
+                        setburgerstate(!burgerstate)
+                      }}
+                    >
+                      <Link to="/memberuser/user">個人資訊</Link>
                     </li>
-                    <li>
-                      <Link>我的評價</Link>
+                    <li
+                      onClick={() => {
+                        setburgerstate(!burgerstate)
+                      }}
+                    >
+                      <Link to="/memberuser/comment/:type">我的評價</Link>
                     </li>
-                    <li>
-                      <Link>我的訂單</Link>
+                    <li
+                      onClick={() => {
+                        setburgerstate(!burgerstate)
+                      }}
+                    >
+                      <Link to="/memberuser/order">我的訂單</Link>
                     </li>
-                    <li>
-                      <Link>我的文章</Link>
+                    <li
+                      onClick={() => {
+                        setburgerstate(!burgerstate)
+                      }}
+                    >
+                      <Link to="/memberuser/blog">我的文章</Link>
                     </li>
-                    <li>
-                      <Link>問與答</Link>
+                    <li
+                      onClick={() => {
+                        setburgerstate(!burgerstate)
+                      }}
+                    >
+                      <Link to="/memberuser/qanda">問與答</Link>
                     </li>
-                    <li>
-                      <Link>優惠卷</Link>
+                    <li
+                      onClick={() => {
+                        setburgerstate(!burgerstate)
+                      }}
+                    >
+                      <Link to="/memberuser/coupon/:type">優惠卷</Link>
                     </li>
-                    <li>
-                      <Link>個人地圖</Link>
+                    <li
+                      onClick={() => {
+                        setburgerstate(!burgerstate)
+                      }}
+                    >
+                      <Link to="/memberuser/mymap">個人地圖</Link>
                     </li>
-                    <li>
-                      <Link>願望清單</Link>
+                    <li
+                      onClick={() => {
+                        setburgerstate(!burgerstate)
+                      }}
+                    >
+                      <Link to="/memberuser/wishlist">願望清單</Link>
                     </li>
                   </ul>
                 </li>
