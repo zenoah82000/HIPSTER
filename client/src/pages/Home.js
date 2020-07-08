@@ -379,8 +379,7 @@ function Home(props) {
       <>
         <FeaturedProduct
           item={item}
-          addwishlist={props.addwishlist}
-          deletewishlist={props.deletewishlist}
+          addWishlistCheck={props.addWishlistCheck}
         />
       </>
     )
@@ -431,8 +430,7 @@ function Home(props) {
       <>
         <CountdownProduct
           item={item}
-          addwishlist={props.addwishlist}
-          deletewishlist={props.deletewishlist}
+          addWishlistCheck={props.addWishlistCheck}
         />
       </>
     )

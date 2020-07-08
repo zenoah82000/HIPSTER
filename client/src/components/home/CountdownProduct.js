@@ -6,10 +6,8 @@ import { connect } from 'react-redux'
 function CountdownProduct(props) {
   // 設置倒數計時: 結束時間 - 當前時間
   //控制關注愛心class
-  //取得會員資料
-  const member = JSON.parse(localStorage.getItem('member')) || ''
 
-  const { item, wishlist, addwishlist, deletewishlist } = props
+  const { item, wishlist, addWishlistCheck } = props
   //商品區塊>關注
   // const [heart, setheart] = useState(wishlist.includes(item.productId))
   // console.log(heart)
@@ -46,20 +44,6 @@ function CountdownProduct(props) {
       </>
     )
   }
-  const addWish = (e) => {
-    e.preventDefault()
-    if (member.id) {
-      if (
-        wishlist.findIndex((value) => value.productId == item.productId) != -1
-      ) {
-        deletewishlist(item)
-      } else {
-        addwishlist(item)
-      }
-    } else {
-      alert('請先登入')
-    }
-  }
 
   useEffect(() => {
     setInterval(() => {
@@ -84,7 +68,7 @@ function CountdownProduct(props) {
                   : 'activity-follow'
               }
               onClick={(e) => {
-                addWish(e)
+                addWishlistCheck(e,item)
               }}
             >
               <FaHeart />

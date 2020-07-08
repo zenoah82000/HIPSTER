@@ -119,6 +119,7 @@ router.post("/member/checkout", async (req, res) => {
     phone,
     email,
   ]);
+  //訂單新增成功到評論
   for (let i = 0; i < orderItems.length; i++) {
     db.query(addorderlist, [
       orderId,
@@ -134,7 +135,11 @@ router.post("/member/checkout", async (req, res) => {
     });
   }
   console.log("訂單新增成功" + orderId);
-
+//有使用優惠券扣除優惠券
+if(discountcode !=null && discountcode !=''){
+  const coupon = "UPDATE `rel_member_coupon` SET `memberCouponNum`=0 WHERE `memberId`=? && discountCode =?"
+  db.query(coupon,[memberId,discountcode])
+}
   //訂單成功送出email
   console.log("送出電子郵件");
   const transporter = nodemailer.createTransport({
@@ -196,11 +201,11 @@ router.post("/member/checkout", async (req, res) => {
   attachments: img
   };
   // 準備發送信件
-  transporter.sendMail(mailOptions, function (err, info) {
-    if (err) {
-      return console.log(err);
-    }
-  });
+  // transporter.sendMail(mailOptions, function (err, info) {
+  //   if (err) {
+  //     return console.log(err);
+  //   }
+  // });
   const ordertime = "SELECT * FROM `orderlist` WHERE `orderListId`= ?";
   const [r3] = await db.query(ordertime, [r2.insertId]);
   //傳送回前端
