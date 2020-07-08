@@ -10,7 +10,7 @@ function ProductDescription(props) {
   const { productContent, getProductMultiImgAsync, productMultiImg } = props
 
   useEffect(() => {
-    console.log(props.match.params.id)
+    // console.log(props.match.params.id)
     getProductMultiImgAsync(props.match.params.id)
   }, [])
 

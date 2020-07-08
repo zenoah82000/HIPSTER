@@ -111,7 +111,6 @@ function AsideBar(props) {
         }
       }
     }
-
     return flag
   }
   function checkcategory(item) {
@@ -242,7 +241,7 @@ function AsideBar(props) {
 
   useEffect(() => {
     getProductCategoryAsync()
-    console.log(pricerange)
+    // console.log(pricerange)
   }, [])
 
   useEffect(() => {
@@ -255,14 +254,6 @@ function AsideBar(props) {
     setDateValue([new Date(startDate), new Date(endDate)])
     // console.log(pricerange)
   }, [endDate])
-
-  // useEffect(() => {
-  //   pricerange.min = price.min
-  //   pricerange.max = price.max
-  //   price.min = pricerange.min
-  //   price.max = pricerange.max
-  //   console.log(pricerange)
-  // }, [price])
 
   //生成類別
   const display = categorylist.map((item, index) => {
@@ -315,7 +306,6 @@ function AsideBar(props) {
                     ? 'checkbox-dropdown-list active'
                     : 'checkbox-dropdown-list'
                 }
-                key={item.categoryId}
               >
                 {categorylist.map((category, i) => {
                   if (
@@ -357,7 +347,7 @@ function AsideBar(props) {
                       <>
                         <li
                           className="checkbox"
-                          key={category.categoryName}
+                          key={item.categoryId}
                           onClick={() => {
                             setLoading(true)
                             checkcat(
