@@ -207,20 +207,20 @@ router.post("/member/checkout", async (req, res) => {
     <hr/>
     <div className="cartdetail-footer">
       <div style="display: flex;justify-content: space-between;width:100%;">
-        <p>總計:</p>
-        <span>
+        <p style="margin:0px;line-height:30px;">總計:</p>
+        <span style="font-size: 16px;line-height:30px;">
           NT$${req.body.total}
         </span>
       </div>
       <div style="display: flex;justify-content: space-between;width:100%;">
-        <p>折扣:</p>
-        <span>
+        <p style="margin:0px;line-height:30px;">折扣:</p>
+        <span style="font-size: 16px;line-height:30px">
           -NT$${sumless}
         </span>
       </div>
       <div style="display: flex;justify-content: space-between;width:100%;">
-        <p>結帳金額:</p>
-        <span style=" font-weight: bold;font-size: 20px;color: #ff3400;">
+        <p style="margin:0px;line-height:30px;">結帳金額:</p>
+        <span style=" font-weight: bold;font-size: 20px;color: #ff3400;line-height:30px;">
           NT$${sumdiscount}
         </span>
       </div>
