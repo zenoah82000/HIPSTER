@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Calendar from 'react-calendar'
 import { connect } from 'react-redux'
-import { Link, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { Collapse } from '@material-ui/core'
 import InputRange from 'react-input-range'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -13,7 +13,6 @@ import '../../styles/product/AsideBar.scss'
 // import 'react-input-range/lib/css/index.css'
 
 import { getProductCategoryAsync } from '../../actions/product/getProductCategory'
-import { element } from 'prop-types'
 
 function AsideBar(props) {
   // const getProductCategoryAsync = async (productCategory) => {
