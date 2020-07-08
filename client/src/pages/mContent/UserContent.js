@@ -379,8 +379,8 @@ function UserContent() {
   return (
     <>
       <UpdateOk show={showUpdateOk} onHide={() => setshowUpdateOk(false)} />
-      <div className="contentBlock">
-        <div className="contentTitle">會員資料</div>
+      <div className="usercontainer">
+        <div className="usertitle">會員資料</div>
 
         <Form>{edit ? editDisplay : dataDisplay}</Form>
       </div>
