@@ -334,7 +334,7 @@ function App(props) {
             <PaymentDetail sum={sum} userSuccess={userSuccess} />
           </ProtectedRoute>
           <ProtectedRoute path="/paymentFinish">
-            <PaymentFinish userSuccess={userSuccess} />
+            <PaymentFinish sum={sum} userSuccess={userSuccess} />
           </ProtectedRoute>
           <ProtectedRoute path="/paymentType">
             <PaymentType sum={sum} userSuccess={userSuccess} />

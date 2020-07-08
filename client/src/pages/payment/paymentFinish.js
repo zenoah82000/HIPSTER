@@ -8,7 +8,7 @@ import { BsCheckCircle } from 'react-icons/bs'
 
 function paymentFinish(props) {
   //取得買家資訊
-  const { buyerinfo } = props
+  const { buyerinfo, sum } = props
   //前往訂單
   const nextOrder = () => {
     props.history.push('/memberuser/order')
@@ -62,6 +62,39 @@ function paymentFinish(props) {
                     )
                   })
                 : ''}
+            </div>
+            <div className="paymentfinish-footer">
+              <div className="paymentfinish-subtotal">
+                <p>總計:</p>
+                <span>
+                  NT$
+                  {sum(buyerinfo.product)
+                    .toString()
+                    .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
+                </span>
+              </div>
+              <div className="paymentfinish-coupon">
+                <p>
+                  優惠碼
+                  {buyerinfo.discountcode ? buyerinfo.discountcode : '(未使用)'}
+                  :
+                </p>
+                <span>
+                  -NT$
+                  {buyerinfo.sumless
+                    .toString()
+                    .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
+                </span>
+              </div>
+              <div className="paymentfinish-total">
+                <p>結帳金額:</p>
+                <span>
+                  NT$
+                  {buyerinfo.sumdiscount
+                    .toString()
+                    .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}
+                </span>
+              </div>
             </div>
             <button
               className="paymentButton"
