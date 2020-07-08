@@ -1,12 +1,17 @@
-.blog-edit-title {
-  width: 100%;
-}
+// .blog-edit-title {
+//   width: 100%;
+// }
 
 .blog-edit-ul {
+  margin-bottom: 100px;
   li {
     margin: 10px auto;
     .form-group {
       padding-left: 0;
     }
   }
+}
+
+.blogedit-submit-btn {
+  color: $fontawesome;
 }

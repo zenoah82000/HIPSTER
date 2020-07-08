@@ -12,7 +12,7 @@ const getBlogList = async (req) => {
     rows: [],
   }
   
-  const sql = "SELECT `article`.`articleId`,`article`.`memberId`,`article`.`articleTitle`,`article`.`categoryId`,`article`.`articleContent`,`article`.`articleImg`,`article`.`created_at`,`article`.`updated_at`,`member`.`memberId`,`member`.`memberName`,`member`.`memberImg` FROM `article` LEFT JOIN `member` ON `article`.`memberId` = `member`.`memberId` ORDER BY articleId ASC"
+  const sql = "SELECT `article`.`articleId`,`article`.`memberId`,`article`.`articleTitle`,`article`.`categoryId`,`article`.`articleContent`,`article`.`articleImg`,`article`.`created_at`,`article`.`updated_at`,`member`.`memberId`,`member`.`memberName`,`member`.`memberImg` FROM `article` LEFT JOIN `member` ON `article`.`memberId` = `member`.`memberId` ORDER BY articleId DESC"
   const [r] = await db.query(sql)
   if (r) {
     output.success = true;

@@ -7,7 +7,12 @@
     display: block;
     height: 50px;
     background: #b98f50;
-    color: #fff !important;
+    // color: #fff !important;
+  }
+}
+.blog-add-btn {
+  .blogadd-submit-btn {
+    color: $fontawesome;
   }
 }
 .blog-add-content {
@@ -15,6 +20,7 @@
   height: 50vh;
 }
 .blog-add-ul {
+  margin-bottom: 100px;
   li {
     margin: 10px auto;
     .form-group {

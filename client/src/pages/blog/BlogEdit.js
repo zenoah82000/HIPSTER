@@ -14,7 +14,6 @@ function BlogEdit(props) {
   const { blogData,getBlogDataAsync,editBlogDataAsync } = props
   const { articleId } = props.match.params
   const articleContent = localStorage.getItem('articleContent')
-  // console.log('articleContent',articleContent)
   
   const [editArticleTitle, setEditArticleTitle] = useState('')
   const [editArticleCategory, setEditArticleCategory] = useState('')
@@ -35,7 +34,6 @@ function BlogEdit(props) {
   useEffect(() => {
     if(blogData && blogData.length){
       blogDataItem = blogData.find((item)=>item.articleId==articleId)
-      // console.log('blogDataItem',blogDataItem)
       //設定受控元件
       setEditArticleTitle(blogDataItem.articleTitle)
       setEditArticleCategory(blogDataItem.categoryId)
@@ -46,7 +44,6 @@ function BlogEdit(props) {
       blogItemCategory = blogDataItem.categoryId
       blogItemContent = blogDataItem.articleContent
       blogItemImg = blogDataItem.articleImg
-      // console.log('blogItemContent',blogItemContent)  
     }
     console.log('componentDidUpdate')    
   }, [blogData])       
@@ -85,12 +82,11 @@ function BlogEdit(props) {
   let showBlogEdit
   if(blogData && blogData.length){
   showBlogEdit = 
-        <ul className="list-unstyled blog-add-ul">
-          <li className="d-flex justify-content-between">
-            <div>
+        <ul className="list-unstyled blog-edit-ul">
+          <li className="row align-items-center">
+            <div className="col-2">
               <Form>
                   <Form.Group>
-                    {/* <Form.Label>文章類別</Form.Label> */}
                     <Form.Control as="select" className="blog-select-category" value={editArticleCategory} onChange={event => setEditArticleCategory(event.target.value)}>
                       <option value="1">心情抒發</option>
                       <option value="2">靈感角落</option>
@@ -102,17 +98,21 @@ function BlogEdit(props) {
                   </Form.Group>
                 </Form>              
             </div>
-            <div className="blog-add-btn">
-              <button className="btn" 
+            <div className="col-6"></div>
+            <div className="blog-add-btn col-4 row justify-content-end">
+              <button className="btn text-danger" 
               onClick={e=>{
                 e.preventDefault()
                 props.history.go(-1)}}
-              >取消編輯</button>
-              <button className="btn" onClick={e => {
+              ><i class="far fa-window-close"></i>取消編輯</button>
+              <button className="btn blogedit-submit-btn" onClick={e => {
                   e.preventDefault()
                   handleSubmit()                  
-                  }}>編輯完成</button>
+                  }}><i class="far fa-check-square"></i>編輯完成</button>
             </div>
+            {/* <div className="blog-add-btn col-2">
+              
+            </div> */}
           </li>
           <li>
             <InputGroup className="mb-3">            
