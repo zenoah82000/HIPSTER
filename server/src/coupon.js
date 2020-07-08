@@ -101,6 +101,26 @@ router.post("/member/addcoupon", async (req, res) => {
    
   });
 
+//修改優惠券數量
+router.post('/couponUpdate', upload.none(), async (req, res)=>{
+  console.log(req.body)
+  const output ={
+    success: false,
+    body: req.body,
+  }
+  const sql = "UPDATE `rel_member_coupon` SET `memberCouponNum`=? WHERE `id`=?"
+  const [r] = await db.query(sql , [
+    req.body.memberCouponNum,
+    req.body.id,
+    ])
+  if (r) {
+      output.result = r;
+      output.success = true;
+      console.log('result:', r);
+    }
+  res.json(output);
+})  
+
 module.exports = router
 
 

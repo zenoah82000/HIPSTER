@@ -288,7 +288,7 @@ function UserContent() {
       <Form.Row>
         <Col sm={4}>
           <Form.Group controlId="exampleForm.ControlInput1">
-            <Form.Label>信箱帳號：</Form.Label>
+            <Form.Label>信箱帳號：(不可更改)</Form.Label>
             <Form.Control type="email" disabled placeholder={memberMail} />
           </Form.Group>
         </Col>

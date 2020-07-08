@@ -257,12 +257,12 @@ function AsideBar(props) {
   useEffect(() => {
     setStartDate(stdate)
     setEndDate(eddate)
-    console.log(pricerange)
+    // console.log(pricerange)
   }, [stdate])
 
   useEffect(() => {
     setDateValue([new Date(startDate), new Date(endDate)])
-    console.log(pricerange)
+    // console.log(pricerange)
   }, [endDate])
 
   // useEffect(() => {
@@ -423,7 +423,7 @@ function AsideBar(props) {
             <ul className="checkbox-dropdown-list active">
               <li
                 className="checkbox px-0 "
-                key="全部"
+                key={'全部'}
                 onClick={() => {
                   searchParams.get('loc')
                     ? searchParams.get('loc') === '1,2,3,4,5'
@@ -453,7 +453,7 @@ function AsideBar(props) {
 
               <li
                 className="checkbox px-0"
-                key="北部"
+                key={'北部'}
                 onClick={() => {
                   checkloc('1')
                   searchParams.set('page', 1)
@@ -474,7 +474,7 @@ function AsideBar(props) {
               </li>
               <li
                 className="checkbox px-0"
-                key="中部"
+                key={'中部'}
                 onClick={() => {
                   checkloc('2')
                   searchParams.set('page', 1)
@@ -495,7 +495,7 @@ function AsideBar(props) {
               </li>
               <li
                 className="checkbox px-0"
-                key="南部"
+                key={'南部'}
                 onClick={() => {
                   checkloc('3')
                   searchParams.set('page', 1)
@@ -516,7 +516,7 @@ function AsideBar(props) {
               </li>
               <li
                 className="checkbox px-0"
-                key="東部"
+                key={'東部'}
                 onClick={() => {
                   checkloc('4')
                   searchParams.set('page', 1)
@@ -537,7 +537,7 @@ function AsideBar(props) {
               </li>
               <li
                 className="checkbox px-0"
-                key="外島"
+                key={'外島'}
                 onClick={() => {
                   checkloc('5')
                   searchParams.set('page', 1)
@@ -644,11 +644,11 @@ function AsideBar(props) {
           </div>
           <div className="range">
             <InputRange
-              maxValue={10000}
+              maxValue={5000}
               minValue={0}
-              value={price}
+              value={{ ...price }}
               onChange={(value) => {
-                setPrice(value)
+                setPrice({ ...value })
               }}
               onChangeComplete={(value) => {
                 window.scrollTo({ top: 0, behavior: 'smooth' })

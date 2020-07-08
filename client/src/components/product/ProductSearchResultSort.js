@@ -31,7 +31,7 @@ function ProductSearchResultSort(props) {
               props.history.push(`?${searchParams.toString()}`)
             }}
           >
-            <i class="fas fa-thumbs-up"></i> 網站推薦
+            <i className="fas fa-thumbs-up"></i> 網站推薦
           </a>
         </span>
         <span>

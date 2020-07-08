@@ -23,23 +23,23 @@ function ProductList(props) {
   // const currentpage = searchParams.get('page')
   const currentPage = !!searchParams.get('page') ? +searchParams.get('page') : 1
   const perPage = 5
-  const cat = !!searchParams.get('cat')
+  const cat = searchParams.has('cat')
     ? searchParams
         .get('cat')
         .split(',')
         .map((item, index) => {
           return item
         })
-    : !!searchParams.get('cat')
+    : false
 
-  const loc = !!searchParams.get('loc')
+  const loc = !!searchParams.has('loc')
     ? searchParams
         .get('loc')
         .split(',')
         .map((item, index) => {
           return item
         })
-    : !!searchParams.get('loc')
+    : false
 
   const stdate =
     searchParams.has('startDate') && searchParams.has('endDate')
@@ -63,7 +63,7 @@ function ProductList(props) {
           min: +searchParams.get('minPrice'),
           max: +searchParams.get('maxPrice'),
         }
-      : { min: 0, max: 10000 }
+      : { min: 0, max: 5000 }
 
   const sort = searchParams.has('sort') ? searchParams.get('sort') : false
 
@@ -80,16 +80,16 @@ function ProductList(props) {
   if (!!loc && !!cat) {
     length =
       [...loc].length >= [...cat].length ? [...loc].length : [...cat].length
-  } else if (!!loc) {
+  } else if (!!loc && !cat) {
     length = [...loc].length
-  } else if (!!cat) {
+  } else if (!!cat && !loc) {
     length = [...cat].length
   } else {
     length = 0
   }
 
   const count = productListData.filter((item, index) => {
-    if (length === 0) {
+    if (!loc && !cat) {
       if (+Date.parse(item.productEndingDate) >= +stdate) {
         if (!!minPrice && !!maxPrice) {
           if (
@@ -122,9 +122,9 @@ function ProductList(props) {
           }
         }
       }
-    } else {
-      for (let i = 0; i < length; i++) {
-        if (item.categoryId === +cat[i] || item.locationParentId === +loc[i]) {
+    } else if (!!loc && !cat) {
+      for (let i = 0; i < [...loc].length; i++) {
+        if (item.locationParentId === +loc[i]) {
           if (+Date.parse(item.productEndingDate) >= +eddate) {
             if (!!minPrice && !!maxPrice) {
               if (
@@ -158,6 +158,98 @@ function ProductList(props) {
                 }
               } else {
                 return item
+              }
+            }
+          }
+        }
+      }
+    } else if (!!cat && !loc) {
+      for (let i = 0; i < [...cat].length; i++) {
+        if (item.categoryId === +cat[i]) {
+          if (+Date.parse(item.productEndingDate) >= +eddate) {
+            if (!!minPrice && !!maxPrice) {
+              if (
+                +item.productPrice <= +maxPrice &&
+                +item.productPrice >= +minPrice
+              ) {
+                if (!!keyword) {
+                  if (
+                    new String(item.productName).toString().includes(keyword) ||
+                    new String(item.productAddress)
+                      .toString()
+                      .includes(keyword) ||
+                    new String(item.locationName).toString().includes(keyword)
+                  ) {
+                    return item
+                  }
+                } else {
+                  return item
+                }
+              }
+            } else {
+              if (!!keyword) {
+                if (
+                  new String(item.productName).toString().includes(keyword) ||
+                  new String(item.productAddress)
+                    .toString()
+                    .includes(keyword) ||
+                  new String(item.locationName).toString().includes(keyword)
+                ) {
+                  return item
+                }
+              } else {
+                return item
+              }
+            }
+          }
+        }
+      }
+    } else {
+      for (let i = 0; i < [...cat].length; i++) {
+        if (item.categoryId === +cat[i]) {
+          for (let i = 0; i < [...loc].length; i++) {
+            if (item.locationParentId === +loc[i]) {
+              if (+Date.parse(item.productEndingDate) >= +eddate) {
+                if (!!minPrice && !!maxPrice) {
+                  if (
+                    +item.productPrice <= +maxPrice &&
+                    +item.productPrice >= +minPrice
+                  ) {
+                    if (!!keyword) {
+                      if (
+                        new String(item.productName)
+                          .toString()
+                          .includes(keyword) ||
+                        new String(item.productAddress)
+                          .toString()
+                          .includes(keyword) ||
+                        new String(item.locationName)
+                          .toString()
+                          .includes(keyword)
+                      ) {
+                        return item
+                      }
+                    } else {
+                      return item
+                    }
+                  }
+                } else {
+                  if (!!keyword) {
+                    if (
+                      new String(item.productName)
+                        .toString()
+                        .includes(keyword) ||
+                      new String(item.productAddress)
+                        .toString()
+                        .includes(keyword) ||
+                      new String(item.locationName).toString().includes(keyword)
+                    ) {
+                      return item
+                    }
+                  } else {
+                    return item
+                  }
+                }
               }
             }
           }
