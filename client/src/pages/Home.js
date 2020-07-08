@@ -189,14 +189,14 @@ function Home(props) {
         <FaSearch className="fonticon" />
         搜尋
       </Link>
-      <Link
-        to="/map"
+      <a
+        href="/map"
         id="location-btn"
         className="location-search-btn btn btn-danger"
       >
         <FaStreetView className="fonticon" />
         定位搜尋
-      </Link>
+      </a>
     </div>
   )
 
