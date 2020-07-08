@@ -4,24 +4,11 @@ import { FaStar, FaHeart, FaMapMarkerAlt } from 'react-icons/fa'
 import { connect } from 'react-redux'
 
 function FeaturedProduct(props) {
-  const { item, wishlist, addwishlist, deletewishlist } = props
+  const { item, wishlist, addWishlistCheck } = props
   const member = JSON.parse(localStorage.getItem('member')) || ''
   // //商品區塊>關注
 
-  const addWish = (e) => {
-    e.preventDefault()
-    if (member.id) {
-      if (
-        wishlist.findIndex((value) => value.productId == item.productId) != -1
-      ) {
-        deletewishlist(item)
-      } else {
-        addwishlist(item)
-      }
-    } else {
-      alert('請先登入')
-    }
-  }
+  
   //精選商品>星數顯示
   const start1 = (
     <>
@@ -96,7 +83,7 @@ function FeaturedProduct(props) {
                   : 'activity-follow'
               }
               onClick={(e) => {
-                addWish(e)
+                addWishlistCheck(e,item)
               }}
             >
               <FaHeart />

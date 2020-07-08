@@ -13,11 +13,10 @@ import Mycart from '../../components/order/MyCart'
 import CouponAllData from '../../components/coupon/CouponAllData'
 
 function ShoppingCar(props) {
-  const { mycart, buyerinfo, deleteCart, sum, userSuccess } = props
+  const { mycart, buyerinfo, deleteCart, sum, userSuccess ,setCheckloginok} = props
   let checkdiv
 
-  //請先登入視窗
-  const [login, setLogin] = useState(false)
+  
   //結帳視窗
   const [checkoutok, setCheckoutok] = useState(false)
 
@@ -157,37 +156,11 @@ function ShoppingCar(props) {
       </div>
     )
   }
-
-  //請登入視窗
-  function Checklogin(props) {
-    return (
-      <Modal
-        className="SignOk"
-        {...props}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Body className="SignOk-bg">
-          <p className="SignOk-title">請先登入</p>
-          <div
-            className="SignOkbtn"
-            onClick={() => {
-              setLogin(false)
-            }}
-          >
-            確認
-          </div>
-        </Modal.Body>
-      </Modal>
-    )
-  }
-
   //確認訂單
   const checkOut = () => {
     //判斷是否登入
     if (!userSuccess) {
-      setLogin(true)
+      setCheckloginok(true)
     } else {
       setCheckoutok(true)
     }
@@ -309,7 +282,6 @@ function ShoppingCar(props) {
   return (
     <>
       <MyCartDetail show={checkoutok} onHide={() => setCheckoutok(false)} />
-      <Checklogin show={login} onHide={() => setLogin(false)} />
       <div className="container">
         <h1 className="py-4">購物車</h1>
         {display}
