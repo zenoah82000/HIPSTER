@@ -61,7 +61,7 @@ function CommentList(props) {
     ) {
       return (
         <>
-          <div className="commentList d-flex row">
+          <div className="commentList d-flex row" key={itemObj.itemListId}>
             <div className="col-md-2 col-sm-2 text-center">
               <div className="iconBox m-auto mb-1">
                 <img
