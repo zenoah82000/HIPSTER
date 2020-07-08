@@ -1,7 +1,7 @@
 //主要背景色
 $hipsterbackground: #132948;
 // 強調色
-$hipstercolordanger: #ff3400;
+$hipstercolordanger: rgba(104, 142, 103, 0.8);
 //以下輔色，按深淺排列
 $hipstercolorone: #31445f;
 $hipstercolortwo: #4e5f76;
@@ -73,7 +73,7 @@ $white: #ffffff;
   border: 1.5px solid rgb(216, 214, 214);
 }
 .sidebarlink-hs {
-  color: #707070;
+  color: #684b38;
 }
 .sidebarlink-hs:hover {
   color: $hipstercolordanger;
