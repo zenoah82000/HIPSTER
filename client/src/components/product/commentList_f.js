@@ -24,6 +24,7 @@ function CommentList(props) {
     setStar,
     commentNum,
     setCommentNum,
+    setLoading,
   } = props
   const [tabIndex, setTabIndex] = useState(0)
 
@@ -39,7 +40,7 @@ function CommentList(props) {
     return star
   }
 
-  console.log(data)
+  // console.log(data)
   // console.log({ ...data[0] }.memberName)
   let starsum = 0
   const display = data.map((item, index) => {
@@ -73,11 +74,11 @@ function CommentList(props) {
             <div className="commentBox col-md-10 col-sm-10">
               <h3 className="eventTitle">{stars(itemObj.star)} </h3>
               <ul className=" list-unstyled box2">
-                <li>
+                <li key={itemObj.commentId}>
                   <p className="">{itemObj.content}</p>
                 </li>
 
-                <li className="d-flex">
+                <li className="d-flex" key={itemObj.orderId}>
                   <SimpleReactLightbox>
                     <SRLWrapper>
                       <div className="commentImg">
@@ -91,7 +92,7 @@ function CommentList(props) {
                     </SRLWrapper>
                   </SimpleReactLightbox>
                 </li>
-                <li>
+                <li key={itemObj.productImg}>
                   <small style={{ color: 'grey' }}>
                     評論日期: {itemObj.updated_at.substring(0, 10)}
                   </small>
@@ -103,8 +104,8 @@ function CommentList(props) {
       )
     }
   })
-  console.log(star)
-  console.log(commentNum)
+  // console.log(star)
+  // console.log(commentNum)
   useEffect(() => {
     getProductCommentAsync(props.match.params.id)
   }, [])
@@ -132,6 +133,7 @@ function CommentList(props) {
             productnumbers={data.length}
             perPage={5}
             moveto={2500}
+            setLoading={setLoading}
           />
         </TabPanel>
 
@@ -149,6 +151,7 @@ function CommentList(props) {
             productnumbers={data.length}
             perPage={perPage}
             moveto={2500}
+            setLoading={setLoading}
           />
         </TabPanel>
       </Tabs>

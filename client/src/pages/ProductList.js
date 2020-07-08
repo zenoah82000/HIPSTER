@@ -431,7 +431,7 @@ function ProductList(props) {
                             height: '18px',
                           }}
                         ></div>
-                        <diiv
+                        <div
                           className="product-description"
                           style={{
                             backgroundColor: '#ccc',
@@ -439,7 +439,7 @@ function ProductList(props) {
                             height: '18px',
                             margin: '10px 0',
                           }}
-                        ></diiv>
+                        ></div>
                       </div>
                     </div>
                   </div>

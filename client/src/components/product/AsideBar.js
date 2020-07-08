@@ -596,7 +596,6 @@ function AsideBar(props) {
                 showDoubleView={true}
                 value={dateValue}
                 onChange={(value) => {
-                  setLoading(true)
                   console.log(value[0].toLocaleDateString())
                   setStartDate(value[0].toLocaleDateString())
                   console.log(value[1].toLocaleDateString())
