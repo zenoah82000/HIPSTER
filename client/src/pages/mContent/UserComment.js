@@ -263,8 +263,8 @@ function UserComment(props) {
                 </NavLink>
               </div>
             </div>
+            <div className="tab-pane">{displayMyComment}</div>
           </div>
-          <div className="tab-pane">{displayMyComment}</div>
         </>
       ) : (
         <>
@@ -290,33 +290,34 @@ function UserComment(props) {
                 </NavLink>
               </div>
             </div>
-          </div>
-          <div className="tab-pane">
-            {noCommentlist.length >= 1 ? (
-              noCommentlist.map((item, index) => (
-                <ReplyComment
-                  key={item.itemListId}
-                  commentData={item}
-                  index={index}
-                  handleDelete={handleDelete}
-                  commentAsync={commentAsync}
-                />
-              ))
-            ) : (
-              <div className="empty ">
-                <div className="emptyimgbox mb-3">
-                  <img
-                    className="emptyImg mb-3"
-                    src="http://localhost:5000/images/order/wishlist.webp"
+
+            <div className="tab-pane">
+              {noCommentlist.length >= 1 ? (
+                noCommentlist.map((item, index) => (
+                  <ReplyComment
+                    key={item.itemListId}
+                    commentData={item}
+                    index={index}
+                    handleDelete={handleDelete}
+                    commentAsync={commentAsync}
                   />
+                ))
+              ) : (
+                <div className="empty ">
+                  <div className="emptyimgbox mb-3">
+                    <img
+                      className="emptyImg mb-3"
+                      src="http://localhost:5000/images/order/wishlist.webp"
+                    />
+                  </div>
+                  <div className="emptytext text-center">
+                    <p>
+                      目前無尚未評價！趕緊探索你下一次的旅程，並標記你心儀的活動體驗
+                    </p>
+                  </div>
                 </div>
-                <div className="emptytext text-center">
-                  <p>
-                    目前無尚未評價！趕緊探索你下一次的旅程，並標記你心儀的活動體驗
-                  </p>
-                </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </>
       )}
