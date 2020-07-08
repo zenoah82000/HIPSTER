@@ -69,14 +69,6 @@ function AsideBar(props) {
         ]
       : [new Date(startDate), new Date(endDate)]
   // console.log(d)
-  //設定價格區間
-  // const pricerange =
-  //   searchParams.has('minPrice') && searchParams.has('maxPrice')
-  //     ? {
-  //         min: +searchParams.get('minPrice'),
-  //         max: +searchParams.get('maxPrice'),
-  //       }
-  //     : { min: 32, max: 10000 }
 
   const [categorySection, setCategorySection] = useState([])
   // const [price, setPrice] = useState(pricerange)
@@ -251,7 +243,6 @@ function AsideBar(props) {
 
   useEffect(() => {
     getProductCategoryAsync()
-
     console.log(pricerange)
   }, [])
 
@@ -652,13 +643,13 @@ function AsideBar(props) {
         <div className="aside-wrapper-filter-box" style={{ cursor: 'default' }}>
           <h3>價格 (TWD) </h3>
           <div className="price-area">
-            {{ ...price }.min} ~ {{ ...price }.max}
+            {price.min} ~ {price.max}
           </div>
           <div className="range">
             <InputRange
               maxValue={5000}
               minValue={0}
-              value={{ ...price }}
+              value={price}
               onChange={(value) => {
                 setPrice({ ...value })
               }}

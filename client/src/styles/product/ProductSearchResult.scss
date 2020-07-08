@@ -9,4 +9,21 @@
     font-size: 20px;
     font-weight: 600;
   }
+
+  .categoryItem {
+    position: relative;
+    display: inline-block;
+    width: 100px;
+    height: 24px;
+    background: rgba(104, 75, 56, 0.623);
+    color: white;
+    border-radius: 10px;
+    text-align: center;
+    margin: 0 20px;
+    font-weight: 600;
+    cursor: pointer;
+    &:hover {
+      background: rgb(104, 75, 56);
+    }
+  }
 }

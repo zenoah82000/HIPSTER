@@ -295,7 +295,7 @@ function ProductList(props) {
     t = setTimeout(() => {
       setLoading(false)
       console.log(loading)
-    }, 700)
+    }, 600)
   }, [searchParams])
 
   const display = count.map((item, index) => {
@@ -401,6 +401,7 @@ function ProductList(props) {
                 <ProductSearchResult
                   productnumbers={count.length}
                   loading={loading}
+                  setPrice={setPrice}
                 />
               </Fade>
             ) : (
@@ -430,7 +431,7 @@ function ProductList(props) {
                             height: '18px',
                           }}
                         ></div>
-                        <diiv
+                        <div
                           className="product-description"
                           style={{
                             backgroundColor: '#ccc',
@@ -438,7 +439,7 @@ function ProductList(props) {
                             height: '18px',
                             margin: '10px 0',
                           }}
-                        ></diiv>
+                        ></div>
                       </div>
                     </div>
                   </div>

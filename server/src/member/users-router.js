@@ -112,7 +112,7 @@ router.post("/addmember", async (req, res, next) => {
   // console.log(req.body)
   const memberMail = req.body.memberMail;
   const memberPwd = req.body.memberPwd;
-  const addMemberSql = `INSERT INTO member(memberName, memberGender, memberBirth, memberPhone, 	memberAddress	,	memberMail,	memberPwd,	memberImg, memberStatus) VALUES('訪客','男','2020-01-01','請輸入連絡電話','請輸入地址',?,?,'tmp.jpg','true')`;
+  const addMemberSql = `INSERT INTO member(memberName, memberGender, memberBirth, memberPhone, 	memberAddress	,	memberMail,	memberPwd,	memberImg, memberStatus) VALUES('文青','男','2020-01-01','請輸入連絡電話','請輸入地址',?,?,'tmp.jpg','true')`;
 
   const [r1] = await db.query(addMemberSql, [memberMail, memberPwd]);
   res.json(req.body);
