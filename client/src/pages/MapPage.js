@@ -24,6 +24,7 @@ class MapPage extends React.Component {
   }
   onClickReset = () => {
     this.props.getLocation()
+    // this.state.viewport
     console.log(this.state.viewport)
   }
 

@@ -158,6 +158,8 @@ class mapList extends React.Component {
   //地圖定位
   handleClick() {
     this.props.onClickReset()
+    this.search.value = ''
+
   }
 
   //點擊咖啡廳卡片
@@ -609,6 +611,7 @@ class mapList extends React.Component {
                   placeholder="尋找什麼活動嗎?  請輸入活動名稱或地址"
                   onChange={(event) => this.updateSearch(event)}
                   // value={this.state.search}
+                  ref={(input) => (this.search = input)}
                   type="text"
                 />
                 <div class="input-group-append">
