@@ -22,7 +22,7 @@ function UserMymap(props) {
   // console.log(props)
   const [myItemlist, setMyItemlist] = useState([])
   const member = JSON.parse(localStorage.getItem('member'))
-  
+
   // 後端傳資料
   const checkoutAsync = async (order) => {
     const request = new Request(`http://localhost:5000/mymap/${member.id}`, {
@@ -67,63 +67,64 @@ function UserMymap(props) {
     <>
       <div className="usercontainer">
         <h2 className="usertitle">我的文青地圖</h2>
-      </div>
-      <div className="tab-pane">
-        <div style={{ background: '#E6DED8', padding: '20px 20px 0 20px' }}>
-          <Map
-            center={[25.0338438, 121.54335]}
-            zoom={12}
-            style={{ width: '100%', height: '350px' }}
-          >
-            <TileLayer
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            />
-            {myItemlist.map((item, index) => (
-              <Marker
-                position={[item.lat, item.log]}
-                // icon={cafeTagIcon}
-                onMouseOver={(e) => {
-                  e.target.openPopup()
-                }}
-              >
-                {/* <Popup></Popup> */}
-              </Marker>
-            ))}
-          </Map>
-        </div>
 
-        <div class="coupon-listview" style={{ background: '#E6DED8' }}>
-          {myItemlist.length >= 1 ? (
-            <VerticalTimeline>
+        <div className="tab-pane">
+          <div style={{ background: '#E6DED8', padding: '20px 20px 0 20px' }}>
+            <Map
+              center={[25.0338438, 121.54335]}
+              zoom={12}
+              style={{ width: '100%', height: '350px' }}
+            >
+              <TileLayer
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+              />
               {myItemlist.map((item, index) => (
-                <TimelineElement myMapData={item} />
+                <Marker
+                  position={[item.lat, item.log]}
+                  // icon={cafeTagIcon}
+                  onMouseOver={(e) => {
+                    e.target.openPopup()
+                  }}
+                >
+                  {/* <Popup></Popup> */}
+                </Marker>
               ))}
-            </VerticalTimeline>
-          ) : (
-            <div className="empty ">
-              <div className="emptyimgbox mb-3">
-                <img
-                  className="emptyImg mb-3"
-                  src="http://localhost:5000/images/order/wishlist.webp"
-                />
+            </Map>
+          </div>
+
+          <div class="coupon-listview" style={{ background: '#E6DED8' }}>
+            {myItemlist.length >= 1 ? (
+              <VerticalTimeline>
+                {myItemlist.map((item, index) => (
+                  <TimelineElement myMapData={item} />
+                ))}
+              </VerticalTimeline>
+            ) : (
+              <div className="empty ">
+                <div className="emptyimgbox mb-3">
+                  <img
+                    className="emptyImg mb-3"
+                    src="http://localhost:5000/images/order/wishlist.webp"
+                  />
+                </div>
+                <div className="emptytext text-center">
+                  <p>
+                    文青足跡是空的！趕緊探索你下一次的旅程，並標記你心儀的活動體驗
+                  </p>
+                </div>
               </div>
-              <div className="emptytext text-center">
-                <p>
-                  文青足跡是空的！趕緊探索你下一次的旅程，並標記你心儀的活動體驗
-                </p>
-              </div>
-            </div>
-          )}
+            )}
+          </div>
+          <a
+            id="back-to-top"
+            href="#"
+            class="btn  btn-lg back-to-top"
+            role="button"
+          >
+            <i class="fas fa-chevron-up"></i>
+          </a>
         </div>
-        <a
-          id="back-to-top"
-          href="#"
-          class="btn  btn-lg back-to-top"
-          role="button"
-        >
-          <i class="fas fa-chevron-up"></i>
-        </a>
       </div>
     </>
   )

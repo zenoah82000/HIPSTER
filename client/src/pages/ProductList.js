@@ -294,7 +294,7 @@ function ProductList(props) {
   useEffect(() => {
     t = setTimeout(() => {
       setLoading(false)
-      console.log(loading)
+      // console.log(loading)
     }, 600)
   }, [searchParams])
 
@@ -402,6 +402,7 @@ function ProductList(props) {
                   productnumbers={count.length}
                   loading={loading}
                   setPrice={setPrice}
+                  setLoading={setLoading}
                 />
               </Fade>
             ) : (
