@@ -295,7 +295,7 @@ function ProductList(props) {
     t = setTimeout(() => {
       setLoading(false)
       console.log(loading)
-    }, 700)
+    }, 600)
   }, [searchParams])
 
   const display = count.map((item, index) => {
@@ -401,6 +401,7 @@ function ProductList(props) {
                 <ProductSearchResult
                   productnumbers={count.length}
                   loading={loading}
+                  setPrice={setPrice}
                 />
               </Fade>
             ) : (
