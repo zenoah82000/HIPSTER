@@ -11,7 +11,7 @@ function Articles(props) {
     .replace(/&nbsp;/gi, '')
   return (
     <>
-      <Link to={`/blogDetail/${item.articleId}`} className="blog-group">
+      <a href={`/blogDetail/${item.articleId}`} className="blog-group">
         <div className="blog-image">
           <img src={item.articleImg} />
         </div>
@@ -27,7 +27,7 @@ function Articles(props) {
             <p className="blog-member-text">{item.memberName}</p>
           </div>
         </div>
-      </Link>
+      </a>
     </>
   )
 }
