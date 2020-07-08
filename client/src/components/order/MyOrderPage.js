@@ -100,7 +100,7 @@ function OrderPage(props) {
         }
       }
       if (totalpages - startPage > groupCount) {
-        pages.push(<li key={-2} className="disabled"></li>)
+        pages.push(<li key={-2} className="disabled">···</li>)
       }
       pages.push(
         <li

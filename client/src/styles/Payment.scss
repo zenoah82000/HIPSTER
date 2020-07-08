@@ -89,6 +89,9 @@
   &:hover {
     background-color: #5d704e;
   }
+  &:focus {
+    outline: none;
+  }
 }
 .prograssBar1 {
   width: 100%;
@@ -175,7 +178,8 @@
     .productbox {
       margin: 20px 0;
       .productimgbox {
-        width: 120px;
+        width: 150px;
+        height: 100px;
         .productimg {
           object-fit: cover;
           width: 100%;
