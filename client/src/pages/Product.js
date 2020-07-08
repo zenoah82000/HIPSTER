@@ -4,8 +4,6 @@ import { connect } from 'react-redux'
 
 import '../styles/Product.scss'
 
-import MyBreadcrumb from '../components/MyBreadcrumb'
-import CommtentList from '../components/comments/commentList'
 import ProductBanner from '../components/product/ProductBanner'
 import BookArea from '../components/product/BookArea'
 import ProductStarBar from '../components/product/ProductStarBar'

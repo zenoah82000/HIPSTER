@@ -43,24 +43,25 @@ function CommentList(props) {
   // console.log(data)
   // console.log({ ...data[0] }.memberName)
   let starsum = 0
+  let staraverage, commentstotal
   const display = data.map((item, index) => {
     const itemObj = { ...item }
+
     if (data.length === 0) {
-      setStar(0)
-      setCommentNum(0)
+      staraverage = 0
+      commentstotal = 0
     } else {
       starsum += +itemObj.star
-      setStar(Math.ceil(starsum / data.length))
-      setCommentNum(data.length)
+      staraverage = Math.ceil(starsum / data.length)
+      commentstotal = data.length
     }
-
     if (
       index >= currentPage * perPage - perPage &&
       index < currentPage * perPage
     ) {
       return (
         <>
-          <div className="commentList d-flex row">
+          <div className="commentList d-flex row" key={itemObj.itemListId}>
             <div className="col-md-2 col-sm-2 text-center">
               <div className="iconBox m-auto mb-1">
                 <img
@@ -104,6 +105,8 @@ function CommentList(props) {
       )
     }
   })
+  // setStar(staraverage)
+  setCommentNum(commentstotal)
   // console.log(star)
   // console.log(commentNum)
   useEffect(() => {
