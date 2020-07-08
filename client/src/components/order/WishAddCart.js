@@ -81,7 +81,7 @@ function WishAddCart(props) {
             </span>
             <GrFormSubtract
               className={
-                addcartamount == 1 ? 'subtract subtractopt' : 'subtract'
+                addcartamount === 1 ? 'subtract subtractopt' : 'subtract'
               }
               onClick={() => {
                 changeAmount('dec')

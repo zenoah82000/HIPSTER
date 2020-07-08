@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 import { withRouter } from 'react-router-dom'
-import { Container, Row, Col, Form, Button } from 'react-bootstrap'
+import {  Col, Form } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import '../../styles/Payment.scss'
 

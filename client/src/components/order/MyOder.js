@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import $ from 'jquery'
 import QRcode from 'qrcode.react'
 
-import { Modal, Button, Form } from 'react-bootstrap'
+import { Modal} from 'react-bootstrap'
 function MyOder(props) {
   const { item, orderlist } = props
 
@@ -21,12 +21,12 @@ function MyOder(props) {
 
   //判斷商品數量
   const productamount = orderlist.orderdetails.filter(
-    (value) => value.orderId == item.orderId
+    (value) => value.orderId === item.orderId
   )
 
   //商品展開判斷
   const unfold = (e) => {
-    if (unfoldtext == '展開更多') {
+    if (unfoldtext === '展開更多') {
       $(e.target)
         .closest('.order-body')
         .css('maxHeight', productamount.length * 200 + 'px')
@@ -152,7 +152,7 @@ function MyOder(props) {
         </div>
         <div className="card-body order-body unfoldbox">
           {orderlist.orderdetails
-            .filter((value) => value.orderId == item.orderId)
+            .filter((value) => value.orderId === item.orderId)
             .map((value, index) => {
               return (
                 <>
