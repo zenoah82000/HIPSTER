@@ -232,6 +232,7 @@ function App(props) {
   const updateLocation = (position) => {
     setViewport({
       center: [position.coords.latitude, position.coords.longitude],
+      zoom: 15,
     })
     setMylocation([position.coords.latitude, position.coords.longitude])
   }

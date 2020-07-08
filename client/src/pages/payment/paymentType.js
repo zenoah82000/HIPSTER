@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import $ from 'jquery'
 import { connect } from 'react-redux'
-import { Container, Row, Col, Form, Button } from 'react-bootstrap'
-import { withRouter, Link } from 'react-router-dom'
+import {  Col, Form } from 'react-bootstrap'
+import { withRouter} from 'react-router-dom'
 import '../../styles/Payment.scss'
 
 import { FaCcMastercard, FaCcVisa } from 'react-icons/fa'
