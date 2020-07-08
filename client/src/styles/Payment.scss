@@ -151,10 +151,13 @@
   background-size: contain;
   background-color: white;
 }
-.contentBox {
+.paymentFinish {
   width: 100%;
   // height: 800px;
   background: white;
+  .paymentFinishok {
+    color: #688e67;
+  }
   .infoemailbox {
     margin-bottom: 48px;
     font-size: 16px;
@@ -164,88 +167,99 @@
       font-size: 16px;
     }
   }
-
-  .orderdetail {
-    .orderdetail-title {
-      align-items: center;
+  .paymentFinishdetailbox {
+    width: 100%;
+    .orderdetail {
       h4 {
         margin: 0px;
       }
-      h6 {
-        margin: 0px;
-      }
-    }
-    .productbox {
-      margin: 20px 0;
-      .productimgbox {
-        width: 150px;
-        height: 100px;
-        .productimg {
-          object-fit: cover;
-          width: 100%;
-          height: 100%;
-        }
-      }
-      .productinfo {
-        width: 40%;
-        display: flex;
-        flex-wrap: wrap;
+      .productbox {
+        margin: 20px 0;
         align-items: center;
-        .infoname {
+        .productimgbox {
+          width: 150px;
+          height: 100px;
+          .productimg {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+          }
+        }
+        .productinfo {
+          width: 70%;
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          .infoname {
+            font-weight: bold;
+            font-size: 16px;
+            color: black;
+            width: 100%;
+          }
+          .infoprice {
+            width: 100%;
+            font-size: 16px;
+            color: black;
+          }
+          .infoamount {
+            width: 100%;
+            font-size: 16px;
+            color: black;
+          }
+          .infodate {
+            font-size: 16px;
+            color: black;
+          }
+        }
+        .infosubtotal {
+          width: 30%;
+          text-align: right;
+          p {
+            font-weight: bold;
+            font-size: 20px;
+            letter-spacing: normal;
+          }
+        }
+      }
+    }
+    .paymentfinish-footer {
+      .paymentfinish-subtotal {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        p {
+          color: black;
+        }
+        span {
+          font-size: 20px;
+          color: rgb(107, 106, 106);
+        }
+      }
+      .paymentfinish-coupon {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        p {
+          color: black;
+        }
+        span {
+          color: rgb(107, 106, 106);
+          font-size: 20px;
+        }
+      }
+      .paymentfinish-total {
+        display: flex;
+        // border-top: 1px solid rgb(180, 180, 180);
+        justify-content: space-between;
+        width: 100%;
+        p {
+          color: black;
+        }
+        span {
           font-weight: bold;
-          font-size: 16px;
-          color: black;
-          width: 100%;
+          font-size: 24px;
+          color: #ff3400;
         }
-        .infoprice {
-          width: 100%;
-          font-size: 16px;
-          color: black;
-        }
-        .infodate {
-          font-size: 16px;
-          color: black;
-        }
-      }
-    }
-  }
-  .paymentfinish-footer {
-    .paymentfinish-subtotal {
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-      p {
-        color: black;
-      }
-      span {
-        font-size: 20px;
-        color: black;
-      }
-    }
-    .paymentfinish-coupon {
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-      p {
-        color: black;
-      }
-      span {
-        color: black;
-        font-size: 20px;
-      }
-    }
-    .paymentfinish-total {
-      display: flex;
-      // border-top: 1px solid rgb(180, 180, 180);
-      justify-content: space-between;
-      width: 100%;
-      p {
-        color: black;
-      }
-      span {
-        font-weight: bold;
-        font-size: 24px;
-        color: #ff3400;
       }
     }
   }
