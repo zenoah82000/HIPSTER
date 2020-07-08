@@ -402,6 +402,7 @@ function ProductList(props) {
                   productnumbers={count.length}
                   loading={loading}
                   setPrice={setPrice}
+                  setLoading={setLoading}
                 />
               </Fade>
             ) : (

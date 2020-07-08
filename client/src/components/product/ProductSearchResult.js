@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom'
 import '../../styles/product/ProductSearchResult.scss'
 
 function ProductSearchResult(props) {
-  const { productnumbers, loading, setPrice } = props
+  const { productnumbers, loading, setPrice, setLoading } = props
 
   useEffect(() => {
     console.log(loading)
@@ -22,6 +22,7 @@ function ProductSearchResult(props) {
               className="categoryItem"
               onClick={() => {
                 setPrice({ min: 0, max: 5000 })
+                setLoading(true)
                 props.history.push(`/productlist`)
               }}
             >
