@@ -10,11 +10,7 @@ import { getBlogDataAsync } from '../../actions/blog'
 function Blog(props) {      
   const { blogData,getBlogDataAsync } = props
   const { url, path } = props.match
-  // let { categoryId } = props.match.params || 0
-  // console.log('categoryId',categoryId)
-  // console.log('Blog的url',url)
-  // console.log('Blog的path',path)
-
+  
   let blogDataRp = []  
 
   if(blogData && blogData.length){    
