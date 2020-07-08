@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link, withRouter, Redirect } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
 import Swal from 'sweetalert2'
+import Fade from 'react-reveal/Fade'
 
 import MyBreadcrumb from '../../components/MyBreadcrumb'
 import { getBlogDataAsync, deleteBlogDataAsync } from '../../actions/blog'
@@ -55,19 +56,23 @@ function UserBlog(props) {
     if(item.memberId==memberId)
     return (
       <>
+      <Fade bottom>
        <hr />      
-      <div className="row userblog-list-item" key={item.articleId}>
-        <Link to={"/blogDetail/" + item.articleId} className="d-block col-2">
+      <div className="row userblog-list-item align-items-center" key={item.articleId}>
+        <div className="col-9 row">
+          <Link to={"/blogDetail/" + item.articleId} className="d-block col-4 pl-3">
           <img src={item.articleImg} />
         </Link>
-        <Link to={"/blogDetail/" + item.articleId} className="d-block col-7 text-decoration-none">
-          <h3>{item.articleTitle}</h3>
-          <p className="userblog-articleContent">{item.articleContent}</p>
-          <p>{item.created_at}</p>
+        <Link to={"/blogDetail/" + item.articleId} className="d-block col-8 text-decoration-none">
+          <p className="userblog-item-title">{item.articleTitle}</p>
+          <p className="userblog-item-content">{item.articleContent}</p>
+          <p className="userblog-item-date">{'發文時間: ' + item.created_at}</p>
         </Link>
-        <div className="col-3">
-          <Link to={"/blogEdit/" + item.articleId} className="btn" onClick={()=>{handleEdit(item.articleContent)}}><i class="fas fa-edit"></i>編輯</Link>
-          <button className="btn" onClick={e => {
+        </div>
+        
+        <div className="col-3 row userblog-btn-block">
+          <Link to={"/blogEdit/" + item.articleId} className="btn col-6" onClick={()=>{handleEdit(item.articleContent)}}><i class="fas fa-edit"></i>編輯</Link>
+          <Link className="btn col-6" onClick={e => {
             e.preventDefault()
             Swal.fire({
               title: `刪除 ${item.articleTitle} ?`,
@@ -93,9 +98,10 @@ function UserBlog(props) {
             // }
           }}>
             <i className="fa fa-trash" aria-hidden="true"></i>刪除
-          </button>
+          </Link>
         </div>
-      </div>      
+      </div>  
+      </Fade>    
     </>
     )
   })
@@ -110,7 +116,7 @@ function UserBlog(props) {
       <div className="row userBlogTop">
         <img src={userBlogTop} />
       </div>
-      <div className="row">
+      <div className="row justify-content-end py-3 pr-3">
         <Link to="/blogAdd/" className="btn userblog-btn-add d-block"><i class="fas fa-plus-square"></i>發表新文章</Link>
       </div>
       {showBlogList}     
