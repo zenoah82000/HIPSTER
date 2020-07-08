@@ -24,11 +24,11 @@ function BookArea(props) {
         <div className="book-info">
           <ul>
             <li>
-              <i class="far fa-circle"></i>
+              <i className="far fa-circle"></i>
               <div>今日可訂</div>
             </li>
             <li>
-              <i class="far fa-circle"></i>
+              <i className="far fa-circle"></i>
               <div>立即確認並獲得憑證</div>
             </li>
           </ul>
@@ -60,7 +60,7 @@ function BookArea(props) {
               }
             }}
           >
-            <i class="fas fa-minus"></i>
+            <i className="fas fa-minus"></i>
           </div>
           <div className="numbersdisplay">{value}</div>
           <div
@@ -73,7 +73,7 @@ function BookArea(props) {
               }
             }}
           >
-            <i class="fas fa-plus"></i>
+            <i className="fas fa-plus"></i>
           </div>
         </div>
 
