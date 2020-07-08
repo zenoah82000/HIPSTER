@@ -80,7 +80,7 @@ function BlogAdd(props) {
   return (
     <>
       <Container>
-        <MyBreadcrumb />
+        {/* <MyBreadcrumb /> */}
         <ul className="list-unstyled blog-add-ul">
           <li className="row">
             <div className="col-2">
@@ -120,7 +120,9 @@ function BlogAdd(props) {
           </li>
           <li>
             <InputGroup className="mb-3">            
-              <FormControl placeholder="請輸入文章標題..."/>
+              <FormControl placeholder="請輸入文章標題..." onChange={event => {
+                setAddArticleTitle(event.target.value)            
+                }} />
             </InputGroup>
           </li>
           <li>

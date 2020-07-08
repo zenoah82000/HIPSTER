@@ -13,6 +13,8 @@ import { AiFillStar } from 'react-icons/ai'
 import { BsPlusCircle } from 'react-icons/bs'
 import { IconContext } from 'react-icons'
 
+import $ from 'jquery'
+
 //確認框
 import Swal from 'sweetalert2'
 
@@ -93,6 +95,24 @@ function UserComment(props) {
     commentAsync()
     return () => console.log('unmount')
   }, [])
+
+  $(window).scroll(function () {
+    if ($(this).scrollTop() > 100) {
+      $('#back-to-top').fadeIn()
+    } else {
+      $('#back-to-top').fadeOut()
+    }
+  })
+  // scroll body to 0px on click
+  $('#back-to-top').click(function () {
+    $('body,html').animate(
+      {
+        scrollTop: 0,
+      },
+      400
+    )
+    return false
+  })
 
   //提交評論
   const handleDelete = (index) => {
@@ -212,6 +232,14 @@ function UserComment(props) {
     <>
       {props.match.params.type === 'mycomment' ? (
         <>
+          <a
+            id="back-to-top"
+            href="#"
+            class="btn  btn-lg back-to-top"
+            role="button"
+          >
+            <i class="fas fa-chevron-up"></i>
+          </a>
           <div className="usercontainer">
             <h2 className="usertitle mb-3   ">我的評價</h2>
             <div className="d-flex comment-bar ">
