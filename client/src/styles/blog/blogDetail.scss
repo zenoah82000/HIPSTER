@@ -1,15 +1,18 @@
 .blog-detail-main {
-  background: #fff;
+  // background: #fff;
   padding-right: 100px;
+  .blog-detail-title {
+    margin-bottom: 5px;
+    font-weight: 800;
+  }
+  .blog-detail-date {
+    margin-bottom: 10px;
+  }
+  .blog-detail-content {
+    // padding: 10px;
+  }
 }
 
-.blog-detail-title {
-  font-weight: 800;
-}
-
-.blog-detail-content {
-  width: 100%;
-}
 .blog-content-aside {
   button {
     background: #b98f50;
@@ -17,8 +20,8 @@
     margin: 10px auto;
   }
   .card {
-    width: 80%;
-    margin: 10px auto;
+    // width: 80%;
+    margin: 0 auto;
     background: #ffffff;
     border-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.2) 0 3px 5px 0px;
@@ -35,25 +38,73 @@
     }
   }
   .featured {
-    width: 80%;
-    margin: 10px auto;
+    // width: 80%;
+    margin: 50px auto;
+    h3 {
+      font-weight: 800;
+    }
+    a {
+      // border-bottom: 1px solid #aaa;
+      padding-bottom: 20px;
+      // background: #ffffff;
+      text-decoration: none;
+      box-shadow: 3px 3px 5px rgba(189, 186, 186, 0.3);
+      // border-radius: 10px;
+      transition: 0.3s;
+      &:hover {
+        box-shadow: 1px 1px 3px rgba($color: #000000, $alpha: 0.3);
+        transform: scale(0.95);
+      }
+      img {
+        width: 70px;
+        height: 70px;
+        margin: auto 0;
+      }
+    }
   }
 }
 .blog-related-posts {
   h3 {
-    font-weight: 900;
+    font-weight: 800;
   }
   ul {
-    padding: 5px;
+    padding-top: 20px;
     li {
-      // padding: 10px;
+      a {
+        margin: 0 auto;
+        width: 90%;
+        background: #ffffff;
+        text-decoration: none;
+        box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+        transition: 0.3s;
+        &:hover {
+          box-shadow: 1px 1px 3px rgba($color: #000000, $alpha: 0.3);
+          transform: scale(0.95);
+        }
+        .related-card-title {
+          padding: 10px;
+          color: #707070 !important;
+          font-size: 20px;
+          font-weight: 600;
+        }
+        .related-author-date {
+          padding: 10px;
+          // padding-bottom: 5px;
+          img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+          }
+        }
+      }
       img {
-        border-radius: 8px;
-        width: 260px;
+        border-radius: 10px 10px 0 0;
+        width: 100%;
         height: 180px;
       }
       h5 {
-        font-weight: 900;
+        font-weight: 800;
       }
     }
   }
@@ -64,10 +115,17 @@
     img {
       width: 70px;
       height: 70px;
+      margin: 5px auto;
       border-radius: 50%;
     }
+    .blog-commentator {
+      text-align: center;
+    }
+    .blog-comment-text {
+      // padding-bottom: 50px;
+    }
   }
-  ul {
+  .comment-input {
     li {
       textarea {
         width: 100%;
