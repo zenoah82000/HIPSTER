@@ -14,7 +14,7 @@ function ProductSearchResult(props) {
     <>
       <div className="product-result">
         {loading ? (
-          <h4 style={{ display: 'inline-block' }}>載入中</h4>
+          <h4 style={{ display: 'inline-block' }}>搜尋中</h4>
         ) : (
           <>
             <h4 style={{ display: 'inline-block' }}>{productnumbers} 項行程</h4>
