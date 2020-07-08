@@ -7,7 +7,7 @@ function ProductSearchResult(props) {
   const { productnumbers, loading, setPrice, setLoading } = props
 
   useEffect(() => {
-    console.log(loading)
+    // console.log(loading)
   }, [loading])
   // console.log(productnumbers)
   return (
