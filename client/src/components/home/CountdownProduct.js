@@ -53,7 +53,7 @@ function CountdownProduct(props) {
 
   return (
     <>
-      <Link to={`/product/${item.productId}`}>
+      <a href={`/product/${item.productId}`}>
         <p className="countdown-num">
           {[countdowntime(item.productEndingDate)]}
         </p>
@@ -68,7 +68,7 @@ function CountdownProduct(props) {
                   : 'activity-follow'
               }
               onClick={(e) => {
-                addWishlistCheck(e,item)
+                addWishlistCheck(e, item)
               }}
             >
               <FaHeart />
@@ -95,7 +95,7 @@ function CountdownProduct(props) {
             </p>
           </div>
         </div>
-      </Link>
+      </a>
     </>
   )
 }
