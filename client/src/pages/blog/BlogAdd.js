@@ -96,27 +96,22 @@ function BlogAdd(props) {
                     <option value="6">手寫日記</option>
                   </Form.Control>
                 </Form.Group>
-              </Form>
-              {/* <select className="blog-select-category" onChange={event => setAddArticleCategory(event.target.value)} value={addArticleCategory}>                
-                <option value="1">心情抒發</option>
-                <option value="2">靈感角落</option>
-                <option value="3">重點書評</option>
-                <option value="4">活動分享</option>
-                <option value="5">新人新書</option>
-                <option value="6">手寫日記</option>
-              </select> */}
+              </Form>              
             </div>
-            <div className="col-8"></div>
-            <div className="blog-add-btn col-2 row">
-              <button className="btn" onClick={e => {
+            <div className="col-6"></div>
+            <div className="blog-add-btn col-4 row align-items-center justify-content-end text-right">
+              <button className="btn text-danger" onClick={e => {
                   e.preventDefault()
                   handleCancel()
-                  }}>取消發文</button>
-              <button className="btn" onClick={e => {
+                  }}><i class="far fa-window-close"></i>取消發文</button>
+                  <button className="btn blogadd-submit-btn" onClick={e => {
                   e.preventDefault()
                   handleSubmit()                  
-              }}>發佈文章</button>
+              }}><i class="far fa-check-square"></i>發佈文章</button>
             </div>
+            {/* <div className="blog-add-btn col-2 row align-items-center justify-content-end">
+              
+            </div> */}
           </li>
           <li>
             <InputGroup className="mb-3">            
