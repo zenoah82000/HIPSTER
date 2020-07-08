@@ -28,7 +28,6 @@ class mapList extends React.Component {
       searchBtn2: '日期',
       searchBtn3: '星等',
       star:0,
-      product:[],
       date: new Date(),
       dateClicked: false,
       active: true,
