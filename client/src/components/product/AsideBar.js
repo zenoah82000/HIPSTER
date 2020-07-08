@@ -40,6 +40,7 @@ function AsideBar(props) {
     pricerange,
     price,
     setPrice,
+    setLoading,
   } = props
 
   //設定開始日期
@@ -79,7 +80,7 @@ function AsideBar(props) {
 
   const [categorySection, setCategorySection] = useState([])
   // const [price, setPrice] = useState(pricerange)
-  const [checked, setChecked] = useState(false)
+  const [checked, setChecked] = useState(true)
   const [checked2, setChecked2] = useState(false)
 
   const [dateValue, setDateValue] = useState(d)
@@ -337,6 +338,7 @@ function AsideBar(props) {
                           className="checkbox"
                           key={item.categoryId}
                           onClick={() => {
+                            setLoading(true)
                             searchParams.get('cat')
                               ? checkCatChild(categoryChild)
                                 ? deleteCatChild(categoryChild)
@@ -367,6 +369,7 @@ function AsideBar(props) {
                           className="checkbox"
                           key={category.categoryName}
                           onClick={() => {
+                            setLoading(true)
                             checkcat(
                               category.categoryId.toString(),
                               category.categoryParentId.toString()
@@ -425,6 +428,7 @@ function AsideBar(props) {
                 className="checkbox px-0 "
                 key={'全部'}
                 onClick={() => {
+                  setLoading(true)
                   searchParams.get('loc')
                     ? searchParams.get('loc') === '1,2,3,4,5'
                       ? searchParams.delete('loc')
@@ -455,6 +459,7 @@ function AsideBar(props) {
                 className="checkbox px-0"
                 key={'北部'}
                 onClick={() => {
+                  setLoading(true)
                   checkloc('1')
                   searchParams.set('page', 1)
                   window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -476,6 +481,7 @@ function AsideBar(props) {
                 className="checkbox px-0"
                 key={'中部'}
                 onClick={() => {
+                  setLoading(true)
                   checkloc('2')
                   searchParams.set('page', 1)
                   window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -497,6 +503,7 @@ function AsideBar(props) {
                 className="checkbox px-0"
                 key={'南部'}
                 onClick={() => {
+                  setLoading(true)
                   checkloc('3')
                   searchParams.set('page', 1)
                   window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -518,6 +525,7 @@ function AsideBar(props) {
                 className="checkbox px-0"
                 key={'東部'}
                 onClick={() => {
+                  setLoading(true)
                   checkloc('4')
                   searchParams.set('page', 1)
                   window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -539,6 +547,7 @@ function AsideBar(props) {
                 className="checkbox px-0"
                 key={'外島'}
                 onClick={() => {
+                  setLoading(true)
                   checkloc('5')
                   searchParams.set('page', 1)
                   window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -596,6 +605,7 @@ function AsideBar(props) {
                 showDoubleView={true}
                 value={dateValue}
                 onChange={(value) => {
+                  setLoading(true)
                   console.log(value[0].toLocaleDateString())
                   setStartDate(value[0].toLocaleDateString())
                   console.log(value[1].toLocaleDateString())
@@ -608,6 +618,7 @@ function AsideBar(props) {
                 <div
                   className="cancle_btn"
                   onClick={() => {
+                    setLoading(true)
                     searchParams.delete('startDate')
                     searchParams.delete('endDate')
                     searchParams.set('page', 1)
@@ -623,6 +634,7 @@ function AsideBar(props) {
                 <div
                   className="apply_btn"
                   onClick={() => {
+                    setLoading(true)
                     window.scrollTo({ top: 0, behavior: 'smooth' })
                     setStartDateEndDate(startDate, endDate)
                     setChecked2(!checked2)
@@ -651,6 +663,7 @@ function AsideBar(props) {
                 setPrice({ ...value })
               }}
               onChangeComplete={(value) => {
+                setLoading(true)
                 window.scrollTo({ top: 0, behavior: 'smooth' })
                 setMinPriceMaxPrice(value.min, value.max)
                 searchParams.set('page', 1)

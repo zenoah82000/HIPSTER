@@ -19,6 +19,7 @@ import Slide from 'react-reveal/Slide'
 function ProductList(props) {
   const { productListData, getProductListAsync } = props
   const [date, setDate] = useState(new Date())
+  const [loading, setLoading] = useState(true)
   const searchParams = new URLSearchParams(props.location.search)
   // const currentpage = searchParams.get('page')
   const currentPage = !!searchParams.get('page') ? +searchParams.get('page') : 1
@@ -283,10 +284,19 @@ function ProductList(props) {
     return Math.floor(Math.random() * (max - min)) + min //不含最大值，含最小值
   }
 
+  let t
+
   useEffect(() => {
     getProductListAsync()
     setDate(new Date())
   }, [])
+
+  useEffect(() => {
+    t = setTimeout(() => {
+      setLoading(false)
+      console.log(loading)
+    }, 700)
+  }, [searchParams])
 
   const display = count.map((item, index) => {
     if (
@@ -376,6 +386,7 @@ function ProductList(props) {
             cat={cat}
             loc={loc}
             price={price}
+            setLoading={setLoading}
             setPrice={setPrice}
             pricerange={pricerange}
           />
@@ -387,22 +398,134 @@ function ProductList(props) {
             (searchParams.has('minPrice') && searchParams.has('maxPrice')) ||
             !!keyword ? (
               <Fade>
-                <ProductSearchResult productnumbers={count.length} />
+                <ProductSearchResult
+                  productnumbers={count.length}
+                  loading={loading}
+                />
               </Fade>
             ) : (
               ''
             )}
             <ProductSearchResultSort searchParams={searchParams} />
             {/* -------商品列表區域------ */}
-            {display}
+            {loading ? (
+              <>
+                <div className="product-list-search-info">
+                  <div className="row">
+                    <div className="col-sm-5 col-lg-4">
+                      <div
+                        style={{
+                          backgroundColor: '#ccc',
+                          minWidth: 100,
+                          minHeight: 255,
+                        }}
+                      ></div>
+                    </div>
+                    <div className="col-sm-7 col-lg-8 px-15">
+                      <div className="product-detail">
+                        <div
+                          className="product-label"
+                          style={{
+                            backgroundColor: '#ccc',
+                            height: '18px',
+                          }}
+                        ></div>
+                        <diiv
+                          className="product-description"
+                          style={{
+                            backgroundColor: '#ccc',
+                            width: '50%',
+                            height: '18px',
+                            margin: '10px 0',
+                          }}
+                        ></diiv>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="product-list-search-info">
+                  <div className="row">
+                    <div className="col-sm-5 col-lg-4">
+                      <div
+                        style={{
+                          backgroundColor: '#ccc',
+                          minWidth: 100,
+                          minHeight: 255,
+                        }}
+                      ></div>
+                    </div>
+                    <div className="col-sm-7 col-lg-8 px-15">
+                      <div className="product-detail">
+                        <div
+                          className="product-label"
+                          style={{
+                            backgroundColor: '#ccc',
+                            height: '18px',
+                          }}
+                        ></div>
+                        <div
+                          className="product-description"
+                          style={{
+                            backgroundColor: '#ccc',
+                            width: '50%',
+                            height: '18px',
+                            margin: '10px 0',
+                          }}
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="product-list-search-info">
+                  <div className="row">
+                    <div className="col-sm-5 col-lg-4">
+                      <div
+                        style={{
+                          backgroundColor: '#ccc',
+                          minWidth: 100,
+                          minHeight: 255,
+                        }}
+                      ></div>
+                    </div>
+                    <div className="col-sm-7 col-lg-8 px-15">
+                      <div className="product-detail">
+                        <div
+                          className="product-label"
+                          style={{
+                            backgroundColor: '#ccc',
+                            height: '18px',
+                          }}
+                        ></div>
+                        <div
+                          className="product-description"
+                          style={{
+                            backgroundColor: '#ccc',
+                            width: '50%',
+                            height: '18px',
+                            margin: '10px 0',
+                          }}
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </>
+            ) : (
+              display
+            )}
+
             {/* -------商品列表區域------ */}
-            <Slide bottom>
+
+            {loading ? (
+              ''
+            ) : (
               <ProductListPageBar
                 productnumbers={count.length}
                 currentPage={currentPage}
                 perPage={perPage}
+                setLoading={setLoading}
               />
-            </Slide>
+            )}
           </ProductListMainContent>
         </div>
       </div>
