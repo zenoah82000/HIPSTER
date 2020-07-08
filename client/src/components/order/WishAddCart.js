@@ -10,6 +10,20 @@ function WishAddCart(props) {
   const [addcartdate, setAddcartdate] = useState('')
   //日期提示
   let isdate, date
+
+  //取得日期
+  let getdate = new Date()
+  let month = getdate.getMonth() + 1
+  let day = getdate.getDate()+1
+
+  let productdate=
+  getdate.getFullYear() +
+    '-' +
+    (month < 10 ? '0' : '') +
+    month +
+    '-' +
+    (day < 10 ? '0' : '') +
+    day
   //增加到購物車
   const wishAddCart = () => {
     if (date.value) {
@@ -47,8 +61,8 @@ function WishAddCart(props) {
             ref={(input) => (date = input)}
             className="wish-date"
             type="date"
-            min="2020-07-01"
-            max="2020-08-01"
+            min={productdate}
+            max={addcartdata.productEndingDate.substr(0,10)}
             value={addcartdate}
             onChange={(e) => {
               setAddcartdate(e.target.value)

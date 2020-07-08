@@ -13,7 +13,7 @@ import Test from '../pages/Test'
 
 function Mynavbar(props) {
   //購物車資料
-  const { mycart, deleteCart, userSuccess, setuserSuccess, username } = props
+  const { mycart, deleteCart, userSuccess, setuserSuccess, username ,checkloginok,setCheckloginok} = props
   // console.log(userSuccess)
 
   //購物車視窗狀態
@@ -100,6 +100,32 @@ function Mynavbar(props) {
     console.log('loginOk', loginOk)
   }
 
+
+  //請先登入
+  //請登入視窗
+  function Checklogin(props) {
+    return (
+      <Modal
+        className="SignOk"
+        {...props}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Body className="SignOk-bg">
+          <p className="SignOk-title">請先登入</p>
+          <div
+            className="SignOkbtn"
+            onClick={() => {
+              setCheckloginok(false)
+            }}
+          >
+            確認
+          </div>
+        </Modal.Body>
+      </Modal>
+    )
+  }
   //登出處理
   async function LogoutMember(item) {
     localStorage.removeItem('member')
@@ -502,6 +528,7 @@ function Mynavbar(props) {
 
   return (
     <>
+    <Checklogin show={checkloginok} onHide={() => setCheckloginok(false)} />
       <SignLoginMassage show={showlogin} onHide={() => setShowlogin(false)} />
       <SignOkMassage show={showSignOk} onHide={() => setShowSignOk(false)} />
       <LoginOkMassage show={showLoginOk} onHide={() => setShowLoginOk(false)} />

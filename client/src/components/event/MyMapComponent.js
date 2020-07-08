@@ -380,7 +380,11 @@ export default class ViewportExample extends Component {
                     </li>
                   </ul>
                   <div className="cardButton">
-                    <a value="" href={`/product/${clickData.productId}`}>
+                    <a
+                      value=""
+                      href={`/product/${clickData.productId}`}
+                      target="_blank"
+                    >
                       立即預定商品
                     </a>
                   </div>

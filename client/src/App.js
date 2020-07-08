@@ -3,9 +3,6 @@ import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-//取得購物車資料
-import { getCartDataAsync, getCartData } from './actions/order/order_Actions'
-
 import Mynavbar from './components/Mynavbar'
 import Myfooter from './components/Myfooter'
 import MainContent from './components/MainContent'
@@ -51,6 +48,9 @@ function App(props) {
   const username = userlocalStorage.name
 
   const { mycart, wishlist } = props
+  
+  //請先登入視窗
+  const [checkloginok, setCheckloginok] = useState(false)
   //取得購物車資料
   const localCart = JSON.parse(localStorage.getItem('cart')) || []
 
@@ -86,9 +86,23 @@ function App(props) {
     const response = await fetch(request)
     const data = await response.json()
   }
+  //加入願望清單判斷
+  const addWishlistCheck = (e,item) => {
+    e.preventDefault()
+    if (userlocalStorage.id) {
+      if (
+        wishlist.findIndex((value) => value.productId == item.productId) != -1
+      ) {
+        deletewishlist(item)
+      } else {
+        addwishlist(item)
+      }
+    } else {
+      setCheckloginok(true)
+    }
+  }
   //加入願望清單
   const addwishlist = (value) => {
-    console.log(value)
     const index = wishlist.findIndex(
       (item) => item.productId === value.productId
     )
@@ -256,6 +270,8 @@ function App(props) {
           userSuccess={userSuccess}
           setuserSuccess={setuserSuccess}
           username={username}
+          checkloginok={checkloginok}
+          setCheckloginok={setCheckloginok}
         />
 
         <Switch>
@@ -296,6 +312,7 @@ function App(props) {
               deleteCart={deleteCart}
               sum={sum}
               userSuccess={userSuccess}
+              setCheckloginok={setCheckloginok}
             />
           </Route>
           <Route path="/map">
@@ -329,7 +346,7 @@ function App(props) {
             <AllCoupon />
           </Route>
           <Route exact path="/">
-            <Home addwishlist={addwishlist} deletewishlist={deletewishlist} />
+            <Home addWishlistCheck={addWishlistCheck} />
           </Route>
 
           <Route exact path="*">

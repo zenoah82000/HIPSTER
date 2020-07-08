@@ -5,49 +5,42 @@ const router = express.Router();
 const nodemailer = require("nodemailer");
 require("dotenv").config();
 
-
-
-
-
 //願望清單取得
 router.get("/member/wishlist/:memberId", async (req, res) => {
-  const memberId = req.params.memberId
-  const wishsql="SELECT `wishlist`.`productId`,`product`.`productImg`,`product`.`productName`,`product`.`productPrice`,`product`.`productEndingDate`,`product`.`productAddress` FROM `wishlist` INNER JOIN `product` ON `wishlist`.`productId` = `product`.`productId`  WHERE `memberId` = ?"
-  const [wishlist] = await db.query(wishsql,[memberId])
+  const memberId = req.params.memberId;
+  const wishsql =
+    "SELECT `wishlist`.`productId`,`product`.`productImg`,`product`.`productName`,`product`.`star`,`product`.`productPrice`,`product`.`productEndingDate`,`product`.`productAddress` FROM `wishlist` INNER JOIN `product` ON `wishlist`.`productId` = `product`.`productId`  WHERE `memberId` = ?";
+  const [wishlist] = await db.query(wishsql, [memberId]);
 
-
-  res.json(wishlist)
-
-})
+  res.json(wishlist);
+});
 //願望清單新增
 
 router.post("/member/wishlistAdd/:memberId", async (req, res) => {
-  console.log('新增願望清單')
-  console.log(req.body)
-  const memberId = req.params.memberId
-  const productId = req.body.productId
-  const wishsql="INSERT INTO `wishlist` (`memberId`,`productId`) VALUES(?,?)"
-  const [wishlist] = await db.query(wishsql,[memberId,productId])
+  console.log("新增願望清單");
+  console.log(req.body);
+  const memberId = req.params.memberId;
+  const productId = req.body.productId;
+  const wishsql = "INSERT INTO `wishlist` (`memberId`,`productId`) VALUES(?,?)";
+  const [wishlist] = await db.query(wishsql, [memberId, productId]);
 
-
-  res.json(wishlist)
-
-})
+  res.json(wishlist);
+});
 //願望清單刪除
 router.delete("/member/wishlistDel/:memberId", async (req, res) => {
-  console.log(req.body.memberId+"刪除願望清單")
-  const memberId = req.params.memberId
-  const productId = req.body.productId
-  const wishsql="DELETE FROM `wishlist` WHERE `memberId` = ? && `productId`=?"
-  const [wishlist] = await db.query(wishsql,[memberId,productId])
+  console.log(req.body.memberId + "刪除願望清單");
+  const memberId = req.params.memberId;
+  const productId = req.body.productId;
+  const wishsql =
+    "DELETE FROM `wishlist` WHERE `memberId` = ? && `productId`=?";
+  const [wishlist] = await db.query(wishsql, [memberId, productId]);
 
-
-  res.json(wishlist)
-})
+  res.json(wishlist);
+});
 //訂單列表
 router.get("/member/order/:memberId", async (req, res) => {
   console.log("買家訂單請求");
-  const memberId = req.params.memberId
+  const memberId = req.params.memberId;
   //每一頁幾筆
   const perPage = 4;
 
@@ -89,16 +82,16 @@ router.post("/member/checkout", async (req, res) => {
   let year = new Date().getFullYear().toString();
   let month = new Date().getMonth().toString();
   let date = new Date().getDate().toString();
-  const memberId = req.body.orderMemberId
+  const memberId = req.body.orderMemberId;
   const orderItems = req.body.orderItems;
   const email = req.body.email;
   const phone = req.body.phone;
-  const contact = req.body.lastName+req.body.firstName
-  const sumdiscount= req.body.sumdiscount
-  const sumless = req.body.sumless
-  const discountcode = req.body.discountcode
-  const paymentType = req.body.paymentType
-  
+  const contact = req.body.lastName + req.body.firstName;
+  const sumdiscount = req.body.sumdiscount;
+  const sumless = req.body.sumless;
+  const discountcode = req.body.discountcode;
+  const paymentType = req.body.paymentType;
+
   //取得總筆數
   let orderId;
   const total = "show table status like 'orderlist'";
@@ -126,6 +119,7 @@ router.post("/member/checkout", async (req, res) => {
     phone,
     email,
   ]);
+  //訂單新增成功到評論
   for (let i = 0; i < orderItems.length; i++) {
     db.query(addorderlist, [
       orderId,
@@ -136,14 +130,16 @@ router.post("/member/checkout", async (req, res) => {
       orderItems[i].checkQty,
       orderItems[i].checkSubtotal,
     ]).then(([res]) => {
-
       const additemListId = "INSERT INTO `comments` (`itemListId`) VALUES(?)";
-      return db.query(additemListId,[res.insertId])
-
+      return db.query(additemListId, [res.insertId]);
     });
   }
   console.log("訂單新增成功" + orderId);
-
+//有使用優惠券扣除優惠券
+if(discountcode !=null && discountcode !=''){
+  const coupon = "UPDATE `rel_member_coupon` SET `memberCouponNum`=0 WHERE `memberId`=? && discountCode =?"
+  db.query(coupon,[memberId,discountcode])
+}
   //訂單成功送出email
   console.log("送出電子郵件");
   const transporter = nodemailer.createTransport({
@@ -161,14 +157,48 @@ router.post("/member/checkout", async (req, res) => {
     },
   });
   let text = orderItems.map((item) => {
-    return "<li>" + item.name + "<li>";
+    return `<div style="display:flex;padding:0px 40px;">
+        <div style="width: 150px;height: 100px;margin-right: 12px;">
+          <img src="cid:${item.productId}"style="object-fit: cover; width: 100%;height: 100%;"/>
+        </div>
+        <div style="width: 50%;">
+          <p style="font-size: 16px;color: black;font-weight: bolder;margin:0;">
+            ${item.name}
+          </p>
+          <p style="font-size: 12px;color: black;margin:0;">
+            數量:${item.checkQty}
+          </p>
+          <p style="font-size: 12px;color: black;margin:0;">
+            價格:NT$${item.checkPrice}
+          </p>
+          <p style="font-size: 12px;color: black;margin:0;">
+            日期:${item.date}
+          </p>
+        </div>
+        <div style="width: 25%;text-align: left; line-height:100px">
+          <p style="font-size:16px;margin:0;">小計:NT$${item.checkPrice * item.checkQty}</p>
+        </div>
+      </div>`
   });
+  var img=[]
+  for(let i =0;i<orderItems.length;i++){
+    let imgbox={
+      filename: orderItems[i].img.replace('\r\n',''),     
+      path: __dirname +`/../../public/images/product/${orderItems[i].img.replace('\r\n','')}`,              
+      cid: orderItems[i].productId.toString()
+    }
+    img.push(imgbox)
+  }
   var mailOptions = {
     from: '"Hipster文青地圖" <e24971234@gmail.com>',
     to: email,
     subject: "感謝您在本站消費",
-    html: `<div><p style="color:blue;">訂單編號:${orderId} </p> + <div>`,
-    
+    html: `<div>
+    <p style="font-size: 16px;color: black;font-weight: bolder">訂單編號:${orderId}</p>
+    <hr />
+    <div>${text}<div>
+  </div>`,
+  attachments: img
   };
   // 準備發送信件
   transporter.sendMail(mailOptions, function (err, info) {
@@ -176,15 +206,15 @@ router.post("/member/checkout", async (req, res) => {
       return console.log(err);
     }
   });
-  const ordertime = "SELECT * FROM `orderlist` WHERE `orderListId`= ?"
-  const [r3] =await db.query(ordertime,[r2.insertId])
+  const ordertime = "SELECT * FROM `orderlist` WHERE `orderListId`= ?";
+  const [r3] = await db.query(ordertime, [r2.insertId]);
   //傳送回前端
-  const buytime = r3[0].created_at.toLocaleString()
-  let data ={
+  const buytime = r3[0].created_at.toLocaleString();
+  let data = {
     orderId,
     buytime,
-  }
-  
+  };
+
   res.json(data);
 });
 

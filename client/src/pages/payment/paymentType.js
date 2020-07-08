@@ -63,6 +63,7 @@ function PaymentType(props) {
       let total = sum(buyerinfo.product)
       buyerinfo.product.forEach((item, i) => {
         itemData.productId = item.productId
+        itemData.img=item.productImg
         itemData.date = item.date
         itemData.name = item.productName
         itemData.checkPrice = item.productPrice
