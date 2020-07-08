@@ -209,6 +209,46 @@
       }
     }
   }
+  .paymentfinish-footer {
+    .paymentfinish-subtotal {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      p {
+        color: black;
+      }
+      span {
+        font-size: 20px;
+        color: black;
+      }
+    }
+    .paymentfinish-coupon {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      p {
+        color: black;
+      }
+      span {
+        color: black;
+        font-size: 20px;
+      }
+    }
+    .paymentfinish-total {
+      display: flex;
+      // border-top: 1px solid rgb(180, 180, 180);
+      justify-content: space-between;
+      width: 100%;
+      p {
+        color: black;
+      }
+      span {
+        font-weight: bold;
+        font-size: 24px;
+        color: #ff3400;
+      }
+    }
+  }
 }
 //檢視訂單視窗
 //訂單確認視窗

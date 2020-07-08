@@ -3,7 +3,7 @@ import { Link, withRouter } from 'react-router-dom'
 import '../../styles/product/ProductListPageBar.scss'
 
 function ProductListPageBar(props) {
-  const { productnumbers, currentPage, perPage, moveto } = props
+  const { productnumbers, currentPage, perPage, moveto, setLoading } = props
   const searchParams = new URLSearchParams(props.location.search)
   const Top = moveto ? moveto : 0
   const perpage = perPage
@@ -11,6 +11,7 @@ function ProductListPageBar(props) {
     productnumbers === 0 ? 1 : Math.ceil(productnumbers / perpage)
   const groupCount = 5
   const [startPage, setStartPage] = useState(1)
+
   // const currentPage = !!searchParams.get('page') ? +searchParams.get('page') : 1
   function startPageset(targetpage) {
     if (targetpage >= groupCount) {
@@ -29,6 +30,7 @@ function ProductListPageBar(props) {
           className={+currentPage > 1 ? 'prepage' : 'prepage disabled'}
           // to={`?page=${i}`}
           onClick={() => {
+            setLoading(true)
             searchParams.set('page', currentPage - 1)
             window.scrollTo({ top: Top, behavior: 'smooth' })
             props.history.push(`?${searchParams.toString()}`)
@@ -47,6 +49,7 @@ function ProductListPageBar(props) {
               className={i === currentPage ? 'active' : ''}
               // to={`?page=${i}`}
               onClick={() => {
+                setLoading(true)
                 searchParams.get('page')
                   ? searchParams.set('page', i)
                   : searchParams.append('page', i)
@@ -66,6 +69,7 @@ function ProductListPageBar(props) {
           <a
             className={currentPage === 1 ? 'active' : ''}
             onClick={() => {
+              setLoading(true)
               searchParams.get('page')
                 ? searchParams.set('page', 1)
                 : searchParams.append('page', 1)
@@ -99,6 +103,7 @@ function ProductListPageBar(props) {
               <a
                 className={currentPage === i ? 'active' : ''}
                 onClick={() => {
+                  setLoading(true)
                   searchParams.get('page')
                     ? searchParams.set('page', i)
                     : searchParams.append('page', i)
@@ -125,6 +130,7 @@ function ProductListPageBar(props) {
           <a
             className={currentPage === totalpages ? 'active' : ''}
             onClick={() => {
+              setLoading(true)
               searchParams.get('page')
                 ? searchParams.set('page', totalpages)
                 : searchParams.append('page', totalpages)
@@ -147,6 +153,7 @@ function ProductListPageBar(props) {
           }
           // to={`?page=${i}`}
           onClick={() => {
+            setLoading(true)
             searchParams.set('page', currentPage + 1)
             window.scrollTo({ top: Top, behavior: 'smooth' })
             props.history.push(`?${searchParams.toString()}`)

@@ -241,7 +241,7 @@ function PaymentType(props) {
                       required
                       name="ccv"
                       size="lg"
-                      type="text"
+                      type="password"
                       placeholder="安全碼"
                       maxlength="3"
                       pattern="^\d{3}$"

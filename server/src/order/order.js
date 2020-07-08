@@ -201,11 +201,11 @@ if(discountcode !=null && discountcode !=''){
   attachments: img
   };
   // 準備發送信件
-  transporter.sendMail(mailOptions, function (err, info) {
-    if (err) {
-      return console.log(err);
-    }
-  });
+  // transporter.sendMail(mailOptions, function (err, info) {
+  //   if (err) {
+  //     return console.log(err);
+  //   }
+  // });
   const ordertime = "SELECT * FROM `orderlist` WHERE `orderListId`= ?";
   const [r3] = await db.query(ordertime, [r2.insertId]);
   //傳送回前端
