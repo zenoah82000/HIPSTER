@@ -46,7 +46,7 @@ function UserCoupon(props) {
       discountCode,
     }
     Swal.fire({
-      title: '確定新增此優惠券?',
+      title: '確認兌換此優惠券?',
       icon: 'question',
       showCancelButton: true,
       html:
@@ -59,7 +59,6 @@ function UserCoupon(props) {
       if (result.value) {
         props.addUserCouponDataAsync(GiviFormData)
         Swal.fire({
-          title: '優惠券新增成功',
           icon: 'success',
         }).then(() => {
           props.history.go(0)
@@ -67,9 +66,6 @@ function UserCoupon(props) {
       }
     })
   }
-
-  // console.log('discountCode', discountCode)
-  // console.log('adduserCouponData', adduserCouponData)
 
   let couponList = userCouponData.map((item) => {
     if (
@@ -190,7 +186,7 @@ function UserCoupon(props) {
                   activeClassName="currentcoupon"
                   className="coupontab-a"
                 >
-                  不適用
+                  不可使用
                 </NavLink>
               </div>
             </div>
@@ -248,7 +244,7 @@ function UserCoupon(props) {
                   activeClassName="currentcoupon"
                   className="coupontab-a"
                 >
-                  不適用
+                  不可使用
                 </NavLink>
               </div>
             </div>
