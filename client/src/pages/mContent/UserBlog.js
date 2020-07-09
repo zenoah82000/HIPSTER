@@ -107,15 +107,15 @@ function UserBlog(props) {
   return (
     <>
       <div className="usercontainer">
-        <h2 className="usertitle mb-3">我的文章</h2>
-      </div>
-      <div className="row userBlogTop">
-        <img src={userBlogTop} />
-      </div>
-      <div className="row justify-content-end py-3 pr-3">
-        <Link to="/blogAdd/" className="btn userblog-btn-add d-block"><i class="fas fa-plus-square"></i>發表新文章</Link>
-      </div>
-      {showBlogList}     
+        <h2 className="usertitle mb-3">我的文章</h2>      
+        <div className="row userBlogTop">
+          <img src={userBlogTop} />
+        </div>
+        <div className="row justify-content-end py-3 pr-3">
+          <Link to="/blogAdd/" className="btn userblog-btn-add d-block"><i class="fas fa-plus-square"></i>發表新文章</Link>
+        </div>
+        {showBlogList} 
+      </div>    
     </>
   )
 }

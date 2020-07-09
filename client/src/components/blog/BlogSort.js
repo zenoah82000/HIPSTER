@@ -7,7 +7,7 @@ function BlogSort(props) {
   
   return (
     <>
-     <ul class="nav blog-sort-nav">
+     <ul class="nav blog-sort-nav py-3 col-10">
         <li> 
           <NavLink activeClassName="active" className="nav-link" exact to={url}>
           全部
