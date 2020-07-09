@@ -11,21 +11,21 @@ import { RiMoneyCnyCircleLine } from 'react-icons/ri'
 import { AiFillStar } from 'react-icons/ai'
 
 export const pointerIcon = new L.Icon({
-  iconUrl: require('../../images/myplace.svg'),
-  iconRetinaUrl: require('../../images/myplace.svg'),
+  iconUrl: require('../../images/cafeTag-me.svg'),
+  iconRetinaUrl: require('../../images/cafeTag-me.svg'),
   iconAnchor: [5, 55],
   popupAnchor: [10, -44],
-  iconSize: [50, 55],
+  iconSize: [70, 70],
 })
 
 export const cafeTagIcon = new L.Icon({
-  iconUrl: require('../../images/location-pin.svg'),
-  iconRetinaUrl: require('../../images/location-pin.svg'),
+  iconUrl: require('../../images/icon-coffee.svg'),
+  iconRetinaUrl: require('../../images/icon-coffee.svg'),
   iconAnchor: [5, 55],
   popupAnchor: [10, -44],
-  iconSize: [50, 55],
+  iconSize: [55, 55],
 })
-export const productTagIcon2 = new L.Icon({
+export const productTagIcon1 = new L.Icon({
   iconUrl: require('../../images/icon1.svg'),
   iconRetinaUrl: require('../../images/icon1.svg'),
   iconAnchor: [5, 55],
@@ -35,7 +35,7 @@ export const productTagIcon2 = new L.Icon({
   // shadowSize: [68, 95],
   // shadowAnchor: [20, 92]
 })
-export const productTagIcon1 = new L.Icon({
+export const productTagIcon2 = new L.Icon({
   iconUrl: require('../../images/icon2.svg'),
   iconRetinaUrl: require('../../images/icon2.svg'),
   iconAnchor: [5, 55],
