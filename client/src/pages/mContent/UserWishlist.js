@@ -5,6 +5,7 @@ import { Modal, Button, Form } from 'react-bootstrap'
 import { FaShoppingCart } from 'react-icons/fa'
 import { AiFillStar } from 'react-icons/ai'
 import { BsTrash } from 'react-icons/bs'
+import Fade from 'react-reveal/Fade'
 
 import Swal from 'sweetalert2'
 
@@ -96,9 +97,10 @@ function UserWishlist(props) {
     wishlist != null && wishlist.length >= 1 ? (
       <div className="wishlistbox ">
         <div className="row">
-          {wishlist.map((item) => {
+          {wishlist.map((item,index) => {
             return (
               <>
+              <Fade key={item.productId} bottom delay={10*index}>
                 <div key={item.productId} className="wishlist-card card m-2">
                   <div className="card-header">
                   <Link to={`/product/${item.productId}`}>
@@ -142,6 +144,7 @@ function UserWishlist(props) {
                     </button>
                   </div>
                 </div>
+                </Fade>
               </>
             )
           })}

@@ -98,7 +98,9 @@ function UserOrder() {
     <>
       <div className="usercontainer">
         <h2 className="usertitle">我的訂單</h2>
-        {loading ? <h2>載入中</h2> : display}
+        {loading ? <div class="spinner-border text-success" role="status">
+  <span class="sr-only">Loading...</span>
+</div> : display}
       </div>
     </>
   )

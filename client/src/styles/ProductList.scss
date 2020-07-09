@@ -12,6 +12,11 @@
       margin-bottom: 15px;
       border-radius: 6px;
       overflow: hidden;
+      transition: 0.2s;
+      &:hover {
+        filter: opacity(0.75);
+        // box-shadow: 0 0 10px 0 rgb(155, 155, 155);
+      }
       @media screen and (max-width: 599px) {
         height: unset;
         min-height: 400px;
