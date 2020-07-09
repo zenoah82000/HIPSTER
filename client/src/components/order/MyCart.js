@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { GoX } from 'react-icons/go'
 
-import Amount from '../../components/order/Amount'
+import Amount from '../../components/order/amount'
 
 function MyCart(props) {
   const { deleteCart, mycart } = props
