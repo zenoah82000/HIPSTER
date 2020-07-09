@@ -24,12 +24,16 @@
       box-shadow: 0 0 0 0;
     }
   }
+  Form.Row {
+    // margin-bottom: 15px;
+  }
   .cancelBtn,
   .submitBtn {
     @extend .EditBtn;
     margin-right: 10px;
   }
   .form-row {
+    padding-bottom: 15px;
     border-top: 0.5px solid rgba($color: #000000, $alpha: 0.2);
     .text-muted {
       font-size: 16px;
