@@ -15,25 +15,26 @@
   .gap {
     margin: 0 5px;
   }
-  a{
+  a {
     text-decoration: none;
     color: #684b38;
     font-weight: bolder;
     font-size: 16px;
     cursor: pointer;
-    .fa-star{
+    .fa-star {
       color: #684b38;
-      
     }
     &:hover {
       color: rgb(104, 142, 103);
-      & .fa-star{
+      & .fa-star {
         color: rgb(104, 142, 103);
       }
     }
-    
   }
-  .active{
+  .active {
     color: rgb(104, 142, 103);
+    & .fa-star {
+      color: rgb(104, 142, 103);
+    }
   }
 }
