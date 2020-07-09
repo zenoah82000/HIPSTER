@@ -285,7 +285,7 @@ function UserContent() {
           </Form.Group>
         </Col>
       </Form.Row>
-      <Form.Row>
+      <Form.Row className="row-bottom">
         <Col sm={4}>
           <Form.Group controlId="exampleForm.ControlInput1">
             <Form.Label>信箱帳號：(不可更改)</Form.Label>
