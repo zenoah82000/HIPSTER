@@ -405,13 +405,19 @@ class mapList extends React.Component {
         data=this.state.productdata.filter((item)=>{
           return (item.productName
             .toLowerCase()
-            .indexOf(this.state.search.toLowerCase()) !== -1)
+            .indexOf(this.state.search.toLowerCase()) !== -1 ||
+            item.productAddress
+              .toLowerCase()
+              .indexOf(this.state.search.toLowerCase()) !== -1)
         })
       }else{
         data=this.state.productdata.filter((item)=>{
          return (item.productName
           .toLowerCase()
-          .indexOf(this.state.search.toLowerCase()) !== -1&&item.star >= this.state.star)
+          .indexOf(this.state.search.toLowerCase()) !== -1 ||
+          item.productAddress
+            .toLowerCase()
+            .indexOf(this.state.search.toLowerCase()) !== -1 &&item.star >= this.state.star)
         })
       }
     }else{
@@ -419,13 +425,19 @@ class mapList extends React.Component {
         data=this.state.productdata.filter((item)=>{
           return (item.productName
             .toLowerCase()
-            .indexOf(this.state.search.toLowerCase()) !== -1 && item.category == this.state.searchBtn1)
+            .indexOf(this.state.search.toLowerCase()) !== -1 ||
+            item.productAddress
+              .toLowerCase()
+              .indexOf(this.state.search.toLowerCase()) !== -1 && item.category == this.state.searchBtn1)
          })
       }else{
         data=this.state.productdata.filter((item)=>{
           return (item.productName
             .toLowerCase()
-            .indexOf(this.state.search.toLowerCase()) !== -1 && item.category == this.state.searchBtn1 && item.star >= this.state.star)
+            .indexOf(this.state.search.toLowerCase()) !== -1 ||
+            item.productAddress
+              .toLowerCase()
+              .indexOf(this.state.search.toLowerCase()) !== -1 && item.category == this.state.searchBtn1 && item.star >= this.state.star)
          })
       }
     }
