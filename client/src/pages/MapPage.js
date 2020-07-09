@@ -15,7 +15,7 @@ class MapPage extends React.Component {
       cafeActive: true,
       clicked: false,
       clickData: [],
-      filterData: '',
+      filterData: [],
     }
   }
 
@@ -40,10 +40,9 @@ class MapPage extends React.Component {
   }
 
   setFileterData = (data) => {
-    console.log(data)
-    let filterData = data
+    // console.log(data)
     this.setState({
-      filterData,
+      filterData: data,
     })
   }
 
@@ -78,6 +77,7 @@ class MapPage extends React.Component {
               CafeData={CafeData}
               myLocation={this.props.myLocation}
               clickData={this.state.clickData}
+              filterData={this.state.filterData}
             />
           </div>
         </div>

@@ -27,7 +27,8 @@ class mapList extends React.Component {
       searchBtn1: '類別',
       searchBtn2: '日期',
       searchBtn3: '星等',
-      star:0,
+      star: 0,
+      filterData: [],
       date: new Date(),
       dateClicked: false,
       active: true,
@@ -48,7 +49,10 @@ class mapList extends React.Component {
     const data = await response.json()
     this.setState(
       { cafedata: data.cafelist, productdata: data.productlist },
-      () => this.sortByStarDsc()
+      () => {
+        this.sortByStarDsc()
+        this.productfilterList()
+      }
     )
   }
 
@@ -56,31 +60,33 @@ class mapList extends React.Component {
   componentDidMount() {
     this.setState({
       search: '',
-      display:false,
+      display: false,
     })
     this.getOrderlistAsync()
+    this.productfilterList()
   }
 
-  sendData(item) {
-    this.props.setFileterData(item)
-  }
   //搜尋
   updateSearch(event) {
-    this.setState({
-      data: this.state.data,
-      search: event.target.value,
-      display:true
-    })
+    this.setState(
+      {
+        data: this.state.data,
+        search: event.target.value,
+        display: true,
+      },
+      () => {
+        this.productfilterList()
+      }
+    )
     console.log(event.target.value)
     this.props.searchInput(event.target.value)
   }
   componentDidUpdate() {
-    setTimeout(()=>{
+    setTimeout(() => {
       this.setState({
-        display:false,
+        display: false,
       })
-     
-    },800)
+    }, 800)
   }
   //排序
   sortByStarAsc = () => {
@@ -90,7 +96,7 @@ class mapList extends React.Component {
     })
 
     this.setState({
-      productdata: sortedProductsAsc,
+      filterData: sortedProductsAsc,
     })
   }
 
@@ -101,7 +107,7 @@ class mapList extends React.Component {
     })
 
     this.setState({
-      productdata: sortedProductsDsc,
+      filterData: sortedProductsDsc,
     })
   }
 
@@ -112,7 +118,7 @@ class mapList extends React.Component {
     })
 
     this.setState({
-      productdata: sortedProductsAsc,
+      filterData: sortedProductsAsc,
     })
   }
 
@@ -123,7 +129,7 @@ class mapList extends React.Component {
     })
 
     this.setState({
-      productdata: sortedProductsDsc,
+      filterData: sortedProductsDsc,
     })
   }
   stars = (v) => {
@@ -136,18 +142,28 @@ class mapList extends React.Component {
 
   //搜尋btn
   showCat = (event) => {
-    this.setState({
-      searchBtn1: event.target.name,
-      display:true,
-    })
+    this.setState(
+      {
+        searchBtn1: event.target.name,
+        display: true,
+      },
+      () => {
+        this.productfilterList()
+      }
+    )
     console.log(this.state.searchBtn1)
   }
   showStar = (event) => {
-    this.setState({
-      searchBtn3: event.target.text,
-      display:true,
-    })
-    this.setState({star:+event.target.name})
+    this.setState(
+      {
+        searchBtn3: event.target.text,
+        display: true,
+      },
+      () => {
+        this.productfilterList()
+      }
+    )
+    this.setState({ star: +event.target.name })
   }
 
   //選日期
@@ -172,7 +188,6 @@ class mapList extends React.Component {
   handleClick() {
     this.props.onClickReset()
     this.search.value = ''
-
   }
 
   //點擊咖啡廳卡片
@@ -191,329 +206,76 @@ class mapList extends React.Component {
     event.openPopup()
   }
 
-  //咖啡廳列表
-  filterList() {
-    let updatedList = this.state.cafedata.filter((item) => {
-      // console.log(this.state.searchBtn1, this.state.searchBtn3)
-      if (
-        this.state.searchBtn1 === '全部類別' ||
-        this.state.searchBtn1 === '類別'
-      ) {
-        // console.log('texs')
-        if (this.state.searchBtn3 == '4.5分以上') {
+  //商品列表
+  productfilterList = () => {
+    if (
+      this.state.searchBtn1 === '全部類別' ||
+      this.state.searchBtn1 === '類別'
+    ) {
+      if (this.state.star == 0) {
+        const newdata = this.state.productdata.filter((item) => {
           return (
-            item.mapCafe_Name
+            item.productName
               .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1 &&
-            item.star > 4.5
-          )
-        } else if (this.state.searchBtn3 == '4分以上') {
-          return (
-            item.mapCafe_Name
-              .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1 && item.star > 4
-          )
-        } else if (this.state.searchBtn3 == '3.5分以上') {
-          return (
-            item.mapCafe_Name
-              .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1 &&
-            item.star > 3.5
-          )
-        } else {
-          return (
-            item.mapCafe_Name
+              .indexOf(this.state.search.toLowerCase()) !== -1 ||
+            item.productAddress
               .toLowerCase()
               .indexOf(this.state.search.toLowerCase()) !== -1
           )
-        }
-      } else if (this.state.searchBtn1 == '咖啡廳') {
-        if (this.state.searchBtn3 == '4.5分以上') {
-          return (
-            item.mapCafe_Name
-              .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1 &&
-            item.category == '咖啡廳' &&
-            item.star > 4.5
-          )
-        } else if (this.state.searchBtn3 == '4分以上') {
-          return (
-            item.mapCafe_Name
-              .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1 &&
-            item.category == '咖啡廳' &&
-            item.star > 4.5
-          )
-        } else if (this.state.searchBtn3 == '3.5分以上') {
-          return (
-            item.mapCafe_Name
-              .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1 &&
-            item.category == '咖啡廳' &&
-            item.star > 3.5
-          )
-        } else {
-          return (
-            item.mapCafe_Name
-              .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1 &&
-            item.category == '咖啡廳'
-          )
-        }
-      } else if (this.state.searchBtn1 == '手作課程') {
-        if (this.state.searchBtn3 == '4.5分以上') {
-          return (
-            item.mapCafe_Name
-              .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) &&
-            item.category == '手作課程' &&
-            item.star > 4.5
-          )
-        } else if (this.state.searchBtn3 == '4分以上') {
-          return (
-            item.mapCafe_Name
-              .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1 &&
-            item.category == '手作課程' &&
-            item.star > 4.5
-          )
-        } else if (this.state.searchBtn3 == '3.5分以上') {
-          return (
-            item.mapCafe_Name
-              .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1 &&
-            item.category == '手作課程' &&
-            item.star > 3.5
-          )
-        } else {
-          return (
-            item.mapCafe_Name
-              .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1 &&
-            item.category == '手作課程'
-          )
-        }
-      } else if (this.state.searchBtn1 == '文藝展覽') {
-        if (this.state.searchBtn3 == '4.5分以上') {
-          return (
-            item.mapCafe_Name
-              .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1 &&
-            item.category == '文藝展覽' &&
-            item.star > 4.5
-          )
-        } else if (this.state.searchBtn3 == '4分以上') {
-          return (
-            item.mapCafe_Name
-              .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1 &&
-            item.category == '文藝展覽' &&
-            item.star > 4.5
-          )
-        } else if (this.state.searchBtn3 == '3.5分以上') {
-          return (
-            item.mapCafe_Name
-              .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1 &&
-            item.category == '文藝展覽' &&
-            item.star > 3.5
-          )
-        } else {
-          return (
-            item.mapCafe_Name
-              .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1 &&
-            item.category == '文藝展覽'
-          )
-        }
-      }
-    })
-
-    let data = updatedList.map((item, index, array) => {
-      return (
-        <Fade>
-          <li
-            className="eventContentLi list-group-item"
-            data-category={item.mapCafe_Name}
-            key={index}
-            id={item.id}
-            onClick={() => this.cardClick(item)}
-          >
-            <div className="eventContentBox d-flex">
-              <div className="eventImgBox col-4">
-                <img
-                  src="https://i.pinimg.com/564x/6e/61/7c/6e617c62730ff732340ea3bf1fbef940.jpg"
-                  alt=""
-                />
-              </div>
-              <div className="eventDetailBox col-8 pl-3">
-                <h5 className="eventTitle" style={{ fontWeight: 'bold' }}>
-                  {item.mapCafe_Name}
-                </h5>
-                <ul className=" list-unstyled">
-                  <li>
-                    <div
-                      className={
-                        item.category == '咖啡廳'
-                          ? 'mapCategoryCafe'
-                          : item.category == '手作課程'
-                          ? 'mapCategoryItem'
-                          : 'mapCategoryItem2'
-                      }
-                    >
-                      {item.category}
-                    </div>
-                  </li>
-                  {/* <li>
-                    <RatingStarValue ratingValue={item.star} />
-                  </li> */}
-                  <li>
-                    <span className="mr-2">
-                      <FaRegClock />
-                    </span>
-                    營業時間: {item.openTime}-{item.closeTime}
-                  </li>
-                  <li>
-                    <span className="mr-2">
-                      <FaMapMarkerAlt />
-                    </span>
-                    地點: {item.mapCafe_Address}
-                  </li>
-                  <li>
-                    <span className="mr-2">
-                      <FaRegCalendarCheck />
-                    </span>
-                    活動日期：
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </li>
-        </Fade>
-      )
-    })
-
-    // this.setState({ cafeupdatedList: updatedList })
-    return data
-  }
-
-  //商品列表
-  productfilterList=()=> {
-    let data=[]
-    if(this.state.searchBtn1 ==='全部類別'||this.state.searchBtn1 ==='類別'){
-      if(this.state.star == 0){
-        data=this.state.productdata.filter((item)=>{
-          return (item.productName
-            .toLowerCase()
-            .indexOf(this.state.search.toLowerCase()) !== -1 ||
-            item.productAddress
-              .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1)
         })
-      }else{
-        data=this.state.productdata.filter((item)=>{
-         return ((item.productName
-          .toLowerCase()
-          .indexOf(this.state.search.toLowerCase()) !== -1 ||
-          item.productAddress
-            .toLowerCase()
-            .indexOf(this.state.search.toLowerCase()) !== -1) &&item.star >= this.state.star)
+        this.setState({ filterData: newdata }, () => {
+          this.props.setFileterData(newdata)
+        })
+      } else {
+        const newdata = this.state.productdata.filter((item) => {
+          return (
+            (item.productName
+              .toLowerCase()
+              .indexOf(this.state.search.toLowerCase()) !== -1 ||
+              item.productAddress
+                .toLowerCase()
+                .indexOf(this.state.search.toLowerCase()) !== -1) &&
+            item.star >= this.state.star
+          )
+        })
+        this.setState({ filterData: newdata }, () => {
+          this.props.setFileterData(newdata)
         })
       }
-    }else{
-      if(this.state.star == 0){
-        data=this.state.productdata.filter((item)=>{
-          return ((item.productName
-            .toLowerCase()
-            .indexOf(this.state.search.toLowerCase()) !== -1 ||
-            item.productAddress
+    } else {
+      if (this.state.star == 0) {
+        const newdata = this.state.productdata.filter((item) => {
+          return (
+            (item.productName
               .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1) && item.category == this.state.searchBtn1)
-         })
-      }else{
-        data=this.state.productdata.filter((item)=>{
-          return ((item.productName
-            .toLowerCase()
-            .indexOf(this.state.search.toLowerCase()) !== -1||
-            item.productAddress
+              .indexOf(this.state.search.toLowerCase()) !== -1 ||
+              item.productAddress
+                .toLowerCase()
+                .indexOf(this.state.search.toLowerCase()) !== -1) &&
+            item.category == this.state.searchBtn1
+          )
+        })
+        this.setState({ filterData: newdata }, () => {
+          this.props.setFileterData(newdata)
+        })
+      } else {
+        const newdata = this.state.productdata.filter((item) => {
+          return (
+            (item.productName
               .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1 ) && item.category == this.state.searchBtn1 && item.star >= this.state.star)
-         })
+              .indexOf(this.state.search.toLowerCase()) !== -1 ||
+              item.productAddress
+                .toLowerCase()
+                .indexOf(this.state.search.toLowerCase()) !== -1) &&
+            item.category == this.state.searchBtn1 &&
+            item.star >= this.state.star
+          )
+        })
+        this.setState({ filterData: newdata }, () => {
+          this.props.setFileterData(newdata)
+        })
       }
     }
-    
-
-    let showdata = data.map((item, index, array) => {
-      return (
-        <Fade bottom>
-          <li
-            className="eventContentLi list-group-item"
-            data-category={item.productName}
-            key={index}
-            id={item.mapId}
-            onClick={() => this.productCardClick(item)}
-          >
-            <div className="eventContentBox d-flex">
-              <div className="eventImgBox col-4">
-                <img
-                  src={
-                    'http://localhost:5000/images/product/' + item.productImg
-                  }
-                  alt=""
-                />
-              </div>
-              <div className="eventDetailBox col-8 pl-3">
-                <h5 className="eventTitle" style={{ fontWeight: 'bold' }}>
-                  {item.productName}
-                </h5>
-                <ul className=" list-unstyled">
-                  <li>
-                    <div
-                      className={
-                        item.category == '咖啡廳'
-                          ? 'mapCategoryCafe'
-                          : item.category == '手作課程'
-                          ? 'mapCategoryItem'
-                          : 'mapCategoryItem2'
-                      }
-                    >
-                      {item.category}
-                    </div>
-                  </li>
-                  <li>{this.stars(item.star)}</li>
-                  <li>
-                    <span className="mr-2">
-                      <FaRegCalendarCheck />
-                    </span>
-                    活動日期: 即日起 ~ {item.productEndingDate.substring(0, 10)}
-                  </li>
-                  <li>
-                    <span className="mr-2">
-                      <FaMapMarkerAlt />
-                    </span>
-                    地點: {item.productAddress}
-                  </li>
-                  <li>
-                    <span className="mr-2">
-                      <RiMoneyCnyCircleLine />
-                    </span>
-                    價格：
-                    <span className={item.productPrice == 0 ? 'blue' : ''}>
-                      {item.productPrice == 0
-                        ? '免費'
-                        : `NT$ ${item.productPrice
-                            .toString()
-                            .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}`}
-                    </span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </li>
-        </Fade>
-      )
-    })
-    return showdata
   }
 
   //渲染畫面
@@ -710,7 +472,90 @@ class mapList extends React.Component {
           </div>
           <div className="dataBox overflow-auto px-1">
             <ul className="list-group ">
-              {this.state.display? '':this.productfilterList()}
+              {this.state.display
+                ? ''
+                : this.state.filterData.map((item, index, array) => {
+                    return (
+                      <Fade bottom>
+                        <li
+                          className="eventContentLi list-group-item"
+                          data-category={item.productName}
+                          key={index}
+                          id={item.mapId}
+                          onClick={() => this.productCardClick(item)}
+                        >
+                          <div className="eventContentBox d-flex">
+                            <div className="eventImgBox col-4">
+                              <img
+                                src={
+                                  'http://localhost:5000/images/product/' +
+                                  item.productImg
+                                }
+                                alt=""
+                              />
+                            </div>
+                            <div className="eventDetailBox col-8 pl-3">
+                              <h5
+                                className="eventTitle"
+                                style={{ fontWeight: 'bold' }}
+                              >
+                                {item.productName}
+                              </h5>
+                              <ul className=" list-unstyled">
+                                <li>
+                                  <div
+                                    className={
+                                      item.category == '咖啡廳'
+                                        ? 'mapCategoryCafe'
+                                        : item.category == '手作課程'
+                                        ? 'mapCategoryItem'
+                                        : 'mapCategoryItem2'
+                                    }
+                                  >
+                                    {item.category}
+                                  </div>
+                                </li>
+                                <li>{this.stars(item.star)}</li>
+                                <li>
+                                  <span className="mr-2">
+                                    <FaRegCalendarCheck />
+                                  </span>
+                                  活動日期: 即日起 ~{' '}
+                                  {item.productEndingDate.substring(0, 10)}
+                                </li>
+                                <li>
+                                  <span className="mr-2">
+                                    <FaMapMarkerAlt />
+                                  </span>
+                                  地點: {item.productAddress}
+                                </li>
+                                <li>
+                                  <span className="mr-2">
+                                    <RiMoneyCnyCircleLine />
+                                  </span>
+                                  價格：
+                                  <span
+                                    className={
+                                      item.productPrice == 0 ? 'blue' : ''
+                                    }
+                                  >
+                                    {item.productPrice == 0
+                                      ? '免費'
+                                      : `NT$ ${item.productPrice
+                                          .toString()
+                                          .replace(
+                                            /(\d)(?=(\d{3})+(?:\.\d+)?$)/g,
+                                            '$1,'
+                                          )}`}
+                                  </span>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </li>
+                      </Fade>
+                    )
+                  })}
               {/* {cafeActive ? (
                 <>{this.filterList()}</>
               ) : (

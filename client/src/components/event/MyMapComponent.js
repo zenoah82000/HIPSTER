@@ -89,8 +89,8 @@ export default class ViewportExample extends Component {
     return star
   }
   render() {
-    let { viewport, clicked, cafeActive, clickData } = this.props
-    console.log(this.props)
+    let { viewport, clicked, cafeActive, clickData, filterData } = this.props
+    console.log(filterData)
     // console.log(clickData.mapId)
     // console.log(clickData.lat, clickData.log)
     return (
@@ -391,7 +391,7 @@ export default class ViewportExample extends Component {
                 </Popup>
               </Marker>
 
-              {this.state.productdata.map((item) => (
+              {filterData.map((item) => (
                 <Marker
                   position={[item.lat, item.log]}
                   icon={productTagIcon}
@@ -491,7 +491,7 @@ export default class ViewportExample extends Component {
               ))}
             </>
           ) : (
-            this.state.productdata.map((item) => (
+            filterData.map((item) => (
               <Marker position={[item.lat, item.log]} icon={productTagIcon}>
                 <Popup className="locationCard">
                   <h5>{item.productName}</h5>
