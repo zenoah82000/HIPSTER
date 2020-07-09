@@ -8,8 +8,7 @@ import Fade from 'react-reveal/Fade'
 import MyBreadcrumb from '../../components/MyBreadcrumb'
 import { getBlogDataAsync, deleteBlogDataAsync } from '../../actions/blog'
 
-import author1 from '../../images/blog/author1.jpg'
-import userBlogTop from '../../images/blog/userBlogTop.png'
+import userBlogTop from '../../images/blog/userBlogTopNew.jpg'
 
 function UserBlog(props) {
   const { blogData, getBlogDataAsync, deleteBlogDataAsync } = props

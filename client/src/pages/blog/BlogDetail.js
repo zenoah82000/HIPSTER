@@ -29,7 +29,7 @@ function BlogDetail(props) {
   })
 
   const blogDataFeatured = blogData.filter((item)=>{    
-    return (item.articleId < 6)
+    return (item.articleId > 22 && item.articleId < 29)
   })
 
   const showBlogDetail = blogDataFt.map((item)=>{
