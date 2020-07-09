@@ -4,8 +4,6 @@ import { connect } from 'react-redux'
 
 import '../styles/Product.scss'
 
-import MyBreadcrumb from '../components/MyBreadcrumb'
-import CommtentList from '../components/comments/commentList'
 import ProductBanner from '../components/product/ProductBanner'
 import BookArea from '../components/product/BookArea'
 import ProductStarBar from '../components/product/ProductStarBar'
@@ -30,7 +28,7 @@ function Product(props) {
   const currentPage = !!searchParams.get('page') ? +searchParams.get('page') : 1
   const [star, setStar] = useState(0)
   const [commentNum, setCommentNum] = useState(0)
-
+  const [loading, setLoading] = useState(true)
   useEffect(() => {
     console.log(props.match.params.id)
     getProductInfoAsync(props.match.params.id)
@@ -79,6 +77,7 @@ function Product(props) {
                 productName={product.productName}
                 productId={product.productId}
                 currentPage={currentPage}
+                setLoading={setLoading}
               />
             </div>
           </div>

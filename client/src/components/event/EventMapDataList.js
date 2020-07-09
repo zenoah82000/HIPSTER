@@ -27,6 +27,7 @@ class mapList extends React.Component {
       searchBtn1: '類別',
       searchBtn2: '日期',
       searchBtn3: '星等',
+      star:0,
       date: new Date(),
       dateClicked: false,
       active: true,
@@ -133,8 +134,9 @@ class mapList extends React.Component {
   }
   showStar = (event) => {
     this.setState({
-      searchBtn3: event.target.name,
+      searchBtn3: event.target.text,
     })
+    this.setState({star:+event.target.name})
   }
 
   //選日期
@@ -158,6 +160,8 @@ class mapList extends React.Component {
   //地圖定位
   handleClick() {
     this.props.onClickReset()
+    this.search.value = ''
+
   }
 
   //點擊咖啡廳卡片
@@ -383,145 +387,40 @@ class mapList extends React.Component {
   }
 
   //商品列表
-  productfilterList() {
-    let updatedList = this.state.productdata.filter((item) => {
-      // console.log(this.state.searchBtn1, this.state.searchBtn3)
-      if (
-        this.state.searchBtn1 === '全部類別' ||
-        this.state.searchBtn1 === '類別'
-      ) {
-        // console.log('texs')
-        if (this.state.searchBtn3 == '5分') {
-          return (
-            item.productName
-              .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1 && item.star == 5
-          )
-        } else if (this.state.searchBtn3 == '4分以上') {
-          return (
-            item.productName
-              .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1 && item.star >= 4
-          )
-        } else if (this.state.searchBtn3 == '3分以上') {
-          return (
-            item.productName
-              .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1 && item.star >= 3
-          )
-        } else {
-          return (
-            item.productName
-              .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1 ||
-            item.productAddress
-              .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1
-          )
-        }
-      } else if (this.state.searchBtn1 == '咖啡廳') {
-        if (this.state.searchBtn3 == '5分') {
-          return (
-            item.productName
-              .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1 &&
-            item.category == '咖啡廳' &&
-            item.star == 5
-          )
-        } else if (this.state.searchBtn3 == '4分以上') {
-          return (
-            item.productName
-              .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1 &&
-            item.category == '咖啡廳' &&
-            item.star >= 4
-          )
-        } else if (this.state.searchBtn3 == '3分以上') {
-          return (
-            item.productName
-              .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1 &&
-            item.category == '咖啡廳' &&
-            item.star >= 3
-          )
-        } else {
-          return (
-            item.productName
-              .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1 &&
-            item.category == '咖啡廳'
-          )
-        }
-      } else if (this.state.searchBtn1 == '手作課程') {
-        if (this.state.searchBtn3 == '5分') {
-          return (
-            item.productName
-              .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) &&
-            item.category == '手作課程' &&
-            item.star == 5
-          )
-        } else if (this.state.searchBtn3 == '4分以上') {
-          return (
-            item.productName
-              .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1 &&
-            item.category == '手作課程' &&
-            item.star >= 4
-          )
-        } else if (this.state.searchBtn3 == '3分以上') {
-          return (
-            item.productName
-              .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1 &&
-            item.category == '手作課程' &&
-            item.star >= 3
-          )
-        } else {
-          return (
-            item.productName
-              .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1 &&
-            item.category == '手作課程'
-          )
-        }
-      } else if (this.state.searchBtn1 == '文藝展覽') {
-        if (this.state.searchBtn3 == '5分') {
-          return (
-            item.productName
-              .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1 &&
-            item.category == '文藝展覽' &&
-            item.star == 5
-          )
-        } else if (this.state.searchBtn3 == '4分以上') {
-          return (
-            item.productName
-              .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1 &&
-            item.category == '文藝展覽' &&
-            item.star >= 4
-          )
-        } else if (this.state.searchBtn3 == '3.5分以上') {
-          return (
-            item.productName
-              .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1 &&
-            item.category == '文藝展覽' &&
-            item.star >= 3
-          )
-        } else {
-          return (
-            item.productName
-              .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) !== -1 &&
-            item.category == '文藝展覽'
-          )
-        }
+  productfilterList=()=> {
+    let data=[]
+    if(this.state.searchBtn1 ==='全部類別'||this.state.searchBtn1 ==='類別'){
+      if(this.state.star == 0){
+        data=this.state.productdata.filter((item)=>{
+          return (item.productName
+            .toLowerCase()
+            .indexOf(this.state.search.toLowerCase()) !== -1)
+        })
+      }else{
+        data=this.state.productdata.filter((item)=>{
+         return (item.productName
+          .toLowerCase()
+          .indexOf(this.state.search.toLowerCase()) !== -1&&item.star >= this.state.star)
+        })
       }
-    })
+    }else{
+      if(this.state.star == 0){
+        data=this.state.productdata.filter((item)=>{
+          return (item.productName
+            .toLowerCase()
+            .indexOf(this.state.search.toLowerCase()) !== -1 && item.category == this.state.searchBtn1)
+         })
+      }else{
+        data=this.state.productdata.filter((item)=>{
+          return (item.productName
+            .toLowerCase()
+            .indexOf(this.state.search.toLowerCase()) !== -1 && item.category == this.state.searchBtn1 && item.star >= this.state.star)
+         })
+      }
+    }
+    
 
-    let data = updatedList.map((item, index, array) => {
+    let showdata = data.map((item, index, array) => {
       return (
         <Fade bottom>
           <li
@@ -591,7 +490,7 @@ class mapList extends React.Component {
         </Fade>
       )
     })
-    return data
+    return showdata
   }
 
   //渲染畫面
@@ -609,6 +508,7 @@ class mapList extends React.Component {
                   placeholder="尋找什麼活動嗎?  請輸入活動名稱或地址"
                   onChange={(event) => this.updateSearch(event)}
                   // value={this.state.search}
+                  ref={(input) => (this.search = input)}
                   type="text"
                 />
                 <div class="input-group-append">
@@ -703,7 +603,7 @@ class mapList extends React.Component {
                       <Dropdown.Item
                         href=""
                         className="btn3"
-                        name="全部星等"
+                        name="0"
                         onClick={(event) => this.showStar(event)}
                       >
                         全部星等
@@ -711,7 +611,7 @@ class mapList extends React.Component {
                       <Dropdown.Item
                         href=""
                         className="btn3"
-                        name="5分"
+                        name="5"
                         onClick={(event) => this.showStar(event)}
                       >
                         5分
@@ -719,7 +619,7 @@ class mapList extends React.Component {
                       <Dropdown.Item
                         href=""
                         className="btn3"
-                        name="4分以上"
+                        name="4"
                         onClick={(event) => this.showStar(event)}
                       >
                         4分以上
@@ -727,7 +627,7 @@ class mapList extends React.Component {
                       <Dropdown.Item
                         href=""
                         className="btn3"
-                        name="3分以上"
+                        name="3"
                         onClick={(event) => this.showStar(event)}
                       >
                         3分以上

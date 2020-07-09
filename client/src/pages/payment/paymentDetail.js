@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 import { withRouter } from 'react-router-dom'
-import { Container, Row, Col, Form, Button } from 'react-bootstrap'
+import { Col, Form } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import '../../styles/Payment.scss'
 
@@ -110,44 +110,42 @@ function PaymentDetail(props) {
                           請輸入名字
                         </Form.Control.Feedback>
                       </Form.Group>
+                      <Form.Group as={Col} sm={12} md={12}>
+                        <Form.Control
+                          required
+                          id="mobile"
+                          name="mobile"
+                          size="lg"
+                          type="text"
+                          placeholder="行動電話或家用電話"
+                          ref={(input) => (phone = input)}
+                          pattern="^09[0-9]{2}-?[0-9]{3}-?[0-9]{3}$|^\(?\d{2,3}\)?-?\d{4}-?\d{4}$"
+                          // onChange={(e) => getformInfo(e, 'mobile')}
+                        />
+                        <Form.Control.Feedback>正確!</Form.Control.Feedback>
+                        <Form.Control.Feedback type="invalid">
+                          請輸入正確的電話號碼
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                      <Form.Group as={Col} sm={12} md={12}>
+                        <Form.Control
+                          required
+                          ref={(input) => (email = input)}
+                          name="email"
+                          id="email"
+                          size="lg"
+                          type="email"
+                          placeholder="電子郵件地址"
+                          ref={(input) => (email = input)}
+                          pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{3,6}(?:\.[a-z]{2})?)$"
+                          // onChange={(e) => getformInfo(e, 'email')}
+                        />
+                        <Form.Control.Feedback>正確!</Form.Control.Feedback>
+                        <Form.Control.Feedback type="invalid">
+                          請輸入email
+                        </Form.Control.Feedback>
+                      </Form.Group>
                     </Form.Row>
-
-                    <Form.Group>
-                      <Form.Control
-                        required
-                        id="mobile"
-                        name="mobile"
-                        size="lg"
-                        type="text"
-                        placeholder="行動電話或家用電話"
-                        ref={(input) => (phone = input)}
-                        pattern="^09[0-9]{2}-?[0-9]{3}-?[0-9]{3}$|^\(?\d{2,3}\)?-?\d{4}-?\d{4}$"
-                        // onChange={(e) => getformInfo(e, 'mobile')}
-                      />
-                      <Form.Control.Feedback>正確!</Form.Control.Feedback>
-                      <Form.Control.Feedback type="invalid">
-                        請輸入正確的電話號碼
-                      </Form.Control.Feedback>
-                      <br />
-                    </Form.Group>
-                    <Form.Group>
-                      <Form.Control
-                        required
-                        ref={(input) => (email = input)}
-                        name="email"
-                        id="email"
-                        size="lg"
-                        type="email"
-                        placeholder="電子郵件地址"
-                        ref={(input) => (email = input)}
-                        pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{3,6}(?:\.[a-z]{2})?)$"
-                        // onChange={(e) => getformInfo(e, 'email')}
-                      />
-                      <Form.Control.Feedback>正確!</Form.Control.Feedback>
-                      <Form.Control.Feedback type="invalid">
-                        請輸入email
-                      </Form.Control.Feedback>
-                    </Form.Group>
                   </div>
                 </div>
               </div>

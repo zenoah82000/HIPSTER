@@ -24,6 +24,7 @@ function CommentList(props) {
     setStar,
     commentNum,
     setCommentNum,
+    setLoading,
   } = props
   const [tabIndex, setTabIndex] = useState(0)
 
@@ -39,27 +40,28 @@ function CommentList(props) {
     return star
   }
 
-  console.log(data)
+  // console.log(data)
   // console.log({ ...data[0] }.memberName)
   let starsum = 0
+  let staraverage, commentstotal
   const display = data.map((item, index) => {
     const itemObj = { ...item }
+
     if (data.length === 0) {
-      setStar(0)
-      setCommentNum(0)
+      staraverage = 0
+      commentstotal = 0
     } else {
       starsum += +itemObj.star
-      setStar(Math.ceil(starsum / data.length))
-      setCommentNum(data.length)
+      staraverage = Math.ceil(starsum / data.length)
+      commentstotal = data.length
     }
-
     if (
       index >= currentPage * perPage - perPage &&
       index < currentPage * perPage
     ) {
       return (
         <>
-          <div className="commentList d-flex row">
+          <div className="commentList d-flex row" key={itemObj.itemListId}>
             <div className="col-md-2 col-sm-2 text-center">
               <div className="iconBox m-auto mb-1">
                 <img
@@ -73,11 +75,11 @@ function CommentList(props) {
             <div className="commentBox col-md-10 col-sm-10">
               <h3 className="eventTitle">{stars(itemObj.star)} </h3>
               <ul className=" list-unstyled box2">
-                <li>
+                <li key={itemObj.commentId}>
                   <p className="">{itemObj.content}</p>
                 </li>
 
-                <li className="d-flex">
+                <li className="d-flex" key={itemObj.orderId}>
                   <SimpleReactLightbox>
                     <SRLWrapper>
                       <div className="commentImg">
@@ -91,7 +93,7 @@ function CommentList(props) {
                     </SRLWrapper>
                   </SimpleReactLightbox>
                 </li>
-                <li>
+                <li key={itemObj.productImg}>
                   <small style={{ color: 'grey' }}>
                     評論日期: {itemObj.updated_at.substring(0, 10)}
                   </small>
@@ -103,8 +105,10 @@ function CommentList(props) {
       )
     }
   })
-  console.log(star)
-  console.log(commentNum)
+  // setStar(staraverage)
+  setCommentNum(commentstotal)
+  // console.log(star)
+  // console.log(commentNum)
   useEffect(() => {
     getProductCommentAsync(props.match.params.id)
   }, [])
@@ -132,6 +136,7 @@ function CommentList(props) {
             productnumbers={data.length}
             perPage={5}
             moveto={2500}
+            setLoading={setLoading}
           />
         </TabPanel>
 
@@ -149,6 +154,7 @@ function CommentList(props) {
             productnumbers={data.length}
             perPage={perPage}
             moveto={2500}
+            setLoading={setLoading}
           />
         </TabPanel>
       </Tabs>

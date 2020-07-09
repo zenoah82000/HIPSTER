@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Calendar from 'react-calendar'
 import { connect } from 'react-redux'
-import { Link, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { Collapse } from '@material-ui/core'
 import InputRange from 'react-input-range'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -13,7 +13,6 @@ import '../../styles/product/AsideBar.scss'
 // import 'react-input-range/lib/css/index.css'
 
 import { getProductCategoryAsync } from '../../actions/product/getProductCategory'
-import { element } from 'prop-types'
 
 function AsideBar(props) {
   // const getProductCategoryAsync = async (productCategory) => {
@@ -69,14 +68,6 @@ function AsideBar(props) {
         ]
       : [new Date(startDate), new Date(endDate)]
   // console.log(d)
-  //設定價格區間
-  // const pricerange =
-  //   searchParams.has('minPrice') && searchParams.has('maxPrice')
-  //     ? {
-  //         min: +searchParams.get('minPrice'),
-  //         max: +searchParams.get('maxPrice'),
-  //       }
-  //     : { min: 32, max: 10000 }
 
   const [categorySection, setCategorySection] = useState([])
   // const [price, setPrice] = useState(pricerange)
@@ -120,7 +111,6 @@ function AsideBar(props) {
         }
       }
     }
-
     return flag
   }
   function checkcategory(item) {
@@ -251,8 +241,7 @@ function AsideBar(props) {
 
   useEffect(() => {
     getProductCategoryAsync()
-
-    console.log(pricerange)
+    // console.log(pricerange)
   }, [])
 
   useEffect(() => {
@@ -265,14 +254,6 @@ function AsideBar(props) {
     setDateValue([new Date(startDate), new Date(endDate)])
     // console.log(pricerange)
   }, [endDate])
-
-  // useEffect(() => {
-  //   pricerange.min = price.min
-  //   pricerange.max = price.max
-  //   price.min = pricerange.min
-  //   price.max = pricerange.max
-  //   console.log(pricerange)
-  // }, [price])
 
   //生成類別
   const display = categorylist.map((item, index) => {
@@ -325,7 +306,6 @@ function AsideBar(props) {
                     ? 'checkbox-dropdown-list active'
                     : 'checkbox-dropdown-list'
                 }
-                key={item.categoryId}
               >
                 {categorylist.map((category, i) => {
                   if (
@@ -367,7 +347,7 @@ function AsideBar(props) {
                       <>
                         <li
                           className="checkbox"
-                          key={category.categoryName}
+                          key={item.categoryId}
                           onClick={() => {
                             setLoading(true)
                             checkcat(
@@ -605,7 +585,6 @@ function AsideBar(props) {
                 showDoubleView={true}
                 value={dateValue}
                 onChange={(value) => {
-                  setLoading(true)
                   console.log(value[0].toLocaleDateString())
                   setStartDate(value[0].toLocaleDateString())
                   console.log(value[1].toLocaleDateString())
@@ -652,13 +631,13 @@ function AsideBar(props) {
         <div className="aside-wrapper-filter-box" style={{ cursor: 'default' }}>
           <h3>價格 (TWD) </h3>
           <div className="price-area">
-            {{ ...price }.min} ~ {{ ...price }.max}
+            {price.min} ~ {price.max}
           </div>
           <div className="range">
             <InputRange
               maxValue={5000}
               minValue={0}
-              value={{ ...price }}
+              value={price}
               onChange={(value) => {
                 setPrice({ ...value })
               }}

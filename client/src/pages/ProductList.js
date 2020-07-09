@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { Link, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 import '../styles/ProductList.scss'
 
@@ -14,7 +14,6 @@ import { getProductListAsync } from '../actions/product/getProductList'
 
 import ReactStars from 'react-rating-stars-component'
 import Fade from 'react-reveal/Fade'
-import Slide from 'react-reveal/Slide'
 
 function ProductList(props) {
   const { productListData, getProductListAsync } = props
@@ -76,18 +75,6 @@ function ProductList(props) {
   const [price, setPrice] = useState(pricerange)
 
   // console.log(loc, cat, stdate, eddate, minPrice, maxPrice)
-
-  let length
-  if (!!loc && !!cat) {
-    length =
-      [...loc].length >= [...cat].length ? [...loc].length : [...cat].length
-  } else if (!!loc && !cat) {
-    length = [...loc].length
-  } else if (!!cat && !loc) {
-    length = [...cat].length
-  } else {
-    length = 0
-  }
 
   const count = productListData.filter((item, index) => {
     if (!loc && !cat) {
@@ -278,13 +265,11 @@ function ProductList(props) {
   } else {
   }
 
-  function getRandomInt(min, max) {
-    min = Math.ceil(min)
-    max = Math.floor(max)
-    return Math.floor(Math.random() * (max - min)) + min //不含最大值，含最小值
-  }
-
-  let t
+  // function getRandomInt(min, max) {
+  //   min = Math.ceil(min)
+  //   max = Math.floor(max)
+  //   return Math.floor(Math.random() * (max - min)) + min //不含最大值，含最小值
+  // }
 
   useEffect(() => {
     getProductListAsync()
@@ -292,10 +277,10 @@ function ProductList(props) {
   }, [])
 
   useEffect(() => {
-    t = setTimeout(() => {
+    setTimeout(() => {
       setLoading(false)
-      console.log(loading)
-    }, 700)
+      // console.log(loading)
+    }, 600)
   }, [searchParams])
 
   const display = count.map((item, index) => {
@@ -401,6 +386,8 @@ function ProductList(props) {
                 <ProductSearchResult
                   productnumbers={count.length}
                   loading={loading}
+                  setPrice={setPrice}
+                  setLoading={setLoading}
                 />
               </Fade>
             ) : (
@@ -430,7 +417,7 @@ function ProductList(props) {
                             height: '18px',
                           }}
                         ></div>
-                        <diiv
+                        <div
                           className="product-description"
                           style={{
                             backgroundColor: '#ccc',
@@ -438,7 +425,7 @@ function ProductList(props) {
                             height: '18px',
                             margin: '10px 0',
                           }}
-                        ></diiv>
+                        ></div>
                       </div>
                     </div>
                   </div>

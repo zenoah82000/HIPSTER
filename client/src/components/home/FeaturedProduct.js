@@ -8,7 +8,6 @@ function FeaturedProduct(props) {
   const member = JSON.parse(localStorage.getItem('member')) || ''
   // //商品區塊>關注
 
-  
   //精選商品>星數顯示
   const start1 = (
     <>
@@ -71,7 +70,7 @@ function FeaturedProduct(props) {
 
   return (
     <>
-      <Link to={`/product/${item.productId}`}>
+      <a href={`/product/${item.productId}`}>
         <div className="activity-main-cont">
           <div className="activity-picture">
             <div
@@ -83,7 +82,7 @@ function FeaturedProduct(props) {
                   : 'activity-follow'
               }
               onClick={(e) => {
-                addWishlistCheck(e,item)
+                addWishlistCheck(e, item)
               }}
             >
               <FaHeart />
@@ -105,7 +104,7 @@ function FeaturedProduct(props) {
             <div className="start-group">{startdisplay(item.star)}</div>
           </div>
         </div>
-      </Link>
+      </a>
     </>
   )
 }

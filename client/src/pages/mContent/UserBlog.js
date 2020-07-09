@@ -71,8 +71,8 @@ function UserBlog(props) {
         </div>
         
         <div className="col-3 row userblog-btn-block">
-          <Link to={"/blogEdit/" + item.articleId} className="btn col-6" onClick={()=>{handleEdit(item.articleContent)}}><i class="fas fa-edit"></i>編輯</Link>
-          <Link className="btn col-6" onClick={e => {
+          <Link to={"/blogEdit/" + item.articleId} className="btn col-6 userblog-edit-btn" onClick={()=>{handleEdit(item.articleContent)}}><i class="fas fa-edit"></i>編輯</Link>
+          <Link className="btn col-6 text-danger" onClick={e => {
             e.preventDefault()
             Swal.fire({
               title: `刪除 ${item.articleTitle} ?`,
@@ -91,11 +91,7 @@ function UserBlog(props) {
                   props.history.go(0)
                 })                             
               }
-            })
-            // if(window.confirm('確認刪除?')){
-            //   handleDelete(item.articleId)
-            //   props.history.go(0)
-            // }
+            })            
           }}>
             <i className="fa fa-trash" aria-hidden="true"></i>刪除
           </Link>
@@ -111,15 +107,15 @@ function UserBlog(props) {
   return (
     <>
       <div className="usercontainer">
-        <h2 className="usertitle mb-3">我的文章</h2>
-      </div>
-      <div className="row userBlogTop">
-        <img src={userBlogTop} />
-      </div>
-      <div className="row justify-content-end py-3 pr-3">
-        <Link to="/blogAdd/" className="btn userblog-btn-add d-block"><i class="fas fa-plus-square"></i>發表新文章</Link>
-      </div>
-      {showBlogList}     
+        <h2 className="usertitle mb-3">我的文章</h2>      
+        <div className="row userBlogTop">
+          <img src={userBlogTop} />
+        </div>
+        <div className="row justify-content-end py-3 pr-3">
+          <Link to="/blogAdd/" className="btn userblog-btn-add d-block"><i class="fas fa-plus-square"></i>發表新文章</Link>
+        </div>
+        {showBlogList} 
+      </div>    
     </>
   )
 }

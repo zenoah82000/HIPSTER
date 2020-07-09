@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import '../../styles/product/ProductListPageBar.scss'
 
 function ProductListPageBar(props) {
@@ -166,6 +166,7 @@ function ProductListPageBar(props) {
     )
     return pages
   }
+
   useEffect(() => {
     startPageset(currentPage)
   }, [])

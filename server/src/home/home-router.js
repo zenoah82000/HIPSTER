@@ -166,8 +166,9 @@ async function executeSQL(
     return text;
   }
   //======================================================================
-  const num = makerandomletter(2)+randomusefloor(1,999)  //產生亂數
-  // mailstate?memberId = [r1][0][0].memberId:memberId = ''
+  // const num = makerandomletter(2)+randomusefloor(1,999)  //產生亂數
+  const num = 'wj252'  //固定驗證碼demo用
+ 
 
 //先定義寫入驗證碼sql
   const Sqlcodeinput = "UPDATE `member` SET `code`=? WHERE `memberId`=?" 

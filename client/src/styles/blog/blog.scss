@@ -5,7 +5,7 @@
 }
 
 .blog-sort-nav {
-  margin-bottom: 10px;
+  // margin-bottom: 10px;
   li {
     a {
       color: #684b38;
@@ -15,6 +15,12 @@
       border-bottom: 3px solid #b98f50;
     }
   }
+}
+
+.blog-btn-add {
+  width: 70%;
+  margin: 0 0 0 auto;
+  background: #b98f50;
 }
 
 .blog-list-card {

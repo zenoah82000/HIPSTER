@@ -37,9 +37,11 @@ function BlogDetail(props) {
       <>
         <div className="col-9">
          <div className="blog-detail-main">
+          <div className="blog-content-container">
           <h1 className="blog-detail-title">{item.articleTitle}</h1>
           <p className="blog-detail-date">{'發文日期:'+item.created_at}</p>
-          <div className="blog-detail-content" dangerouslySetInnerHTML={{__html: item.articleContent}}>        
+            <div className="blog-detail-content" dangerouslySetInnerHTML={{__html: item.articleContent}}>        
+            </div>
           </div>
          </div>                             
         </div>              
@@ -50,12 +52,12 @@ function BlogDetail(props) {
   const showAuthor = blogDataFt.map((item)=>{
     return(      
       <div className="card">
-        <p>作者資訊</p>
+        <p className="pl-2">作者資訊</p>
         <div className="blog-author-avatar">
           <img src={`http://localhost:5000/images/member/${item.memberImg}`} alt="author" className="d-block"/>
         </div>
         <h3 className="text-center">{item.memberName}</h3>
-        {/* <p className="text-center">發表文章數:999</p> */}
+        <p className="text-center">發表文章數:20</p>
         <button className="btn d-block">看更多他的文</button>
       </div>
     )
@@ -64,17 +66,18 @@ function BlogDetail(props) {
   const showFeatured = blogDataFeatured.map((item)=>{
     return(
       <>
-        <Link to={"/blogDetail/" + item.articleId} className="d-block">
-        <div className="row">
+        <Link to={"/blogDetail/" + item.articleId} className="d-block align-items-center pt-3">
+        
+        <div className="row align-items-center blog-featured-container">
           <div className="col-3">
             <img src={item.articleImg}/>
           </div>
           <div className="col-9">
             <p className="pl-3">{item.articleTitle}</p>
           </div>
-        </div>  
-        </Link>           
-        {/* <hr/>         */}
+          </div>
+        
+        </Link>   
       </>
     )
   })

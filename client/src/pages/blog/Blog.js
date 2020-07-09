@@ -30,7 +30,13 @@ function Blog(props) {
   return (
     <div className="blog-list-bg">
       <Container>
-        <BlogSort url={url}/>   
+        <div className="row align-items-center">
+          <BlogSort url={url}/>
+          <div className="col-2">
+            <Link to="/blogAdd/" className="btn blog-btn-add d-block"><i class="fas fa-plus-square"></i>發表新文章</Link>
+          </div>
+        </div>
+           
         <Switch>
           <Route exact path={path}>
             <BlogList blogDataRp={blogDataRp} />

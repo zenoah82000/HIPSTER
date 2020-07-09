@@ -135,11 +135,12 @@ router.post("/member/checkout", async (req, res) => {
     });
   }
   console.log("訂單新增成功" + orderId);
-//有使用優惠券扣除優惠券
-if(discountcode !=null && discountcode !=''){
-  const coupon = "UPDATE `rel_member_coupon` SET `memberCouponNum`=0 WHERE `memberId`=? && discountCode =?"
-  db.query(coupon,[memberId,discountcode])
-}
+  //有使用優惠券扣除優惠券
+  if (discountcode != null && discountcode != "") {
+    const coupon =
+      "UPDATE `rel_member_coupon` SET `memberCouponNum`=0 WHERE `memberId`=? && discountCode =?";
+    db.query(coupon, [memberId, discountcode]);
+  }
   //訂單成功送出email
   console.log("送出電子郵件");
   const transporter = nodemailer.createTransport({
@@ -159,9 +160,11 @@ if(discountcode !=null && discountcode !=''){
   let text = orderItems.map((item) => {
     return `<div style="display:flex;padding:0px 40px;">
         <div style="width: 150px;height: 100px;margin-right: 12px;">
-          <img src="cid:${item.productId}"style="object-fit: cover; width: 100%;height: 100%;"/>
+          <img src="cid:${
+            item.productId
+          }"style="object-fit: cover; width: 100%;height: 100%;"/>
         </div>
-        <div style="width: 50%;">
+        <div style="width: 60%;margin-top:10px;">
           <p style="font-size: 16px;color: black;font-weight: bolder;margin:0;">
             ${item.name}
           </p>
@@ -175,37 +178,62 @@ if(discountcode !=null && discountcode !=''){
             日期:${item.date}
           </p>
         </div>
-        <div style="width: 25%;text-align: left; line-height:100px">
-          <p style="font-size:16px;margin:0;">小計:NT$${item.checkPrice * item.checkQty}</p>
+        <div style="width: 40%;text-align:right; line-height:100px">
+          <p style="font-size:16px;margin:0;">小計:NT$${
+            item.checkPrice * item.checkQty
+          }</p>
         </div>
-      </div>`
+      </div>`;
   });
-  var img=[]
-  for(let i =0;i<orderItems.length;i++){
-    let imgbox={
-      filename: orderItems[i].img.replace('\r\n',''),     
-      path: __dirname +`/../../public/images/product/${orderItems[i].img.replace('\r\n','')}`,              
-      cid: orderItems[i].productId.toString()
-    }
-    img.push(imgbox)
+  var img = [];
+  for (let i = 0; i < orderItems.length; i++) {
+    let imgbox = {
+      filename: orderItems[i].img.replace("\r\n", ""),
+      path:
+        __dirname +
+        `/../../public/images/product/${orderItems[i].img.replace("\r\n", "")}`,
+      cid: orderItems[i].productId.toString(),
+    };
+    img.push(imgbox);
   }
   var mailOptions = {
     from: '"Hipster文青地圖" <e24971234@gmail.com>',
     to: email,
     subject: "感謝您在本站消費",
-    html: `<div>
+    html: `<div style="width:80%">
     <p style="font-size: 16px;color: black;font-weight: bolder">訂單編號:${orderId}</p>
     <hr />
-    <div>${text}<div>
+    <div>${text}</div>
+    <hr/>
+    <div style="">
+      <div style="display: flex;justify-content: space-between;width:100%;text-align:right;">
+        <p style="margin:0px;line-height:30px;">總計:</p>
+        <span style="font-size: 16px;line-height:30px;">
+          NT$${req.body.total}
+        </span>
+      </div>
+      <div style="display: flex;justify-content: space-between;width:100%;text-align:right;">
+        <p style="margin:0px;line-height:30px;">折扣:</p>
+        <span style="font-size: 16px;line-height:30px;">
+          -NT$${sumless}
+        </span>
+      </div>
+      <div style="display: flex;justify-content: space-between;width:100%;text-align:right;">
+        <p style="margin:0px;line-height:30px;">結帳金額:</p>
+        <span style="font-weight: bold;font-size: 20px;color: #ff3400;line-height:30px;">
+          NT$${sumdiscount}
+        </span>
+      </div>
+    </div>
   </div>`,
-  attachments: img
+    attachments: img,
   };
   // 準備發送信件
-  // transporter.sendMail(mailOptions, function (err, info) {
-  //   if (err) {
-  //     return console.log(err);
-  //   }
-  // });
+  transporter.sendMail(mailOptions, function (err, info) {
+    if (err) {
+      return console.log(err);
+    }
+  });
   const ordertime = "SELECT * FROM `orderlist` WHERE `orderListId`= ?";
   const [r3] = await db.query(ordertime, [r2.insertId]);
   //傳送回前端
