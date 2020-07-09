@@ -105,7 +105,9 @@ function ProductSearchResultSort(props) {
             {searchParams.has('sort')
               ? searchParams.get('sort') === 'PRICE_ASC'
                 ? '價格：低到高'
-                : '價格：高到低'
+                : searchParams.get('sort') === 'PRICE_DESC'
+                ? '價格：高到低'
+                : '價格：低到高'
               : '價格：低到高'}
           </a>
         </span>
