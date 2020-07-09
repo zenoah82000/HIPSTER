@@ -80,19 +80,24 @@ function CommentList(props) {
                 </li>
 
                 <li className="d-flex" key={itemObj.orderId}>
-                  <SimpleReactLightbox>
-                    <SRLWrapper>
-                      <div className="commentImg">
-                        <img
-                          className="commentImgPhoto commentImghover"
-                          src={`http://localhost:5000/images/comments/${itemObj.commentImg}`}
-                          // this.state.data.commentImg
-                          alt={itemObj.commentImg}
-                        />
-                      </div>
-                    </SRLWrapper>
-                  </SimpleReactLightbox>
+                  {itemObj.commentImg != '' || itemObj.commentImg != null ? (
+                    <SimpleReactLightbox>
+                      <SRLWrapper>
+                        <div className="commentImg">
+                          <img
+                            className="commentImgPhoto commentImghover"
+                            src={`http://localhost:5000/images/comments/${itemObj.commentImg}`}
+                            // this.state.data.commentImg
+                            alt={itemObj.commentImg}
+                          />
+                        </div>
+                      </SRLWrapper>
+                    </SimpleReactLightbox>
+                  ) : (
+                    '為上傳圖片'
+                  )}
                 </li>
+
                 <li key={itemObj.productImg}>
                   <small style={{ color: 'grey' }}>
                     評論日期: {itemObj.updated_at.substring(0, 10)}
