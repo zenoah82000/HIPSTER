@@ -147,12 +147,19 @@ function ReplyComment({
                 <div className="comment-tbhead">
                   <div class="row">
                     <div class="col-md-9 col-sm-12 pl-1">
-                      <h5
-                        className="eventTitle "
-                        style={{ fontWeight: 'bold' }}
+                      <a
+                        className="link"
+                        value=""
+                        href={`/product/${commentData.productId}`}
+                        target="_blank"
                       >
-                        {commentData.productName}
-                      </h5>
+                        <h5
+                          className="eventTitle "
+                          style={{ fontWeight: 'bold' }}
+                        >
+                          {commentData.productName}
+                        </h5>
+                      </a>
                     </div>
                     <div class="col-md-3 col-sm-12 pr-1">
                       <ul className="float-right list-unstyled">

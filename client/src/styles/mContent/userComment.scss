@@ -23,7 +23,7 @@
 }
 
 .myReply {
-  background: rgb(209, 207, 207);
+  background: #f8f8f8;
   width: 100%;
   min-height: 155px;
   padding-right: 10px;
@@ -38,6 +38,16 @@
   object-fit: cover;
   // padding-top: 8px;;
   border-radius: 3px;
+}
+
+.link {
+  text-decoration: none;
+  color: white;
+}
+.link:hover {
+  text-decoration: none;
+  color: rgb(235, 235, 235);
+  // opacity: 0.8;
 }
 
 .commentImg {
@@ -137,4 +147,9 @@
   .buttonstyle {
     width: 115px !important;
   }
+}
+
+.eventTitle {
+  margin-top: 12px;
+  margin-left: 10px;
 }

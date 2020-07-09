@@ -57,7 +57,7 @@ function ProductStarBar(props) {
           ) : (
             <FontAwesomeIcon icon={far.faHeart} className="" />
           )}
-          <span>心願清單</span>
+          <span>願望清單</span>
         </div>
       </div>
     </>

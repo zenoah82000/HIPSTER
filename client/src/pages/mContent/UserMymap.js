@@ -11,8 +11,8 @@ import '../../styles/mContent/userMymap.scss'
 import 'react-vertical-timeline-component/style.min.css'
 
 export const pointerIcon = new L.Icon({
-  iconUrl: require('../../images/marker.svg'),
-  iconRetinaUrl: require('../../images/marker.svg'),
+  iconUrl: require('../../images/location2.svg'),
+  iconRetinaUrl: require('../../images/location2.svg'),
   iconAnchor: [5, 55],
   popupAnchor: [10, -44],
   iconSize: [50, 55],
@@ -82,7 +82,7 @@ function UserMymap(props) {
               {myItemlist.map((item, index) => (
                 <Marker
                   position={[item.lat, item.log]}
-                  // icon={cafeTagIcon}
+                  icon={pointerIcon}
                   onMouseOver={(e) => {
                     e.target.openPopup()
                   }}

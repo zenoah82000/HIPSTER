@@ -7,7 +7,7 @@ import { far } from '@fortawesome/free-regular-svg-icons'
 import '../../styles/product/ProductSearchResultSort.scss'
 
 function ProductSearchResultSort(props) {
-  const { searchParams } = props
+  const { searchParams, setLoading } = props
   return (
     <>
       <div className="product-result-sort">
@@ -23,6 +23,7 @@ function ProductSearchResultSort(props) {
                 : 'active'
             }
             onClick={() => {
+              setLoading(true)
               searchParams.has('sort')
                 ? searchParams.set('sort', 'omdesc')
                 : searchParams.append('sort', 'omdesc')
@@ -45,6 +46,7 @@ function ProductSearchResultSort(props) {
                 : ''
             }
             onClick={() => {
+              setLoading(true)
               searchParams.has('sort')
                 ? searchParams.set('sort', 'prec')
                 : searchParams.append('sort', 'prec')
@@ -68,6 +70,7 @@ function ProductSearchResultSort(props) {
                 : ''
             }
             onClick={() => {
+              setLoading(true)
               searchParams.has('sort')
                 ? searchParams.set('sort', 'comdesc')
                 : searchParams.append('sort', 'comdesc')
@@ -91,6 +94,7 @@ function ProductSearchResultSort(props) {
                 : ''
             }
             onClick={() => {
+              setLoading(true)
               searchParams.has('sort')
                 ? searchParams.get('sort') === 'PRICE_ASC'
                   ? searchParams.set('sort', 'PRICE_DESC')

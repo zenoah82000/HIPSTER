@@ -393,7 +393,10 @@ function ProductList(props) {
             ) : (
               ''
             )}
-            <ProductSearchResultSort searchParams={searchParams} />
+            <ProductSearchResultSort
+              searchParams={searchParams}
+              setLoading={setLoading}
+            />
             {/* -------商品列表區域------ */}
             {loading ? (
               <>
