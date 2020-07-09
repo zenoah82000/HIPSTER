@@ -131,11 +131,11 @@ function PaymentType(props) {
                   id="MasterCard"
                   onChange={(e) => {
                     getpaymentType(e)
-                    // $('#master').fadeToggle()
-                    // $('#visa').fadeOut()
+                    $('#master').fadeToggle()
+                    $('#visa').fadeOut()
                   }}
                 />
-                <FaCcMastercard id="master" size="25px" display="none" />
+                <FaCcMastercard id="master" size="50px" display="none" />
                 <Form.Check
                   required
                   inline
@@ -145,9 +145,11 @@ function PaymentType(props) {
                   id="VISA"
                   onChange={(e) => {
                     getpaymentType(e)
+                    $('#visa').fadeToggle()
+                    $('#master').fadeOut()
                   }}
                 />
-                <FaCcVisa id="visa" size="25px" display="none" />
+                <FaCcVisa id="visa" size="50px" display="none" />
               </Form.Group>
                 <Form.Row>
                   <Form.Group as={Col} xs={3} sm={3} md={3}>
@@ -283,7 +285,7 @@ function PaymentType(props) {
                   </div>
                   <div className="d-flex justify-content-between">
                     <p>折價金額</p>
-                    <p>{buyerinfo.sumless.toString()
+                    <p>-NT${buyerinfo.sumless.toString()
                           .replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')}</p>
                   </div>
                 </div>

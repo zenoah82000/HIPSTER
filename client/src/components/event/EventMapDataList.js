@@ -391,20 +391,30 @@ class mapList extends React.Component {
     let data=[]
     if(this.state.searchBtn1 ==='全部類別'||this.state.searchBtn1 ==='類別'){
       if(this.state.star == 0){
-        data=this.state.productdata
+        data=this.state.productdata.filter((item)=>{
+          return (item.productName
+            .toLowerCase()
+            .indexOf(this.state.search.toLowerCase()) !== -1)
+        })
       }else{
         data=this.state.productdata.filter((item)=>{
-         return (item.star >= this.state.star)
+         return (item.productName
+          .toLowerCase()
+          .indexOf(this.state.search.toLowerCase()) !== -1&&item.star >= this.state.star)
         })
       }
     }else{
       if(this.state.star == 0){
         data=this.state.productdata.filter((item)=>{
-          return (item.category == this.state.searchBtn1)
+          return (item.productName
+            .toLowerCase()
+            .indexOf(this.state.search.toLowerCase()) !== -1 && item.category == this.state.searchBtn1)
          })
       }else{
         data=this.state.productdata.filter((item)=>{
-          return (item.category == this.state.searchBtn1 &&item.star >= this.state.star)
+          return (item.productName
+            .toLowerCase()
+            .indexOf(this.state.search.toLowerCase()) !== -1 && item.category == this.state.searchBtn1 && item.star >= this.state.star)
          })
       }
     }

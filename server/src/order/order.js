@@ -164,7 +164,7 @@ router.post("/member/checkout", async (req, res) => {
             item.productId
           }"style="object-fit: cover; width: 100%;height: 100%;"/>
         </div>
-        <div style="width: 60%;">
+        <div style="width: 60%;margin-top:10px;">
           <p style="font-size: 16px;color: black;font-weight: bolder;margin:0;">
             ${item.name}
           </p>
@@ -205,22 +205,22 @@ router.post("/member/checkout", async (req, res) => {
     <hr />
     <div>${text}</div>
     <hr/>
-    <div className="cartdetail-footer">
-      <div style="display: flex;justify-content: space-between;width:100%;">
+    <div style="">
+      <div style="display: flex;justify-content: space-between;width:100%;text-align:right;">
         <p style="margin:0px;line-height:30px;">總計:</p>
         <span style="font-size: 16px;line-height:30px;">
           NT$${req.body.total}
         </span>
       </div>
-      <div style="display: flex;justify-content: space-between;width:100%;">
+      <div style="display: flex;justify-content: space-between;width:100%;text-align:right;">
         <p style="margin:0px;line-height:30px;">折扣:</p>
-        <span style="font-size: 16px;line-height:30px">
+        <span style="font-size: 16px;line-height:30px;">
           -NT$${sumless}
         </span>
       </div>
-      <div style="display: flex;justify-content: space-between;width:100%;">
+      <div style="display: flex;justify-content: space-between;width:100%;text-align:right;">
         <p style="margin:0px;line-height:30px;">結帳金額:</p>
-        <span style=" font-weight: bold;font-size: 20px;color: #ff3400;line-height:30px;">
+        <span style="font-weight: bold;font-size: 20px;color: #ff3400;line-height:30px;">
           NT$${sumdiscount}
         </span>
       </div>
