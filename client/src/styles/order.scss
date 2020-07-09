@@ -247,9 +247,17 @@
     }
   }
 }
+
 @media screen and (max-width: 576px) {
   .orderpage {
     & li {
+      &.orderNextPage {
+        display: none;
+      }
+      &.orderBacktPage {
+        display: none;
+      }
+
       &.active {
       }
       &.disabled {

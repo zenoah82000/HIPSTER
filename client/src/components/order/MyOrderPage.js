@@ -22,7 +22,7 @@ function OrderPage(props) {
     pages.push(
       <li
         key={'previous'}
-        className={+currentPage > 1 ? '' : 'disabled'}
+        className={+currentPage > 1 ? 'orderBacktPage' : 'disabled orderBacktPage'}
         onClick={() => {
           window.scrollTo({ top: 0, behavior: 'smooth' })
           setCurrentPage(currentPage -1)
@@ -40,11 +40,12 @@ function OrderPage(props) {
             className={i === currentPage ? 'active' : ''}
             // to={`?page=${i}`}
             onClick={() => {
+              setCurrentPage(i)
+              startPageset(i)
               if (i != currentPage) {
                 window.scrollTo({ top: 0, behavior: 'smooth' })
               }
-              setCurrentPage(i)
-              startPageset(i)
+              
             }}
           >
             {i}
@@ -122,7 +123,7 @@ function OrderPage(props) {
     pages.push(
       <li
         key={'next'}
-        className={currentPage === totalpages ? 'disabled' : ''}
+        className={currentPage === totalpages ? 'disabled orderNextPage' : 'orderNextPage'}
         onClick={() => {
           window.scrollTo({ top: 0, behavior: 'smooth' })
           setCurrentPage(currentPage +1)

@@ -56,6 +56,7 @@ class mapList extends React.Component {
   componentDidMount() {
     this.setState({
       search: '',
+      display:false,
     })
     this.getOrderlistAsync()
   }
@@ -68,11 +69,19 @@ class mapList extends React.Component {
     this.setState({
       data: this.state.data,
       search: event.target.value,
+      display:true
     })
     console.log(event.target.value)
     this.props.searchInput(event.target.value)
   }
-
+  componentDidUpdate() {
+    setTimeout(()=>{
+      this.setState({
+        display:false,
+      })
+     
+    },800)
+  }
   //排序
   sortByStarAsc = () => {
     let sortedProductsAsc
@@ -129,12 +138,14 @@ class mapList extends React.Component {
   showCat = (event) => {
     this.setState({
       searchBtn1: event.target.name,
+      display:true,
     })
     console.log(this.state.searchBtn1)
   }
   showStar = (event) => {
     this.setState({
       searchBtn3: event.target.text,
+      display:true,
     })
     this.setState({star:+event.target.name})
   }
@@ -687,7 +698,7 @@ class mapList extends React.Component {
           </div>
           <div className="dataBox overflow-auto px-1">
             <ul className="list-group ">
-              {this.productfilterList()}
+              {this.state.display? '':this.productfilterList()}
               {/* {cafeActive ? (
                 <>{this.filterList()}</>
               ) : (

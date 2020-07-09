@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { GoX } from 'react-icons/go'
-
+import Fade from 'react-reveal/Fade'
 import Amount from '../../components/order/amount'
 
 function MyCart(props) {
@@ -11,6 +11,7 @@ function MyCart(props) {
       {mycart.map((value, index) => {
         return (
           <>
+          <Fade bottom>
             <div key={value.productId} className="cartproductbox">
               <div className="productname">
                 <GoX
@@ -46,6 +47,7 @@ function MyCart(props) {
                 </div>
               </div>
             </div>
+            </Fade>
           </>
         )
       })}
