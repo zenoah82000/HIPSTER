@@ -2,12 +2,14 @@
 @import '~bootstrap/scss/bootstrap.scss';
 @import '~react-tabs/style/react-tabs.scss';
 // 其它要導入覆蓋掉原本的預設bootstrap樣式要放在這下面
+@import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
 
 body {
   // font-family: 'Noto Sans TC', sans-serif;
   // font-family: '微軟正黑體';
   font-family: 'Open Sans', 'Heiti TC', 'LiHei Pro', 'Helvetica Neue', Helvetica,
-    Arial, '微軟正黑體', '微软雅黑', メイリオ, '맑은 고딕', sans-serif;
+    Arial, '微軟正黑體', '微软雅黑', メイリオ, '맑은 고딕', sans-serif, 'Caveat',
+    cursive;
   color: #54595f;
 }
 .none {

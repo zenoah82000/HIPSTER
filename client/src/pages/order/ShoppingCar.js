@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import $ from 'jquery'
 import { connect } from 'react-redux'
+import {AiOutlineShoppingCart} from 'react-icons/ai'
 
 //確認框
 import Swal from 'sweetalert2'
@@ -283,7 +284,7 @@ function ShoppingCar(props) {
     <>
       <MyCartDetail show={checkoutok} onHide={() => setCheckoutok(false)} />
       <div className="container">
-        <h1 className="py-4">購物車</h1>
+        <p className="shoppingCart-title pt-4 pb-2 h5"><AiOutlineShoppingCart className="mr-2 ShoppingCart-icon" />Shopping Cart</p>
         {display}
       </div>
     </>

@@ -80,7 +80,7 @@ function CommentList(props) {
                 </li>
 
                 <li className="d-flex" key={itemObj.orderId}>
-                  {itemObj.commentImg != '' || itemObj.commentImg != null ? (
+                  {itemObj.commentImg ? (
                     <SimpleReactLightbox>
                       <SRLWrapper>
                         <div className="commentImg">
@@ -94,7 +94,7 @@ function CommentList(props) {
                       </SRLWrapper>
                     </SimpleReactLightbox>
                   ) : (
-                    '為上傳圖片'
+                    ''
                   )}
                 </li>
 
