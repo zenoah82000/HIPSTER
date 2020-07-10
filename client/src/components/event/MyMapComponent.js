@@ -11,31 +11,40 @@ import { RiMoneyCnyCircleLine } from 'react-icons/ri'
 import { AiFillStar } from 'react-icons/ai'
 
 export const pointerIcon = new L.Icon({
-  iconUrl: require('../../images/myplace.svg'),
-  iconRetinaUrl: require('../../images/myplace.svg'),
+  iconUrl: require('../../images/cafeTag-me.svg'),
+  iconRetinaUrl: require('../../images/cafeTag-me.svg'),
   iconAnchor: [5, 55],
   popupAnchor: [10, -44],
-  iconSize: [50, 55],
+  iconSize: [70, 70],
 })
 
 export const cafeTagIcon = new L.Icon({
-  iconUrl: require('../../images/location-pin.svg'),
-  iconRetinaUrl: require('../../images/location-pin.svg'),
+  iconUrl: require('../../images/icon-coffee.svg'),
+  iconRetinaUrl: require('../../images/icon-coffee.svg'),
   iconAnchor: [5, 55],
   popupAnchor: [10, -44],
-  iconSize: [50, 55],
+  iconSize: [55, 55],
 })
-export const productTagIcon = new L.Icon({
-  iconUrl: require('../../images/point.svg'),
-  iconRetinaUrl: require('../../images/point.svg'),
+export const productTagIcon1 = new L.Icon({
+  iconUrl: require('../../images/icon1.svg'),
+  iconRetinaUrl: require('../../images/icon1.svg'),
   iconAnchor: [5, 55],
   popupAnchor: [10, -44],
-  iconSize: [50, 55],
+  iconSize: [60, 60],
   // shadowUrl: "../assets/marker-shadow.png",
   // shadowSize: [68, 95],
   // shadowAnchor: [20, 92]
 })
-
+export const productTagIcon2 = new L.Icon({
+  iconUrl: require('../../images/icon2.svg'),
+  iconRetinaUrl: require('../../images/icon2.svg'),
+  iconAnchor: [5, 55],
+  popupAnchor: [10, -44],
+  iconSize: [60, 60],
+  // shadowUrl: "../assets/marker-shadow.png",
+  // shadowSize: [68, 95],
+  // shadowAnchor: [20, 92]
+})
 export default class ViewportExample extends Component {
   constructor(props) {
     super(props)
@@ -292,7 +301,7 @@ export default class ViewportExample extends Component {
               <Marker
                 ref={this.openPopup}
                 position={[clickData.lat, clickData.log]}
-                icon={productTagIcon}
+                icon={clickData.category == '手作課程'?productTagIcon1: productTagIcon2}
               >
                 <Popup className="locationCard">
                   <h5 style={{ width: '100%' }}>{clickData.productName}</h5>
@@ -330,7 +339,7 @@ export default class ViewportExample extends Component {
                     <li>
                       <span>
                         {this.stars(clickData.star)}
-                        {/* <RatingStarValue ratingValue={clickData.star} /> */}
+                       
                       </span>
                     </li>
                     <li>
@@ -394,7 +403,7 @@ export default class ViewportExample extends Component {
               {filterData.map((item) => (
                 <Marker
                   position={[item.lat, item.log]}
-                  icon={productTagIcon}
+                  icon={item.category == '手作課程'?productTagIcon1: productTagIcon2}
                   // onMouseOver={(e) => {
                   //   e.target.openPopup()
                   // }}
@@ -437,7 +446,10 @@ export default class ViewportExample extends Component {
                         />
                       </li>
                       <li>
-                        <RatingStarValue ratingValue={item.star} />
+                      <span>
+                        {this.stars(item.star)}
+                       
+                      </span>
                       </li>
                       <li>
                         <span className="mr-2">
@@ -492,7 +504,7 @@ export default class ViewportExample extends Component {
             </>
           ) : (
             filterData.map((item) => (
-              <Marker position={[item.lat, item.log]} icon={productTagIcon}>
+              <Marker position={[item.lat, item.log]}  icon={item.category == '手作課程'?productTagIcon1: productTagIcon2}>
                 <Popup className="locationCard">
                   <h5>{item.productName}</h5>
                   <ul className="cardList list-unstyled">
@@ -528,7 +540,10 @@ export default class ViewportExample extends Component {
                       />
                     </li>
                     <li>
-                      <RatingStarValue ratingValue={item.star} />
+                    <span>
+                        {this.stars(item.star)}
+                       
+                      </span>
                     </li>
                     <li>
                       <span className="mr-2">
