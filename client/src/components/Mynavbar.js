@@ -466,8 +466,14 @@ function Mynavbar(props) {
           <div
             className="SignOkbtn"
             onClick={() => {
-              setloginOk(0)
-              setShowLoginOk(false)
+              if (loginOk == 0) {
+                setloginOk(0)
+                setShowLoginOk(false)
+                setShowlogin(true) //重開註冊登入視窗
+              } else {
+                setloginOk(0)
+                setShowLoginOk(false)
+              }
             }}
           >
             確認
