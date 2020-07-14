@@ -13,7 +13,15 @@ import Test from '../pages/Test'
 
 function Mynavbar(props) {
   //購物車資料
-  const { mycart, deleteCart, userSuccess, setuserSuccess, username ,checkloginok,setCheckloginok} = props
+  const {
+    mycart,
+    deleteCart,
+    userSuccess,
+    setuserSuccess,
+    username,
+    checkloginok,
+    setCheckloginok,
+  } = props
   // console.log(userSuccess)
 
   //購物車視窗狀態
@@ -24,13 +32,16 @@ function Mynavbar(props) {
 
   //是否跳出註冊&登入視窗
   const [showlogin, setShowlogin] = useState(false)
-  //視窗顯示註冊&登入狀態,true=註冊  false=登入
+  //視窗內顯示註冊&登入狀態,true=註冊  false=登入
   const [SignLogin, setSignLogin] = useState(true)
-  //視窗送出按鈕狀態切換
+  //視窗上方註冊登入切換按鈕樣式
   const signchangbtn = SignLogin ? 'btn changbtn active' : 'btn changbtn'
   const loginchangbtn = SignLogin ? 'btn changbtn' : 'btn changbtn active'
+
   //是否跳出註冊完成視窗
   const [showSignOk, setShowSignOk] = useState(false)
+  //註冊帳號是否重複
+  let accountOk
   //是否跳出登入完成視窗
   const [showLoginOk, setShowLoginOk] = useState(false)
   //是否跳出登出完成視窗
@@ -72,7 +83,7 @@ function Mynavbar(props) {
     const data = await response.json()
 
     console.log('伺服器回傳的json資料', data)
-    // 要等驗証過，再設定資料(簡單的直接設定)
+    data ? (accountOk = true) : (accountOk = false)
   }
 
   //登入會員傳後端
@@ -99,7 +110,6 @@ function Mynavbar(props) {
     // console.log('伺服器登入回傳的json資料', data)
     console.log('loginOk', loginOk)
   }
-
 
   //請先登入
   //請登入視窗
@@ -313,17 +323,34 @@ function Mynavbar(props) {
                   if (signcheckbox == false) {
                     alert('請確認已詳細閱讀，並同意接受會員權益與個資同意條款')
                   } else {
-                    //撈取資料
-                    signData = {
-                      memberMail: signAccount.value,
-                      memberPwd: signPassword.value,
+                    //判斷帳號格式
+                    var strEmail = signAccount.value
+                    var emailRule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/
+                    if (strEmail.search(emailRule) == -1) {
+                      alert('請輸入正確Email格式')
+                    } else {
+                      if (signPassword.value.length < 6) {
+                        alert('密碼長度不能小於6位')
+                      } else {
+                        //撈取資料
+                        signData = {
+                          memberMail: signAccount.value,
+                          memberPwd: signPassword.value,
+                        }
+                        // console.log('strEmail', strEmail)
+                        addNewMember(signData) //寫入資料庫
+
+                        setTimeout(() => {
+                          console.log('accountOk', accountOk)
+                          if (accountOk != true) {
+                            alert('此帳號已被註冊過')
+                          } else {
+                            setShowlogin(false) //關閉註冊登入視窗
+                            setShowSignOk(true) //跳出註冊完成視窗
+                          }
+                        }, 300)
+                      }
                     }
-                    // console.log(signData)
-                    addNewMember(signData) //寫入資料庫
-                    setShowlogin(false) //關閉註冊登入視窗
-                    setTimeout(() => {
-                      setShowSignOk(true) //跳出註冊完成視窗
-                    }, 300)
                   }
                 }
               }}
@@ -369,9 +396,9 @@ function Mynavbar(props) {
           <div
             className="SignOkbtn"
             onClick={() => {
-              setShowSignOk(false)
-              setSignLogin(false)
-              setShowlogin(true)
+              setShowSignOk(false) //關小視窗
+              setSignLogin(false) //切換登入樣式
+              setShowlogin(true) //浮動視窗開啟
             }}
           >
             確認
@@ -528,7 +555,7 @@ function Mynavbar(props) {
 
   return (
     <>
-    <Checklogin show={checkloginok} onHide={() => setCheckloginok(false)} />
+      <Checklogin show={checkloginok} onHide={() => setCheckloginok(false)} />
       <SignLoginMassage show={showlogin} onHide={() => setShowlogin(false)} />
       <SignOkMassage show={showSignOk} onHide={() => setShowSignOk(false)} />
       <LoginOkMassage show={showLoginOk} onHide={() => setShowLoginOk(false)} />

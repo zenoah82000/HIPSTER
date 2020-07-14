@@ -112,10 +112,25 @@ router.post("/addmember", async (req, res, next) => {
   // console.log(req.body)
   const memberMail = req.body.memberMail;
   const memberPwd = req.body.memberPwd;
-  const addMemberSql = `INSERT INTO member(memberName, memberGender, memberBirth, memberPhone, 	memberAddress	,	memberMail,	memberPwd,	memberImg, memberStatus) VALUES('文青','男','2020-01-01','請輸入連絡電話','請輸入地址',?,?,'tmp.jpg','true')`;
+  let account
 
+  //先檢查是否已有被使用過
+  const accountCheck = `SELECT * FROM member WHERE  memberMail=?  `;
+  const [r] = await db.query(accountCheck, [memberMail]);
+
+  if([r][0].length == 1){
+    account = false
+  }else if([r][0].length == 0){
+    account = true
+  const addMemberSql = `INSERT INTO member(memberName, memberGender, memberBirth, memberPhone, 	memberAddress	,	memberMail,	memberPwd,	memberImg, memberStatus) VALUES('文青','男','2020-01-01','請輸入連絡電話','請輸入地址',?,?,'tmp.jpg','true')`;
   const [r1] = await db.query(addMemberSql, [memberMail, memberPwd]);
-  res.json(req.body);
+
+  }
+
+  // console.log(account)
+
+  res.json(account);
+
 });
 
 // 取得會員基本資料
