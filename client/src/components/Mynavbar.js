@@ -810,7 +810,10 @@ function Mynavbar(props) {
                     className="memberbtn logout"
                     onClick={() => {
                       setuserSuccess(false)
-                      setShowLogoutOk(true)
+
+                      setTimeout(() => {
+                        setShowLogoutOk(true)
+                      }, 300)
                     }}
                   >
                     登出

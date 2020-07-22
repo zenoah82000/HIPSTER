@@ -267,6 +267,8 @@ function Home(props) {
       </>
     )
   })
+  console.log('articleslist', articleslist)
+  console.log('articles', articles)
 
   //置頂按鈕
   $(window).scroll(function () {

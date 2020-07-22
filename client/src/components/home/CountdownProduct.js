@@ -16,7 +16,7 @@ function CountdownProduct(props) {
   const [thistime, setthistime] = useState('')
 
   const thistimedata = () => {
-    var time = new Date()
+    var time = new Date() //獲取當前標準時間
     var nowTime = time.getTime() // 獲取當前毫秒數
     setthistime(nowTime)
   }
