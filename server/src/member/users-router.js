@@ -6,7 +6,10 @@ const db = require(__dirname + "./../db_connect2");
 const multer = require("multer");
 const fs = require("fs");
 
-const router = express.Router();
+const fetch = require("node-fetch");
+
+
+const router = express.Router();//about測試用
 
 // 執行sql用的async-await的函式
 // sql 執行用的sql
@@ -222,5 +225,35 @@ router.post(
     res.json({});
   }
 );
+
+
+
+// about/測試用
+router.post('/linktest', async (req, res, next) => {
+
+
+  fetch('http://tbike-data.tainan.gov.tw/Service/StationStatus/Json', {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    },
+  })
+  .then((DATA) => {
+    // console.log(res)
+    // console.log(res.statusText)
+    return DATA.json()
+  })
+  .then((obj) => {
+    res.json(obj)
+  })
+
+
+  
+
+  
+})
+
+
 
 module.exports = router;

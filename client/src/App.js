@@ -48,7 +48,7 @@ function App(props) {
   const username = userlocalStorage.name
 
   const { mycart, wishlist } = props
-  
+
   //請先登入視窗
   const [checkloginok, setCheckloginok] = useState(false)
   //取得購物車資料
@@ -87,7 +87,7 @@ function App(props) {
     const data = await response.json()
   }
   //加入願望清單判斷
-  const addWishlistCheck = (e,item) => {
+  const addWishlistCheck = (e, item) => {
     e.preventDefault()
     if (userlocalStorage.id) {
       if (
@@ -155,11 +155,10 @@ function App(props) {
     getLocation()
     userlocalStorage.success ? setuserSuccess(true) : setuserSuccess(false)
     props.dispatch({ type: 'GET_CART', value: localCart })
-    
   }, [])
-  useEffect(()=>{
+  useEffect(() => {
     getwishAsync()
-  },[userSuccess])
+  }, [userSuccess])
   //加入購物車
   const addCart = (value) => {
     const index = mycart.findIndex((item) => item.productId == value.productId)
@@ -276,7 +275,7 @@ function App(props) {
         />
 
         <Switch>
-          <Route path="/about">
+          <Route path="/about/:page?">
             <About />
           </Route>
           {/* Blog Routes */}
