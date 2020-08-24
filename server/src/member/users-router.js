@@ -242,7 +242,7 @@ router.post('/linktest', async (req, res, next) => {
   .then((DATA) => {
     // console.log(res)
     // console.log(res.statusText)
-    return DATA.json()
+    return  DATA.json()
   })
   .then((obj) => {
     res.json(obj)

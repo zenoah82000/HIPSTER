@@ -201,7 +201,10 @@ function About(props) {
       <div className="container">
         <div className="title">
           <h1>資料串接分頁展示</h1>
-          <a href="data.json" target="_blank">
+          <a
+            href="http://tbike-data.tainan.gov.tw/Service/StationStatus/Json"
+            target="_blank"
+          >
             JSON API資料來源：T-Bike 臺南市公共自行車租賃站資訊
           </a>
         </div>
