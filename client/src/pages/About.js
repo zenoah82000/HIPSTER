@@ -11,6 +11,7 @@ function About(props) {
   const paramstring = props.location.search
   const searchparams = new URLSearchParams(paramstring)
   let page = searchparams.get('page') //about/?page=?
+  console.log(page)
   if (page == null || page < 1) {
     //判斷為空或小於1時
     page = 1
@@ -90,14 +91,14 @@ function About(props) {
     firstButton = (
       <>
         <li className="page-item ">
-          <Link className="page-link" to="./?page=1" tabindex="-1">
+          <Link className="page-link" to="./about?page=1" tabindex="-1">
             最前頁
           </Link>
         </li>
         <li className="page-item ">
           <Link
             className="page-link"
-            to={`./?page=${parseInt(page) - 1}`}
+            to={`./about?page=${parseInt(page) - 1}`}
             tabindex="-1"
           >
             上一頁
@@ -144,7 +145,7 @@ function About(props) {
         <li className="page-item">
           <Link
             className="page-link"
-            to={`./?page=${parseInt(page) + 1}`}
+            to={`./about?page=${parseInt(page) + 1}`}
             tabindex="-1"
           >
             下一頁
@@ -153,7 +154,7 @@ function About(props) {
         <li className="page-item">
           <Link
             className="page-link"
-            to={`./?page=${totalPages}`}
+            to={`./about?page=${totalPages}`}
             tabindex="-1"
           >
             最後頁
@@ -172,7 +173,7 @@ function About(props) {
       numcontent = (
         <>
           <li class="page-item active" aria-current="page">
-            <Link class="page-link" to={`./?page=${i}`}>
+            <Link class="page-link" to={`./about?page=${i}`}>
               {i}
             </Link>
           </li>
@@ -181,7 +182,7 @@ function About(props) {
     } else {
       numcontent = (
         <li class="page-item " aria-current="page">
-          <Link class="page-link" to={`./?page=${i}`}>
+          <Link class="page-link" to={`./about?page=${i}`}>
             {i}
           </Link>
         </li>
