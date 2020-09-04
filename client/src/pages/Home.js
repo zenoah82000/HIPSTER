@@ -12,6 +12,17 @@ import Searchbar from '../components/home/Searchbar'
 import { FaMapMarkerAlt } from 'react-icons/fa'
 import Slider from 'react-slick'
 
+//所有連接資料庫function
+import {
+  homeProductFeaturedlist,
+  homeslickBannerData,
+  homeslickBannerImgData,
+  homeProductEndlist,
+  homeArticleslist,
+} from '../components/home/Function'
+
+import { activitys, banner, countdowns } from '../components/home/SlickControl' //slick輪播控制
+
 function Home(props) {
   //存放倒數結束5筆商品資料
   const [ProductEndlist, setProductEndlist] = useState('')
@@ -24,175 +35,6 @@ function Home(props) {
   const [slickBannerData, setslickBannerData] = useState('')
   //存放中間輪播banner-多圖資料
   const [slickBannerImgData, setslickBannerImgData] = useState('')
-
-  //找出精選3筆商品
-  async function homeProductFeaturedlist(item) {
-    // 注意資料格式要設定，伺服器才知道是json格式
-    const request = new Request(
-      'http://localhost:5000/homeproductfeaturedlist/',
-      {
-        method: 'POST',
-        body: JSON.stringify(item),
-        headers: new Headers({
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        }),
-      }
-    )
-    const response = await fetch(request)
-    const data = await response.json()
-    // console.log('3筆商品', data)
-    setProductFeaturedlist(data)
-  }
-
-  //找出中間banner商品資料
-  async function homeslickBannerData(item) {
-    // 注意資料格式要設定，伺服器才知道是json格式
-    const request = new Request('http://localhost:5000/homeslickbannerdata/', {
-      method: 'POST',
-      body: JSON.stringify(item),
-      headers: new Headers({
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      }),
-    })
-    const response = await fetch(request)
-    const data = await response.json()
-    // console.log('1筆商品', data)
-    setslickBannerData(data)
-  }
-  //找出中間banner商品(多圖)資料
-  async function homeslickBannerImgData(item) {
-    // 注意資料格式要設定，伺服器才知道是json格式
-    const request = new Request(
-      'http://localhost:5000/homeslickbannerimgdata/',
-      {
-        method: 'POST',
-        body: JSON.stringify(item),
-        headers: new Headers({
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        }),
-      }
-    )
-    const response = await fetch(request)
-    const data = await response.json()
-    // console.log('4張圖片', data)
-    setslickBannerImgData(data)
-  }
-
-  //找出倒數結束5筆商品
-  async function homeProductEndlist(item) {
-    // 注意資料格式要設定，伺服器才知道是json格式
-    const request = new Request('http://localhost:5000/homeproductendlist/', {
-      method: 'POST',
-      body: JSON.stringify(item),
-      headers: new Headers({
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      }),
-    })
-    const response = await fetch(request)
-    const data = await response.json()
-    // console.log('5筆商品', data.length)
-    setProductEndlist(data)
-  }
-
-  //找出6筆最新文章
-  async function homeArticleslist(item) {
-    // 注意資料格式要設定，伺服器才知道是json格式
-    const request = new Request('http://localhost:5000/homearticleslist/', {
-      method: 'POST',
-      body: JSON.stringify(item),
-      headers: new Headers({
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      }),
-    })
-    const response = await fetch(request)
-    const data = await response.json()
-    // console.log('6筆文章', data)
-    setarticleslist(data)
-  }
-
-  //輪播-精選
-  var activitys = {
-    arrows: false,
-    dots: false,
-    infinite: false,
-    autoplay: false,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    responsive: [
-      {
-        breakpoint: 599,
-        settings: {
-          arrows: false,
-          dots: true,
-          infinite: true,
-          autoplay: true,
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  }
-
-  //輪播-大banner
-  var banner = {
-    arrows: false,
-    dots: false,
-    infinite: true,
-    autoplay: true,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    speed: 2000,
-    fade: true,
-    cssEase: 'linear',
-    autoplaySpeed: 5000,
-    responsive: [
-      {
-        breakpoint: 599,
-        settings: {
-          arrows: false,
-          dots: false,
-          infinite: true,
-          autoplay: true,
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          speed: 2000,
-          fade: true,
-          cssEase: 'linear',
-          autoplaySpeed: 5000,
-        },
-      },
-    ],
-  }
-
-  //輪播-時限
-  var countdowns = {
-    arrows: true,
-    dots: false,
-    infinite: true,
-    autoplay: true,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    autoplaySpeed: 5000,
-    responsive: [
-      {
-        breakpoint: 599,
-        settings: {
-          arrows: false,
-          dots: true,
-          infinite: true,
-          autoplay: true,
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          autoplaySpeed: 5000,
-        },
-      },
-    ],
-  }
 
   //精選3筆商品顯示
   let ProductFeatured = Array.from(ProductFeaturedlist)
@@ -267,8 +109,8 @@ function Home(props) {
       </>
     )
   })
-  console.log('articleslist', articleslist)
-  console.log('articles', articles)
+  // console.log('articleslist', articleslist)
+  // console.log('articles', articles)
 
   //置頂按鈕
   $(window).scroll(function () {
@@ -291,11 +133,26 @@ function Home(props) {
 
   //網頁載入時執行
   useEffect(() => {
-    homeProductEndlist() //倒數活動
-    homeslickBannerData() //banner
-    homeslickBannerImgData() //banner多圖
-    homeProductFeaturedlist() //精選活動
-    homeArticleslist() //精選文章
+    //精選活動
+    homeProductFeaturedlist().then((res) => {
+      setProductFeaturedlist(res)
+    })
+    //banner
+    homeslickBannerData().then((res) => {
+      setslickBannerData(res)
+    })
+    //banner多圖
+    homeslickBannerImgData().then((res) => {
+      setslickBannerImgData(res)
+    })
+    //倒數活動
+    homeProductEndlist().then((res) => {
+      setProductEndlist(res)
+    })
+    //精選文章
+    homeArticleslist().then((res) => {
+      setarticleslist(res)
+    })
     setInterval(() => {}, 1000)
   }, [])
 
