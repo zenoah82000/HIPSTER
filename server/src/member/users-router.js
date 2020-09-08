@@ -5,6 +5,7 @@ const fileUpload = require("express-fileupload");
 const db = require(__dirname + "./../db_connect2");
 const multer = require("multer");
 const fs = require("fs");
+const sha1 = require('sha1');
 
 const fetch = require("node-fetch");
 
@@ -85,7 +86,7 @@ router.post("/loginmember", async (req, res, next) => {
   // console.log(typeof req.body)
   // console.log(req.body)
   const memberMail = req.body.memberMail;
-  const memberPwd = req.body.memberPwd;
+  const memberPwd = sha1(req.body.memberPwd);
   // console.log('acc:'+memberMail)
   // console.log('pwd:'+memberPwd)
   const loginMemberSql = `SELECT * FROM member WHERE  memberMail=? AND memberPwd=? `;
@@ -114,7 +115,7 @@ router.post("/addmember", async (req, res, next) => {
   // console.log(typeof req.body)
   // console.log(req.body)
   const memberMail = req.body.memberMail;
-  const memberPwd = req.body.memberPwd;
+  const memberPwd = sha1(req.body.memberPwd);
   let account
 
   //先檢查是否已有被使用過
@@ -146,6 +147,8 @@ router.post("/getmemberdata", async (req, res, next) => {
   res.json(r1[0]);
 });
 
+
+
 // 更新會員資料
 router.post("/updatememberdata", async (req, res, next) => {
   // console.log(req.body)
@@ -157,7 +160,7 @@ router.post("/updatememberdata", async (req, res, next) => {
   const memberBirth = req.body.memberBirth;
   const memberPhone = req.body.memberPhone;
   const memberAddress = req.body.memberAddress;
-  const memberPwd = req.body.memberPwd;
+  const memberPwd = sha1(req.body.memberPwd);
   // const memberImg = req.body.memberImg
   const memberImg = req.body.memberImgState
     ? `memberid_${req.body.memberId}.${filename}`
@@ -253,6 +256,7 @@ router.post('/linktest', async (req, res, next) => {
 
   
 })
+
 
 
 
